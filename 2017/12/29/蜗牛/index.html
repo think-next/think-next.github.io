@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>蜗牛 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="定义模版函数。name是必填的，表示函数名。其他部分表示函数的参数以及参数默认值。函数的声明应该出现在函数调用之前。 123456789101112131415161718192021/* model.tpl */&amp;#123;function name=menu level=0&amp;#125;&amp;#123;function menu level=0&amp;#125;          &amp;#123;* shor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="蜗牛">
+<meta property="og:url" content="http://yoursite.com/2017/12/29/蜗牛/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="定义模版函数。name是必填的，表示函数名。其他部分表示函数的参数以及参数默认值。函数的声明应该出现在函数调用之前。 123456789101112131415161718192021/* model.tpl */&amp;#123;function name=menu level=0&amp;#125;&amp;#123;function menu level=0&amp;#125;          &amp;#123;* shor">
+<meta property="og:updated_time" content="2017-12-29T08:45:16.946Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="蜗牛">
+<meta name="twitter:description" content="定义模版函数。name是必填的，表示函数名。其他部分表示函数的参数以及参数默认值。函数的声明应该出现在函数调用之前。 123456789101112131415161718192021/* model.tpl */&amp;#123;function name=menu level=0&amp;#125;&amp;#123;function menu level=0&amp;#125;          &amp;#123;* shor">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-蜗牛" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/29/蜗牛/" class="article-date">
+  <time datetime="2017-12-29T08:14:25.000Z" itemprop="datePublished">2017-12-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      蜗牛
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="定义模版函数。"><a href="#定义模版函数。" class="headerlink" title="定义模版函数。"></a>定义模版函数。</h2><p>name是必填的，表示函数名。其他部分表示函数的参数以及参数默认值。函数的声明应该出现在函数调用之前。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* model.tpl */</span></span><br><span class="line">&#123;<span class="function"><span class="keyword">function</span> <span class="title">name</span>=<span class="title">menu</span> <span class="title">level</span>=0&#125;</span></span><br><span class="line"><span class="function"></span>&#123;<span class="function"><span class="keyword">function</span> <span class="title">menu</span> <span class="title">level</span>=0&#125;          </span>&#123;* short-hand *&#125;</span><br><span class="line">  &lt;ul class="level&#123;$level&#125;"&gt;</span><br><span class="line">  &#123;<span class="keyword">foreach</span> $data <span class="keyword">as</span> $entry&#125;</span><br><span class="line">    &#123;<span class="keyword">if</span> is_array($entry)&#125;</span><br><span class="line">      &lt;li&gt;&#123;$entry@key&#125;&lt;/li&gt;</span><br><span class="line">      &#123;menu data=$entry level=$level+<span class="number">1</span>&#125;</span><br><span class="line">    &#123;<span class="keyword">else</span>&#125;</span><br><span class="line">      &lt;li&gt;&#123;$entry&#125;&lt;/li&gt;</span><br><span class="line">    &#123;/<span class="keyword">if</span>&#125;</span><br><span class="line">  &#123;/<span class="keyword">foreach</span>&#125;</span><br><span class="line">  &lt;/ul&gt;</span><br><span class="line">&#123;/<span class="function"><span class="keyword">function</span>&#125;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;* create an <span class="keyword">array</span> to demonstrate *&#125;</span><br><span class="line">&#123;$menu = [<span class="string">'item1'</span>,<span class="string">'item2'</span>,<span class="string">'item3'</span> =&gt; [<span class="string">'item3-1'</span>,<span class="string">'item3-2'</span>,<span class="string">'item3-3'</span> =&gt;</span><br><span class="line">[<span class="string">'item3-3-1'</span>,<span class="string">'item3-3-2'</span>]],<span class="string">'item4'</span>]&#125;</span><br><span class="line"></span><br><span class="line">&#123;* run the <span class="keyword">array</span> through the <span class="function"><span class="keyword">function</span> *&#125;</span></span><br><span class="line"><span class="function"></span>&#123;menu data=$menu&#125;</span><br></pre></td></tr></table></figure>
+<p>对于include中引用的函数，要想使函数在父模板中生效，需要声明inline属性。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="keyword">include</span> file=<span class="string">'./model.tpl'</span> inline&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>在smarty的display之后可以有其他操作，并不会影响输出。
+display的操作会将text/html文件的发送到客户端，所以统计，发送消息相关的操作可以放在display之后。
+</code></pre><blockquote>
+<p>date_format函数，不再需要在PHP层专门处理时间的格式</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;&#123;%$order.order_time|date_format:<span class="string">"%Y/%m/%d %H:%I"</span>%&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>设置默认值</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;%$name|<span class="keyword">default</span>:<span class="string">""</span>%&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/29/蜗牛/" data-id="cjbroukuk0001t8v8p6sj9078" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/12/29/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/12/29/蜗牛/">蜗牛</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/29/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
