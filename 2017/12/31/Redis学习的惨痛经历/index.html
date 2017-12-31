@@ -159,7 +159,7 @@
     </div>
     
     <div class="post-body post-content">
-        <p>我们开发的产品类似于于 <a href="http://www.trivago.com/" target="_blank" rel="noopener">trivago hotel search</a>，<a href="http://redis.io/" target="_blank" rel="noopener">Redis</a>也多用来缓存临时数据。比如将操作频繁的流水数据先存储到redis中，之后再迁移到关系型数据库做持久化。</p>
+        <p>我们开发的产品类似于 <a href="http://www.trivago.com/" target="_blank" rel="noopener">trivago hotel search</a>，<a href="http://redis.io/" target="_blank" rel="noopener">Redis</a>也多用来缓存临时数据。比如将操作频繁的流水数据先存储到redis中，之后再迁移到关系型数据库做持久化。</p>
 <p>查找旅店的功能，前端主要是靠PHP和<a href="http://symfony.com/" target="_blank" rel="noopener">Symfony Framework</a>开发，后端是Java开发。本章我们主要强调PHP和Redis的协作，目前它们运行的非常稳定，但我们为实现这一步却花费了很大的精力。下面就来讲我们学习Redis经历。</p>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>起初我们使用的库是 <a href="https://github.com/nrk/predis" target="_blank" rel="noopener">Predis</a>，一直到2013年我们开始使用<a href="https://github.com/phpredis/phpredis" target="_blank" rel="noopener">phpredis</a> (C实现)，主要因为二者的性能差异。</p>
 <p>在2014年，我们给平台开发了新的特性，导致<strong>http 请求短时间内翻了一倍</strong>，结果有40%的请求<strong>HTTP 500: Internal Server Error</strong>.</p>
@@ -182,8 +182,7 @@
 <p>当我们将测试调整到总用户的20%，两个redis库都出现了错误。最终排除了<code>phpredis</code>自身问题的可能。</p>
 <h3 id="更新redis"><a href="#更新redis" class="headerlink" title="更新redis"></a>更新redis</h3><p>我们和<code>phpredis</code>的维护者取得联系，首先，他们会问：“你们使用的版本是最新的吗？”一旦你提的版本不是最新的，他们就会回答：“请升级到最新版本后重试”。</p>
 <p>最终我们升级了版本，但不幸的是，问题仍然没有解决。</p>
-<p>###调试延迟问题</p>
-<p>阅读了一些文档后，我们发现了<code>redis</code>的一个新特性：<a href="http://redis.io/topics/latency#redis-software-watchdog" target="_blank" rel="noopener">Redis Software Watchdog</a>，用来记录执行较慢的操作。虽然官方文档上仍然被标注为<strong>实验性功能</strong>，但是我们却想尝试一次。</p>
+<h3 id="调试延迟问题"><a href="#调试延迟问题" class="headerlink" title="调试延迟问题"></a>调试延迟问题</h3><p>阅读了一些文档后，我们发现了<code>redis</code>的一个新特性：<a href="http://redis.io/topics/latency#redis-software-watchdog" target="_blank" rel="noopener">Redis Software Watchdog</a>，用来记录执行较慢的操作。虽然官方文档上仍然被标注为<strong>实验性功能</strong>，但是我们却想尝试一次。</p>
 <blockquote>
 <p><strong>Tip</strong><br><a href="http://redis.io/topics/latency#single-threaded-nature-of-redis" target="_blank" rel="noopener">Redis 是单线程的</a>. 每个命令都可能阻塞其他的命令。这很容易被忽视，但却是一些问题的根本原因所在。</p>
 </blockquote>
@@ -205,11 +204,10 @@
 <p>我们团队每15分钟会执行一个<code>cronjob</code>，利用<a href="http://redis.io/topics/pipelining" target="_blank" rel="noopener">Redis Pipelining</a>特性，将MySQL中的数据导入到共享的Redis中。因为Redis是单线程的，导致Redis每隔15分钟就会被阻塞几分钟。</p>
 <blockquote>
 <p><strong>Tip</strong></p>
-<p>意识到Redis实例是多个团队或业务共享</p>
-<p>Be aware of Redis instances that are shared between teams and data context. Due to different use cases and long running commands they may block each other. Remember: Redis is single threaded.</p>
+<p>意识到Redis实例是多个团队或业务共享。不同的使用场景或者执行的命令都可能阻塞彼此。谨记：Redis是单线程的。</p>
 </blockquote>
-<p>We moved the cronjob to its own Redis instance. As a result, the (former) shared instance threw a lot less connection and timeout errors than before. Due to the split of data contexts the amount of commands per instance was reduced. Furthermore, starting several Redis instances per server leads to a better utilization of computing resources. Why? Again: <strong>Redis is single threaded!</strong> And modern servers have a lot of cores.</p>
-<p><em>Side note</em>: The usage of <a href="http://redis.io/commands/select" target="_blank" rel="noopener">SELECT</a> and multiple databases inside one Redis instance was mentioned as an <a href="https://groups.google.com/forum/#!topic/redis-db/vS5wX8X4Cjg" target="_blank" rel="noopener">anti pattern</a> by <a href="https://twitter.com/antirez" target="_blank" rel="noopener">Salvatore</a>.</p>
+<p>我们将cronjob执行的redis实例拆分出来后，之前共享redis的报错明显减少。此外，多个redis实例还可以更好的利用计算机资源。为什么呢？Redis是单线程的，现代的服务器是多核的。</p>
+<p>注：在一个redis实例中使用<a href="http://redis.io/commands/select" target="_blank" rel="noopener">SELECT</a> 和多个db被看做<a href="https://groups.google.com/forum/#!topic/redis-db/vS5wX8X4Cjg" target="_blank" rel="noopener">anti pattern</a>。</p>
 <h3 id="O-n-can-kill-you"><a href="#O-n-can-kill-you" class="headerlink" title="O(n) can kill you"></a>O(n) can kill you</h3><p>Okay, we found several causes and reduced the amount of connection and timeout errors by an order of magnitude. Everything went well for a long time and our Redis setup was healthy. The time went by, teams implemented new features into our application and our traffic continued to grow. The traffic growth went fast and the connection and command timeout errors came back.</p>
 <p>Our first thought: <em>Really? Murphy? Are you there?</em></p>
 <p>Luckily we saw a pattern in the occurrence of the message. It occurred periodically every 5 minutes. Based on our knowledge from the last investigation we started right away. We measured the base latency, enabled watchdog and read the <a href="http://redis.io/commands/slowlog" target="_blank" rel="noopener">SLOWLOG</a> documentation.</p>
