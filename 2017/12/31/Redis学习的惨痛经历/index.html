@@ -1,0 +1,480 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Redis学习的惨痛经历 | 发飙的蜗牛</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="发飙的蜗牛" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+    <div class="hide">
+    	<script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language="JavaScript"></script>
+    </div>
+
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title="">
+            <img src="/img/avatar.jpg" alt="logo头像">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 蜗牛保持乐观就会爬的更远 </h2>
+             
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation"><a href="/"><i class="fa fa-fw "></i>Home</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/前端/"><i class="fa fa-fw "></i>前端</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/后端/"><i class="fa fa-fw "></i>后端</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/工具/"><i class="fa fa-fw "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/资源/"><i class="fa fa-fw "></i>资源</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Redis学习的惨痛经历">
+            
+            Redis学习的惨痛经历
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>无</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            null
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/12/31</span>
+    </span>
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>我们开发的产品类似于于 <a href="http://www.trivago.com/" target="_blank" rel="noopener">trivago hotel search</a>，<a href="http://redis.io/" target="_blank" rel="noopener">Redis</a>也多用来缓存临时数据。比如将操作频繁的流水数据先存储到redis中，之后再迁移到关系型数据库做持久化。</p>
+<p>查找旅店的功能，前端主要是靠PHP和<a href="http://symfony.com/" target="_blank" rel="noopener">Symfony Framework</a>开发，后端是Java开发。本章我们主要强调PHP和Redis的协作，目前它们运行的非常稳定，但我们为实现这一步却花费了很大的精力。下面就来讲我们学习Redis经历。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>起初我们使用的库是 <a href="https://github.com/nrk/predis" target="_blank" rel="noopener">Predis</a>，一直到2013年我们开始使用<a href="https://github.com/phpredis/phpredis" target="_blank" rel="noopener">phpredis</a> (C实现)，主要因为二者的性能差异。</p>
+<p>在2014年，我们给平台开发了新的特性，导致<strong>http 请求短时间内翻了一倍</strong>，结果有40%的请求<strong>HTTP 500: Internal Server Error</strong>.</p>
+<p>之后查看日志，发现错误多是redis的连接问题： <a href="https://github.com/phpredis/phpredis/blob/1fa240478ff5c1be4dd769c759859b7f66db3526/library.c#L443" target="_blank" rel="noopener"><em>read error on connection</em></a> 和 <a href="https://github.com/phpredis/phpredis/blob/607988ad8dcb6dbaac1b3af7329042c7da62212d/redis.c#L447" target="_blank" rel="noopener"><em>Redis server went away</em></a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">| WARN | ... Redis\ConnectException: Unable to connect: read error on connection ...</span><br><span class="line">#0 /.../vendor/.../Redis/RedisPool.php(106): ...\Redis\RedisPool-&gt;connect(Object(Redis), Object(...\Redis\RedisServerConfiguration))</span><br><span class="line">#1 /.../vendor/.../Redis/RedisClient.php(130): ...\Redis\RedisPool-&gt;get(&apos;default&apos;, true)</span><br><span class="line">#2 /.../vendor/.../Redis/RedisClient.php(94): ...\Redis\RedisClient-&gt;setMode(false)</span><br><span class="line">...</span><br><span class="line">#17 /.../app/bootstrap.php.cache(551): Symfony\Bundle\FrameworkBundle\HttpKernel-&gt;handle(Object(Symfony\Component\HttpFoundation\Request), 1, true)</span><br><span class="line">#18 /.../web/app.php(15): Symfony\Component\HttpKernel\Kernel-&gt;handle(Object(Symfony\Component\HttpFoundation\Request))</span><br><span class="line">#19 &#123;main&#125;</span><br><span class="line">| 12.34.56.78 | www.trivago.de | /?aDateRange%5Barr%5D=2014-05-20&amp;aDateRange%5Bdep%5D=2014-05-21&amp;iRoomType=1&amp;iPathId=44742... | Mozilla/5.0 (WindowsNT 6.1; Trident/7.0; rv:11.0) like Gecko</span><br></pre></td></tr></table></figure>
+<p>Google发现，其他人也遇到过同样的问题： <a href="https://github.com/phpredis/phpredis/issues/70" target="_blank" rel="noopener">debug read error on connection #70</a>和 <a href="https://github.com/phpredis/phpredis/issues/492" target="_blank" rel="noopener">read error on connection’ #492</a>.</p>
+<h2 id="调试和修复"><a href="#调试和修复" class="headerlink" title="调试和修复"></a>调试和修复</h2><p>我们对于问题的起因并没有线索，我们首先做的尝试是Github上所有提到的每个细节点：</p>
+<ul>
+<li>修改redis建立连接和执行命令的超时时间，从500ms调整为2.5s</li>
+<li>禁用php的 default_socket_timeout 设置</li>
+<li>在redis服务上禁用 SYN cookies</li>
+<li>检查web服务器和redis建立的文件描述符数量</li>
+<li>增加服务器 <a href="https://www.freebsd.org/cgi/man.cgi?query=mbuffer&amp;sektion=1&amp;apropos=0&amp;manpath=FreeBSD+9.0-RELEASE+and+Ports" target="_blank" rel="noopener">mbuffer</a> </li>
+<li>调整TCP协议中backlog的大小</li>
+</ul>
+<p>然而上述修改都没有解决实际问题。我们也试图复现这个问题，但没有成功。可能只有在请求高峰的时候，问题才会出现。</p>
+<h3 id="在调用redis结束后关闭连接"><a href="#在调用redis结束后关闭连接" class="headerlink" title="在调用redis结束后关闭连接"></a>在调用redis结束后关闭连接</h3><p>PHP应用通常是无状态的，一个请求处理结束后，过程中分配的数据都会被销毁。当时我们没有使用php-fpm和redis的长连接机制，所以每个请求都会创建一个新的连接。重新审视代码后发现：我们打开的新连接，从来没有手动关闭过。</p>
+<p>这在新版本的PHP中应该不是什么问题。当脚本执行完毕后，PHP会主动帮我们关闭这些连接。然而在老版本中，却可能会导致出现无效连接或内存泄漏的问题。<strong>除此之外，主动关闭连接也是一个好的习惯</strong>，所以我们修复了这个问题。但它对问题本身并没有什么帮助。</p>
+<h3 id="A-B-Testing-Redis库"><a href="#A-B-Testing-Redis库" class="headerlink" title="A/B-Testing Redis库"></a>A/B-Testing Redis库</h3><p>是否我们遇到了phpredis库本身的bug？为了验证这个假设，我们专门A/B-Test比较了<code>phpredis</code>和<code>predis</code>两个库。</p>
+<p>当我们将测试调整到总用户的20%，两个redis库都出现了错误。最终排除了<code>phpredis</code>自身问题的可能。</p>
+<h3 id="更新redis"><a href="#更新redis" class="headerlink" title="更新redis"></a>更新redis</h3><p>我们和<code>phpredis</code>的维护者取得联系，首先，他们会问：“你们使用的版本是最新的吗？”一旦你提的版本不是最新的，他们就会回答：“请升级到最新版本后重试”。</p>
+<p>最终我们升级了版本，但不幸的是，问题仍然没有解决。</p>
+<p>###调试延迟问题</p>
+<p>阅读了一些文档后，我们发现了<code>redis</code>的一个新特性：<a href="http://redis.io/topics/latency#redis-software-watchdog" target="_blank" rel="noopener">Redis Software Watchdog</a>，用来记录执行较慢的操作。虽然官方文档上仍然被标注为<strong>实验性功能</strong>，但是我们却想尝试一次。</p>
+<blockquote>
+<p><strong>Tip</strong><br><a href="http://redis.io/topics/latency#single-threaded-nature-of-redis" target="_blank" rel="noopener">Redis 是单线程的</a>. 每个命令都可能阻塞其他的命令。这很容易被忽视，但却是一些问题的根本原因所在。</p>
+</blockquote>
+<p>我们开启了<code>Watchdog</code>等待几秒之后，我们撞到了一个bug：Redis服务宕了，请查看 <a href="https://github.com/antirez/redis/issues/1771" target="_blank" rel="noopener">Software watchdog crashes redis during rdb save point #1771</a>。到目前为止，我们还没有任何进展。我们启用了线下的Redis库，继续测试。</p>
+<p>我们接下来测试我们<code>redis</code>的 <a href="http://redis.io/topics/latency#latency-baseline" target="_blank" rel="noopener">latency baseline</a>。系统内在的延迟看上去还不错，但<code>redis</code>服务的延迟就看起来比较吓人：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ redis-cli --latency -p 6380 -h 1.2.3.4</span><br><span class="line">min: 0, max: 463, avg: 2.03 (19443 samples)</span><br></pre></td></tr></table></figure>
+<p>我们检查了<code>redis</code>的日志，发现<code>redis</code>每隔几分钟就同步数据到磁盘。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">[20398] 22 May 09:20:55.351 * 10000 changes in 60 seconds. Saving...</span><br><span class="line">[20398] 22 May 09:20:55.759 * Background saving started by pid 41941</span><br><span class="line">[41941] 22 May 09:22:48.197 * DB saved on disk</span><br><span class="line">[20398] 22 May 09:22:49.321 * Background saving terminated with success</span><br><span class="line">[20398] 22 May 09:25:23.299 * 10000 changes in 60 seconds. Saving...</span><br><span class="line">[20398] 22 May 09:25:23.644 * Background saving started by pid 42027</span><br><span class="line">[20398] 22 May 09:26:50.646 # Accepting client connection: accept: Software caused connection abort</span><br><span class="line">[20398] 22 May 09:26:50.900 # Accepting client connection: accept: Software caused connection abort</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>我们使用<code>redis</code>默认的配置，并运行在裸机上进行测试。我们第一个问题便是：<strong>为什么fork一个后台的存储进程要花费约400ms？</strong>在阅读了一部分博客和<a href="https://github.com/antirez/redis/blob/e9d861ec69a11208578fc2a8b7dcdf4c52df316e/src/rdb.c#L1878" target="_blank" rel="noopener">BGSAVE</a>之后，我们终于明白：<code>redis</code>正在fork的存储进程需要复制<a href="https://en.wikipedia.org/wiki/Page_table" target="_blank" rel="noopener">page table</a>。如果你的<code>redis</code>有很多key，即使是在一台物理机上，它也会花费很长时间。这个情况已经被加到官方文档：<a href="http://redis.io/topics/latency#fork-time-in-different-systems" target="_blank" rel="noopener">Fork time in different systems</a>.</p>
+<p>接下来我们关闭了 <a href="http://redis.io/topics/persistence#snapshotting" target="_blank" rel="noopener">Redis snapshots</a> 服务，这减少了超过30%的<code>read error on connection</code></p>
+<p>对于一个需要持久化的实例，<code>snapshpts</code>的使用可能相当棘手。如果有很多请求，且每个请求都做写操作，那么就会有很多的key被修改。这会触发更多的 <code>BGSAVE</code> 操作以及更多的<code>redis</code>拒绝连接现象。因为这最终导致更长的fock时间和redis阻塞。</p>
+<blockquote>
+<p><strong>Tip</strong></p>
+<p>回顾你的持久化需求和redis的配置：当请求高峰的时候，应用会修改很多key以及需要做持久化吗？考虑将<a href="http://redis.io/topics/persistence#aof-advantages" target="_blank" rel="noopener">AOF</a> 或定期地执行<code>BGSAVE</code>作为标准snapshot的替代，这可能会避免出现连接超时或执行命令超时。</p>
+</blockquote>
+<p>在部分应用场景中，我们并不想去关闭全局的持久化。我们选择关闭这些<code>redis</code>的<code>snapshot</code>，启用<code>cronjobs</code>在具体的时间调用<code>BGSAVE</code>命令。这样就可以避免在请求高峰时触发持久化操作。对于更高的持久化需求，我们更倾向于使用<a href="http://redis.io/topics/persistence#aof-advantages" target="_blank" rel="noopener">AOF</a>。如果你想要了解更多关于<code>rolling BGSAVE</code>，可以查看：<a href="https://groups.google.com/forum/#!topic/redis-db/xJRJkOIyW_g" target="_blank" rel="noopener">Rolling BGSAVE instead of (pre)-configured save points</a>。</p>
+<p>这些改变可以被认为是一个成功。我们减少了error和timeout的问题，但error还是会时不时出现。</p>
+<h3 id="为每个业务创建专门的实例"><a href="#为每个业务创建专门的实例" class="headerlink" title="为每个业务创建专门的实例"></a>为每个业务创建专门的实例</h3><p>很多团队可能会仅仅使用一个Redis实例，将不同业务或功能的数据存储在<a href="http://redis.io/commands/select" target="_blank" rel="noopener">不同的db里</a>，这看起来很好，但让我们继续往下说。</p>
+<p>我们团队每15分钟会执行一个<code>cronjob</code>，利用<a href="http://redis.io/topics/pipelining" target="_blank" rel="noopener">Redis Pipelining</a>特性，将MySQL中的数据导入到共享的Redis中。因为Redis是单线程的，导致Redis每隔15分钟就会被阻塞几分钟。</p>
+<blockquote>
+<p><strong>Tip</strong></p>
+<p>意识到Redis实例是多个团队或业务共享</p>
+<p>Be aware of Redis instances that are shared between teams and data context. Due to different use cases and long running commands they may block each other. Remember: Redis is single threaded.</p>
+</blockquote>
+<p>We moved the cronjob to its own Redis instance. As a result, the (former) shared instance threw a lot less connection and timeout errors than before. Due to the split of data contexts the amount of commands per instance was reduced. Furthermore, starting several Redis instances per server leads to a better utilization of computing resources. Why? Again: <strong>Redis is single threaded!</strong> And modern servers have a lot of cores.</p>
+<p><em>Side note</em>: The usage of <a href="http://redis.io/commands/select" target="_blank" rel="noopener">SELECT</a> and multiple databases inside one Redis instance was mentioned as an <a href="https://groups.google.com/forum/#!topic/redis-db/vS5wX8X4Cjg" target="_blank" rel="noopener">anti pattern</a> by <a href="https://twitter.com/antirez" target="_blank" rel="noopener">Salvatore</a>.</p>
+<h3 id="O-n-can-kill-you"><a href="#O-n-can-kill-you" class="headerlink" title="O(n) can kill you"></a>O(n) can kill you</h3><p>Okay, we found several causes and reduced the amount of connection and timeout errors by an order of magnitude. Everything went well for a long time and our Redis setup was healthy. The time went by, teams implemented new features into our application and our traffic continued to grow. The traffic growth went fast and the connection and command timeout errors came back.</p>
+<p>Our first thought: <em>Really? Murphy? Are you there?</em></p>
+<p>Luckily we saw a pattern in the occurrence of the message. It occurred periodically every 5 minutes. Based on our knowledge from the last investigation we started right away. We measured the base latency, enabled watchdog and read the <a href="http://redis.io/commands/slowlog" target="_blank" rel="noopener">SLOWLOG</a> documentation.</p>
+<p>In a very short time, compared to previous investigations, we identified a cronjob that fires the <a href="http://redis.io/commands/keys" target="_blank" rel="noopener">KEYS *</a> command against a big Redis instance. Luckily the Redis documentation describes the <strong>Time complexity</strong> per command with the help of the <a href="https://en.wikipedia.org/wiki/Big_O_notation" target="_blank" rel="noopener">Big O notation</a>. The time complexity of the KEYS command is defined as:</p>
+<blockquote>
+<p>O(N) with N being the number of keys in the database…</p>
+</blockquote>
+<p>In big databases and depending on the pattern you apply on the KEYS command this operation can lead to a long blocking Redis instance.</p>
+<blockquote>
+<p><strong>Tip</strong><br>Take a dedicated look at your Redis commands and their <em>Time complexity</em>. A few commands with a high Big O estimation can slow down the performance of your Redis instance. Often there are alternative commands that serve nearly the same purpose and are a better choice (e.g. the <a href="http://redis.io/commands/scan" target="_blank" rel="noopener">SCAN</a> family as a replacement for <a href="http://redis.io/commands/keys" target="_blank" rel="noopener">KEYS</a>)</p>
+</blockquote>
+<p>Back in 2014 there was only a small note in the <a href="http://redis.io/topics/latency#latency-generated-by-slow-commands" target="_blank" rel="noopener">Latency generated by slow commands</a>documentation, which said the <em>KEYS</em> command should only be used for debugging purposes. In the meantime the command reference was extended and a warning related to this was added.</p>
+<p>Based on this new experience we had a look at our application code again. We checked all Redis commands with a special attention to the use case, used data structure and their time complexity. This was a lot of work, but it paid off. We optimized over 40% of the executed commands which led to less time spent in the communication with Redis. In the end this led to an overall faster response time of our web stack. We were fine again.</p>
+<h3 id="One-connection-per-request"><a href="#One-connection-per-request" class="headerlink" title="One connection per request"></a>One connection per request</h3><p>We accepted the challenge with the ever growing amount of traffic in the following months and further optimized our application and stack in several ways. Some of our goals were tackling the consumption of memory per request, optimizing our database queries (slow query log), tuning our caching layers and adding more hardware (web servers) to our datacenters. Especially the last change, adding more web servers to our stack, created yet another challenge.</p>
+<p>As mentioned earlier, we were dealing with stateless applications. Without the usage of php-fpm and persistent connections this means:</p>
+<ol>
+<li>An HTTP request comes in</li>
+<li>The application creates connections to various services</li>
+<li>Operations are executed, queries are run, requests are made, etc.</li>
+<li>The application closes connections created in 2.</li>
+<li>The reponse is delivered to the client</li>
+</ol>
+<p>This worked great so far and this is the way many applications work. But if you scale the number of servers that can accept incoming requests, your traffic grows and you don`t pay special attention to your 3rd party components this can go wrong. <strong>Very wrong.</strong></p>
+<p><img src="http://tech.trivago.com/img/posts/learn-redis-the-hard-way/twemproxy-arch.png" alt="twemproxy architecture"></p>
+<p>Depending on the request, the application creates third party connections, executes one or two commands and disconnects again. 50% up to 75% of the commands we execute are used for connection handling. Remember Redis is single threaded. If you have a lot of clients that try to connect to your Redis instance continuously, you will keep your instance busy with connection handling instead of executing the commands you run your business logic on. This may lead to a slowdown/blocking of your Redis instance. The (simplified) image above visualizes the problem. Every arrow represents one HTTP client request.</p>
+<blockquote>
+<p><strong>Tip</strong><br>Consider a proxy between your application and your 3rd party components. If you have a high connection/command ratio or Redis is used as a platform across many different teams, a proxy can be very beneficial. It can reduce the connection overhead or act as a firewall for expensive and unwanted commands.</p>
+</blockquote>
+<p>This problem sounds like a typical proxy problem. Subsequent research showed that we were not alone and that this problem had been solved before. One solution is <a href="https://github.com/twitter/twemproxy" target="_blank" rel="noopener"><em>twemproxy</em></a>by twitter. <em>twemproxy</em> was created specifically for this use case. You install this proxy on every webserver and twemproxy holds a persistent connection to your Redis instance(s). Your application will only connect to the local proxy which should be a lot faster, because it connects to a unix domain socket instead of an external service via network. And even better: It supports <a href="http://memcached.org/" target="_blank" rel="noopener">memcached</a> as well. This was good news for us, because memcached is part of our stack and might face this problem in the future.</p>
+<p>So we introduced twemproxy into our stack. It was not a <em>“put it in and everything is working”</em> project. We had several small adjustments to make before it was a success, like</p>
+<ul>
+<li>getting <a href="https://github.com/twitter/twemproxy/pull/293" target="_blank" rel="noopener">twemproxy up and running on FreeBSD</a> (OS we use for web- and Redis-servers)</li>
+<li>adding <a href="https://github.com/twitter/twemproxy/pull/294" target="_blank" rel="noopener">Redis SELECT on connect/support for multiple databases in Redis</a></li>
+<li><a href="https://github.com/twitter/twemproxy/blob/master/notes/recommendation.md#read-writev-and-mbuf" target="_blank" rel="noopener">configuring our mbuf values correctly</a></li>
+<li>check for usage of <a href="https://github.com/twitter/twemproxy/blob/master/notes/redis.md" target="_blank" rel="noopener">Redis commands not supported by twemproxy</a></li>
+</ul>
+<p>As described earlier the usage of multiple databases was marked as an anti pattern. At this time we were not able to move all our applications away from connecting to different databases on one Redis instance so the capability to SELECT a database other than the default one was still a requirement for us.</p>
+<p>Another advantage of twemproxy is its ability to block expensive commands. So it can act like a circuit breaker for commands like <em>KEYS</em> and dangerous operations like <a href="http://redis.io/commands/flushall" target="_blank" rel="noopener">FLUSHALL</a>and <a href="http://redis.io/commands/flushdb" target="_blank" rel="noopener">FLUSHDB</a>.</p>
+<p>The downside of this: Every new command of future Redis versions needs to be supported by twemproxy as well. If you upgrade your Redis installation to use new features, like <a href="http://redis.io/commands#geo" target="_blank" rel="noopener">GEO commands</a>, twemproxy support needs to be added and deployed as well.</p>
+<p>The deployment of twemproxy was a great success. We eliminated all timeout and connection errors that were left (without buying new hardware).</p>
+<h3 id="Bonus-round-Shard-your-data"><a href="#Bonus-round-Shard-your-data" class="headerlink" title="Bonus round: Shard your data"></a>Bonus round: Shard your data</h3><p>All known root causes for the connection and command timeouts were solved. The growth and traffic of our platform still continued and we continued to optimize our Redis usage.</p>
+<p>Two of our Redis use cases were caching of calculated data and short term (~1 min.) storage. At some point in time one machine will not be able to handle those use cases alone anymore, because</p>
+<ul>
+<li>the data won’t fit into RAM</li>
+<li>the number of read/write requests is to high for one machine</li>
+</ul>
+<p>As a follow up we started to shard our data over several machines using <a href="https://en.wikipedia.org/wiki/Consistent_hashing" target="_blank" rel="noopener">consistent hashing</a>. Luckily this way of sharding is natively supported by twemproxy. This resulted in:</p>
+<ul>
+<li>Reduction of traffic/load/requests per machine</li>
+<li>Improved reliability of this caching infrastructure during node failures</li>
+</ul>
+<p>Both points are a big win, especially the second one. If a machine fails (e.g. hardware failure) our service is able to operate normally. Only a small percentage of compute and storage power is sacrificed. We applied this pattern to every use case where it made sense or was applicable We didn’t regret it. Most prominently, due to a node failure in this component last year this optimization had its debut.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>In this post, we told you our painful story of how we learned to use and benefit from <em>Redis</em>. During the time of identifying and fixing these issues, we faced multiple challenges like the constantly increasing HTTP traffic to our platform and understanding the implications of operating such a database.</p>
+<p>Looking back this was not only a technical issue and now this seems to be obvious. The root causes of these errors were more a conceptional issue. The way we used Redis was not ideal for this kind of traffic and growth.</p>
+<p>After understanding the issues more and more it was clear that there is no “silver bullet” to solve this problem. There were several important lessons like</p>
+<ul>
+<li>understanding how commands are executed (single threaded)</li>
+<li>properly configure the way how Redis persists data (BGSAVE)</li>
+<li>splitting data storage per service and avoiding shared Redis instances (multiple databases)</li>
+<li>understand time complexity of Redis commands (KEYS/O(n))</li>
+<li>control the amount of TCP/IP connections to your Redis instances (twemproxy)</li>
+<li>shard your data once it doesn’t fit onto one machine anymore and accepting machine failures (consistent hashing)</li>
+</ul>
+<p>We had a hard but exciting time and all of us learned a lot. Ever since we applied the changes described here to our setup we didn’t face any bigger issue. But be aware: There are many other things you have to take care of when you run Redis in production like</p>
+<ul>
+<li><a href="http://redis.io/topics/replication" target="_blank" rel="noopener">replication and required RAM</a></li>
+<li><a href="http://redis.io/topics/sentinel" target="_blank" rel="noopener">automatic failover via sentinal</a></li>
+<li>correct use of <a href="https://redis.io/topics/lru-cache#eviction-policies" target="_blank" rel="noopener">eviction policies</a></li>
+<li>basic understanding of <a href="https://redis.io/topics/security" target="_blank" rel="noopener">Redis security model</a> (also <a href="http://antirez.com/news/96" target="_blank" rel="noopener">possible attack patterns by insufficient configuration</a>)</li>
+<li>proper monitoring and alerting</li>
+</ul>
+<p>Did you experience similar issues/problems? Or were you able to use any of the tips mentioned here? Let us know in the comment section.</p>
+
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+</div>
+
+
+    <div id="comments">
+        
+    <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1966422"></script>
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">Search</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">localSearch</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.2.0版本已经上线！欢迎更新~ <br/>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br/>
+<hr/>接受贡献，包括不限于提交问题与需求，修复代码。欢迎Pull Request<br/>支持主题：<a href="https://github.com/shenliyang/hexo-theme-snippet/stargazers">Star一下</a>
+</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">Social</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/shenliyang" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:snippet@91h5.cc" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+	            <a href="/" rel="external nofollow" title="联系QQ" target="_blank">
+			    	<i class="qq fa fa-qq"></i>
+			    </a>
+            
+	            <a href="/" rel="external nofollow" title="微博" target="_blank">
+			    	<i class="weibo fa fa-weibo"></i>
+			    </a>
+            
+	            <a href="/" rel="external nofollow" title="QQ群" target="_blank">
+			    	<i class="users fa fa-users"></i>
+			    </a>
+            
+	            <a href="/atom.xml" rel="external nofollow" title="RSS" target="_blank">
+			    	<i class="feed fa fa-feed"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+
+        
+        
+    <div class="widget">
+      <h3 class="title">Archives</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">December 2017</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+
+        
+        
+    <div class="widget">
+        <h3 class="title">Friends</h3>
+        <div class="content friends-link">
+        
+            <a href="http://www.shenliyang.com" class="fa" target="_blank">个人博客</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  <script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+
+
+	<script src="/js/search.js?rev=@@hash"></script>
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>
