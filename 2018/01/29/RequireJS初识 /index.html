@@ -24,7 +24,7 @@
     <!--Title-->
 
 
-<title>归档：2018/1 | 发飙的蜗牛</title>
+<title>RequireJS初识 | 发飙的蜗牛</title>
 
 
     <link rel="alternate" href="/atom.xml" title="发飙的蜗牛" type="application/atom+xml">
@@ -36,6 +36,8 @@
 
 
 
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
 
 
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
@@ -115,33 +117,88 @@
     <section class="content-wrap">
         <div class="container">
             <div class="row">
-                <main class="col-md-8 main-content ">
-                    <div id="main">
-  <div id="post-list">
-    <ul class="archives-post-list">
-    	<h1 class="info">2018年 1月</h1>
-        
-          <li class="post-items" _href="/2018/01/29/RequireJS初识 /">
-            <h3 class="post-item-title">
-            	<a href="/2018/01/29/RequireJS初识 /"> RequireJS初识 </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/01/21/Memcached遇到的json_decode问题/">
-            <h3 class="post-item-title">
-            	<a href="/2018/01/21/Memcached遇到的json_decode问题/"> Memcached遇到的json_decode问题 </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/01/14/Git分支模型/">
-            <h3 class="post-item-title">
-            	<a href="/2018/01/14/Git分支模型/"> Git分支模型 </a>
-            </h3>  
-          </li>
-        
-    </ul>
-  </div>
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="RequireJS初识">
+            
+            RequireJS初识
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>记事</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            js
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2018/01/29</span>
+    </span>
 </div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>开发上想找一个时间选择控件，无意中就找到了<a href="http://www.layui.com/laydate/" target="_blank" rel="noopener">layDate 日期与时间组件</a>。</p>
+<p>直接下载源码，在文件中引入.js和.css文件，但是调用的时候产生异常了。很好奇！作为一名服务端开发，我一直都是这样搞的，百试不爽。今天却翻车了！！查看错误发现是require这个方法报的错，主要的原因是：laydate未定义。</p>
+<p>为什么要引入requirejs，这个东西到底该怎么用呢？从后端的角度看：它其实就是扮演PHP中的 spl_autoload_register的角色。当执行JS的时候，自动去调用执行脚本所需的js。</p>
+<p>所以对代码做如下修改,主要用来配置加载js的路径。</p>
+<p>注：如果是本地资源，千万不要写成如下代码所示的：域名+路径的形式（见注释掉的baseUrl）。当正式服和测试服域名不相同时，就比较麻烦。我就是因为我们测试服的域名是woniu-test，正式服我的域名是woniu，结果require的加载请求一直请求的是woniu的域名，找了半天才发现这个问题。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">requirejs.config(&#123;</span><br><span class="line">    <span class="comment">//baseUrl: 'http://woniu/resource'</span></span><br><span class="line">    baseUrl: <span class="string">'/resource/'</span>,</span><br><span class="line">    <span class="comment">//paths: &#123;</span></span><br><span class="line">    <span class="comment">//    laydate: 'js/laydate'</span></span><br><span class="line">    <span class="comment">//&#125;,</span></span><br><span class="line">    <span class="comment">//shim:&#123;</span></span><br><span class="line">    <span class="comment">//    'laydate': &#123;</span></span><br><span class="line">    <span class="comment">//        deps: ['js/laydate'],</span></span><br><span class="line">    <span class="comment">//        exports: 'laydate'</span></span><br><span class="line">    <span class="comment">//    &#125;</span></span><br><span class="line">    <span class="comment">//&#125;</span></span><br><span class="line">&#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>调用的时候直接如下调用，就ok了！！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    require([&apos;js/laydate&apos;], function (_)&#123;</span><br><span class="line">        // called once the DOM is ready</span><br><span class="line">        laydate.render(&#123;</span><br><span class="line">            elem: &apos;#input-end-time&apos;, //指定元素</span><br><span class="line">            type: &apos;datetime&apos;</span><br><span class="line">        &#125;);</span><br><span class="line">        laydate.render(&#123;</span><br><span class="line">            elem: &apos;#input-start-time&apos;, //指定元素</span><br><span class="line">            type: &apos;datetime&apos;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2018/01/21/Memcached遇到的json_decode问题/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1966422"></script>
+
+
+
+
+
+
+
+
+    </div>
 
 
 

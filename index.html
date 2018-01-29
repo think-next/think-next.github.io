@@ -94,10 +94,10 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         
-                            <li role="presentation"><a href="/"><i class="fa fa-fw "></i>博客</a>
+                            <li role="presentation"><a href="/categories/博客"><i class="fa fa-fw "></i>博客</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/前端/"><i class="fa fa-fw "></i>主页</a>
+                            <li role="presentation"><a href="/categories/记事/"><i class="fa fa-fw "></i>记事</a>
                             </li>
                         
                             <li role="presentation"><a href="/categories/后端/"><i class="fa fa-fw "></i>后端</a>
@@ -124,9 +124,63 @@
 
 <article class="post">
     
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
+                <a href="/2018/01/29/RequireJS初识 /">RequireJS初识</a>
+            </h1>
+            <div class="post-meta">  &bull;
+                <time class="post-date" datetime="" title="">
+                    2018年01月29日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+            开发上想找一个时间选择控件，无意中就找到了layDate 日期与时间组件。
+直接下载源码，在文件中引入.js和.css文件，但是调用的时候产生异常了。很好奇！作为一名服务端开发，我一直都是这样搞的，百试不爽。今天却翻车了！！查看错误发...
+        </p> 
+    </div>
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>记事</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            js
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2018/01/29</span>
+    </span>
+</div>
+
+        </div>
+
+        <div class="post-permalink"> 
+            <a href="/2018/01/29/RequireJS初识 /" class="btn btn-default">阅读全文</a>
+        </div>
+    </footer>
+</article>
+
+
+<article class="post">
+    
         <div class="post-media">
             <a href="javascript:">
-                <img class="img-ajax" src="/img/loading.gif"  data-src="http://tech.trivago.com/img/posts/memcached-optimization/method_hit_count.png"   alt="Memcached遇到的json_decode问题"> 
+                <img class="img-ajax" src="/img/loading.gif"  data-src="http://tech.trivago.com/img/posts/memcached-optimization/before.jpg"   alt="Memcached遇到的json_decode问题"> 
             </a>
         </div>
     
@@ -313,13 +367,13 @@
         
         
     <div class="widget">    
-        <h3 class="title">Search</h3>
+        <h3 class="title">搜索</h3>
         <div id="search-form">
             <div id="result-mask" class="hide"></div>
             <div class="search-area">
                 
                     <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
-                    <button type="button" class="search-form-submit" id="search-local">localSearch</button>
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
                 
                 
             </div>
@@ -351,7 +405,7 @@
         
         
     <div class="widget">
-      <h3 class="title">Social</h3> 
+      <h3 class="title">社交</h3> 
         <div class="content social">
             
 	            <a href="//github.com/GitHubSi" rel="external nofollow" title="Github" target="_blank">
@@ -369,25 +423,25 @@
         
         
     <div class="widget">
-        <h3 class="title">Categories</h3>
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link current" href="/categories/博客/"><i class="fa" aria-hidden="true">博客</i></a><span class="category-list-count">3</span></li></ul>
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/博客/"><i class="fa" aria-hidden="true">博客</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/记事/"><i class="fa" aria-hidden="true">记事</i></a><span class="category-list-count">1</span></li></ul>
     </div>
 
 
         
         
     <div class="widget">
-      <h3 class="title">Archives</h3>
-        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">January 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">December 2017</i></a><span class="archive-list-count">1</span></li></ul>
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">January 2018</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">December 2017</i></a><span class="archive-list-count">1</span></li></ul>
     </div>
 
 
         
         
   <div class="widget">
-    <h3 class="title">Tag Cloud</h3>
+    <h3 class="title">标签云</h3>
     <div class="content tag-cloud">
-        <a href="/tags/cache/" style="font-size: 10px;">cache</a>
+        <a href="/tags/cache/" style="font-size: 20px;">cache</a> <a href="/tags/js/" style="font-size: 10px;">js</a>
     </div>
   </div>
 
@@ -395,7 +449,7 @@
         
         
     <div class="widget">
-        <h3 class="title">Friends</h3>
+        <h3 class="title">友链</h3>
         <div class="content friends-link">
         
             <a href="http://blog.csdn.net/whynottrythis" class="fa" target="_blank">个人博客</a>
