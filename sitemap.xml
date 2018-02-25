@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/2018/websocket%E5%9F%BA%E7%A1%80%E5%BC%80%E5%8F%91/</loc>
+    <lastmod>2018-02-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/2018/protobufs%E5%9C%A8logstash%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</loc>
     <lastmod>2018-01-30T20:10:33+00:00</lastmod>
   </url>
@@ -50,7 +55,7 @@
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2018-01-30T20:10:33+00:00</lastmod>
+    <lastmod>2018-02-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -62,6 +67,18 @@
   <url>
     <loc>/tags/protobufs/</loc>
     <lastmod>2018-01-30T20:10:33+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/protocol/</loc>
+    <lastmod>2018-02-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/summarize/</loc>
+    <lastmod>2018-02-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -79,7 +96,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-01-30T20:10:33+00:00</lastmod>
+    <lastmod>2018-02-25T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>
