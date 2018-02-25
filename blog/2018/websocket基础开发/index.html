@@ -104,9 +104,9 @@ http.HandleFunc(&quot;/ws&quot;, serveForWs)
 
 <pre><code>func serveForWs(w http.ResponseWriter, r *http.Request) {
     if r.Method != &quot;GET&quot; {
-		http.Error(w, &quot;Method not allowed&quot;, http.StatusMethodNotAllowed)
-		return
-	}
+        http.Error(w, &quot;Method not allowed&quot;, http.StatusMethodNotAllowed)
+        return
+    }
 	
     conn, err := upgrader.Upgrade(w, r, nil)
     if err != nil {
@@ -144,7 +144,7 @@ if err != nil {
     for {
     	select {
     	case &lt;-ticker.C:
-    		if err := ws.WriteControl(websocket.PingMessage, []byte{}, time.Now().Add(writeWait)); err != nil {
+    	    if err := ws.WriteControl(websocket.PingMessage, []byte{}, time.Now().Add(writeWait)); err != nil {
     			log.Println(&quot;ping:&quot;, err)
     		}
     	case &lt;-done:
@@ -182,26 +182,26 @@ type Client struct {
 <p>Room主要提供注册、取消注册和广播消息的功能。也是一个后台运行的常驻协程。</p>
 
 <pre><code>func (room *Room) Run() {
-	for {
-		select {
-		case client := &lt;-room.register:
-			room.clients[client] = true
-		case client := &lt;-room.unregister:
-			if _, ok := room.clients[client]; ok {
-				delete(room.clients, client)
-				close(client.send)
-			}
-		case message := &lt;-room.broadcast:
-			for client := range room.clients {
-				select {
-				case client.send &lt;- message:
-				default:
-					close(client.send)
-					delete(h.clients, client)
-				}
-			}
-		}
-	}
+    for {
+    	select {
+    	case client := &lt;-room.register:
+    		room.clients[client] = true
+    	case client := &lt;-room.unregister:
+    		if _, ok := room.clients[client]; ok {
+    			delete(room.clients, client)
+    			close(client.send)
+    		}
+    	case message := &lt;-room.broadcast:
+    		for client := range room.clients {
+    			select {
+    			case client.send &lt;- message:
+    			default:
+    				close(client.send)
+    				delete(h.clients, client)
+    			}
+    		}
+    	}
+    }
 }
 </code></pre>
 
@@ -270,17 +270,12 @@ go func() {
 }()
 </code></pre>
 
-<p>参考文章：</p>
-
-<blockquote>
-<ol>
-<li><a href="https://github.com/gorilla/websocket/tree/master">websocket repository</a></li>
-<li><a href="https://github.com/heroku-examples/go-websocket-chat-demo">go-websocket-chat-demo</a></li>
-<li><a href="https://godoc.org/github.com/gorilla/websocket">websocket godoc</a></li>
-<li><a href="https://tools.ietf.org/html/rfc6455#section-5.5.1">websocket rfc6455</a></li>
-<li><a href="https://godoc.org/github.com/garyburd/redigo/redis#PubSubConn">redis godoc</a></li>
-</ol>
-</blockquote>
+<p>参考文章：
+&gt;1. <a href="https://github.com/gorilla/websocket/tree/master">websocket repository</a>
+&gt;2. <a href="https://github.com/heroku-examples/go-websocket-chat-demo">go-websocket-chat-demo</a>
+&gt;3. <a href="https://godoc.org/github.com/gorilla/websocket">websocket godoc</a>
+&gt;4. <a href="https://tools.ietf.org/html/rfc6455#section-5.5.1">websocket rfc6455</a>
+&gt;5. <a href="https://godoc.org/github.com/garyburd/redigo/redis#PubSubConn">redis godoc</a></p>
 
 
   <footer>
