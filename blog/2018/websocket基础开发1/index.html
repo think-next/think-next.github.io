@@ -281,12 +281,17 @@ go func() {
 
 <p>如果某个时刻，<code>Client</code>突然断开了连接，过了一会又重新连接上了,那么中间推送的数据如何处理？这涉及是消息的持久化问题，以及消息推送的数据结构。推送的数据中都还有当前的时间戳，当<code>Client</code>重新连接时，需要携带最后一次接受到消息的时间戳，服务端只需要推送这段时间内的消息就OK了。</p>
 
-<p>参考文章：
-&gt;1. <a href="https://github.com/gorilla/websocket/tree/master">websocket repository</a>
-&gt;2. <a href="https://github.com/heroku-examples/go-websocket-chat-demo">go-websocket-chat-demo</a>
-&gt;3. <a href="https://godoc.org/github.com/gorilla/websocket">websocket godoc</a>
-&gt;4. <a href="https://tools.ietf.org/html/rfc6455#section-5.5.1">websocket rfc6455</a>
-&gt;5. <a href="https://godoc.org/github.com/garyburd/redigo/redis#PubSubConn">redis godoc</a></p>
+<p>参考文章：</p>
+
+<blockquote>
+<ol>
+<li><a href="https://github.com/gorilla/websocket/tree/master">websocket repository</a></li>
+<li><a href="https://github.com/heroku-examples/go-websocket-chat-demo">go-websocket-chat-demo</a></li>
+<li><a href="https://godoc.org/github.com/gorilla/websocket">websocket godoc</a></li>
+<li><a href="https://tools.ietf.org/html/rfc6455#section-5.5.1">websocket rfc6455</a></li>
+<li><a href="https://godoc.org/github.com/garyburd/redigo/redis#PubSubConn">redis godoc</a></li>
+</ol>
+</blockquote>
 
 
   <footer>
