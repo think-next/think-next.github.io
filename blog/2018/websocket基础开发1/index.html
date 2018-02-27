@@ -80,6 +80,8 @@
 
 
 
+
+
 <p>WebSocket是一种网络通讯协议。在服务器端可以将HTTP请求升级为WebSocket请求。区别于普通的HTTP请求，WebSocket中存在特殊的字段标识：</p>
 
 <pre><code>GET /chat HTTP/1.1
@@ -119,7 +121,7 @@ http.HandleFunc(&quot;/ws&quot;, serveForWs)
 }
 </code></pre>
 
-<p><a href="https://godoc.org/github.com/gorilla/websocket#Upgrader.Upgrade">Upgrader</a>负责连接升级，同时指定连接的部分属性。包括<code>ReadBufferSize</code>，<code>WriteBufferSize</code>，<code>CheckOrigin</code>等。</p>
+<p><a href="https://godoc.org/github.com/gorilla/websocket#Upgrader.Upgrade">Upgrader</a>负责连接升级，同时指定连接的部分属性。包括<code>ReadBufferSize</code>，<code>WriteBufferSize</code>，<code>CheckOrigin</code>等。<code>Upgrader</code>默认会检查<code>header</code>头中<code>Origin</code>是否有效，如果你要使用这个默认函数的话，需要确保客户端请求头中包含<code>Origin</code>。</p>
 
 <pre><code>var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
@@ -174,6 +176,8 @@ c.conn.SetPongHandler(func(string) error { c.conn.SetReadDeadline(time.Now().Add
 </code></pre>
 
 <p>WebSocket支持UTF-8编码的文本消息、及二进制消息。</p>
+
+<h2 id="模拟聊天室">模拟聊天室</h2>
 
 <p>在聊天室的应用中，需要保存所有在线用户的连接信息，我们引入<code>room</code>的结构。当用户进入<code>room</code>时，保存连接。当用户离开<code>room</code>时，取消连接。这些数据均保存在内存中。</p>
 
@@ -238,9 +242,17 @@ func GetInstance() *Hub {
 }
 </code></pre>
 
-<p>当WebSocket部署到多台服务器时，同一个房间内的用户就会连接到不同的服务器。对某个房间进行<code>广播</code>时，需要保证所有的WebSocket服务器同时对该房间进行广播。这涉及到WebSocket服务的水平扩展问题，我们需要引入<code>pub/sub Broker</code>，用它来负责各个WebSocket服务间的通讯。这样的工具其实很多，比如<code>Redis</code>、<code>NSQ</code>、<code>Kafka</code>等。下面会介绍<code>Redis</code>的发布订阅功能。</p>
+<h2 id="部署websocket集群服务">部署WebSocket集群服务</h2>
 
-<p>利用Redis<a href="http://redisbook.readthedocs.io/en/latest/feature/pubsub.html">发布/订阅</a>模式，每台WebSocket服务后台常驻一个协程，用来接收后台发布的消息。Redis订阅后会接收三种类型消息：错误、发布的消息及订阅<code>Channel</code>的消息。</p>
+<p>当WebSocket部署到多台服务器时，同一个房间内的用户就会连接到不同的服务器。所以，每台服务器都只是保存了房间的部分连接。这样可以有效的降低单机负载，及避免单点问题。</p>
+
+<p>当系统决定对某个房间进行<code>广播</code>时，需要保证每台WebSocket服务器同时对该房间的用户进行广播。这涉及到WebSocket服务的水平扩展问题，也可以抽象为：不同服务间该如何通讯？</p>
+
+<p>我们引入<code>pub/sub Broker</code>，用它来负责各个WebSocket服务间的通讯。这样的工具其实很多，比如<code>Redis</code>、<code>NSQ</code>、<code>Kafka</code>等。下面先介绍<code>Redis</code>的发布订阅功能。</p>
+
+<h3 id="redis的发布-订阅">Redis的发布/订阅</h3>
+
+<p>利用Redis<a href="http://redisbook.readthedocs.io/en/latest/feature/pubsub.html">发布/订阅</a>模式，每台WebSocket服务后台常驻一个协程，用来接收后台发布的消息。Redis订阅后会接收三种类型消息：错误消息、发布的消息及订阅<code>Channel</code>的消息。</p>
 
 <p>采用这种方式会存在丢数据的情况。比如，<code>Client</code>订阅某个<code>Channel</code>后，该连接会一直挂着，等待接收订阅的消息，直到连接超时或异常断开。当连接超时时，我们需要重新发起订阅。但就在这个间隙<code>PUBLISH</code>的数据，永远也找不回来了。我们需要加一个<code>ping/pong</code>检查，以及持久化Redis <code>PUBLISH</code>消息的代码补丁。</p>
 
@@ -279,7 +291,19 @@ go func() {
 }()
 </code></pre>
 
-<p>如果某个时刻，<code>Client</code>突然断开了连接，过了一会又重新连接上了,那么中间推送的数据如何处理？这涉及是消息的持久化问题，以及消息推送的数据结构。推送的数据中都还有当前的时间戳，当<code>Client</code>重新连接时，需要携带最后一次接受到消息的时间戳，服务端只需要推送这段时间内的消息就OK了。</p>
+<h2 id="连接断开到重连的数据处理">连接断开到重连的数据处理</h2>
+
+<p>如果某个时刻，<code>Client</code>突然断开了连接，过了一会又重新连接上了,那么中间推送的数据如何处理？</p>
+
+<p>这涉及是消息的持久化问题，以及消息推送的数据结构。每次推送的数据中都携带当前时间戳信息，当<code>Client</code>重新连接到服务时，需要携带最后一次接受到消息的时间戳。这样服务端只需要推送这段时间内的消息就OK了。</p>
+
+<h2 id="用户与用户间的相互通讯">用户与用户间的相互通讯</h2>
+
+<p>当两个用户连接到同一台服务器上时，实现两者之间的通讯比较容易。但我们引入了WebSocket集群。</p>
+
+<p>我们创建用户和服务器的关联关系，通过用户查找当前所在的服务器。这样通过服务器内存中的MAP映射关系，就可以操作用户的WebSocket连接了。</p>
+
+<p>或许，我们还可以充分利用<code>Pub/Sub</code>的思路。每个<code>Client</code>都订阅一个唯一的<code>Channel</code>，这样可以很轻松的确保两个用户的通讯。哈哈，但还必须要考虑<code>Sub</code>所创建的链接数、文件描述符是否够用、并发。</p>
 
 <p>参考文章：</p>
 
