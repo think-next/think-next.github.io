@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>IAP支付初识 - 付辉</title>
+    <meta property="og:title" content="IAP支付初识 - 付辉">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/">Blog</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>IAP支付初识</h1>
+
+
+<h3>付辉
+
+    
+    
+     /  2018-02-28
+    
+</h3>
+<hr>
+
+      </header>
+
+
+
+
+
+<p>`[草稿]</p>
+
+<p><code>IAP</code>全称<code>In-App Purchase</code>，也可以叫内购。查看<a href="https://baike.baidu.com/item/IAP/16700121">百度百科</a>，IAP是一种智能移动终端应用程序的付费模式。大概的意思：用户在APP内通过付费，来享受APP内提供的服务或体验。</p>
+
+<p>我不仅仅想总结一下苹果的<code>IAP</code>，还想反思一下支付要注意的细节。</p>
+
+<p>从问题入手：如何确认苹果交易的唯一标识。想要做到支付的幂等性，每一笔订单就应该有一个唯一的标识。来避免出现类似这样的现象：用户支付了一次，服务端却创建了多个订单。</p>
+
+<h2 id="交易的唯一标识">交易的唯一标识</h2>
+
+<p>我们使用服务端验证的流程，每笔交易都通过服务器请求苹果服务器来完成校验。</p>
+
+<p>用户在支付完成后，IOS客户端获取到苹果回传的<code>receipt</code>，之后将数据传递给自己的服务器。服务器再向苹果发起验证请求，校验支付的合法性。校验通过之后，服务器返回给客户端，可以将这次交易关闭了。客户端<code>finish</code>掉这次交易，整个支付完成了。</p>
+
+<pre><code>sequenceDiagram
+苹果-&gt;&gt;APP: 1 支付通知
+APP-&gt;&gt;自己服务: 2
+自己服务-&gt;&gt;苹果: 3 校验receipt
+苹果--&gt;&gt;自己服务: 4 IOS 校验返回 
+自己服务--&gt;&gt;APP: 5. 校验结果
+</code></pre>
+
+<p>苹果没有采用“支付成功后，回调通知第三方服务器的方式”，起初让我很诧异。但后来了解到：用户绕过第三方，可以直接找苹果客服退钱。而且，苹果客服退款之后，也不会主动通知第三方。哈哈，原来跟别人收费，还能收的这么有态度！</p>
+
+<p><code>YY</code>的时候到了。如果用户A在支付完成，但客户端还没来得及将<code>receipt</code>传递给自己服务器的时候，用户A退出登录，将手机借给了用户B，用户B登录了自己的账号。这时客户端继续之前没有完成的验证并成功返回。但是这笔交易却记到了用户B的账号上。</p>
+
+<p>这显然不是我们预期的，虽然这种情况发生的概率本身很小。但为了避免这样的情况，考虑当APP收到苹果的<code>receipt</code>时，先向自己服务器请求生成一个<code>order</code>，创建<code>order</code>和用户<code>user</code>的关系。后续APP将<code>order</code>和<code>receipt</code>发给服务器，服务端通过<code>order</code>来确认下单的用户。</p>
+
+<p>苹果的唯一标识如何确定了，是用<code>receipt</code>的<code>md5</code>值吗？起初确实有这样的考虑，但最终发现这样的对应关系并不唯一。</p>
+
+<p>假设下面的场景：当客户端支付<code>order-1</code>时，服务端在请求苹果校验的时候网络有点问题，<code>receipt-1</code>没有被成功关闭，需要等待后续重试。这时我们建立了<code>order-1</code>和<code>receipt-1</code>摘要的关系。但同时用户又购买了新的产品，支付了<code>order-2</code>订单。此时，<code>order-1</code>订单的重试被触发，但这时因为产生了新的订单，<code>receipt-1</code>已经被更新啦。</p>
+
+<p>假设<code>order-2</code>却第一个拿到了返回的<code>receipt-2</code>。服务端拿这个<code>receipt-2</code>去<code>AppStore</code>请求的时候，返回的<code>in_app</code>中就包含两次购买的所有产品信息。此时，客户端<code>finish</code>掉这个<code>receipt-2</code>。这时，<code>order-1</code>的订单<code>receipt-1</code>返回来了，服务端重新去苹果请求，当前<code>in_app</code>中就只有<code>order-1</code>的商品信息了。</p>
+
+<h3 id="切换账号的烦恼">切换账号的烦恼</h3>
+
+<p>可能会有这样的疑问：这个专门生成的<code>order</code>是不是有些鸡肋？为什么不省去它，在APP直接提交<code>receipt</code>到自己服务器的同时，服务器根据<code>receipt</code>的摘要或者其他来创建<code>order</code>。</p>
+
+<p>最主要的原因是<code>receipt</code>是变化的。当有新的订单生成时，重新获取的<code>receipt</code>就会被更新。这时</p>
+
+<pre><code>sequenceDiagram
+APP-&gt;&gt;IAP服务: 
+B-&gt;&gt;A: Great!
+</code></pre>
+
+<p>在交易支付完成后，IOS客户端传递给服务器端<code>receipt-data</code>,以及服务端生成的订单号<code>order-id</code>。确定本次交易归属于的用户，以及建立服务器<code>order-id</code>和<code>receipt</code>的对应的关系。</p>
+
+<p>但查看苹果开发文档对 <a href="https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html#//apple_ref/doc/uid/TP40010573-CH106-SW1">Receipt Fields </a>的介绍，<code>in_app</code>存储的是一个数组结构，所以生产环境中<code>in_app</code>中可能包含多条购买记录。此时，两者是一对多的关系。即一个<code>order-id</code>，多个<code>purchase receipt</code></p>
+
+<p>苹果对<code>in_app</code>的描述如下：</p>
+
+<blockquote>
+<p>In the JSON file, the value of this key is an array containing all in-app purchase receipts based on the in-app purchase transactions present in the input base-64 receipt-data.</p>
+</blockquote>
+
+<p>包含基于当前<code>base-64 receipt-data</code>的交易信息。当客户端支付<code>order-1</code>时，网络有点问题，<code>receipt-1</code>没有及时返回。客户端在等待苹果返回<code>receipt-1</code>的同时，用户又购买了新的产品，支付了<code>order-2</code>订单。此时，假设<code>order-2</code>却第一个拿到了返回的<code>receipt-2</code>。服务端拿这个<code>receipt-2</code>去<code>AppStore</code>请求的时候，返回的<code>in_app</code>中就包含两次购买的所有产品信息。此时，客户端<code>finish</code>掉这个<code>receipt-2</code>。这时，<code>order-1</code>的订单<code>receipt-1</code>返回来了，服务端重新去苹果请求，当前<code>in_app</code>中就只有<code>order-1</code>的商品信息了。</p>
+
+<p>可以看出：1. 客户端每次<code>finish</code>，都只能针对一次交易；2.order-2订单对应了两个<code>receipt</code>。</p>
+
+<blockquote>
+<p>The in-app purchase receipt for a consumable product is added to the receipt when the purchase is made. It is kept in the receipt until your app finishes that transaction. After that point, it is removed from the receipt the next time the receipt is updated - for example, when the user makes another purchase or if your app explicitly refreshes the receipt.</p>
+</blockquote>
+
+<p>在客户端<code>finish</code>这个<code>receipt</code>之前，通过当前的<code>base-64 receipt-data</code>客户获得交易信息，客户端<code>finish</code>之后，该<code>base-64 receipt-data</code>就获取不到数据了。</p>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2018/websocket%E5%9F%BA%E7%A1%80%E5%BC%80%E5%8F%911/">WebSocket基础开发</a></span>
+  <span class="nav-next"></span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">Fu Hui</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+
