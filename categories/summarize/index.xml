@@ -26,28 +26,18 @@ location optional_modifier location_match { }  如下是optional_modifier的类�
     
     <item>
       <title>IAP支付初识</title>
-      <link>/blog/2018/iap%E6%94%AF%E4%BB%98%E5%88%9D%E8%AF%86/</link>
+      <link>/blog/2018/02-08-iap%E6%94%AF%E4%BB%98%E5%88%9D%E8%AF%86/</link>
       <pubDate>Wed, 28 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/iap%E6%94%AF%E4%BB%98%E5%88%9D%E8%AF%86/</guid>
-      <description>[草稿]
-IAP全称In-App Purchase，也可以叫内购。查看百度百科，IAP是一种智能移动终端应用程序的付费模式。大概的意思：用户在APP内通过付费，来享受APP内提供的服务或体验。
+      <guid>/blog/2018/02-08-iap%E6%94%AF%E4%BB%98%E5%88%9D%E8%AF%86/</guid>
+      <description>IAP全称In-App Purchase，也可以叫内购。查看百度百科，IAP是一种智能移动终端应用程序的付费模式。大概的意思：用户在APP内通过付费，来享受APP内提供的服务或体验。
 我不仅仅想总结一下苹果的IAP，还想反思一下支付要注意的细节。
-从问题入手：如何确认苹果交易的唯一标识。想要做到支付的幂等性，每一笔订单就应该有一个唯一的标识。来避免出现类似这样的现象：用户支付了一次，服务端却创建了多个订单。
-交易的唯一标识 我们使用服务端验证的流程，每笔交易都通过服务器请求苹果服务器来完成校验。
-用户在支付完成后，IOS客户端获取到苹果回传的receipt，之后将数据传递给自己的服务器。服务器再向苹果发起验证请求，校验支付的合法性。校验通过之后，服务器返回给客户端，可以将这次交易关闭了。客户端finish掉这次交易，整个支付完成了。
-sequenceDiagram 苹果-&amp;gt;&amp;gt;APP: 1 支付通知 APP-&amp;gt;&amp;gt;自己服务: 2 自己服务-&amp;gt;&amp;gt;苹果: 3 校验receipt 苹果--&amp;gt;&amp;gt;自己服务: 4 IOS 校验返回 自己服务--&amp;gt;&amp;gt;APP: 5. 校验结果  苹果没有采用“支付成功后，回调通知第三方服务器的方式”，起初让我很诧异。但后来了解到：用户绕过第三方，可以直接找苹果客服退钱。而且，苹果客服退款之后，也不会主动通知第三方。哈哈，原来跟别人收费，还能收的这么有态度！
-YY的时候到了。如果用户A在支付完成，但客户端还没来得及将receipt传递给自己服务器的时候，用户A退出登录，将手机借给了用户B，用户B登录了自己的账号。这时客户端继续之前没有完成的验证并成功返回。但是这笔交易却记到了用户B的账号上。
-这显然不是我们预期的，虽然这种情况发生的概率本身很小。但为了避免这样的情况，考虑当APP收到苹果的receipt时，先向自己服务器请求生成一个order，创建order和用户user的关系。后续APP将order和receipt发给服务器，服务端通过order来确认下单的用户。
-苹果的唯一标识如何确定了，是用receipt的md5值吗？起初确实有这样的考虑，但最终发现这样的对应关系并不唯一。
-假设下面的场景：当客户端支付order-1时，服务端在请求苹果校验的时候网络有点问题，receipt-1没有被成功关闭，需要等待后续重试。这时我们建立了order-1和receipt-1摘要的关系。但同时用户又购买了新的产品，支付了order-2订单。此时，order-1订单的重试被触发，但这时因为产生了新的订单，receipt-1已经被更新啦。
-假设order-2却第一个拿到了返回的receipt-2。服务端拿这个receipt-2去AppStore请求的时候，返回的in_app中就包含两次购买的所有产品信息。此时，客户端finish掉这个receipt-2。这时，order-1的订单receipt-1返回来了，服务端重新去苹果请求，当前in_app中就只有order-1的商品信息了。
-切换账号的烦恼 可能会有这样的疑问：这个专门生成的order是不是有些鸡肋？为什么不省去它，在APP直接提交receipt到自己服务器的同时，服务器根据receipt的摘要或者其他来创建order。
-最主要的原因是receipt是变化的。当有新的订单生成时，重新获取的receipt就会被更新。这时
-sequenceDiagram APP-&amp;gt;&amp;gt;IAP服务: B-&amp;gt;&amp;gt;A: Great!  在交易支付完成后，IOS客户端传递给服务器端receipt-data,以及服务端生成的订单号order-id。确定本次交易归属于的用户，以及建立服务器order-id和receipt的对应的关系。
-但查看苹果开发文档对 Receipt Fields 的介绍，in_app存储的是一个数组结构，所以生产环境中in_app中可能包含多条购买记录。此时，两者是一对多的关系。即一个order-id，多个purchase receipt
-苹果对in_app的描述如下：
- In the JSON file, the value of this key is an array containing all in-app purchase receipts based on the in-app purchase transactions present in the input base-64 receipt-data.</description>
+从问题入手：如何确认苹果交易的唯一标识。想要做到支付的幂等性，每一笔订单都应该有一个唯一的标识。来避免出现类似这样的现象：用户支付了一次，服务端却创建了多个订单。
+交易的唯一标识 我们使用服务端校验支付流程，每笔交易都通过服务器请求苹果服务器来完成校验。
+IAP支付的流程  苹果IAP支付有一个“事务”的概念。当用户支付完成，苹果会回调APP，传递一个receipt的凭证。 APP端本地校验receipt或者APP回传到自己Server端对其校验 校验通过后，APP端主动finish调该transaction  transaction理解 对于每一次支付，都会产生一个新的transaction，用来唯一标识该订单。客户端每次finish的对象也是它。
+对于它是不是唯一的疑问，查阅了部分文档，有很多订阅型的产品的开发反馈：transaction在一段时间后可能会发生变化。但我查询的结果认为：transaction可以唯一确定一笔交易。
+如下摘录苹果论坛的一段描述：
+ There are two transactionIdentifiers - the one that comes with the particular purchase and the one in the purchase receipt. Any call to updatedTransactions, including the call when you originally purchase the IAP, has a transaction.transactionIdentifier that is always unique. When you originally purchase an IAP or when you repurchase an IAP for free or when you restore an IAP the receipt will also contain the &amp;ldquo;unique&amp;rdquo; transaction_id of the original purchase transaction.</description>
     </item>
     
     <item>
