@@ -6,7 +6,7 @@
     <description>Recent content in Fuhui&#39;s Blog on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 10 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 17 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>HTTP总结-状态码</title>
       <link>/blog/2018/03-15-http%E6%80%BB%E7%BB%93-%E7%8A%B6%E6%80%81%E7%A0%81/</link>
-      <pubDate>Sat, 10 Mar 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 17 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/blog/2018/03-15-http%E6%80%BB%E7%BB%93-%E7%8A%B6%E6%80%81%E7%A0%81/</guid>
       <description>405 方法不被允许 (Method not allowed)。用来访问本页面的谓词不被允许，有时将POST请求修改为GET请求之后异常就解决了。
