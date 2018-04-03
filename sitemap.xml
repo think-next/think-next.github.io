@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/blog/2018/03-31-%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/</loc>
+    <loc>/blog/2018/03-31-%E5%8C%85%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2018-03-30T00:00:00+00:00</lastmod>
   </url>
   
@@ -87,6 +87,12 @@
   <url>
     <loc>/tags/js/</loc>
     <lastmod>2018-01-29T20:10:33+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/npm/</loc>
+    <lastmod>2018-03-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
