@@ -134,15 +134,18 @@
 
 <p><code>Composer</code>生成的包管理目录叫<code>vendor</code>，它也是生成两个文件<code>composer.lock</code>和<code>composer.json</code>。<code>composer.lock</code>描述了项目的依赖以及其它的一些元信息。</p>
 
-<p><code>composer.lock</code>用来明确锁定安装包的具体版本信息，包证所有人安装的版本都是一致的。具体的原因在于：
-1. <code>composer.json</code>中指定的安装包的版本号，比如<code>^2.0</code>，只能确定该包的主版本号一定是<code>2</code>，当<code>Composer</code>在<code>install</code>的过程中，具体安装了该包符合条件的那个版本，是无法从<code>.json</code>中看出来的。
-2. 同理，还是上面的例子，如果一个同事，数月前执行<code>install</code>安装的版本是<code>2.0.0</code>，后来这个包在<code>2</code>版本下发布了一个小版本<code>2.1.0</code>。另一个同事这个时候执行<code>install</code>，很可能就安装成了<code>2.1.0</code></p>
+<p><code>composer.lock</code>用来明确锁定安装包的具体版本信息，包证所有人安装的版本都是一致的。具体的原因在于：</p>
+
+<ol>
+<li><code>composer.json</code>中指定的安装包版本，比如<code>^2.0</code>，只能确定该包的主版本号一定是<code>2</code>，当<code>Composer</code>在<code>install</code>的过程中，具体安装了该包符合条件的哪个版本，是无法从<code>.json</code>中看出来的。</li>
+<li>同理，还是上面的例子，如果一个同事，数月前执行<code>install</code>安装的版本是<code>2.0.0</code>，后来这个包在<code>2</code>版本下发布了一个小版本<code>2.1.0</code>。另一个同事后来执行<code>install</code>，很可能就安装成了<code>2.1.0</code></li>
+</ol>
 
 <p>综上所述，<code>composer.lock</code>用来保证安装包的一致性，避免安装到不同的版本包，给生产环境带来的不确定性。</p>
 
 <h3 id="install-update">install/update</h3>
 
-<p><code>install</code>主要用来安装新包。当安装新包的时候，需要首先查看<code>.lock</code>文件是否存在，如果存在，安装<code>.lock</code>中指定的具体版本。如果不存在，直接安装。同事更新<code>.json</code>和<code>.lock</code>两个问题。</p>
+<p><code>install</code>主要用来安装新包。当安装新包的时候，需要首先查看<code>.lock</code>文件是否存在，如果存在，安装<code>.lock</code>中指定的具体版本。如果不存在，直接安装。同时更新<code>.json</code>和<code>.lock</code>两个文件。</p>
 
 <p><code>update</code>主要用来更新<code>.lock</code>中安装的包。随着时间的推移，<code>.json</code>中的包可能又发布了新版本，所以<code>update</code>就是用来检查<code>.json</code>中包的新版本，更新<code>.lock</code>文件用的。</p>
 

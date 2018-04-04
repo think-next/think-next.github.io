@@ -30,9 +30,9 @@ npm install file:local-package-path  版本管理 svn或者git只需要提交pac
 每次升级或降级版本，执行如下代码，相应的package.json，package-lock.json会自动更新：
 npm install &amp;lt;package-name&amp;gt;@&amp;lt;version&amp;gt;  删除依赖包：
 npm uninstall &amp;lt;package&amp;gt;  Composer管理 Composer生成的包管理目录叫vendor，它也是生成两个文件composer.lock和composer.json。composer.lock描述了项目的依赖以及其它的一些元信息。
-composer.lock用来明确锁定安装包的具体版本信息，包证所有人安装的版本都是一致的。具体的原因在于： 1. composer.json中指定的安装包的版本号，比如^2.0，只能确定该包的主版本号一定是2，当Composer在install的过程中，具体安装了该包符合条件的那个版本，是无法从.json中看出来的。 2. 同理，还是上面的例子，如果一个同事，数月前执行install安装的版本是2.0.0，后来这个包在2版本下发布了一个小版本2.1.0。另一个同事这个时候执行install，很可能就安装成了2.1.0
-综上所述，composer.lock用来保证安装包的一致性，避免安装到不同的版本包，给生产环境带来的不确定性。
-install/update install主要用来安装新包。当安装新包的时候，需要首先查看.lock文件是否存在，如果存在，安装.lock中指定的具体版本。如果不存在，直接安装。同事更新.json和.lock两个问题。
+composer.lock用来明确锁定安装包的具体版本信息，包证所有人安装的版本都是一致的。具体的原因在于：
+ composer.json中指定的安装包版本，比如^2.0，只能确定该包的主版本号一定是2，当Composer在install的过程中，具体安装了该包符合条件的哪个版本，是无法从.json中看出来的。 同理，还是上面的例子，如果一个同事，数月前执行install安装的版本是2.0.0，后来这个包在2版本下发布了一个小版本2.1.0。另一个同事后来执行install，很可能就安装成了2.1.0  综上所述，composer.lock用来保证安装包的一致性，避免安装到不同的版本包，给生产环境带来的不确定性。
+install/update install主要用来安装新包。当安装新包的时候，需要首先查看.lock文件是否存在，如果存在，安装.lock中指定的具体版本。如果不存在，直接安装。同时更新.json和.lock两个文件。
 update主要用来更新.lock中安装的包。随着时间的推移，.json中的包可能又发布了新版本，所以update就是用来检查.json中包的新版本，更新.lock文件用的。
 我在使用的过程中，比较倾向于使用下面的单个包操作的方式：
 php composer.phar update monolog/monolog [...]  版本管理 在git环境中.json和.lock都需要被提交的版本控制。vendor目录就不需要啦。</description>
