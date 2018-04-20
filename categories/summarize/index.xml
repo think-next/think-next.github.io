@@ -6,10 +6,27 @@
     <description>Recent content in Summarize on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 05 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 20 Apr 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/summarize/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>xorm使用reverse指令创建模版</title>
+      <link>/blog/2018/04-20-xorm%E4%BD%BF%E7%94%A8reverse%E6%8C%87%E4%BB%A4%E5%88%9B%E5%BB%BA%E6%A8%A1%E7%89%88/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/04-20-xorm%E4%BD%BF%E7%94%A8reverse%E6%8C%87%E4%BB%A4%E5%88%9B%E5%BB%BA%E6%A8%A1%E7%89%88/</guid>
+      <description>这只能算作一次小的功能介绍
+结合我们使用过的go数据操作类的库，执行的逻辑基本都是：将数据库返回的数据，转换成我们提前声明的结构体对象，然后返回。
+今天要介绍的就是如何自动创建每个table对应的结构体。
+查看 xorm tool的介绍：
+xorm reverse mysql root:@/xorm_test?charset=utf8 templates/goxorm  初看这个介绍，让我费了一段时间才理解。你可以在命令行查看它的具体含义：
+xorm help reverse  命令中templates/goxorm其实是xorm提供好的模版路径。我错误的理解成了：执行命令生成结果的存储路径。
+tmplPath Template dir for generated. the default templates dir has provide 1 template  其次就是mysql的连接语句：一般来说，都是这样写的：
+username:pwd@ip:port/db?charset=utf8  但是使用上述方式却无法正常执行命令，正确的方式是：
+xorm reverse &amp;quot;username:pwd@tcp(ip:port)/db?charset=utf&amp;quot; templates/goxorm  </description>
+    </item>
     
     <item>
       <title>了解Laravel依赖注入</title>
@@ -51,7 +68,10 @@ composer.lock用来明确锁定安装包的具体版本信息，包证所有人�
 install/update install主要用来安装新包。当安装新包的时候，需要首先查看.lock文件是否存在，如果存在，安装.lock中指定的具体版本。如果不存在，直接安装。同时更新.json和.lock两个文件。
 update主要用来更新.lock中安装的包。随着时间的推移，.json中的包可能又发布了新版本，所以update就是用来检查.json中包的新版本，更新.lock文件用的。
 我在使用的过程中，比较倾向于使用下面的单个包操作的方式：
-php composer.phar update monolog/monolog [...]  版本管理 在git环境中.json和.lock都需要被提交的版本控制。vendor目录就不需要啦。</description>
+php composer.phar update monolog/monolog [...]  版本管理 在git环境中.json和.lock都需要被提交的版本控制。vendor目录就不需要啦。
+glide版本管理 glide是go的版本管理工具。其实glide也是参考composer设计的，所以上面对composer的说法也同样有效。
+vendor目录默认会在项目下生成。需要特别注意的是：go的项目必须在gopath路径下的src目录下。
+govendor</description>
     </item>
     
     <item>

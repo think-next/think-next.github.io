@@ -35,7 +35,10 @@ composer.lock用来明确锁定安装包的具体版本信息，包证所有人�
 install/update install主要用来安装新包。当安装新包的时候，需要首先查看.lock文件是否存在，如果存在，安装.lock中指定的具体版本。如果不存在，直接安装。同时更新.json和.lock两个文件。
 update主要用来更新.lock中安装的包。随着时间的推移，.json中的包可能又发布了新版本，所以update就是用来检查.json中包的新版本，更新.lock文件用的。
 我在使用的过程中，比较倾向于使用下面的单个包操作的方式：
-php composer.phar update monolog/monolog [...]  版本管理 在git环境中.json和.lock都需要被提交的版本控制。vendor目录就不需要啦。</description>
+php composer.phar update monolog/monolog [...]  版本管理 在git环境中.json和.lock都需要被提交的版本控制。vendor目录就不需要啦。
+glide版本管理 glide是go的版本管理工具。其实glide也是参考composer设计的，所以上面对composer的说法也同样有效。
+vendor目录默认会在项目下生成。需要特别注意的是：go的项目必须在gopath路径下的src目录下。
+govendor</description>
     </item>
     
   </channel>
