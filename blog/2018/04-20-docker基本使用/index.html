@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>docker基本使用 - 付辉</title>
+    <meta property="og:title" content="docker基本使用 - 付辉">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/">Blog</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>docker基本使用</h1>
+
+
+<h3>付辉
+
+    
+    
+     /  2018-04-20
+    
+</h3>
+<hr>
+
+      </header>
+
+
+
+<p>知道一点比完全不知道要好，对问题有深入了解比仅知道皮毛要好。作为<code>docker</code>的一个初学者，现在对<code>docker</code>做简单记录。希望随着工作、生活，更深入的了解学习<code>docker</code>。这也是一件很有意义的事。</p>
+
+<p><code>docker</code>是提供了一个容器，有几个相关的概念：</p>
+
+<ol>
+<li><code>image</code> 镜像</li>
+<li><code>container</code> 容器</li>
+</ol>
+
+<p>我觉得之所以说<code>docker</code>好用，是因为<a href="https://hub.docker.com/explore/"><code>Docker Hub</code></a>提供了很多镜像，比如<code>MySQL</code>、<code>Redis</code>等。对它们安装、卸载异常方便。</p>
+
+<p>下面举个例子，我们想搭建测试服务，安装<code>MySQL</code>，<code>Redis</code>等依赖。我们将他们当作一个项目的依赖，声明一个配置文件·<code>db.yml</code>，然后将这些依赖，类似于<code>composer</code>编辑：</p>
+
+<pre><code>version: &quot;3&quot;
+
+services:
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - /Users/neojos/dockerData/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: paytest
+      MYSQL_DATABASE: paytest
+      MYSQL_USER: neojos
+      MYSQL_PASSWORD: neojos-pwd
+    ports:
+      - &quot;3306:3306&quot;
+
+  myredis:
+    image: redis
+    restart: always
+    volumes:
+      - /Users/neojos/dockerData/redis
+    ports:
+      - &quot;6379:6379&quot;
+    command: redis-server --appendonly yes
+</code></pre>
+
+<p>执行如下命令，<code>MySQL</code>和<code>Redis</code>的服务就启动了</p>
+
+<pre><code>docker-composer -f db.yml up
+</code></pre>
+
+<p>可以通过执行如下命令查看，确实有两个容器在运行。</p>
+
+<pre><code>docker container ls
+</code></pre>
+
+<p>这样很好，但当我想进去<code>MySQL</code>的容器内执行一些命令时，该怎么办呢？</p>
+
+<p>比如，我想确认一下我这样写<code>MySQL</code>的连接是否正确,我想进去容器内执行下面的指令：</p>
+
+<pre><code>mysql -h 127.0.0.1 -P 3306 -u neojos -p'neojos-pwd' paytest
+</code></pre>
+
+<p>很简单,只需要执行如下指令。可以发现，已经进到<code>MySQL</code>命令行了。</p>
+
+<pre><code>docker container exec -it 9008f76b728d mysql -h 127.0.0.1 -P 3306 -u neojos -pneojos-pwd paytest
+</code></pre>
+
+<p>上面的这个可呢个看不太明白，所以我复杂一下命令的说明：</p>
+
+<pre><code>See 'docker container exec --help'.
+
+Usage:  docker container exec [OPTIONS] CONTAINER COMMAND [ARG...] [flags]
+</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2018/04-19-xorm%E4%BD%BF%E7%94%A8reverse%E6%8C%87%E4%BB%A4%E5%88%9B%E5%BB%BA%E6%A8%A1%E7%89%88/">xorm使用reverse指令创建模版</a></span>
+  <span class="nav-next"></span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">Fu Hui</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+
