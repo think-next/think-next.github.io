@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Saga Pattern - 付辉</title>
+    <meta property="og:title" content="Saga Pattern - 付辉">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/">Blog</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>Saga Pattern</h1>
+
+
+<h3>付辉
+
+    
+    
+     /  2018-04-24
+    
+</h3>
+<hr>
+
+      </header>
+
+
+
+
+
+<p>在微服务中，用的比较多的分布式事务模式：<a href="https://www.cs.cornell.edu/andru/cs711/2002fa/reading/sagas.pdf"><code>SAGA</code></a>。</p>
+
+<p>插播：在你觉得英文很难读懂的时候，别人却只是觉得有些英文论文很难读懂。所以，有时间就看一点这篇论文，总会看完的。</p>
+
+<p><code>saga</code>是一个本地事务的序列，每个事务都在各个微服务内部完成。通过外部的请求来开始第一个事务，且当前面的事务完成后，后面的事务就会被触发。</p>
+
+<p>简要描述一下：</p>
+
+<pre><code># 中心系统 - 充当分布式事务管理中心
+1. 请求 - 订单服务 - 用户下单
+2. 请求 - 库存服务 - 减少库存
+</code></pre>
+
+<p>下面介绍实现<code>saga</code>最流行的两种方式：</p>
+
+<ol>
+<li><code>Events</code> 不需要一个中心调度系统，每个服务生产、监听别的服务产生的事件，决定下一步怎么处理。</li>
+<li><code>Command</code> 有一个中心服务来协调管理业务逻辑，做<code>saga</code>决策。</li>
+</ol>
+
+<h2 id="events"><code>Events</code></h2>
+
+<p>在<code>Events</code>的方式中，各个服务执行完成事务之后，会发布一个<code>event</code>。其他服务会监听这个<code>event</code>，然后执行自己本地的事务，发布一个新的<code>event</code>。</p>
+
+<p>当最后一个服务执行了本地事务，没有发布新的<code>event</code>,或者发布了其他服务不监听的<code>event</code>。分布式事务终止。</p>
+
+<p>对这种方式来说，有效跟踪事务的执行状态是一个痛点。但实际工作中，确实需要明确知道事务的执行路径。两种解决办法：</p>
+
+<ol>
+<li>每个服务都更新当前的事务记录，记录可以存储在<code>DB</code>中，有几个服务，记录就应该有几个状态。</li>
+<li>插入一个服务，监听所有服务的<code>event</code>。</li>
+</ol>
+
+<h3 id="补偿逻辑">补偿逻辑</h3>
+
+<p>分布式事务执行过程中，当其中一个事务执行失败之后，事务需要触发补偿逻辑。其原理还是发送一个<code>event</code>，只不过其他服务监听到之后，处发事务的补偿逻辑，回滚之前的本地操作。</p>
+
+<h3 id="实现方式">实现方式</h3>
+
+<p>采用消息队列实现，以<code>NSQ</code>为例，可以这样考虑：</p>
+
+<ol>
+<li><code>event</code>应该有一个唯一的身份标识。</li>
+<li>每个服务至少应该监听一个<code>topic</code>，且至少作为一个<code>topic</code>的<code>producer</code>。</li>
+<li>可以考虑一个统一的<code>topic</code>，多个<code>channel</code>的实现方式。</li>
+</ol>
+
+<h3 id="总结">总结</h3>
+
+<p>当服务比较多的时候，<code>topic</code>可能会有很多，程序复杂性提高了不少。而且，一个留神，很可能让监听变成了一个死循环。</p>
+
+<h2 id="command"><code>command</code></h2>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2018/04-20-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">docker基本使用</a></span>
+  <span class="nav-next"></span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">Fu Hui</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+
