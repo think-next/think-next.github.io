@@ -37,8 +37,7 @@ update主要用来更新.lock中安装的包。随着时间的推移，.json中�
 我在使用的过程中，比较倾向于使用下面的单个包操作的方式：
 php composer.phar update monolog/monolog [...]  版本管理 在git环境中.json和.lock都需要被提交的版本控制。vendor目录就不需要啦。
 glide版本管理 glide是go的版本管理工具。其实glide也是参考composer设计的，所以上面对composer的说法也同样有效。
-vendor目录默认会在项目下生成。需要特别注意的是：go的项目必须在gopath路径下的src目录下。
-govendor</description>
+在项目开发中也仅需要对 glide.yaml 和 glide.</description>
     </item>
     
   </channel>

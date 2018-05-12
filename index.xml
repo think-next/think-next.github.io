@@ -106,23 +106,30 @@ update主要用来更新.lock中安装的包。随着时间的推移，.json中�
 我在使用的过程中，比较倾向于使用下面的单个包操作的方式：
 php composer.phar update monolog/monolog [...]  版本管理 在git环境中.json和.lock都需要被提交的版本控制。vendor目录就不需要啦。
 glide版本管理 glide是go的版本管理工具。其实glide也是参考composer设计的，所以上面对composer的说法也同样有效。
-vendor目录默认会在项目下生成。需要特别注意的是：go的项目必须在gopath路径下的src目录下。
-govendor</description>
+在项目开发中也仅需要对 glide.yaml 和 glide.</description>
     </item>
     
     <item>
       <title>HTTP总结-状态码</title>
-      <link>/blog/2018/03-15-http%E6%80%BB%E7%BB%93-%E7%8A%B6%E6%80%81%E7%A0%81/</link>
+      <link>/blog/2018/03-17-http%E6%80%BB%E7%BB%93-%E7%8A%B6%E6%80%81%E7%A0%81/</link>
       <pubDate>Sat, 17 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/03-15-http%E6%80%BB%E7%BB%93-%E7%8A%B6%E6%80%81%E7%A0%81/</guid>
-      <description>405 方法不被允许 (Method not allowed)。用来访问本页面的谓词不被允许，有时将POST请求修改为GET请求之后异常就解决了。
+      <guid>/blog/2018/03-17-http%E6%80%BB%E7%BB%93-%E7%8A%B6%E6%80%81%E7%A0%81/</guid>
+      <description>给别人轻松讲明白一个问题，才能算自己真正了解这个问题。 &amp;gt; Origin Header 头让我熟悉了一次sheme
+从HTTP的头Origin说起，想起之前客户端定义scheme，因为不了解，问了开发的同事“scheme是什么？”反正我当时是不明白他们讲的。
+在了解HTTP Origin语法的时候，我其实才真正明白：scheme 指请求所使用的协议，通常是HTTP、HTTPS或者其他。
+Origin: &amp;lt;scheme&amp;gt; &amp;quot;://&amp;quot; &amp;lt;host&amp;gt; [&amp;quot;:&amp;quot; &amp;lt;port&amp;gt;]  Origin表示请求来至哪个站点。在WebSocket通信的时候，明确指明要校验这个参数。
+405 方法不被允许 (Method not allowed)。用来访问本页面的谓词不被允许，有时将POST请求修改为GET请求之后异常就解决了。
 比如：Web端通过Ajax异步提交数据，并且是POST的方式。莫名奇妙的的发现返回的状态码是405。很有可能是服务端在处理请求时出错了，在Nginx返回时，返回了404.html或者500.html导致的。
 500 服务器内部错误。比如：服务端处理出现异常。同时，在PHP错误日志中可以查看异常发生的调用栈信息。
-502 作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。
-比如：服务端尝试连接mysql，但长时间链接不上，就会返回502错误。这篇 http 502 和 504 的区别 介绍的比较好，推荐大家浏览。
-504 网关超时。为了完成您的 HTTP 请求， 该服务器访问一个上游服务器， 但没得到及时的响应
-比如：nginx超过了自己设置的超时时间，不等待php-fpm的返回结果，直接给客户端返回504错误。但是此时php-fpm依然还在处理请求（在没有超出自己的超时时间的情况下）。</description>
+502 作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。比如nginx从php-fpm接收到了不完整的response数据。
+比如：服务端尝试连接mysql，但长时间链接不上，就会返回502错误。
+可以浏览一些具体的文章：
+ http 502 和 504 的区别 Nginx一次奇怪的502 报错探究  503 服务暂时不可用，一段时间后服务就可以正常工作了。
+在代码发布的时候可能会使用到。比如go服务，在发版前需要将之前运行的进程kill掉，之后启动新的进程。但这个过程间隙，会导致已连接的客户端处理中断。所以在发版之前，先返回503,等待已经接收的请求处理完成，然后升级。
+504 网关超时。为了完成您的 HTTP 请求，该服务器访问一个上游服务器，但没得到及时的响应
+比如：nginx超过了自己设置的超时时间，不等待php-fpm的返回结果，直接给客户端返回504错误。但是此时php-fpm依然还在处理请求（在没有超出自己的超时时间的情况下）。
+0、超时、客户端主动断开连接 If you connect with the server, then you can get a return code from it, otherwise it will fail and you get a 0.</description>
     </item>
     
     <item>

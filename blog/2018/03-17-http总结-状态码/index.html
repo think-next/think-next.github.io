@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>HTTP总结-状态码 - 付辉</title>
+    <meta property="og:title" content="HTTP总结-状态码 - 付辉">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/">Blog</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>HTTP总结-状态码</h1>
+
+
+<h3>付辉
+
+    
+    
+     /  2018-03-17
+    
+</h3>
+<hr>
+
+      </header>
+
+
+
+
+
+<p>给别人轻松讲明白一个问题，才能算自己真正了解这个问题。
+&gt; Origin Header 头让我熟悉了一次sheme</p>
+
+<p>从HTTP的头Origin说起，想起之前客户端定义scheme，因为不了解，问了开发的同事“scheme是什么？”反正我当时是不明白他们讲的。</p>
+
+<p>在了解HTTP Origin语法的时候，我其实才真正明白：scheme 指请求所使用的协议，通常是HTTP、HTTPS或者其他。</p>
+
+<pre><code>Origin: &lt;scheme&gt; &quot;://&quot; &lt;host&gt; [&quot;:&quot; &lt;port&gt;]
+</code></pre>
+
+<p>Origin表示请求来至哪个站点。在WebSocket通信的时候，明确指明要校验这个参数。</p>
+
+<h2 id="405">405</h2>
+
+<p>方法不被允许 (Method not allowed)。用来访问本页面的谓词不被允许，有时将POST请求修改为GET请求之后异常就解决了。</p>
+
+<p>比如：<code>Web</code>端通过<code>Ajax</code>异步提交数据，并且是<code>POST</code>的方式。莫名奇妙的的发现返回的状态码是<code>405</code>。很有可能是服务端在处理请求时出错了，在<code>Nginx</code>返回时，返回了<code>404.html</code>或者<code>500.html</code>导致的。</p>
+
+<h2 id="500">500</h2>
+
+<p>服务器内部错误。比如：服务端处理出现异常。同时，在PHP错误日志中可以查看异常发生的调用栈信息。</p>
+
+<h2 id="502">502</h2>
+
+<p>作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。比如<code>nginx</code>从<code>php-fpm</code>接收到了不完整的<code>response</code>数据。</p>
+
+<p>比如：服务端尝试连接<code>mysql</code>，但长时间链接不上，就会返回502错误。</p>
+
+<p>可以浏览一些具体的文章：</p>
+
+<ol>
+<li><a href="https://juejin.im/entry/589148f92f301e00690e863d">http 502 和 504 的区别</a></li>
+<li><a href="https://mp.weixin.qq.com/s/_6GWNojX0hAvupX906nhwQ">Nginx一次奇怪的502 报错探究</a></li>
+</ol>
+
+<h2 id="503">503</h2>
+
+<p>服务暂时不可用，一段时间后服务就可以正常工作了。</p>
+
+<p>在代码发布的时候可能会使用到。比如<code>go</code>服务，在发版前需要将之前运行的进程<code>kill</code>掉，之后启动新的进程。但这个过程间隙，会导致已连接的客户端处理中断。所以在发版之前，先返回<code>503</code>,等待已经接收的请求处理完成，然后升级。</p>
+
+<h2 id="504">504</h2>
+
+<p>网关超时。为了完成您的 HTTP 请求，该服务器访问一个上游服务器，但没得到及时的响应</p>
+
+<p>比如：nginx超过了自己设置的超时时间，不等待php-fpm的返回结果，直接给客户端返回504错误。但是此时php-fpm依然还在处理请求（在没有超出自己的超时时间的情况下）。</p>
+
+<h2 id="0-超时-客户端主动断开连接">0、超时、客户端主动断开连接</h2>
+
+<p>If you connect with the server, then you can get a return code from it, otherwise it will fail and you get a 0.
+1. So if you try to connect to &ldquo;www.google.com/lksdfk&rdquo; you will get a return code of 400,
+2. if you go directly to google.com, you will get 302 (and then 200 if you forward to the next page&hellip; well I do because it forwards to google.com.br, so you might not get that),
+3. and if you go to &ldquo;googlecom&rdquo; you will get a 0 (host no found), so with the last one, there is nobody to send a code back.</p>
+
+<pre><code> $errorMsg = curl_error($ch);
+curl_close($ch);
+if (!$response || $httpCode != 200) {
+    throw new RuntimeException(&quot;Fail to request mobile traffic api, httpCode={$httpCode}, Curl error: &quot; . $errorMsg);
+}
+
+//输出
+
+Fail to request mobile traffic api, httpCode=0, 
+Curl error: Operation timed out after 1001 milliseconds with 0 bytes received
+</code></pre>
+
+<h2 id="408">408</h2>
+
+<p>您的 Web 服务器认为，在 1 ）建立客户端（如您的浏览器或我们的 CheckUpDown 机器人） 和服务器之间 IP 连接（套解字 - socket ）， 和 2 ）通过该套解字收到数据，之间的时间间隔太长， 所以服务器放弃该连接。 套接字连接实际上已失效 - 您的 Web 服务器已就对该特定套接字连接发出 &lsquo; 超时 &rsquo; 信号。客户端的请求必须及时重复。</p>
+
+<p>常见在上传大文件的过程中，PHP程序处理超时（最长执行时间一般为30s）。</p>
+
+<h2 id="499">499</h2>
+
+<p>An Nginx HTTP server extension. This code introduced to log the case when the connection is closed by client while HTTP server is processing its request, making server unable to send the HTTP header back</p>
+
+<p>可能的原因：
+1. 可能表明服务器upstream处理过慢，导致用户提前关闭连接
+2. 用户频繁刷新</p>
+
+<pre><code>#让代理服务端不要主动关闭客户端的连接。
+proxy_ignore_client_abort  on; 
+</code></pre>
+
+<p>默认 proxy_ignore_client_abort 是关闭的，此时在请求过程中如果客户端端主动关闭请求或者客户端网络断掉，那么 Nginx 会记录 499，同时 request_time 是「<strong>后端已经处理</strong>」的时间，而upstream_response_time 为“-“ (已验证)。</p>
+
+<p>如果使用了 proxy_ignore_client_abort on ;
+那么客户端主动断掉连接之后，Nginx 会等待后端处理完(或者超时)，然后记录「后端的返回信息」到日志。所以，如果后端返回 200，就记录 200 ；如果后端放回 5XX ，那么就记录 5XX 。</p>
+
+<p>如果超时(默认60s，可以用 proxy_read_timeout 设置)，Nginx 会主动断开连接，记录 504
+注：只在做反向代理的时候加入，作为其他服务器的时候，关闭为好，默认设置是关闭的！</p>
+
+<p>参考链接<a href="http://yucanghai.blog.51cto.com/5260262/1713803">：http://yucanghai.blog.51cto.com/5260262/1713803</a></p>
+
+<h2 id="403">403</h2>
+
+<p>禁止访问。您的Web服务器无条件拒绝，并且不允许进一步探讨。</p>
+
+<p>多数常见公司服务器接口扫描情况。</p>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2018/03-01-nginx%E6%80%BB%E7%BB%93/">Nginx总结</a></span>
+  <span class="nav-next"><a href="/blog/2018/03-31-%E5%8C%85%E7%AE%A1%E7%90%86/">包管理工具</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">Fu Hui</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

@@ -162,15 +162,17 @@
 
 <p><a href="https://github.com/Masterminds/glide">glide</a>是<code>go</code>的版本管理工具。其实<code>glide</code>也是参考<code>composer</code>设计的，所以上面对<code>composer</code>的说法也同样有效。</p>
 
-<p><code>vendor</code>目录默认会在项目下生成。需要特别注意的是：<code>go</code>的项目必须在<code>gopath</code>路径下的<code>src</code>目录下。</p>
+<p>在项目开发中也仅需要对 <code>glide.yaml</code> 和 <code>glide.lock</code> 进行版本控制，vendor目录可以忽略掉。</p>
 
-<p><a href="https://github.com/kardianos/govendor">govendor</a></p>
+<p>注：<code>vendor</code>目录默认会在项目下生成。需要特别注意的是：<code>go</code>的项目必须在<code>gopath</code>路径下的<code>src</code>目录下。</p>
+
+<p>另一个版本管理工具是<a href="https://github.com/kardianos/govendor"><code>govendor</code></a>。它做的只是对包的管理工作，如果编译过程中缺少了引用的包，我们需要先执行<code>go get</code>下载该包，然后通过<code>govendor add +external</code>将包拷贝到<code>vendor</code>目录。</p>
 
 
   <footer>
   
 <nav class="post-nav">
-  <span class="nav-prev">&larr; <a href="/blog/2018/03-15-http%E6%80%BB%E7%BB%93-%E7%8A%B6%E6%80%81%E7%A0%81/">HTTP总结-状态码</a></span>
+  <span class="nav-prev">&larr; <a href="/blog/2018/03-17-http%E6%80%BB%E7%BB%93-%E7%8A%B6%E6%80%81%E7%A0%81/">HTTP总结-状态码</a></span>
   <span class="nav-next"><a href="/blog/2018/04-05-%E4%BA%86%E8%A7%A3laravel%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">了解Laravel依赖注入</a> &rarr;</span>
 </nav>
 
