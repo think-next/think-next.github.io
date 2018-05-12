@@ -6,10 +6,27 @@
     <description>Recent content in 蜗牛保持乐观才会爬的更远 on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 12 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>代码重构</title>
+      <link>/blog/2018/05-12-%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/</link>
+      <pubDate>Sat, 12 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/05-12-%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/</guid>
+      <description>重构自己的代码是一件幸福的事，重构别人的代码确是一件不幸的事。尤其是被重构代码的人还没有离职的时候&amp;hellip;
+临时变量 这是重构的一个重要切入点。方法体内临时变量太多，尤其是一些词不表意的临时变量，理解维护是一件非常痛苦的事情。
+是否可以将临时变量直接替换成方法调用，或者将临时变量规整到一个粒度更小的方法体中。
+多态 当遇到很多的switch或者if-elseif的时候，可以考虑是否能用多态来替换。
+比如下面的方法：
+switch type { case movie.TV: case movie.Release }  需要特别提醒：movie包的常量作为判断条件，该方法就最好应该在movie包中。这样当需求变更时，便体现出最小修改原则。
+我们提取一个movieType的抽象类，然后依次对每个类型实现相应的方法，通过类型为movieType的成员变量，实现不同类型的统一调用。
+这样做的好处：便于扩展，当新的类型添加时，对老得业务来说：零干扰。
+但有的情况下，这样的拆分模式可能还有小缺陷。当类型是一个频繁被添加、修改的参数时，这样的模式就显得很冗余。这是可以使用属性拆分。将各个类型中的属性实现多态。也算是一种策略转移。</description>
+    </item>
     
     <item>
       <title>Saga Pattern</title>
