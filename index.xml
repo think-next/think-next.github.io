@@ -6,10 +6,24 @@
     <description>Recent content in 蜗牛保持乐观才会爬的更远 on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 12 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 15 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>awk使用</title>
+      <link>/blog/2018/05-15-awk%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/05-15-awk%E4%BD%BF%E7%94%A8/</guid>
+      <description> 从掌握awk的基本指令，到在工作中熟练使用，中间还有一段路要走！通过总结一些工作中需要的案例，来加深理解。
+打印符合条件的前一行记录 这个案例很抽象，可能非常难遇到，除非自己给自己挖坑。
+业务代码中处理每条数据，都会顺序输出两条日志。第一条表示要处理的数据内容，第二条表示处理的结果。现在想滤出来所有处理成功的记录。比如日志文件如下：
+uid=1 HAPPY uid=2 SAD uid=3 SAD  处理的AWK脚本如下：
+#! /bin/bash # testPage表示日志文件 pieces=$(awk &#39;/HAPPY/{line=NR-1;print line}&#39; testPage | xargs) for piece in $pieces do echo $(awk NR==$piece testPage) done  脚本总结：
+ 首先通过正则表达式过滤，获取执行成功的数据行号。然后传递给xargs，转换为空格分隔的字符串。 遍历每个行号。值得注意，shell中对空格分隔的字符串可以直接使用for...in 通过awk条件判断，打印该行内容  </description>
+    </item>
     
     <item>
       <title>代码重构</title>
@@ -20,12 +34,16 @@
       <description>重构自己的代码是一件幸福的事，重构别人的代码确是一件不幸的事。尤其是被重构代码的人还没有离职的时候&amp;hellip;
 临时变量 这是重构的一个重要切入点。方法体内临时变量太多，尤其是一些词不表意的临时变量，理解维护是一件非常痛苦的事情。
 是否可以将临时变量直接替换成方法调用，或者将临时变量规整到一个粒度更小的方法体中。
-多态 当遇到很多的switch或者if-elseif的时候，可以考虑是否能用多态来替换。
+重复 代码重复，多处copy相同的代码，会让人迫不及待的想要重构。
+项目中重复代码过多，会给维护、开发带来很大的不便。一个简单的逻辑修改，但却涉及修改好多处代码，还不能保证涉及的部分都修改了。这确实是一件头疼的事。
+所以代码要做好封装：
+ 封装的粒度要把握好。一方面便于测试需要，另一方面通过组合，还能满足其他需求。 封装要考虑参数如何传递。包括是否应该包含成员变量，参数的个数多少合适。 封装的方法应该如何归类。怎样可以将方法归到最合适的类。  多态 当遇到很多的switch或者if-elseif的时候，可以考虑是否能用多态来替换。
 比如下面的方法：
 switch type { case movie.TV: case movie.Release }  需要特别提醒：movie包的常量作为判断条件，该方法就最好应该在movie包中。这样当需求变更时，便体现出最小修改原则。
-我们提取一个movieType的抽象类，然后依次对每个类型实现相应的方法，通过类型为movieType的成员变量，实现不同类型的统一调用。
-这样做的好处：便于扩展，当新的类型添加时，对老得业务来说：零干扰。
-但有的情况下，这样的拆分模式可能还有小缺陷。当类型是一个频繁被添加、修改的参数时，这样的模式就显得很冗余。这是可以使用属性拆分。将各个类型中的属性实现多态。也算是一种策略转移。</description>
+我们提取一个movieType的抽象类，然后依次对每个类型实现相应的方法，通过声明类型为movieType的成员变量，实现不同类型的统一调用。
+这样做的好处：便于扩展。当新的类型添加时，对老的业务来说：零干扰。
+但某些情况下，这样的拆分模式可能会有小缺陷。当类型是一个频繁被添加、修改的参数时，这样的模式就显得很冗余。这时可以使用属性拆分。将各个类型中的属性实现多态，也可以称做是一种策略转移。
+访问成员变量 两个分歧：直接访问VS间接访问。两者均有好处，</description>
     </item>
     
     <item>
