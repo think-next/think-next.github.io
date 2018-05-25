@@ -126,6 +126,20 @@
 
 <p>但某些情况下，这样的拆分模式可能会有小缺陷。当类型是一个频繁被添加、修改的参数时，这样的模式就显得很冗余。这时可以使用<code>属性拆分</code>。将各个类型中的属性实现多态，也可以称做是一种策略转移。</p>
 
+<h3 id="使用类替换枚举类型">使用类替换枚举类型</h3>
+
+<p>当一个类内含有多个常量枚举类型时，可以考虑将枚举类型的值封装成新的对象。这也是一个切入点。举个例子：</p>
+
+<pre><code class="language-go">// original code
+const(
+    Month int = iota
+    Year int
+) 
+
+//modified code
+//将这些常量封装到另一个package中
+</code></pre>
+
 <h2 id="访问成员变量">访问成员变量</h2>
 
 <p>两个分歧：直接访问<code>VS</code>间接访问。两者均有好处，</p>
@@ -134,8 +148,8 @@
   <footer>
   
 <nav class="post-nav">
-  <span class="nav-prev">&larr; <a href="/blog/2018/04-24-saga-pattern/">Saga Pattern</a></span>
-  <span class="nav-next"><a href="/blog/2018/05-15-awk%E4%BD%BF%E7%94%A8/">awk使用</a> &rarr;</span>
+  <span class="nav-prev">&larr; <a href="/blog/2018/05-09-mysql%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93%E4%B8%80-/">MySQL使用总结(一)</a></span>
+  <span class="nav-next"><a href="/blog/2018/05-15-shell%E6%93%8D%E4%BD%9C%E6%96%87%E6%9C%AC%E5%AE%9E%E4%BE%8B/">shell操作文本实例</a> &rarr;</span>
 </nav>
 
 
