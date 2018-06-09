@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Go test基础用法 - 付辉</title>
+    <meta property="og:title" content="Go test基础用法 - 付辉">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/">Blog</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>Go test基础用法</h1>
+
+
+<h3>付辉
+
+    
+    
+     /  2018-05-02
+    
+</h3>
+<hr>
+
+      </header>
+
+
+
+
+
+<blockquote>
+<p>当直接使用<code>IDE</code>进行单元测试时，有没有好奇它时如何实现的？比如<code>GoLand</code>写的测试用例。</p>
+</blockquote>
+
+<p>所有的代码都需要写测试用例。这不仅仅是对自己的代码负责，也是对别人的负责。</p>
+
+<p>最近工作中使用<code>glog</code>这个库，因为它对外提供的方法都很简单，想封装处理一下。但却遇到了点麻烦：这个包需要在命令行传递<code>log_dir</code>参数，来指定日志文件的路径。</p>
+
+<p>所以，正常运行的话，首先需要编译可执行文件，然后命令行指定参数执行。如下示例：</p>
+
+<pre><code>go build main.go
+./main -log_dir=&quot;/data&quot;    //当前目录作为日志输出目录
+</code></pre>
+
+<p>但在<code>go test</code>的时候，如何指定这个参数了？</p>
+
+<p>调查发现，发现<code>go test</code>也可以生成可执行文件。需要使用<code>-c</code>来指定。示例如下：</p>
+
+<pre><code>go test -c param_test_dir   //最后一个参数是待测试的目录
+</code></pre>
+
+<p>执行后就会发现：这样的做法，会运行所有的<code>Test</code>用例。如何仅仅执行某一个测试用例了（编译器到底是如何做到的？）。</p>
+
+<p>这里有另一个属性<code>-run</code>，用来指定执行的测试用例的匹配模式。举个例子：</p>
+
+<pre><code>func TestGetRootLogger(t *testing.T) {
+	writeLog(&quot;测试&quot;)
+}
+
+func TestGetRootLogger2(t *testing.T) {
+	writeLog(&quot;测试2&quot;)
+}
+</code></pre>
+
+<p>当我在命令行明确匹配执行<code>Logger2</code>，运行的时候确实仅仅执行该测试用例</p>
+
+<pre><code>go test -v -run Logger2 ./util/     //-v表示verbose，输出相信信息
+</code></pre>
+
+<p>但是，我发现，在指定了<code>c</code>参数之后，<code>run</code>参数无法生效！这样的话，还真是没有好的办法来处理这种情况。</p>
+
+<h2 id="benchmark-测试"><code>Benchmark</code>测试</h2>
+
+<p>关于如何运行<code>Benchmark</code>测试，默认执行<code>go test</code>并不会执行<code>Benchmark</code>，需要在命令行明确加上<code>-bench=标记</code>，它接受一个表达式作为参数，匹配基准测试的函数，.表示运行所有基准测试。</p>
+
+<pre><code>go test -bench=.
+
+// 明确指定要运行那个测试，传递一个正则表达式给run属性
+go test -run=XXX -bench=.
+</code></pre>
+
+<p>默认情况下，<code>benchmark</code>最小运行时长为<code>1s</code>。如果<code>benchmark</code>函数执行返回，但<code>1s</code>的时间还没有结束，<code>b.N</code>会根据某种机制依次递增。可以通过参数<code>-benchtime=20s</code>来改变这种行为。</p>
+
+<p>还有一个参数：<code>benchmem</code>。可以提供每次操作分配内存的次数，以及每次操作分配的字节数。</p>
+
+<pre><code class="language-go">go test -bench=Fib40 -benchtime=20s
+</code></pre>
+
+<h2 id="覆盖率">覆盖率</h2>
+
+<p>跟执行<code>go test</code>不同的是，需要多加一个参数<code>-coverprofile</code>,所以完整的命令：</p>
+
+<pre><code>go test -v -coverprofile=c.out
+</code></pre>
+
+<p>生成报告有go为我们提供的工具，使用</p>
+
+<pre><code>go tool cover -html=c.out -o=tag.html
+</code></pre>
+
+<p>即可生成一个名字为tag.html的HTML格式的测试覆盖率报告，这里有详细的信息告诉我们哪一行代码测试到了，哪一行代码没有测试到。</p>
+
+<p>参考文章：</p>
+
+<ol>
+<li><a href="http://www.flysnow.org/2017/05/16/go-in-action-go-unit-test.html">Go 单元测试</a></li>
+</ol>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2018/04-24-saga-pattern/">Saga Pattern</a></span>
+  <span class="nav-next"><a href="/blog/2018/05-09-mysql%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93%E4%B8%80-/">MySQL使用总结(一)</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">Fu Hui</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+
