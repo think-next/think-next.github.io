@@ -396,5 +396,15 @@ Feature 分支 Feature 分支主要用来开新功能。一般来说，只要功
 | WARN | ... Redis\ConnectException: Unable to connect: read error on connection ... #0 /.../vendor/.../Redis/RedisPool.php(106): ...\Redis\RedisPool-&amp;gt;connect(Object(Redis), Object(...\Redis\RedisServerConfiguration)) #1 /.../vendor/.../Redis/RedisClient.php(130): ...\Redis\RedisPool-&amp;gt;get(&#39;default&#39;, true) #2 /.../vendor/.../Redis/RedisClient.php(94): ...\Redis\RedisClient-&amp;gt;setMode(false) ... #17 /.../app/bootstrap.php.cache(551): Symfony\Bundle\FrameworkBundle\HttpKernel-&amp;gt;handle(Object(Symfony\Component\HttpFoundation\Request), 1, true) #18 /.../web/app.php(15): Symfony\Component\HttpKernel\Kernel-&amp;gt;handle(Object(Symfony\Component\HttpFoundation\Request)) #19 {main} | 12.34.56.78 | www.trivago.de | /?aDateRange%5Barr%5D=2014-05-20&amp;amp;aDateRange%5Bdep%5D=2014-05-21&amp;amp;iRoomType=1&amp;amp;iPathId=44742... | Mozilla/5.0 (WindowsNT 6.</description>
     </item>
     
+    <item>
+      <title></title>
+      <link>/blog/2018/%E4%B8%B4%E6%97%B6%E4%BF%9D%E5%AD%98%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93sql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/%E4%B8%B4%E6%97%B6%E4%BF%9D%E5%AD%98%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93sql/</guid>
+      <description>保存生活作风请求体
+select * from u_charge where c_uid = 10318003 order by c_id desc ; select * from u_charge where c_order = &amp;quot;1000000038797108&amp;quot;; select * from u_charge where c_channel_transaction_no = &amp;quot;1000000038797108&amp;quot;; delete from u_charge where c_uid = 10318003 order by c_id limit 50; select * from u_charge where c_id = 4046035 and c_status = 0;    </description>
+    </item>
+    
   </channel>
 </rss>
