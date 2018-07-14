@@ -152,9 +152,9 @@ func BenchmarkLock(b *testing.B) {
 
 <li><p><code>Read Commited</code>只能读取到已经提交的数据。但同一个事务执行同样的查询语句，读取的数据可能不一致。<strong>原因是</strong>：只会对记录加记录锁，而不会在记录之间加间隙锁，所以允许新的记录插入到被锁定记录的附近。当多次执行查询语句时，可能得到不同的结果。<strong>解决了<code>Dirty Read</code>的问题</strong>。</p></li>
 
-<li><p><code>Repeatable Read</code>在同一事务内的查询始终和事务开始时刻一致。在事务内，对数据读取或写入时会锁定这些数据行，但是这种方式存在幻读问题，因为只能锁定读取或写入的行，不能阻止另一个事务插入数据。*原因是<strong>：多次读取同一范围的数据会返回第一次查询的快照，不会返回不同的数据行，靠自身的<code>MVCC</code>控制机制实现。</strong>解决了<code>Non Repeatable Read</code>的问题**。</p></li>
+<li><p><code>Repeatable Read</code>在同一事务内的查询始终和事务开始时刻一致。在事务内，对数据读取或写入时会锁定这些数据行，但是这种方式存在幻读问题，因为只能锁定读取或写入的行，不能阻止另一个事务插入数据。<strong>原因是</strong>：多次读取同一范围的数据会返回第一次查询的快照，不会返回不同的数据行，靠自身的<code>MVCC</code>控制机制实现。<strong>解决了<code>Non Repeatable Read</code>的问题</strong>。</p></li>
 
-<li><p><code>Serializable</code>，与可重复读的唯一区别是，默认把普通的SELECT语句修改为<code>SELECT...LOCK IN SHARE MODE</code>，即查询语句返回的数据加上共享锁，阻碍其他事务修改真实数据。解决了<code>Phantom Read</code>问题。</p></li>
+<li><p><code>Serializable</code>，与可重复读的唯一区别是，默认把普通的SELECT语句修改为<code>SELECT...LOCK IN SHARE MODE</code>，即查询语句返回的数据加上共享锁，阻碍其他事务修改真实数据。<strong>解决了<code>Phantom Read</code>问题</strong>。</p></li>
 </ol>
 
 <h3 id="查询数据库的隔离级别">查询数据库的隔离级别</h3>
