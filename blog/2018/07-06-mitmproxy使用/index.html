@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>mitmproxy使用 - 付辉</title>
+    <meta property="og:title" content="mitmproxy使用 - 付辉">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/">Blog</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>mitmproxy使用</h1>
+
+
+<h3>付辉
+
+    
+    
+     /  2018-07-06
+    
+</h3>
+<hr>
+
+      </header>
+
+
+
+
+
+<p>介绍一款非常好用的抓包工具，官网地址：<a href="https://www.mitmproxy.org">https://www.mitmproxy.org</a>。实际上，在调试苹果<code>IAP</code>支付时，始终没有抓成功过，反而因为设置了代理，导致苹果<code>沙盒用户</code>无法成功支付。它名字的全拼是<code>Man-in-the-middle-proxy</code>，代表中间人攻击。</p>
+
+<h2 id="常用的快捷键">常用的快捷键</h2>
+
+<ol>
+<li>在列表界面，按<code>回车</code>进入详情界面</li>
+<li>在详情界面，按<code>q</code>返回列表界面</li>
+<li>在详情界面，按<code>tab</code>键在<code>Request</code>,<code>Response</code>,<code>Detail</code>三个<code>tab</code>之间切换。按<code>j</code>，<code>k</code>可以滚动查看详情.</li>
+<li>在列表界面，按<code>G</code>跳到最新一个请求</li>
+<li>在列表界面，按<code>g</code>跳到第一个请求</li>
+<li>在列表界面，按<code>d</code>删除当前选中的请求，按<code>D</code>恢复刚才删除的请求</li>
+<li>在列表界面，按<code>z</code>清空请求列表</li>
+</ol>
+
+<h2 id="常用的过滤表达式">常用的过滤表达式</h2>
+
+<p>列表界面,按<code>f</code>进入过滤模式。详细的过滤表达式，可以查看：<a href="https://docs.mitmproxy.org/stable/concepts-filters/"><code>Filter expressions</code></a>。
+1. <code>~h regex    Header</code>
+    . <code>~u regex URL</code>
+3. <code>~m regex    Method</code></p>
+
+<h2 id="原理">原理</h2>
+
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/Subject_Alternative_Name">Subject Alternative Name</a>：is an extension to X.509 that allows various values to be associated with a security certificate using a subjectAltName field. These values are called Subject Alternative Names (SANs). Names include</li>
+<li><a href="https://en.wikipedia.org/wiki/Server_Name_Indication">Server Name Indication</a>： is an extension to the TLS computer networking protocol by which a client indicates which hostname it is attempting to connect to at the start of the handshaking process. This allows a server to present multiple certificates on the same IP address and TCP port number and hence allows multiple secure (HTTPS) websites (or any other service over TLS) to be served by the same IP address without requiring all those sites to use the same certificate.</li>
+</ol>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2018/07-01-mysql%E4%BA%8B%E5%8A%A1/">MySQL事务</a></span>
+  <span class="nav-next"></span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">Fu Hui</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

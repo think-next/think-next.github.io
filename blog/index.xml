@@ -6,10 +6,21 @@
     <description>Recent content in Fuhui&#39;s Blog on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Jul 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>mitmproxy使用</title>
+      <link>/blog/2018/07-06-mitmproxy%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 06 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/07-06-mitmproxy%E4%BD%BF%E7%94%A8/</guid>
+      <description>介绍一款非常好用的抓包工具，官网地址：https://www.mitmproxy.org。实际上，在调试苹果IAP支付时，始终没有抓成功过，反而因为设置了代理，导致苹果沙盒用户无法成功支付。它名字的全拼是Man-in-the-middle-proxy，代表中间人攻击。
+常用的快捷键  在列表界面，按回车进入详情界面 在详情界面，按q返回列表界面 在详情界面，按tab键在Request,Response,Detail三个tab之间切换。按j，k可以滚动查看详情. 在列表界面，按G跳到最新一个请求 在列表界面，按g跳到第一个请求 在列表界面，按d删除当前选中的请求，按D恢复刚才删除的请求 在列表界面，按z清空请求列表  常用的过滤表达式 列表界面,按f进入过滤模式。详细的过滤表达式，可以查看：Filter expressions。 1. ~h regex Header . ~u regex URL 3. ~m regex Method
+原理  Subject Alternative Name：is an extension to X.509 that allows various values to be associated with a security certificate using a subjectAltName field. These values are called Subject Alternative Names (SANs). Names include Server Name Indication： is an extension to the TLS computer networking protocol by which a client indicates which hostname it is attempting to connect to at the start of the handshaking process.</description>
+    </item>
     
     <item>
       <title>MySQL事务</title>
