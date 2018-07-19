@@ -6,10 +6,25 @@
     <description>Recent content in 2018-07 on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 10 Jul 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/2018-07/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux查看监听的端口进程</title>
+      <link>/blog/2018/07-10-linux%E6%9F%A5%E7%9C%8B%E7%9B%91%E5%90%AC%E7%9A%84%E7%AB%AF%E5%8F%A3%E8%BF%9B%E7%A8%8B/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/07-10-linux%E6%9F%A5%E7%9C%8B%E7%9B%91%E5%90%AC%E7%9A%84%E7%AB%AF%E5%8F%A3%E8%BF%9B%E7%A8%8B/</guid>
+      <description>Netstat 是一款命令行工具，可用于列出系统上所有的网络套接字连接情况，包括 tcp, udp 以及 unix 套接字。另外它还能列出处于监听状态（即等待接入请求）的套接字。经常使用 netstat 用于查看网络连接信息和系统开启的端口号。
+ 还有一个完美替代它的命令ss，全称是socket statistics。ss的优点就在于“天下武功唯快不破”。
+引言 已知服务监听的端口，想查找当前服务的PID。我们可以拆解成2个子问题： 1. 如何查看该端口是否在被服务监听 2. 如何查看该端口的PID
+ps 用于查看服务器上的进程信息.最最常用的就是:
+ps -ef  netstat 显示的状态列：Proto，Recv-Q，Send-Q，Local Address，Foreign Address，State。其中Recv-Q和Send-Q分别代表接收队列和发送队列。这些数字一般都是0，如果不是，则表示软件包正在队列中堆积。
+Proto Recv-Q Send-Q Local Address Foreign Address State tcp 0 0 enlightened:domain *:* LISTEN  比较有用的选项是：
+ -n：Show network addresses as numbers (normally netstat interprets addresses and attempts to display them symbolically). This option may be used with any of the display formats.</description>
+    </item>
     
     <item>
       <title>mitmproxy使用</title>
