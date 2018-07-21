@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>2018-05 on 付辉</title>
-    <link>/categories/2018-05/</link>
-    <description>Recent content in 2018-05 on 付辉</description>
+    <title>Linux on 付辉</title>
+    <link>/tags/linux/</link>
+    <description>Recent content in Linux on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 15 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 10 Jul 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/2018-05/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux查看监听的端口进程</title>
+      <link>/blog/2018/07-10-linux%E6%9F%A5%E7%9C%8B%E7%9B%91%E5%90%AC%E7%9A%84%E7%AB%AF%E5%8F%A3%E8%BF%9B%E7%A8%8B/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/07-10-linux%E6%9F%A5%E7%9C%8B%E7%9B%91%E5%90%AC%E7%9A%84%E7%AB%AF%E5%8F%A3%E8%BF%9B%E7%A8%8B/</guid>
+      <description>Netstat 是一款命令行工具，可用于列出系统上所有的网络套接字连接情况，包括 tcp, udp 以及 unix 套接字。另外它还能列出处于监听状态（即等待接入请求）的套接字。经常使用 netstat 用于查看网络连接信息和系统开启的端口号。
+ 还有一个完美替代它的命令ss，全称是socket statistics。ss的优点就在于“天下武功唯快不破”。
+引言 已知服务监听的端口，想查找当前服务的PID。我们可以拆解成2个子问题： 1. 如何查看该端口是否在被服务监听 2. 如何查看该端口的PID
+ps 用于查看服务器上的进程信息.最最常用的就是:
+ps -ef  netstat 显示的状态列：Proto，Recv-Q，Send-Q，Local Address，Foreign Address，State。其中Recv-Q和Send-Q分别代表接收队列和发送队列。这些数字一般都是0，如果不是，则表示软件包正在队列中堆积。
+Proto Recv-Q Send-Q Local Address Foreign Address State tcp 0 0 enlightened:domain *:* LISTEN  比较有用的选项是：
+ -n：Show network addresses as numbers (normally netstat interprets addresses and attempts to display them symbolically). This option may be used with any of the display formats.</description>
+    </item>
     
     <item>
       <title>shell操作文本实例</title>
@@ -28,20 +43,6 @@ comm -2 -3 a.txt b.txt  调查发现，需要将两个文本先排好序，才�
 sort a.txt &amp;gt; a-sort.txt sort b.txt &amp;gt; b-sort.txt comm -2 -3 a-sort.txt b-sort.txt  使用uniq及sort实现 如下这种方式，仅仅可以找出不匹配的记录。无法区分数据是仅仅存在A系统，还是仅仅存在B系统。只能获取数据的交集和差集两部分。
 原理很简单，将两个系统的文件合并到一个文件，然后排序。最终交集的数据，应该有2条记录。差集的记录，只有1条。
 cat a.txt b.</description>
-    </item>
-    
-    <item>
-      <title>MySQL使用总结(一)</title>
-      <link>/blog/2018/05-09-mysql%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93%E4%B8%80-/</link>
-      <pubDate>Wed, 09 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2018/05-09-mysql%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93%E4%B8%80-/</guid>
-      <description>查询的执行时间 第一次遇到查询时候报超时。很好奇，别的工具是如何修改查询的操时时间。
-set max_statement_time = 0;  By using max_statement_time, it is possible to limit the execution time of individual queries.
- The MySQL version of max_statement_time is defined in millseconds, not seconds. MySQL&amp;rsquo;s implementation can only kill SELECTs.  left join 这个语句执行起来特别的费劲，但需求是：找出A表中存在，但B表中不存在的记录。
-on条件 一直以为on是在执行表关联时的判断逻辑，即两个表的记录要不要关联，全靠on。直到遇到left join。发现它完全没有理会on提供的左表过滤条件，它返回了左表的全部记录，需要将条件放到where中才生效。
-举个例子
--- table_a.id &amp;gt; 2018 无效 select * from table_a left join table_b on table_a.id = table_b.a_id and table_a.id &amp;gt; 2018 -- 正确的方式 select * from table_a left join table_b on table_a.</description>
     </item>
     
   </channel>
