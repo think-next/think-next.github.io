@@ -80,6 +80,8 @@
 
 
 
+
+
 <p>知道一点比完全不知道要好，对问题有深入了解比仅知道皮毛要好。作为<code>docker</code>的一个初学者，现在对<code>docker</code>做简单记录。希望随着工作、生活，更深入的了解学习<code>docker</code>。这也是一件很有意义的事。</p>
 
 <p><code>docker</code>有几个相关的概念：</p>
@@ -146,6 +148,47 @@ services:
 
 Usage:  docker container exec [OPTIONS] CONTAINER COMMAND [ARG...] [flags]
 </code></pre>
+
+<h2 id="dockerfile-指令"><code>Dockerfile</code>指令</h2>
+
+<p><code>Dockerfile</code>是一个文本文件，其内包含了一条条的指令(<code>Instruction</code>)，每一条指令构建一层，每一条指令的内容，就是描述该层应如何构建。</p>
+
+<h3 id="from"><code>FROM</code></h3>
+
+<p>所谓定制镜像，一定是以一个镜像为基础，在其上进行定制。而<code>FROM</code>就是用于指定基础镜像。因为<code>Dockerfile</code>中<code>FROM</code>是必备的指令，而且必须是第一条指令。</p>
+
+<h3 id="run"><code>RUN</code></h3>
+
+<p>新建一层，在其上执行命令。执行结束后，<code>commit</code>这一层的修改，构成新的镜像。</p>
+
+<h3 id="env"><code>ENV</code></h3>
+
+<p>用于设置环境变量：<code>ENV KEY VALUE</code>或者<code>ENV KEY=VALUE</code></p>
+
+<h3 id="copy"><code>COPY</code></h3>
+
+<p>将从构建<strong>上下文目录</strong>中源路径的文件/目录复制到新的一层的镜像内的目标路径的位置。</p>
+
+<h3 id="cmd"><code>CMD</code></h3>
+
+<p>指定默认的容器<strong>主进程</strong>的启动命令。容器就是进程，那么在启动容器的时候，需要指定所运行的程序及参数。</p>
+
+<pre><code>docker run image command
+</code></pre>
+
+<p>跟在镜像名后的是<code>command</code>，运行时会替换<code>CMD</code>的默认值。</p>
+
+<h3 id="entrypoint"><code>ENTRYPOINT</code></h3>
+
+<p>和<code>CMD</code>一样，都是指定容器启动程序和参数。当指定了<code>ENTRYPOINT</code>之后，<code>CMD</code>的含义就发生了改变，不再是直接运行其命令，而是将<code>CMD</code>作为参数传递给<code>ENTRYPOINT</code>指令。</p>
+
+<h3 id="expose"><code>EXPOSE</code></h3>
+
+<p>声明运行时容器提供服务端口</p>
+
+<h3 id="workdir"><code>WORKDIR</code></h3>
+
+<p>用于指定工作目录，以后各层的当前目录就被改为指定的目录。如果目录不存在，系统会创建目录。</p>
 
 
   <footer>
