@@ -13,10 +13,10 @@
     
     <item>
       <title>Protobufs在Logstash中的应用</title>
-      <link>/blog/2018/protobufs%E5%9C%A8logstash%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</link>
+      <link>/blog/2018/01-30-protobufs%E5%9C%A8logstash%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</link>
       <pubDate>Tue, 30 Jan 2018 20:10:33 +0000</pubDate>
       
-      <guid>/blog/2018/protobufs%E5%9C%A8logstash%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</guid>
+      <guid>/blog/2018/01-30-protobufs%E5%9C%A8logstash%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</guid>
       <description>ELK 分别是Elasticsearch、Logstash、Kibana技术栈的结合。主要解决的问题在于：系统服务器多，日志数据分散难以查找，日志数据量大，查询速度慢，或者不够实时。
  在trivago，我们主要依靠ELK来处理日志。我们通过使用Kafaka，将服务器的访问日志、错误日志、性能基准数据及各种各样的诊断日志，传递给Logstash，Logstash处理之后将日志存放到Elasticsearch。在数据传输中，我们更倾向使用protocol buffer对数据进行编码。这篇博客，我们将主要介绍如何使用Logstash来解析protobuf编码的消息。 相比无模式的JSON格式，Protobufs是一种有模式、高效的数据序列化格式。我们在Kafaka中传输的数据，很多都在使用Protocol Buffers进行编码。它的优势就在于：首先，编码后的数据size明显要比其他的编码方式要小。以JSON编码举例，消息体中不仅仅包含实际数据，还有对应的Key值及很多的中括号。对于文档结构基本不变的数据，传输中包含这些附加信息，是一种资源的浪费。当发送端和接收端对交互的文档结构达成一致后，传输过程还携带这部分结构信息就显得多余。在整个日志处理过程中，该部分消耗的资源是可以被节省下来。其次，消费者所处理的数据，数据格式都是约定好的，完全不会像JSON一样，莫名奇妙多出一个字段。同时，给数据字段的理解产生误解。
 不开心的是，Logstash不支持Protobufs编解码。目前，它支持纯文本、JSON格式和其他别的消息格式。因此，我们决定自己实现这部分功能。

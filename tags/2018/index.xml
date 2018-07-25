@@ -182,8 +182,8 @@ install/update install主要用来安装新包。当安装新包的时候，需�
 update主要用来更新.lock中安装的包。随着时间的推移，.json中的包可能又发布了新版本，所以update就是用来检查.json中包的新版本，更新.lock文件用的。
 我在使用的过程中，比较倾向于使用下面的单个包操作的方式：
 php composer.phar update monolog/monolog [...]  版本管理 在git环境中.json和.lock都需要被提交的版本控制。vendor目录就不需要啦。
-glide版本管理 glide是go的版本管理工具。其实glide也是参考composer设计的，所以上面对composer的说法也同样有效。
-在项目开发中也仅需要对 glide.yaml 和 glide.</description>
+Go下的版本管理工具 glide glide是go的版本管理工具。其实glide也是参考composer设计的，所以上面对composer的说法也同样有效。
+在项目开发中也仅需要对 glide.</description>
     </item>
     
   </channel>

@@ -182,8 +182,8 @@ install/update install主要用来安装新包。当安装新包的时候，需�
 update主要用来更新.lock中安装的包。随着时间的推移，.json中的包可能又发布了新版本，所以update就是用来检查.json中包的新版本，更新.lock文件用的。
 我在使用的过程中，比较倾向于使用下面的单个包操作的方式：
 php composer.phar update monolog/monolog [...]  版本管理 在git环境中.json和.lock都需要被提交的版本控制。vendor目录就不需要啦。
-glide版本管理 glide是go的版本管理工具。其实glide也是参考composer设计的，所以上面对composer的说法也同样有效。
-在项目开发中也仅需要对 glide.yaml 和 glide.</description>
+Go下的版本管理工具 glide glide是go的版本管理工具。其实glide也是参考composer设计的，所以上面对composer的说法也同样有效。
+在项目开发中也仅需要对 glide.</description>
     </item>
     
     <item>
@@ -240,10 +240,10 @@ IAP支付的流程  苹果IAP支付有一个“事务”的概念。当用户支
     
     <item>
       <title>WebSocket基础开发</title>
-      <link>/blog/2018/websocket%E5%9F%BA%E7%A1%80%E5%BC%80%E5%8F%911/</link>
+      <link>/blog/2018/02-25-websocket%E5%9F%BA%E7%A1%80%E5%BC%80%E5%8F%91/</link>
       <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/websocket%E5%9F%BA%E7%A1%80%E5%BC%80%E5%8F%911/</guid>
+      <guid>/blog/2018/02-25-websocket%E5%9F%BA%E7%A1%80%E5%BC%80%E5%8F%91/</guid>
       <description>WebSocket是一种网络通讯协议。在服务器端可以将HTTP请求升级为WebSocket请求。区别于普通的HTTP请求，WebSocket中存在特殊的字段标识：
 GET /chat HTTP/1.1 Host: server.example.com Upgrade: websocket Connection: Upgrade Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw== Sec-WebSocket-Protocol: chat, superchat Sec-WebSocket-Version: 13 Origin: http://example.com  这种协议升级，是在应用层实现的。所以一个服务器本身既可以提供WebSocket服务，也可以提供正常的HTTP服务。
 我们下面对服务做区分。/ws负责对外提供WebSocket服务。

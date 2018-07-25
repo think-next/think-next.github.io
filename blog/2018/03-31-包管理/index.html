@@ -158,7 +158,9 @@
 
 <p>在<code>git</code>环境中<code>.json</code>和<code>.lock</code>都需要被提交的版本控制。<code>vendor</code>目录就不需要啦。</p>
 
-<h2 id="glide-版本管理"><code>glide</code>版本管理</h2>
+<h2 id="go-下的版本管理工具"><code>Go</code>下的版本管理工具</h2>
+
+<h3 id="glide"><code>glide</code></h3>
 
 <p><a href="https://github.com/Masterminds/glide">glide</a>是<code>go</code>的版本管理工具。其实<code>glide</code>也是参考<code>composer</code>设计的，所以上面对<code>composer</code>的说法也同样有效。</p>
 
@@ -166,7 +168,21 @@
 
 <p>注：<code>vendor</code>目录默认会在项目下生成。需要特别注意的是：<code>go</code>的项目必须在<code>gopath</code>路径下的<code>src</code>目录下。</p>
 
+<h3 id="govendor"><code>govendor</code></h3>
+
 <p>另一个版本管理工具是<a href="https://github.com/kardianos/govendor"><code>govendor</code></a>。它做的只是对包的管理工作，如果编译过程中缺少了引用的包，我们需要先执行<code>go get</code>下载该包，然后通过<code>govendor add +external</code>将包拷贝到<code>vendor</code>目录。</p>
+
+<p>比较实用的指令：</p>
+
+<pre><code># 外部包，即被 $GOPATH 管理，但不在 vendor 目录下
+govendor add +e 
+
+# 从线上远端库添加或更新标签或分支等于v1的依赖包
+govendor fetch golang.org/x/net/context@=v1
+
+# 本地存在vendor.json 时候拉取依赖包，匹配所记录的版本
+govendor sync -v
+</code></pre>
 
 
   <footer>
