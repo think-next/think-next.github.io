@@ -30,15 +30,6 @@
     </item>
     
     <item>
-      <title>Go</title>
-      <link>/tags/go/</link>
-      <pubDate>Thu, 19 Apr 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/go/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Golang</title>
       <link>/tags/golang/</link>
       <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
@@ -116,6 +107,15 @@
       <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/protocol/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Think</title>
+      <link>/tags/think/</link>
+      <pubDate>Tue, 24 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/think/</guid>
       <description></description>
     </item>
     
