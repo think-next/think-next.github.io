@@ -6,10 +6,20 @@
     <description>Recent content in 2018-04 on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Apr 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/2018-04/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Saga Pattern</title>
+      <link>/blog/2018/04-24-saga-pattern/</link>
+      <pubDate>Tue, 24 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/04-24-saga-pattern/</guid>
+      <description>在微服务中，用的比较多的分布式事务模式：SAGA。下面是lysu/go-saga库中的描述：
+ Saga is a long-lived transaction came up with many small sub-transaction.ExecutionCoordinator(SEC) is coordinator for sub-transactions execute and saga-log written.Sub-transaction is normal business operation, it contain a Action and action&amp;rsquo;s Compensate. Saga-Log is used to record saga process, and SEC will use it to decide next step and how to recovery from error.Log presents Saga Log. Saga Log used to log execute status for saga, and SEC use it to compensate and retry.</description>
+    </item>
     
     <item>
       <title>docker基本使用</title>
