@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2018-01 on 付辉</title>
+    <link>/categories/2018-01/</link>
+    <description>Recent content in 2018-01 on 付辉</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 14 Jan 2018 20:10:33 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/2018-01/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Git分支模型</title>
+      <link>/blog/2018/01-14-git%E5%88%86%E6%94%AF%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Sun, 14 Jan 2018 20:10:33 +0000</pubDate>
+      
+      <guid>/blog/2018/01-14-git%E5%88%86%E6%94%AF%E6%A8%A1%E5%9E%8B/</guid>
+      <description>Git分支模型 文章将围绕下图来描述我们所使用的分支模型。主要包括master和develop两个主线分支以及feature、release、hotfixes分支。
+为什么选择Git 针对“centralized”和“distributed”版本管理工具的争论，可以在GitSvnComparsion查看。就我个人而言，我更喜欢Git。Git改变了开发者对merge操作和branch操作的思考方式，而且两者也是Git日常工作流中的最常用的操作。
+不集中式又集中式 Git是分布式版本管理系统，不存在集中式版本管理系统的中央存储库。这在技术角度上确实不存在，但在观念上，我们可以将origin看作整个版本管理的中央存储库。
+如下图所示，开发者除了可以从origin中push或pull代码，还可以从别的分支中pull代码。当多个同事共同开发产品的新功能时，彼此间的代码同步显得尤为重要。
+主要分支 Git中央存储库中包含两个重要的分支，它们在项目的生命周期中都一直存在：
+ master develop  两个分支有如下特性：
+ origin/master分支的HEAD 指针反映的一直都是发布就绪的状态。master分支上的代码也是生产服务的代码。 origin/develop分支的HEAD指针反映当前项目的修改，该分支集成其他分支所做的一切修改。甚至可以运行一个自动化脚本，每天晚上将各个分支的修改merge到develop分支。  当develop分支中的代码趋于稳定，准备发新版的时候，应该将其merger到master分支，并标记本次发布的版本号。稍后详细讨论。
+原则上，master分支的代码都是可发布的，所以我们对merge到master的代码有严格的要求。理论上，我们可以运行一个脚本，一旦检测到master的代码有提交，自动执行编译、并同步代码到生产服务器。
+支承分支 如master和develop旁边的其他分支，它们的生命周期有限，最终会从代码库中被移除。而我们使用分支主要来实现：
+ 来帮助各个团队之间并行开发 为新版本发布做准备 修复当前生产环境的bug。  我们使用的分支有以下几种:
+ Feature branches Release branches Hotfix branches  各个分支根据不同的目的被创建，对它们的操作也遵循严格的规则。比如分支如何创建、开发完成之后merge到的对象等。
+另外，这些分支其实都是普通的git分支。只是根据我们使用的目的策略给他们赋予了不同的功能。
+Feature 分支 Feature 分支主要用来开新功能。一般来说，只要功能还没有开发完善，它就应该一直存在。但最终应该被merge回develop分支或者丢弃。feature分支遵循以下规则：
+ 从develop分支上创建feature分支 feature分支最终merge回develop分支 分支的命名规则：除了master, develop, release-*, or hotfix-*的任何名字  feature分支通常只存在于开发人员的版本库中，而不应该存在于origin仓库中。但考虑到团队成员协作开发的情况，彼此之间需要定期merge对方的代码，这是就需要借助develop分支来实现了。
+创建feature分支 git checkout -b myfeature develop  合并feature 分支 git check develop git merge --no-off myfeature git branch -d myfeature git push origin develop  release分支 release分支主要用来为代码发布做准备。在合并代码之前，它允许做小的bug修改、为版本发布做准备工作（指定版本号、建数据表等）。通过在release分支上做这些操作，可以保证develop分支是干净的，不影响当前新功能的开发。release分支遵循下面的规则：</description>
+    </item>
+    
+  </channel>
+</rss>

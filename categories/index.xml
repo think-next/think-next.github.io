@@ -6,10 +6,19 @@
     <description>Recent content in Categories on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jan 2018 20:10:33 +0000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2018-01</title>
+      <link>/categories/2018-01/</link>
+      <pubDate>Sun, 14 Jan 2018 20:10:33 +0000</pubDate>
+      
+      <guid>/categories/2018-01/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>2018-04</title>
