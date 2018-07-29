@@ -39,6 +39,15 @@
     </item>
     
     <item>
+      <title>Http</title>
+      <link>/tags/http/</link>
+      <pubDate>Sat, 17 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/http/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Js</title>
       <link>/tags/js/</link>
       <pubDate>Mon, 29 Jan 2018 20:10:33 +0000</pubDate>
@@ -75,11 +84,29 @@
     </item>
     
     <item>
+      <title>Nginx</title>
+      <link>/tags/nginx/</link>
+      <pubDate>Sat, 10 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Npm</title>
       <link>/tags/npm/</link>
       <pubDate>Fri, 30 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/npm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pay</title>
+      <link>/tags/pay/</link>
+      <pubDate>Wed, 28 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/pay/</guid>
       <description></description>
     </item>
     
