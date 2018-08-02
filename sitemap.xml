@@ -167,6 +167,12 @@
   </url>
   
   <url>
+    <loc>/categories/2018-06/</loc>
+    <lastmod>2018-06-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/categories/2018-07/</loc>
     <lastmod>2018-07-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -296,19 +302,19 @@
   
   <url>
     <loc>/categories/summarize/</loc>
-    <lastmod>2018-06-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/tcp/ip/</loc>
-    <lastmod>2018-07-28T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/</loc>
     <lastmod>2018-06-08T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/tcp/ip/</loc>
+    <lastmod>2018-07-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -321,6 +327,12 @@
   <url>
     <loc>/tags/tools/</loc>
     <lastmod>2018-08-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/transaction/</loc>
+    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

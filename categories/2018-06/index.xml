@@ -1,29 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tcp/ip on 付辉</title>
-    <link>/tags/tcp/ip/</link>
-    <description>Recent content in Tcp/ip on 付辉</description>
+    <title>2018-06 on 付辉</title>
+    <link>/categories/2018-06/</link>
+    <description>Recent content in 2018-06 on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 15 Jun 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/tcp/ip/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/2018-06/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Tcp Server Design</title>
-      <link>/blog/2018/2018-07-28-tcp-server-design/</link>
-      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2018/2018-07-28-tcp-server-design/</guid>
-      <description> 绝大多数的TCP服务都是支持并发的。当一个连接请求到达时，服务端接收这个连接，然后创建一个新的线程(或进程)来处理这个连接。
-listen状态 在本地启动Go的服务，使用netstat查看：
-netstat -an -f inet  可以看到listen状态的请求连接。其中Local Address的*表示请求会被本地的任意地址处理(如果有多重地址的话)。Foreign Address中*.*表示客户端的ip和port都是未知的。
-Active Internet connections (including servers) Proto Recv-Q Send-Q Local Address Foreign Address (state) tcp46 0 0 *.3900 *.* LISTEN  当新的请求到达，并被接收时，服务器内核中会创建一个ESTABLISHED状态的连接。而listen继续去接收新的连接。
-Proto Recv-Q Send-Q Local Address Foreign Address (state) tcp4 0 0 127.0.0.1.3900 127.0.0.1.51133 ESTABLISHED tcp46 0 0 *.3900 *.* LISTEN  request queue 当listening状态的应用正在忙于处理新的连接，同时有其他的请求进来时，服务器是如何处理的呢？引入另一个概念：请求队列。
- 每一个监听状态的终端都有一个固定长度的队列，用来存放TCP三次握手完成，但还没有被应用接收的连接。client会认为该连接已经创建成功，所以它此时发送的数据也会被缓存起来。 当队列满了后，TCP会直接忽略进来的SYN，而非回复RST报文头。这样做便是要client稍后重新发送SYN。 如果TCP三次握手完成，连接也就被创建成功了。如果此时服务端不想为该ip提供服务，服务端要么发送FIN关闭这个连接，或者发送RST中断这个连接。整个过程中，TCP没有权限去限制client端。  </description>
-    </item>
     
     <item>
       <title>timewait状态解读</title>

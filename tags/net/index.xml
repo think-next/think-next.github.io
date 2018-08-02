@@ -51,5 +51,25 @@ Proto Recv-Q Send-Q Local Address Foreign Address (state) tcp4 0 0 127.0.0.1.390
 原理  Subject Alternative Name：is an extension to X.509 that allows various values to be associated with a security certificate using a subjectAltName field. These values are called Subject Alternative Names (SANs). Names include Server Name Indication： is an extension to the TLS computer networking protocol by which a client indicates which hostname it is attempting to connect to at the start of the handshaking process.</description>
     </item>
     
+    <item>
+      <title>timewait状态解读</title>
+      <link>/blog/2018/06-15-timewait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/</link>
+      <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/06-15-timewait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/</guid>
+      <description>突然想梳理一下time_wait,毕竟自己遇到它好多次了。
+time_wait status time_wait作为HTTP连接关闭的一个正常状态。当系统time_wait过多，超过操作系统设定的文件套接字上限时，就会导致整个服务不可用。
+唯一确定连接的4个组成部分，它们是客户端及服务端的IP和PORT。一般来说，处于time_wait状态的port在2mls内是无法被重复使用的。所以瞬间的wait_wait过多，直接导致整个系统无法服务。
+关闭连接包含4次握手，TCP是全双工的，有一端需要主动提出关闭。相应的，对端来被动来关闭。对于我们常见的CS模式，主动和被动的角色是没有明确界限的。
+client[FIN_WAIT_1] ---(FIN M)---&amp;gt; server[CLOSE_WAIT] client[FIN_WAIT_2] &amp;lt;---(ack M+1)--- server client[TIME_WAIT] &amp;lt;---(FIN N)--- server[LAST_ACK] client ---(ack N+1)---&amp;gt; server[CLOSED]  active close端的系统中才会出现time_wait的状态。拿请求https://google.com来举例，客户端在创建连接时，其实并不关心连接的端口号，它是系统随机创建的。google服务存在一个443端口,一直处于listen状态。当客户端断开连接时，客户端系统其实就会出现time_wait。当服务端主动断开连接时，客户端会出现close_wait状态。
+2MLS time_wait也被称为2MLS wait。全名maximum segment lifetime, 表示一个数据块在被丢弃之前，在网络中能存在的最长时间。TCP的数据包是作为IP数据传输的，而IP数据包是否有效受限于设置的TTL，所以该MSL存在上限。
+在2MLS内，该连接不会处理那些迟到的请求，占用的端口号也无法被系统的其他程序使用。2MLS还可以保证，当服务端没有收到ack时，客户端重新发送一次ack。
+可以通过tcp_tw_reuse来重用time_wait状态的端口号。
+shell查询time_wait连接 查看连接的状态，主要有两个命令netstat和ss。netstat有的ss都有，而且运行非常快。
+netstat -n | awk &#39;/^tcp/ {++S[$NF]} END {for(a in S) {print a, S[a]} }&#39;  匹配tcp连接，声明了数组S，$NF用于获取最后一列的数据，也就是tcp status，最后通过for语句输出。
+ss -o state time-wait &#39;( sport = :http )&#39; #timewait是中划线  通过ss还可以方便的过滤出源端口是80的，状态是time_wait的连接
+总结 在开发中，可以适当考虑使用长连接。而且，现在基本所有的库都自带连接池功能。</description>
+    </item>
+    
   </channel>
 </rss>
