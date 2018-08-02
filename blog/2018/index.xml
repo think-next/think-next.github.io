@@ -6,10 +6,25 @@
     <description>Recent content in Fuhui&#39;s Blog on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/2018/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ngrep抓包</title>
+      <link>/blog/2018/2018-08-01-ngrep%E6%8A%93%E5%8C%85/</link>
+      <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/2018-08-01-ngrep%E6%8A%93%E5%8C%85/</guid>
+      <description>简单的工具其实挺有用的。警告：不许瞧不起工具，尤其是你还不会用的工具。
+ngrep还是之前跟花椒直播的同事对接项目时，了解到的一个工具。它可以用来抓取服务器上通过网卡的所有请求。跟tcpdump差不多，但却更简单。tcpdump需要借助Wireshark才可以将请求完美展示出来，但这个就跟使用grep一样。
+以前专门请教过一个同事如何使用Wireshark分析网络请求，自己也专门看了相关的Wireshark操作。但最终却发现，如果是抓客户端的请求(非分析TCP)，Wireshark使用起来并不方便。而如果分析的是服务端之间的请求，还需要借助tcpdump先来把请求记录下来，然后再到Wireshark中打开分析。
+Example 经常使用的模式
+# 匹配特定host ngrep -q host api.open.huajiao.com -d any -W byline # 匹配特定host和端口 ngrep –q host api.open.huajiao.com and port 80 –W byline # 报文中包含&amp;quot;search&amp;quot;关键字 ngrep –q –W byline &amp;quot;search&amp;quot; host www.google.com and port 80  Options 详细还是通过man直接查看工具说明吧！这里列举一个：
+-d By default ngrep will select a default interface to listen on. Use this option to force ngrep to listen on interface dev.  结果示例 以下是命令输出的结果，跟curl是不是很像：
+interface: any filter: ( host api.</description>
+    </item>
     
     <item>
       <title>Tcp Server Design</title>
@@ -253,7 +268,7 @@ go test -bench=Fib40 -benchtime=20s  覆盖率 跟执行go test不同的是，�
       <description>知道一点比完全不知道要好，对问题有深入了解比仅知道皮毛要好。作为docker的一个初学者，现在对docker做简单记录。希望随着工作、生活，更深入的了解学习docker。这也是一件很有意义的事。
 docker有几个相关的概念：
  image 镜像 container 容器  我觉得之所以说docker好用，是因为Docker Hub提供了很多镜像，比如MySQL、Redis等。对它们安装、卸载异常方便。
-下面举个例子，我们想搭建测试服务，安装MySQL，Redis等依赖。我们将他们当作一个项目的依赖，声明一个配置文件·db.yml，然后将这些依赖，类似于composer编辑：
+Example 我们想搭建测试服务，安装MySQL，Redis等依赖。我们将他们当作一个项目的依赖，声明一个配置文件·db.yml，然后将这些依赖，类似于composer编辑：
 version: &amp;quot;3&amp;quot; services: db: image: mysql:5.7 volumes: - /Users/neojos/dockerData/mysql restart: always environment: MYSQL_ROOT_PASSWORD: paytest MYSQL_DATABASE: paytest MYSQL_USER: neojos MYSQL_PASSWORD: neojos-pwd ports: - &amp;quot;3306:3306&amp;quot; myredis: image: redis restart: always volumes: - /Users/neojos/dockerData/redis ports: - &amp;quot;6379:6379&amp;quot; command: redis-server --appendonly yes  执行如下命令，MySQL和Redis的服务就启动了
 docker-composer -f db.yml up  可以通过执行如下命令查看，确认是否有两个容器在运行。
 docker container ls  这样很好，但当我想进去MySQL的容器内执行一些命令时，该怎么办呢？比如，我想确认下面的MySQL连接语句是否正确,而且我还一定要进去容器内执行MySQL命令行语句：

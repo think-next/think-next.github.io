@@ -30,7 +30,7 @@
       <description>知道一点比完全不知道要好，对问题有深入了解比仅知道皮毛要好。作为docker的一个初学者，现在对docker做简单记录。希望随着工作、生活，更深入的了解学习docker。这也是一件很有意义的事。
 docker有几个相关的概念：
  image 镜像 container 容器  我觉得之所以说docker好用，是因为Docker Hub提供了很多镜像，比如MySQL、Redis等。对它们安装、卸载异常方便。
-下面举个例子，我们想搭建测试服务，安装MySQL，Redis等依赖。我们将他们当作一个项目的依赖，声明一个配置文件·db.yml，然后将这些依赖，类似于composer编辑：
+Example 我们想搭建测试服务，安装MySQL，Redis等依赖。我们将他们当作一个项目的依赖，声明一个配置文件·db.yml，然后将这些依赖，类似于composer编辑：
 version: &amp;quot;3&amp;quot; services: db: image: mysql:5.7 volumes: - /Users/neojos/dockerData/mysql restart: always environment: MYSQL_ROOT_PASSWORD: paytest MYSQL_DATABASE: paytest MYSQL_USER: neojos MYSQL_PASSWORD: neojos-pwd ports: - &amp;quot;3306:3306&amp;quot; myredis: image: redis restart: always volumes: - /Users/neojos/dockerData/redis ports: - &amp;quot;6379:6379&amp;quot; command: redis-server --appendonly yes  执行如下命令，MySQL和Redis的服务就启动了
 docker-composer -f db.yml up  可以通过执行如下命令查看，确认是否有两个容器在运行。
 docker container ls  这样很好，但当我想进去MySQL的容器内执行一些命令时，该怎么办呢？比如，我想确认下面的MySQL连接语句是否正确,而且我还一定要进去容器内执行MySQL命令行语句：

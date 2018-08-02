@@ -100,7 +100,9 @@
 
 <p>我觉得之所以说<code>docker</code>好用，是因为<a href="https://hub.docker.com/explore/"><code>Docker Hub</code></a>提供了很多镜像，比如<code>MySQL</code>、<code>Redis</code>等。对它们安装、卸载异常方便。</p>
 
-<p>下面举个例子，我们想搭建测试服务，安装<code>MySQL</code>，<code>Redis</code>等依赖。我们将他们当作一个项目的依赖，声明一个配置文件·<code>db.yml</code>，然后将这些依赖，类似于<code>composer</code>编辑：</p>
+<h2 id="example"><code>Example</code></h2>
+
+<p>我们想搭建测试服务，安装<code>MySQL</code>，<code>Redis</code>等依赖。我们将他们当作一个项目的依赖，声明一个配置文件·<code>db.yml</code>，然后将这些依赖，类似于<code>composer</code>编辑：</p>
 
 <pre><code>version: &quot;3&quot;
 
@@ -210,7 +212,7 @@ FROM image[:tag | @digest] AS stage
 COPY --from=stage ...
 </code></pre>
 
-<h3 id="example"><code>Example</code></h3>
+<h3 id="example-1"><code>Example</code></h3>
 
 <p>下面是精简版示例：</p>
 

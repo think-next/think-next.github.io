@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Net on 付辉</title>
+    <link>/tags/net/</link>
+    <description>Recent content in Net on 付辉</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 01 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/net/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ngrep抓包</title>
+      <link>/blog/2018/2018-08-01-ngrep%E6%8A%93%E5%8C%85/</link>
+      <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/2018-08-01-ngrep%E6%8A%93%E5%8C%85/</guid>
+      <description>简单的工具其实挺有用的。警告：不许瞧不起工具，尤其是你还不会用的工具。
+ngrep还是之前跟花椒直播的同事对接项目时，了解到的一个工具。它可以用来抓取服务器上通过网卡的所有请求。跟tcpdump差不多，但却更简单。tcpdump需要借助Wireshark才可以将请求完美展示出来，但这个就跟使用grep一样。
+以前专门请教过一个同事如何使用Wireshark分析网络请求，自己也专门看了相关的Wireshark操作。但最终却发现，如果是抓客户端的请求(非分析TCP)，Wireshark使用起来并不方便。而如果分析的是服务端之间的请求，还需要借助tcpdump先来把请求记录下来，然后再到Wireshark中打开分析。
+Example 经常使用的模式
+# 匹配特定host ngrep -q host api.open.huajiao.com -d any -W byline # 匹配特定host和端口 ngrep –q host api.open.huajiao.com and port 80 –W byline # 报文中包含&amp;quot;search&amp;quot;关键字 ngrep –q –W byline &amp;quot;search&amp;quot; host www.google.com and port 80  Options 详细还是通过man直接查看工具说明吧！这里列举一个：
+-d By default ngrep will select a default interface to listen on. Use this option to force ngrep to listen on interface dev.  结果示例 以下是命令输出的结果，跟curl是不是很像：
+interface: any filter: ( host api.</description>
+    </item>
+    
+    <item>
+      <title>Tcp Server Design</title>
+      <link>/blog/2018/2018-07-28-tcp-server-design/</link>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/2018-07-28-tcp-server-design/</guid>
+      <description> 绝大多数的TCP服务都是支持并发的。当一个连接请求到达时，服务端接收这个连接，然后创建一个新的线程(或进程)来处理这个连接。
+listen状态 在本地启动Go的服务，使用netstat查看：
+netstat -an -f inet  可以看到listen状态的请求连接。其中Local Address的*表示请求会被本地的任意地址处理(如果有多重地址的话)。Foreign Address中*.*表示客户端的ip和port都是未知的。
+Active Internet connections (including servers) Proto Recv-Q Send-Q Local Address Foreign Address (state) tcp46 0 0 *.3900 *.* LISTEN  当新的请求到达，并被接收时，服务器内核中会创建一个ESTABLISHED状态的连接。而listen继续去接收新的连接。
+Proto Recv-Q Send-Q Local Address Foreign Address (state) tcp4 0 0 127.0.0.1.3900 127.0.0.1.51133 ESTABLISHED tcp46 0 0 *.3900 *.* LISTEN  request queue 当listening状态的应用正在忙于处理新的连接，同时有其他的请求进来时，服务器是如何处理的呢？引入另一个概念：请求队列。
+ 每一个监听状态的终端都有一个固定长度的队列，用来存放TCP三次握手完成，但还没有被应用接收的连接。client会认为该连接已经创建成功，所以它此时发送的数据也会被缓存起来。 当队列满了后，TCP会直接忽略进来的SYN，而非回复RST报文头。这样做便是要client稍后重新发送SYN。 如果TCP三次握手完成，连接也就被创建成功了。如果此时服务端不想为该ip提供服务，服务端要么发送FIN关闭这个连接，或者发送RST中断这个连接。整个过程中，TCP没有权限去限制client端。  </description>
+    </item>
+    
+    <item>
+      <title>mitmproxy使用</title>
+      <link>/blog/2018/07-06-mitmproxy%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 06 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/07-06-mitmproxy%E4%BD%BF%E7%94%A8/</guid>
+      <description>介绍一款非常好用的抓包工具，官网地址：https://www.mitmproxy.org。实际上，在调试苹果IAP支付时，始终没有抓成功过，反而因为设置了代理，导致苹果沙盒用户无法成功支付。它名字的全拼是Man-in-the-middle-proxy，代表中间人攻击。
+常用的快捷键  在列表界面，按回车进入详情界面 在详情界面，按q返回列表界面 在详情界面，按tab键在Request,Response,Detail三个tab之间切换。按j，k可以滚动查看详情. 在列表界面，按G跳到最新一个请求 在列表界面，按g跳到第一个请求 在列表界面，按d删除当前选中的请求，按D恢复刚才删除的请求 在列表界面，按z清空请求列表  常用的过滤表达式 列表界面,按f进入过滤模式。详细的过滤表达式，可以查看：Filter expressions。 1. ~h regex Header . ~u regex URL 3. ~m regex Method
+原理  Subject Alternative Name：is an extension to X.509 that allows various values to be associated with a security certificate using a subjectAltName field. These values are called Subject Alternative Names (SANs). Names include Server Name Indication： is an extension to the TLS computer networking protocol by which a client indicates which hostname it is attempting to connect to at the start of the handshaking process.</description>
+    </item>
+    
+  </channel>
+</rss>
