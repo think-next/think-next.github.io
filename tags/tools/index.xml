@@ -13,10 +13,10 @@
     
     <item>
       <title>ngrep抓包</title>
-      <link>/blog/2018/2018-08-01-ngrep%E6%8A%93%E5%8C%85/</link>
+      <link>/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/</link>
       <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/2018-08-01-ngrep%E6%8A%93%E5%8C%85/</guid>
+      <guid>/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/</guid>
       <description>简单的工具其实挺有用的。警告：不许瞧不起工具，尤其是你还不会用的工具。
 ngrep还是之前跟花椒直播的同事对接项目时，了解到的一个工具。它可以用来抓取服务器上通过网卡的所有请求。跟tcpdump差不多，但却更简单。tcpdump需要借助Wireshark才可以将请求完美展示出来，但这个就跟使用grep一样。
 以前专门请教过一个同事如何使用Wireshark分析网络请求，自己也专门看了相关的Wireshark操作。但最终却发现，如果是抓客户端的请求(非分析TCP)，Wireshark使用起来并不方便。而如果分析的是服务端之间的请求，还需要借助tcpdump先来把请求记录下来，然后再到Wireshark中打开分析。

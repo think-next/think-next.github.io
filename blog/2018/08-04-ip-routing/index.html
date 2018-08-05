@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>IP Routing - 付辉</title>
+    <meta property="og:title" content="IP Routing - 付辉">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/2018/">Blog</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>IP Routing</h1>
+
+
+
+<section class="post-meta">
+    <span class="post-author">付辉
+    
+        
+        
+         /  2018-08-04
+        
+    </span>
+    
+    <a href="/tags/tcp/ip">tcp/ip</a>
+    
+    <a href="/tags/net">net</a>
+    
+</section>
+
+
+<hr>
+
+      </header>
+
+
+
+
+
+<p>假设你在跟小米公司对接服务，那你有没有好奇过：自家的服务器是如何找到小米公司的服务器的。为了安全，公司的服务器可都是在内网的，用户是无法直接访问到的。好好了解一下Ip Routing，它可以给你部分答案。</p>
+
+<h2 id="概述">概述</h2>
+
+<p>当主机<code>IP(Network)</code>层收到一个<code>datagram</code>后，它首先会检查<code>datagram</code>的目标主机是不是自己。如果是，那么它会将<code>datagram</code>发送给其他协议处理。如果不是，它便检查自己是否被配置作为一个路由。如果是，它将按照规则将<code>datagram</code>继续传递。否则，默默的把<code>datagram</code>丢掉。</p>
+
+<p>所有<code>routing</code>提供的<code>IP</code>地址，都假设下一个<code>hop</code>是离目标地址最近的。在<code>datagram</code>传递的过程中，我们会修改<code>link-layer</code>的地址为下一个<code>hop</code>的地址，而<code>Destination IP</code>一般是不做修改的。</p>
+
+<h2 id="routing-table"><code>Routing Table</code></h2>
+
+<p>在命令行执行 <code>netstat -rn</code>，查看系统的<code>routing table</code>。</p>
+
+<pre><code># 展示结果做了修改，非真实值
+
+neojos@BJ ~ $ netstat -rn
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+140.168.0.0     10.3.206.240   255.255.0.0     UG        0 0          0 eth0
+</code></pre>
+
+<h3 id="了解-falgs-参数">了解<code>Falgs</code>参数：</h3>
+
+<ol>
+<li><code>U</code>  表示当前路由是在使用的</li>
+<li><code>G</code>  表示路由到一个<code>gateway</code>。如果没有设置该<code>flag</code>，则表示跟<code>Destination</code>是直接连接的。</li>
+<li><code>H</code>  表示路由到一个主机地址。如果没有设置该<code>flag</code>，则<code>Destination</code>是一个网络地址。</li>
+<li><code>D</code>  表示路由是通过<code>ICMP Redirect</code>设置的。一般来说，<code>Redirect</code>设置的<code>route</code>都是主机地址。</li>
+</ol>
+
+<h3 id="路由查询的顺序">路由查询的顺序：</h3>
+
+<ol>
+<li>查找匹配的主机地址</li>
+<li>查找匹配的网络地址</li>
+<li>查找<code>default</code>的路由。</li>
+</ol>
+
+<h2 id="host-unreachable"><code>Host unreachable</code></h2>
+
+<p>当<code>route</code>没有找到<code>destination</code>时，<code>Destination Host Unreachable</code>的错误会返回给源主机。你可以通过<code>ping</code>路由表中配置错误的<code>destination host address</code>来查看。</p>
+
+<h2 id="icmp-redirect-error"><code>ICMP Redirect Error</code></h2>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/">ngrep抓包</a></span>
+  <span class="nav-next"></span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">Fu Hui</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

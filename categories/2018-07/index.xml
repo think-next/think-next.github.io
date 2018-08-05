@@ -13,10 +13,10 @@
     
     <item>
       <title>Tcp Server Design</title>
-      <link>/blog/2018/2018-07-28-tcp-server-design/</link>
+      <link>/blog/2018/07-28-tcp-server-design/</link>
       <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/2018-07-28-tcp-server-design/</guid>
+      <guid>/blog/2018/07-28-tcp-server-design/</guid>
       <description> 绝大多数的TCP服务都是支持并发的。当一个连接请求到达时，服务端接收这个连接，然后创建一个新的线程(或进程)来处理这个连接。
 listen状态 在本地启动Go的服务，使用netstat查看：
 netstat -an -f inet  可以看到listen状态的请求连接。其中Local Address的*表示请求会被本地的任意地址处理(如果有多重地址的话)。Foreign Address中*.*表示客户端的ip和port都是未知的。
@@ -27,10 +27,10 @@ Proto Recv-Q Send-Q Local Address Foreign Address (state) tcp4 0 0 127.0.0.1.390
     
     <item>
       <title>重试</title>
-      <link>/blog/2018/2018-07-24-%E9%87%8D%E8%AF%95/</link>
+      <link>/blog/2018/07-24-%E9%87%8D%E8%AF%95/</link>
       <pubDate>Tue, 24 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/2018-07-24-%E9%87%8D%E8%AF%95/</guid>
+      <guid>/blog/2018/07-24-%E9%87%8D%E8%AF%95/</guid>
       <description>为了克服网络问题，重试是我们常用的手段之一。但必须记住：重试的姿势非常重要。照应一句古话：“差若毫厘，谬以千里”。
 正确的姿势是便是：
  如果请求没有成功，以指数型延迟重试

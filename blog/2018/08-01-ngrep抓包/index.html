@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>ngrep抓包 - 付辉</title>
+    <meta property="og:title" content="ngrep抓包 - 付辉">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/2018/">Blog</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>ngrep抓包</h1>
+
+
+
+<section class="post-meta">
+    <span class="post-author">付辉
+    
+        
+        
+         /  2018-08-01
+        
+    </span>
+    
+    <a href="/tags/linux">linux</a>
+    
+    <a href="/tags/tools">tools</a>
+    
+    <a href="/tags/net">net</a>
+    
+</section>
+
+
+<hr>
+
+      </header>
+
+
+
+
+
+<p>简单的工具其实挺有用的。警告：不许瞧不起工具，尤其是你还不会用的工具。</p>
+
+<p><code>ngrep</code>还是之前跟花椒直播的同事对接项目时，了解到的一个工具。它可以用来抓取服务器上通过网卡的所有请求。跟<code>tcpdump</code>差不多，但却更简单。<code>tcpdump</code>需要借助<code>Wireshark</code>才可以将请求完美展示出来，但这个就跟使用<code>grep</code>一样。</p>
+
+<p>以前专门请教过一个同事如何使用<code>Wireshark</code>分析网络请求，自己也专门看了相关的<code>Wireshark</code>操作。但最终却发现，如果是抓客户端的请求(非分析<code>TCP</code>)，<code>Wireshark</code>使用起来并不方便。而如果分析的是服务端之间的请求，还需要借助<code>tcpdump</code>先来把请求记录下来，然后再到<code>Wireshark</code>中打开分析。</p>
+
+<h2 id="example"><code>Example</code></h2>
+
+<p>经常使用的模式</p>
+
+<pre><code># 匹配特定host
+ngrep -q host api.open.huajiao.com -d any -W byline
+
+# 匹配特定host和端口
+ngrep –q host api.open.huajiao.com and port 80  –W byline 
+
+# 报文中包含&quot;search&quot;关键字
+ngrep –q –W byline &quot;search&quot; host www.google.com and port 80 
+</code></pre>
+
+<h2 id="options"><code>Options</code></h2>
+
+<p>详细还是通过<code>man</code>直接查看工具说明吧！这里列举一个：</p>
+
+<pre><code>-d  By default  ngrep will select a default interface to listen on.
+          Use this option to force ngrep to listen on interface dev.
+</code></pre>
+
+<h2 id="结果示例"><code>结果示例</code></h2>
+
+<p>以下是命令输出的结果，跟<code>curl</code>是不是很像：</p>
+
+<pre><code>interface: any
+filter: ( host api.open.huajiao.com ) and (ip or ip6)
+
+T **.***.***.***:80 -&gt; **.***.***.***:56181 [AP]
+HTTP/1.1 200 OK.
+Server: nginx/1.2.9.
+Date: Wed, 15 Feb 2017 09:18:07 GMT.
+Content-Type: application/json.
+Transfer-Encoding: chunked.
+Connection: close.
+Cache-Control: no-store.
+.
+48.
+{&quot;errno&quot;:35,&quot;errmsg&quot;:&quot;\u670d\u52a1\u5668\u88ab\u62d2\u7edd&quot;,&quot;consume&quot;:6}.
+0.
+.
+</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2018/07-28-tcp-server-design/">Tcp Server Design</a></span>
+  <span class="nav-next"><a href="/blog/2018/08-04-ip-routing/">IP Routing</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">Fu Hui</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

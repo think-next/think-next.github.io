@@ -6,17 +6,31 @@
     <description>Recent content in Fuhui&#39;s Blog on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 04 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/2018/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>IP Routing</title>
+      <link>/blog/2018/08-04-ip-routing/</link>
+      <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/08-04-ip-routing/</guid>
+      <description> 假设你在跟小米公司对接服务，那你有没有好奇过：自家的服务器是如何找到小米公司的服务器的。为了安全，公司的服务器可都是在内网的，用户是无法直接访问到的。好好了解一下Ip Routing，它可以给你部分答案。
+概述 当主机IP(Network)层收到一个datagram后，它首先会检查datagram的目标主机是不是自己。如果是，那么它会将datagram发送给其他协议处理。如果不是，它便检查自己是否被配置作为一个路由。如果是，它将按照规则将datagram继续传递。否则，默默的把datagram丢掉。
+所有routing提供的IP地址，都假设下一个hop是离目标地址最近的。在datagram传递的过程中，我们会修改link-layer的地址为下一个hop的地址，而Destination IP一般是不做修改的。
+Routing Table 在命令行执行 netstat -rn，查看系统的routing table。
+# 展示结果做了修改，非真实值 neojos@BJ ~ $ netstat -rn Kernel IP routing table Destination Gateway Genmask Flags MSS Window irtt Iface 140.168.0.0 10.3.206.240 255.255.0.0 UG 0 0 0 eth0  了解Falgs参数：  U 表示当前路由是在使用的 G 表示路由到一个gateway。如果没有设置该flag，则表示跟Destination是直接连接的。 H 表示路由到一个主机地址。如果没有设置该flag，则Destination是一个网络地址。 D 表示路由是通过ICMP Redirect设置的。一般来说，Redirect设置的route都是主机地址。  路由查询的顺序：  查找匹配的主机地址 查找匹配的网络地址 查找default的路由。  Host unreachable 当route没有找到destination时，Destination Host Unreachable的错误会返回给源主机。你可以通过ping路由表中配置错误的destination host address来查看。
+ICMP Redirect Error </description>
+    </item>
+    
+    <item>
       <title>ngrep抓包</title>
-      <link>/blog/2018/2018-08-01-ngrep%E6%8A%93%E5%8C%85/</link>
+      <link>/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/</link>
       <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/2018-08-01-ngrep%E6%8A%93%E5%8C%85/</guid>
+      <guid>/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/</guid>
       <description>简单的工具其实挺有用的。警告：不许瞧不起工具，尤其是你还不会用的工具。
 ngrep还是之前跟花椒直播的同事对接项目时，了解到的一个工具。它可以用来抓取服务器上通过网卡的所有请求。跟tcpdump差不多，但却更简单。tcpdump需要借助Wireshark才可以将请求完美展示出来，但这个就跟使用grep一样。
 以前专门请教过一个同事如何使用Wireshark分析网络请求，自己也专门看了相关的Wireshark操作。但最终却发现，如果是抓客户端的请求(非分析TCP)，Wireshark使用起来并不方便。而如果分析的是服务端之间的请求，还需要借助tcpdump先来把请求记录下来，然后再到Wireshark中打开分析。
@@ -28,10 +42,10 @@ interface: any filter: ( host api.</description>
     
     <item>
       <title>Tcp Server Design</title>
-      <link>/blog/2018/2018-07-28-tcp-server-design/</link>
+      <link>/blog/2018/07-28-tcp-server-design/</link>
       <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/2018-07-28-tcp-server-design/</guid>
+      <guid>/blog/2018/07-28-tcp-server-design/</guid>
       <description> 绝大多数的TCP服务都是支持并发的。当一个连接请求到达时，服务端接收这个连接，然后创建一个新的线程(或进程)来处理这个连接。
 listen状态 在本地启动Go的服务，使用netstat查看：
 netstat -an -f inet  可以看到listen状态的请求连接。其中Local Address的*表示请求会被本地的任意地址处理(如果有多重地址的话)。Foreign Address中*.*表示客户端的ip和port都是未知的。
@@ -42,10 +56,10 @@ Proto Recv-Q Send-Q Local Address Foreign Address (state) tcp4 0 0 127.0.0.1.390
     
     <item>
       <title>重试</title>
-      <link>/blog/2018/2018-07-24-%E9%87%8D%E8%AF%95/</link>
+      <link>/blog/2018/07-24-%E9%87%8D%E8%AF%95/</link>
       <pubDate>Tue, 24 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/2018-07-24-%E9%87%8D%E8%AF%95/</guid>
+      <guid>/blog/2018/07-24-%E9%87%8D%E8%AF%95/</guid>
       <description>为了克服网络问题，重试是我们常用的手段之一。但必须记住：重试的姿势非常重要。照应一句古话：“差若毫厘，谬以千里”。
 正确的姿势是便是：
  如果请求没有成功，以指数型延迟重试
@@ -124,7 +138,7 @@ func sessPart() { //开启事务 session := engine.NewSession() sess.Begin() def
     </item>
     
     <item>
-      <title>timewait状态解读</title>
+      <title>Timewait状态解读</title>
       <link>/blog/2018/06-15-timewait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/</link>
       <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
       

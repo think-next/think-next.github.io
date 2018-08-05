@@ -3,17 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/blog/2018/2018-08-01-ngrep%E6%8A%93%E5%8C%85/</loc>
+    <loc>/blog/2018/08-04-ip-routing/</loc>
+    <lastmod>2018-08-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/</loc>
     <lastmod>2018-08-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/2018/2018-07-28-tcp-server-design/</loc>
+    <loc>/blog/2018/07-28-tcp-server-design/</loc>
     <lastmod>2018-07-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/2018/2018-07-24-%E9%87%8D%E8%AF%95/</loc>
+    <loc>/blog/2018/07-24-%E9%87%8D%E8%AF%95/</loc>
     <lastmod>2018-07-24T00:00:00+00:00</lastmod>
   </url>
   
@@ -180,7 +185,7 @@
   
   <url>
     <loc>/categories/2018-08/</loc>
-    <lastmod>2018-08-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-08-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -213,7 +218,7 @@
   
   <url>
     <loc>/blog/2018/</loc>
-    <lastmod>2018-08-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-08-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -260,7 +265,7 @@
   
   <url>
     <loc>/tags/net/</loc>
-    <lastmod>2018-08-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-08-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -314,7 +319,7 @@
   
   <url>
     <loc>/tags/tcp/ip/</loc>
-    <lastmod>2018-07-28T00:00:00+00:00</lastmod>
+    <lastmod>2018-08-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -350,7 +355,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-08-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-08-04T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>
