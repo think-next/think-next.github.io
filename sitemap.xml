@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/2018/08-07-git%E6%92%A4%E9%94%80%E6%9C%AC%E5%9C%B0%E4%BF%AE%E6%94%B9/</loc>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/2018/08-04-ip-routing/</loc>
     <lastmod>2018-08-04T00:00:00+00:00</lastmod>
   </url>
@@ -185,7 +190,7 @@
   
   <url>
     <loc>/categories/2018-08/</loc>
-    <lastmod>2018-08-04T00:00:00+00:00</lastmod>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -218,12 +223,12 @@
   
   <url>
     <loc>/blog/2018/</loc>
-    <lastmod>2018-08-04T00:00:00+00:00</lastmod>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/git/</loc>
-    <lastmod>2018-01-14T20:10:33+00:00</lastmod>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -331,7 +336,7 @@
   
   <url>
     <loc>/tags/tools/</loc>
-    <lastmod>2018-08-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -355,7 +360,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-08-04T00:00:00+00:00</lastmod>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Git撤销本地修改 - 付辉</title>
+    <meta property="og:title" content="Git撤销本地修改 - 付辉">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/2018/">Blog</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>Git撤销本地修改</h1>
+
+
+
+<section class="post-meta">
+    <span class="post-author">付辉
+    
+        
+        
+         /  2018-08-07
+        
+    </span>
+    
+    <a href="/tags/tools">tools</a>
+    
+    <a href="/tags/git">git</a>
+    
+</section>
+
+
+<hr>
+
+      </header>
+
+
+
+
+
+<p>用了<code>git</code>就会发现，再也不想用<code>svn</code>了。</p>
+
+<h2 id="使用-reset-回退">使用<code>reset</code>回退</h2>
+
+<p>本质上是<code>commit</code>操作的回退。<code>Git</code>工作流可以简化为三个部分：<code>Working Directory</code>、<code>index</code>、<code>HEAD</code>。后两部分对应的<code>git</code>命令便是<code>add</code>和<code>commit</code>。如果使用的是<code>Sourcetree</code>工具，那么这三部分就更直观了。</p>
+
+<p>该命令的具体功能是移动<code>HEAD</code>，即移动分支的指针。将当前的<code>HEAD</code>重新指向之前的版本，本地工作环境也会跟着切换。适用场景：本地已经<code>commit</code>，但尚未<code>push</code>到远端仓库的回滚操作。</p>
+
+<p>该命令提供了三个属性：分别是<code>soft</code>、<code>mixed</code>、和<code>hard</code>。
+1. <code>soft</code>撤销上一次的<code>commit</code>命令，返回到<code>HEAD</code>前的<code>index</code>状态。
+2. <code>mixed</code>撤销了上一次的<code>git add</code>和<code>git commit</code>命令，将<code>index</code>的修改回滚到<code>Working Directory</code>。
+3. <code>hard</code>撤销了最后<code>git add</code> 和 <code>git commit</code> 命令以及工作目录中的所有修改。</p>
+
+<p>所以<code>reset</code>重写的顺序如下：
+1. 移动 HEAD 指向的分支（如果是<code>soft</code>，则到此停止）。
+2. 使索引看起来像 HEAD（如果是<code>mixed</code>，则到此停止）。
+3. 使工作目录看起来像索引。</p>
+
+<h3 id="example"><code>Example</code></h3>
+
+<p>当执行pull命令发生冲突时时，本地代码需要做merge操作。但本地代码只是临时调试修改，并不需要保存提交。执行如下命令，便会清空本地的修改，hard相当于一个版本的指针，origin/master可以替换为具体的版本号</p>
+
+<pre><code class="language-git">git reset --hard origin/master
+git reset --hard version-number
+</code></pre>
+
+<p>获取版本号可以通过<code>git log</code>直接查看。</p>
+
+<p>更多详细介绍，可以查看： <a href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%AB%98%E7%BA%A7%E5%90%88%E5%B9%B6">高级合并</a>及 <a href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E7%BD%AE%E6%8F%AD%E5%AF%86">重置揭密</a></p>
+
+<h2 id="使用-stash-储藏">使用<code>stash</code>储藏</h2>
+
+<p>将==工作区==的修改进行存储，使本地重新成为一个干净的环境，同时方便在之后应用这些改动。可以用于存储==已被索引的文件==、或者==未跟踪的文件==。执行<code>git stash -a</code>来暂存所有改动的文件。</p>
+
+<p>下面是执行的流程：</p>
+
+<ol>
+<li><code>git stash</code> 储藏修改</li>
+<li><code>git stash list</code> 查看储藏的列表</li>
+<li>将储藏重新应用到当前分支：<code>git statsh apply stash@{1}</code>或者<code>git stash pop stash@{1}</code>。后者会在应用暂存之后从堆栈上删除</li>
+<li><code>git stash drop stash@{1}</code> 移除暂存</li>
+</ol>
+
+<h2 id="使用-clean-清空">使用<code>clean</code>清空</h2>
+
+<p>用于从工作区移除未被追踪的文件。执行<code>git clean -d -f</code>来移除所有未被追踪的文件或目录。</p>
+
+<ol>
+<li><code>git clean -d -n</code> 可以用来做一次删除前的演示</li>
+<li><code>git clean -d -i</code> 用于交互式的删除文件</li>
+</ol>
+
+<h2 id="使用-checkout">使用<code>checkout</code></h2>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2018/08-04-ip-routing/">IP Routing</a></span>
+  <span class="nav-next"></span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">Fu Hui</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+
