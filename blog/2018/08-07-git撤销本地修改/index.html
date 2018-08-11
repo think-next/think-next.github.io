@@ -100,15 +100,21 @@
 
 <p>该命令的具体功能是移动<code>HEAD</code>，即移动分支的指针。将当前的<code>HEAD</code>重新指向之前的版本，本地工作环境也会跟着切换。适用场景：本地已经<code>commit</code>，但尚未<code>push</code>到远端仓库的回滚操作。</p>
 
-<p>该命令提供了三个属性：分别是<code>soft</code>、<code>mixed</code>、和<code>hard</code>。
-1. <code>soft</code>撤销上一次的<code>commit</code>命令，返回到<code>HEAD</code>前的<code>index</code>状态。
-2. <code>mixed</code>撤销了上一次的<code>git add</code>和<code>git commit</code>命令，将<code>index</code>的修改回滚到<code>Working Directory</code>。
-3. <code>hard</code>撤销了最后<code>git add</code> 和 <code>git commit</code> 命令以及工作目录中的所有修改。</p>
+<p>该命令提供了三个属性：分别是<code>soft</code>、<code>mixed</code>、和<code>hard</code>。</p>
 
-<p>所以<code>reset</code>重写的顺序如下：
-1. 移动 HEAD 指向的分支（如果是<code>soft</code>，则到此停止）。
-2. 使索引看起来像 HEAD（如果是<code>mixed</code>，则到此停止）。
-3. 使工作目录看起来像索引。</p>
+<ol>
+<li><code>soft</code>撤销上一次的<code>commit</code>命令，返回到<code>HEAD</code>前的<code>index</code>状态。</li>
+<li><code>mixed</code>撤销了上一次的<code>git add</code>和<code>git commit</code>命令，将<code>index</code>的修改回滚到<code>Working Directory</code>。</li>
+<li><code>hard</code>撤销了最后<code>git add</code> 和 <code>git commit</code> 命令以及工作目录中的所有修改。</li>
+</ol>
+
+<p>所以<code>reset</code>重写的顺序如下：</p>
+
+<ol>
+<li>移动 HEAD 指向的分支（如果是<code>soft</code>，则到此停止）。</li>
+<li>使索引看起来像 HEAD（如果是<code>mixed</code>，则到此停止）。</li>
+<li>使工作目录看起来像索引。</li>
+</ol>
 
 <h3 id="example"><code>Example</code></h3>
 
@@ -124,7 +130,7 @@ git reset --hard version-number
 
 <h2 id="使用-stash-储藏">使用<code>stash</code>储藏</h2>
 
-<p>将==工作区==的修改进行存储，使本地重新成为一个干净的环境，同时方便在之后应用这些改动。可以用于存储==已被索引的文件==、或者==未跟踪的文件==。执行<code>git stash -a</code>来暂存所有改动的文件。</p>
+<p>将<strong>工作区</strong>的修改进行存储，使本地重新成为一个干净的环境，同时方便在之后应用这些改动。可以用于存储<strong>已被索引的文件</strong>、或者<strong>未跟踪的文件</strong>。执行<code>git stash -a</code>来暂存所有改动的文件。</p>
 
 <p>下面是执行的流程：</p>
 
