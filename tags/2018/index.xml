@@ -6,38 +6,10 @@
     <description>Recent content in 2018 on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 08 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 12 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/2018/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>订单系统初识</title>
-      <link>/blog/2018/06-08-%E8%AE%A2%E5%8D%95%E7%B3%BB%E7%BB%9F%E5%88%9D%E8%AF%86/</link>
-      <pubDate>Fri, 08 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2018/06-08-%E8%AE%A2%E5%8D%95%E7%B3%BB%E7%BB%9F%E5%88%9D%E8%AF%86/</guid>
-      <description>计划将订单系统做一下梳理，包括之前写的IAP支付。其中一些细节，自己描述的也不是特别满意。后续慢慢的完善。
-整个订单系统，概括的讲，其实就是创建订单、支付订单、交付权益这三个过程。但里面涉及的东西，可能必我们想象的要多很多。
-订单号 在调用支付时，一般都会要求创建订单号。该订单号是标识本地交易的凭证，必须做到系统唯一。
-创建订单号也有很多学问。最差也得做到：首先，不重复；其次，别人不能通过订单号，推测出任何有意义的信息；再次，订单号长度一定要做好控制。
-订单再支付 描述一个场景：用户下单之后，并没有立即支付，而是过了一段时间，重新支付之前下的订单。这种情况，如果涉及到扣减库存，还会设置订单的过期时间。
-重新支付的时候可能会有点问题：很多支付接口，不允许使用同一个订单号支付两次，即使上一次没有支付成功。换句话说，当你想重新支付时，系统需要生成一个新的订单号。
-这样会导致：用户仅仅成功购买了一个商品，后台却生成了数笔订单。后期的统计变得麻烦了不少。
-我们的做法便是：在确认支付时，生成两个订单，一个父订单，一个子订单。父订单用来标识用户的购买行为，子订单用户跟第三方支付。
-订单统一管理 对于业务简单的部门来说，订单号自己创建，自己管理完全足够了。
-但公司想汇总各个部门的订单数据时会变得异常麻烦。所以需要统一的订单创建平台。该平台负责订单的创建、以及后续订单的状态管理。
-整个系统也开始变得复杂起来了。订单创建、订单状态更新都需要通知“订单系统”。数据也开始出现不一致。
-交付 在用户下单、支付成功之后，将购买的商品或权益给到用户。
-实物商品 将用户的购买行为添加到他的购买记录等，让快递员将商品送到用户手中等。
-虚拟商品 用户在王者荣耀上买了一套皮肤，这就属于购买虚拟商品。最终腾讯只需要给用户的数据库写一条权益记录就好，不存在发货的过程。
-签收 拆单 用户可能一次性购买多个商品，但系统只生成一个订单。对于实物商品，会涉及的拆单流程。比如用户买了肥皂和书，后台系统需要将肥皂交给卖家A来发货，将书交给卖家B来发。同样的商品，可能还会根据卖家和买家的距离来拆单。
-签收 那么当更新订单签收状态时，就有疑问了。一个订单，它可能对应多个商品，那么只有商品全部被签收成功，才应该修改为已签收状态。但这种全部成功或者全部失败的状态，本身就很难保证。
-所以签收应该针对具体商品。商城系统中，有两个常用的概念：SPU和SKU。那小米手机来举例，小米Note可以当作是一个SPU,而具体的红色-32G等能具体到一个实际的个体的就是SKU。
-最终，签收状态应该是订单号+SKU_ID来决定的。
-表结构设计 在用户下单、支付的过程中，跟订单内部商品的SKU关系不大，而且为了保证订单的幂等性,将订单设置为唯一索引是必须的。
-在签收的过程中，无法做到针对订单来签收，而应该对订单下的SKU做签收。所以签收表应该独立出来。</description>
-    </item>
     
     <item>
       <title>代码重构</title>
@@ -60,73 +32,6 @@ switch type { case movie.TV: case movie.Release }  需要特别提醒：movie包
 但某些情况下，这样的拆分模式可能会有小缺陷。当类型是一个频繁被添加、修改的参数时，这样的模式就显得很冗余。这时可以使用属性拆分。将各个类型中的属性实现多态，也可以称做是一种策略转移。
 使用类替换枚举类型 当一个类内含有多个常量枚举类型时，可以考虑将枚举类型的值封装成新的对象。这也是一个切入点。举个例子：
 // original code const( Month int = iota Year int ) //modified code //将这些常量封装到另一个package中  访问成员变量 两个分歧：直接访问VS间接访问。两者均有好处，</description>
-    </item>
-    
-    <item>
-      <title>Go test基础用法</title>
-      <link>/blog/2018/05-02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</link>
-      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2018/05-02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</guid>
-      <description>当直接使用IDE进行单元测试时，有没有好奇它时如何实现的？比如GoLand写的测试用例。
- 所有的代码都需要写测试用例。这不仅仅是对自己的代码负责，也是对别人的负责。
-最近工作中使用glog这个库，因为它对外提供的方法都很简单，想封装处理一下。但却遇到了点麻烦：这个包需要在命令行传递log_dir参数，来指定日志文件的路径。
-所以，正常运行的话，首先需要编译可执行文件，然后命令行指定参数执行。如下示例：
-go build main.go ./main -log_dir=&amp;quot;/data&amp;quot; //当前目录作为日志输出目录  但在go test的时候，如何指定这个参数了？
-调查发现，发现go test也可以生成可执行文件。需要使用-c来指定。示例如下：
-go test -c param_test_dir //最后一个参数是待测试的目录  执行后就会发现：这样的做法，会运行所有的Test用例。如何仅仅执行某一个测试用例了（编译器到底是如何做到的？）。
-这里有另一个属性-run，用来指定执行的测试用例的匹配模式。举个例子：
-func TestGetRootLogger(t *testing.T) { writeLog(&amp;quot;测试&amp;quot;) } func TestGetRootLogger2(t *testing.T) { writeLog(&amp;quot;测试2&amp;quot;) }  当我在命令行明确匹配执行Logger2，运行的时候确实仅仅执行该测试用例
-go test -v -run Logger2 ./util/ //-v表示verbose，输出相信信息  但是，我发现，在指定了c参数之后，run参数无法生效！这样的话，还真是没有好的办法来处理这种情况。
-Benchmark测试 关于如何运行Benchmark测试，默认执行go test并不会执行Benchmark，需要在命令行明确加上-bench=标记，它接受一个表达式作为参数，匹配基准测试的函数，.表示运行所有基准测试。
-go test -bench=. // 明确指定要运行那个测试，传递一个正则表达式给run属性 go test -run=XXX -bench=.  默认情况下，benchmark最小运行时长为1s。如果benchmark函数执行返回，但1s的时间还没有结束，b.N会根据某种机制依次递增。可以通过参数-benchtime=20s来改变这种行为。
-还有一个参数：benchmem。可以提供每次操作分配内存的次数，以及每次操作分配的字节数。
-go test -bench=Fib40 -benchtime=20s  覆盖率 跟执行go test不同的是，需要多加一个参数-coverprofile,所以完整的命令：</description>
-    </item>
-    
-    <item>
-      <title>了解Laravel依赖注入</title>
-      <link>/blog/2018/04-05-%E4%BA%86%E8%A7%A3laravel%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</link>
-      <pubDate>Thu, 05 Apr 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2018/04-05-%E4%BA%86%E8%A7%A3laravel%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</guid>
-      <description>随笔 突然想了解一下Laravel，然后发现：它没有我想象的那么简单，很多的调用都找不到入口。加载view的逻辑，看了很长时间，还是没有搞明白：一个值传递的参数，怎么好好的就变了呢？下面都是看别的的文章的总结，我还要继续完善，直到搞清楚这个view是怎么实现的。
-看了两篇文章，介绍了如何使用xdebug断点调试php及测试性能。作为了解Laravel的必要工具，也介绍进来。
- How to Install Xdebug with PHPStorm and Vagrant Debugging and Profiling PHP with Xdebug  概要 使用use Illuminate\Container\Container;作为参考的例子。
-可以浏览原创：Laravel Container (容器) 深入理解 (下)。
-摘抄Laravel
- The Laravel service container is a powerful tool for managing class dependencies and performing dependency injection.
- 通过config/app.php可以查看Laravel的Service container。Service下的register便是用来创建binding的。通过php artisan make:provider CustomServiceProvider创建自定义的ServiceProvider。
- There is no need to bind classes into the container if they do not depend on any interfaces.</description>
-    </item>
-    
-    <item>
-      <title>包管理工具</title>
-      <link>/blog/2018/03-31-%E5%8C%85%E7%AE%A1%E7%90%86/</link>
-      <pubDate>Fri, 30 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2018/03-31-%E5%8C%85%E7%AE%A1%E7%90%86/</guid>
-      <description>反思之前的过程，一直没有试图跟上技术的发展。恍然觉得，其实技术比买股票更能让我找到快乐。新的技术越来越多，能做的便是，持续保持蜗牛锲而不舍的精神，慢慢爬！
-首先感谢这篇文章2018 年了，你还是只会 npm install 吗？，让我重新开始审视包管理工具。因为在PHP开发中有Composer，在Go的开发中有glide。但却没有尝试思考它们背后的那些为什么。
-npm包管理 我一直不理解package.json和package-lock.json这两个文件的作用。直观上看，前者是我们项目所依赖的包，后者是各个包自身的明细依赖。但这样的设计却是经过多个版本迭代最终确定的形式。
-当我们执行install或者update的时候，package-lock.json会根据nodemodules的更新而进行相应更新。当前就理解到这里，请看Composer
-包的版本 包的版本号采用semver约束，由3个数字组成，格式必须为 MAJOR.MINOR.PATCH, 意为： 主版本号.小版本号.修订版本号。
-约束还有一条：主版本号相同的升级版本必须提供向下兼容，但这仅仅是口头约束。测试版本的匹配，可以访问网址：https://semver.npmjs.com/。
- ^开头的版本：主版本号相同，大于等于小版本号的所有版本。 ~开头的版本：主版本、小版本号相同，大于等于修正版本的版本。 *或者x的版本：两者表示通配符。 在常规仅包含数字的版本号之外：表示不稳定的发布版本。  管理依赖 有时候，项目和项目之间存在引用依赖关系。比如将多个项目间共同使用的类在common项目下维护，然后其他项目project-1和project-2分别引用项目common。当project项目变得越来越多时，每次新的项目都需要手动拷贝common代码。
-可以将common做为一个包来管理。创建package.json文件，将common项目托管到git仓库。执行npm install git_url就可以将common作为依赖包进行安装了。
-npm除了安装git仓库的代码，也可以安装本地的代码。
-npm install file:local-package-path  版本管理 svn或者git只需要提交package.json, package-lock.json, 不需要提交node_modules目录。
-每次升级或降级版本，执行如下代码，相应的package.json，package-lock.json会自动更新：
-npm install &amp;lt;package-name&amp;gt;@&amp;lt;version&amp;gt;  删除依赖包：
-npm uninstall &amp;lt;package&amp;gt;  Composer管理 Composer生成的包管理目录叫vendor，它也是生成两个文件composer.lock和composer.json。composer.lock描述了项目的依赖以及其它的一些元信息。
-composer.lock用来明确锁定安装包的具体版本信息，包证所有人安装的版本都是一致的。具体的原因在于：
- composer.json中指定的安装包版本，比如^2.0，只能确定该包的主版本号一定是2，当Composer在install的过程中，具体安装了该包符合条件的哪个版本，是无法从.json中看出来的。 同理，还是上面的例子，如果一个同事，数月前执行install安装的版本是2.0.0，后来这个包在2版本下发布了一个小版本2.1.0。另一个同事后来执行install，很可能就安装成了2.1.0  综上所述，composer.lock用来保证安装包的一致性，避免安装到不同的版本包，给生产环境带来的不确定性。
-install/update install主要用来安装新包。当安装新包的时候，需要首先查看.lock文件是否存在，如果存在，安装.lock中指定的具体版本。如果不存在，直接安装。同时更新.json和.lock两个文件。
-update主要用来更新.lock中安装的包。随着时间的推移，.json中的包可能又发布了新版本，所以update就是用来检查.json中包的新版本，更新.lock文件用的。
-我在使用的过程中，比较倾向于使用下面的单个包操作的方式：
-php composer.phar update monolog/monolog [...]  版本管理 在git环境中.json和.lock都需要被提交的版本控制。vendor目录就不需要啦。
-Go下的版本管理工具 glide glide是go的版本管理工具。其实glide也是参考composer设计的，所以上面对composer的说法也同样有效。
-在项目开发中也仅需要对 glide.</description>
     </item>
     
   </channel>

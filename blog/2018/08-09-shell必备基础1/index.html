@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Shell必备基础(1) - 付辉</title>
+    <meta property="og:title" content="Shell必备基础(1) - 付辉">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/2018/">Blog</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>Shell必备基础(1)</h1>
+
+
+
+<section class="post-meta">
+    <span class="post-author">付辉
+    
+        
+        
+         /  2018-08-09
+        
+    </span>
+    
+    <a href="/tags/linux">linux</a>
+    
+</section>
+
+
+<hr>
+
+      </header>
+
+
+
+
+
+<p><code>Shell</code>是对<code>Linux</code>命令的深加工，用得好，事半功倍。 本来只想加深<code>Array</code>的用法，但一不小心，又变成了一篇基础大全。</p>
+
+<h2 id="比较运算">比较运算</h2>
+
+<p>习惯在<code>if</code>语句中使用<code>[[...]]</code>对条件进行比较，字符串、数值以及文件，统统笑纳。</p>
+
+<h3 id="算数比较">算数比较</h3>
+
+<p>常用的操作符有<code>-eq</code>、<code>-ne</code>、<code>-gt</code>、<code>-lt</code>、<code>-le</code>等。</p>
+
+<h3 id="文件系统">文件系统</h3>
+
+<p>当编译文件、或者查看<code>pid</code>文件、日志时会经常用到。</p>
+
+<pre><code>[ -e $var ] 如果指定的变量包含的文件存在，则返回真
+[ -f $var ] 如果指定的变量包含正常的文件路径或文件名，则返回真
+</code></pre>
+
+<h3 id="字符串比较">字符串比较</h3>
+
+<p>判空还是相当常见的操作。比如，查看当前系统是否启用了<code>notify</code>的进程，如果有的话，<code>kill</code>掉。</p>
+
+<pre><code>pid=`ps -ef | grep notify | grep -v 'grep' | awk '{print $2}'`
+if [[ -n $pid ]]
+then
+    echo -e &quot;\033[31m Kill掉当前正在运行的进程... \033[0m\n&quot;
+    kill $pid
+fi
+</code></pre>
+
+<p>常见的操作符如下：</p>
+
+<pre><code>[[ -z $str ]]   如果str包含的是空字符串，则返回真
+[[ -n $str ]]   如果str包含的是非空字符串，则返回真
+</code></pre>
+
+<p>其他的操作符包括：<code>==</code>、<code>!=</code>、<code>&gt;</code>、<code>&lt;</code></p>
+
+<h3 id="逻辑运算">逻辑运算</h3>
+
+<p>使用逻辑<code>&amp;&amp;</code>和<code>||</code>来表示与和或的逻辑关系。</p>
+
+<p>比如</p>
+
+<pre><code>if [[ -n $str ]] &amp;&amp; [[ -z $str ]]
+then
+    echo $str
+fi
+</code></pre>
+
+<h2 id="基本语句-example">基本语句<code>Example</code></h2>
+
+<h3 id="if-语句"><code>if</code>语句</h3>
+
+<pre><code>if command1
+then
+    # ...
+elif command2
+then
+    # ...
+else
+    # ...
+fi
+</code></pre>
+
+<h3 id="while-语句"><code>while</code>语句</h3>
+
+<pre><code class="language-bash">while [ 1 ] 
+do
+    echo $RANDOM
+done
+</code></pre>
+
+<h3 id="for-语句"><code>for</code>语句</h3>
+
+<p><code>for</code>循环总是以空格、<code>\t</code>、<code>\n</code>作为分隔符。如果要明确指定分隔符的话，使用<code>IFS</code>明确声明。</p>
+
+<pre><code class="language-bash">SERVER=(
+    # server list
+    &quot;node025.add.neojos.net&quot;
+    &quot;node026.add.neojos.net&quot;
+    &quot;node062.add.neojos.net&quot;
+    &quot;node063.add.neojos.net&quot;
+)
+
+#${SERVER[@]}其实就是一个用空格implode起来各个元素的组合字符串
+for var in ${SERVER[@]}
+do
+    echo $var;
+done
+</code></pre>
+
+<h3 id="case-语句"><code>case</code>语句</h3>
+
+<pre><code>case $OPT in
+        i)
+            NEED_BUILD=false
+            ;;
+        b)
+            BUILD_FILE=$OPTARG
+            ;;
+    esac
+</code></pre>
+
+<h2 id="数组">数组</h2>
+
+<p>定义一个数组，元素间使用空格或者<code>\n</code>进行分隔。</p>
+
+<pre><code>task=(&quot;delivery&quot; &quot;notify&quot; &quot;event&quot;)
+</code></pre>
+
+<p>要访问其中的元素，需要知道它的下标：</p>
+
+<pre><code>echo ${task[0]} ${task[1]} 
+</code></pre>
+
+<p>经常会用到的获取数组的方式（<code>*</code>可以用来替换<code>@</code>）：</p>
+
+<pre><code>${task[@]}      #数组所有元素的value
+${!task[@]}     #数组所有元素的key
+${#task[@]}     #数组元素的个数
+</code></pre>
+
+<p>下面列举几个简单的例子：</p>
+
+<pre><code>#!/bin/bash
+
+arr=(
+	one
+	two
+	three
+	[6]=six
+)
+
+echo &quot;Array size :&quot; ${#arr[@]}
+# Array size : 4
+</code></pre>
+
+<h2 id="函数">函数</h2>
+
+<p>函数的声明：</p>
+
+<pre><code>function deploy()
+{
+    # 在函数体内部，通过 $n 的形式来获取参数的值
+    server=$1;
+    echo -e &quot;start deploy \033[0;34m$server\033[0m; put y to continue, put n to quit:&quot;
+    read line
+
+    if [ &quot;$line&quot; != &quot;y&quot; ]; then
+        return
+    fi
+}
+
+</code></pre>
+
+<p>函数的调用：</p>
+
+<pre><code>for server in &quot;${SERVER[@]}&quot;
+do
+    deploy $server
+done
+</code></pre>
+
+<p>参考文章：</p>
+
+<ol>
+<li><a href="https://www.linuxjournal.com/content/bash-arrays">Bash Array</a></li>
+</ol>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2018/08-07-git%E6%92%A4%E9%94%80%E6%9C%AC%E5%9C%B0%E4%BF%AE%E6%94%B9/">Git撤销本地修改</a></span>
+  <span class="nav-next"></span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">Fu Hui</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

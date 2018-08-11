@@ -6,10 +6,28 @@
     <description>Recent content in Linux on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 09 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Shell必备基础(1)</title>
+      <link>/blog/2018/08-09-shell%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%801/</link>
+      <pubDate>Thu, 09 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/08-09-shell%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%801/</guid>
+      <description>Shell是对Linux命令的深加工，用得好，事半功倍。 本来只想加深Array的用法，但一不小心，又变成了一篇基础大全。
+比较运算 习惯在if语句中使用[[...]]对条件进行比较，字符串、数值以及文件，统统笑纳。
+算数比较 常用的操作符有-eq、-ne、-gt、-lt、-le等。
+文件系统 当编译文件、或者查看pid文件、日志时会经常用到。
+[ -e $var ] 如果指定的变量包含的文件存在，则返回真 [ -f $var ] 如果指定的变量包含正常的文件路径或文件名，则返回真  字符串比较 判空还是相当常见的操作。比如，查看当前系统是否启用了notify的进程，如果有的话，kill掉。
+pid=`ps -ef | grep notify | grep -v &#39;grep&#39; | awk &#39;{print $2}&#39;` if [[ -n $pid ]] then echo -e &amp;quot;\033[31m Kill掉当前正在运行的进程... \033[0m\n&amp;quot; kill $pid fi  常见的操作符如下：
+[[ -z $str ]] 如果str包含的是空字符串，则返回真 [[ -n $str ]] 如果str包含的是非空字符串，则返回真  其他的操作符包括：==、!=、&amp;gt;、&amp;lt;
+逻辑运算 使用逻辑&amp;amp;&amp;amp;和||来表示与和或的逻辑关系。
+比如
+if [[ -n $str ]] &amp;amp;&amp;amp; [[ -z $str ]] then echo $str fi  基本语句Example if语句 if command1 then # .</description>
+    </item>
     
     <item>
       <title>ngrep抓包</title>
