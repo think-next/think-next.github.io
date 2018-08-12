@@ -6,10 +6,21 @@
     <description>Recent content in Golang on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 11 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Golang下的Error</title>
+      <link>/blog/2018/08-11-golang%E4%B8%8B%E7%9A%84error/</link>
+      <pubDate>Sat, 11 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/08-11-golang%E4%B8%8B%E7%9A%84error/</guid>
+      <description>感觉error确实没啥可说的，这个简单到极致的package总共也不超过10行有效代码。而且常用的fmt也提供了很方便的返回error的方法：
+// Package errors implements functions to manipulate errors. package errors // New returns an error that formats as the given text. func New(text string) error { return &amp;amp;errorString{text} } // errorString is a trivial implementation of error. type errorString struct { s string } func (e *errorString) Error() string { return e.s }  自定义error error设计的如此简单，导致其判断错误类型就比较麻烦。比如我想判断MySQL的报错是否由主键冲突导致，我可以这样处理：
+const PrimaryKeyDuplicateCode = &amp;quot;1062&amp;quot; if strings.Contains(err.Error(), PrimaryKeyDuplicateCode) { //commands }  这样的判断逻辑，如果仅是用于特殊情况，还勉强可以接收。但如果你要整个项目都使用这种形式的话，就会觉得精神崩溃，心理无法承受（反正我是这样感觉的）。所以，我们要自定义实现一个Error结构。当然，这样搞还有syscall这个package。</description>
+    </item>
     
     <item>
       <title>Go test基础用法</title>
