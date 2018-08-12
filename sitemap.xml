@@ -163,12 +163,6 @@
   </url>
   
   <url>
-    <loc>/tags/2018/</loc>
-    <lastmod>2018-05-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/categories/2018-01/</loc>
     <lastmod>2018-01-30T20:10:33+00:00</lastmod>
     <priority>0</priority>
@@ -327,14 +321,8 @@
   </url>
   
   <url>
-    <loc>/categories/summarize/</loc>
-    <lastmod>2018-06-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/</loc>
-    <lastmod>2018-05-12T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-21T15:48:33+00:00</lastmod>
     <priority>0</priority>
   </url>
   
