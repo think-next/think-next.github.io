@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>Shell必备基础(1) - 付辉</title>
-    <meta property="og:title" content="Shell必备基础(1) - 付辉">
+    <title>Shell必备基础（1） - 付辉</title>
+    <meta property="og:title" content="Shell必备基础（1） - 付辉">
     
 
     
@@ -64,7 +64,7 @@
 
     <article class="main">
       <header class="title">
-      <h1>Shell必备基础(1)</h1>
+      <h1>Shell必备基础（1）</h1>
 
 
 
@@ -246,12 +246,19 @@ echo &quot;Array size :&quot; ${#arr[@]}
 
 </code></pre>
 
-<p>函数的调用：</p>
+<p>函数的调用。函数名会在<code>$0</code>变量中定义，函数命令行上的任何参数都需要通过<code>$1</code>,<code>$2</code>&hellip;来定义。还可以通过<code>$#</code>来判断参数的个数。</p>
 
 <pre><code>for server in &quot;${SERVER[@]}&quot;
 do
     deploy $server
 done
+</code></pre>
+
+<p>获取参数的具体形式：</p>
+
+<pre><code>$#  传递到脚本的参数个数
+$*  以一个单字符串形式向脚本传递参数。如果是&quot;$*&quot;，会输出&quot;$1 $2 … $n&quot;的形式。
+$@  与$*相同，但是使用时加引号，并在引号中返回每个参数。
 </code></pre>
 
 <p>参考文章：</p>

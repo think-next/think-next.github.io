@@ -6,10 +6,23 @@
     <description>Recent content in Golang on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 19 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>本地缓存BigCache</title>
+      <link>/blog/2018/2018-08-19-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98bigcache/</link>
+      <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/2018-08-19-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98bigcache/</guid>
+      <description>BigCache的作者做了详细的阐述，尽在这里：Writing a very fast cache service with millions of entries in Go。不得不说，作者的表述非常完美，给它点赞。GitHub地址在：github.com/allegro/bigcache。Usage非常简单，相信一看就会用了。
+Concurrency的理解 为了避免加锁成为系统的瓶颈，BigTable采用了Shared的方式来解决，确实也有点Redis单线程的感觉。将一块大的数据划分成多块小的数据，为小数据块加锁，确实很好的缓解了加锁的瓶颈。这体现出了拆分的思想，突然想到了曾经被面试的问题：“请将2G的数据进行排序”。
+我比较好奇它的Hash方法，客户端的key转换为实际存储的hashedKey的过程。请看通过hashedKey获取shard的部分，作者没有使用%取余来实现，而是使用了&amp;amp;与运算来替代，确实很注重细节啊！
+说到与运算:0&amp;amp;0=0; 0&amp;amp;1=0; 1&amp;amp;0=0; 1&amp;amp;1=1;，所以，最终拆分个数完全取决与二进制中1的数量。如果shardMask等于3，那就可以拆分成4份，如果等于4，那结果就是2份，以此类推。
+//通过客户端的key获取实际存储的key // Sum64 gets the string and returns its uint64 hash value. func (f fnv64a) Sum64(key string) uint64 { var hash uint64 = offset64 for i := 0; i &amp;lt; len(key); i++ { hash ^= uint64(key[i]) hash *= prime64 } return hash } //通过实际存储的key获取shard块，使用与运算。 func (c *BigCache) getShard(hashedKey uint64) (shard *cacheShard) { return c.</description>
+    </item>
     
     <item>
       <title>Golang下的Error</title>

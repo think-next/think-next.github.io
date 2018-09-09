@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/2018/2018-08-19-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98bigcache/</loc>
+    <lastmod>2018-08-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/2018/08-11-golang%E4%B8%8B%E7%9A%84error/</loc>
     <lastmod>2018-08-11T00:00:00+00:00</lastmod>
   </url>
@@ -206,7 +211,7 @@
   
   <url>
     <loc>/categories/2018-08/</loc>
-    <lastmod>2018-08-11T00:00:00+00:00</lastmod>
+    <lastmod>2018-08-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -233,7 +238,7 @@
   
   <url>
     <loc>/blog/2018/</loc>
-    <lastmod>2018-08-11T00:00:00+00:00</lastmod>
+    <lastmod>2018-08-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -244,7 +249,7 @@
   
   <url>
     <loc>/tags/golang/</loc>
-    <lastmod>2018-08-11T00:00:00+00:00</lastmod>
+    <lastmod>2018-08-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -352,7 +357,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-08-11T00:00:00+00:00</lastmod>
+    <lastmod>2018-08-19T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>

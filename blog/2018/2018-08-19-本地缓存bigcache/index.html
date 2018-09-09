@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>本地缓存BigCache - 付辉</title>
+    <meta property="og:title" content="本地缓存BigCache - 付辉">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/2018/">Blog</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>本地缓存BigCache</h1>
+
+
+
+<section class="post-meta">
+    <span class="post-author">付辉
+    
+        
+        
+         /  2018-08-19
+        
+    </span>
+    
+    <a href="/tags/golang">golang</a>
+    
+</section>
+
+
+<hr>
+
+      </header>
+
+
+
+
+
+<p><code>BigCache</code>的作者做了详细的阐述，尽在这里：<a href="https://allegro.tech/2016/03/writing-fast-cache-service-in-go.html"><code>Writing a very fast cache service with millions of entries in Go</code></a>。不得不说，作者的表述非常完美，给它点赞。<code>GitHub</code>地址在：<a href="https://github.com/allegro/bigcache">github.com/allegro/bigcache</a>。<code>Usage</code>非常简单，相信一看就会用了。</p>
+
+<h2 id="concurrency-的理解"><code>Concurrency</code>的理解</h2>
+
+<p>为了避免加锁成为系统的瓶颈，<code>BigTable</code>采用了<code>Shared</code>的方式来解决，确实也有点<code>Redis</code>单线程的感觉。将一块大的数据划分成多块小的数据，为小数据块加锁，确实很好的缓解了加锁的瓶颈。这体现出了<code>拆分</code>的思想，突然想到了曾经被面试的问题：“请将2G的数据进行排序”。</p>
+
+<p>我比较好奇它的<code>Hash</code>方法，客户端的<code>key</code>转换为实际存储的<code>hashedKey</code>的过程。请看通过<code>hashedKey</code>获取<code>shard</code>的部分，作者没有使用<code>%</code>取余来实现，而是使用了<code>&amp;</code>与运算来替代，确实很注重细节啊！</p>
+
+<p>说到与运算:<code>0&amp;0=0;   0&amp;1=0;    1&amp;0=0;     1&amp;1=1;</code>，所以，最终拆分个数完全取决与二进制中1的数量。如果<code>shardMask</code>等于3，那就可以拆分成4份，如果等于4，那结果就是2份，以此类推。</p>
+
+<pre><code>//通过客户端的key获取实际存储的key
+// Sum64 gets the string and returns its uint64 hash value.
+func (f fnv64a) Sum64(key string) uint64 {
+	var hash uint64 = offset64
+	for i := 0; i &lt; len(key); i++ {
+		hash ^= uint64(key[i])
+		hash *= prime64
+	}
+
+	return hash
+}
+
+
+//通过实际存储的key获取shard块，使用与运算。
+func (c *BigCache) getShard(hashedKey uint64) (shard *cacheShard) {
+	return c.shards[hashedKey&amp;c.shardMask]
+}
+</code></pre>
+
+<h2 id="entry-中存储的数据"><code>Entry</code>中存储的数据</h2>
+
+<p>这也是我特别好奇的地方。因为作者只简单介绍了它是模拟<code>queue</code>实现的，而且在<code>map</code>的结构中，它存储的仅仅是<code>offset</code>。那么，它是如何通过一个<code>offset</code>来获取到完整的数据信息的？</p>
+
+<p>如代码所示，每个<code>entry</code>由5部分组成，分别是时间戳(8<code>byte</code>)、<code>key</code>的<code>hash</code>值(8<code>byte</code>)、<code>key</code>的长度(2<code>byte</code>)、<code>key</code>的值本身以及<code>value</code>的值本身。这里通过<code>小端字节序</code>来存储，所以后续的反编译也应该指定这种模式。从<code>PutUint64</code>、<code>PutUint16</code>也可以对应到字节的大小。</p>
+
+<pre><code>func wrapEntry(timestamp uint64, hash uint64, key string, entry []byte, buffer *[]byte) []byte {
+	keyLength := len(key)
+	blobLength := len(entry) + headersSizeInBytes + keyLength
+
+	if blobLength &gt; len(*buffer) {
+		*buffer = make([]byte, blobLength)
+	}
+	blob := *buffer
+
+	binary.LittleEndian.PutUint64(blob, timestamp)
+	binary.LittleEndian.PutUint64(blob[timestampSizeInBytes:], hash)
+	binary.LittleEndian.PutUint16(blob[timestampSizeInBytes+hashSizeInBytes:], uint16(keyLength))
+	copy(blob[headersSizeInBytes:], key)
+	copy(blob[headersSizeInBytes+keyLength:], entry)
+
+	return blob[:blobLength]
+}
+</code></pre>
+
+<h2 id="queue-存储"><code>queue</code>存储</h2>
+
+<p><code>queue</code>中每个元素都由2部分组成，前4个<code>byte</code>是数据的长度，后面是数据的值本身。其中<code>PutUint32</code>变需要4<code>byte</code>。所以<code>queue</code>中每个元素最下的长度应该是4，而它的值部分只能是0了。</p>
+
+<pre><code>func (q *BytesQueue) push(data []byte, len int) {
+	binary.LittleEndian.PutUint32(q.headerBuffer, uint32(len))
+	q.copy(q.headerBuffer, headerEntrySize)
+
+	q.copy(data, len)
+
+	if q.tail &gt; q.head {
+		q.rightMargin = q.tail
+	}
+
+	q.count++
+}
+</code></pre>
+
+<p>关于<code>rightMargin</code>，用于标识队列中最后一个元素的位置，是一个绝对位置。所以，当队列需要扩容时，会<code>copy</code>该坐标之前的所有元素，如下面的示例代码。对于最正常的情况，该值跟<code>tail</code>相等。</p>
+
+<pre><code>copy(q.array, oldArray[:q.rightMargin])
+</code></pre>
+
+<p>关于<code>head</code>和<code>tail</code>是一个相对的坐标，而且跟严格意义上队列的两个属性不一致。在<code>queue</code>中存储的元素有<code>timestamp</code>的部分，而<code>head</code>所指向的元素不一定是最早插入队列的元素，同理,<code>tail</code>指向的元素也不是最晚插入队列的元素。它们会因为循环而相互变动，只要的作用便是：推断是否可以合理的插入新的元素。</p>
+
+<pre><code class="language-go">if q.tail &lt; q.head {
+	emptyBlobLen := q.head - q.tail - headerEntrySize
+	q.push(make([]byte, emptyBlobLen), emptyBlobLen)
+	q.head = leftMarginIndex
+	//absoulate position to right margin
+	q.tail = q.rightMargin
+}
+</code></pre>
+
+<p>关于<code>leftMarginIndex</code>声明成一个常量，而且<code>head</code>默认从1开始。为什么要这样处理，注释给出的解释：</p>
+
+<pre><code>// Bytes before left margin are not used. Zero index means element does not exist in queue,
+//useful while reading slice from index
+</code></pre>
+
+<p>关于申请新的空间，引入了<code>minimumEmptyBlobSize</code>，它占用36个<code>byte</code>。它其实占用了一个比实际需要大的多的空间。</p>
+
+<pre><code>minimumEmptyBlobSize = 32 + headerEntrySize
+</code></pre>
+
+<p>当<code>tail</code>和<code>head</code>间的空隙，不足以容纳当前要插入的元素的时候，期间需要插入一个空的元素，具体到下面的代码：</p>
+
+<pre><code>emptyBlobLen := q.head - q.tail - headerEntrySize
+q.push(make([]byte, emptyBlobLen), emptyBlobLen)
+</code></pre>
+
+<p>这个赋值的意义在这行代码才体现出来，当申请空间的时候，需要一个默认的值来标识：是否可以申请空间了。那么<code>availableSpaceBeforeHead</code>是可能产生负数的。</p>
+
+<pre><code>func (q *BytesQueue) availableSpaceBeforeHead() int {
+	if q.tail &gt;= q.head {
+		//leftMarginIndex mean
+		return q.head - leftMarginIndex - minimumEmptyBlobSize
+	}
+	return q.head - q.tail - minimumEmptyBlobSize
+}
+</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2018/08-11-golang%E4%B8%8B%E7%9A%84error/">Golang下的Error</a></span>
+  <span class="nav-next"></span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">Fu Hui</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+
