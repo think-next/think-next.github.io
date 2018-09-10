@@ -90,6 +90,8 @@
 
 
 
+
+
 <p>关于压测，首先要了解<code>TPS</code>和并发用户数之间的关系：</p>
 
 <blockquote>
@@ -104,6 +106,18 @@
 </code></pre>
 
 <p>对于<code>linux</code>的命令，其实<code>man</code>查看就足够了。</p>
+
+<h2 id="example"><code>example</code></h2>
+
+<p>提交<code>json</code>格式的数据请求到服务器。<code>POST</code>后跟数据内容，不需要使用引号处理。</p>
+
+<pre><code># linux下执行命令
+siege -f ./url.txt  -H &quot;Content-Type: application/json&quot;
+
+# url.txt中的内容
+HOST=neojos.com
+$(HOST)/v1/buy POST {&quot;bid&quot;: 0, &quot;type&quot;: 13 }
+</code></pre>
 
 
   <footer>
