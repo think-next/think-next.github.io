@@ -6,10 +6,23 @@
     <description>Recent content in Net on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 24 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Tcp Bulk Data</title>
+      <link>/blog/2018/09-24-tcp-bulk-data/</link>
+      <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/09-24-tcp-bulk-data/</guid>
+      <description>TCP在数据传输中有receive buffer和send buffer。通过连接中的window size可以看出数据的读取情况。而且，TCP中sliding-window protocol来实现接收端并不需要对每一个收到的packet，都执行ack操作。因为有缓冲去的存在，所以可以对收到的多个packet，统一回复一个ack。
+通过握手，TCP两端交换window size的大小。sender可以连续发送多个packet来填满receiver&#39;s window，当应用层从buffer中读取数据之后，window size便会更新。比如，在ack的回复中，如果显示win 0，则表示receiver接收到了所有数据，但数据还在buffer中，尚未被应用读取。之后数据被读取，window size便会被更新，通过ack来重新通知sender。需要注意的是，该ack仅仅只是通知window size的更新。
+对于window size，相关的是sliding windows。可以简单的想象成固定长度的“队列”，长度一定，表示window size是固定的。应用读取数据之后，队列末尾便会追加对应数量的size，供sender发送新的数据，队首的数据便彻底被移除了。
+PUSH flag这是TCP header中的一个标识，用于表示sender不想让该packet在tcp buffer中被缓存，去等待额外的数据到来，而是应立即传递给receiver处理。
+sender和receiver网络连接中可能存在很多hop或者slower links，这也就导致了window size确定的复杂性。这便引入了congestion window,术语slow start。sender在建立连接后，先初始化window为一个segment，每次收到ack，sender便增加一个segment（exponential increae），最终，segment的大小便是congestion window size。</description>
+    </item>
     
     <item>
       <title>IP Routing</title>

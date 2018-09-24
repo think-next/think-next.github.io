@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Tcp Bulk Data - 付辉</title>
+    <meta property="og:title" content="Tcp Bulk Data - 付辉">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/2018/">Blog</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>Tcp Bulk Data</h1>
+
+
+
+<section class="post-meta">
+    <span class="post-author">付辉
+    
+        
+        
+         /  2018-09-24
+        
+    </span>
+    
+    <a href="/tags/tcp/ip">tcp/ip</a>
+    
+    <a href="/tags/net">net</a>
+    
+</section>
+
+
+<hr>
+
+      </header>
+
+
+
+<p><code>TCP</code>在数据传输中有<code>receive buffer</code>和<code>send buffer</code>。通过连接中的<code>window size</code>可以看出数据的读取情况。而且，<code>TCP</code>中<code>sliding-window protocol</code>来实现接收端并不需要对每一个收到的<code>packet</code>，都执行<code>ack</code>操作。因为有缓冲去的存在，所以可以对收到的多个<code>packet</code>，统一回复一个<code>ack</code>。</p>
+
+<p>通过握手，<code>TCP</code>两端交换<code>window size</code>的大小。<code>sender</code>可以连续发送多个<code>packet</code>来填满<code>receiver's window</code>，当应用层从<code>buffer</code>中读取数据之后，<code>window size</code>便会更新。比如，在<code>ack</code>的回复中，如果显示<code>win 0</code>，则表示<code>receiver</code>接收到了所有数据，但数据还在<code>buffer</code>中，尚未被应用读取。之后数据被读取，<code>window size</code>便会被更新，通过<code>ack</code>来重新通知<code>sender</code>。需要注意的是，该<code>ack</code>仅仅只是通知<code>window size</code>的更新。</p>
+
+<p>对于<code>window size</code>，相关的是<code>sliding windows</code>。可以简单的想象成固定长度的“队列”，长度一定，表示<code>window size</code>是固定的。应用读取数据之后，队列末尾便会追加对应数量的<code>size</code>，供<code>sender</code>发送新的数据，队首的数据便彻底被移除了。</p>
+
+<p><code>PUSH flag</code>这是<code>TCP header</code>中的一个标识，用于表示<code>sender</code>不想让该<code>packet</code>在<code>tcp buffer</code>中被缓存，去等待额外的数据到来，而是应立即传递给<code>receiver</code>处理。</p>
+
+<p><code>sender</code>和<code>receiver</code>网络连接中可能存在很多<code>hop</code>或者<code>slower links</code>，这也就导致了<code>window size</code>确定的复杂性。这便引入了<code>congestion window</code>,术语<code>slow start</code>。<code>sender</code>在建立连接后，先初始化<code>window</code>为一个<code>segment</code>，每次收到<code>ack</code>，<code>sender</code>便增加一个<code>segment</code>（<code>exponential increae</code>），最终，<code>segment</code>的大小便是<code>congestion window size</code>。</p>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2018/2018-08-19-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98bigcache/">本地缓存BigCache</a></span>
+  <span class="nav-next"></span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">Fu Hui</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+
