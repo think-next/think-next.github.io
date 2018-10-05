@@ -13,10 +13,10 @@
     
     <item>
       <title>本地缓存BigCache</title>
-      <link>/blog/2018/2018-08-19-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98bigcache/</link>
+      <link>/blog/2018/08-19-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98bigcache/</link>
       <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/2018-08-19-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98bigcache/</guid>
+      <guid>/blog/2018/08-19-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98bigcache/</guid>
       <description>BigCache的作者做了详细的阐述，尽在这里：Writing a very fast cache service with millions of entries in Go。不得不说，作者的表述非常完美，给它点赞。GitHub地址在：github.com/allegro/bigcache。Usage非常简单，相信一看就会用了。
 Concurrency的理解 为了避免加锁成为系统的瓶颈，BigTable采用了Shared的方式来解决，确实也有点Redis单线程的感觉。将一块大的数据划分成多块小的数据，为小数据块加锁，确实很好的缓解了加锁的瓶颈。这体现出了拆分的思想，突然想到了曾经被面试的问题：“请将2G的数据进行排序”。
 我比较好奇它的Hash方法，客户端的key转换为实际存储的hashedKey的过程。请看通过hashedKey获取shard的部分，作者没有使用%取余来实现，而是使用了&amp;amp;与运算来替代，确实很注重细节啊！
