@@ -90,9 +90,19 @@
 
 
 
-<p><code>BigCache</code>的作者做了详细的阐述，尽在这里：<a href="https://allegro.tech/2016/03/writing-fast-cache-service-in-go.html"><code>Writing a very fast cache service with millions of entries in Go</code></a>。不得不说，作者的表述非常完美，给它点赞。<code>GitHub</code>地址在：<a href="https://github.com/allegro/bigcache">github.com/allegro/bigcache</a>。<code>Usage</code>非常简单，相信一看就会用了。</p>
+<p><code>BigCache</code>的作者做了详细的阐述，尽在这里：<a href="https://allegro.tech/2016/03/writing-fast-cache-service-in-go.html"><code>Writing a very fast cache service with millions of entries in Go</code></a>。不得不说，作者的表述非常完美，给它点赞。<code>GitHub</code>地址在：<a href="https://github.com/allegro/bigcache">github.com/allegro/bigcache</a>。<code>Usage</code>非常简单。</p>
 
-<h2 id="concurrency-的理解"><code>Concurrency</code>的理解</h2>
+<h2 id="omitting-gc"><code>Omitting GC</code></h2>
+
+<p>当<code>map</code>中存储过百万的<code>object</code>时，<code>Go</code>语言自身的<code>GC</code>甚至会影响不相关的请求，即使是对一个空对象做<code>Marsh</code>操作，响应时间也可能在<code>1s</code>以上。所以，如何避免<code>Go</code>默认对<code>map</code>做的<code>Garbage Collector</code>至关重要。</p>
+
+<ol>
+<li><code>GC</code>回收<code>heap</code>中对象，所以我们不把对象创建在<code>heap</code>中就可以避过垃圾回收。查阅<a href="https://godoc.org/github.com/glycerine/offheap"><code>offheap</code></a>。</li>
+<li>使用<a href="https://github.com/coocood/freecache"><code>freecache</code></a>.</li>
+<li>在<code>map</code>结构的<code>key</code>和<code>value</code>中不存储<code>pointer</code>，这样便可以将<code>map</code>创建在堆上，同时忽略<code>GC</code>的影响。这来源于<code>Go</code>的<a href="https://github.com/golang/go/issues/9477">优化</a>.</li>
+</ol>
+
+<h2 id="concurrency"><code>Concurrency</code></h2>
 
 <p>为了避免加锁成为系统的瓶颈，<code>BigTable</code>采用了<code>Shared</code>的方式来解决，确实也有点<code>Redis</code>单线程的感觉。将一块大的数据划分成多块小的数据，为小数据块加锁，确实很好的缓解了加锁的瓶颈。这体现出了<code>拆分</code>的思想，突然想到了曾经被面试的问题：“请将2G的数据进行排序”。</p>
 
