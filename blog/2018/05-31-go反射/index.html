@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Go反射 - 付辉</title>
+    <meta property="og:title" content="Go反射 - 付辉">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/2018/">Blog</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>Go反射</h1>
+
+
+
+<section class="post-meta">
+    <span class="post-author">付辉
+    
+        
+        
+         /  2018-05-31
+        
+    </span>
+    
+    <a href="/tags/golang">golang</a>
+    
+</section>
+
+
+<hr>
+
+      </header>
+
+
+
+
+
+<h2 id="概述"><code>概述</code></h2>
+
+<p>对<code>interface</code>类型操作，如何对内部的值进行处理和分析。比如判断<code>interface</code>是否底层存储的是<code>struct</code>类型，以及该<code>struct</code>是否含有某个特定的<code>Field</code>值。</p>
+
+<p><code>interface</code>类型包含两部分内容：<code>dynamic type</code>和<code>dynamic value</code>。当转换为<code>interface</code>类型后（操作是默认的），原类型下声明的方法，<code>interface</code>类型就无法再调用了。</p>
+
+<p>实际工作中，<code>interface</code>类型会接收任意类型的值，处理的过程很多都是通过<code>reflect</code>实现的。</p>
+
+<h2 id="reflect-value"><code>reflect.Value</code></h2>
+
+<p><code>reflect</code>里两个主要角色：<code>Value</code>和<code>Type</code>。<code>Value</code>用于处理值的操作，反射过程中处理的值是原始值的值拷贝，所以操作中要注意区分值传递和地址传递。</p>
+
+<p>对于指针类型的值，只有获取其原始值，才可以达到修改的目的。如下所示，<code>obj</code>实际类型是一个<code>struct</code>的指针，想要将其转换成“值类型”，调用<code>Elem</code>方法来实现。</p>
+
+<pre><code>//获取指针的实际类型
+v := reflect.ValueOf(obj)       //Kind == Ptr
+v = v.Elem()
+if v.Kind() != reflect.Struct {
+	return NewError(http.ErrorInvalidParam, &quot;interface类型必须是struct结构&quot;, nil)
+}
+</code></pre>
+
+<h3 id="查找指定的-field">查找指定的<code>Field</code></h3>
+
+<p>我们假设<code>struct</code>中包含有某个特殊<code>Field</code>，那么在接口层面该如何进行判断呢？比如，查看结构体中是否含有<code>Data</code>的<code>Field</code>.</p>
+
+<p><code>reflect</code>本身提供了多种判断形式。以<code>FieldByName</code>为例，<code>Type</code>和<code>Value</code>都实现了该方法，但返回值不相同。<code>reflect</code>要求调用的值本身需要是<code>struct</code>类型才可以。</p>
+
+<pre><code class="language-golang">h := v.FieldByName(HeaderHField)    //HeaderHField为自定义常亮
+if h.IsValid() {
+	
+}
+</code></pre>
+
+<h3 id="将-value-转换为-interface-类型">将<code>value</code>转换为<code>interface</code>类型</h3>
+
+<p><code>reflect</code>操作的<code>interface</code>类型，即由<code>interface</code>转换为<code>reflect.Value</code>类型，同样，逆向的转换也是可以的。</p>
+
+<p>它提供了<code>interface()</code>方法。转换之后，我们就可以继续使用断言进行实际类型转换了。</p>
+
+<pre><code>value := h.Interface()      //将value转换为interface
+customHead, isOk := value.(string)  //  断言为string类型
+</code></pre>
+
+<p>f</p>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2018/05-15-shell%E6%93%8D%E4%BD%9C%E6%96%87%E6%9C%AC%E5%AE%9E%E4%BE%8B/">shell操作文本实例</a></span>
+  <span class="nav-next"><a href="/blog/2018/06-08-%E8%AE%A2%E5%8D%95%E7%B3%BB%E7%BB%9F%E5%88%9D%E8%AF%86/">订单系统初识</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">Fu Hui</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+
