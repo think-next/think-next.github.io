@@ -6,10 +6,31 @@
     <description>Recent content in 蜗牛保持乐观才会爬的更远 on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 24 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 10 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go net 超时处理</title>
+      <link>/blog/2018/10-10-go-net-%E8%B6%85%E6%97%B6%E5%A4%84%E7%90%86/</link>
+      <pubDate>Wed, 10 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/10-10-go-net-%E8%B6%85%E6%97%B6%E5%A4%84%E7%90%86/</guid>
+      <description>序 这篇文章详细介绍了，net/http包中对应HTTP的各个阶段，如何使用timeout来进行读/写超时控制以及服务端和客户端支持设置的timeout类型。本质上，这些timeout都是代码层面对各个函数设置的处理时间。比如，读取客户端读取请求头、读取响应体的时间，本质上都是响应函数的超时时间。
+作者强烈不建议，在工作中使用net/http包上层封装的默认方法（没有明确设置timeout），很容易出现系统文件套接字被耗尽等令人悲伤的情况。比如：
+// 相信工作中也不会出现这样的代码 func main() { http.ListenAndServe(&amp;quot;127.0.0.1:3900&amp;quot;, nil) }  正文 在使用Go开发HTTP Server或client的过程中，指定timeout很常见，但也很容易犯错。timeout错误一般还不容易被发现，可能只有当系统出现请求超时、服务挂起时，错误才被严肃暴露出来。
+HTTP是一个复杂的多阶段协议，所以也不存在一个timeout值适用于所有场景。想一下StreamingEndpoint、JSON API、 Comet， 很多情况下，默认值根本不是我们所需要的值。
+这篇博客中，我会对HTTP请求的各个阶段进行拆分，列举可能需要设置的timeout值。然后从客户端和服务端的角度，分析它们设置timeout的不同方式。
+SetDeadline 首先，你需要知道Go所暴露出来的，用于实现timeout的方法：Deadline。
+timeout本身通过 net.Conn包中的Set[Read|Write]Deadline(time.Time)方法来控制。Deadline是一个绝对的时间点，当连接的I/O操作超过这个时间点而没有完成时，便会因为超时失败。
+Deadlines不同于timeouts. 对一个连接而言，设置Deadline之后，除非你重新调用SetDeadline，否则这个Deadline不会变化。前面也提了，Deadline是一个绝对的时间点。因此，如果要通过SetDeadline来设置timeout，就不得不在每次执行Read/Write前重新调用它。
+你可能并不想直接调用SetDeadline方法，而是选择 net/http提供的更上层的方法。但你要时刻记住：所有timeout操作都是通过设置Deadline实现的。每次调用，它们并不会去重置的deadline。
+Server Timeouts 关于服务端超时，这篇帖子So you want to expose Go on the Internet也介绍了很多信息，特别是关于HTTP/2和Go 1.7 bugs的部分.
+对于服务端而言，指定timeout至关重要。否则，一些请求很慢或消失的客户端很可能导致系统文件描述符泄漏，最终服务端报错：
+http: Accept error: accept tcp [::]:80: accept4: too many open files; retrying in 5ms  在创建http.Server的时候，可以通过ReadTimeout和WriteTimeout来设置超时。你需要明确的声明它们：
+srv := &amp;amp;http.Server{ ReadTimeout: 5 * time.Second, WriteTimeout: 10 * time.Second, } log.</description>
+    </item>
     
     <item>
       <title>Tcp Bulk Data</title>
