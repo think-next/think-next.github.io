@@ -94,7 +94,9 @@
 
 <p>用了<code>git</code>就会发现，再也不想用<code>svn</code>了。</p>
 
-<h2 id="使用-reset-回退">使用<code>reset</code>回退</h2>
+<p><code>Note</code>：在<strong>执行<code>push</code>操作前</strong>，所有的修改都发生在本地，可以使用<code>reset</code>随便回滚本地的提交。但要注意：本地修改一旦回滚，无法找回。<strong>在<code>push</code>后</strong>，想要回滚到指定的版本，便需要使用<code>revert</code>，这样的代价就是：你的回滚记录被记录在了<code>log</code>中，所有人都可以看见。</p>
+
+<h2 id="reset-回退"><code>reset</code>回退</h2>
 
 <p>本质上是<code>commit</code>操作的回退。<code>Git</code>工作流可以简化为三个部分：<code>Working Directory</code>、<code>index</code>、<code>HEAD</code>。后两部分对应的<code>git</code>命令便是<code>add</code>和<code>commit</code>。如果使用的是<code>Sourcetree</code>工具，那么这三部分就更直观了。</p>
 
@@ -122,13 +124,14 @@
 
 <pre><code class="language-git">git reset --hard origin/master
 git reset --hard version-number
+git reset --hard HEAD
 </code></pre>
 
 <p>获取版本号可以通过<code>git log</code>直接查看。</p>
 
 <p>更多详细介绍，可以查看： <a href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%AB%98%E7%BA%A7%E5%90%88%E5%B9%B6">高级合并</a>及 <a href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E7%BD%AE%E6%8F%AD%E5%AF%86">重置揭密</a></p>
 
-<h2 id="使用-stash-储藏">使用<code>stash</code>储藏</h2>
+<h2 id="stash-储藏"><code>stash</code>储藏</h2>
 
 <p>将<strong>工作区</strong>的修改进行存储，使本地重新成为一个干净的环境，同时方便在之后应用这些改动。可以用于存储<strong>已被索引的文件</strong>、或者<strong>未跟踪的文件</strong>。执行<code>git stash -a</code>来暂存所有改动的文件。</p>
 
@@ -141,7 +144,7 @@ git reset --hard version-number
 <li><code>git stash drop stash@{1}</code> 移除暂存</li>
 </ol>
 
-<h2 id="使用-clean-清空">使用<code>clean</code>清空</h2>
+<h2 id="clean-清空"><code>clean</code>清空</h2>
 
 <p>用于从工作区移除未被追踪的文件。执行<code>git clean -d -f</code>来移除所有未被追踪的文件或目录。</p>
 
@@ -150,7 +153,14 @@ git reset --hard version-number
 <li><code>git clean -d -i</code> 用于交互式的删除文件</li>
 </ol>
 
-<h2 id="使用-checkout">使用<code>checkout</code></h2>
+<h2 id="revert"><code>revert</code></h2>
+
+<p>我们工作区的内容，是所有版本修改合并的结果。如果觉得某个版本的提交有问题，使用<code>revert</code>便可以直接撤销这个版本的修改。</p>
+
+<pre><code>--&gt; (modify version 1) --&gt; (modify version 2) --&gt; (modify version3)
+</code></pre>
+
+<p>执行<code>git revert 版本号</code>仅仅是撤销这个版本的修改。如果你想将版本回滚到<code>version 1</code>，你需要执行2次<code>revert</code>操作。且每次执行<code>revert</code>都会有一个新的版本生成。</p>
 
 
   <footer>

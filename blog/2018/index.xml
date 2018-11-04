@@ -98,16 +98,17 @@ if [[ -n $str ]] &amp;amp;&amp;amp; [[ -z $str ]] then echo $str fi  基本语�
       
       <guid>/blog/2018/08-07-git%E6%92%A4%E9%94%80%E6%9C%AC%E5%9C%B0%E4%BF%AE%E6%94%B9/</guid>
       <description>用了git就会发现，再也不想用svn了。
-使用reset回退 本质上是commit操作的回退。Git工作流可以简化为三个部分：Working Directory、index、HEAD。后两部分对应的git命令便是add和commit。如果使用的是Sourcetree工具，那么这三部分就更直观了。
+Note：在执行push操作前，所有的修改都发生在本地，可以使用reset随便回滚本地的提交。但要注意：本地修改一旦回滚，无法找回。在push后，想要回滚到指定的版本，便需要使用revert，这样的代价就是：你的回滚记录被记录在了log中，所有人都可以看见。
+reset回退 本质上是commit操作的回退。Git工作流可以简化为三个部分：Working Directory、index、HEAD。后两部分对应的git命令便是add和commit。如果使用的是Sourcetree工具，那么这三部分就更直观了。
 该命令的具体功能是移动HEAD，即移动分支的指针。将当前的HEAD重新指向之前的版本，本地工作环境也会跟着切换。适用场景：本地已经commit，但尚未push到远端仓库的回滚操作。
 该命令提供了三个属性：分别是soft、mixed、和hard。
  soft撤销上一次的commit命令，返回到HEAD前的index状态。 mixed撤销了上一次的git add和git commit命令，将index的修改回滚到Working Directory。 hard撤销了最后git add 和 git commit 命令以及工作目录中的所有修改。  所以reset重写的顺序如下：
  移动 HEAD 指向的分支（如果是soft，则到此停止）。 使索引看起来像 HEAD（如果是mixed，则到此停止）。 使工作目录看起来像索引。  Example 当执行pull命令发生冲突时时，本地代码需要做merge操作。但本地代码只是临时调试修改，并不需要保存提交。执行如下命令，便会清空本地的修改，hard相当于一个版本的指针，origin/master可以替换为具体的版本号
-git reset --hard origin/master git reset --hard version-number  获取版本号可以通过git log直接查看。
+git reset --hard origin/master git reset --hard version-number git reset --hard HEAD  获取版本号可以通过git log直接查看。
 更多详细介绍，可以查看： 高级合并及 重置揭密
-使用stash储藏 将工作区的修改进行存储，使本地重新成为一个干净的环境，同时方便在之后应用这些改动。可以用于存储已被索引的文件、或者未跟踪的文件。执行git stash -a来暂存所有改动的文件。
+stash储藏 将工作区的修改进行存储，使本地重新成为一个干净的环境，同时方便在之后应用这些改动。可以用于存储已被索引的文件、或者未跟踪的文件。执行git stash -a来暂存所有改动的文件。
 下面是执行的流程：
- git stash 储藏修改 git stash list 查看储藏的列表 将储藏重新应用到当前分支：git statsh apply stash@{1}或者git stash pop stash@{1}。后者会在应用暂存之后从堆栈上删除 git stash drop stash@{1} 移除暂存  使用clean清空 用于从工作区移除未被追踪的文件。执行git clean -d -f来移除所有未被追踪的文件或目录。</description>
+ git stash 储藏修改 git stash list 查看储藏的列表 将储藏重新应用到当前分支：git statsh apply stash@{1}或者git stash pop stash@{1}。后者会在应用暂存之后从堆栈上删除 git stash drop stash@{1} 移除暂存  clean清空 用于从工作区移除未被追踪的文件。执行git clean -d -f来移除所有未被追踪的文件或目录。</description>
     </item>
     
     <item>
