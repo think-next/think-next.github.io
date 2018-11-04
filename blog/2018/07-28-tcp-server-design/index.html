@@ -120,8 +120,8 @@ tcp46      0      0  *.3900                 *.*                    LISTEN
 <p>当<code>listening</code>状态的应用正在忙于处理新的连接，同时有其他的请求进来时，服务器是如何处理的呢？引入另一个概念：请求队列。</p>
 
 <ol>
-<li>每一个监听状态的终端都有一个固定长度的队列，用来存放<code>TCP</code>三次握手完成，但还没有被应用接收的连接。<code>client</code>会认为该连接已经创建成功，所以它此时发送的数据也会被缓存起来。</li>
-<li>当队列满了后，<code>TCP</code>会直接忽略进来的<code>SYN</code>，而非回复<code>RST</code>报文头。这样做便是要<code>client</code>稍后重新发送<code>SYN</code>。</li>
+<li>每一个监听状态的终端都有一个固定长度的队列，用来存放<code>TCP</code>三次握手完成，但还没有被应用接收的连接。<code>client</code>会认为该连接已经创建成功，所以它此时发送的数据也会被缓存起来。如果<code>queue</code>中的连接长时间不被应用读取，便会导致<code>client</code>超时。</li>
+<li>当队列满了后，<code>TCP</code>会直接忽略进来的<code>SYN</code>，而非回复<code>RST</code>报文头。这样做便是要<code>client</code>稍后重新发送<code>SYN</code>。因为服务器比较繁忙的状况，可能马上就会恢复。</li>
 <li>如果<code>TCP</code>三次握手完成，连接也就被创建成功了。如果此时服务端不想为该<code>ip</code>提供服务，服务端要么发送<code>FIN</code>关闭这个连接，或者发送<code>RST</code>中断这个连接。整个过程中，<code>TCP</code>没有权限去限制<code>client</code>端。</li>
 </ol>
 
