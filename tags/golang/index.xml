@@ -6,10 +6,25 @@
     <description>Recent content in Golang on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 10 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 12 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go Interface 类型</title>
+      <link>/blog/2018/10-12-go-interface-%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Fri, 12 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/10-12-go-interface-%E7%B1%BB%E5%9E%8B/</guid>
+      <description>草稿1
+introduction duck typing 很形象的解释了interface的本意。它是一种特别的数据类型，内部声明了一组要实现的方法集合，任何实现了这些方法的数据类型都可以认为实现了这个interface。这跟其他语言中的抽象类有异曲同工之处，但却不需要去明确声明实现了这个interface。
+空的interface类型没有声明任何方法，所以GO中所有数据类型都实现了interface{}。这也为我们实现泛型编程提供了可能，虽然使用起来并不舒服。
+protocol interface可以做为一组不相关的对象进行交流的一种规范或约束，类比protobuf，数据字段必须严格按照声明进行传递。只不过interface约束的是待实现的方法。
+比如error接口，所有实现了Error()方法的类型都可以赋值给error类型变量，无需明确声明继承关系，就实现了多态。
+// The error built-in interface type is the conventional interface for // representing an error condition, with the nil value representing no error. type error interface { Error() string }  interface用法 generic algorithm interface类型接受任意类型的参数，结合reflect或者断言可以确定参数的实际类型。比如fmt包就有这样用（具体需要深入方法内部）：
+// Println formats using the default formats for its operands and writes to standard output. // Spaces are always added between operands and a newline is appended.</description>
+    </item>
     
     <item>
       <title>Go net 超时处理</title>

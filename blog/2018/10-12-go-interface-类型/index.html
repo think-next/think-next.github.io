@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Go Interface 类型 - 付辉</title>
+    <meta property="og:title" content="Go Interface 类型 - 付辉">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/2018/">Blog</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>Go Interface 类型</h1>
+
+
+
+<section class="post-meta">
+    <span class="post-author">付辉
+    
+        
+        
+         /  2018-10-12
+        
+    </span>
+    
+    <a href="/tags/golang">golang</a>
+    
+</section>
+
+
+<hr>
+
+      </header>
+
+
+
+
+
+<p><em><u>草稿1</u></em></p>
+
+<h2 id="introduction"><code>introduction</code></h2>
+
+<p><a href="https://en.wikipedia.org/wiki/Duck_typing"><code>duck typing</code></a> 很形象的解释了<code>interface</code>的本意。它是一种特别的数据类型，内部声明了一组要实现的方法集合，任何实现了这些方法的数据类型都可以认为实现了这个<code>interface</code>。这跟其他语言中的<code>抽象类</code>有异曲同工之处，但却不需要去明确声明实现了这个<code>interface</code>。</p>
+
+<p>空的<code>interface</code>类型没有声明任何方法，所以<code>GO</code>中所有数据类型都实现了<code>interface{}</code>。这也为我们实现<code>泛型编程</code>提供了可能，虽然使用起来并不舒服。</p>
+
+<h2 id="protocol"><code>protocol</code></h2>
+
+<p><code>interface</code>可以做为一组不相关的对象进行交流的一种规范或约束，类比<a href="https://developers.google.com/protocol-buffers/"><code>protobuf</code></a>，数据字段必须严格按照声明进行传递。只不过<code>interface</code>约束的是待实现的方法。</p>
+
+<p>比如<code>error</code>接口，所有实现了<code>Error()</code>方法的类型都可以赋值给<code>error</code>类型变量，无需明确声明继承关系，就实现了<code>多态</code>。</p>
+
+<pre><code class="language-golang">// The error built-in interface type is the conventional interface for
+// representing an error condition, with the nil value representing no error.
+type error interface {
+	Error() string
+}
+</code></pre>
+
+<h2 id="interface-用法"><code>interface</code>用法</h2>
+
+<h3 id="generic-algorithm"><code>generic algorithm</code></h3>
+
+<p><code>interface</code>类型接受任意类型的参数，结合<code>reflect</code>或者<code>断言</code>可以确定参数的实际类型。比如<code>fmt</code>包就有这样用（具体需要深入方法内部）：</p>
+
+<pre><code class="language-golang">// Println formats using the default formats for its operands and writes to standard output.
+// Spaces are always added between operands and a newline is appended.
+// It returns the number of bytes written and any write error encountered.
+func Println(a ...interface{}) (n int, err error) {
+	return Fprintln(os.Stdout, a...)
+}
+</code></pre>
+
+<p>通过<code>interface</code>约束一套行为，也可以实现泛型编程。比如<code>sort</code>包，只要实现了接口对应的方法，就可以使用<code>sort</code>包来进行排序。具体如何排序，操作什么数据类型，都由你自己来实现。要实现的方式依次是：获取集合的长度，两个元素比较大小以及如何交换两个元素。</p>
+
+<pre><code>// A type, typically a collection, that satisfies sort.Interface can be
+// sorted by the routines in this package. The methods require that the
+// elements of the collection be enumerated by an integer index.
+type Interface interface {
+	// Len is the number of elements in the collection.
+	Len() int
+	// Less reports whether the element with
+	// index i should sort before the element with index j.
+	Less(i, j int) bool
+	// Swap swaps the elements with indexes i and j.
+	Swap(i, j int)
+}
+</code></pre>
+
+<h3 id="hiding-implement-detail"><code>hiding implement detail</code></h3>
+
+<p>当函数返回一个具体类型的<code>interface</code>，那么你就能调用<code>interface</code>实现的方法，而内部的具体实现可以一无所知。</p>
+
+<h3 id="providing-interception-points"><code>providing interception points</code></h3>
+
+<h4 id="1-unmarshal">1. <code>Unmarshal</code></h4>
+
+<p>当使用<code>Unmarshal</code>解析<code>json</code>时，为具体的类型实现<a href="https://golang.org/pkg/encoding/json/#Marshaler"><code>Unmarshaler</code></a>接口，就实现了自定义解析。</p>
+
+<blockquote>
+<p><code>To unmarshal JSON into a value implementing the Unmarshaler interface, Unmarshal calls that value's UnmarshalJSON method, including when the input is a JSON null.</code></p>
+</blockquote>
+
+<pre><code>// Unmarshaler is the interface implemented by types
+// that can unmarshal a JSON description of themselves.
+// The input can be assumed to be a valid encoding of
+// a JSON value. UnmarshalJSON must copy the JSON data
+// if it wishes to retain the data after returning.
+//
+// By convention, to approximate the behavior of Unmarshal itself,
+// Unmarshalers implement UnmarshalJSON([]byte(&quot;null&quot;)) as a no-op.
+type Unmarshaler interface {
+	UnmarshalJSON([]byte) error
+}
+</code></pre>
+
+<h4 id="2-handler">2. <code>Handler</code></h4>
+
+<p>通过实现<code>Handler</code>接口，来处理不同的请求。</p>
+
+<pre><code>// A Handler responds to an HTTP request.
+//
+// ServeHTTP should write reply headers and data to the ResponseWriter
+// and then return. Returning signals that the request is finished; it
+// is not valid to use the ResponseWriter or read from the
+// Request.Body after or concurrently with the completion of the
+// ServeHTTP call.
+
+type Handler interface {
+	ServeHTTP(ResponseWriter, *Request)
+}
+</code></pre>
+
+<p><code>ServeMux</code>也实现了<code>handler</code>接口，但它基于<code>request</code>实现了一个路由表。</p>
+
+<pre><code>// ServeHTTP dispatches the request to the handler whose
+// pattern most closely matches the request URL.
+func (mux *ServeMux) ServeHTTP(w ResponseWriter, r *Request) {
+	if r.RequestURI == &quot;*&quot; {
+		if r.ProtoAtLeast(1, 1) {
+			w.Header().Set(&quot;Connection&quot;, &quot;close&quot;)
+		}
+		w.WriteHeader(StatusBadRequest)
+		return
+	}
+	h, _ := mux.Handler(r)
+	h.ServeHTTP(w, r)
+}
+
+</code></pre>
+
+<h3 id="polymorphism"><code>polymorphism</code></h3>
+
+<hr />
+
+<p>参考文章：</p>
+
+<ol>
+<li><a href="https://research.swtch.com/interfaces"><code>Go Data Structures: Interfaces</code></a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/32926119"><code>https://zhuanlan.zhihu.com/p/32926119</code></a></li>
+</ol>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2018/10-10-go-net-%E8%B6%85%E6%97%B6%E5%A4%84%E7%90%86/">Go net 超时处理</a></span>
+  <span class="nav-next"><a href="/blog/2018/11-20-nss%E5%88%9D%E7%AA%A5/">NSS初窥</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">Fu Hui</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

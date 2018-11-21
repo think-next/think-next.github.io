@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>/blog/2018/10-12-go-interface-%E7%B1%BB%E5%9E%8B/</loc>
+    <lastmod>2018-10-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/2018/10-10-go-net-%E8%B6%85%E6%97%B6%E5%A4%84%E7%90%86/</loc>
     <lastmod>2018-10-10T00:00:00+00:00</lastmod>
   </url>
@@ -243,7 +248,7 @@
   
   <url>
     <loc>/categories/2018-10/</loc>
-    <lastmod>2018-10-10T00:00:00+00:00</lastmod>
+    <lastmod>2018-10-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -287,7 +292,7 @@
   
   <url>
     <loc>/tags/golang/</loc>
-    <lastmod>2018-10-10T00:00:00+00:00</lastmod>
+    <lastmod>2018-10-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
