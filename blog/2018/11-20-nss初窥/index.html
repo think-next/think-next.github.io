@@ -90,7 +90,7 @@
 
 
 
-<p><em><u>草稿</u></em></p>
+<p><em><u>草稿 0.1</u></em></p>
 
 <p>在使用<code>wireshark</code>分析<code>https</code>时，加密传输的内容会解析失败。而<code>NSS</code>可以存储<code>TLS</code>握手过程中的<code>Key</code>，用于解密。很好奇，它是如何实现的？</p>
 
@@ -123,7 +123,7 @@ EXPORTER_SECRET 51c27befc24dceb18ade59b4a10c1398725848f7130b2ebeeb2e01483ed95e4d
 
 <h3 id="case-1"><code>case 1.</code></h3>
 
-<p>使用<code>wireshark</code>抓取一个<code>TLS</code>的握手过程来简单分析：</p>
+<p>使用<code>wireshark</code>抓取一个<code>TLS</code>的握手过程来简单示例。其中<code>Client Key Exchange, Change Cipher Spec, Encrypted Handshake Message</code>在一个数据包中返回。</p>
 
 <p><img src="https://i.loli.net/2018/11/21/5bf4acc7064a5.png" alt="image" /></p>
 
@@ -139,6 +139,14 @@ EXPORTER_SECRET 51c27befc24dceb18ade59b4a10c1398725848f7130b2ebeeb2e01483ed95e4d
 <li>在<code>Client Key Exchange</code>阶段，客户端根据这两个随机数，生成<code>Pre-master</code>，并用公钥加密，发送给服务端</li>
 <li><code>Change Cipher Spec</code>阶段，服务端私钥解密，获取<code>PRe-master</code>，用同样的算法计算加密密钥。</li>
 </ol>
+
+<h4 id="关于-change-cipher-spec-protocol">关于<code>Change Cipher Spec Protocol</code></h4>
+
+<blockquote>
+<p>The change cipher spec protocol is used to change the encryption being used by the client and server. It is normally used as part of the handshake process to switch to symmetric key encryption. The CCS protocol is a single message that tells the peer that the sender wants to change to a new set of keys, which are then created from information exchanged by the handshake protocol.</p>
+</blockquote>
+
+<p>实际上用于通知<code>peer</code>使用当前协商的密钥进行通讯</p>
 
 <hr />
 
