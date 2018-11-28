@@ -17,7 +17,7 @@
       <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
       
       <guid>/blog/2018/11-20-nss%E5%88%9D%E7%AA%A5/</guid>
-      <description>草稿 0.1
+      <description>版本 0.01
 在使用wireshark分析https时，加密传输的内容会解析失败。而NSS可以存储TLS握手过程中的Key，用于解密。很好奇，它是如何实现的？
 wireshark配置  Edit→Preferences→Protocols→SSL→(Pre)-Master-Secret log filename.  key log文件格式 文件的格式：&amp;lt;Label&amp;gt; &amp;lt;space&amp;gt; &amp;lt;ClientRandom&amp;gt; &amp;lt;space&amp;gt; &amp;lt;Secret&amp;gt;
 比较常见的Label和对应日志的内容:

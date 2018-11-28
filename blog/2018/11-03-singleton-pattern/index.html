@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>singleton pattern - 付辉</title>
+    <meta property="og:title" content="singleton pattern - 付辉">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/2018/">Blog</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>singleton pattern</h1>
+
+
+
+<section class="post-meta">
+    <span class="post-author">付辉
+    
+        
+        
+         /  2018-11-03
+        
+    </span>
+    
+    <a href="/tags/golang">golang</a>
+    
+</section>
+
+
+<hr>
+
+      </header>
+
+
+
+
+
+<p><em><u>版本 0.01</u></em></p>
+
+<p>在服务运行期间，针对所有<code>goroutine</code>共用一份数据的情况，比如配置信息，都可以选择只读取一次配置文件。但千万要注意 <strong>单例中不要保存只属于具体的<code>goroutine</code>的数据</strong>，否则会出现相互覆盖的情况。</p>
+
+<p>单例也是<a href="https://docs.microsoft.com/en-us/dotnet/framework/performance/lazy-initialization"><code>Lazy Initialization</code></a>的一种，对于经常不使用的变量，只有在使用的时候才进行实例化，整体来说，还是节约资源的。</p>
+
+<p>或者类似<a href="https://godoc.org/net/http"><code>net/http</code></a>中的<code>client</code>这种类型：</p>
+
+<blockquote>
+<p>Clients and Transports are safe for concurrent use by multiple goroutines and for efficiency should only be created once and re-used.</p>
+</blockquote>
+
+<h2 id="sync-once-简介"><code>sync.Once</code>简介</h2>
+
+<p><code>Go</code>语言通过<code>sync</code>包可以方便的实现线程安全的单例模式。最叹为观止的是，<code>sync</code>包的实现如此简单。通常用来处理在服务运行期间，只需要初始化一次的变量。</p>
+
+<pre><code>// Once is an object that will perform exactly one action.
+type Once struct {
+	m    Mutex
+	done uint32
+}
+
+func (o *Once) Do(f func()) {
+	if atomic.LoadUint32(&amp;o.done) == 1 {
+		return
+	}
+	// Slow-path.
+	o.m.Lock()
+	defer o.m.Unlock()
+	if o.done == 0 {
+		defer atomic.StoreUint32(&amp;o.done, 1)
+		f()
+	}
+}
+</code></pre>
+
+<h2 id="sync-once-设计思路"><code>sync.Once</code>设计思路</h2>
+
+<p>举个例子：</p>
+
+<p>下面声明统一获取配置类的函数，因为配置信息在整个服务运行期间是不会发生改变的。函数通过判断<code>config</code>是否被初始化，来达到只初始化一次的目的。例子中<code>config</code>声明为<code>map</code>的数据结构，来存储配置信息（<code>map</code>不支持并发访问，这里先忽略）。</p>
+
+<pre><code>package encrypt_config
+
+//key-secret pairs
+var config map[string]string
+
+func loadConfig(name string) string {
+	if config == nil {
+		config = map[string]string{
+			&quot;zi-ru&quot;: &quot;Mji9##a0LY&quot;,
+			&quot;baidu&quot;: &quot;Kj8*0okhHH&quot;,
+		}
+	}
+	return config[name]
+}
+</code></pre>
+
+<p>代码最显而易见的问题：并发的情况下，包内变量<code>config</code>被初始化多次。因为各个<code>goroutine</code>访问<code>config</code>时可能都是<code>nil</code>。</p>
+
+<p>但还存在一种可能的情况：<code>goroutine B</code>发现<code>config ！= nil</code>，但是当通过<code>name</code>去获取对应的值时，返回的却是空字符串。也就是说<code>goroutine A</code>访问到了一个没有被完全初始化的<code>config</code></p>
+
+<h3 id="reason"><code>reason</code></h3>
+
+<p><code>Go</code>在执行上述方法的时候，编译器在不影响最终结果的情况下，本身可以调整代码执行的顺序。这也是现在计算机多核处理，共享内存必然要面临的情况。比如编译器做了如下调整：</p>
+
+<pre><code>func loadConfig(name string) string {
+	if config == nil {
+	
+	    //goroutine B 访问的时候，config刚被初始化 
+	    config = make(map[string]string)
+	    config[&quot;zi-ru&quot;] = &quot;Mji9##a0LY&quot;
+	    config[&quot;baidu&quot;] = &quot;Kj8*0okhHH&quot;
+	}
+	return config[name]
+}
+</code></pre>
+
+<p>问题的本质在于：<strong><code>goroutine B</code>访问到了第一个<code>goroutine A</code>正在初始化的变量</strong>。而<code>sync</code>通过声明<code>done</code>标识，在配合<code>Mutex</code>锁，巧妙的实现了隔离。保证在<code>config</code>在初始化过程中，别的<code>goroutine</code>是不可访问的。</p>
+
+<p>下面是在 <a href="https://www.infoq.cn/article/double-checked-locking-with-delay-initialization"><code>双重检查锁定与延迟初始化</code></a> 的一段内容：</p>
+
+<blockquote>
+<p>根据《The Java Language Specification, Java SE 7 Edition》（后文简称为 java 语言规范），所有线程在执行 java 程序时必须要遵守 intra-thread semantics。intra-thread semantics 保证重排序不会改变单线程内的程序执行结果。换句话来说，intra-thread semantics 允许那些在单线程内，不会改变单线程程序执行结果的重排序。</p>
+</blockquote>
+
+<h2 id="lock"><code>lock</code></h2>
+
+<p><code>Lock</code></p>
+
+<pre><code>// Lock locks m.
+// If the lock is already in use, the calling goroutine
+// blocks until the mutex is available.
+func (m *Mutex) Lock() {
+	// Fast path: grab unlocked mutex.
+	if atomic.CompareAndSwapInt32(&amp;m.state, 0, mutexLocked) {
+		if race.Enabled {
+			race.Acquire(unsafe.Pointer(m))
+		}
+		return
+	}
+    ......
+</code></pre>
+
+<hr />
+
+<p>参考文章：</p>
+
+<ol>
+<li><a href="https://www.infoq.cn/article/double-checked-locking-with-delay-initialization"><code>双重检查锁定与延迟初始化</code></a></li>
+</ol>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2018/10-12-go-interface-%E7%B1%BB%E5%9E%8B/">Go Interface 类型</a></span>
+  <span class="nav-next"><a href="/blog/2018/11-20-nss%E5%88%9D%E7%AA%A5/">NSS初窥</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">Fu Hui</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

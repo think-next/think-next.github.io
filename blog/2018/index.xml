@@ -17,7 +17,7 @@
       <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
       
       <guid>/blog/2018/11-20-nss%E5%88%9D%E7%AA%A5/</guid>
-      <description>草稿 0.1
+      <description>版本 0.01
 在使用wireshark分析https时，加密传输的内容会解析失败。而NSS可以存储TLS握手过程中的Key，用于解密。很好奇，它是如何实现的？
 wireshark配置  Edit→Preferences→Protocols→SSL→(Pre)-Master-Secret log filename.  key log文件格式 文件的格式：&amp;lt;Label&amp;gt; &amp;lt;space&amp;gt; &amp;lt;ClientRandom&amp;gt; &amp;lt;space&amp;gt; &amp;lt;Secret&amp;gt;
 比较常见的Label和对应日志的内容:
@@ -25,6 +25,21 @@ CLIENT_HANDSHAKE_TRAFFIC_SECRET CLIENT_RANDOM CLIENT_TRAFFIC_SECRET_0 EXPORTER_S
 我在网上找到了严格一致的流程分析图（画的真不错）。
 计算对称密钥的过程:
  在Client Hello阶段生成random_C 在Server Hello阶段生成random_S 在Client Key Exchange阶段，客户端根据这两个随机数，生成Pre-master，并用公钥加密，发送给服务端 Change Cipher Spec阶段，服务端私钥解密，获取PRe-master，用同样的算法计算加密密钥。  关于Change Cipher Spec Protocol  The change cipher spec protocol is used to change the encryption being used by the client and server.</description>
+    </item>
+    
+    <item>
+      <title>singleton pattern</title>
+      <link>/blog/2018/11-03-singleton-pattern/</link>
+      <pubDate>Sat, 03 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/11-03-singleton-pattern/</guid>
+      <description>版本 0.01
+在服务运行期间，针对所有goroutine共用一份数据的情况，比如配置信息，都可以选择只读取一次配置文件。但千万要注意 单例中不要保存只属于具体的goroutine的数据，否则会出现相互覆盖的情况。
+单例也是Lazy Initialization的一种，对于经常不使用的变量，只有在使用的时候才进行实例化，整体来说，还是节约资源的。
+或者类似net/http中的client这种类型：
+ Clients and Transports are safe for concurrent use by multiple goroutines and for efficiency should only be created once and re-used.
+ sync.Once简介 Go语言通过sync包可以方便的实现线程安全的单例模式。最叹为观止的是，sync包的实现如此简单。通常用来处理在服务运行期间，只需要初始化一次的变量。
+// Once is an object that will perform exactly one action. type Once struct { m Mutex done uint32 } func (o *Once) Do(f func()) { if atomic.LoadUint32(&amp;amp;o.done) == 1 { return } // Slow-path. o.m.Lock() defer o.</description>
     </item>
     
     <item>
