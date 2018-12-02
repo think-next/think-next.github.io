@@ -6,10 +6,25 @@
     <description>Recent content in MySQL on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Dec 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Deafult Decimal</title>
+      <link>/blog/2018/12-01-deafult-decimal/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/12-01-deafult-decimal/</guid>
+      <description>版本 0.00
+ 我说：version dependent 表示我们的思考时，应该依赖具体的版本。举个例子，你把2015年看到的一些redis机制拿到现在跟别人谈论，很容易闹出笑话。在3年的时间里，它可能已经做了无数的优化。所以，思考要与时俱进。
+ 引言 在涉及到支付业务的时候，数据库里的钱怎么存：  存储单位是元。在业务处理的时候就会涉及到浮点数，很多商家喜欢将价钱定义为0.99而不是1元。这在使用过程中非常忌讳是否相等的比较。浮点数的比较经常喜欢用|floatA - floatB| &amp;gt; 0.00001来，很多第三方库也提供了比较方法。 存储单位时分。为了避免浮点类型比较时的不确定性，决定使用整形来替代。一般来说没有问题，可如果是要严格缺心眼打折，比如给一个售价4.99的打5折，那么最后就会存在5里的情况。一般都喜欢向上取整，应收用户2.495，实收用户2.50.  那么在MySQL的Column中该如何存储呢？  如果是分的话，肯定时当整形来存储的。但如果时浮点的，大家都会选择decimal，因为该类型不会丢失精度。 存储为字符串。浮点数保留指定位数的字符串。在Go中我也尝试过，fmt.Sprintf(&amp;quot;%.2f&amp;quot;, 3.091)还是靠谱的。  这篇文章当然不是来分析这两种存储方式的，也不是来分析该存储什么数据类型的。而仅仅时想阐述一个之前不了解的知识点（知识点太少，写点别的来凑）。
+deault value 在MySQL建表的过程中，一般都会指定DEFAULT VALUE。在执行INSERT时，如果不指定该字段，MySQL会默认使用该默认值来替代。下面是创建的一个decimal类型字段，在Go中使用xorm 来表示，可以看出，xorm使用字符串类型来接收decimal类型的值。
+type table_test struct { PayPrice string `xorm:&amp;quot;not null default 0.00 comment(&#39;支付价钱&#39;) DECIMAL(10,2)&amp;quot;` }  最后发现：在测试环境下，向数据库插入记录时，不指定PayPrice没有任何问题。但到了正式服数据表插入便失败了。报错信息如下：
+{ &amp;quot;Number&amp;quot;: 1366, &amp;quot;Message&amp;quot;: &amp;quot;Incorrect decimal value: &#39;&#39; for column &#39;pay_price&#39; at row 1&amp;quot; }  STRICT_TRANS_TABLES 查询sql_mode如下：
+show variables like &#39;sql_mode&#39;  下面的内容截取至:Strict SQL Mode:</description>
+    </item>
     
     <item>
       <title>MySQL事务</title>

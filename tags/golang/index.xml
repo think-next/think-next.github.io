@@ -17,13 +17,13 @@
       <pubDate>Sat, 03 Nov 2018 00:00:00 +0000</pubDate>
       
       <guid>/blog/2018/11-03-singleton-pattern/</guid>
-      <description>版本 0.01
-在服务运行期间，针对所有goroutine共用一份数据的情况，比如配置信息，都可以选择只读取一次配置文件。但千万要注意 单例中不要保存只属于具体的goroutine的数据，否则会出现相互覆盖的情况。
-单例也是Lazy Initialization的一种，对于经常不使用的变量，只有在使用的时候才进行实例化，整体来说，还是节约资源的。
+      <description>版本 0.02
+在服务运行期间，针对所有goroutine共用一份数据的情况，比如配置信息，都可以选择只读取一次配置文件。但还是要特别注意：
+ 单例中不要保存只属于具体的goroutine的数据，否则会出现相互覆盖的情况。 单例中使用的具体业务数据要通过参数的形式传递，避免有成员变量存在。  单例也是Lazy Initialization的一种，对于经常不使用的变量，只有在使用的时候才进行实例化，整体来说，还是节约资源的。
 或者类似net/http中的client这种类型：
  Clients and Transports are safe for concurrent use by multiple goroutines and for efficiency should only be created once and re-used.
  sync.Once简介 Go语言通过sync包可以方便的实现线程安全的单例模式。最叹为观止的是，sync包的实现如此简单。通常用来处理在服务运行期间，只需要初始化一次的变量。
-// Once is an object that will perform exactly one action. type Once struct { m Mutex done uint32 } func (o *Once) Do(f func()) { if atomic.LoadUint32(&amp;amp;o.done) == 1 { return } // Slow-path. o.m.Lock() defer o.</description>
+// Once is an object that will perform exactly one action. type Once struct { m Mutex done uint32 } func (o *Once) Do(f func()) { if atomic.LoadUint32(&amp;amp;o.done) == 1 { return } // Slow-path.</description>
     </item>
     
     <item>

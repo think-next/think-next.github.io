@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/2018/12-01-deafult-decimal/</loc>
+    <lastmod>2018-12-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/2018/11-20-nss%E5%88%9D%E7%AA%A5/</loc>
     <lastmod>2018-11-20T00:00:00+00:00</lastmod>
   </url>
@@ -274,6 +279,12 @@
   </url>
   
   <url>
+    <loc>/categories/2018-12/</loc>
+    <lastmod>2018-12-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/about/</loc>
   </url>
   
@@ -296,7 +307,7 @@
   
   <url>
     <loc>/blog/2018/</loc>
-    <lastmod>2018-11-20T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -337,7 +348,7 @@
   
   <url>
     <loc>/tags/mysql/</loc>
-    <lastmod>2018-07-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -421,7 +432,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-11-20T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-01T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>
