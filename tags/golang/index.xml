@@ -17,7 +17,7 @@
       <pubDate>Sat, 08 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>/blog/2018/12-08-net-transport/</guid>
-      <description>版本 0.01
+      <description>版本 0.02
 在调用第三方请求时，正确使用Client也不是一件非常容易的事。
 下面是截取的一段描述，建议Client或Transport在整个服务期间最好是全局单例的，Transport本身会维护连接的状态，而且线程安全。强烈建议，不要使用系统提供的任何默认值。
  The Client&amp;rsquo;s Transport typically has internal state (cached TCP connections), so Clients should be reused instead of created as needed. Clients are safe for concurrent use by multiple goroutines.
