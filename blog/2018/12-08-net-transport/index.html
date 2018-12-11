@@ -218,20 +218,12 @@ func (t *Transport) putOrCloseIdleConn(pconn *persistConn) {
 
 <p>首先我们声明一个<code>Dialer</code>用于创建连接。这里特别注意<code>Dialer</code>下的<code>KeepAlive</code>字段，这是<code>Client</code>为了维持长连接，主动发送<code>TCP keep-alive segment</code>的时间间隔，类比<code>ping-pong</code>模式。官方的解释是：<code>KeepAlive specifies the keep-alive period for an active network connection. If zero, keep-alives are not enabled. Network protocols that do not support keep-alives ignore this field.</code>。</p>
 
-<p>下面是设置<code>keep-alive</code>的代码：</p>
-
-<pre><code>if tc, ok := c.(*TCPConn); ok &amp;&amp; d.KeepAlive &gt; 0 {
-	setKeepAlive(tc.fd, true)
-	setKeepAlivePeriod(tc.fd, d.KeepAlive)
-	testHookSetKeepAlive()
-}
-</code></pre>
-
 <p>我们在每次创建连接的时候，都将本地<code>socket</code>地址和服务端<code>socket</code>地址打印出来。如果没有新的地址生成，说明当前连接复用了前面创建的连接。这也侧面证明了是否服务端支持<code>Keep-Alive</code>。但需要强调的是，默认情况下只存在<code>DefaultMaxIdleConnsPerHost</code>个长连接。</p>
 
 <pre><code class="language-go">func PrintLocalDial(ctx context.Context, network, addr string) (net.Conn, error) {
 	dial := net.Dialer{
 		Timeout:   30 * time.Second,
+		//指定的这个时间并没有生效，即使在请求完成后Sleep 30s连接仍然有效
 		KeepAlive: 5 * time.Second,
 	}
 	conn, err := dial.Dial(network, addr)
@@ -273,13 +265,31 @@ func TestRequestBaiDu(t *testing.T) {
 
 <p>通过截取到的请求可以得出：首先，<code>client</code>端每间隔<code>5s</code>发送<code>keep-alive segment</code>，其次，如果连接在<code>15s</code>内不活跃，服务端会关闭连接。通过分析图中的时间轴就可以得出。</p>
 
-<p><img src="https://i.loli.net/2018/12/11/5c0e8e5bb0067.png" alt="img" /></p>
+<p><img src="https://i.loli.net/2018/12/11/5c0e8e5bb0067.png" alt="image" /></p>
+
+<h2 id="tcp-keepalive-timer"><code>TCP KeepAlive Timer</code></h2>
+
+<p>上图<code>Wireshark</code>抓取的数据报文中，那些红字体黑背景的报文给人一种貌似出错的感觉。而他本身就是<code>TCP</code>保活机制。在创建连接后，<code>TCP</code>两端都会启动一个<code>Timer</code>计时器，用于检测连接是否有效。</p>
+
+<p>保活探测报文为一个空报文段（或只含有一个字节）它的序列号等于对方主机发送的ACK报文的最大的序列号减1，因为这一序列号的数据段已经被成功接受，所以不会对到达的报文段产生影响。</p>
+
+<p>如图所示，第一个<code>keep-alive segment</code>的<code>Seq=302</code>，而它最近一次的<code>Seq=303</code>。这样整个保活过程都不会对<code>data transfer</code>产生影响。</p>
+
+<p>下面便是设置<code>keep-alive</code>时间间隔的代码：</p>
+
+<pre><code>if tc, ok := c.(*TCPConn); ok &amp;&amp; d.KeepAlive &gt; 0 {
+	setKeepAlive(tc.fd, true)
+	setKeepAlivePeriod(tc.fd, d.KeepAlive)
+	testHookSetKeepAlive()
+}
+</code></pre>
 
 <p>参考文章：</p>
 
 <ol>
 <li><a href="https://serholiu.com/go-http-client-keepalive"><code>Go HTTP Client 持久连接</code></a></li>
 <li><a href="https://medium.com/@nate510/don-t-use-go-s-default-http-client-4804cb19f779"><code>Don’t use Go’s default HTTP client (in production)</code></a></li>
+<li><a href="https://www.lovemytool.com/blog/2014/11/are-tcp-keep-alive-messages-bad-by-chris-greer.html#comment-6a00e008d957708834022ad3808ea0200c"><code>Are TCP Keep Alive Messages Bad? (By Chris Greer)</code></a></li>
 </ol>
 
 
