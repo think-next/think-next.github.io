@@ -41,7 +41,7 @@ const ( StatusDoPaySuccess = 1 StatusDoPayCompensateSuccess = 2 StatusDoPayCompe
       <pubDate>Fri, 12 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>/blog/2018/10-12-go-interface-%E7%B1%BB%E5%9E%8B/</guid>
-      <description>草稿1
+      <description>草稿 0.02
 introduction duck typing 很形象的解释了interface的本意。它是一种特别的数据类型，内部声明了一组要实现的方法集合，任何实现了这些方法的数据类型都可以认为实现了这个interface。这跟其他语言中的抽象类有异曲同工之处，但却不需要去明确声明实现了这个interface。
 空的interface类型没有声明任何方法，所以GO中所有数据类型都实现了interface{}。这也为我们实现泛型编程提供了可能，虽然使用起来并不舒服。
 protocol interface可以做为一组不相关的对象进行交流的一种规范或约束，类比protobuf，数据字段必须严格按照声明进行传递。只不过interface约束的是待实现的方法。
