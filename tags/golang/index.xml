@@ -138,7 +138,7 @@ value := h.Interface() //将value转换为interface customHead, isOk := value.(s
       <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
       
       <guid>/blog/2018/05-02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</guid>
-      <description>版本：0.02
+      <description>版本：0.03
  当直接使用IDE进行单元测试时，有没有好奇它时如何实现的？比如GoLand写的测试用例。
  所有的代码都需要写测试用例。这不仅仅是对自己的代码负责，也是对别人的负责。
 最近工作中使用glog这个库，因为它对外提供的方法都很简单，想封装处理一下。但却遇到了点麻烦：这个包需要在命令行传递log_dir参数，来指定日志文件的路径。
