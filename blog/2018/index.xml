@@ -493,9 +493,9 @@ go test -c param_test_dir //最后一个参数是待测试的目录  执行后�
 这里有另一个属性-run，用来指定执行的测试用例的匹配模式。举个例子：
 func TestGetRootLogger(t *testing.T) { writeLog(&amp;quot;测试&amp;quot;) } func TestGetRootLogger2(t *testing.T) { writeLog(&amp;quot;测试2&amp;quot;) }  当我在命令行明确匹配执行Logger2，运行的时候确实仅仅执行该测试用例
 go test -v -run Logger2 ./util/ //-v表示verbose，输出相信信息  但是，我发现，在指定了c参数之后，run参数无法生效！这样的话，还真是没有好的办法来处理这种情况。
-性能测试pprof 性能测试涉及如下方面：
- CPU Profiling：CPU分析，按照一定的频率采集所监听的应用程序CPU（含寄存器）的使用情况，可确定应用程序在主动消耗CPU 周期时花费时间的位置 Memory Profiling：内存分析，在应用程序进行堆分配时记录堆栈跟踪，用于监视当前和历史内存使用情况，以及检查内存泄漏 Block Profiling：阻塞分析，记录 goroutine 阻塞等待同步（包括定时器通道）的位置 Mutex Profiling：互斥锁分析，报告互斥锁的竞争情况  在程序中引入如下包，便可以通过web方式查看性能情况，访问的路径为：/debug/pprof/，该路径下会显示多个查看项。该路径下还有其他子页面。
-_ &amp;quot;net/http/pprof&amp;quot;  关于/debug/pprof/下的子页面：</description>
+性能测试pprof 定位服务是否存在资源泄漏或者滥用API的行为，光靠review代码是不行的，最好能借助工具。
+Profile 引用godoc for pprof描述:
+ A Profile is a collection of stack traces showing the call sequences that led to instances of a particular event, such as allocation.</description>
     </item>
     
     <item>

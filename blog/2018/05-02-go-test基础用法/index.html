@@ -137,6 +137,16 @@ func TestGetRootLogger2(t *testing.T) {
 
 <h2 id="性能测试-pprof">性能测试<code>pprof</code></h2>
 
+<p>定位服务是否存在资源泄漏或者滥用<code>API</code>的行为，光靠<code>review</code>代码是不行的，最好能借助工具。</p>
+
+<h3 id="profile"><code>Profile</code></h3>
+
+<p>引用<a href="https://golang.org/pkg/runtime/pprof/#Profile"><code>godoc for pprof</code></a>描述:</p>
+
+<blockquote>
+<p><code>A Profile is a collection of stack traces showing the call sequences that led to instances of a particular event, such as allocation. Packages can create and maintain their own profiles; the most common use is for tracking resources that must be explicitly closed, such as files or network connections.</code></p>
+</blockquote>
+
 <p>性能测试涉及如下方面：</p>
 
 <ol>
