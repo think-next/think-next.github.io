@@ -90,7 +90,7 @@
 
 
 
-<p><strong><em>版本：0.03</em></strong></p>
+<p><strong><em>版本：0.04</em></strong></p>
 
 <blockquote>
 <p>当直接使用<code>IDE</code>进行单元测试时，有没有好奇它时如何实现的？比如<code>GoLand</code>写的测试用例。</p>
@@ -134,6 +134,54 @@ func TestGetRootLogger2(t *testing.T) {
 </code></pre>
 
 <p>但是，我发现，在指定了<code>c</code>参数之后，<code>run</code>参数无法生效！这样的话，还真是没有好的办法来处理这种情况。</p>
+
+<h3 id="使用-map-的测试">使用<code>map</code>的测试</h3>
+
+<p>可以结合使用闭包，设置期望值，来写测试用例。<code>Run</code>函数内部是阻塞的，所以<code>TestSum</code>方法依次执行测试。</p>
+
+<p>同时<code>testSumFunc</code>返回了<code>test</code>方法使用了闭包的特性，对返回函数内部的值是无法确定的。</p>
+
+<pre><code>func TestSum(t *testing.T) {
+	t.Run(&quot;A&quot;, testSumFunc([]int{1, 2, 3}, 7))
+	t.Run(&quot;B&quot;, testSumFunc([]int{2, 3, 4}, 8))
+}
+
+func Sum(numbers []int) int {
+	total := 0
+	for _, v := range numbers {
+		total += v
+	}
+
+	return total
+}
+
+func testSumFunc(numbers []int, expected int) func(t *testing.T) {
+	return func(t *testing.T) {
+		actual := Sum(numbers)
+		if actual != expected {
+			t.Error(fmt.Sprintf(&quot;Expected the sum of %v to be %d but instead got %d!&quot;, numbers, expected, actual))
+		}
+	}
+}
+</code></pre>
+
+<h2 id="main"><code>Main</code></h2>
+
+<p>非常简单，看如下示例。这样在执行任何<code>test case</code>时都首先执行准备，在测试用例执行完毕后，会运行清理工作。需要特别说明的是：<code>flag.Parse()</code>以及<code>os.Exit(m.Run())</code>是不可缺少的两步。</p>
+
+<pre><code class="language-go">func TestMain(m *testing.M) {
+    //准备工作
+	fmt.Println(&quot;start prepare&quot;)
+
+	flag.Parse()
+	exitCode := m.Run()
+    
+    //清理工作
+	fmt.Println(&quot;prepare to clean&quot;)
+	
+	os.Exit(exitCode)
+}
+</code></pre>
 
 <h2 id="性能测试-pprof">性能测试<code>pprof</code></h2>
 
