@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/2018/12-29-how-to-use-godog/</loc>
+    <lastmod>2018-12-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/2018/12-08-net-transport/</loc>
     <lastmod>2018-12-08T00:00:00+00:00</lastmod>
   </url>
@@ -285,7 +290,7 @@
   
   <url>
     <loc>/categories/2018-12/</loc>
-    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -312,7 +317,7 @@
   
   <url>
     <loc>/blog/2018/</loc>
-    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -431,13 +436,13 @@
   
   <url>
     <loc>/tags/translate/</loc>
-    <lastmod>2018-10-10T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-29T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>
