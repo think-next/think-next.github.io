@@ -6,10 +6,27 @@
     <description>Recent content in Translate on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 29 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 05 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/translate/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Gin使用</title>
+      <link>/blog/2018/19-01-06-gin%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sat, 05 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/19-01-06-gin%E4%BD%BF%E7%94%A8/</guid>
+      <description>Gin对net/http包做了封装，支持路由、中间件等特性，极大的方便对Http Server的开发。文章通过一个Test例子，来简要介绍。对于特别基础的部分，请阅读参考文章。
+接口测试 Go中testing包为程序自测提供了便利。可以查阅之前写的博客Go test基础用法，对其内容，我还是挺满意的。
+使用Postman 对于接口测试，很多情况都在使用Postman这样的工具。首先在本地启动服务，然后在Postman中配置请求的地址和参数、执行请求、查看结果。
+这种方式唯一让人不满意的地方在于：每次修改都需要重启服务。跟直接执行一次Test相比，明显多了一步。
+使用Test 测试基类 下面的代码作为接口测试的基类。
+TestMain中，我们为所有的测试用例指定通用的配置。之后在执行其他Test前，都会先执行TestMain中的代码。有效的避免了代码冗余。
+getRouter方法用于返回一个gin的实例。我们将服务的路由重新在Test中指定，并设置了中间件。
+testHttpResponse是我们请求处理的核心代码，发送请求，并保存响应到w中
+//common_test.go func TestMain(m *testing.M) { //声明执行Test前的操作 gin.SetMode(gin.TestMode) testutils.NewTestApp(&amp;quot;../conf.test.toml&amp;quot;) flag.Parse() os.Exit(m.Run()) } //设置路由，获取框架Gin的实例 func getRouter() *gin.Engine { router := gin.Default() //配置路由，这是我项目中的自定义配置 router.Use(middleware.HeaderProcess()) RouteAPI(router) return router } //统一处理请求返回结果 func testHttpResponse(t *testing.T, r *gin.Engine, req *http.Request, f func(w *httptest.ResponseRecorder) error) { w := httptest.NewRecorder() r.ServeHTTP(w, req) if err := f(w); err != nil { t.Fatal(err) } }  测试用例 下面是具体的测试用例。我们构造了一个Json数据格式的POST请求，然后通过调用testHttpResponse方法来读取接口的响应数据。</description>
+    </item>
     
     <item>
       <title>How to use godog</title>
