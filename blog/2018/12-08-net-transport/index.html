@@ -141,7 +141,7 @@ Transport RoundTripper
 
 <h2 id="缓存-idle-连接">缓存<code>Idle</code>连接</h2>
 
-<p>首先了解缓存长链接的<code>Key</code>是什么，即用来唯一确定连接的<code>Key</code>。我们选来看看它如何从缓存池获取的空闲连接：</p>
+<p>连接是如何被缓存的呢？怎么样唯一确定一个连接？缓存池的底层是什么？诸多问题，下面都会说到。首先解释如何从缓存池获取空闲连接：</p>
 
 <pre><code class="language-go">//1. 获取的方法，截取其中一部分代码
 func (t *Transport) getIdleConn(cm connectMethod) (pconn *persistConn, idleSince time.Time) {
