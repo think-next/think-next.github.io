@@ -106,21 +106,21 @@
 
 <p><strong><code>fixed-point</code></strong> 是将<code>bit</code>位拆分成固定的两部分：小数点前的部分和小数点后的部分。拿<code>32 bit</code>的<code>fixed-point</code>表示举例，可以将其中的<code>24 bit</code>用于表示整数部分，剩余的<code>8 bit</code>表示小数部分。</p>
 
-<p>假如要表示<code>1.625</code>，我们可以将小数点后面的第一个<code>bit</code>表示$\frac12$，第二个<code>bit</code>表示<code>1/4</code>，第三个<code>1/8</code>一直到最后一个<code>1/256</code>。最后的表示就是<code>00000000 00000000 00000001 10100000</code>。这样其实也好理解，因为小数点前是从$2^0$开始向左成倍递增，小数点后从$2^{-1}$开始向右递减。</p>
+<p>假如要表示<code>1.625</code>，我们可以将小数点后面的第一个<code>bit</code>表示<code>$\frac12$</code>，第二个<code>bit</code>表示<code>1/4</code>，第三个<code>1/8</code>一直到最后一个<code>1/256</code>。最后的表示就是<code>00000000 00000000 00000001 10100000</code>。这样其实也好理解，因为小数点前是从$2^0$开始向左成倍递增，小数点后从<code>$2^{-1}$</code>开始向右递减。</p>
 
 <p>因为小数点后面的部分始终小于1，上面这种表达方式能表达的最大数是<code>255/256</code>。再比这个数小，这种结构就无法表示了。</p>
 
 <h2 id="floating-point-basics"><code>Floating-point basics</code></h2>
 
-<p>根据上面的思路，我们用二进制表达一下<code>5.5</code>这个十进制数，转化后是$101.1<em>{(2)}$。继续转换成二进制科学计数法的形式：$1.011</em>{(2)} * 2^2$。在转换的二进制科学计数法过程中，我们将小数点向左移了2位。就跟转换十进制的效果一样：$101.1_{(10)}$ 的科学计数形式为$1.011 * 10^2$。</p>
+<p>根据上面的思路，我们用二进制表达一下<code>5.5</code>这个十进制数，转化后是<code>$101.1_{(2)}$</code>。继续转换成二进制科学计数法的形式：<code>$1.011_{(2)} * 2^2$</code>。在转换的二进制科学计数法过程中，我们将小数点向左移了2位。就跟转换十进制的效果一样：<code>$101.1_{(10)}$</code> 的科学计数形式为<code>$1.011 * 10^2$</code>。</p>
 
-<p>对于二进制科学计数法表达的<code>5.5</code>，我们将其拆分成2部分，<code>1.011</code>是一部分，我们称为<code>mantissa</code>。指数2是另一部分，称为<code>exponent</code>。下面我们要将$1.011_{(2)} * 2^2$ 映射到计算机存储的<code>8 bit</code>结构上。</p>
+<p>对于二进制科学计数法表达的<code>5.5</code>，我们将其拆分成2部分，<code>1.011</code>是一部分，我们称为<code>mantissa</code>。指数2是另一部分，称为<code>exponent</code>。下面我们要将<code>$1.011_{(2)} * 2^2$</code> 映射到计算机存储的<code>8 bit</code>结构上。</p>
 
-<p>我们用第一个<code>bit</code>来表示正负符号，1表示负数，0表示正数。紧接着的<code>4 bit</code>用来表示<code>exponent + 7</code>后的值。    <code>4 bit</code>最大可以表示到<code>15</code>，这也就意味着当前的<code>exponent</code>不能超过<code>8</code>，不能低于<code>-7</code>。最后的<code>3 bit</code>用于存储<code>mantissa</code>的小数部分。你可能有疑问，它的整数部分怎么办呢？这里我们约定整数部分都调整成1，这样就可以节省<code>1 bit</code>了。举个例子，如果要表示的十进制数是0.5，那么最后的二进制数不是$0.1_{(2)}$，而是$1.0 * 2^{-1}$。最后表示的结果就是：<code>0 1001 011</code>。</p>
+<p>我们用第一个<code>bit</code>来表示正负符号，1表示负数，0表示正数。紧接着的<code>4 bit</code>用来表示<code>exponent + 7</code>后的值。    <code>4 bit</code>最大可以表示到<code>15</code>，这也就意味着当前的<code>exponent</code>不能超过<code>8</code>，不能低于<code>-7</code>。最后的<code>3 bit</code>用于存储<code>mantissa</code>的小数部分。你可能有疑问，它的整数部分怎么办呢？这里我们约定整数部分都调整成1，这样就可以节省<code>1 bit</code>了。举个例子，如果要表示的十进制数是0.5，那么最后的二进制数不是<code>$0.1_{(2)}$</code>，而是<code>$1.0 * 2^{-1}$</code>。最后表示的结果就是：<code>0 1001 011</code>。</p>
 
 <p><img src="http://www.toves.org/books/float/fmt_float8.png" alt="" /></p>
 
-<p>再来一个<code>decode</code>的例子，即将<code>0 0101 100</code>还原回原始值。根据之前的描述<code>0101</code>表示的十进制是5，所以<code>exponent = -2</code>，表示回二进制科学计数法的结果：$1.100 * 2^{-2} = 0.011_{(2)}$。我们继续转换成真实精度的数：<code>0.375</code>。</p>
+<p>再来一个<code>decode</code>的例子，即将<code>0 0101 100</code>还原回原始值。根据之前的描述<code>0101</code>表示的十进制是5，所以<code>exponent = -2</code>，表示回二进制科学计数法的结果：<code>$1.100 * 2^{-2} = 0.011_{(2)}$</code>。我们继续转换成真实精度的数：<code>0.375</code>。</p>
 
 <p>最后可以看在，如果<code>mantissa</code>的长度超过<code>3 bit</code>表示的范围，那么数据的存储就会丢失精度，结果就是一个近似值了。</p>
 
@@ -128,13 +128,13 @@
 
 <p>继续按照上面的思路，现在<code>8 bit</code>的浮点表示能表示的数值区间更大。</p>
 
-<p>要表示最小正数的话，<code>sign</code>置为0，接下来的<code>4 bits</code>置为<code>0000</code>，最后的<code>mantissa</code>也置为<code>000</code>。那么最终的表示结果就是：$1.000<em>{(2)} * 2^{-7} = 2^{-7} ≈ 0.0079</em>{(10)}$。</p>
+<p>要表示最小正数的话，<code>sign</code>置为0，接下来的<code>4 bits</code>置为<code>0000</code>，最后的<code>mantissa</code>也置为<code>000</code>。那么最终的表示结果就是：<code>$1.000_{(2)} * 2^{-7} = 2^{-7} ≈ 0.0079_{(10)}$</code>。</p>
 
-<p>表示最大正数的话，<code>sign</code>置为0，其他位也都置为1。最终表示的结果：$1.111<em>{(2)} * 2^{8} = 111100000</em>{(2)} = 480_{(10)}$。所以<code>8 bits</code>浮点表示的正数范围<code>(0.0079, 480]</code>。而<code>8 bits</code> 二进制表示的范围是<code>[1, 127]</code>。范围确实大了很多。</p>
+<p>表示最大正数的话，<code>sign</code>置为0，其他位也都置为1。最终表示的结果：<code>$1.111_{(2)} * 2^{8} = 111100000_{(2)} = 480_{(10)}$</code>。所以<code>8 bits</code>浮点表示的正数范围<code>(0.0079, 480]</code>。而<code>8 bits</code> 二进制表示的范围是<code>[1, 127]</code>。范围确实大了很多。</p>
 
-<p>但是必须注意：<strong>浮点数无法准确表示该区间内的所有数</strong>。拿十进制51来说，用二进制表示是<code>110011</code>。转化为<code>8 bits</code>的浮点数表示：$110011<em>{(2)} = 1.10011</em>{(2)}*2^{5}$。当我们试着去存储的时候，发现<code>3 bits</code>的<code>mantissa</code>放不下现在的<code>10011</code>。我们不得不做近似取值，将结果修改为$1.101<em>{(2)} * 2^{5} = 110100</em>{(2)} = 52_{(10)}$。所以，在我们<code>8 bits</code> 表达的浮点数中<code>51 = 52</code>。这样的处理有时候让我们很无奈，但这也是为了让<code>8 bits</code>表示更大范围的数所必须付出的代价。</p>
+<p>但是必须注意：<strong>浮点数无法准确表示该区间内的所有数</strong>。拿十进制51来说，用二进制表示是<code>110011</code>。转化为<code>8 bits</code>的浮点数表示：<code>$110011_{(2)} = 1.10011_{(2)}*2^{5}$</code>。当我们试着去存储的时候，发现<code>3 bits</code>的<code>mantissa</code>放不下现在的<code>10011</code>。我们不得不做近似取值，将结果修改为<code>$1.101_{(2)} * 2^{5} = 110100_{(2)} = 52_{(10)}$</code>。所以，在我们<code>8 bits</code> 表达的浮点数中<code>51 = 52</code>。这样的处理有时候让我们很无奈，但这也是为了让<code>8 bits</code>表示更大范围的数所必须付出的代价。</p>
 
-<p>从上面的过程中，我们还可以理解在计算中<code>round up</code>和<code>round down</code>的策略。当小数点后的数超过<code>3 bit</code>时，就是展现这个策略的时候。拿<code>19</code>举例，表示成二进制科学计数法：$1.0011 * 2^4$。如果执行<code>round up</code>，最终的结果就是$1.010<em>{(2)} * 2^4 = 20</em>{(10)}$。如果执行<code>round down</code>，结果便是$1.001_{(2)} * 2^4 = 18$。</p>
+<p>从上面的过程中，我们还可以理解在计算中<code>round up</code>和<code>round down</code>的策略。当小数点后的数超过<code>3 bit</code>时，就是展现这个策略的时候。拿<code>19</code>举例，表示成二进制科学计数法：<code>$1.0011 * 2^4$</code>。如果执行<code>round up</code>，最终的结果就是<code>$1.010_{(2)} * 2^4 = 20_{(10)}$</code>。如果执行<code>round down</code>，结果便是<code>$1.001_{(2)} * 2^4 = 18$</code>。</p>
 
 <p>如果我们要提高浮点数表达的精度，<code>mantissa</code>区间就需要更多的<code>bit</code>来表示。拿<code>float32</code>来举例，它是<code>1 bit</code>的<code>sign</code>，<code>8 bits</code>的<code>exponent</code>以及<code>23 bits</code>表示的<code>mantissa</code>。</p>
 
