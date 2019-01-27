@@ -154,7 +154,7 @@ private long waitNextMillis(long currentTimestamp) {
 }
 </code></pre>
 
-<p>最终生成<code>ID</code>的部分如下。正常情况下，当前时间戳是一个十位的整数，拿<code>1547209358</code>举例。转换为二进制的话也才31位<code>bit</code>而已：<code>1011100001110001000101010001110</code>。抛开下面的代码，我们给时间戳分配32位<code>bit</code>的话，也就是左移<code>1</code>bit，最终的结果便是：<code>3094418716</code>。而<code>32bit</code>最大的值是<code>4294967295</code>,可以撑到<code>2106/2/7</code>。</p>
+<p>最终生成<code>ID</code>的部分如下。正常情况下，当前时间戳是一个十位的整数，拿<code>1547209358(s not ms)</code>举例。转换为二进制的话也才31位<code>bit</code>而已：<code>1011100001110001000101010001110</code>。抛开下面的代码，我们给时间戳分配32位<code>bit</code>的话，也就是左移<code>1</code>bit，最终的结果便是：<code>3094418716</code>。而<code>32bit</code>最大的值是<code>4294967295</code>,可以撑到<code>2106/2/7</code>。</p>
 
 <pre><code class="language-java">long id = currentTimestamp &lt;&lt; (TOTAL_BITS - EPOCH_BITS);
 id |= (nodeId &lt;&lt; (TOTAL_BITS - EPOCH_BITS - NODE_ID_BITS));
