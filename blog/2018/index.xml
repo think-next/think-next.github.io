@@ -6,10 +6,21 @@
     <description>Recent content in Fuhui&#39;s Blog on 付辉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 26 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/2018/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>gRPC入门</title>
+      <link>/blog/2018/19-01-26-grpc%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Sat, 26 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/19-01-26-grpc%E5%85%A5%E9%97%A8/</guid>
+      <description>为什么使用grpc 主要包括以下两点原因：
+ protocl buffer一种高效的序列化结构。 支持http 2.0标准化协议。  很对人经常拿thrift跟grpc比较，现在先不发表任何看法，后续会深入thrift进行介绍。
+http/2  HTTP/2 enables a more efficient use of network resources and a reduced perception of latency by introducing header field compression and allowing multiple concurrent exchanges on the same connection… Specifically, it allows interleaving of request and response messages on the same connection and uses an efficient coding for HTTP header fields. It also allows prioritization of requests, letting more important requests complete more quickly, further improving performance.</description>
+    </item>
     
     <item>
       <title>Float的基本介绍</title>

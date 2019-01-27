@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/2018/19-01-26-grpc%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2019-01-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/2018/19-01-16-float%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/</loc>
     <lastmod>2019-01-16T00:00:00+00:00</lastmod>
   </url>
@@ -311,7 +316,7 @@
   
   <url>
     <loc>/categories/2019-01/</loc>
-    <lastmod>2019-01-16T00:00:00+00:00</lastmod>
+    <lastmod>2019-01-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -338,7 +343,7 @@
   
   <url>
     <loc>/blog/2018/</loc>
-    <lastmod>2019-01-16T00:00:00+00:00</lastmod>
+    <lastmod>2019-01-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -349,7 +354,7 @@
   
   <url>
     <loc>/tags/golang/</loc>
-    <lastmod>2019-01-16T00:00:00+00:00</lastmod>
+    <lastmod>2019-01-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -457,13 +462,13 @@
   
   <url>
     <loc>/tags/translate/</loc>
-    <lastmod>2019-01-16T00:00:00+00:00</lastmod>
+    <lastmod>2019-01-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-01-16T00:00:00+00:00</lastmod>
+    <lastmod>2019-01-26T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>
