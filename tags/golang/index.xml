@@ -6,10 +6,24 @@
     <description>Recent content in Golang on 道法自然</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 26 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>垃圾回收之引用计数</title>
+      <link>/blog/2018/19-02-01-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B9%8B%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/</link>
+      <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/19-02-01-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B9%8B%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/</guid>
+      <description>思来想去，决定总结一下垃圾回收机制。引用计数与我结缘最早，也比较简单、基础，遂决定从引用计数入手。
+—— 不管人非笑，不管人毁谤，不管人荣辱，任他功夫有进有退，我只是这致良知的主宰不息，久久自然有得力处
+ Reference Counting 对象在创建时保存一个自身被引用的计数，初始值为1。每次被新的变量引用，该值加1。相反，则减去1。当该值等于0时，占用空间被系统回收。
+什么是对象呢？ var neojos int64 = 32 var ptrNeojos *int64 = &amp;amp;name  如上所示，我们创建了一个int64类型的object，命名为neojos。程序中对该object的操作都是通过使用neojos来实现的。而ptrNeojos其实又创建了一个*int64类型的object，但它的值保存的是neojos的地址。
+对于ptrNeojos来说，它的生命周期跟普通变量的生命周期没有区别。唯一区别的是，当它生命周期结束后，ptrNeojos会被垃圾回收，而底层指向的object却不会。
+如何计数呢？ Object * obj1 = new Object(); // RefCount(obj1) starts at 1 Object * obj2 = obj1; // RefCount(obj1) incremented to 2 as new reference is added Object * obj3 = new Object(); obj2-&amp;gt;SomeMethod(); obj2 = NULL; // RefCount(obj1) decremented to 1 as ref goes away obj1 = obj3; // RefCount(obj1) decremented to 0 and can be collected  obj1指向了一个匿名对象，为了方便，我们叫anonymousObj。上述代码展示了anonymousObj从创建到被垃圾回收的整个过程。垃圾回收对象的内存空间，上述过程中obj1对象的地址不会发生改变，只是底层引用的对象发生了变化。</description>
+    </item>
     
     <item>
       <title>gRPC入门</title>
