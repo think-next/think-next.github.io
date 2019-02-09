@@ -6,10 +6,26 @@
     <description>Recent content in Golang on 道法自然</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>新年彩蛋之中大奖</title>
+      <link>/blog/2018/2019-02-08-%E6%96%B0%E5%B9%B4%E5%BD%A9%E8%9B%8B%E4%B9%8B%E4%B8%AD%E5%A4%A7%E5%A5%96/</link>
+      <pubDate>Sat, 09 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/2019-02-08-%E6%96%B0%E5%B9%B4%E5%BD%A9%E8%9B%8B%E4%B9%8B%E4%B8%AD%E5%A4%A7%E5%A5%96/</guid>
+      <description>2019年计划通过福利彩票发家致富的，可以好好看一看这篇博客。作为新年彩蛋来送给大家，也希望大家能真的中大奖。
+—— 新年快乐，给每个有梦想的程序员
+ 生成随机号 小概率事件也要做的一丝不苟，大家都是程序员，为啥要用别人家写的随机代码。嘎嘎！
+双色球蓝号1-12、红号1-33，非常简单，只需保证生成的红号不相互重复就可以，然后就是考虑如何做到真正的随机。
+还有一个问题就是如何存储一组号码。首先，分成红区和蓝区两部分，最后一个号约定为蓝号。另外，为了方便存储，我们放弃了将每个数字用符号连接的方式，而是自定义了34进制，用于保证每组号码的长度都是7。
+var redBall = map[int]rune{ 1: &#39;1&#39;, 2: &#39;2&#39;, 3: &#39;3&#39;, //...... 31: &#39;V&#39;, 32: &#39;W&#39;, 33: &#39;X&#39;, } var redFlip = map[rune]int{ &#39;1&#39;: 1, &#39;2&#39;: 2, &#39;3&#39;: 3, //... &#39;V&#39;: 31, &#39;W&#39;: 32, &#39;X&#39;: 33, }  我们提供一个编解码的方法，用于将字符串转换为一组号码。对应的，将一组号码转换为长度为7的字符串。
+随机红号范围控制在1-33，蓝号控制在1-16。所以，我们对当前纳秒进行取余，便可以保证数据的正确。对于去重部分，通过map属性来达到目的，map的key存储生成的随机号，value存储对应的编码。因为map结构读取数据时本身也是随机的，所以在生成红号和蓝号的时候便多生成一部分，最后再取6个红号，1个蓝号。
+type TwoColor struct { } //encode func (color *TwoColor) Encode(origin []int) string { runes := make([]rune, 0) for _, v := range origin { if elem, ok := redBall[v]; ok { runes = append(runes, elem) } return string(runes) } //decode func (color *TwoColor) Decode(origin string) []int { result := make([]int, 0) for _, v := range origin { if elem, ok := redFlip[v]; ok { result = append(result, elem) } } return result } //generate random numbers func (color *TwoColor) GenerateRandom() string { redResult := make(map[int]rune, 12) for len(redResult) &amp;lt; 12 { key := time.</description>
+    </item>
     
     <item>
       <title>垃圾回收之引用计数</title>
