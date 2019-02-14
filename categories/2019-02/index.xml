@@ -13,10 +13,10 @@
     
     <item>
       <title>新年彩蛋之中大奖</title>
-      <link>/blog/2018/2019-02-08-%E6%96%B0%E5%B9%B4%E5%BD%A9%E8%9B%8B%E4%B9%8B%E4%B8%AD%E5%A4%A7%E5%A5%96/</link>
+      <link>/blog/2019/2019-02-08-%E6%96%B0%E5%B9%B4%E5%BD%A9%E8%9B%8B%E4%B9%8B%E4%B8%AD%E5%A4%A7%E5%A5%96/</link>
       <pubDate>Sat, 09 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/2019-02-08-%E6%96%B0%E5%B9%B4%E5%BD%A9%E8%9B%8B%E4%B9%8B%E4%B8%AD%E5%A4%A7%E5%A5%96/</guid>
+      <guid>/blog/2019/2019-02-08-%E6%96%B0%E5%B9%B4%E5%BD%A9%E8%9B%8B%E4%B9%8B%E4%B8%AD%E5%A4%A7%E5%A5%96/</guid>
       <description>2019年计划通过福利彩票发家致富的，可以好好看一看这篇博客。作为新年彩蛋来送给大家，也希望大家能真的中大奖。
 —— 新年快乐，给每个有梦想的程序员
  生成随机号 小概率事件也要做的一丝不苟，大家都是程序员，为啥要用别人家写的随机代码。嘎嘎！
@@ -29,10 +29,10 @@ type TwoColor struct { } //encode func (color *TwoColor) Encode(origin []int) st
     
     <item>
       <title>垃圾回收之引用计数</title>
-      <link>/blog/2018/19-02-01-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B9%8B%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/</link>
+      <link>/blog/2019/19-02-01-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B9%8B%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/</link>
       <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/19-02-01-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B9%8B%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/</guid>
+      <guid>/blog/2019/19-02-01-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B9%8B%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/</guid>
       <description>思来想去，决定总结一下垃圾回收机制。引用计数与我结缘最早，也比较简单、基础，遂决定从引用计数入手。
 —— 不管人非笑，不管人毁谤，不管人荣辱，任他功夫有进有退，我只是这致良知的主宰不息，久久自然有得力处
  Reference Counting 对象在创建时保存一个自身被引用的计数，初始值为1。每次被新的变量引用，该值加1。相反，则减去1。当该值等于0时，占用空间被系统回收。
