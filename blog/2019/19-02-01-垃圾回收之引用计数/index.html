@@ -109,7 +109,7 @@
 <h6 id="什么是对象呢">什么是对象呢？</h6>
 
 <pre><code class="language-Go">var neojos int64 = 32
-var ptrNeojos *int64 = &amp;name
+var ptrNeojos *int64 = &amp;neojos
 </code></pre>
 
 <p>如上所示，我们创建了一个<code>int64</code>类型的<code>object</code>，命名为<code>neojos</code>。程序中对该<code>object</code>的操作都是通过使用<code>neojos</code>来实现的。而<code>ptrNeojos</code>其实又创建了一个<code>*int64</code>类型的<code>object</code>，但它的值保存的是<code>neojos</code>的地址。</p>
