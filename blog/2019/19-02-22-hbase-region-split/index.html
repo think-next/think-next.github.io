@@ -97,7 +97,7 @@
 
 
 <blockquote>
-<p>Tables are automatically partitioned horizontally by HBase into regions. Each region comprises a subset of a table&rsquo;s rows`</p>
+<p>Tables are automatically partitioned horizontally by HBase into regions. Each region comprises a subset of a table&rsquo;s rows</p>
 </blockquote>
 
 <h2 id="引言">引言</h2>
@@ -110,7 +110,7 @@
 
 <p><code>HBase</code>中<code>column</code>被划分到一个<code>column family</code>里，所有的<code>column family</code>成员有一个唯一的前缀来标识。比如<code>info:190101</code>和<code>info:190102</code>就属于<code>info family</code>的的成员。有趣的是，虽然<code>column families</code>必须在表<code>schema definition</code>中被声明，但它的成员却是能够随意添加。</p>
 
-<p>关于<code>Region</code>，作为分布式<code>HBase</code>集群数据的最小单元，每个<code>RegionServer</code>管理着<code>table regions</code>的一个子集。客户端在和<code>HBase</code>交互时，都需要请求集群的<code>ZooKeeper</code>来获取集群的服务信息，缓存相关的元信息，之后跟具体的<code>RegionServer</code>做交互请求。</p>
+<p>关于<code>Region</code>，作为分布式<code>HBase</code>集群数据的最小单元，每个<code>RegionServer</code>管理着<code>table regions</code>的若干个子集。客户端在和<code>HBase</code>交互时，都需要请求集群的<code>ZooKeeper</code>来获取集群的服务信息，缓存相关的元信息，之后就跟具体的<code>RegionServer</code>做交互了。</p>
 
 <h2 id="reading-data"><code>Reading Data</code></h2>
 
@@ -132,11 +132,13 @@
 
 <p>之所以可以这样划分，是因为<code>HBase</code>中数据行是以<code>RowKey</code>的字典序排列的，并且<code>RowKey</code>是全局唯一的。这样的划分策略对<code>RowKey</code>的设计有点需求，如果<code>RowKey</code>的随机性不好，在分布式集群中，负责<code>Region_1</code>的<code>RegionServer</code>负载和负责<code>Region_2</code>的负载相差可能会很多，导致资源的利用很不均衡。</p>
 
-<p>其实也很好理解，就比如以中国的姓作为<code>RowKey</code>的前缀，那么负责“王、李”的<code>RegionServer</code>的负载就会很高，因为这些数据都会根据<code>StartKey-EndKey</code>写入到具体的<code>Region</code>上。很多时候，为了使数据分布的更加均匀，充分利用集群的资源，我们需要对原始的<code>RowKey</code>做一次<code>HASH</code>处理，在原始的<code>RowKey</code>和实际存储的<code>RowKey</code>之间有一个固定的映射关系。</p>
+<p>其实也很好理解，就比如以中国的姓作为<code>RowKey</code>的前缀，那么负责“王、李”的<code>RegionServer</code>的负载就会很高，因为这些数据都会根据<code>StartKey-EndKey</code>写入到具体的<code>Region</code>上。很多时候，为了使数据分布的更加均匀，充分利用集群的资源，我们需要对原始的<code>RowKey</code>做一次<code>HASH</code>处理，在原始的<code>RowKey</code>和实际存储的<code>RowKey</code>之间生成一个固定的映射关系。</p>
 
 <h2 id="extension"><code>extension</code></h2>
 
-<p>处理问题的思想都是相通的，比如<code>HBase</code>对数据存储到不同<code>Region</code>中。本质上也是：对数据进行分片，来扩展写操作。具体点就是：将数据划分成多个完全独立的子集，客户端通过映射关系，定向到具体的数据分片进行处理。工作中接触最多的非<code>MySQL</code>莫属，对数据的如何分片，根本还在于<strong>业务最终要实现怎样的查询</strong>，设计中尽量避免分片数据集的关联表查询，可能会有痛苦。</p>
+<p>处理问题的思想都是相通的，比如<code>HBase</code>将数据存储到不同<code>Region</code>中。本质上也是：对数据进行分片，来扩展写操作。具体点就是：将数据划分成多个完全独立的子集，客户端通过映射关系，定向到具体的数据分片进行处理。</p>
+
+<p>工作中接触最多的非<code>MySQL</code>莫属，如何对数据分片，根本还在于<strong>业务最终要实现怎样的查询</strong>。注意：设计中要尽量避免分片数据集的关联表查询，可能会有痛苦。</p>
 
 <p>参考文章：</p>
 
