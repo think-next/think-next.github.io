@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DailyLife on 道法自然</title>
+    <link>/tags/dailylife/</link>
+    <description>Recent content in DailyLife on 道法自然</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 03 Mar 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/dailylife/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>读书有感</title>
+      <link>/life/2019/19-03-03-%E8%AF%BB%E4%B9%A6%E6%9C%89%E6%84%9F/</link>
+      <pubDate>Sun, 03 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/life/2019/19-03-03-%E8%AF%BB%E4%B9%A6%E6%9C%89%E6%84%9F/</guid>
+      <description>19年开始读一些文学书，内心多了30的焦虑，希望从别人的故事中汲取力量。
+ 创业，从一个小目标开始 创办了zendesk的企业家写的一本回忆录，从透支信用卡、挤经济舱到开全球限量版轿车、坐私人飞机，其中的艰辛只有他自己最清楚。作为一个看客，最触动我的便是：他们年过30，随便去任何一家公司都能领到不错的薪水，但还是毅然决然地选择了自己创业，他们的理由很简单，如果这次创业机会不能好好把握，自己的人生便是死局。
+创业，可能是每个有梦想的人都必须走的一条路吧。</description>
+    </item>
+    
+  </channel>
+</rss>
