@@ -6,10 +6,23 @@
     <description>Recent content in 蜗牛保持乐观才会爬的更远 on 道法自然</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 22 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 28 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>MySQL事务（2）</title>
+      <link>/blog/2019/19-02-28-mysql%E4%BA%8B%E5%8A%A12/</link>
+      <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/19-02-28-mysql%E4%BA%8B%E5%8A%A12/</guid>
+      <description>花繁柳密能拨开方见手段，风狂雨骤时可立定才是脚跟。
+ 引言 在MySQL处理事务的过程中，遇到如下报错：
+Error 1205: Lock wait timeout exceeded; try restarting transaction  结合日志信息，很快的定位了问题代码并做了修复，但这个报错却一直存在。观念里，只要等待一段时间，这个错误就应该消失啊，是哪里出问题了？
+问题 代码在执行Begin之后，处理到某个逻辑直接return处理，没有关闭事务导致的。因为SQL操作的记录一直占着锁得不到释放，所以后续对该行记录进行写操作时，就会报这个错误。示例代码如下：
+func (notify *Sign) HandleSign(ctx *context.Context) error { // 事务操作，开启事务 if err := ses.Begin(); err != nil { return err } // 这里需要特别注意，正常情况必须加上 // defer ses.Close() // 更新Log表记录 _, err := ses.Where(&amp;quot;id = ?&amp;quot;, contractLog.Id).Cols(&amp;quot;status&amp;quot;).Update(contractLog) if err != nil { ses.Rollback() return err } //这个地方直接return导致的，这个事务没有关闭，导致上面的锁一直没有释放 return nil if err := ses.Commit(); err !</description>
+    </item>
     
     <item>
       <title>HBase Region Split</title>

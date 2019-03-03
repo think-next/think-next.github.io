@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>MySQL事务（2） - 道法自然</title>
+    <meta property="og:title" content="MySQL事务（2） - 道法自然">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.14.1/styles/googlecode.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/">Blog</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>MySQL事务（2）</h1>
+
+
+
+
+    
+    
+    <section class="post-meta">
+        <span class="post-author">付辉
+        
+            
+            
+             /  2019-02-28
+            
+        </span>
+        
+        <a href="/tags/transaction">transaction</a>
+        
+    </section>
+    
+
+
+
+<hr>
+      </header>
+
+
+
+
+
+<blockquote>
+<p>花繁柳密能拨开方见手段，风狂雨骤时可立定才是脚跟。</p>
+</blockquote>
+
+<h2 id="引言">引言</h2>
+
+<p>在<code>MySQL</code>处理事务的过程中，遇到如下报错：</p>
+
+<pre><code>Error 1205: Lock wait timeout exceeded; try restarting transaction
+</code></pre>
+
+<p>结合日志信息，很快的定位了问题代码并做了修复，但这个报错却一直存在。观念里，只要等待一段时间，这个错误就应该消失啊，是哪里出问题了？</p>
+
+<h2 id="问题">问题</h2>
+
+<p>代码在执行<code>Begin</code>之后，处理到某个逻辑直接<code>return</code>处理，没有关闭事务导致的。因为<code>SQL</code>操作的记录一直占着锁得不到释放，所以后续对该行记录进行写操作时，就会报这个错误。示例代码如下：</p>
+
+<pre><code class="language-go">func (notify *Sign) HandleSign(ctx *context.Context) error {
+
+	// 事务操作，开启事务
+	if err := ses.Begin(); err != nil {
+		return err
+	}
+
+	// 这里需要特别注意，正常情况必须加上
+	// defer ses.Close()
+
+	// 更新Log表记录
+	_, err := ses.Where(&quot;id = ?&quot;, contractLog.Id).Cols(&quot;status&quot;).Update(contractLog)
+	if err != nil {
+		ses.Rollback()
+		return err
+	}
+
+	//这个地方直接return导致的，这个事务没有关闭，导致上面的锁一直没有释放
+	return nil
+
+	if err := ses.Commit(); err != nil {
+		return err
+	}
+	ses.Close()
+}
+</code></pre>
+
+<p>问题的关键就在于<code>Begin</code>后，没有执行<code>Rollback</code>或<code>Commit</code>，导致事务没有被关闭。这里特别强调<code>defer close()</code>的作用，下面是文档对<code>Close</code>的注释。</p>
+
+<blockquote>
+<p><code>Close release the connection from pool</code></p>
+
+<p><code>When Close be called, if session is a transaction and do not call Commit or Rollback, then call Rollback</code></p>
+</blockquote>
+
+<h2 id="processlist"><code>PROCESSLIST</code></h2>
+
+<pre><code class="language-sql">SHOW [FULL] PROCESSLIST
+</code></pre>
+
+<p>使用如上命令，查看是否存在一个线程执行占用了很长的时间，这体现在它<code>Sleep</code>的时间上。果不其然，确实有那么一个，但我忍住没有<code>KILL</code>它。因为我无法确定就是这个线程导致的。</p>
+
+<blockquote>
+<p><a href="https://dev.mysql.com/doc/refman/8.0/en/show-processlist.html"><code>SHOW PROCESSLIST</code></a> shows which threads are running. If you have the <a href="https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process"><code>PROCESS</code></a> privilege, you can see all threads. Otherwise, you can see only your own threads (that is, threads associated with the MySQL account that you are using). If you do not use the <code>FULL</code> keyword, only the first 100 characters of each statement are shown in the <code>Info</code> field.</p>
+</blockquote>
+
+<h2 id="show-engine-innodb-status"><code>SHOW ENGINE INNODB STATUS</code></h2>
+
+<blockquote>
+<p><a href="https://dev.mysql.com/doc/refman/8.0/en/show-engine.html"><code>SHOW ENGINE INNODB STATUS</code></a> displays extensive information from the standard <code>InnoDB</code> Monitor about the state of the <code>InnoDB</code> storage engine. For information about the standard monitor and other <code>InnoDB</code> Monitors that provide information about <code>InnoDB</code> processing, see <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-monitors.html">Section 15.16, “InnoDB Monitors”</a>.</p>
+</blockquote>
+
+<p>一上来就引用<a href="https://dev.mysql.com/doc/refman/8.0/en/show-engine.html"><code>SHOW ENGINE Syntax</code></a>也是因为没有接触过这个命令，网上说：当你更新表中的某条记录时，如果一些别的线程对这条记录上了锁，并且执行占用时间较长的话，就会导致你对该条记录的操作超时。</p>
+
+<p>不过非常遗憾，我查看了它输出的结果，并没有显示出这条问题<code>SQL</code>。</p>
+
+<h2 id="innodb-lock-wait-timeout-https-dev-mysql-com-doc-refman-5-7-en-innodb-parameters-html-sysvar-innodb-lock-wait-timeout"><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_lock_wait_timeout"><code>innodb_lock_wait_timeout</code></a></h2>
+
+<pre><code class="language-sql">show variables like 'innodb_lock_wait_timeout';
+</code></pre>
+
+<p>当事务没有被释放时，后续事务执行失败的等待时间就是由这个设置决定的。当事务访问这条记录超过这个时间还无法获得锁，就会报引言中的错误。</p>
+
+<blockquote>
+<p>The length of time in seconds an <code>InnoDB</code> <a href="https://dev.mysql.com/doc/refman/5.7/en/glossary.html#glos_transaction">transaction</a> waits for a <a href="https://dev.mysql.com/doc/refman/5.7/en/glossary.html#glos_row_lock">row lock</a> before giving up. The default value is 50 seconds. A transaction that tries to access a row that is locked by another <code>InnoDB</code> transaction waits at most this many seconds for write access to the row before issuing the following error</p>
+</blockquote>
+
+<p>参考文章：</p>
+
+<ol>
+<li><a href="https://stackoverflow.com/questions/5836623/getting-lock-wait-timeout-exceeded-try-restarting-transaction-even-though-im"><code>stackoverflow problem</code></a></li>
+</ol>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2019/19-02-22-hbase-region-split/">HBase Region Split</a></span>
+  <span class="nav-next"></span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/tex.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/go.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">DDF</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+
