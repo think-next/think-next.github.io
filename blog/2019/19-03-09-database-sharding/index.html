@@ -100,6 +100,8 @@
 
 <p>可以简单地认为<code>Sharding</code>就是对数据进行分组的过程，即将整个大的数据集按照某种规则分割成多个小数据集。类似于网站服务，针对不同的服务，提供服务的链接地址也不相同，而这其实也是一个<code>Sharding</code>的过程。在业务层实现的<code>Sharding</code>，关键就在<code>Route</code>的过程，即将具体的数据请求，发送到对的数据集上。</p>
 
+<p><img src="https://raw.githubusercontent.com/GitHubSi/blog/master/static/img/database-sharding/sharding-router.png" alt="img" /></p>
+
 <h2 id="why-sharding"><code>Why Sharding</code></h2>
 
 <p>在一些本地缓存的开发中，如果以<code>map</code>的形式存储数据集，因为该类型不支持并发操作。所以，在读写操作时就需要对<code>map</code>进行加锁，。可想而知，每次操作都加锁、解锁，而读写缓存又是一个高频操作，性能当然上不去。<strong>解决的思路</strong>就是对数据集进行<code>Sharding</code>操作，将整个数据集拆分成多个小块数据集，这样分别对小块数据集进行加锁、解锁，性能就提高了不少。</p>
