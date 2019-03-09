@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Database Sharding - 道法自然</title>
+    <meta property="og:title" content="Database Sharding - 道法自然">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.14.1/styles/googlecode.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/">Blog</a></li>
+        
+        <li><a href="/life/">Life</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>Database Sharding</h1>
+
+
+
+
+    
+    
+    <section class="post-meta">
+        <span class="post-author">付辉
+        
+            
+            
+             /  2019-03-09
+            
+        </span>
+        
+        <a href="/tags/mysql">MySQL</a>
+        
+    </section>
+    
+
+
+
+<hr>
+      </header>
+
+
+
+
+
+<h2 id="sharding"><code>Sharding</code></h2>
+
+<p>可以简单地认为<code>Sharding</code>就是对数据进行分组的过程，即将整个大的数据集按照某种规则分割成多个小数据集。类似于网站服务，针对不同的服务，提供服务的链接地址也不相同，而这其实也是一个<code>Sharding</code>的过程。在业务层实现的<code>Sharding</code>，关键就在<code>Route</code>的过程，即将具体的数据请求，发送到对的数据集上。</p>
+
+<h2 id="why-sharding"><code>Why Sharding</code></h2>
+
+<p>在一些本地缓存的开发中，如果以<code>map</code>的形式存储数据集，因为该类型不支持并发操作。所以，在读写操作时就需要对<code>map</code>进行加锁，。可想而知，每次操作都加锁、解锁，而读写缓存又是一个高频操作，性能当然上不去。<strong>解决的思路</strong>就是对数据集进行<code>Sharding</code>操作，将整个数据集拆分成多个小块数据集，这样分别对小块数据集进行加锁、解锁，性能就提高了不少。</p>
+
+<p>如果数据集过大，表的检索性能会越来越低。而如果对数据集进行分片，对分片数据并发检索，以及将某些分片数据直接加载到内存，都可以极大提高操作的效率。</p>
+
+<h2 id="数据均匀分布">数据均匀分布</h2>
+
+<p>拿博客网站举例，老用户发布的博客肯定要多于新注册的用户。那么，在对博客记录进行分表操作时，就需要考虑数据均匀分布的问题，避免老用户都分布在一张表内，造成这张表数据额外大。</p>
+
+<p>解决的办法很简单，即对<code>Sharding Key</code>先做<code>Hash</code>处理，然后再实现数据<code>Sharding</code>过程。比如在系统设计初期，我们考虑基于用户<code>UID</code>将博客数据拆分成4个表。最基础的分表策略：</p>
+
+<pre><code class="language-go">// 最终的结果就是blog_0, blog_1, blog_2, blog_3
+tablePrefix := blog_%d
+tableName := fmt.Sprintf(&quot;%s&quot;, uid&amp;3)
+</code></pre>
+
+<h2 id="业务类型">业务类型</h2>
+
+<p>分表过程需要结合实际项目，不同的业务场景，需求千差万别、更别说底层的数据了。拿购物场景来说，以商铺为分表<code>Key</code>，将同商铺的交易数据存储到一起，跟以用户为分表<code>Key</code>，将同用户的交易数据存储到一起。这两种情形完全不同，而这也将决定项目后期数据统计的方式。</p>
+
+<p>所以分区的根本再于业务要执行的具体数据操作，要知道跨分区来之行<code>Join</code>之类的操作，不仅处理麻烦，性能也是问题。</p>
+
+<h2 id="服务化">服务化</h2>
+
+<p>实际项目中，按单一维度划分业务数据几乎是不可能的。比如上面说到的购物场景，商铺是一个维度，用户同样也是一个维度，当然，产品的类型还是一个维度。</p>
+
+<p>这种情况下，我们一般选择将项目拆分成多个微服务，划分各个微服务间操作数据的边界范围。而服务与服务间的数据交互都通过调用<code>API</code>来实现。</p>
+
+<p>需要注意的是，服务拆分一定要从具体业务来考虑，尽可能将关联数据保存在同一个物理节点，避免每次操作都需要通过网络来发送大量的数据。</p>
+
+<h2 id="唯一id">唯一ID</h2>
+
+<p>将数据集划分为多个分区后，基于不同的业务，查询场景也会面临各种各样的问题。比如在博客网站中，假设我们基于用户做了<code>Sharding</code>分表，而查询需求是：按照博客的发布时间顺序来展示列表。所以，这样的分页查询会异常痛苦。假设列表每页展示20条记录，那么代码就需要从每张表中都取出最近的20条记录做<code>merge</code>处理。如果<code>Sharding</code>的个数足够多，那简直无法继续了。</p>
+
+<pre><code class="language-sql">-- 获取最新的20条发帖记录。如果要翻页的话，将Now替换为上一批数据的最早时间
+select * from blog_0 where create_time &lt; Now() order by id desc;
+select * from blog_1 where create_time &lt; Now() order by id desc;
+select * from blog_2 where create_time &lt; Now() order by id desc;
+select * from blog_3 where create_time &lt; Now() order by id desc;
+</code></pre>
+
+<p>正确的处理方式是<strong>创建一张关系表</strong>，记录所有博客元信息。而上述分页操作都基于该关系表来实现。但<code>Sharding</code>中的各表都有各自的自增主键，都从1开始自增，这就导致各个表中存在相同的标识符，再关系表中无法做区分。解决的办法大致有两种：</p>
+
+<ol>
+<li><p>生成<a href="http://neojos.com/blog/2019/19-01-11-%E6%8E%A2%E8%AE%A8%E5%88%86%E5%B8%83%E5%BC%8Fid%E7%94%9F%E6%88%90%E7%B3%BB%E7%BB%9F/">全局唯一的<code>UUID</code></a>，或者稍加改造，生成全局自增且占内存小的唯一ID。</p></li>
+
+<li><p>在关系表中不仅保存分区表的主键ID，还额外保存分区ID，通过这两个ID来唯一标识一条记录。</p></li>
+</ol>
+
+<hr />
+
+<p>参考文章：</p>
+
+<ol>
+<li><a href="https://www.citusdata.com/blog/2018/01/10/sharding-in-plain-english/"><code>Database sharding explained in plain English</code></a></li>
+<li><a href="https://www.citusdata.com/blog/2017/08/09/principles-of-sharding-for-relational-databases/"><code>Principles of Sharding for Relational Databases</code></a></li>
+<li><a href="https://www.citusdata.com/blog/2016/08/10/sharding-for-a-multi-tenant-app-with-postgres/"><code>Sharding a multi-tenant app with Postgres</code></a></li>
+<li><a href="http://www.craigkerstiens.com/2012/11/30/sharding-your-database/"><code>Sharding Your Database</code></a></li>
+<li><a href="https://www.scienjus.com/database-sharding-review/"><code>数据库水平分片心得</code></a></li>
+</ol>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2019/19-02-28-mysql%E4%BA%8B%E5%8A%A12/">MySQL事务（2）</a></span>
+  <span class="nav-next"></span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/tex.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/go.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">DDF</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+
