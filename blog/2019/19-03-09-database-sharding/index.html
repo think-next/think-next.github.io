@@ -100,6 +100,8 @@
 
 <p>可以简单地认为<code>Sharding</code>就是对数据进行分组的过程，即将整个大的数据集按照某种规则分割成多个小数据集。类似于网站服务，针对不同的服务，提供服务的链接地址也不相同，而这其实也是一个<code>Sharding</code>的过程。在业务层实现的<code>Sharding</code>，关键就在<code>Route</code>的过程，即将具体的数据请求，发送到对的数据集上。</p>
 
+<p><strong>基本要求</strong>：<code>Sharding</code>前后执行相同的查询，返回的结果也相同。</p>
+
 <p><img src="https://raw.githubusercontent.com/GitHubSi/blog/master/static/img/database-sharding/sharding-router.png" alt="img" /></p>
 
 <h2 id="why-sharding"><code>Why Sharding</code></h2>
@@ -110,7 +112,7 @@
 
 <h2 id="数据均匀分布">数据均匀分布</h2>
 
-<p>拿博客网站举例，老用户发布的博客肯定要多于新注册的用户。那么，在对博客记录进行分表操作时，就需要考虑数据均匀分布的问题，避免老用户都分布在一张表内，造成这张表数据额外大。</p>
+<p>拿博客网站举例，老用户发布的博客肯定要多于新注册的用户。那么，在对博客记录进行分表操作时，就需要考虑数据均匀分布的问题，避免老用户都分布在一张表内，造成某张表数据额外大。</p>
 
 <p>解决的办法很简单，即对<code>Sharding Key</code>先做<code>Hash</code>处理，然后再实现数据<code>Sharding</code>过程。比如在系统设计初期，我们考虑基于用户<code>UID</code>将博客数据拆分成4个表。最基础的分表策略：</p>
 
@@ -131,7 +133,7 @@ tableName := fmt.Sprintf(&quot;%s&quot;, uid&amp;3)
 
 <p>这种情况下，我们一般选择将项目拆分成多个微服务，划分各个微服务间操作数据的边界范围。而服务与服务间的数据交互都通过调用<code>API</code>来实现。</p>
 
-<p>需要注意的是，服务拆分一定要从具体业务来考虑，尽可能将关联数据保存在同一个物理节点，避免每次操作都需要通过网络来发送大量的数据。</p>
+<p>需要注意的是，服务拆分一定要从具体业务来考虑，尽可能将相关的数据放在一起，提高检索性能，避免每次操作都需要通过网络来发送数据。</p>
 
 <h2 id="唯一id">唯一ID</h2>
 
