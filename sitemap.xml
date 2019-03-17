@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/2019/%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8C/</loc>
+    <lastmod>2019-03-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/life/2019/19-03-12-%E5%B9%B3%E5%B8%B8%E5%BF%83/</loc>
     <lastmod>2019-03-12T00:00:00+00:00</lastmod>
   </url>
@@ -368,7 +373,7 @@
   
   <url>
     <loc>/categories/2019-03/</loc>
-    <lastmod>2019-03-12T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -384,7 +389,7 @@
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -459,6 +464,12 @@
   </url>
   
   <url>
+    <loc>/tags/mysql/</loc>
+    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/net/</loc>
     <lastmod>2018-09-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -526,13 +537,13 @@
   
   <url>
     <loc>/tags/translate/</loc>
-    <lastmod>2019-02-15T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-03-12T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-16T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>

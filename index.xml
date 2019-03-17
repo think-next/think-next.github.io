@@ -6,10 +6,25 @@
     <description>Recent content in 蜗牛保持乐观才会爬的更远 on 道法自然</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 12 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 16 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>数据一致性（二）</title>
+      <link>/blog/2019/%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8C/</link>
+      <pubDate>Sat, 16 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8C/</guid>
+      <description>我们流连于事物的表象，满足浅尝辄止的片刻欢愉，却几乎从不久留。我们在人生的道路上争先恐后，却吝于用片刻思考目标和方向。
+ 概述 至今没有接触过MySQL多主的情况，即存在多个MySQL实例同时负责读写请求（抛弃只读库）。思考后认为：没有这么实现的技术难点在于：数据的一致性得不到保证。此外，还会涉及：
+ MySQL采用自增主键索引的话，多主之间的数据同步简直是灾难。 内部锁机制的优势大打折扣，跨主库间的锁应该也是灾难级别的吧。  那么支持分布式的其他数据库又是怎么搞定这个问题的呢？比如Cassandra，多个节点之间可以同时处理读写请求，那么它是如何处理节点间数据同步以保证一致性的呢？
+MySQL数据的一致性  We think this is an unacceptable burden to place ondevelopers and that consistency problems should be solved at the database level
+ 细细想想，MySQL自身实现的数据一致性也是相当复杂的。以Innodb举例，如果通过普通索引执行查询，首先获取到的仅仅是主键索引，后面还需要通过主键索引来获取完整的记录。查询如此，更新亦如此。
+Master-Slave模式 通常情况下，MySQL部署都是一主多从。Master作为更新DB的入口，而Slave的数据通过binlog来进行同步。所以大胆想一想，有没有可能出现一种情况（假设id=1记录原始的name值为neojos）：
+## 第一次同步数据 update s-1 set name=&amp;quot;neojos-1&amp;quot; where id = 1; ## 失败 update s-2 set name=&amp;quot;neojos-1&amp;quot; where id = 1; ## 成功 update s-3 set name=&amp;quot;neojos-1&amp;quot; where id = 1; ## 成功 ## 第二次同步数据 update s-1 set name=&amp;quot;neojos-2&amp;quot; where id = 1; ## 成功 update s-2 set name=&amp;quot;neojos-2&amp;quot; where id = 1; ## 失败 update s-3 set name=&amp;quot;neojos-2&amp;quot; where id = 1; ## 成功  最后，数据库从某一个时间点开始，Master和Salve的数据会变得不一致了当然不可能，MySQL在数据同步上做了非常硬的约束。包括Slave_IO_Running、Slave_SQL_Running以及Seconds_Behind_Master等。</description>
+    </item>
     
     <item>
       <title>平常心</title>
