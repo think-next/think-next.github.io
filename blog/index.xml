@@ -6,17 +6,36 @@
     <description>Recent content in DDF&#39;s Blog on 道法自然</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 16 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 24 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Go 调度模型（一）</title>
+      <link>/blog/2019/19-03-24-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%80/</link>
+      <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/19-03-24-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%80/</guid>
+      <description>题：想清楚了就去做，做的时候不要再回头想。
+ OS Scheduler 在操作系统中保存了运行的进程列表，以及进程的运行状态(运行中、可运行及不可运行)。当进程运行时长超过了被分配的时间片(比如每10ms)，那么该进程会被系统抢占，然后在该CPU上执行别的进程。所以，OS的调度是抢占式的，可能抢占策略略有不同。
+当进程被抢占时，需要保存该进程运行的上下文，并被重新放回到调度器，等待下一次被执行。
+Golang Scheduler  Goroutine scheduler
+The scheduler&amp;rsquo;s job is to distribute ready-to-run goroutines over worker threads.
+ 如图所示，OS层看到是只有Go进程以及运行的多个线程，而Goroutine本身是被Golang Runtime Scheduler调度管理的。
+对OS而言，Go Binary是一个系统进程。内部Go Program对系统API的调度都是通过Runtime level解释来实现。Runtine记录了每个Goroutine的信息，在当前进程的线程池中按照顺序依次调度Goroutine。
+Golang在Runtime内部实现了自己的调度，并不是基于时间切片的抢占式调度，而是基于Goroutines的协作式调度，目的就是要让Goroutine在OS-Thread中发挥出更多的并发优势。所以，在Runtime过程中，只有当正在运行的Goroutine被阻塞或者运行结束时，别的Goroutine才会被调度。常见的阻塞情形包括：
+ 阻塞的系统调用方式，比如文件或网络操作 垃圾自动回收  整体而言，Goroutine的数量大于Threads数量会更有优势，这样当其他Goroutine阻塞时，别的Goroutine就会被执行。
+Goroutine G用于表示Goroutine及它所包含的栈和状态信息。Goroutine存在于Go Runtime的的虚拟空间，而非OS中。
+// src/runtime/runtime2.go // 以下结构体精简了很多字段 type g struct { stack stack // offset known to runtime/cgo m *m // current m; offset known to arm liblink sched gobuf stktopsp uintptr // expected sp at top of stack, to check in traceback param unsafe.</description>
+    </item>
+    
+    <item>
       <title>数据一致性（二）</title>
-      <link>/blog/2019/%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8C/</link>
+      <link>/blog/2019/19-03-16-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8C/</link>
       <pubDate>Sat, 16 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8C/</guid>
+      <guid>/blog/2019/19-03-16-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8C/</guid>
       <description>我们流连于事物的表象，满足浅尝辄止的片刻欢愉，却几乎从不久留。我们在人生的道路上争先恐后，却吝于用片刻思考目标和方向。
  概述 至今没有接触过MySQL多主的情况，即存在多个MySQL实例同时负责读写请求（抛弃只读库）。思考后认为：没有这么实现的技术难点在于：数据的一致性得不到保证。此外，还会涉及：
  MySQL采用自增主键索引的话，多主之间的数据同步简直是灾难。 内部锁机制的优势大打折扣，跨主库间的锁应该也是灾难级别的吧。  那么支持分布式的其他数据库又是怎么搞定这个问题的呢？比如Cassandra，多个节点之间可以同时处理读写请求，那么它是如何处理节点间数据同步以保证一致性的呢？

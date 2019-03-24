@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Go 调度模型（一） - 道法自然</title>
+    <meta property="og:title" content="Go 调度模型（一） - 道法自然">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.14.1/styles/googlecode.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/">Blog</a></li>
+        
+        <li><a href="/life/">Life</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>Go 调度模型（一）</h1>
+
+
+
+
+    
+    
+    <section class="post-meta">
+        <span class="post-author">付辉
+        
+            
+            
+             /  2019-03-24
+            
+        </span>
+        
+        <a href="/tags/translate">translate</a>
+        
+        <a href="/tags/golang">golang</a>
+        
+    </section>
+    
+
+
+
+<hr>
+      </header>
+
+
+
+
+
+<blockquote>
+<p>题：想清楚了就去做，做的时候不要再回头想。</p>
+</blockquote>
+
+<h2 id="os-scheduler"><code>OS Scheduler</code></h2>
+
+<p>在操作系统中保存了运行的进程列表，以及进程的运行状态(运行中、可运行及不可运行)。当进程运行时长超过了被分配的时间片(比如每10<code>ms</code>)，那么该进程会被系统抢占，然后在该<code>CPU</code>上执行别的进程。所以，<code>OS</code>的调度是抢占式的，可能抢占策略略有不同。</p>
+
+<p>当进程被抢占时，需要保存该进程运行的上下文，并被重新放回到调度器，等待下一次被执行。</p>
+
+<h2 id="golang-scheduler">Golang Scheduler</h2>
+
+<blockquote>
+<p>Goroutine scheduler</p>
+
+<p>The scheduler&rsquo;s job is to distribute ready-to-run goroutines over worker threads.</p>
+</blockquote>
+
+<p>如图所示，<code>OS</code>层看到是只有<code>Go</code>进程以及运行的多个线程，而<code>Goroutine</code>本身是被<code>Golang Runtime Scheduler</code>调度管理的。</p>
+
+<p>对<code>OS</code>而言，<code>Go Binary</code>是一个系统进程。内部<code>Go Program</code>对系统<code>API</code>的调度都是通过<code>Runtime level</code>解释来实现。<code>Runtine</code>记录了每个<code>Goroutine</code>的信息，在当前进程的线程池中按照顺序依次调度<code>Goroutine</code>。</p>
+
+<p><img src="https://i.loli.net/2019/03/24/5c974c7eb3407.png" alt="`Diagram of the relationships between the
+runtime, OS, and programmer defined code`" /></p>
+
+<p><code>Golang</code>在<code>Runtime</code>内部实现了自己的调度，并不是基于时间切片的抢占式调度，而是基于<code>Goroutines</code>的协作式调度，目的就是要让<code>Goroutine</code>在<code>OS-Thread</code>中发挥出更多的并发优势。所以，在<code>Runtime</code>过程中，只有当正在运行的<code>Goroutine</code>被阻塞或者运行结束时，别的<code>Goroutine</code>才会被调度。常见的阻塞情形包括：</p>
+
+<ul>
+<li>阻塞的系统调用方式，比如文件或网络操作</li>
+<li>垃圾自动回收</li>
+</ul>
+
+<p>整体而言，<code>Goroutine</code>的数量大于<code>Threads</code>数量会更有优势，这样当其他<code>Goroutine</code>阻塞时，别的<code>Goroutine</code>就会被执行。</p>
+
+<h2 id="goroutine">Goroutine</h2>
+
+<p><code>G</code>用于表示<code>Goroutine</code>及它所包含的栈和状态信息。<code>Goroutine</code>存在于<code>Go Runtime</code>的的虚拟空间，而非<code>OS</code>中。</p>
+
+<pre><code class="language-go">// src/runtime/runtime2.go
+// 以下结构体精简了很多字段
+type g struct {
+	stack       stack   // offset known to runtime/cgo
+
+	m              *m      // current m; offset known to arm liblink
+	sched          gobuf
+	stktopsp       uintptr        // expected sp at top of stack, to check in traceback
+	param          unsafe.Pointer // passed parameter on wakeup
+	atomicstatus   uint32
+	stackLock      uint32 // sigprof/scang lock; TODO: fold in to atomicstatus
+}
+</code></pre>
+
+<p>代码中，通过追加<code>go</code>前缀遍可以创建<code>groutine</code>。</p>
+
+<pre><code class="language-go">go func(){
+}
+</code></pre>
+
+<h2 id="machine"><code>Machine</code></h2>
+
+<p>物理执行的单元，用于表示<code>OS Threads</code>。<code>M</code>包含当前运行的<code>Goroutine</code>信息等。</p>
+
+<pre><code class="language-go">// src/runtime/runtime2.go
+type m struct {
+	g0      *g     // goroutine with scheduling stack
+	
+	// Fields not known to debuggers.
+	goSigStack    gsignalStack // Go-allocated signal handling stack
+	curg          *g       // current running goroutine
+	p             puintptr // attached p for executing go code (nil if not executing go code)
+	spinning      bool // m is out of work and is actively looking for work
+	blocked       bool // m is blocked on a note
+	freeWait      uint32 // if == 0, safe to free g0 and delete m (atomic)
+	alllink       *m // on allm
+	schedlink     muintptr
+	createstack   [32]uintptr    // stack that created this thread.
+	thread        uintptr // thread handle
+	freelink      *m      // on sched.freem
+}
+</code></pre>
+
+<h2 id="processor"><code>Processor</code></h2>
+
+<p><code>P</code>记录了<code>G</code>和<code>M</code>的相关信息，<code>P</code>需要调度<code>M</code>来让<code>M</code>执行<code>G</code>的代码。在<code>P</code>中包含了本地可运行的<code>Goroutine</code>队列，这样的设计也是为了优化访问全局<code>Goroutines</code>队列频繁加锁的性能问题。当一个新的<code>G</code>被创建，它会被追加在相应<code>P</code>队列的末尾，以保证最终会被执行。</p>
+
+<p>此外，当<code>P</code>没有可运行的<code>Goroutine</code>处理时，它会随机从其他<code>P</code>的<code>Goroutines</code>队列末尾取一半<code>G</code>用于自己消费。</p>
+
+<pre><code class="language-go">// src/runtime/runtime2.go
+type p struct {
+	lock mutex
+
+	id          int32
+	m           muintptr   // back-link to associated m (nil if idle)
+	mcache      *mcache
+
+	// Queue of runnable goroutines. Accessed without lock.
+	runqhead uint32
+	runqtail uint32
+	runq     [256]guintptr
+	// runnext, if non-nil, is a runnable G that was ready'd by
+	// the current G and should be run next instead of what's in
+	// runq if there's time remaining in the running G's time
+	// slice. It will inherit the time left in the current time
+	// slice. If a set of goroutines is locked in a
+	// communicate-and-wait pattern, this schedules that set as a
+	// unit and eliminates the (potentially large) scheduling
+	// latency that otherwise arises from adding the ready'd
+	// goroutines to the end of the run queue.
+	runnext guintptr
+
+	// Available G's (status == Gdead)
+	gfree    *g
+}
+</code></pre>
+
+<h2 id="code-snippet"><code>Code snippet</code></h2>
+
+<p>尝试执行下面的代码，会发现这其实是一个死循环，最后的打印结果永远得不到输出。</p>
+
+<pre><code class="language-go">package main
+import &quot;fmt&quot;
+import &quot;time&quot;
+import &quot;runtime&quot;
+
+func main() {
+    var result int
+    processors := runtime.GOMAXPROCS(0)  
+    for i := 0; i &lt; processors; i++ {
+        go func() {
+            for { result++ }
+        }()
+    }
+    time.Sleep(time.Second)       //wait for go function to increment the value.
+    fmt.Println(&quot;result =&quot;, result)
+}
+</code></pre>
+
+<p>在<code>Golang</code>运行时，创建的<code>OS Threads</code>最多等于<code>GOMAXPROCS</code>，<code>Goroutine</code>就在这有限的<code>OS Threads</code>上被调度执行。</p>
+
+<p>在代码中，当前并行运行的<code>Goroutine</code>全部用来做无限循环的累加操作，运行数量等于<code>GOMAXPROCS</code>。而<code>main</code>是一个额外的<code>Goroutine</code>。根据<code>Golang Scheduler</code>的设定，因为其他<code>Goroutine</code>都在紧张的运行，调度器并不会将其中的任何一个<code>Goroutine</code>挂起，所以<code>main goroutine</code>永远不会被调度执行。</p>
+
+<p>在实际开发中，因为存在诸如<code>channel</code>或者<code>Api requeest</code>等情况，程序<code>hang</code>住的可能行并不大。</p>
+
+<p>参考文章：</p>
+
+<ol>
+<li><a href="https://medium.com/@riteeksrivastava/a-complete-journey-with-goroutines-8472630c7f5c"><code>A complete journey with Goroutines</code></a></li>
+<li><a href="http://www.sarathlakshman.com/2016/06/15/pitfall-of-golang-scheduler"><code>A pitfall of golang scheduler</code></a></li>
+<li><a href="http://www1.cs.columbia.edu/~aho/cs6998/reports/12-12-11_DeshpandeSponslerWeiss_GO.pdf"><code>Analysis of the Go runtime scheduler</code></a></li>
+</ol>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2019/19-03-16-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8C/">数据一致性（二）</a></span>
+  <span class="nav-next"></span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/tex.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/go.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">DDF</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+
