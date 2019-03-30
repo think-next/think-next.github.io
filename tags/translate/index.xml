@@ -41,7 +41,7 @@ P的改进 原始Go的调度并没有P，仅有G、M以及Sched。当时系统�
       <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>/blog/2019/19-03-24-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%80/</guid>
-      <description>题：想清楚了就去做，做的时候不要再回头想。
+      <description>想清楚了就去做，做的时候不要再回头想。
  OS Scheduler 在操作系统中保存了运行的进程列表，以及进程的运行状态(运行中、可运行及不可运行)。当进程运行时长超过了被分配的时间片(比如每10ms)，那么该进程会被系统抢占，然后在该CPU上执行别的进程。所以，OS的调度是抢占式的，可能抢占策略略有不同。
 当进程被抢占时，需要保存该进程运行的上下文，并被重新放回到调度器，等待下一次被执行。
 Golang Scheduler  Goroutine scheduler
@@ -76,7 +76,6 @@ Master-Slave模式 通常情况下，MySQL部署都是一主多从。Master作�
       
       <guid>/blog/2019/19-02-15-mark-sweep-gc/</guid>
       <description>把事做成的才是赢家，在口头上压倒对手，真的没有那么重要！
-—— 大道至简
  Whirlwind introduce 当对象不再被引用时，对象不会立即被垃圾回收。也不存在任何子系统来专门记录使用的内存情况。
 当系统没有内存空间时，触发GC处理。它首先会枚举所有的Root对象，然后递归的遍历根对象的引用关系。给遍历到的对象设置一个特殊标记，表明该对象是可达的，空间不能被回收。
 当标记结束后，GC进入清洗阶段，任何在内存中没有被这次垃圾回收标记的对象都会被系统回收。
@@ -107,8 +106,7 @@ void Mark(Object* pObj) { if (!Marked(pObj)) // Marked returns the marked flag f
       <pubDate>Sat, 26 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/blog/2019/19-01-26-grpc%E5%85%A5%E9%97%A8/</guid>
-      <description>这篇文章是给别人写的，不是我要写的。我也来卖个萌！！
-—— 时间飞逝 如一名携带信息的邮差 但那只不过是我们的比喻 人物是杜撰的 匆忙是假装的 携带的也不是人的讯息
+      <description>时间飞逝 如一名携带信息的邮差 但那只不过是我们的比喻 人物是杜撰的 匆忙是假装的 携带的也不是人的讯息
  为什么使用grpc 主要包括以下两点原因：
  protocl buffer一种高效的序列化结构。 支持http 2.0标准化协议。  很对人经常拿thrift跟grpc比较，现在先不发表任何看法，后续会深入thrift进行介绍。
 http/2  HTTP/2 enables a more efficient use of network resources and a reduced perception of latency by introducing header field compression and allowing multiple concurrent exchanges on the same connection… Specifically, it allows interleaving of request and response messages on the same connection and uses an efficient coding for HTTP header fields.</description>

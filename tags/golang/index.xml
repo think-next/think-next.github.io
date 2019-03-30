@@ -41,7 +41,7 @@ P的改进 原始Go的调度并没有P，仅有G、M以及Sched。当时系统�
       <pubDate>Mon, 25 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>/blog/2019/19-03-25-%E5%9F%BA%E4%BA%8Ego%E7%9A%84cron-job%E5%AE%9E%E7%8E%B0/</guid>
-      <description>题：随风要稳，逆风要浪
+      <description>随风要稳，逆风要浪
  timer  The Timer type represents a single event. When the Timer expires, the current time will be sent on C.
  下面使用timer实现在固定时间点执行task任务。
 处理思路：每次在执行task前，计算当前时间和执行时间点的差值，通过设置timer未来的触发时间来执行任务。在完成本次task之后，重置timer的触发时间，等待下一次执行。
@@ -54,7 +54,7 @@ const IntervalPeriod time.Duration = 24 * time.Hour // 核心函数：在h:m:s�
       <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>/blog/2019/19-03-24-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%80/</guid>
-      <description>题：想清楚了就去做，做的时候不要再回头想。
+      <description>想清楚了就去做，做的时候不要再回头想。
  OS Scheduler 在操作系统中保存了运行的进程列表，以及进程的运行状态(运行中、可运行及不可运行)。当进程运行时长超过了被分配的时间片(比如每10ms)，那么该进程会被系统抢占，然后在该CPU上执行别的进程。所以，OS的调度是抢占式的，可能抢占策略略有不同。
 当进程被抢占时，需要保存该进程运行的上下文，并被重新放回到调度器，等待下一次被执行。
 Golang Scheduler  Goroutine scheduler
@@ -73,8 +73,7 @@ Goroutine G用于表示Goroutine及它所包含的栈和状态信息。Goroutine
       <pubDate>Sat, 09 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>/blog/2019/19-02-08-%E6%96%B0%E5%B9%B4%E5%BD%A9%E8%9B%8B%E4%B9%8B%E4%B8%AD%E5%A4%A7%E5%A5%96/</guid>
-      <description>2019年计划通过福利彩票发家致富的，可以好好看一看这篇博客。作为新年彩蛋来送给大家，也希望大家能真的中大奖。
-—— 新年快乐，给每个有梦想的程序员
+      <description>2019年计划通过福利彩票发家致富的，可以好好看一看这篇博客。作为新年彩蛋来送给大家，也希望大家能真的中大奖。—— 新年快乐，给每个有梦想的程序员
  生成随机号 小概率事件也要做的一丝不苟，大家都是程序员，为啥要用别人家写的随机代码。嘎嘎！
 双色球蓝号1-12、红号1-33，非常简单，只需保证生成的红号不相互重复就可以，然后就是考虑如何做到真正的随机。
 还有一个问题就是如何存储一组号码。首先，分成红区和蓝区两部分，最后一个号约定为蓝号。另外，为了方便存储，我们放弃了将每个数字用符号连接的方式，而是自定义了34进制，用于保证每组号码的长度都是7。
@@ -103,8 +102,7 @@ type TwoColor struct { } //encode func (color *TwoColor) Encode(origin []int) st
       <pubDate>Sat, 26 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/blog/2019/19-01-26-grpc%E5%85%A5%E9%97%A8/</guid>
-      <description>这篇文章是给别人写的，不是我要写的。我也来卖个萌！！
-—— 时间飞逝 如一名携带信息的邮差 但那只不过是我们的比喻 人物是杜撰的 匆忙是假装的 携带的也不是人的讯息
+      <description>时间飞逝 如一名携带信息的邮差 但那只不过是我们的比喻 人物是杜撰的 匆忙是假装的 携带的也不是人的讯息
  为什么使用grpc 主要包括以下两点原因：
  protocl buffer一种高效的序列化结构。 支持http 2.0标准化协议。  很对人经常拿thrift跟grpc比较，现在先不发表任何看法，后续会深入thrift进行介绍。
 http/2  HTTP/2 enables a more efficient use of network resources and a reduced perception of latency by introducing header field compression and allowing multiple concurrent exchanges on the same connection… Specifically, it allows interleaving of request and response messages on the same connection and uses an efficient coding for HTTP header fields.</description>

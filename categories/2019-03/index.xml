@@ -41,7 +41,7 @@ P的改进 原始Go的调度并没有P，仅有G、M以及Sched。当时系统�
       <pubDate>Mon, 25 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>/blog/2019/19-03-25-%E5%9F%BA%E4%BA%8Ego%E7%9A%84cron-job%E5%AE%9E%E7%8E%B0/</guid>
-      <description>题：随风要稳，逆风要浪
+      <description>随风要稳，逆风要浪
  timer  The Timer type represents a single event. When the Timer expires, the current time will be sent on C.
  下面使用timer实现在固定时间点执行task任务。
 处理思路：每次在执行task前，计算当前时间和执行时间点的差值，通过设置timer未来的触发时间来执行任务。在完成本次task之后，重置timer的触发时间，等待下一次执行。
@@ -54,7 +54,7 @@ const IntervalPeriod time.Duration = 24 * time.Hour // 核心函数：在h:m:s�
       <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>/blog/2019/19-03-24-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%80/</guid>
-      <description>题：想清楚了就去做，做的时候不要再回头想。
+      <description>想清楚了就去做，做的时候不要再回头想。
  OS Scheduler 在操作系统中保存了运行的进程列表，以及进程的运行状态(运行中、可运行及不可运行)。当进程运行时长超过了被分配的时间片(比如每10ms)，那么该进程会被系统抢占，然后在该CPU上执行别的进程。所以，OS的调度是抢占式的，可能抢占策略略有不同。
 当进程被抢占时，需要保存该进程运行的上下文，并被重新放回到调度器，等待下一次被执行。
 Golang Scheduler  Goroutine scheduler
