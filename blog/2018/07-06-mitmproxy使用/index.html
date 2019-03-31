@@ -55,6 +55,8 @@
         <li><a href="/about/">About</a></li>
         
         
+
+
         </ul>
       </nav>
     </header>
@@ -92,7 +94,6 @@
 
 
 
-
 <p>介绍一款非常好用的抓包工具，官网地址：<a href="https://www.mitmproxy.org">https://www.mitmproxy.org</a>。实际上，在调试苹果<code>IAP</code>支付时，始终没有抓成功过，反而因为设置了代理，导致苹果<code>沙盒用户</code>无法成功支付。它名字的全拼是<code>Man-in-the-middle-proxy</code>，代表中间人攻击。</p>
 
 <h2 id="常用的快捷键">常用的快捷键</h2>
@@ -109,10 +110,13 @@
 
 <h2 id="常用的过滤表达式">常用的过滤表达式</h2>
 
-<p>列表界面,按<code>f</code>进入过滤模式。详细的过滤表达式，可以查看：<a href="https://docs.mitmproxy.org/stable/concepts-filters/"><code>Filter expressions</code></a>。
-1. <code>~h regex    Header</code>
-    . <code>~u regex URL</code>
-3. <code>~m regex    Method</code></p>
+<p>列表界面,按<code>f</code>进入过滤模式。详细的过滤表达式，可以查看：<a href="https://docs.mitmproxy.org/stable/concepts-filters/"><code>Filter expressions</code></a>。</p>
+
+<ol>
+<li><code>~h regex    Header</code></li>
+<li><code>~u regex    URL</code></li>
+<li><code>~m regex    Method</code></li>
+</ol>
 
 <h2 id="原理">原理</h2>
 
