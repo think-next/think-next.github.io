@@ -97,6 +97,10 @@
 
 
 
+<blockquote>
+<p><code>人生的挫折感并不取决于境遇本身，而取决于境遇和自我期待之间的落差。</code></p>
+</blockquote>
+
 <h2 id="概述"><code>概述</code></h2>
 
 <p>对<code>interface</code>类型操作，如何对内部的值进行处理和分析。比如判断<code>interface</code>是否底层存储的是<code>struct</code>类型，以及该<code>struct</code>是否含有某个特定的<code>Field</code>值。</p>
@@ -118,6 +122,8 @@ if v.Kind() != reflect.Struct {
     return NewError(http.ErrorInvalidParam, &quot;interface类型必须是struct结构&quot;, nil)
 }
 </code></pre>
+
+<p>一些其他的操作，比如通过<code>reflect.Value</code>获取<code>reflect.Type</code>类型，通过诸如<code>Index</code>、<code>Elem</code>、<code>MapIndex</code>、<code>Field</code>等来操作不同的数据类型，当然调用前最好结合<code>Kind</code>对实际类型进行判断，保证调用的安全性。</p>
 
 <h2 id="查找指定的-field">查找指定的<code>Field</code></h2>
 

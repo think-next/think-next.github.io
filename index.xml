@@ -702,12 +702,14 @@ netstat -n | awk &#39;/^tcp/ {++S[$NF]} END {for(a in S) {print a, S[a]} }&#39; 
       <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
       
       <guid>/blog/2018/05-31-go%E5%8F%8D%E5%B0%84/</guid>
-      <description>概述 对interface类型操作，如何对内部的值进行处理和分析。比如判断interface是否底层存储的是struct类型，以及该struct是否含有某个特定的Field值。
+      <description>人生的挫折感并不取决于境遇本身，而取决于境遇和自我期待之间的落差。
+ 概述 对interface类型操作，如何对内部的值进行处理和分析。比如判断interface是否底层存储的是struct类型，以及该struct是否含有某个特定的Field值。
 interface类型包含两部分内容：dynamic type和dynamic value。当转换为interface类型后（操作是默认的），原类型下声明的方法，interface类型就无法再调用了。
 实际工作中，interface类型会接收任意类型的值，处理的过程很多都是通过reflect实现的。
 reflect.Value reflect里两个主要角色：Value和Type。Value用于处理值的操作，反射过程中处理的值是原始值的值拷贝，所以操作中要注意区分值传递和地址传递。
 对于指针类型的值，只有获取其原始值，才可以达到修改的目的。如下所示，obj实际类型是一个struct的指针，想要将其转换成“值类型”，调用Elem方法来实现。
-//获取指针的实际类型 v := reflect.ValueOf(obj) //Kind == Ptr v = v.Elem() if v.Kind() != reflect.Struct { return NewError(http.ErrorInvalidParam, &amp;quot;interface类型必须是struct结构&amp;quot;, nil) }  查找指定的Field 我们假设struct中包含有某个特殊Field，那么在接口层面该如何进行判断呢？比如，查看结构体中是否含有Data的Field.
+//获取指针的实际类型 v := reflect.ValueOf(obj) //Kind == Ptr v = v.Elem() if v.Kind() != reflect.Struct { return NewError(http.ErrorInvalidParam, &amp;quot;interface类型必须是struct结构&amp;quot;, nil) }  一些其他的操作，比如通过reflect.Value获取reflect.Type类型，通过诸如Index、Elem、MapIndex、Field等来操作不同的数据类型，当然调用前最好结合Kind对实际类型进行判断，保证调用的安全性。
+查找指定的Field 我们假设struct中包含有某个特殊Field，那么在接口层面该如何进行判断呢？比如，查看结构体中是否含有Data的Field.
 reflect本身提供了多种判断形式。以FieldByName为例，Type和Value都实现了该方法，但返回值不相同。reflect要求调用的值本身需要是struct类型才可以。
 h := v.FieldByName(HeaderHField) //HeaderHField为自定义常亮 if h.IsValid() { }  将value转换为interface类型 reflect操作的interface类型，即由interface转换为reflect.Value类型，同样，逆向的转换也是可以的。
 它提供了interface()方法。转换之后，我们就可以继续使用断言进行实际类型转换了。
