@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>design pattern on 道法自然</title>
+    <link>/tags/design-pattern/</link>
+    <description>Recent content in design pattern on 道法自然</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/design-pattern/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>设计模式-适配器模式</title>
+      <link>/blog/2019/2019-04-07-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/2019-04-07-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</guid>
+      <description>当你眼里只有赚钱的时候，你就永远无法把事情本身给做好，收获的也会很有限，最后可能还赚不到钱。- From Myself
+ 下面的代码是github.com/gin-gonic/gin/binding中获取Binding实例的逻辑。我在想：这段代码体现的是什么设计模式呢？写法上肯定是工厂模式，因为它基于不同的contentType创建返回具体的实例。但从宏观上来看，它算不算一个适配器呢？
+func Default(method, contentType string) Binding { if method == &amp;quot;GET&amp;quot; { return Form } switch contentType { case MIMEJSON: return JSON case MIMEXML, MIMEXML2: return XML case MIMEPROTOBUF: return ProtoBuf case MIMEMSGPACK, MIMEMSGPACK2: return MsgPack default: //case MIMEPOSTForm, MIMEMultipartPOSTForm: return Form } }  Adapter Pattern 适配器模式不仅仅局限于代码设计，在现实世界中也经常会看到。比如苹果手机的转接线，将新的、方形的Lighting接口适配到旧的、圆孔的耳机上。
+Adapter Pattern主要被用来适配两个不兼容的接口，给两个独立或者不兼容的类提供一个兼容模式，而不需要修改两者内部的具体实现。Adapter Pattern可以是一个独立的新对象或者新方法，在设计中扮演一个桥梁的作用，或者是对不相互兼容的数据格式进行转换。又或者是重用系统老的既存类，来提供新的功能。
+Purpose 适配器主要通过转换数据格式，组合、引用不兼容的对象，最终实现我们期盼的功能。
+ 老系统到新系统的业务迁移。新老系统首先在接收数据的格式上不尽相同，其次新系统可能也需要调用老系统的内部实现。 重新对对象进行封装，用来提供业务期望的新功能。或者让不兼容的对象可以一起工作。  Design Pattern Diagram  Target：Client端调用的新接口。 Adapter：将Adaptee适配到Target，实现两者间的转换。 Adaptee：需要去适配的既存接口  Implementation 常见的适配实现主要有两种方式：</description>
+    </item>
+    
+  </channel>
+</rss>
