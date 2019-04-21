@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/2019/2019-04-21-go-module%E4%B8%80/</loc>
+    <lastmod>2019-04-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/2019/2019-04-14-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%89/</loc>
     <lastmod>2019-04-14T00:00:00+00:00</lastmod>
   </url>
@@ -390,6 +395,12 @@
   </url>
   
   <url>
+    <loc>/tags/2019/</loc>
+    <lastmod>2019-04-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/categories/2019-01/</loc>
     <lastmod>2019-01-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -425,7 +436,7 @@
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2019-04-14T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -453,7 +464,7 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2019-03-24T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -483,7 +494,7 @@
   
   <url>
     <loc>/tags/golang/</loc>
-    <lastmod>2019-04-14T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -554,6 +565,12 @@
   </url>
   
   <url>
+    <loc>/categories/summarize/</loc>
+    <lastmod>2019-04-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/tcp/ip/</loc>
     <lastmod>2018-11-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -585,7 +602,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-04-14T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-21T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>

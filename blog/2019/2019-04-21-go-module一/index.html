@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Go Module（一） - 道法自然</title>
+    <meta property="og:title" content="Go Module（一） - 道法自然">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.14.1/styles/googlecode.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/">Blog</a></li>
+        
+        <li><a href="/life/">Life</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+
+
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>Go Module（一）</h1>
+
+
+
+
+    
+    
+    <section class="post-meta">
+        <span class="post-author">付辉
+        
+            
+            
+             /  2019-04-21
+            
+        </span>
+        
+        <a href="/tags/2019">2019</a>
+        
+        <a href="/tags/golang">golang</a>
+        
+    </section>
+    
+
+
+
+<hr>
+      </header>
+
+
+
+
+<blockquote>
+<p><code>半成品</code></p>
+</blockquote>
+
+<h2 id="go111module"><code>GO111MODULE</code></h2>
+
+<p><code>Go 1.1</code>包含了对<code>Go Modules</code>的<a href="https://golang.org/cmd/go/#hdr-Preliminary_module_support">预支持</a>，包括调整后的<code>go get</code>命令。后续版本总<code>GOPATH</code>和老的<code>go get</code>可能会被官方移除。</p>
+
+<p>在<code>Go Modules</code>中支持了一个临时环境变量：<code>GO111MODULE</code>，可以赋值为<code>off</code>、<code>on</code>或<code>auto</code>。</p>
+
+<ol>
+<li>值为<code>off</code>，表示不支持<code>Go Modules</code>模式，<code>Go</code>仍然在<code>vendor</code>和<code>GoPATH</code>路径下查找依赖；</li>
+<li>值为<code>on</code>，表示当前明确使用<code>Go Modules</code>，<code>Go</code>不再去<code>GOPATH</code>下查找任何依赖；</li>
+<li>值为<code>auto</code>或未设置，表示是否启用<code>Go Modules</code>依赖当前的目录情况，当编译的项目在<code>GoPATH/src</code>之外，或者当前目录或子目录本身包含<code>go.mod</code>文件，则启用<code>Go Modules</code>模式。</li>
+</ol>
+
+<h2 id="defining-a-module"><code>Defining a module</code></h2>
+
+<p><code>module</code>通过源码根目录下的<code>go.mod</code>文件来<a href="https://golang.org/cmd/go/#hdr-Defining_a_module">定义</a>。根路径下的<code>module</code>是项目依赖包的集合，但会排除子目录的<code>go.mod</code>文件。</p>
+
+<p>下面是<code>go mod</code>文件模版：</p>
+
+<pre><code class="language-go">module example.com/m
+
+require (
+	golang.org/x/text v0.3.0
+	gopkg.in/yaml.v2 v2.1.0
+)
+</code></pre>
+
+<p>要开始使用<code>go mod</code>，仅需要在项目下执行<code>go mod init</code>命令创建<code>go.mod</code>文件即可。</p>
+
+<pre><code class="language-shell">go mod init example.com/m
+</code></pre>
+
+<h2 id="modules-and-vendoring-https-golang-org-cmd-go-hdr-modules-and-vendoring"><a href="https://golang.org/cmd/go/#hdr-Modules_and_vendoring"><code>Modules and vendoring</code></a></h2>
+
+<p>当使用<code>module</code>时，<code>Go</code>命令会完全忽略<code>vendor</code>目录。为了跟之前<code>Go</code>的依赖管理相兼容，我们可以使用<code>go mod vendor</code> 创建<code>vendor</code>目录来存储编译代码的依赖包。如果在编译的时候要使用<code>vendor</code>中的依赖包，需要使用<code>go build -mod=vendor</code>命令。</p>
+
+<pre><code class="language-shell">go mod vendor 
+go build -mod=vendor
+</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2019/2019-04-14-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%89/">Go 调度模型（三）</a></span>
+  <span class="nav-next"></span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/tex.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/go.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">DDF</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+
