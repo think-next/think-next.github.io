@@ -17,14 +17,15 @@
       <pubDate>Sun, 21 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/blog/2019/2019-04-21-go-module%E4%B8%80/</guid>
-      <description>  半成品
+      <description>这世上太多的人，宁愿吃生活苦，也不愿吃自律的苦。大概是因为生活的苦，躺着就来了，而自律的苦，得自己去找。但只有吃得下自律的苦，才有成功的自由，没有一种成功是走得了捷径的，通向真正成功的唯一道路只有自律。越成功，越自律。越自律，越成功。
  GO111MODULE Go 1.1包含了对Go Modules的预支持，包括调整后的go get命令。后续版本总GOPATH和老的go get可能会被官方移除。
 在Go Modules中支持了一个临时环境变量：GO111MODULE，可以赋值为off、on或auto。
  值为off，表示不支持Go Modules模式，Go仍然在vendor和GoPATH路径下查找依赖； 值为on，表示当前明确使用Go Modules，Go不再去GOPATH下查找任何依赖； 值为auto或未设置，表示是否启用Go Modules依赖当前的目录情况，当编译的项目在GoPATH/src之外，或者当前目录或子目录本身包含go.mod文件，则启用Go Modules模式。  Defining a module module通过源码根目录下的go.mod文件来定义。根路径下的module是项目依赖包的集合，但会排除子目录的go.mod文件。
 下面是go mod文件模版：
 module example.com/m require ( golang.org/x/text v0.3.0 gopkg.in/yaml.v2 v2.1.0 )  要开始使用go mod，仅需要在项目下执行go mod init命令创建go.mod文件即可。
 go mod init example.com/m  Modules and vendoring 当使用module时，Go命令会完全忽略vendor目录。为了跟之前Go的依赖管理相兼容，我们可以使用go mod vendor 创建vendor目录来存储编译代码的依赖包。如果在编译的时候要使用vendor中的依赖包，需要使用go build -mod=vendor命令。
-go mod vendor go build -mod=vendor  </description>
+go mod vendor go build -mod=vendor  Go Get 首先，go get解析需要新增哪些依赖。可以通过在包名后添加@version或者@branch等方式来取代命令的默认更新行为。如果后缀指定为@none，则表明该依赖应该被移除。
+其次，go get会下载、编译、安装指定的包。包的安装模式也是被允许的，比如使用go get golang.org/x/perf/cmd/..来更新cmd下的所有子包。</description>
     </item>
     
     <item>
