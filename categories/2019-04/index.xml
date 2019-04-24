@@ -6,10 +6,48 @@
     <description>Recent content in 2019-04 on 道法自然</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Apr 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/2019-04/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Kafka中消息分配策略</title>
+      <link>/blog/2019/kafka%E4%B8%AD%E6%B6%88%E6%81%AF%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/</link>
+      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/kafka%E4%B8%AD%E6%B6%88%E6%81%AF%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/</guid>
+      <description>非淡泊无以明，非宁静无以致远
+ Question 关于kafka中partation和consumer的是如何执行分配的。今早骑自行车的时候突然想起这个问题。它是怎么分配的，我记得我看到好几次相关的介绍文章，现在却想不起来？
+sense 很多时候，我们在看完一篇技术文档时，感觉对其中的内容都了解了，其实不然。这也是所谓的被动输入和主动输出的区别所在。相比主动输出而言，被动输入缺少了深层思考的态度。得到一些老师的课里就谈到过主动输出的重要性。
+很多概念都已经记不起来了，文章的内容可能也不够准确，但重在思考和想法的过程：
+Thinking partaion是数据的存储单位，一个topic至少存在一个partation。consumer使用主动拉数据的方式来消费消息，这就是所有已知概念。那么partation和consumer是如何分配的呢？*这里我们假设消息数据总量是一样的*。
+首先，应该存在一个类似LVS的负载均衡器，因为当consumer增加或者减少时，对应的分配策略也需要做相应的调整。在consumer注册成为消费者时，提交的信息中有consumer Group的概念，这非常好理解，即同一个组的consumer会独立处理一份数据。同时，因为有了Group，我们在管理的时候就会简单很多。当然，所有的讨论都是以一个Group为前提的。
+1:1 从最简单的开始考虑，假设现在partation和consumer的数量比例是1:1，那就没有那么多事了，简单明了。
+1:2 假设是1:2呢？问题来了，好比现在只有一个数据，但有AB两个线程都要读它，且A和B中有且只有一个能读到。这种情况在计算机中相当普遍，通用的处理方式就是加锁，以保证数据只被其中一个线程处理。但加锁就意味着性能开销，尤其是高并发的场景。
+继续按照这个思路来考虑，两个consumer同时向一个partation发起请求，需要一个全局锁来控制每个消息只能返回给请求中的一个。相比较1:1的方式，这样的性能肯定是提高了不少。
+2:1 假设是2:1呢？这个也很直观，两份数据，但只有一个消费者，那肯定都需要这一个消费者来处理了，就跟CPU任务调度还有些类似。
+如果跟1:2的分配策略比较呢？这里通过将原来的一份数据平均分成两份，去掉了1:2中加锁的开销，但只有一个connsumer来消费数据。好比是单核CPU任意处理数据跟双核CPU加锁处理数据。
+2:2 假设是2:2呢，我们可以平均分配partation和consumer，而且这样系统性能却得到最大提升，不仅去掉了锁的开销，还有两个线程来同时消费。
+结论 通过上面的对比，我们可以清楚的发现，通过调整partation和consumer的数量就可以将系统性能达到最大，完全不需要引入锁机制。这样想的话，分配就很简单了。</description>
+    </item>
+    
+    <item>
+      <title>Go Module（一）</title>
+      <link>/blog/2019/2019-04-21-go-module%E4%B8%80/</link>
+      <pubDate>Sun, 21 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/2019-04-21-go-module%E4%B8%80/</guid>
+      <description>这世上太多的人，宁愿吃生活苦，也不愿吃自律的苦。大概是因为生活的苦，躺着就来了，而自律的苦，得自己去找。但只有吃得下自律的苦，才有成功的自由，没有一种成功是走得了捷径的，通向真正成功的唯一道路只有自律。越成功，越自律。越自律，越成功。
+ GO111MODULE Go 1.1包含了对Go Modules的预支持，包括调整后的go get命令。后续版本总GOPATH和老的go get可能会被官方移除。
+在Go Modules中支持了一个临时环境变量：GO111MODULE，可以赋值为off、on或auto。
+ 值为off，表示不支持Go Modules模式，Go仍然在vendor和GoPATH路径下查找依赖； 值为on，表示当前明确使用Go Modules，Go不再去GOPATH下查找任何依赖； 值为auto或未设置，表示是否启用Go Modules依赖当前的目录情况，当编译的项目在GoPATH/src之外，或者当前目录或子目录本身包含go.mod文件，则启用Go Modules模式。  Defining a module module通过源码根目录下的go.mod文件来定义。根路径下的module是项目依赖包的集合，但会排除子目录的go.mod文件。
+下面是go mod文件模版：
+module example.com/m require ( golang.org/x/text v0.3.0 gopkg.in/yaml.v2 v2.1.0 )  要开始使用go mod，仅需要在项目下执行go mod init命令创建go.mod文件即可。
+go mod init example.com/m  Modules and vendoring 当使用module时，Go命令会完全忽略vendor目录。为了跟之前Go的依赖管理相兼容，我们可以使用go mod vendor 创建vendor目录来存储编译代码的依赖包。如果在编译的时候要使用vendor中的依赖包，需要使用go build -mod=vendor命令。
+go mod vendor go build -mod=vendor  Go Get 首先，go get解析需要新增哪些依赖。可以通过在包名后添加@version或者@branch等方式来取代命令的默认更新行为。如果后缀指定为@none，则表明该依赖应该被移除。
+其次，go get会下载、编译、安装指定的包。包的安装模式也是被允许的，比如使用go get golang.org/x/perf/cmd/..来更新cmd下的所有子包。</description>
+    </item>
     
     <item>
       <title>Go 调度模型（三）</title>
