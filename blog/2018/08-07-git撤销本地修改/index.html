@@ -185,6 +185,13 @@ error: Commit 603c1333339bc9b5ad4d8b864e948d4bd950bf05 is a merge but no -m opti
 fatal: 还原失败
 </code></pre>
 
+<h3 id="revert-vs-reset"><code>Revert vs Reset</code></h3>
+
+<ol>
+<li><code>reset</code>是在正常的<code>commit</code>历史中,删除了指定的<code>commit</code>,这时 <code>HEAD</code> 是向后移动了,而 <code>revert</code> 是在正常的<code>commit</code>历史中再<code>commit</code>一次,只不过是反向提交,他的 <code>HEAD</code> 是一直向前的.</li>
+<li><code>git revert</code>是用一次新的<code>commit</code>来回滚之前的<code>commit</code>，<code>git reset</code>是直接删除指定的<code>commit</code></li>
+</ol>
+
 <h3 id="revert-the-revert"><code>Revert the revert</code></h3>
 
 <p>听着这个标题，就感觉很有意思！</p>
