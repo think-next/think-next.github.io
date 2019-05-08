@@ -99,7 +99,11 @@
 
 
 
-<p><strong><em>版本：0.02</em></strong></p>
+<hr />
+
+<blockquote>
+<p>懂得了好多大道理，但还是过不好这一生！</p>
+</blockquote>
 
 <p>用了git就会发现，再也不想用svn了。</p>
 
@@ -144,15 +148,14 @@ git reset --hard HEAD
 
 <h2 id="stash-储藏"><code>stash</code>储藏</h2>
 
-<p>将==工作区==的修改进行存储，使本地重新成为一个干净的环境，同时方便在之后应用这些改动。可以用于存储==已被索引的文件==、或者==未跟踪的文件==。执行<code>git stash -a</code>来暂存所有改动的文件。</p>
-
-<p>下面是执行的流程：</p>
+<p>将工作区的修改进行存储，使本地重新成为一个干净的环境，同时方便在之后应用这些改动。可以用于存储已被索引的文件、或者未跟踪的文件。执行<code>git stash -a</code>来暂存所有改动的文件。常见的包括如下命令：</p>
 
 <ol>
 <li><code>git stash</code> 储藏修改</li>
 <li><code>git stash list</code> 查看储藏的列表</li>
 <li>将储藏重新应用到当前分支：<code>git statsh apply stash@{1}</code>或者<code>git stash pop stash@{1}</code>。后者会在应用暂存之后从堆栈上删除</li>
 <li><code>git stash drop stash@{1}</code> 移除暂存</li>
+<li><code>git stash clear</code> 清除本地所有的贮藏历史</li>
 </ol>
 
 <h2 id="使用-clean-清空">使用<code>clean</code>清空</h2>
