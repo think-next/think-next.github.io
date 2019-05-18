@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/2019/2019-05-18-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/</loc>
+    <lastmod>2019-05-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/2019/2019-05-11-mongo-eof%E4%BA%8C/</loc>
     <lastmod>2019-05-11T00:00:00+00:00</lastmod>
   </url>
@@ -435,7 +440,7 @@
   
   <url>
     <loc>/categories/2019-05/</loc>
-    <lastmod>2019-05-11T00:00:00+00:00</lastmod>
+    <lastmod>2019-05-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -451,7 +456,7 @@
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2019-05-11T00:00:00+00:00</lastmod>
+    <lastmod>2019-05-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -611,13 +616,13 @@
   
   <url>
     <loc>/tags/translate/</loc>
-    <lastmod>2019-04-14T00:00:00+00:00</lastmod>
+    <lastmod>2019-05-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-05-11T00:00:00+00:00</lastmod>
+    <lastmod>2019-05-18T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>
