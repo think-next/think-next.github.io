@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>database package - 道法自然</title>
+    <meta property="og:title" content="database package - 道法自然">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.14.1/styles/googlecode.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/">Blog</a></li>
+        
+        <li><a href="/life/">Life</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+
+
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>database package</h1>
+
+
+
+
+    
+    
+    <section class="post-meta">
+        <span class="post-author">付辉
+        
+            
+            
+             /  2019-06-03
+            
+        </span>
+        
+        <a href="/tags/golang">golang</a>
+        
+    </section>
+    
+
+
+
+<hr>
+      </header>
+
+
+
+
+<h2 id="清除无效连接">清除无效连接</h2>
+
+<p>在database库下清除过期连接时，使用了如下的代码逻辑。其中freeConn是空闲连接池，d是连接可被重复使用的最长时间，nowFunc返回的是当前时间。最新生成的连接在freeConn的末尾，而清除的过程则是使用最新的、次新的连接依次替换最早过期的、次早过期的连接。</p>
+
+<p>在for循环中直接使用len来获取总计数，在循环体内部将freeConn末尾的值替换首部的值，并将freeConn的len长度减去1。最后还做了<code>i—</code>操作，重复校验了一次。</p>
+
+<pre><code class="language-go">expiredSince := nowFunc().Add(-d)
+var closing []*driverConn
+for i := 0; i &lt; len(db.freeConn); i++ {
+	c := db.freeConn[i]
+	if c.createdAt.Before(expiredSince) {
+		closing = append(closing, c)
+		last := len(db.freeConn) - 1
+		db.freeConn[i] = db.freeConn[last]
+		db.freeConn[last] = nil
+		db.freeConn = db.freeConn[:last]
+		i--
+	}
+}
+</code></pre>
+
+<h3 id="参考点">参考点</h3>
+
+<p>slice中首部和尾部数据的交换过程，以及每次通过<code>i--</code>达到的重复校验的思路。</p>
+
+<h2 id="间隔执行">间隔执行</h2>
+
+<p>清除无效连接的工作是由一个goroutine在后台完成的，下面是截取的部分代码。for循环内部是处理连接的具体实现。每次清除操作完成后，通过Reset来重置Timer。</p>
+
+<pre><code class="language-go">func (db *DB) connectionCleaner(d time.Duration) {
+	const minInterval = time.Second
+
+	if d &lt; minInterval {
+		d = minInterval
+	}
+	t := time.NewTimer(d)
+
+	for {
+		select {
+		case &lt;-t.C:
+		case &lt;-db.cleanerCh: // maxLifetime was changed or db was closed.
+		}
+
+		if d &lt; minInterval {
+			d = minInterval
+		}
+		t.Reset(d)
+	}
+}
+</code></pre>
+
+<h3 id="参考点-1">参考点</h3>
+
+<p>学习NewTimer函数的使用，它在声明后仅仅执行一次。通过Reset来重新使他生效。这样可以忽略操作执行的具体时间，每次都在上次操作完成后，间隔固定时间，再执行下一次操作。</p>
+
+<p>还可以对比NewTicker做比较。</p>
+
+<h2 id="获取连接">获取连接</h2>
+
+<p>从freeConn中获取一个缓存的连接，拿到连接之后并将它从freeConn中移除。同时，校验连接是否已经超过最大连接使用时间。</p>
+
+<pre><code class="language-go">if strategy == cachedOrNewConn &amp;&amp; numFree &gt; 0 {
+	conn := db.freeConn[0]
+	copy(db.freeConn, db.freeConn[1:])
+	db.freeConn = db.freeConn[:numFree-1]
+	conn.inUse = true
+	db.mu.Unlock()
+	if conn.expired(lifetime) {
+		conn.Close()
+		return nil, driver.ErrBadConn
+	}
+	return conn, nil
+}
+</code></pre>
+
+<h3 id="参考点-2">参考点</h3>
+
+<p>使用copy对slice的第一个元素进行移除。同时，通过重新赋值来修改slice的len属性。</p>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2019/19-05-18-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/">数据一致性（三）</a></span>
+  <span class="nav-next"></span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/tex.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/go.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">DDF</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

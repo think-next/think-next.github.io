@@ -13,10 +13,10 @@
     
     <item>
       <title>数据一致性（三）</title>
-      <link>/blog/2019/2019-05-18-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/</link>
+      <link>/blog/2019/19-05-18-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/</link>
       <pubDate>Sat, 18 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/2019-05-18-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/</guid>
+      <guid>/blog/2019/19-05-18-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/</guid>
       <description>一个人的时候多一点努力，才能让自己的爱情，少一点条件，多一点纯粹
  Quorum 在有冗余数据的分布式存储系统中，数据会在不同的机器上存放多份拷贝。但是同一时刻一个对象的多份拷贝只能用于读或者用于写。该算法可以保证同一份数据对象的多份拷贝不会被超过两个访问对象读写。
 分布式系统中每一份数据拷贝对象被赋予一票。每一个读操作获得的票数必须大于最小读票数 $V_r$，每个写操作获得的票数必须大于最小写票数 $V_w$才能读或者写。如果系统有V票，那么最小读写票数应该满足如下限制：
@@ -37,10 +37,10 @@ Summary 当意见不一致的时候，大家可以选择投票。当票数一致
     
     <item>
       <title>mongo EOF（二）</title>
-      <link>/blog/2019/2019-05-11-mongo-eof%E4%BA%8C/</link>
+      <link>/blog/2019/19-05-11-mongo-eof%E4%BA%8C/</link>
       <pubDate>Sat, 11 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/2019-05-11-mongo-eof%E4%BA%8C/</guid>
+      <guid>/blog/2019/19-05-11-mongo-eof%E4%BA%8C/</guid>
       <description>任何事情的成功都需要掐准时间
  上一节mongo EOF中，关于容器的配置，只是粗略的使用了Docker-Compose-MongoDB-Replica-Set项目提供好的docker-compose.yml文件。在使用过程中，我发现这个文件本身一些不如意的地方。首先，services中的creator服务，entrypoint指令太长了，不美；其次，所有的service都没有给容器外部暴露端口，导致外部无法访问容器；再次，直接使用mongo repliSet的连接串进行访问，无法正常访问mongo服务。
 在上一篇文章的基础上，这篇文章对docker-compse.yml做了一些调整，并且也包含了docker使用的入门介绍。更新后的docker-compose.yml请访问githubsi。

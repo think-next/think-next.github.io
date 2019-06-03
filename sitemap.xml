@@ -3,42 +3,47 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/blog/2019/2019-05-18-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/</loc>
+    <loc>/blog/2019/19-06-03-database-package/</loc>
+    <lastmod>2019-06-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/2019/19-05-18-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/</loc>
     <lastmod>2019-05-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/2019/2019-05-11-mongo-eof%E4%BA%8C/</loc>
+    <loc>/blog/2019/19-05-11-mongo-eof%E4%BA%8C/</loc>
     <lastmod>2019-05-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/2019/2019-04-27-mongo-eof/</loc>
+    <loc>/blog/2019/19-04-27-mongo-eof/</loc>
     <lastmod>2019-04-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/2019/2019-04-24-kafka%E4%B8%AD%E6%B6%88%E6%81%AF%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/</loc>
+    <loc>/blog/2019/19-04-24-kafka%E4%B8%AD%E6%B6%88%E6%81%AF%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/</loc>
     <lastmod>2019-04-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/2019/2019-04-21-go-module%E4%B8%80/</loc>
+    <loc>/blog/2019/19-04-21-go-module%E4%B8%80/</loc>
     <lastmod>2019-04-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/2019/2019-04-14-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%89/</loc>
+    <loc>/blog/2019/19-04-14-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%89/</loc>
     <lastmod>2019-04-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/2019/2019-04-07-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</loc>
+    <loc>/blog/2019/19-04-07-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/2019/2019-03-30-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%BA%8C/</loc>
+    <loc>/blog/2019/19-03-30-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%BA%8C/</loc>
     <lastmod>2019-03-30T00:00:00+00:00</lastmod>
   </url>
   
@@ -445,6 +450,12 @@
   </url>
   
   <url>
+    <loc>/categories/2019-06/</loc>
+    <lastmod>2019-06-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/about/</loc>
   </url>
   
@@ -456,7 +467,7 @@
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2019-05-18T00:00:00+00:00</lastmod>
+    <lastmod>2019-06-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -520,7 +531,7 @@
   
   <url>
     <loc>/tags/golang/</loc>
-    <lastmod>2019-05-11T00:00:00+00:00</lastmod>
+    <lastmod>2019-06-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -622,7 +633,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-05-18T00:00:00+00:00</lastmod>
+    <lastmod>2019-06-03T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>

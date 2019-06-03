@@ -55,6 +55,8 @@
         <li><a href="/about/">About</a></li>
         
         
+
+
         </ul>
       </nav>
     </header>
@@ -92,16 +94,15 @@
 
 
 
-
 <blockquote>
-<p>真的猛士，敢于直面惨淡的人生，敢于正视淋漓的鲜血。这是怎样的哀痛者和幸福者？然而造化又常常为庸人设计，以时间的流驶，来洗涤旧迹，仅使留下淡红的血色和微漠的悲哀。在这淡红的血色和微漠的悲哀中，又给人暂得偷生，维持着这似人非人的世界。我不知道这样的世界何时是一个尽头！</p>
+<p><code>真的猛士，敢于直面惨淡的人生，敢于正视淋漓的鲜血。这是怎样的哀痛者和幸福者？然而造化又常常为庸人设计，以时间的流驶，来洗涤旧迹，仅使留下淡红的血色和微漠的悲哀。在这淡红的血色和微漠的悲哀中，又给人暂得偷生，维持着这似人非人的世界。我不知道这样的世界何时是一个尽头！</code></p>
 </blockquote>
 
 <p>有一种感觉，<code>Go</code>调度模型可能还得再来几篇博客，才能真正读出感觉来。现在还是一个门外汉。越是深入了解，越觉得知之甚少，后背发凉。</p>
 
 <h2 id="os-调度结构"><code>OS</code>调度结构</h2>
 
-<p><code>Go Runtime</code>实现了自己的调度策略，从<a href="http://wudaijun.com/2018/11/scheduler-blabla/"><code>OS</code>调度结构</a>的演变来看，<strong>调度</strong>思想都是相似的。当然，*我始终觉得设计背后的思想才是整个系统的核心*。思想从无到有、从中心化到去中心化、从单任务到并行多任务，当然这肯定不是调度策略的专利，在很多场景都有这种思想的体现，比如分布式设计。</p>
+<p><code>Go Runtime</code>实现了自己的调度策略，从<a href="http://wudaijun.com/2018/11/scheduler-blabla/"><code>OS</code>调度结构</a>的演变来看，<strong>调度</strong>思想都是相似的。当然，我始终觉得设计背后的思想才是整个系统的核心。思想从无到有、从中心化到去中心化、从单任务到并行多任务，当然这肯定不是调度策略的专利，在很多场景都有这种思想的体现，比如分布式设计。</p>
 
 <p>那为什么我还是没有一眼看出来呢，可能是阅历太少，思考的深度不够，积极接受现状，懒于了解历史吧。不过，越是去了解，就会发现不会的太多，思维发散的太广，难以为继。</p>
 
@@ -159,11 +160,9 @@
 <p><code>P</code>引入之后，从之前的<code>M</code>和<code>Sched</code>中抽取了部分字段，这样做带来了很多好处：</p>
 
 <ul>
-<li><p><code>MCache</code>就被移动到了<code>P</code>中，而系统最多存在<code>GOMAXPROCES</code>个<code>P</code>，解决了不必要的内存浪费问题</p></li>
-
-<li><p><code>G freelist</code>被移动到<code>P</code>中，每个<code>P</code>都有了一个可运行的本地<code>G</code>队列。本地<code>G</code>队列缓解了全局<code>Sched</code>锁的问题。</p></li>
-
-<li><p>当一个<code>G</code>被<code>M</code>创建，它被追加到对应<code>P</code>的本地队列末尾，以保证每个<code>G</code>都能被执行。</p></li>
+<li><code>MCache</code>就被移动到了<code>P</code>中，而系统最多存在<code>GOMAXPROCES</code>个<code>P</code>，解决了不必要的内存浪费问题</li>
+<li><code>G freelist</code>被移动到<code>P</code>中，每个<code>P</code>都有了一个可运行的本地<code>G</code>队列。本地<code>G</code>队列缓解了全局<code>Sched</code>锁的问题。</li>
+<li>当一个<code>G</code>被<code>M</code>创建，它被追加到对应<code>P</code>的本地队列末尾，以保证每个<code>G</code>都能被执行。</li>
 </ul>
 
 <hr />
@@ -181,7 +180,7 @@
   
 <nav class="post-nav">
   <span class="nav-prev">&larr; <a href="/blog/2019/19-03-25-%E5%9F%BA%E4%BA%8Ego%E7%9A%84cron-job%E5%AE%9E%E7%8E%B0/">基于Go的Cron Job实现</a></span>
-  <span class="nav-next"></span>
+  <span class="nav-next"><a href="/blog/2019/19-04-07-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">设计模式-适配器模式</a> &rarr;</span>
 </nav>
 
 

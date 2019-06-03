@@ -13,10 +13,10 @@
     
     <item>
       <title>mongo EOF（二）</title>
-      <link>/blog/2019/2019-05-11-mongo-eof%E4%BA%8C/</link>
+      <link>/blog/2019/19-05-11-mongo-eof%E4%BA%8C/</link>
       <pubDate>Sat, 11 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/2019-05-11-mongo-eof%E4%BA%8C/</guid>
+      <guid>/blog/2019/19-05-11-mongo-eof%E4%BA%8C/</guid>
       <description>任何事情的成功都需要掐准时间
  上一节mongo EOF中，关于容器的配置，只是粗略的使用了Docker-Compose-MongoDB-Replica-Set项目提供好的docker-compose.yml文件。在使用过程中，我发现这个文件本身一些不如意的地方。首先，services中的creator服务，entrypoint指令太长了，不美；其次，所有的service都没有给容器外部暴露端口，导致外部无法访问容器；再次，直接使用mongo repliSet的连接串进行访问，无法正常访问mongo服务。
 在上一篇文章的基础上，这篇文章对docker-compse.yml做了一些调整，并且也包含了docker使用的入门介绍。更新后的docker-compose.yml请访问githubsi。

@@ -6,17 +6,30 @@
     <description>Recent content in 蜗牛保持乐观才会爬的更远 on 道法自然</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 18 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 03 Jun 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>database package</title>
+      <link>/blog/2019/19-06-03-database-package/</link>
+      <pubDate>Mon, 03 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/19-06-03-database-package/</guid>
+      <description>清除无效连接 在database库下清除过期连接时，使用了如下的代码逻辑。其中freeConn是空闲连接池，d是连接可被重复使用的最长时间，nowFunc返回的是当前时间。最新生成的连接在freeConn的末尾，而清除的过程则是使用最新的、次新的连接依次替换最早过期的、次早过期的连接。
+在for循环中直接使用len来获取总计数，在循环体内部将freeConn末尾的值替换首部的值，并将freeConn的len长度减去1。最后还做了i—操作，重复校验了一次。
+expiredSince := nowFunc().Add(-d) var closing []*driverConn for i := 0; i &amp;lt; len(db.freeConn); i++ { c := db.freeConn[i] if c.createdAt.Before(expiredSince) { closing = append(closing, c) last := len(db.freeConn) - 1 db.freeConn[i] = db.freeConn[last] db.freeConn[last] = nil db.freeConn = db.freeConn[:last] i-- } }  参考点 slice中首部和尾部数据的交换过程，以及每次通过i--达到的重复校验的思路。
+间隔执行 清除无效连接的工作是由一个goroutine在后台完成的，下面是截取的部分代码。for循环内部是处理连接的具体实现。每次清除操作完成后，通过Reset来重置Timer。
+func (db *DB) connectionCleaner(d time.Duration) { const minInterval = time.Second if d &amp;lt; minInterval { d = minInterval } t := time.</description>
+    </item>
+    
+    <item>
       <title>数据一致性（三）</title>
-      <link>/blog/2019/2019-05-18-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/</link>
+      <link>/blog/2019/19-05-18-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/</link>
       <pubDate>Sat, 18 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/2019-05-18-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/</guid>
+      <guid>/blog/2019/19-05-18-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/</guid>
       <description>一个人的时候多一点努力，才能让自己的爱情，少一点条件，多一点纯粹
  Quorum 在有冗余数据的分布式存储系统中，数据会在不同的机器上存放多份拷贝。但是同一时刻一个对象的多份拷贝只能用于读或者用于写。该算法可以保证同一份数据对象的多份拷贝不会被超过两个访问对象读写。
 分布式系统中每一份数据拷贝对象被赋予一票。每一个读操作获得的票数必须大于最小读票数 $V_r$，每个写操作获得的票数必须大于最小写票数 $V_w$才能读或者写。如果系统有V票，那么最小读写票数应该满足如下限制：
@@ -37,10 +50,10 @@ Summary 当意见不一致的时候，大家可以选择投票。当票数一致
     
     <item>
       <title>mongo EOF（二）</title>
-      <link>/blog/2019/2019-05-11-mongo-eof%E4%BA%8C/</link>
+      <link>/blog/2019/19-05-11-mongo-eof%E4%BA%8C/</link>
       <pubDate>Sat, 11 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/2019-05-11-mongo-eof%E4%BA%8C/</guid>
+      <guid>/blog/2019/19-05-11-mongo-eof%E4%BA%8C/</guid>
       <description>任何事情的成功都需要掐准时间
  上一节mongo EOF中，关于容器的配置，只是粗略的使用了Docker-Compose-MongoDB-Replica-Set项目提供好的docker-compose.yml文件。在使用过程中，我发现这个文件本身一些不如意的地方。首先，services中的creator服务，entrypoint指令太长了，不美；其次，所有的service都没有给容器外部暴露端口，导致外部无法访问容器；再次，直接使用mongo repliSet的连接串进行访问，无法正常访问mongo服务。
 在上一篇文章的基础上，这篇文章对docker-compse.yml做了一些调整，并且也包含了docker使用的入门介绍。更新后的docker-compose.yml请访问githubsi。
@@ -51,10 +64,10 @@ creator: build: context: . dockerfile: dockerfile entrypoint: [&amp;quot;/data/c
     
     <item>
       <title>mongo EOF</title>
-      <link>/blog/2019/2019-04-27-mongo-eof/</link>
+      <link>/blog/2019/19-04-27-mongo-eof/</link>
       <pubDate>Sat, 27 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/2019-04-27-mongo-eof/</guid>
+      <guid>/blog/2019/19-04-27-mongo-eof/</guid>
       <description>很多事情仅仅的是严肃的提出问题都感觉很难，更何况还得要先发现它。
  Question 描述 项目中使用：github.com/globalsign/mgo这个库，在一次主从切换之后，mongo后续的操作都失败了, 错误信息输出：EOF。
 引用网上遇到同样问题的其他描述：
@@ -64,10 +77,10 @@ creator: build: context: . dockerfile: dockerfile entrypoint: [&amp;quot;/data/c
     
     <item>
       <title>Kafka中消息分配策略</title>
-      <link>/blog/2019/2019-04-24-kafka%E4%B8%AD%E6%B6%88%E6%81%AF%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/</link>
+      <link>/blog/2019/19-04-24-kafka%E4%B8%AD%E6%B6%88%E6%81%AF%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/</link>
       <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/2019-04-24-kafka%E4%B8%AD%E6%B6%88%E6%81%AF%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/</guid>
+      <guid>/blog/2019/19-04-24-kafka%E4%B8%AD%E6%B6%88%E6%81%AF%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/</guid>
       <description>非淡泊无以明，非宁静无以致远
  Question 关于kafka中partation和consumer的是如何执行分配的。今早骑自行车的时候突然想起这个问题。它是怎么分配的，我记得我看到好几次相关的介绍文章，现在却想不起来？
 sense 很多时候，我们在看完一篇技术文档时，感觉对其中的内容都了解了，其实不然。这也是所谓的被动输入和主动输出的区别所在。相比主动输出而言，被动输入缺少了深层思考的态度。得到一些老师的课里就谈到过主动输出的重要性。
@@ -85,10 +98,10 @@ Thinking partaion是数据的存储单位，一个topic至少存在一个partati
     
     <item>
       <title>Go Module（一）</title>
-      <link>/blog/2019/2019-04-21-go-module%E4%B8%80/</link>
+      <link>/blog/2019/19-04-21-go-module%E4%B8%80/</link>
       <pubDate>Sun, 21 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/2019-04-21-go-module%E4%B8%80/</guid>
+      <guid>/blog/2019/19-04-21-go-module%E4%B8%80/</guid>
       <description>这世上太多的人，宁愿吃生活苦，也不愿吃自律的苦。大概是因为生活的苦，躺着就来了，而自律的苦，得自己去找。但只有吃得下自律的苦，才有成功的自由，没有一种成功是走得了捷径的，通向真正成功的唯一道路只有自律。越成功，越自律。越自律，越成功。
  GO111MODULE Go 1.1包含了对Go Modules的预支持，包括调整后的go get命令。后续版本总GOPATH和老的go get可能会被官方移除。
 在Go Modules中支持了一个临时环境变量：GO111MODULE，可以赋值为off、on或auto。
@@ -102,10 +115,10 @@ go mod vendor go build -mod=vendor  Go Get 首先，go get解析需要新增哪�
     
     <item>
       <title>Go 调度模型（三）</title>
-      <link>/blog/2019/2019-04-14-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%89/</link>
+      <link>/blog/2019/19-04-14-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%89/</link>
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/2019-04-14-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%89/</guid>
+      <guid>/blog/2019/19-04-14-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%89/</guid>
       <description>  别抱怨，也别自怜，所有的现状都是你自己选择的
  前面的章节中，我们介绍了操作系统的调度模型：N:1、1:1、M:N。而Go采用了更高效的方式M:N。从进程的角度来说，线程是最小的调度单元。而Go的模型下，可以把P作为最小单元的调度单元，即在单个线程上运行的Go代码。
 执行模型 下图展示了Go的最小调度单元模型。其中的有两个线程，各维持一个P对象，而且正在执行一个G代码。为了运行G，M必须首先持有P对象。图中灰色的G表示还没有被执行，等待被调度。它们被组织在P的一个runqueues的队列中，当M创建新的Goroutine时，对应的G就会被追加到该队列的末尾。
@@ -119,10 +132,10 @@ go mod vendor go build -mod=vendor  Go Get 首先，go get解析需要新增哪�
     
     <item>
       <title>设计模式-适配器模式</title>
-      <link>/blog/2019/2019-04-07-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</link>
+      <link>/blog/2019/19-04-07-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</link>
       <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/2019-04-07-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</guid>
+      <guid>/blog/2019/19-04-07-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</guid>
       <description>当你眼里只有赚钱的时候，你就永远无法把事情本身给做好，收获的也会很有限，最后可能还赚不到钱。- From Myself
  下面的代码是github.com/gin-gonic/gin/binding中获取Binding实例的逻辑。我在想：这段代码体现的是什么设计模式呢？写法上肯定是工厂模式，因为它基于不同的contentType创建返回具体的实例。但从宏观上来看，它算不算一个适配器呢？
 func Default(method, contentType string) Binding { if method == &amp;quot;GET&amp;quot; { return Form } switch contentType { case MIMEJSON: return JSON case MIMEXML, MIMEXML2: return XML case MIMEPROTOBUF: return ProtoBuf case MIMEMSGPACK, MIMEMSGPACK2: return MsgPack default: //case MIMEPOSTForm, MIMEMultipartPOSTForm: return Form } }  Adapter Pattern 适配器模式不仅仅局限于代码设计，在现实世界中也经常会看到。比如苹果手机的转接线，将新的、方形的Lighting接口适配到旧的、圆孔的耳机上。
@@ -133,10 +146,10 @@ Purpose 适配器主要通过转换数据格式，组合、引用不兼容的对
     
     <item>
       <title>Go 调度模型（二）</title>
-      <link>/blog/2019/2019-03-30-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%BA%8C/</link>
+      <link>/blog/2019/19-03-30-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%BA%8C/</link>
       <pubDate>Sat, 30 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/2019-03-30-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%BA%8C/</guid>
+      <guid>/blog/2019/19-03-30-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%BA%8C/</guid>
       <description>真的猛士，敢于直面惨淡的人生，敢于正视淋漓的鲜血。这是怎样的哀痛者和幸福者？然而造化又常常为庸人设计，以时间的流驶，来洗涤旧迹，仅使留下淡红的血色和微漠的悲哀。在这淡红的血色和微漠的悲哀中，又给人暂得偷生，维持着这似人非人的世界。我不知道这样的世界何时是一个尽头！
  有一种感觉，Go调度模型可能还得再来几篇博客，才能真正读出感觉来。现在还是一个门外汉。越是深入了解，越觉得知之甚少，后背发凉。
 OS调度结构 Go Runtime实现了自己的调度策略，从OS调度结构的演变来看，调度思想都是相似的。当然，我始终觉得设计背后的思想才是整个系统的核心。思想从无到有、从中心化到去中心化、从单任务到并行多任务，当然这肯定不是调度策略的专利，在很多场景都有这种思想的体现，比如分布式设计。

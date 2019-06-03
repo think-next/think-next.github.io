@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2019-06 on 道法自然</title>
+    <link>/categories/2019-06/</link>
+    <description>Recent content in 2019-06 on 道法自然</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 03 Jun 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/2019-06/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>database package</title>
+      <link>/blog/2019/19-06-03-database-package/</link>
+      <pubDate>Mon, 03 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/19-06-03-database-package/</guid>
+      <description>清除无效连接 在database库下清除过期连接时，使用了如下的代码逻辑。其中freeConn是空闲连接池，d是连接可被重复使用的最长时间，nowFunc返回的是当前时间。最新生成的连接在freeConn的末尾，而清除的过程则是使用最新的、次新的连接依次替换最早过期的、次早过期的连接。
+在for循环中直接使用len来获取总计数，在循环体内部将freeConn末尾的值替换首部的值，并将freeConn的len长度减去1。最后还做了i—操作，重复校验了一次。
+expiredSince := nowFunc().Add(-d) var closing []*driverConn for i := 0; i &amp;lt; len(db.freeConn); i++ { c := db.freeConn[i] if c.createdAt.Before(expiredSince) { closing = append(closing, c) last := len(db.freeConn) - 1 db.freeConn[i] = db.freeConn[last] db.freeConn[last] = nil db.freeConn = db.freeConn[:last] i-- } }  参考点 slice中首部和尾部数据的交换过程，以及每次通过i--达到的重复校验的思路。
+间隔执行 清除无效连接的工作是由一个goroutine在后台完成的，下面是截取的部分代码。for循环内部是处理连接的具体实现。每次清除操作完成后，通过Reset来重置Timer。
+func (db *DB) connectionCleaner(d time.Duration) { const minInterval = time.Second if d &amp;lt; minInterval { d = minInterval } t := time.</description>
+    </item>
+    
+  </channel>
+</rss>
