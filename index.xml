@@ -37,6 +37,18 @@ func (db *DB) connectionCleaner(d time.Duration) { const minInterval = time.Seco
     </item>
     
     <item>
+      <title>mongo中ObjectId</title>
+      <link>/blog/2019/2019-06-11-mongo%E4%B8%ADobjectid/</link>
+      <pubDate>Mon, 03 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/2019-06-11-mongo%E4%B8%ADobjectid/</guid>
+      <description>ObjectId在mongo中是自动生成的_id字段，充当数据表的主键ID。按照_id排序基本上等于按照记录的创建时间排序，但还是必须注意：_id并不是严格单调递增的，前4个byte的也只是精确到了秒级，同一秒内的_id并不能保证有序。
+ ObjectIds are small, likely unique, faster to generate, and ordered. ObjectId values consist of 12 bytes, where the first four bytes are a timestamp that reflect the objectId&amp;rsquo;s creation. Specifically - a 4-byte value representing the seconds since the Unix epoch - a 5-byte random value - a 3 byte counter, starting with a random value
+ 排序 使用github.com/globalsign/mgo的翻页逻辑：
+func (detail *CounterDetailMapper) GetDetailsByDesc(ctx context.IContext, objectId string, size int, startPoint string, data *[]models.</description>
+    </item>
+    
+    <item>
       <title>数据一致性（三）</title>
       <link>/blog/2019/19-05-18-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/</link>
       <pubDate>Sat, 18 May 2019 00:00:00 +0000</pubDate>
