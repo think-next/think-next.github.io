@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Using context cancellation in Go - 道法自然</title>
+    <meta property="og:title" content="Using context cancellation in Go - 道法自然">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.14.1/styles/googlecode.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/">Blog</a></li>
+        
+        <li><a href="/life/">Life</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+
+
+        </ul>
+      </nav>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>Using context cancellation in Go</h1>
+
+
+
+
+    
+    
+    <section class="post-meta">
+        <span class="post-author">付辉
+        
+            
+            
+             /  2019-06-22
+            
+        </span>
+        
+        <a href="/tags/golang">golang</a>
+        
+    </section>
+    
+
+
+
+<hr>
+      </header>
+
+
+
+
+<p>文章介绍最近工作中遇到的一个问题，其中50%以上的内容都是Go的源代码。剩下部分是自己的理解，如果有理解错误或探讨的地方，希望大家指正。</p>
+
+<p>问题：针对同一个接口请求，绝大多数都可以正常处理，但却有零星的几请求老是处理失败，错误信息返回 <code>context canceled</code>。重放失败的请求，错误必现。</p>
+
+<p>根据返回的错误信息，再结合我们工程中使用的<code>golang.org/x/net/context/ctxhttp</code>包。猜测可能是在请求处理过程中，异常调用了<code>context</code> 包的<code>CancelFunc</code>方法。同时，我们对比了失败请求和成功请求的区别，发现失败请求的<code>Response.Body</code>数据量非常大。</p>
+
+<p>之后在Google上找到了问题的原因，还真是很容易被忽略，这里是文章的链接：<a href="https://groups.google.com/forum/#!topic/golang-nuts/2FKwG6oEvos">Context cancellation flake</a>。为了解决未来点进去404的悲剧，本文截取了其中的代码&hellip;</p>
+
+<h2 id="code">Code</h2>
+
+<p>代码核心逻辑：向某个地址发送<code>Get</code>请求，并打印响应内容。其中函数<code>fetch</code>用于发送请求，<code>readBody</code>用于读取响应。例子中处理请求的逻辑结构，跟我们项目中的完全一致。</p>
+
+<p><code>fetch</code>方法中使用了默认的<code>http.DefaultClient</code>作为<code>http Client</code>，而它自身是一个“零值”，并没有指定请求的超时时间。所以，例子中又通过<code>context.WithTimeout</code>对超时时间进行了设置。</p>
+
+<p>代码中使用<code>context.WithTimeout</code>来取消请求，存在两种可能情况。第一种，处理的时间超过了指定的超时时间，程序返回<code>deadlineExceededError</code>错误，错误描述<code>context deadline exceeded</code>。另一种是手动调用<code>CancelFunc</code>方法取消执行，返回<code>Canceled</code>错误，描述信息<code>context canceled</code>。</p>
+
+<p>在<code>fetch</code>代码的处理逻辑中，当程序返回<code>http.Response</code>时，会执行<code>cancel()</code>方法，用于标记请求被取消。如果在<code>readBody</code>没读取完返回的数据之前，<code>context</code>被cancel掉了，就会返回<code>context canceled</code>错误。侧面也反映了，关闭<code>Context.Done()</code>与读取<code>http.Response</code>是一个时间赛跑的过程…..</p>
+
+<pre><code class="language-go">package main
+
+import (
+    &quot;context&quot;
+    &quot;io/ioutil&quot;
+    &quot;log&quot;
+    &quot;net/http&quot;
+    &quot;time&quot;
+
+    &quot;golang.org/x/net/context/ctxhttp&quot;
+)
+
+func main() {
+    req, err := http.NewRequest(&quot;GET&quot;, &quot;https://swapi.co/api/people/1&quot;, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    resp, err := fetch(req)
+    if err != nil {
+        log.Fatal(err)
+    }
+    log.Print(readBody(resp))
+}
+
+func fetch(req *http.Request) (*http.Response, error) {
+    ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+    defer cancel()
+    return ctxhttp.Do(ctx, http.DefaultClient, req)
+}
+
+func readBody(resp *http.Response) (string, error) {
+    b, err := ioutil.ReadAll(resp.Body)
+    if err != nil {
+        return &quot;&quot;, err
+    }
+    return string(b), err
+}
+</code></pre>
+
+<p>问题的解决办法如下，作者也附带了<a href="https://play.golang.org/p/trMP7Q-maT">Test Case</a>。 请求包括发送请求和读取响应两部分，<code>CancelFunc</code>应该在请求被处理完成后调用。不然，就会发生上面遇到的问题。</p>
+
+<blockquote>
+<p>In case it&rsquo;s still unclear, you need to wrap both the &ldquo;do request&rdquo; + &ldquo;read body&rdquo; inside the same cancellation context. The &ldquo;defer cancel&rdquo; should encompass both of them, sort of atomically, so the idea is to take it out of your fetch, one level up.</p>
+</blockquote>
+
+<h2 id="重现bug">重现Bug</h2>
+
+<p>我们准备通过控制请求返回的内容，来验证我们的结论。我们在本地启动一个新服务，并对外提供一个接口，来替代上述代码中的请求地址。</p>
+
+<p>代码如下，其中<code>info</code>接口实现了下载resource文件的功能。我们通过控制resource文件的大小，来控制返回response大小的目的。</p>
+
+<pre><code class="language-go">package main
+
+import (
+	&quot;github.com/gin-gonic/gin&quot;
+	&quot;io/ioutil&quot;
+	&quot;log&quot;
+)
+
+func main() {
+	router := gin.Default()
+	router.GET(&quot;/info&quot;, func(c *gin.Context) {
+		data, err := ioutil.ReadFile(&quot;./resource&quot;)
+		if err != nil {
+			log.Println(&quot;read file err:&quot;, err.Error())
+			return
+		}
+
+		log.Println(&quot;send file resource&quot;)
+		c.Writer.Write(data)
+	})
+  
+	router.Run(&quot;:8000&quot;)
+}
+</code></pre>
+
+<p>首先，我们向resource文件中写入大量的内容，重新执行上述代码。错误日志输出：<code>2019/06/13 21:12:37 context canceled</code>。确实重现了！</p>
+
+<p>然后，将resource文件内容删除到只剩一行数据，请求又可以正常处理了。</p>
+
+<pre><code class="language-go">req, err := http.NewRequest(&quot;GET&quot;, &quot;http://127.0.0.1:8000/info&quot;, nil)
+</code></pre>
+
+<p>总结：上述错误代码的执行结果，依赖请求返回的数据量大小。</p>
+
+<h2 id="修正-bug">修正<code>Bug</code></h2>
+
+<p>根据上述分析，我们对代码进行调整：将<code>defer cancel()</code>调整到程序读取完<code>http.Response.Body</code>之后执行。具体修改如下：</p>
+
+<ol>
+<li>在<code>fetch</code>函数中，将<code>cancel</code>函数作为返回值，返回给调用方。</li>
+</ol>
+
+<pre><code class="language-go">func fetch(req *http.Request) (context.CancelFunc, *http.Response, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	resp, err := ctxhttp.Do(ctx, http.DefaultClient, req)
+	return cancel, resp, err
+}
+</code></pre>
+
+<ol>
+<li>当<code>readBody</code>读取完数据之后，再调用<code>cancel</code>方法。</li>
+</ol>
+
+<pre><code class="language-go">	cancel, resp, err := fetch(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer cancel()
+	log.Print(readBody(resp))
+</code></pre>
+
+<p>跟预期的一样，再接口返回的数据量很大的情况下，请求也可以被正常处理。</p>
+
+<h2 id="三种错误类型">三种错误类型</h2>
+
+<h3 id="context-deadline-exceeded"><code>context deadline exceeded</code></h3>
+
+<p>我们将代码中<code>context.WithTimeout</code>的超时时间由<code>5*time.Second</code>调整为<code>1*time.Millisecond</code>。执行代码，输出错误日志：<code>2019/06/13 21:29:11 context deadline exceeded</code>。</p>
+
+<h3 id="context-canceled"><code>context canceled</code></h3>
+
+<p>参考上述代码。</p>
+
+<h3 id="net-http-request-canceled"><code>net/http: request canceled</code></h3>
+
+<p>工作中常见的错误之一：<code>net/http: request canceled (Client.Timeout exceeded while awaiting headers)</code>，这是由<code>http Client</code>设置的超时时间决定的。接下来我们重现一下这个error。</p>
+
+<p><code>fetch</code>方法中，我们声明一个自定义的<code>client</code>，并指定<code>Timeout</code>属性为<code>time.Millisecond</code>，来替换代码中默认的<code>client</code>。</p>
+
+<pre><code class="language-go">func fetch(req *http.Request) (context.CancelFunc, *http.Response, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	customClient := &amp;http.Client{
+		Timeout: time.Millisecond,
+	}
+	resp, err := ctxhttp.Do(ctx, customClient, req)
+	return cancel, resp, err
+}
+</code></pre>
+
+<p>程序执行输出：</p>
+
+<pre><code>2019/06/18 09:20:53 Get http://127.0.0.1:8000/info: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
+</code></pre>
+
+<p>如下是<code>http.Client</code>结构体中对<code>Timeout</code>的注释，它包括创建连接、请求跳转、读取响应的全部时间。</p>
+
+<pre><code class="language-go">// Timeout specifies a time limit for requests made by this
+// Client. The timeout includes connection time, any
+// redirects, and reading the response body. The timer remains
+// running after Get, Head, Post, or Do return and will
+// interrupt reading of the Response.Body.
+//
+// A Timeout of zero means no timeout.
+//
+// The Client cancels requests to the underlying Transport
+// as if the Request's Context ended.
+//
+// For compatibility, the Client will also use the deprecated
+// CancelRequest method on Transport if found. New
+// RoundTripper implementations should use the Request's Context
+// for cancelation instead of implementing CancelRequest.
+</code></pre>
+
+<h2 id="context-原理"><code>context</code>原理</h2>
+
+<p>下面是<code>context</code>的接口类型，因为<code>Done()</code>的注解很好的解释了<code>context</code>最本质的用法，所以，特意只将这部分贴出来。在<code>for</code>循环体内，执行每次循环时，使用<code>select</code>方法来监听<code>Done()</code>是否被关闭了。如果关闭了，就退出循环。在<code>ctxhttp</code>包内，也是通过这种用法来实现对请求的控制的。</p>
+
+<pre><code class="language-go">type Context interface {
+	Deadline() (deadline time.Time, ok bool)
+
+	// Done returns a channel that's closed when work done on behalf of this
+	// context should be canceled. Done may return nil if this context can
+	// never be canceled. Successive calls to Done return the same value.
+	//
+	// WithCancel arranges for Done to be closed when cancel is called;
+	// WithDeadline arranges for Done to be closed when the deadline
+	// expires; WithTimeout arranges for Done to be closed when the timeout
+	// elapses.
+	//
+	// Done is provided for use in select statements:
+	//
+	//  // Stream generates values with DoSomething and sends them to out
+	//  // until DoSomething returns an error or ctx.Done is closed.
+	//  func Stream(ctx context.Context, out chan&lt;- Value) error {
+	//  	for {
+	//  		v, err := DoSomething(ctx)
+	//  		if err != nil {
+	//  			return err
+	//  		}
+	//  		select {
+	//  		case &lt;-ctx.Done():
+	//  			return ctx.Err()
+	//  		case out &lt;- v:
+	//  		}
+	//  	}
+	//  }
+	//
+	// See https://blog.golang.org/pipelines for more examples of how to use
+	// a Done channel for cancelation.
+	Done() &lt;-chan struct{}
+	Err() error
+	Value(key interface{}) interface{}
+}
+</code></pre>
+
+<p>因为有业务逻辑在监听<code>context.Done()</code>，所以，必然需要有逻辑来<code>Close</code>调这个<code>Channel</code>。而整个<code>context</code>包也围绕者两个方面提供了一些方法，包括启动定时器来关闭<code>context.Done()</code>。参考注释中提到的<code>WithCancel</code>、<code>WithDeadline</code>以及<code>WithTimeout</code>。</p>
+
+<h2 id="源代码">源代码</h2>
+
+<p>下面是用来获取<code>cancelCtx</code>的方法，我们可以了解到<code>context</code>内部被封装的三种类型，分别是<code>cancelCtx</code>、<code>timerCtx</code>以及<code>valueCtx</code>。</p>
+
+<pre><code class="language-go">// parentCancelCtx follows a chain of parent references until it finds a
+// *cancelCtx. This function understands how each of the concrete types in this
+// package represents its parent.
+func parentCancelCtx(parent Context) (*cancelCtx, bool) {
+	for {
+		switch c := parent.(type) {
+		case *cancelCtx:
+			return c, true
+		case *timerCtx:
+			return &amp;c.cancelCtx, true
+		case *valueCtx:
+			parent = c.Context
+		default:
+			return nil, false
+		}
+	}
+}
+</code></pre>
+
+<p>查看这三种类型的声明，内部都封装了一个<code>Context</code>值，用来存储父<code>Context</code>。恰恰也是通过这个字段，将整个<code>Context</code>串了起来。其中<code>timerCtx</code>是基于<code>cancelCtx</code>做的扩展，在其基础上添加了计时的功能。另外，<code>cancelCtx</code>节点中的<code>children</code>用于保存它所有的子节点。</p>
+
+<pre><code class="language-go">// A cancelCtx can be canceled. When canceled, it also cancels any children
+// that implement canceler.
+type cancelCtx struct {
+	Context
+
+	mu       sync.Mutex            // protects following fields
+	done     chan struct{}         // created lazily, closed by first cancel call
+	children map[canceler]struct{} // set to nil by the first cancel call
+	err      error                 // set to non-nil by the first cancel call
+}
+
+// A timerCtx carries a timer and a deadline. It embeds a cancelCtx to
+// implement Done and Err. It implements cancel by stopping its timer then
+// delegating to cancelCtx.cancel.
+type timerCtx struct {
+	cancelCtx
+	timer *time.Timer // Under cancelCtx.mu.
+
+	deadline time.Time
+}
+
+// A valueCtx carries a key-value pair. It implements Value for that key and
+// delegates all other calls to the embedded Context.
+type valueCtx struct {
+	Context
+	key, val interface{}
+}
+</code></pre>
+
+<p>接下来，我们了解一下，将一个新的<code>child context</code>节点挂到<code>parent context</code>的过程。</p>
+
+<p>首先，程序判断<code>parent</code>的数据类型，如果是上述三种类型之一，且没有错误信息，直接将<code>child</code>存储到<code>parnet.children</code>的<code>map</code>结构中。</p>
+
+<p>如果<code>parnet</code>不是上述类型之一，程序会启动一个<code>Goroutine</code>异步监听<code>parent.Done()</code>和<code>child.Done()</code>是否被关闭。我的理解是，因为此时<code>parent</code>其实是<code>background</code>和<code>todo</code>中的一种（我称它为顶级<code>parnet</code>），而它们内部都没有字段用于存储和<code>child</code>的关系。所以，在程序<code>select</code>中绑定了它们的对应关系。另外，一个顶级<code>parent</code>也只能有一个<code>child</code>，而这个<code>child</code>应该是上述三种类型中的一种。只有这种一对一的情况，当<code>child.Done()</code>被关闭的时候，整个<code>select</code>退出才是合理的。</p>
+
+<pre><code class="language-go">// propagateCancel arranges for child to be canceled when parent is.
+func propagateCancel(parent Context, child canceler) {
+	if parent.Done() == nil {
+		return // parent is never canceled
+	}
+	if p, ok := parentCancelCtx(parent); ok {
+		p.mu.Lock()
+		if p.err != nil {
+			// parent has already been canceled
+			child.cancel(false, p.err)
+		} else {
+			if p.children == nil {
+				p.children = make(map[canceler]struct{})
+			}
+			p.children[child] = struct{}{}
+		}
+		p.mu.Unlock()
+	} else {
+		go func() {
+			select {
+			case &lt;-parent.Done():
+				child.cancel(false, parent.Err())
+			case &lt;-child.Done():
+			}
+		}()
+	}
+}
+</code></pre>
+
+<p>我们接着看一下<code>WithCancel</code>和<code>WithDeadline</code>这两个方法。前者通过调用<code>CancelFunc</code>来取消。后者在此基础上，加了一个<code>timer</code>的定时触发取消机制。如果<code>WithDeadline</code>参数<code>d</code>本身就是一个过去的时间点，那么<code>WithDeadline</code>和<code>WithCancel</code>效果相同。</p>
+
+<pre><code class="language-go">// WithCancel returns a copy of parent with a new Done channel. The returned
+// context's Done channel is closed when the returned cancel function is called
+// or when the parent context's Done channel is closed, whichever happens first.
+//
+// Canceling this context releases resources associated with it, so code should
+// call cancel as soon as the operations running in this Context complete.
+func WithCancel(parent Context) (ctx Context, cancel CancelFunc) {
+	c := newCancelCtx(parent)
+	propagateCancel(parent, &amp;c)
+	return &amp;c, func() { c.cancel(true, Canceled) }
+}
+
+// WithDeadline returns a copy of the parent context with the deadline adjusted
+// to be no later than d. If the parent's deadline is already earlier than d,
+// WithDeadline(parent, d) is semantically equivalent to parent. The returned
+// context's Done channel is closed when the deadline expires, when the returned
+// cancel function is called, or when the parent context's Done channel is
+// closed, whichever happens first.
+//
+// Canceling this context releases resources associated with it, so code should
+// call cancel as soon as the operations running in this Context complete.
+func WithDeadline(parent Context, d time.Time) (Context, CancelFunc) {
+	if cur, ok := parent.Deadline(); ok &amp;&amp; cur.Before(d) {
+		// The current deadline is already sooner than the new one.
+		return WithCancel(parent)
+	}
+	c := &amp;timerCtx{
+		cancelCtx: newCancelCtx(parent),
+		deadline:  d,
+	}
+	propagateCancel(parent, c)
+	dur := time.Until(d)
+	if dur &lt;= 0 {
+		c.cancel(true, DeadlineExceeded) // deadline has already passed
+		return c, func() { c.cancel(false, Canceled) }
+	}
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	if c.err == nil {
+		c.timer = time.AfterFunc(dur, func() {
+			c.cancel(true, DeadlineExceeded)
+		})
+	}
+	return c, func() { c.cancel(true, Canceled) }
+}
+
+</code></pre>
+
+<p>最后，我们以<code>timerCtx</code>类型为例，来看看<code>cancel</code>函数的具体实现。方法的调用过程是递归执行的，内部调用的是<code>cancelCtx</code>的<code>cancel</code>方法。参数<code>removeFromParent</code>用来判断是否要从父节点中移除该节点。同时，如果计时器存在的话，要关闭计时器。</p>
+
+<pre><code class="language-go">func (c *timerCtx) cancel(removeFromParent bool, err error) {
+	c.cancelCtx.cancel(false, err)
+	if removeFromParent {
+		// Remove this timerCtx from its parent cancelCtx's children.
+		removeChild(c.cancelCtx.Context, c)
+	}
+	c.mu.Lock()
+	if c.timer != nil {
+		c.timer.Stop()
+		c.timer = nil
+	}
+	c.mu.Unlock()
+}
+
+</code></pre>
+
+<p>具体到<code>cancelCtx</code>中的<code>cancel</code>方法，函数依次<code>cancel</code>掉<code>children</code>中存储的子节点。但我们发现，在<code>for</code>循环移除子节点的时候，<code>removeFromParent</code>参数值为<code>false</code>。我的理解是，子节点依赖的父节点都已经被移除了，子节点是否移除就不重要了。</p>
+
+<pre><code class="language-go">// cancel closes c.done, cancels each of c's children, and, if
+// removeFromParent is true, removes c from its parent's children.
+func (c *cancelCtx) cancel(removeFromParent bool, err error) {
+	if err == nil {
+		panic(&quot;context: internal error: missing cancel error&quot;)
+	}
+	c.mu.Lock()
+	if c.err != nil {
+		c.mu.Unlock()
+		return // already canceled
+	}
+	c.err = err
+	if c.done == nil {
+		c.done = closedchan
+	} else {
+		close(c.done)
+	}
+	for child := range c.children {
+		// NOTE: acquiring the child's lock while holding parent's lock.
+		child.cancel(false, err)
+	}
+	c.children = nil
+	c.mu.Unlock()
+
+	if removeFromParent {
+		removeChild(c.Context, c)
+	}
+}
+</code></pre>
+
+<h2 id="在-ctxhttp-中的应用">在<code>ctxhttp</code>中的应用</h2>
+
+<h3 id="发送-request">发送<code>request</code></h3>
+
+<p>上面的例子中，我们创建了一个顶级<code>context.Background</code>。在调用<code>WithTimeout</code>时，<code>parent</code>会创建一个异步的<code>Goroutine</code>用来进行监听<code>Done</code>是否已经被关闭。同时还会为新创建的<code>context</code>设置一个计时器<code>timer</code>，来计算到期时间。</p>
+
+<pre><code class="language-go">ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+</code></pre>
+
+<p>下面是发送请求的代码，可以看到这是一个for循环的过程，所以非常适合<code>context</code>的处理模型。另外，该方法中有我们上面描述的错误情况：<code>net/http: request canceled</code>。对于这种超时错误，我们可以通过判断<code>error</code>类型，以及<code>timeout</code>是否为<code>true</code>来判断。</p>
+
+<p>一直到这里，我们还没有看到<code>context</code>的核心逻辑…&hellip;</p>
+
+<pre><code class="language-go">func (c *Client) do(req *Request) (retres *Response, reterr error) {
+  // 删除简化代码......
+	for {
+		reqs = append(reqs, req)
+		var err error
+		var didTimeout func() bool
+		if resp, didTimeout, err = c.send(req, deadline); err != nil {
+			// c.send() always closes req.Body
+			reqBodyClosed = true
+			if !deadline.IsZero() &amp;&amp; didTimeout() {
+				err = &amp;httpError{
+					// TODO: early in cycle: s/Client.Timeout exceeded/timeout or context cancelation/
+					err:     err.Error() + &quot; (Client.Timeout exceeded while awaiting headers)&quot;,
+					timeout: true,
+				}
+			}
+			return nil, uerr(err)
+		}
+
+		var shouldRedirect bool
+		redirectMethod, shouldRedirect, includeBody = redirectBehavior(req.Method, resp, reqs[0])
+		if !shouldRedirect {
+			return resp, nil
+		}
+	}
+}
+</code></pre>
+
+<p>所有对<code>context</code>的处理，都是在<code>Transport.roundTrip</code>中实现的</p>
+
+<pre><code class="language-go">// roundTrip implements a RoundTripper over HTTP.
+func (t *Transport) roundTrip(req *Request) (*Response, error) {
+	t.nextProtoOnce.Do(t.onceSetNextProtoDefaults)
+	ctx := req.Context()
+	trace := httptrace.ContextClientTrace(ctx)
+
+	for {
+		select {
+		case &lt;-ctx.Done():
+			req.closeBody()
+			return nil, ctx.Err()
+		default:
+		}
+
+		// treq gets modified by roundTrip, so we need to recreate for each retry.
+		treq := &amp;transportRequest{Request: req, trace: trace}
+		cm, err := t.connectMethodForRequest(treq)
+	}
+}
+</code></pre>
+
+<h3 id="读取-response">读取<code>response</code></h3>
+
+<p>在从<code>conn</code>读取数据的时候，依旧对<code>req</code>的<code>context</code>做了判断。同时也可以看出，读取<code>Response.Body</code>的过程，就是不断从<code>resc</code>中读取数据的过程。</p>
+
+<pre><code class="language-go">func (pc *persistConn) roundTrip(req *transportRequest) (resp *Response, err error) {
+	// Write the request concurrently with waiting for a response,
+	// in case the server decides to reply before reading our full
+	// request body.
+	startBytesWritten := pc.nwrite
+	writeErrCh := make(chan error, 1)
+	pc.writech &lt;- writeRequest{req, writeErrCh, continueCh}
+
+	resc := make(chan responseAndError)
+	pc.reqch &lt;- requestAndChan{
+		req:        req.Request,
+		ch:         resc,
+		addedGzip:  requestedGzip,
+		continueCh: continueCh,
+		callerGone: gone,
+	}
+
+	var respHeaderTimer &lt;-chan time.Time
+	cancelChan := req.Request.Cancel
+	ctxDoneChan := req.Context().Done()
+	for {
+		testHookWaitResLoop()
+		select {
+		case &lt;-ctxDoneChan:
+			pc.t.cancelRequest(req.Request, req.Context().Err())
+			cancelChan = nil
+			ctxDoneChan = nil
+		}
+	}
+}
+</code></pre>
+
+<p>参考文章：</p>
+
+<ol>
+<li><a href="https://www.sohamkamani.com/blog/golang/2018-06-17-golang-using-context-cancellation/">Using context cancellation in Go</a></li>
+</ol>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2019/2019-06-06-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%BC%80%E6%94%BE%E5%85%B3%E9%97%AD/">里氏替换&amp;开放关闭</a></span>
+  <span class="nav-next"></span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/tex.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/go.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">DDF</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

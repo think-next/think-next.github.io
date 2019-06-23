@@ -6,10 +6,27 @@
     <description>Recent content in 蜗牛保持乐观才会爬的更远 on 道法自然</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 06 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 22 Jun 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using context cancellation in Go</title>
+      <link>/blog/2019/19-06-23-using-context-cancellation-in-go/</link>
+      <pubDate>Sat, 22 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/19-06-23-using-context-cancellation-in-go/</guid>
+      <description>文章介绍最近工作中遇到的一个问题，其中50%以上的内容都是Go的源代码。剩下部分是自己的理解，如果有理解错误或探讨的地方，希望大家指正。
+问题：针对同一个接口请求，绝大多数都可以正常处理，但却有零星的几请求老是处理失败，错误信息返回 context canceled。重放失败的请求，错误必现。
+根据返回的错误信息，再结合我们工程中使用的golang.org/x/net/context/ctxhttp包。猜测可能是在请求处理过程中，异常调用了context 包的CancelFunc方法。同时，我们对比了失败请求和成功请求的区别，发现失败请求的Response.Body数据量非常大。
+之后在Google上找到了问题的原因，还真是很容易被忽略，这里是文章的链接：Context cancellation flake。为了解决未来点进去404的悲剧，本文截取了其中的代码&amp;hellip;
+Code 代码核心逻辑：向某个地址发送Get请求，并打印响应内容。其中函数fetch用于发送请求，readBody用于读取响应。例子中处理请求的逻辑结构，跟我们项目中的完全一致。
+fetch方法中使用了默认的http.DefaultClient作为http Client，而它自身是一个“零值”，并没有指定请求的超时时间。所以，例子中又通过context.WithTimeout对超时时间进行了设置。
+代码中使用context.WithTimeout来取消请求，存在两种可能情况。第一种，处理的时间超过了指定的超时时间，程序返回deadlineExceededError错误，错误描述context deadline exceeded。另一种是手动调用CancelFunc方法取消执行，返回Canceled错误，描述信息context canceled。
+在fetch代码的处理逻辑中，当程序返回http.Response时，会执行cancel()方法，用于标记请求被取消。如果在readBody没读取完返回的数据之前，context被cancel掉了，就会返回context canceled错误。侧面也反映了，关闭Context.Done()与读取http.Response是一个时间赛跑的过程…..
+package main import ( &amp;quot;context&amp;quot; &amp;quot;io/ioutil&amp;quot; &amp;quot;log&amp;quot; &amp;quot;net/http&amp;quot; &amp;quot;time&amp;quot; &amp;quot;golang.org/x/net/context/ctxhttp&amp;quot; ) func main() { req, err := http.NewRequest(&amp;quot;GET&amp;quot;, &amp;quot;https://swapi.co/api/people/1&amp;quot;, nil) if err != nil { log.Fatal(err) } resp, err := fetch(req) if err != nil { log.Fatal(err) } log.Print(readBody(resp)) } func fetch(req *http.Request) (*http.Response, error) { ctx, cancel := context.WithTimeout(context.Background(), 5*time.</description>
+    </item>
     
     <item>
       <title>里氏替换&amp;开放关闭</title>
