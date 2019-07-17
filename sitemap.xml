@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/2019/19-07-17-database.sql.driver/</loc>
+    <lastmod>2019-07-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/2019/19-06-23-using-context-cancellation-in-go/</loc>
     <lastmod>2019-06-22T00:00:00+00:00</lastmod>
   </url>
@@ -363,6 +368,10 @@
   </url>
   
   <url>
+    <loc>/blog/2018/x-curl-x-post-httpnewfeed/</loc>
+  </url>
+  
+  <url>
     <loc>/categories/2018-01/</loc>
     <lastmod>2018-01-30T20:10:33+00:00</lastmod>
     <priority>0</priority>
@@ -471,6 +480,12 @@
   </url>
   
   <url>
+    <loc>/categories/2019-17/</loc>
+    <lastmod>2019-07-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/about/</loc>
   </url>
   
@@ -482,7 +497,7 @@
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2019-06-22T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -504,7 +519,7 @@
   
   <url>
     <loc>/tags/mysql/</loc>
-    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -546,7 +561,7 @@
   
   <url>
     <loc>/tags/golang/</loc>
-    <lastmod>2019-06-22T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -576,7 +591,7 @@
   
   <url>
     <loc>/tags/mysql/</loc>
-    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -654,7 +669,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-06-22T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-17T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>

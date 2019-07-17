@@ -6,10 +6,21 @@
     <description>Recent content in 蜗牛保持乐观才会爬的更远 on 道法自然</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>database.sql.driver</title>
+      <link>/blog/2019/19-07-17-database.sql.driver/</link>
+      <pubDate>Wed, 17 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/19-07-17-database.sql.driver/</guid>
+      <description>在事务操作中，要求事务的各个阶段都使用一个Conn连接。在连接被关闭之前，还需要执行rollback操作。
+文章翻译了Go源码下database.sql.driver的接口规范，具体实现可以查看源码。
+// 包driver定义了数据驱动要实现的接口，具体的实现会在包sql中用到。 // // 更多还是使用包sql中的代码 package driver import ( &amp;quot;context&amp;quot; &amp;quot;errors&amp;quot; &amp;quot;reflect&amp;quot; ) // Value必须是一个驱动可以处理的值、NamedValueChecker接口能够处理的类型 // 或者下面这些类型的实例 // // int64 // float64 // bool // []byte // string // time.Time // // 如果驱动支持游标，返回值可能也实现Rows接口。举例，当用户 // 执行&amp;quot;select cursor(select * from my_table) from dual&amp;quot;。 // 如果返回的Rows被Close掉了，游标指向的数据也会被Close掉。 type Value interface{} // NameValue 同时包括name和value type NamedValue struct { // 如果Name不为空，它应该被用于参数标识符，而非序号位置。 // // Name 没有符号前缀 Name string // 参数从1开始的序号位置，并且总是被设置 Ordinal int // Value是参数值 Value Value } // Driver是一个必须被各个数据库driver实现的接口 // // 数据库驱动可以实现DriverContext来访问上下文，并且只解析一次连接池的名称， // 而非每个连接都解析一次。 // type Driver interface { // Open返回数据库的一个新连接，参数name是驱动特定格式的字符串 // // Open也可以返回一个缓存的连接（之前被close掉的），但这样 // 做其实没必要。sql包为了连接重复使用维护了一个空闲连接池 // // 返回的连接一次只被一个goroutinue中使用 Open(name string) (Conn, error) } // 如果Driver实现了DriverContext接口，那么sql.</description>
+    </item>
     
     <item>
       <title>Using context cancellation in Go</title>
@@ -1215,6 +1226,15 @@ Feature 分支 Feature 分支主要用来开新功能。一般来说，只要功
 在2014年，我们给平台开发了新的特性，导致http 请求短时间内翻了一倍，结果有40%的请求HTTP 500: Internal Server Error.
 之后查看日志，发现错误多是redis的连接问题： read error on connection 和 Redis server went away。
 | WARN | ... Redis\ConnectException: Unable to connect: read error on connection ... #0 /.../vendor/.../Redis/RedisPool.php(106): ...\Redis\RedisPool-&amp;gt;connect(Object(Redis), Object(...\Redis\RedisServerConfiguration)) #1 /.../vendor/.../Redis/RedisClient.php(130): ...\Redis\RedisPool-&amp;gt;get(&#39;default&#39;, true) #2 /.../vendor/.../Redis/RedisClient.php(94): ...\Redis\RedisClient-&amp;gt;setMode(false) ... #17 /.../app/bootstrap.php.cache(551): Symfony\Bundle\FrameworkBundle\HttpKernel-&amp;gt;handle(Object(Symfony\Component\HttpFoundation\Request), 1, true) #18 /.../web/app.php(15): Symfony\Component\HttpKernel\Kernel-&amp;gt;handle(Object(Symfony\Component\HttpFoundation\Request)) #19 {main} | 12.34.56.78 | www.trivago.de | /?aDateRange%5Barr%5D=2014-05-20&amp;amp;aDateRange%5Bdep%5D=2014-05-21&amp;amp;iRoomType=1&amp;amp;iPathId=44742... | Mozilla/5.0 (WindowsNT 6.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/blog/2018/x-curl-x-post-httpnewfeed/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/x-curl-x-post-httpnewfeed/</guid>
+      <description>curl -X POST \ http://newfeed.int.vpc.igetget.com/feed/v3/planstatistics/finish/continuous-day \ -H &#39;Content-Type: application/json&#39; \ -H &#39;Postman-Token: 87ae6e6d-44da-4ecd-b9f7-ebbafa853141&#39; \ -H &#39;cache-control: no-cache&#39; \ -H &#39;x-uid: 32831765&#39; \ -d &#39;{ &amp;quot;day&amp;quot;:&amp;quot;2019-07-05&amp;quot; }&#39;  勋章观察一下这个用户：10836668</description>
     </item>
     
     <item>
