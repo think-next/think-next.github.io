@@ -59,11 +59,39 @@
         
         <li><a href="/about/">About</a></li>
         
-        
-
-
         </ul>
       </nav>
+
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+          
+
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#example"><code>Example</code></a></li>
+<li><a href="#dockerfile-指令"><code>Dockerfile</code>指令</a>
+<ul>
+<li><a href="#from"><code>FROM</code></a></li>
+<li><a href="#run"><code>RUN</code></a></li>
+<li><a href="#env"><code>ENV</code></a></li>
+<li><a href="#copy"><code>COPY</code></a></li>
+<li><a href="#cmd"><code>CMD</code></a></li>
+<li><a href="#entrypoint"><code>ENTRYPOINT</code></a></li>
+<li><a href="#expose"><code>EXPOSE</code></a></li>
+<li><a href="#workdir"><code>WORKDIR</code></a></li>
+</ul></li>
+<li><a href="#多阶段构建">多阶段构建</a>
+<ul>
+<li><a href="#example-1"><code>Example</code></a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+
+
+      </div>
     </header>
 
     <article class="main">
@@ -94,6 +122,21 @@
 <hr>
       </header>
 
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
 
 
 
@@ -266,7 +309,6 @@ CMD [&quot;bash&quot;, &quot;-c&quot;, &quot;/data/src/${RUN_PROG:=baby} --log_d
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
-
   
 
 

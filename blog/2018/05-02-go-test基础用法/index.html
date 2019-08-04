@@ -59,11 +59,37 @@
         
         <li><a href="/about/">About</a></li>
         
-        
-
-
         </ul>
       </nav>
+
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+          
+
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#test"><code>Test</code></a>
+<ul>
+<li><a href="#使用-map-的测试">使用<code>map</code>的测试</a></li>
+</ul></li>
+<li><a href="#main"><code>Main</code></a></li>
+<li><a href="#性能测试-pprof">性能测试<code>pprof</code></a>
+<ul>
+<li><a href="#profile"><code>Profile</code></a></li>
+<li><a href="#在终端查看性能">在终端查看性能</a></li>
+</ul></li>
+<li><a href="#benchmark-测试"><code>Benchmark</code>测试</a></li>
+<li><a href="#run-example"><code>Run Example</code></a></li>
+<li><a href="#覆盖率">覆盖率</a></li>
+<li><a href="#火焰图"><code>火焰图</code></a></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+
+
+      </div>
     </header>
 
     <article class="main">
@@ -94,6 +120,21 @@
 <hr>
       </header>
 
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
 
 
 
@@ -336,7 +377,6 @@ go-torch -h
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
-
   
 
 

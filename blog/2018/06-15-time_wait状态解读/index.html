@@ -59,11 +59,27 @@
         
         <li><a href="/about/">About</a></li>
         
-        
-
-
         </ul>
       </nav>
+
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+          
+
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#time-wait-status"><code>time_wait status</code></a></li>
+<li><a href="#2mls"><code>2MLS</code></a></li>
+<li><a href="#shell-查询-time-wait-连接"><code>shell</code>查询<code>time_wait</code>连接</a></li>
+<li><a href="#总结">总结</a></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+
+
+      </div>
     </header>
 
     <article class="main">
@@ -96,6 +112,21 @@
 <hr>
       </header>
 
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
 
 
 
@@ -170,7 +201,6 @@
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
-
   
 
 

@@ -59,11 +59,37 @@
         
         <li><a href="/about/">About</a></li>
         
-        
-
-
         </ul>
       </nav>
+
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+          
+
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#接口测试">接口测试</a>
+<ul>
+<li><a href="#使用-postman">使用<code>Postman</code></a></li>
+</ul></li>
+<li><a href="#使用-test">使用<code>Test</code></a>
+<ul>
+<li>
+<ul>
+<li><a href="#测试基类">测试基类</a></li>
+<li><a href="#测试用例">测试用例</a></li>
+<li><a href="#小结">小结</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#middleware"><code>Middleware</code></a></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+
+
+      </div>
     </header>
 
     <article class="main">
@@ -96,6 +122,21 @@
 <hr>
       </header>
 
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
 
 
 
@@ -251,7 +292,6 @@ articleRoutes.GET(&quot;/create&quot;, setUserStatus(), showArticleCreationPage)
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
-
   
 
 

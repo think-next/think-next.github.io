@@ -59,11 +59,44 @@
         
         <li><a href="/about/">About</a></li>
         
-        
-
-
         </ul>
       </nav>
+
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+          
+
+<nav id="TableOfContents">
+<ul>
+<li><a href="#git分支模型">Git分支模型</a>
+<ul>
+<li><a href="#为什么选择git">为什么选择Git</a></li>
+<li><a href="#不集中式又集中式">不集中式又集中式</a></li>
+<li><a href="#主要分支">主要分支</a></li>
+<li><a href="#支承分支">支承分支</a>
+<ul>
+<li><a href="#feature-分支">Feature 分支</a>
+<ul>
+<li><a href="#创建feature分支">创建feature分支</a></li>
+<li><a href="#合并feature-分支">合并feature 分支</a></li>
+</ul></li>
+<li><a href="#release分支">release分支</a>
+<ul>
+<li><a href="#创建release-分支">创建release 分支</a></li>
+<li><a href="#完成release分支">完成release分支</a></li>
+</ul></li>
+<li><a href="#hotfix-分支">Hotfix 分支</a>
+<ul>
+<li><a href="#创建hotfix-分支">创建hotfix 分支</a></li>
+<li><a href="#hotfix分支修复完成">Hotfix分支修复完成</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+
+
+      </div>
     </header>
 
     <article class="main">
@@ -96,6 +129,21 @@
 <hr>
       </header>
 
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
 
 
 
@@ -312,7 +360,6 @@ git merge --no-ff hotfix-1.2.1
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
-
   
 
 

@@ -59,11 +59,17 @@
         
         <li><a href="/about/">About</a></li>
         
-        
-
-
         </ul>
       </nav>
+
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+          
+
+
+      </div>
+
+
+      </div>
     </header>
 
     <article class="main">
@@ -96,6 +102,21 @@
 <hr>
       </header>
 
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
 
 <p>在事务操作中，要求事务的各个阶段都使用一个<code>Conn</code>连接。在连接被关闭之前，还需要执行<code>rollback</code>操作。</p>
 
@@ -546,7 +567,7 @@ func (noRows) RowsAffected() (int64, error) {
   
 <nav class="post-nav">
   <span class="nav-prev">&larr; <a href="/blog/2019/19-06-23-using-context-cancellation-in-go/">Using context cancellation in Go</a></span>
-  <span class="nav-next"></span>
+  <span class="nav-next"><a href="/blog/2019/19-07-28-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/">故障排查</a> &rarr;</span>
 </nav>
 
 
@@ -557,7 +578,6 @@ func (noRows) RowsAffected() (int64, error) {
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
-
   
 
 

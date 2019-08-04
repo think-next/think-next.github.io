@@ -59,11 +59,39 @@
         
         <li><a href="/about/">About</a></li>
         
-        
-
-
         </ul>
       </nav>
+
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+          
+
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#比较运算">比较运算</a>
+<ul>
+<li><a href="#算数比较">算数比较</a></li>
+<li><a href="#文件系统">文件系统</a></li>
+<li><a href="#字符串比较">字符串比较</a></li>
+<li><a href="#逻辑运算">逻辑运算</a></li>
+</ul></li>
+<li><a href="#基本语句-example">基本语句<code>Example</code></a>
+<ul>
+<li><a href="#if-语句"><code>if</code>语句</a></li>
+<li><a href="#while-语句"><code>while</code>语句</a></li>
+<li><a href="#for-语句"><code>for</code>语句</a></li>
+<li><a href="#case-语句"><code>case</code>语句</a></li>
+</ul></li>
+<li><a href="#数组">数组</a></li>
+<li><a href="#函数">函数</a></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+
+
+      </div>
     </header>
 
     <article class="main">
@@ -94,6 +122,21 @@
 <hr>
       </header>
 
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
 
 
 
@@ -290,7 +333,6 @@ $@  与$*相同，但是使用时加引号，并在引号中返回每个参数�
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
-
   
 
 

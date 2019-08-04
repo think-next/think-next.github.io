@@ -59,11 +59,39 @@
         
         <li><a href="/about/">About</a></li>
         
-        
-
-
         </ul>
       </nav>
+
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+          
+
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#floating-point-represent">Floating-point represent</a>
+<ul>
+<li><a href="#1-fixed-point"><code>1. Fixed-point</code></a></li>
+</ul></li>
+<li><a href="#floating-point-basics"><code>Floating-point basics</code></a>
+<ul>
+<li><a href="#1-representable-numbers"><code>1. Representable numbers</code></a></li>
+</ul></li>
+<li><a href="#ieee-standard"><code>IEEE standard</code></a>
+<ul>
+<li><a href="#1-ieee-formats"><code>1. IEEE formats</code></a></li>
+<li><a href="#2-非数值"><code>2. 非数值</code></a></li>
+<li><a href="#3-运算"><code>3. 运算</code></a></li>
+</ul></li>
+<li><a href="#float-to-float">float to float</a></li>
+<li><a href="#match-big"><code>match/big</code></a></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+
+
+      </div>
     </header>
 
     <article class="main">
@@ -96,6 +124,21 @@
 <hr>
       </header>
 
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
 
 
 
@@ -295,7 +338,6 @@ result := bigFloat1.Cmp(bigFloat2)
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
-
   
 
 

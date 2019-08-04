@@ -59,11 +59,30 @@
         
         <li><a href="/about/">About</a></li>
         
-        
-
-
         </ul>
       </nav>
+
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+          
+
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#引言">引言</a>
+<ul>
+<li><a href="#在涉及到支付业务的时候-数据库里的钱怎么存">在涉及到支付业务的时候，数据库里的钱怎么存：</a></li>
+<li><a href="#那么在-mysql-的-column-中该如何存储呢">那么在<code>MySQL</code>的<code>Column</code>中该如何存储呢？</a></li>
+</ul></li>
+<li><a href="#deault-value"><code>deault value</code></a></li>
+<li><a href="#strict-trans-tables"><code>STRICT_TRANS_TABLES</code></a></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+
+
+      </div>
     </header>
 
     <article class="main">
@@ -94,6 +113,21 @@
 <hr>
       </header>
 
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
 
 
 
@@ -169,7 +203,6 @@
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
-
   
 
 

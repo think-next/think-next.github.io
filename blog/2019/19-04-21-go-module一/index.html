@@ -59,11 +59,27 @@
         
         <li><a href="/about/">About</a></li>
         
-        
-
-
         </ul>
       </nav>
+
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+          
+
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#go111module"><code>GO111MODULE</code></a></li>
+<li><a href="#defining-a-module"><code>Defining a module</code></a></li>
+<li><a href="#modules-and-vendoring-https-golang-org-cmd-go-hdr-modules-and-vendoring"><a href="https://golang.org/cmd/go/#hdr-Modules_and_vendoring"><code>Modules and vendoring</code></a></a></li>
+<li><a href="#go-get-https-golang-org-cmd-go-hdr-module-aware-go-get"><a href="https://golang.org/cmd/go/#hdr-Module_aware_go_get"><code>Go Get</code></a></a></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+
+
+      </div>
     </header>
 
     <article class="main">
@@ -94,6 +110,21 @@
 <hr>
       </header>
 
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
 
 
 
@@ -166,7 +197,6 @@ go mod vendor
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
-
   
 
 

@@ -54,11 +54,17 @@
         
         <li class="active"><a href="/about/">About</a></li>
         
-        
-
-
         </ul>
       </nav>
+
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+          
+
+
+      </div>
+
+
+      </div>
     </header>
 
     <article class="main">
@@ -76,6 +82,21 @@
 <hr>
       </header>
 
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
 
 <p>网站是使用<code>hugo</code> + <code>GitHub</code>搭建的静态网页。在这之前，一直用的是<code>hexo</code>，自从无意间看到了<a href="https://yihui.name/">https://yihui.name/</a>。不得不说，自己被博主的优秀以及博客的简单明了折服的一塌糊涂。</p>
 
@@ -92,7 +113,6 @@
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
-
   
 
   

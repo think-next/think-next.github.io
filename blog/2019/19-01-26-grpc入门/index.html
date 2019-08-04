@@ -59,11 +59,32 @@
         
         <li><a href="/about/">About</a></li>
         
-        
-
-
         </ul>
       </nav>
+
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+          
+
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#为什么使用-grpc">为什么使用<code>grpc</code></a></li>
+<li><a href="#http-2"><code>http/2</code></a></li>
+<li><a href="#准备工作"><code>准备工作</code></a></li>
+<li><a href="#protocol-buffer"><code>protocol buffer</code></a></li>
+<li><a href="#grpc-接口"><code>grpc</code>接口</a></li>
+<li><a href="#service-处理流程"><code>service</code>处理流程</a></li>
+<li><a href="#创建订单"><code>创建订单</code></a></li>
+<li><a href="#运行系统"><code>运行系统</code></a></li>
+<li><a href="#总结">总结</a></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+
+
+      </div>
     </header>
 
     <article class="main">
@@ -96,6 +117,21 @@
 <hr>
       </header>
 
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
 
 
 
@@ -417,7 +453,6 @@ func main() {
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
-
   
 
 

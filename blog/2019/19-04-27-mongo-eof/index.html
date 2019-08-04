@@ -59,11 +59,38 @@
         
         <li><a href="/about/">About</a></li>
         
-        
-
-
         </ul>
       </nav>
+
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+          
+
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#question"><code>Question</code></a>
+<ul>
+<li><a href="#描述">描述</a></li>
+<li><a href="#解决思路">解决思路</a></li>
+</ul></li>
+<li><a href="#搭建-replica-set-https-docs-mongodb-com-manual-reference-glossary-term-replica-set">搭建<a href="https://docs.mongodb.com/manual/reference/glossary/#term-replica-set"><code>replica set</code></a></a></li>
+<li><a href="#测试">测试</a></li>
+<li><a href="#docker-compose-yml"><code>docker-compose.yml</code></a>
+<ul>
+<li><a href="#ports-vs-expose"><code>ports vs expose</code></a></li>
+<li><a href="#entrypoint"><code>entrypoint</code></a></li>
+<li><a href="#depends-on"><code>depends_on</code></a></li>
+</ul></li>
+<li><a href="#docker-command"><code>docker command</code></a></li>
+<li><a href="#mongo-command"><code>mongo command</code></a></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+
+
+      </div>
     </header>
 
     <article class="main">
@@ -94,6 +121,21 @@
 <hr>
       </header>
 
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
 
 
 
@@ -258,7 +300,6 @@ rs.slaveOk()
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
-
   
 
 

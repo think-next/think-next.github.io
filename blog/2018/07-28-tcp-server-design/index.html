@@ -59,11 +59,25 @@
         
         <li><a href="/about/">About</a></li>
         
-        
-
-
         </ul>
       </nav>
+
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+          
+
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#listen-状态"><code>listen</code>状态</a></li>
+<li><a href="#request-queue"><code>request queue</code></a></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+
+
+      </div>
     </header>
 
     <article class="main">
@@ -96,6 +110,21 @@
 <hr>
       </header>
 
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
 
 
 
@@ -136,7 +165,7 @@ tcp46      0      0  *.3900                 *.*                    LISTEN
   <footer>
   
 <nav class="post-nav">
-  <span class="nav-prev">&larr; <a href="/blog/2019/19-07-28-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/">故障排查</a></span>
+  <span class="nav-prev">&larr; <a href="/blog/2018/07-24-%E9%87%8D%E8%AF%95/">重试</a></span>
   <span class="nav-next"><a href="/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/">ngrep抓包</a> &rarr;</span>
 </nav>
 
@@ -148,7 +177,6 @@ tcp46      0      0  *.3900                 *.*                    LISTEN
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
-
   
 
 

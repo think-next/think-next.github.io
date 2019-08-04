@@ -59,11 +59,39 @@
         
         <li><a href="/about/">About</a></li>
         
-        
-
-
         </ul>
       </nav>
+
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+          
+
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#npm包管理">npm包管理</a>
+<ul>
+<li><a href="#包的版本">包的版本</a></li>
+<li><a href="#管理依赖">管理依赖</a></li>
+<li><a href="#版本管理">版本管理</a></li>
+</ul></li>
+<li><a href="#composer管理">Composer管理</a>
+<ul>
+<li><a href="#install-update">install/update</a></li>
+<li><a href="#版本管理-1">版本管理</a></li>
+</ul></li>
+<li><a href="#go-下的版本管理工具"><code>Go</code>下的版本管理工具</a>
+<ul>
+<li><a href="#glide"><code>glide</code></a></li>
+<li><a href="#govendor"><code>govendor</code></a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+
+
+      </div>
     </header>
 
     <article class="main">
@@ -94,6 +122,21 @@
 <hr>
       </header>
 
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
 
 
 
@@ -215,7 +258,6 @@ govendor sync -v
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
-
   
 
 

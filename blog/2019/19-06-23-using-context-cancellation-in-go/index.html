@@ -59,11 +59,39 @@
         
         <li><a href="/about/">About</a></li>
         
-        
-
-
         </ul>
       </nav>
+
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+          
+
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#code">Code</a></li>
+<li><a href="#重现bug">重现Bug</a></li>
+<li><a href="#修正-bug">修正<code>Bug</code></a></li>
+<li><a href="#三种错误类型">三种错误类型</a>
+<ul>
+<li><a href="#context-deadline-exceeded"><code>context deadline exceeded</code></a></li>
+<li><a href="#context-canceled"><code>context canceled</code></a></li>
+<li><a href="#net-http-request-canceled"><code>net/http: request canceled</code></a></li>
+</ul></li>
+<li><a href="#context-原理"><code>context</code>原理</a></li>
+<li><a href="#源代码">源代码</a></li>
+<li><a href="#在-ctxhttp-中的应用">在<code>ctxhttp</code>中的应用</a>
+<ul>
+<li><a href="#发送-request">发送<code>request</code></a></li>
+<li><a href="#读取-response">读取<code>response</code></a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+
+
+      </div>
     </header>
 
     <article class="main">
@@ -94,6 +122,21 @@
 <hr>
       </header>
 
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
 
 
 
@@ -634,7 +677,6 @@ func (t *Transport) roundTrip(req *Request) (*Response, error) {
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
-
   
 
 
