@@ -103,9 +103,9 @@ creator: build: context: . dockerfile: dockerfile entrypoint: [&amp;quot;/data/c
  值为off，表示不支持Go Modules模式，Go仍然在vendor和GoPATH路径下查找依赖； 值为on，表示当前明确使用Go Modules，Go不再去GOPATH下查找任何依赖； 值为auto或未设置，表示是否启用Go Modules依赖当前的目录情况，当编译的项目在GoPATH/src之外，或者当前目录或子目录本身包含go.mod文件，则启用Go Modules模式。  Defining a module module通过源码根目录下的go.mod文件来定义。根路径下的module是项目依赖包的集合，但会排除子目录的go.mod文件。
 下面是go mod文件模版：
 module example.com/m require ( golang.org/x/text v0.3.0 gopkg.in/yaml.v2 v2.1.0 )  要开始使用go mod，仅需要在项目下执行go mod init命令创建go.mod文件即可。
-go mod init example.com/m  Modules and vendoring 当使用module时，Go命令会完全忽略vendor目录。为了跟之前Go的依赖管理相兼容，我们可以使用go mod vendor 创建vendor目录来存储编译代码的依赖包。如果在编译的时候要使用vendor中的依赖包，需要使用go build -mod=vendor命令。
-go mod vendor go build -mod=vendor  Go Get 首先，go get解析需要新增哪些依赖。可以通过在包名后添加@version或者@branch等方式来取代命令的默认更新行为。如果后缀指定为@none，则表明该依赖应该被移除。
-其次，go get会下载、编译、安装指定的包。包的安装模式也是被允许的，比如使用go get golang.org/x/perf/cmd/..来更新cmd下的所有子包。</description>
+go mod init example.com/m  The go.mod File go.mod文件的每一行都包还一个简单的指令(module、require、exclude、replace)，然后紧跟参数部分。指令除了单行表示之外，还可以是一个块的形式。其中，文件也是以//作为注释符。
+下面是截取我项目下的go.mod文件的部分内容：
+module gitlab.luojilab.com/igetserver/order_delivery go 1.12 require ( github.com/Shopify/sarama v1.22.1 github.com/bsm/sarama-cluster v2.1.15+incompatible github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b github.com/gopherjs/gopherjs v0.0.0-20181103185306-d547d1d9531e // indirect ) replace ( cloud.</description>
     </item>
     
     <item>
