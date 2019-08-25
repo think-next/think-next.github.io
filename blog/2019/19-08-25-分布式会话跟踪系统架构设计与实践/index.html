@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>故障排查 - 渐行渐远</title>
+    <meta property="og:title" content="故障排查 - 渐行渐远">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.14.1/styles/googlecode.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/">Blog</a></li>
+        
+        <li><a href="/life/">Life</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        </ul>
+      </nav>
+
+      
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+        
+
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#概念">概念</a></li>
+<li><a href="#简化-trace-日志设计">简化<code>trace</code>日志设计</a></li>
+<li><a href="#other-日志设计"><code>Other</code>日志设计</a></li>
+<li><a href="#annotation"><code>Annotation</code></a></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>故障排查</h1>
+
+
+
+
+    
+    
+    <section class="post-meta">
+        <span class="post-author">付辉
+        
+            
+            
+             /  2019-08-25
+            
+        </span>
+        
+        <a href="/tags/golangs">golangs</a>
+        
+    </section>
+    
+
+
+
+<hr>
+      </header>
+
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
+
+
+
+<p>调用链<code>trace</code>系统可以帮助技术人员快速的定位问题，查看整个请求的调用链路，及各个链路的耗时情况。方便技术人员针对性的对服务进行性能优化。</p>
+
+<h2 id="概念">概念</h2>
+
+<p>参考<a href="https://yuerblog.cc/2017/06/22/talk-about-rpc-trace/"><code>调用链trace的设计分析</code></a>的介绍，<code>trace</code>系统的要素包括：<code>traceId</code>、<code>spanId</code>、<code>annotation</code>。</p>
+
+<ol>
+<li><code>traceId</code>：贯穿整个调用链路，通过<code>traceId</code>来关联链路的所有相关日志</li>
+<li><code>spanId</code>：标识单次请求调用</li>
+<li><code>annotation</code>：记录请求调用的附加信息</li>
+</ol>
+
+<h2 id="简化-trace-日志设计">简化<code>trace</code>日志设计</h2>
+
+<p>在<a href="https://yuerblog.cc/2017/06/22/talk-about-rpc-trace/"><code>调用链trace的设计分析</code></a>文章中，系统<code>log</code>设计相对复杂，先从最简单的入手开始了解。</p>
+
+<p>微服务A、B、C之间存在相互调用关系，我们为每次请求记录一条<code>log</code>。通过<code>log</code>中的<code>parnetID</code>来确定调用的层级关系，通过<code>spanID</code>来唯标识一个独立请求，通过<code>traceID</code>来收敛所有相关日志。最终就可以确定请求的调用层级结构。</p>
+
+<p><img src="https://note.youdao.com/yws/public/resource/7efe6785ebb3ec21e849b62e445745be/xmlnote/WEBRESOURCE3cf306ff222798256195be3c80653637/7315" alt="simply" /></p>
+
+<p>从<code>SERVER-C</code>可以看出，日志记录在<code>C</code>服务的总处理时间。在结合<code>SERVER-B</code>的发起请求时间，可以初略得出<code>span2</code>的网络耗时。</p>
+
+<p>特别注意一下<code>span</code>的变化。当向下游服务发起请求时，需要生成一个新的<code>span</code>，并将该<code>span</code>的父节点设置成上一步生成的<code>span</code>。<code>SERVER-B</code>请求<code>SERVER-C</code>描述的就是这个过程。</p>
+
+<p>而当服务收到一个请求时，只有当请求没有关联新的<code>span</code>时，才需要生成一个<code>span</code>。<code>SERVER-C</code>收到<code>SERVER-B</code>的请求，描述的是这种情况。</p>
+
+<h2 id="other-日志设计"><code>Other</code>日志设计</h2>
+
+<p><a href="https://yuerblog.cc/2017/06/22/talk-about-rpc-trace/"><code>调用链trace的设计分析</code></a>文章又是如何实现的呢？文章给出的调用关系如下：</p>
+
+<p><img src="https://note.youdao.com/yws/public/resource/7efe6785ebb3ec21e849b62e445745be/xmlnote/WEBRESOURCEd556b0d268ac0c61f638f64eaee0908f/7285" alt="other" /></p>
+
+<p>两者的区别在于：确定层级的方式不同。这里通过<code>span</code>值的创建规则来确定调用的层级。而前者是通过借助<code>parentID</code>来确定层级。</p>
+
+<p><img src="https://note.youdao.com/yws/public/resource/7efe6785ebb3ec21e849b62e445745be/xmlnote/WEBRESOURCE37828a28249c9e294ded8841a6c986fc/7461" alt="trace-2" /></p>
+
+<h2 id="annotation"><code>Annotation</code></h2>
+
+<p>通过<a href="http://siye1982.github.io/2016/04/07/zipkin/#Annotation"><code>基于Zipkin的Thrift服务RPC调用链跟踪</code></a>文章了解到，存储<code>span</code>信息可以通过<code>Annotation</code>和<code>BinaryAnnotation</code>来实现。</p>
+
+<p><code>Annotation</code>用于记录某个时间点发生的<code>event</code>，对<code>event</code>的触发时间、类型有明确规定。而<code>BinaryAnnotation</code>则用来记录用户自定义的信息。也就是说：前者是公用的，后者是个人用的。</p>
+
+<p>因为反向代理路径重写的原因，客户端请求的<code>path</code>和服务端提供服务的<code>path</code>可能不相同，如果你想在系统中定位这种情况，那么你就可以将<code>http.url</code>追加到<code>BinaryAnnotaion</code>属性中。</p>
+
+<p>了解一下<code>BinaryAnnotation</code>日志存储的数据内容：</p>
+
+<pre><code>{
+    &quot;app&quot;: &quot;app&quot;, //所属应用
+    &quot;ip&quot;: &quot;ip&quot;, //ip地址,冗余信息
+    &quot;key&quot;: &quot;key&quot;, //key, 可以设为存储用户session的key, 如果是用来传递用户session信息的, 可以统一约定为: session_id
+    &quot;mname&quot;: &quot;mname&quot;,  //方法名
+    &quot;pid&quot;: &quot;10000&quot;, //进程id,冗余信息
+    &quot;sid&quot;: &quot;sid&quot;, //spanId
+    &quot;sname&quot;: &quot;sname&quot;, //服务名
+    &quot;tid&quot;: &quot;tid&quot;, //traceId
+    &quot;timestamp&quot;: 1449038780194, //产生的时间戳, 长整型, 精确到毫秒
+    &quot;type&quot;: &quot;type&quot;, //类型,用来区分是记录异常的还是业务流程的等等, 默认是'common'即可
+    &quot;value&quot;: &quot;value&quot; //如果是传递用户session信息 ,可以直接写在该字段中.
+}
+</code></pre>
+
+<p>参考地址：</p>
+
+<ol>
+<li><a href="https://yuerblog.cc/2017/06/22/talk-about-rpc-trace/"><code>调用链trace的设计分析</code></a></li>
+<li><a href="http://www.uml.org.cn/zjjs/201705232.asp"><code>分布式会话跟踪系统架构设计与实践</code></a></li>
+<li><a href="http://siye1982.github.io/2016/04/07/zipkin/#Annotation"><code>基于Zipkin的Thrift服务RPC调用链跟踪</code></a></li>
+</ol>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2019/19-07-28-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/">故障排查</a></span>
+  <span class="nav-next"></span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/tex.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/go.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">DDF</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+
