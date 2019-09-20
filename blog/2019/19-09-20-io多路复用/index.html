@@ -169,13 +169,13 @@
 
 <p>I/O编程过程中，需要同时处理多个客户端接入请求时，可以利用多线程或者I/O多路复用技术进行处理。 I/O多路复用技术通过把多个I/O的阻塞复用到同一个select阻塞上，一个进程监视多个描述符，一旦某个描述符就位， 能够通知程序进行读写操作。因为多路复用本质上是同步I/O，都需要应用程序在读写事件就绪后自己负责读写。 最大的优势是系统开销小，不需要创建和维护额外线程或进程。</p>
 
-<p><img src="https://segmentfault.com/img/bVbxVtQ?w=756&amp;h=399" alt="" /></p>
+<p><img src="https://i.loli.net/2019/09/20/E4rio9ymNcSxVPJ.png" alt="pic-3.png" /></p>
 
 <p>结合多路复用，来看一下异步非阻塞<code>I/O</code>:</p>
 
 <p>对比异步非阻塞<code>I/O</code>，读请求会立即返回，说明请求已经成功发起，应用程序不被阻塞，继续执行其它处理操作。当<code>read</code>响应到达，将数据拷贝到用户空间，产生信号或者执行一个基于线程回调函数完成<code>I/O</code>处理。应用程序不用在多个任务之间切换。</p>
 
-<p><img src="https://segmentfault.com/img/bVbxVtO?w=706&amp;h=323" alt="" /></p>
+<p><img src="https://i.loli.net/2019/09/20/AhzRY2WELVwtNQf.png" alt="pic-2.png" /></p>
 
 <p>可以看出，阻塞<code>I/O</code>在<code>wait for data</code>和<code>copy data from kernel to user</code>两个阶段都是阻塞的。而只有异步<code>I/O</code>的<code>receivefrom</code>是不阻塞的。</p>
 
@@ -231,7 +231,7 @@ func netpoll(block bool) *g {}
 
 <p>两者的差异在于<code>level-trigger</code>模式下只要某个<code>socket</code>处于<code>readable/writable</code>状态，无论什么时候进行<code>epoll_wait</code>都会返回该<code>socket</code>。而<code>edge-trigger</code>模式下只有某个<code>socket</code>从<code>unreadable</code>变为<code>readable</code>或从<code>unwritable</code>变为<code>writable</code>时，<code>epoll_wait</code>才会返回该<code>socket</code>。</p>
 
-<p><img src="https://segmentfault.com/img/bVbxVuc?w=1936&amp;h=1070" alt="et-compare-lt" /></p>
+<p><img src="https://i.loli.net/2019/09/20/dAkVHQmTFz1YKyw.png" alt="ET-LT.png" /></p>
 
 <p>所以, 在<code>epoll</code>的<code>ET</code>模式下, 正确的读写方式为:
 1. 读: 只要可读, 就一直读, 直到返回0, 或者 errno = EAGAIN
