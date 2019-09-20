@@ -144,7 +144,7 @@
 
 <p>微服务A、B、C之间存在相互调用关系，我们为每次请求记录一条<code>log</code>。通过<code>log</code>中的<code>parnetID</code>来确定调用的层级关系，通过<code>spanID</code>来唯标识一个独立请求，通过<code>traceID</code>来收敛所有相关日志。最终就可以确定请求的调用层级结构。</p>
 
-<p><img src="https://note.youdao.com/yws/public/resource/7efe6785ebb3ec21e849b62e445745be/xmlnote/WEBRESOURCE3cf306ff222798256195be3c80653637/7315" alt="simply" /></p>
+<p><img src="https://segmentfault.com/img/bVbwPWH?w=1082&amp;h=566" alt="simply" /></p>
 
 <p>从<code>SERVER-C</code>可以看出，日志记录在<code>C</code>服务的总处理时间。在结合<code>SERVER-B</code>的发起请求时间，可以初略得出<code>span2</code>的网络耗时。</p>
 
@@ -156,11 +156,11 @@
 
 <p><a href="https://yuerblog.cc/2017/06/22/talk-about-rpc-trace/"><code>调用链trace的设计分析</code></a>文章又是如何实现的呢？文章给出的调用关系如下：</p>
 
-<p><img src="https://note.youdao.com/yws/public/resource/7efe6785ebb3ec21e849b62e445745be/xmlnote/WEBRESOURCEd556b0d268ac0c61f638f64eaee0908f/7285" alt="other" /></p>
+<p><img src="https://segmentfault.com/img/bVbwPWL?w=1304&amp;h=618" alt="other" /></p>
 
 <p>两者的区别在于：确定层级的方式不同。这里通过<code>span</code>值的创建规则来确定调用的层级。而前者是通过借助<code>parentID</code>来确定层级。</p>
 
-<p><img src="https://note.youdao.com/yws/public/resource/7efe6785ebb3ec21e849b62e445745be/xmlnote/WEBRESOURCE37828a28249c9e294ded8841a6c986fc/7461" alt="trace-2" /></p>
+<p><img src="https://segmentfault.com/img/bVbwPWO?w=1158&amp;h=580" alt="trace-2" /></p>
 
 <h2 id="annotation"><code>Annotation</code></h2>
 
@@ -200,7 +200,7 @@
   
 <nav class="post-nav">
   <span class="nav-prev">&larr; <a href="/blog/2019/19-07-28-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/">故障排查</a></span>
-  <span class="nav-next"></span>
+  <span class="nav-next"><a href="/blog/2019/19-09-20-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">IO多路复用</a> &rarr;</span>
 </nav>
 
 
