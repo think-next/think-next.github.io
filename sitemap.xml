@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/2019/blog.010-mysql%E5%A2%9E%E9%87%8F%E6%95%B0%E6%8D%AE%E8%AE%A2%E9%98%85%E5%92%8C%E6%B6%88%E8%B4%B9.2019.10.01/</loc>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/2019/19-09-20-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</loc>
     <lastmod>2019-09-20T00:00:00+00:00</lastmod>
   </url>
@@ -513,6 +518,12 @@
   </url>
   
   <url>
+    <loc>/categories/2019-10/</loc>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/categories/2019-17/</loc>
     <lastmod>2019-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -530,7 +541,7 @@
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2019-09-20T00:00:00+00:00</lastmod>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -618,7 +629,7 @@
   
   <url>
     <loc>/tags/linux/</loc>
-    <lastmod>2019-09-20T00:00:00+00:00</lastmod>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -708,7 +719,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-09-20T00:00:00+00:00</lastmod>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>
