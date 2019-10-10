@@ -6,10 +6,73 @@
     <description>Recent content in golang on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 01 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>MySQL增量数据订阅和消费</title>
+      <link>/blog/2019/blog.010-mysql%E5%A2%9E%E9%87%8F%E6%95%B0%E6%8D%AE%E8%AE%A2%E9%98%85%E5%92%8C%E6%B6%88%E8%B4%B9.2019.10.01/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/blog.010-mysql%E5%A2%9E%E9%87%8F%E6%95%B0%E6%8D%AE%E8%AE%A2%E9%98%85%E5%92%8C%E6%B6%88%E8%B4%B9.2019.10.01/</guid>
+      <description> 在订单交付系统中，做到保证权益数据的实时一致性非常难，很多都选择保证数据的最终一致性。在我们的生产环境中，为了保证数据的最终一致性，专门有一个微服务来处理检验异常订单、发告警通知、及时补偿修复异常订单。
+我们开发了一个独立的微服务，它主要用来做遍历整个订单数据，校验每一个订单的交付流程都正常闭环的工作。如果没有完全闭环，它需要选择对应的异常处理策略进行补偿。
+问题是，该微服务如何获取整个订单数据呢？方法有很多，比如：
+ 定期扫描订单系统的全部订单表数据。 订单系统创建一条数据总线，所有创建的订单都发布到数据总线中，微服务订阅该数据总线。 直接订阅订单系统数据表的binlog日志  概述 我们最终确定了使用方法三。这样微服务只处理增量的变更记录，忽略历史已经处理过的记录；同时，binlog就相当于一个数据总线，我们只需要订阅就可以。
+这里引入文章要介绍的重点canal，主要用途是基于 MySQL 数据库增量日志解析，提供增量数据订阅和消费。以及canal-go，它是canal的go语言客户端。具体细节可以直接去链接查看。
+canal的工作原理  canal 模拟 MySQL slave 的交互协议，伪装自己为 MySQL slave ，向 MySQL master 发送 dump 协议 MySQL master 收到 dump 请求，开始推送 binary log 给 slave (即 canal ) canal 解析 binary log 对象(原始为 byte 流)  canal-go的工作原理和流程  Canal连接到mysql数据库，模拟slave canal-go与Canal建立连接 数据库发生变更写入到binlog Canal向数据库发送dump请求，获取binlog并解析 canal-go向Canal请求数据库变更 Canal发送解析后的数据给canal-go canal-go收到数据，消费成功，发送回执。（可选） Canal记录消费位置。  </description>
+    </item>
+    
+    <item>
+      <title>分布式会话跟踪系统架构设计与实践</title>
+      <link>/blog/2019/19-08-25-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D%E8%B7%9F%E8%B8%AA%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/19-08-25-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D%E8%B7%9F%E8%B8%AA%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/</guid>
+      <description> 调用链trace系统可以帮助技术人员快速的定位问题，查看整个请求的调用链路，及各个链路的耗时情况。方便技术人员针对性的对服务进行性能优化。
+概念 参考调用链trace的设计分析的介绍，trace系统的要素包括：traceId、spanId、annotation。
+ traceId：贯穿整个调用链路，通过traceId来关联链路的所有相关日志 spanId：标识单次请求调用 annotation：记录请求调用的附加信息  简化trace日志设计 在调用链trace的设计分析文章中，系统log设计相对复杂，先从最简单的入手开始了解。
+微服务A、B、C之间存在相互调用关系，我们为每次请求记录一条log。通过log中的parnetID来确定调用的层级关系，通过spanID来唯标识一个独立请求，通过traceID来收敛所有相关日志。最终就可以确定请求的调用层级结构。
+从SERVER-C可以看出，日志记录在C服务的总处理时间。在结合SERVER-B的发起请求时间，可以初略得出span2的网络耗时。
+特别注意一下span的变化。当向下游服务发起请求时，需要生成一个新的span，并将该span的父节点设置成上一步生成的span。SERVER-B请求SERVER-C描述的就是这个过程。
+而当服务收到一个请求时，只有当请求没有关联新的span时，才需要生成一个span。SERVER-C收到SERVER-B的请求，描述的是这种情况。
+Other日志设计 调用链trace的设计分析文章又是如何实现的呢？文章给出的调用关系如下：
+两者的区别在于：确定层级的方式不同。这里通过span值的创建规则来确定调用的层级。而前者是通过借助parentID来确定层级。
+Annotation 通过基于Zipkin的Thrift服务RPC调用链跟踪文章了解到，存储span信息可以通过Annotation和BinaryAnnotation来实现。
+Annotation用于记录某个时间点发生的event，对event的触发时间、类型有明确规定。而BinaryAnnotation则用来记录用户自定义的信息。也就是说：前者是公用的，后者是个人用的。
+因为反向代理路径重写的原因，客户端请求的path和服务端提供服务的path可能不相同，如果你想在系统中定位这种情况，那么你就可以将http.url追加到BinaryAnnotaion属性中。
+了解一下BinaryAnnotation日志存储的数据内容：
+{ &amp;quot;app&amp;quot;: &amp;quot;app&amp;quot;, //所属应用 &amp;quot;ip&amp;quot;: &amp;quot;ip&amp;quot;, //ip地址,冗余信息 &amp;quot;key&amp;quot;: &amp;quot;key&amp;quot;, //key, 可以设为存储用户session的key, 如果是用来传递用户session信息的, 可以统一约定为: session_id &amp;quot;mname&amp;quot;: &amp;quot;mname&amp;quot;, //方法名 &amp;quot;pid&amp;quot;: &amp;quot;10000&amp;quot;, //进程id,冗余信息 &amp;quot;sid&amp;quot;: &amp;quot;sid&amp;quot;, //spanId &amp;quot;sname&amp;quot;: &amp;quot;sname&amp;quot;, //服务名 &amp;quot;tid&amp;quot;: &amp;quot;tid&amp;quot;, //traceId &amp;quot;timestamp&amp;quot;: 1449038780194, //产生的时间戳, 长整型, 精确到毫秒 &amp;quot;type&amp;quot;: &amp;quot;type&amp;quot;, //类型,用来区分是记录异常的还是业务流程的等等, 默认是&#39;common&#39;即可 &amp;quot;value&amp;quot;: &amp;quot;value&amp;quot; //如果是传递用户session信息 ,可以直接写在该字段中. }  参考地址：
+ 调用链trace的设计分析 分布式会话跟踪系统架构设计与实践 基于Zipkin的Thrift服务RPC调用链跟踪  </description>
+    </item>
+    
+    <item>
+      <title>故障排查</title>
+      <link>/blog/2019/19-07-28-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</link>
+      <pubDate>Sun, 28 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/19-07-28-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</guid>
+      <description> 测试提Bug的基本要素，主要包括：
+ 期望得到的结果 实际得到的结果 如何重现问题  生产环境出了故障，当然也脱离不开这3个要点。只不过相对重现问题会略微复杂。毕竟，故障总是我们意外之外的情况。
+根据Bug发生的现象，我们会提出很多假设，然后进行逐步排除。
+当问题发生时，最应想到的是：系统最近是否有过改动。很大概率上，一个正常工作的服务会一直维持工作，直到某种外力出现。如果确实是新功能上线导致的，可以结合具体情况，考虑是否回滚到老版本。但有些时候，回滚可能还会引发二次问题，需要特别注意。
+接下来：
+继续保存冷静，简要评估问题的严重程度，及时给外部作出反馈。这里的反馈特别重要，不仅可以让大家了解故障的进展情况，而且，大家还可能提供非常有价值的建议。
+接下来：
+仔细分析故障发生的现象，不要忽略错误日志的任何细节。这个过程中，日志显得尤为重要。一个好的日志记录，必须能还原或推断出当时故障的现场。日志信息主要包括：上下文信息、报错信息。
+当然，有时候故障会涉及多个微服务，最好能有一个trace_id，用来跟踪故障的发生过程，以及具体是微服务中的哪台服务器发生的故障。
+接下来：
+如果无法绝对确定故障的原因，我们需要复现Bug，也就是前文提到的逐个排除。这开发过程中，追加重要服务的测试用例非常重要，可能会节约好多宝贵的时间。
+但也存在难点，比如一些伪相关的原因误导我们的判断。故障一般都有连锁反应，有时候会很难分辨问题的主次。
+Go开发排查问题 Q1 服务发生panic时，结合日志中打印的堆栈信息，可以很容易定位到出错的代码，并作出很多可能的推测。然后，结合具体的上下文信息，能很快复现问题。整个过程中，日志是问题排查的关键。
+日志必须包含panic的堆栈信息，最好有链路的trace_id信息。如果在开发过程中，有对应的Test就更好了。
+Q2 对于接口响应慢的情况，可以依靠pprof工具进行诊断。其中，最可能的是调用外部服务慢，比如经典的MySQL慢查询。
+如果排除了外部依赖的问题，那很可能是程序代码自身问题。通过pprof的各种信息展示，也能很快定位。
+珍惜Bug 不要放过任何Bug，对Bug的处理过程要做好梳理、总结。下面是总结的模版：
+-- 细节 -- 灾难响应 -- 事后总结 -- 做的好的地方 -- 做的不好的地方  </description>
+    </item>
     
     <item>
       <title>database.sql.driver</title>
