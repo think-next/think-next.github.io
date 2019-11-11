@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2019-11 on 渐行渐远</title>
+    <link>/categories/2019-11/</link>
+    <description>Recent content in 2019-11 on 渐行渐远</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/2019-11/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>runtime中P的理解</title>
+      <link>/blog/2019/blog.014-runtime%E4%B8%ADp%E7%9A%84%E7%90%86%E8%A7%A3.2019.11.11/</link>
+      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/blog.014-runtime%E4%B8%ADp%E7%9A%84%E7%90%86%E8%A7%A3.2019.11.11/</guid>
+      <description>P是在Go1.1引入的概念，初始默认等于CPU核的数量。P只是一个逻辑概念，跟CPU也没有任何关系。
+源码go/1.13.4/libexec/src/runtime/proc.go中对P的注释如下：
+// P - processor, a resource that is required to execute Go code. // M must have an associated P to execute Go code, however it can be // blocked or in a syscall w/o an associated P.  再通过源码go/1.13.4/libexec/src/runtime/runtime2.go来简要了解一下P在调度过程中的状态变化：
+const ( // P status _Pidle = iota _Prunning _Psyscall _Pgcstop // _Pdead means a P is no longer used (GOMAXPROCS shrank). We // reuse Ps if GOMAXPROCS increases.</description>
+    </item>
+    
+  </channel>
+</rss>
