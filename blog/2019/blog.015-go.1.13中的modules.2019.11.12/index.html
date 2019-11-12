@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>go.1.13中的Modules - 渐行渐远</title>
+    <meta property="og:title" content="go.1.13中的Modules - 渐行渐远">
+    
+
+    
+      
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.14.1/styles/googlecode.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1 class="headimg">
+    
+    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
+</h1>
+
+
+
+      <nav class="menu">
+        <input id="menu-check" type="checkbox" />
+        <label id="menu-label" for="menu-check" class="unselectable">
+          <span class="icon close-icon">✕</span>
+          <span class="icon open-icon">☰</span>
+          <span class="text">Menu</span>
+        </label>
+        <ul>
+        
+        
+        <li><a href="/blog/">Blog</a></li>
+        
+        <li><a href="/life/">Life</a></li>
+        
+        <li><a href="/categories/">Categories</a></li>
+        
+        <li><a href="/tags/">Tags</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+        </ul>
+      </nav>
+
+      
+      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
+        
+
+
+      </div>
+    </header>
+
+    <article class="main">
+      <header class="title">
+      <h1>go.1.13中的Modules</h1>
+
+
+
+
+    
+    
+    <section class="post-meta">
+        <span class="post-author">付辉
+        
+            
+            
+             /  2019-11-12
+            
+        </span>
+        
+        <a href="/tags/golang">golang</a>
+        
+    </section>
+    
+
+
+
+<hr>
+      </header>
+
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
+
+<p>环境变量<code>GOPRIVATE</code></p>
+
+<p><code>GOPRIVATE</code>升级到<code>go.1.13</code>不得不调整的一个变量。表示引用到的<code>modules</code>是私有的，无须从<code>proxy</code>下载，也无须校验包的<code>checksum</code>。</p>
+
+<p>公司内部基本都有自己的<code>git</code>仓库，升级为<code>go.1.13</code>后，需要在<code>GOPRIVATE</code>中设置仓库的通配符地址。如果不设置该环境变量，<code>go</code>加载<code>package</code>时会从<code>GOPROXY</code>获取，而默认的<code>GOPROXY</code>无法找到指定的包。</p>
+
+<p>参考官方提供的例子：</p>
+
+<pre><code class="language-bash">GOPRIVATE=*.corp.example.com,rsc.io/private
+</code></pre>
+
+<p>环境变量<code>GOPROXY</code></p>
+
+<p><code>go.1.13</code>默认将<code>GOPROXY</code>设置为<code>https://proxy.golang.org,direct</code>，但执行<code>go get</code>会发现，这个地址是无法使用的。</p>
+
+<p>从官方的提供的例子中，简单了解<code>GOPROXY</code>的规范：</p>
+
+<pre><code class="language-bash">// returns a list of all known versions of the given module, one per line.
+GET $GOPROXY/&lt;module&gt;/@v/list
+</code></pre>
+
+<p>当通过<code>GOPROXY</code>找不到具体的<code>module</code>时，会看到404或401的状态码</p>
+
+<p>如果就是很烦躁，也可以不使用这个环境变量:</p>
+
+<pre><code class="language-basg">export GOPROXY=off
+</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/2019/blog.014-runtime%E4%B8%ADp%E7%9A%84%E7%90%86%E8%A7%A3.2019.11.11/">runtime中P的理解</a></span>
+  <span class="nav-next"></span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/tex.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/go.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="http://neojos.com">DDF</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

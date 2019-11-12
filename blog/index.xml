@@ -6,10 +6,28 @@
     <description>Recent content in DDF&#39;s Blog on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 12 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>go.1.13中的Modules</title>
+      <link>/blog/2019/blog.015-go.1.13%E4%B8%AD%E7%9A%84modules.2019.11.12/</link>
+      <pubDate>Tue, 12 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/blog.015-go.1.13%E4%B8%AD%E7%9A%84modules.2019.11.12/</guid>
+      <description>环境变量GOPRIVATE
+GOPRIVATE升级到go.1.13不得不调整的一个变量。表示引用到的modules是私有的，无须从proxy下载，也无须校验包的checksum。
+公司内部基本都有自己的git仓库，升级为go.1.13后，需要在GOPRIVATE中设置仓库的通配符地址。如果不设置该环境变量，go加载package时会从GOPROXY获取，而默认的GOPROXY无法找到指定的包。
+参考官方提供的例子：
+GOPRIVATE=*.corp.example.com,rsc.io/private  环境变量GOPROXY
+go.1.13默认将GOPROXY设置为https://proxy.golang.org,direct，但执行go get会发现，这个地址是无法使用的。
+从官方的提供的例子中，简单了解GOPROXY的规范：
+// returns a list of all known versions of the given module, one per line. GET $GOPROXY/&amp;lt;module&amp;gt;/@v/list  当通过GOPROXY找不到具体的module时，会看到404或401的状态码
+如果就是很烦躁，也可以不使用这个环境变量:
+export GOPROXY=off  </description>
+    </item>
     
     <item>
       <title>runtime中P的理解</title>
