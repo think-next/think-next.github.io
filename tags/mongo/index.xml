@@ -6,10 +6,24 @@
     <description>Recent content in mongo on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 03 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 13 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/mongo/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>mongo中hint的使用</title>
+      <link>/blog/2019/blog.016.mongo%E4%B8%ADhint%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Wed, 13 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/blog.016.mongo%E4%B8%ADhint%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>mongo官方文档对hint的解释如下：
+ The $hint operator forces the query optimizer to use a specific index to fulfill the query. Specify the index either by the index name or by document.
+ hint的命令行用法：
+db.users.find().hint()  mongo中使用explain来确定查询使用的索引方案，对比explain的结果，可以反向校验hint的使用。explain的命令行用法:
+db.collection.explain()  github.com/globalsign/mgo下对hint方法的注释如下：
+// Hint will include an explicit &amp;quot;hint&amp;quot; in the query to force the server // to use a specified index, potentially improving performance in some // situations. The provided parameters are the fields that compose the // key of the index to be used.</description>
+    </item>
     
     <item>
       <title>mongo中ObjectId</title>
