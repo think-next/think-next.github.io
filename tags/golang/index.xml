@@ -43,10 +43,10 @@ const ( // P status _Pidle = iota _Prunning _Psyscall _Pgcstop // _Pdead means a
     
     <item>
       <title>MySQL增量数据订阅和消费</title>
-      <link>/blog/2019/blog.010-mysql%E5%A2%9E%E9%87%8F%E6%95%B0%E6%8D%AE%E8%AE%A2%E9%98%85%E5%92%8C%E6%B6%88%E8%B4%B9.2019.10.01/</link>
+      <link>/blog/2019/2019-10-01-mysql%E5%A2%9E%E9%87%8F%E6%95%B0%E6%8D%AE%E8%AE%A2%E9%98%85%E5%92%8C%E6%B6%88%E8%B4%B9/</link>
       <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/blog.010-mysql%E5%A2%9E%E9%87%8F%E6%95%B0%E6%8D%AE%E8%AE%A2%E9%98%85%E5%92%8C%E6%B6%88%E8%B4%B9.2019.10.01/</guid>
+      <guid>/blog/2019/2019-10-01-mysql%E5%A2%9E%E9%87%8F%E6%95%B0%E6%8D%AE%E8%AE%A2%E9%98%85%E5%92%8C%E6%B6%88%E8%B4%B9/</guid>
       <description> 在订单交付系统中，做到保证权益数据的实时一致性非常难，很多都选择保证数据的最终一致性。在我们的生产环境中，为了保证数据的最终一致性，专门有一个微服务来处理检验异常订单、发告警通知、及时补偿修复异常订单。
 我们开发了一个独立的微服务，它主要用来做遍历整个订单数据，校验每一个订单的交付流程都正常闭环的工作。如果没有完全闭环，它需要选择对应的异常处理策略进行补偿。
 问题是，该微服务如何获取整个订单数据呢？方法有很多，比如：
