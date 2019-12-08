@@ -6,10 +6,19 @@
     <description>Recent content in DDF&#39;s Blog on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 13 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>protocol stack</title>
+      <link>/blog/2019/19-12-08-protocol-stack/</link>
+      <pubDate>Sun, 08 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/19-12-08-protocol-stack/</guid>
+      <description>盗了一张图，小小确幸一下</description>
+    </item>
     
     <item>
       <title>mongo中hint的使用</title>
