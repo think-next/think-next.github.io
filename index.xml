@@ -664,17 +664,15 @@ You can implement step definitions for undefined steps with these snippets: func
     
     <item>
       <title>Net Transport</title>
-      <link>/blog/2018/12-08-net-transport/</link>
+      <link>/blog/2018/2018.12.09-net-transport/</link>
       <pubDate>Sat, 08 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/12-08-net-transport/</guid>
-      <description>版本 0.02
-在调用第三方请求时，正确使用Client也不是一件非常容易的事。
+      <guid>/blog/2018/2018.12.09-net-transport/</guid>
+      <description>在调用第三方请求时，正确使用Client也不是一件非常容易的事。
 下面是截取的一段描述，建议Client或Transport在整个服务期间最好是全局单例的，Transport本身会维护连接的状态，而且线程安全。强烈建议，不要使用系统提供的任何默认值。
  The Client&amp;rsquo;s Transport typically has internal state (cached TCP connections), so Clients should be reused instead of created as needed. Clients are safe for concurrent use by multiple goroutines.
- Transport 如下是官方的简要描述。Transport字段在Client中被声明为接口类型，而实现这个接口的是Transport类型（略显绕）。在net包内部也提供了默认的实现变量：DefaultTransport。
-// Transport specifies the mechanism by which individual // HTTP requests are made. // If nil, DefaultTransport is used. Transport RoundTripper  看一下RoundTripper这个接口，官方描述：
- RoundTripper is an interface representing the ability to execute a single HTTP transaction, obtaining the Response for a given Request.</description>
+ Dial 关于net包的Dial方法，下面是文档是的例子：
+func TestDial(t *testing.T) { conn, err := net.Dial(&amp;quot;tcp&amp;quot;, &amp;quot;baidu.com:80&amp;quot;) if err != nil { // handle error } fmt.Fprintf(conn, &amp;quot;GET /ping HTTP/1.0\r\n\r\n&amp;quot;) status, err := bufio.NewReader(conn).ReadString(&#39;\n&#39;) if err != nil { t.Fatal(err) } t.Log(status) }  与Dial相关的是类型Dialer ，用来配置Dial的属性，包括Timeout、KeepAlive等。当Dialer的每个field都是零值时，等同于直接调用Dial方法。</description>
     </item>
     
     <item>
