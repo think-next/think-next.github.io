@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>2018 on 付辉</title>
+    <title>2018 on 渐行渐远</title>
     <link>/tags/2018/</link>
-    <description>Recent content in 2018 on 付辉</description>
+    <description>Recent content in 2018 on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 12 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 02 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/2018/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>代码重构</title>
-      <link>/blog/2018/05-12-%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/</link>
-      <pubDate>Sat, 12 May 2018 00:00:00 +0000</pubDate>
+      <title>Go test基础用法</title>
+      <link>/blog/2018/2018.05.02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/05-12-%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/</guid>
-      <description>重构自己的代码是一件幸福的事，重构别人的代码确是一件不幸的事。尤其是被重构代码的人还没有离职的时候&amp;hellip;
-重构切记引入意外复杂度，同时要保证代码功能单一，没有冗余的、意义不明的代码存在。还要保证最简API原则。一个接口好坏，一定要明确区分：它不能再处理更多业务了，还是这些业务已经不能再被剥离了。
-临时变量 这是重构的一个重要切入点。方法体内临时变量太多，尤其是一些词不表意的临时变量，理解维护是一件非常痛苦的事情。
-是否可以将临时变量直接替换成方法调用，或者将临时变量规整到一个粒度更小的方法体中。
-重复 代码重复，多处copy相同的代码，会让人迫不及待的想要重构。
-项目中重复代码过多，会给维护、开发带来很大的不便。一个简单的逻辑修改，但却涉及修改好多处代码，还不能保证涉及的部分都修改了。这确实是一件头疼的事。
-所以代码要做好封装：
- 封装的粒度要把握好。一方面便于测试需要，另一方面通过组合，还能满足其他需求。 封装要考虑参数如何传递。包括是否应该包含成员变量，参数的个数多少合适。 封装的方法应该如何归类。怎样可以将方法归到最合适的类。  多态 当遇到很多的switch或者if-elseif的时候，可以考虑是否能用多态来替换。
-比如下面的方法：
-switch type { case movie.TV: case movie.Release }  需要特别提醒：movie包的常量作为判断条件，该方法就最好应该在movie包中。这样当需求变更时，便体现出最小修改原则。
-我们提取一个movieType的抽象类，然后依次对每个类型实现相应的方法，通过声明类型为movieType的成员变量，实现不同类型的统一调用。
-这里体现的是模块化的思想。将系统拆分成独立的模块，降低耦合度。这样做的好处：便于扩展。当新的类型添加时，对老的业务来说：零干扰。
-但某些情况下，这样的拆分模式可能会有小缺陷。当类型是一个频繁被添加、修改的参数时，这样的模式就显得很冗余。这时可以使用属性拆分。将各个类型中的属性实现多态，也可以称做是一种策略转移。
-使用类替换枚举类型 当一个类内含有多个常量枚举类型时，可以考虑将枚举类型的值封装成新的对象。这也是一个切入点。举个例子：
-// original code const( Month int = iota Year int ) //modified code //将这些常量封装到另一个package中  访问成员变量 两个分歧：直接访问VS间接访问。两者均有好处，</description>
+      <guid>/blog/2018/2018.05.02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</guid>
+      <description>当直接使用IDE进行单元测试时，有没有好奇它时如何实现的？比如GoLand写的测试用例。
+ 所有的代码都需要写测试用例。这不仅仅是对自己的代码负责，也是对别人的负责。
+最近工作中使用glog这个库，因为它对外提供的方法都很简单，想封装处理一下。但却遇到了点麻烦：这个包需要在命令行传递log_dir参数，来指定日志文件的路径。
+所以，正常运行的话，首先需要编译可执行文件，然后命令行指定参数执行。如下示例：
+go build main.go ./main -log_dir=&amp;quot;/data&amp;quot; //当前目录作为日志输出目录  但在go test的时候，如何指定这个参数了？
+Test 调查发现，发现go test也可以生成可执行文件。需要使用-c来指定。示例如下：
+go test -c param_test_dir //最后一个参数是待测试的目录  执行后就会发现：这样的做法，会运行所有的Test用例。如何仅仅执行某一个测试用例了（编译器到底是如何做到的？）。
+这里有另一个属性-run，用来指定执行的测试用例的匹配模式。举个例子：
+func TestGetRootLogger(t *testing.T) { writeLog(&amp;quot;测试&amp;quot;) } func TestGetRootLogger2(t *testing.T) { writeLog(&amp;quot;测试2&amp;quot;) }  当我在命令行明确匹配执行Logger2，运行的时候确实仅仅执行该测试用例
+go test -v -run Logger2 ./util/ //-v表示verbose，输出相信信息  但是，我发现，在指定了c参数之后，run参数无法生效！这样的话，还真是没有好的办法来处理这种情况。
+option -timeout
+默认go test运行超过10m会发生panic。如果需要运行更长的时间，需要明确指定。将timeout指定为0，用于忽略时间限制。
+nohup go test -v -timeout 0 -run TestGetRange . &amp;gt; log.txt  使用map的测试 可以结合使用闭包，设置期望值，来写测试用例。Run函数内部是阻塞的，所以TestSum方法依次执行测试。
+同时testSumFunc返回了test方法使用了闭包的特性，对返回函数内部的值是无法确定的。
+func TestSum(t *testing.</description>
     </item>
     
   </channel>

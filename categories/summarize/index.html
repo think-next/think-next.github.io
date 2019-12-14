@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>summarize - 道法自然</title>
-    <meta property="og:title" content="summarize - 道法自然">
+    <title>summarize - 渐行渐远</title>
+    <meta property="og:title" content="summarize - 渐行渐远">
     
 
     
@@ -15,7 +15,7 @@
     
 
     
-    <link href="/categories/summarize/index.xml" rel="alternate" type="application/rss+xml" title="道法自然" />
+    <link href="/categories/summarize/index.xml" rel="alternate" type="application/rss+xml" title="渐行渐远" />
     
     
 
@@ -56,11 +56,14 @@
         
         <li><a href="/about/">About</a></li>
         
-        
-
-
         </ul>
       </nav>
+
+      
+      
+      
+
+
     </header>
 
     <article class="main">
@@ -78,6 +81,21 @@
 <hr>
       </header>
 
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            var height = parseInt($("#bar").css("top"))
+            $(function () {
+                $(window).scroll(function () {
+                    var currentH = $(document).scrollTop();
+                    if (currentH > height) {
+                        $("#bar").css("top", (currentH) + 'px');
+                    } else {
+                        $('#bar').css('top', height + 'px');
+                    }
+
+                });
+            });
+        </script>
 
 
 
@@ -92,12 +110,12 @@
   
   
   
-  <h2 class="archive-title">2019</h2>
+  <h2 class="archive-title">2018</h2>
   
 
   <li>
-    <span class="date">2019/04/21</span>
-    <a href="/blog/2019/2019-04-21-go-module%E4%B8%80/">Go Module（一）</a>
+    <span class="date">2018/05/02</span>
+    <a href="/blog/2018/2018.05.02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/">Go test基础用法</a>
   </li>
   
 </ul>
@@ -118,7 +136,6 @@
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
-
   
 
   

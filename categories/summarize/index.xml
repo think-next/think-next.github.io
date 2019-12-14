@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>summarize on 道法自然</title>
+    <title>summarize on 渐行渐远</title>
     <link>/categories/summarize/</link>
-    <description>Recent content in summarize on 道法自然</description>
+    <description>Recent content in summarize on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 02 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/summarize/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Go Module（一）</title>
-      <link>/blog/2019/2019-04-21-go-module%E4%B8%80/</link>
-      <pubDate>Sun, 21 Apr 2019 00:00:00 +0000</pubDate>
+      <title>Go test基础用法</title>
+      <link>/blog/2018/2018.05.02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/2019-04-21-go-module%E4%B8%80/</guid>
-      <description>这世上太多的人，宁愿吃生活苦，也不愿吃自律的苦。大概是因为生活的苦，躺着就来了，而自律的苦，得自己去找。但只有吃得下自律的苦，才有成功的自由，没有一种成功是走得了捷径的，通向真正成功的唯一道路只有自律。越成功，越自律。越自律，越成功。
- GO111MODULE Go 1.1包含了对Go Modules的预支持，包括调整后的go get命令。后续版本总GOPATH和老的go get可能会被官方移除。
-在Go Modules中支持了一个临时环境变量：GO111MODULE，可以赋值为off、on或auto。
- 值为off，表示不支持Go Modules模式，Go仍然在vendor和GoPATH路径下查找依赖； 值为on，表示当前明确使用Go Modules，Go不再去GOPATH下查找任何依赖； 值为auto或未设置，表示是否启用Go Modules依赖当前的目录情况，当编译的项目在GoPATH/src之外，或者当前目录或子目录本身包含go.mod文件，则启用Go Modules模式。  Defining a module module通过源码根目录下的go.mod文件来定义。根路径下的module是项目依赖包的集合，但会排除子目录的go.mod文件。
-下面是go mod文件模版：
-module example.com/m require ( golang.org/x/text v0.3.0 gopkg.in/yaml.v2 v2.1.0 )  要开始使用go mod，仅需要在项目下执行go mod init命令创建go.mod文件即可。
-go mod init example.com/m  Modules and vendoring 当使用module时，Go命令会完全忽略vendor目录。为了跟之前Go的依赖管理相兼容，我们可以使用go mod vendor 创建vendor目录来存储编译代码的依赖包。如果在编译的时候要使用vendor中的依赖包，需要使用go build -mod=vendor命令。
-go mod vendor go build -mod=vendor  Go Get 首先，go get解析需要新增哪些依赖。可以通过在包名后添加@version或者@branch等方式来取代命令的默认更新行为。如果后缀指定为@none，则表明该依赖应该被移除。
-其次，go get会下载、编译、安装指定的包。包的安装模式也是被允许的，比如使用go get golang.org/x/perf/cmd/..来更新cmd下的所有子包。</description>
+      <guid>/blog/2018/2018.05.02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</guid>
+      <description>当直接使用IDE进行单元测试时，有没有好奇它时如何实现的？比如GoLand写的测试用例。
+ 所有的代码都需要写测试用例。这不仅仅是对自己的代码负责，也是对别人的负责。
+最近工作中使用glog这个库，因为它对外提供的方法都很简单，想封装处理一下。但却遇到了点麻烦：这个包需要在命令行传递log_dir参数，来指定日志文件的路径。
+所以，正常运行的话，首先需要编译可执行文件，然后命令行指定参数执行。如下示例：
+go build main.go ./main -log_dir=&amp;quot;/data&amp;quot; //当前目录作为日志输出目录  但在go test的时候，如何指定这个参数了？
+Test 调查发现，发现go test也可以生成可执行文件。需要使用-c来指定。示例如下：
+go test -c param_test_dir //最后一个参数是待测试的目录  执行后就会发现：这样的做法，会运行所有的Test用例。如何仅仅执行某一个测试用例了（编译器到底是如何做到的？）。
+这里有另一个属性-run，用来指定执行的测试用例的匹配模式。举个例子：
+func TestGetRootLogger(t *testing.T) { writeLog(&amp;quot;测试&amp;quot;) } func TestGetRootLogger2(t *testing.T) { writeLog(&amp;quot;测试2&amp;quot;) }  当我在命令行明确匹配执行Logger2，运行的时候确实仅仅执行该测试用例
+go test -v -run Logger2 ./util/ //-v表示verbose，输出相信信息  但是，我发现，在指定了c参数之后，run参数无法生效！这样的话，还真是没有好的办法来处理这种情况。
+option -timeout
+默认go test运行超过10m会发生panic。如果需要运行更长的时间，需要明确指定。将timeout指定为0，用于忽略时间限制。
+nohup go test -v -timeout 0 -run TestGetRange . &amp;gt; log.txt  使用map的测试 可以结合使用闭包，设置期望值，来写测试用例。Run函数内部是阻塞的，所以TestSum方法依次执行测试。
+同时testSumFunc返回了test方法使用了闭包的特性，对返回函数内部的值是无法确定的。
+func TestSum(t *testing.</description>
     </item>
     
   </channel>

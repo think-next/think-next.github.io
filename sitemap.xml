@@ -343,7 +343,7 @@
   </url>
   
   <url>
-    <loc>/blog/2018/05-02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</loc>
+    <loc>/blog/2018/2018.05.02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</loc>
     <lastmod>2018-05-02T00:00:00+00:00</lastmod>
   </url>
   
@@ -419,6 +419,12 @@
   
   <url>
     <loc>/blog/2018/x-curl-x-post-httpnewfeed/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/2018/</loc>
+    <lastmod>2018-05-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -611,7 +617,7 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2019-03-24T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -720,6 +726,12 @@
   <url>
     <loc>/tags/protocol/</loc>
     <lastmod>2018-02-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/summarize/</loc>
+    <lastmod>2018-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
