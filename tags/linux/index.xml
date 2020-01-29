@@ -1,103 +1,60 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>linux on 渐行渐远</title>
-    <link>/tags/linux/</link>
-    <description>Recent content in linux on 渐行渐远</description>
+    <title>Linux on 渐行渐远</title>
+    <link>https://gohugo.io/tags/linux/</link>
+    <description>Recent content in Linux on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
+    <copyright>&amp;copy;Qiushi Pan 2018-2019</copyright>
     <lastBuildDate>Fri, 20 Sep 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://gohugo.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>IO多路复用</title>
-      <link>/blog/2019/19-09-20-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link>
+      <link>https://gohugo.io/blog/2019/19-09-20-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link>
       <pubDate>Fri, 20 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/19-09-20-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</guid>
-      <description>引言 结合文章我读过的最好的epoll讲解，认识select和epoll的基本工作原理。
-假设：启动一个WEB服务，服务端每accept一个连接，在内核中就会生成一个相应的文件描述符。现在服务器成功建立了10个连接，我们需要知道其中哪些连接发送过来了新的数据，然后对其进行处理和响应。
-通过一个基本的循环，我们就可以实现：
-while true: for x in open_connections: if has_new_input(x): process_input(x)  这也是我们常用的“轮询”模式，不停的询问服务器“数据是否已经准备就绪”，而这非常浪费CPU的时间。
-为了避免CPU的空转（无限的for循环），系统引入了一个select的代理。这个代理比较厉害，可以同时观察许多流的I/O事件。在空闲的时候，会把当前线程阻塞掉。当有一个或多个流有I/O事件时，就从阻塞态中醒来。于是，代码调整成这样：
-while true: select(open_connections) for x in open_connections: if has_new_input(x): process_input(x)  调整之后，如果没有I/O事件产生，我们的程序就会阻塞在select处。但这样依然有个问题：我们从select那里仅仅知道，有I/O事件发生了，但却并不知道是那几个流（可能有一个，多个，甚至全部），我们只能无差别进行轮询，找出能读出或写入数据的流，对他们进行操作。使用select，我们有O(n)的无差别轮询复杂度，同时处理的流越多，每一次无差别轮询时间就越长。
-epoll被用来优化select的问题，它会将哪个流发生了怎样的I/O事件通知我们。此时我们对这些流的操作都是有意义的（复杂度降低到了O(k)，k为产生I/O事件流的个数）。最后，代码调整了这样：
-while true: active_conns = epoll(open_connections) for x in active_conns: process_input(x)  I/O多路复用 多路复用的本质是同步非阻塞I/O，多路复用的优势并不是单个连接处理的更快，而是在于能处理更多的连接。类似服务对外提供了一个批量接口。
-I/O编程过程中，需要同时处理多个客户端接入请求时，可以利用多线程或者I/O多路复用技术进行处理。 I/O多路复用技术通过把多个I/O的阻塞复用到同一个select阻塞上，一个进程监视多个描述符，一旦某个描述符就位， 能够通知程序进行读写操作。因为多路复用本质上是同步I/O，都需要应用程序在读写事件就绪后自己负责读写。 最大的优势是系统开销小，不需要创建和维护额外线程或进程。
-结合多路复用，来看一下异步非阻塞I/O:
-对比异步非阻塞I/O，读请求会立即返回，说明请求已经成功发起，应用程序不被阻塞，继续执行其它处理操作。当read响应到达，将数据拷贝到用户空间，产生信号或者执行一个基于线程回调函数完成I/O处理。应用程序不用在多个任务之间切换。
-可以看出，阻塞I/O在wait for data和copy data from kernel to user两个阶段都是阻塞的。而只有异步I/O的receivefrom是不阻塞的。
-epoll epoll的系统调用方法包括：epoll_create、epoll_ctl、epoll_wait，
- epoll_create创建一个epoll对象：  epollfd = epoll_create()   epoll_ctl往epoll对象中增加/删除某一个流的某一个事件：  // 有缓冲区内有数据时epoll_wait返回 epoll_ctl(epollfd, EPOLL_CTL_ADD, socket, EPOLLIN); //缓冲区可写入时epoll_wait返回 epoll_ctl(epollfd, EPOLL_CTL_DEL, socket, EPOLLOUT);   epoll_wait等待直到注册的事件发生。  Go语言 go语法上提供了select语句，来实现多路复用。select语句中可以监听多个channel，只要其中任意一个channel有事件返回，select就会返回。否则，程序会一直阻塞在select上。通过结合default，还可以实现反复轮询的效果。</description>
+      <guid>https://gohugo.io/blog/2019/19-09-20-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</guid>
+      <description>引言 结合文章我读过的最好的epoll讲解，认识select和epoll的基本工作原理。 假设：启动一个WEB服务，服务端每accept一个连接</description>
     </item>
     
     <item>
       <title>Shell必备基础（1）</title>
-      <link>/blog/2018/08-09-shell%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%801/</link>
+      <link>https://gohugo.io/blog/2018/08-09-shell%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%801/</link>
       <pubDate>Thu, 09 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/08-09-shell%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%801/</guid>
-      <description>Shell是对Linux命令的深加工，用得好，事半功倍。 本来只想加深Array的用法，但一不小心，又变成了一篇基础大全。
-比较运算 习惯在if语句中使用[[...]]对条件进行比较，字符串、数值以及文件，统统笑纳。
-算数比较 常用的操作符有-eq、-ne、-gt、-lt、-le等。
-文件系统 当编译文件、或者查看pid文件、日志时会经常用到。
-[ -e $var ] 如果指定的变量包含的文件存在，则返回真 [ -f $var ] 如果指定的变量包含正常的文件路径或文件名，则返回真  字符串比较 判空还是相当常见的操作。比如，查看当前系统是否启用了notify的进程，如果有的话，kill掉。
-pid=`ps -ef | grep notify | grep -v &#39;grep&#39; | awk &#39;{print $2}&#39;` if [[ -n $pid ]] then echo -e &amp;quot;\033[31m Kill掉当前正在运行的进程... \033[0m\n&amp;quot; kill $pid fi  常见的操作符如下：
-[[ -z $str ]] 如果str包含的是空字符串，则返回真 [[ -n $str ]] 如果str包含的是非空字符串，则返回真  其他的操作符包括：==、!=、&amp;gt;、&amp;lt;
-逻辑运算 使用逻辑&amp;amp;&amp;amp;和||来表示与和或的逻辑关系。
-比如
-if [[ -n $str ]] &amp;amp;&amp;amp; [[ -z $str ]] then echo $str fi  基本语句Example if语句 if command1 then # .</description>
+      <guid>https://gohugo.io/blog/2018/08-09-shell%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%801/</guid>
+      <description>Shell是对Linux命令的深加工，用得好，事半功倍。 本来只想加深Array的用法，但一不小心，又变成了一篇基础大全。 比较运算 习惯在if语</description>
     </item>
     
     <item>
       <title>ngrep抓包</title>
-      <link>/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/</link>
+      <link>https://gohugo.io/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/</link>
       <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/</guid>
-      <description>简单的工具其实挺有用的。警告：不许瞧不起工具，尤其是你还不会用的工具。
-ngrep还是之前跟花椒直播的同事对接项目时，了解到的一个工具。它可以用来抓取服务器上通过网卡的所有请求。跟tcpdump差不多，但却更简单。tcpdump需要借助Wireshark才可以将请求完美展示出来，但这个就跟使用grep一样。
-以前专门请教过一个同事如何使用Wireshark分析网络请求，自己也专门看了相关的Wireshark操作。但最终却发现，如果是抓客户端的请求(非分析TCP)，Wireshark使用起来并不方便。而如果分析的是服务端之间的请求，还需要借助tcpdump先来把请求记录下来，然后再到Wireshark中打开分析。
-Example 经常使用的模式
-# 匹配特定host ngrep -q host api.open.huajiao.com -d any -W byline # 匹配特定host和端口 ngrep –q host api.open.huajiao.com and port 80 –W byline # 报文中包含&amp;quot;search&amp;quot;关键字 ngrep –q –W byline &amp;quot;search&amp;quot; host www.google.com and port 80  Options 详细还是通过man直接查看工具说明吧！这里列举一个：
--d By default ngrep will select a default interface to listen on. Use this option to force ngrep to listen on interface dev.  结果示例 以下是命令输出的结果，跟curl是不是很像：
-interface: any filter: ( host api.</description>
+      <guid>https://gohugo.io/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/</guid>
+      <description>简单的工具其实挺有用的。警告：不许瞧不起工具，尤其是你还不会用的工具。 ngrep还是之前跟花椒直播的同事对接项目时，了解到的一个工具。它可以</description>
     </item>
     
     <item>
       <title>Linux查看监听的端口进程</title>
-      <link>/blog/2018/07-10-linux%E6%9F%A5%E7%9C%8B%E7%9B%91%E5%90%AC%E7%9A%84%E7%AB%AF%E5%8F%A3%E8%BF%9B%E7%A8%8B/</link>
+      <link>https://gohugo.io/blog/2018/07-10-linux%E6%9F%A5%E7%9C%8B%E7%9B%91%E5%90%AC%E7%9A%84%E7%AB%AF%E5%8F%A3%E8%BF%9B%E7%A8%8B/</link>
       <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/07-10-linux%E6%9F%A5%E7%9C%8B%E7%9B%91%E5%90%AC%E7%9A%84%E7%AB%AF%E5%8F%A3%E8%BF%9B%E7%A8%8B/</guid>
-      <description>Netstat 是一款命令行工具，可用于列出系统上所有的网络套接字连接情况，包括 tcp, udp 以及 unix 套接字。另外它还能列出处于监听状态（即等待接入请求）的套接字。经常使用 netstat 用于查看网络连接信息和系统开启的端口号。
- 还有一个完美替代它的命令ss，全称是socket statistics。ss的优点就在于“天下武功唯快不破”。
-引言 已知服务监听的端口，想查找当前服务的PID。我们可以拆解成2个子问题： 1. 如何查看该端口是否在被服务监听 2. 如何查看该端口的PID
-ps 用于查看服务器上的进程信息.最最常用的就是:
-ps -ef  netstat 显示的状态列：Proto，Recv-Q，Send-Q，Local Address，Foreign Address，State。其中Recv-Q和Send-Q分别代表接收队列和发送队列。这些数字一般都是0，如果不是，则表示软件包正在队列中堆积。
-Proto Recv-Q Send-Q Local Address Foreign Address State tcp 0 0 enlightened:domain *:* LISTEN  比较有用的选项是：
- -n：Show network addresses as numbers (normally netstat interprets addresses and attempts to display them symbolically). This option may be used with any of the display formats.</description>
+      <guid>https://gohugo.io/blog/2018/07-10-linux%E6%9F%A5%E7%9C%8B%E7%9B%91%E5%90%AC%E7%9A%84%E7%AB%AF%E5%8F%A3%E8%BF%9B%E7%A8%8B/</guid>
+      <description>Netstat 是一款命令行工具，可用于列出系统上所有的网络套接字连接情况，包括 tcp, udp 以及 unix 套接字。另外它还能列出处于监听状态（即等待接入请求）的套接字。经</description>
     </item>
     
     <item>
       <title>shell操作文本实例</title>
-      <link>/blog/2018/05-15-shell%E6%93%8D%E4%BD%9C%E6%96%87%E6%9C%AC%E5%AE%9E%E4%BE%8B/</link>
+      <link>https://gohugo.io/blog/2018/05-15-shell%E6%93%8D%E4%BD%9C%E6%96%87%E6%9C%AC%E5%AE%9E%E4%BE%8B/</link>
       <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/05-15-shell%E6%93%8D%E4%BD%9C%E6%96%87%E6%9C%AC%E5%AE%9E%E4%BE%8B/</guid>
-      <description>从掌握awk的基本指令，到在工作中熟练使用，中间还有一段路要走！通过总结一些工作中需要的案例，来加深理解。
-打印符合条件的前一行记录 这个案例很抽象，可能非常难遇到，除非自己给自己挖坑。
-业务代码中处理每条数据，都会顺序输出两条日志。第一条表示要处理的数据内容，第二条表示处理的结果。现在想滤出来所有处理成功的记录。比如日志文件如下：
-uid=1 HAPPY uid=2 SAD uid=3 SAD  处理的AWK脚本如下：
-#! /bin/bash # testPage表示日志文件 pieces=$(awk &#39;/HAPPY/{line=NR-1;print line}&#39; testPage | xargs) for piece in $pieces do echo $(awk NR==$piece testPage) done  脚本总结：
- 首先通过正则表达式过滤，获取执行成功的数据行号。然后传递给xargs，转换为空格分隔的字符串。 遍历每个行号。值得注意，shell中对空格分隔的字符串可以直接使用for...in 通过awk条件判断，打印该行内容  求解两个文件的差集 使用comm实现 存在A和B两个系统，理论上A系统中的数据都应该存在于B系统中。但当核对数据时，发现两者数据不一致。如何有效的找出数据的差集。
-具体到真实环境，通过MySQL，导出了满足条件的A、B系统数据的id，文件格式是csv。但当我执行如下列命令，获取仅仅在文件a中存在的记录时，发现数据完全不正确。
-comm -2 -3 a.txt b.txt  调查发现，需要将两个文本先排好序，才能正常返回。
-sort a.txt &amp;gt; a-sort.txt sort b.txt &amp;gt; b-sort.txt comm -2 -3 a-sort.txt b-sort.txt  使用uniq及sort实现 如下这种方式，仅仅可以找出不匹配的记录。无法区分数据是仅仅存在A系统，还是仅仅存在B系统。只能获取数据的交集和差集两部分。
-原理很简单，将两个系统的文件合并到一个文件，然后排序。最终交集的数据，应该有2条记录。差集的记录，只有1条。
-cat a.txt b.</description>
+      <guid>https://gohugo.io/blog/2018/05-15-shell%E6%93%8D%E4%BD%9C%E6%96%87%E6%9C%AC%E5%AE%9E%E4%BE%8B/</guid>
+      <description>从掌握awk的基本指令，到在工作中熟练使用，中间还有一段路要走！通过总结一些工作中需要的案例，来加深理解。 打印符合条件的前一行记录 这个案例很</description>
     </item>
     
   </channel>

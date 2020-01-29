@@ -1,408 +1,101 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-12345678-0', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>Mark-sweep GC - 渐行渐远</title>
-    <meta property="og:title" content="Mark-sweep GC - 渐行渐远">
-    
-
-    
+    <title>
       
+  Mark-sweep GC &ndash; 渐行渐远
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="把事做成的才是赢家，在口头上压倒对手，真的没有那么重要！ Whirlwind introduce 当对象不再被引用时，对象不会立即被垃圾回收。也不存在任何子系统来专门记录使用的内|Hugo-Primer theme&#39;s example site">
     
 
+    <meta name="apple-mobile-web-app-title" content="渐行渐远">
+    
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="Mark-sweep GC | 渐行渐远">
+    <meta name="twitter:description" content="把事做成的才是赢家，在口头上压倒对手，真的没有那么重要！ Whirlwind introduce 当对象不再被引用时，对象不会立即被垃圾回收。也不存在任何子系统来专门记录使用的内|Hugo-Primer theme&#39;s example site">
+    <meta name="twitter:image" content="https://gohugo.io/twitter-card.png">
     
 
-    
-    
 
-
-<link href='//cdn.bootcss.com/highlight.js/9.14.1/styles/googlecode.min.css' rel='stylesheet' type='text/css' />
-
-
-
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
   </head>
 
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://gohugo.io/">
+    渐行渐远
+  </a>
+
   
-  <body class="blog">
-    <header class="masthead">
-      <h1 class="headimg">
-    
-    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
-</h1>
-
-
-
-      <nav class="menu">
-        <input id="menu-check" type="checkbox" />
-        <label id="menu-label" for="menu-check" class="unselectable">
-          <span class="icon close-icon">✕</span>
-          <span class="icon open-icon">☰</span>
-          <span class="text">Menu</span>
-        </label>
-        <ul>
-        
-        
-        <li><a href="/blog/">Blog</a></li>
-        
-        <li><a href="/life/">Life</a></li>
-        
-        <li><a href="/categories/">Categories</a></li>
-        
-        <li><a href="/tags/">Tags</a></li>
-        
-        <li><a href="/about/">About</a></li>
-        
-        </ul>
-      </nav>
-
-      
-      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
-        
-
-  <div class="Box Box--blue p-2 mb-3 mt-5">
-    <a href="/tags/" class="link-gray-dark">
-      <h4>Tags</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/2018" class="link-gray text-emphasized css-truncate-target"><span class="">2018th</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/dailylife" class="link-gray text-emphasized css-truncate-target"><span class="">Daily life</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mq" class="link-gray text-emphasized css-truncate-target"><span class="">M q</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">My s q l</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/cache" class="link-gray text-emphasized css-truncate-target"><span class="">Cache</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/design-pattern" class="link-gray text-emphasized css-truncate-target"><span class="">Design pattern</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/docker" class="link-gray text-emphasized css-truncate-target"><span class="">Docker</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/git" class="link-gray text-emphasized css-truncate-target"><span class="">Git</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/golang" class="link-gray text-emphasized css-truncate-target"><span class="">Golang</span></a>
-      <span class="text-right Counter">34</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/http" class="link-gray text-emphasized css-truncate-target"><span class="">Http</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/js" class="link-gray text-emphasized css-truncate-target"><span class="">Js</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/linux" class="link-gray text-emphasized css-truncate-target"><span class="">Linux</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mongo" class="link-gray text-emphasized css-truncate-target"><span class="">Mongo</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">Mysql</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/net" class="link-gray text-emphasized css-truncate-target"><span class="">Net</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/nginx" class="link-gray text-emphasized css-truncate-target"><span class="">Nginx</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/npm" class="link-gray text-emphasized css-truncate-target"><span class="">Npm</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/pay" class="link-gray text-emphasized css-truncate-target"><span class="">Pay</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/php" class="link-gray text-emphasized css-truncate-target"><span class="">Php</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protobufs" class="link-gray text-emphasized css-truncate-target"><span class="">Protobufs</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protocol" class="link-gray text-emphasized css-truncate-target"><span class="">Protocol</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tcp/ip" class="link-gray text-emphasized css-truncate-target"><span class="">Tcp/ip</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tools" class="link-gray text-emphasized css-truncate-target"><span class="">Tools</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/transaction" class="link-gray text-emphasized css-truncate-target"><span class="">Transaction</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/translate" class="link-gray text-emphasized css-truncate-target"><span class="">Translate</span></a>
-      <span class="text-right Counter">14</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/%e7%bb%9f%e8%ae%a1" class="link-gray text-emphasized css-truncate-target"><span class="">统计</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
-
-
-
-  <div class="Box Box--blue p-2 mb-3">
-    <a href="/categories/" class="link-gray-dark">
-      <h4>Categories</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-01" class="link-gray text-emphasized css-truncate-target"><span class="">2018 01</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-02" class="link-gray text-emphasized css-truncate-target"><span class="">2018 02</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-03" class="link-gray text-emphasized css-truncate-target"><span class="">2018 03</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-04" class="link-gray text-emphasized css-truncate-target"><span class="">2018 04</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-05" class="link-gray text-emphasized css-truncate-target"><span class="">2018 05</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-06" class="link-gray text-emphasized css-truncate-target"><span class="">2018 06</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-07" class="link-gray text-emphasized css-truncate-target"><span class="">2018 07</span></a>
-      <span class="text-right Counter">7</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-08" class="link-gray text-emphasized css-truncate-target"><span class="">2018 08</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-09" class="link-gray text-emphasized css-truncate-target"><span class="">2018 09</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-10" class="link-gray text-emphasized css-truncate-target"><span class="">2018 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-11" class="link-gray text-emphasized css-truncate-target"><span class="">2018 11</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-12" class="link-gray text-emphasized css-truncate-target"><span class="">2018 12</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-01" class="link-gray text-emphasized css-truncate-target"><span class="">2019 01</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-02" class="link-gray text-emphasized css-truncate-target"><span class="">2019 02</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-03" class="link-gray text-emphasized css-truncate-target"><span class="">2019 03</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-04" class="link-gray text-emphasized css-truncate-target"><span class="">2019 04</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-05" class="link-gray text-emphasized css-truncate-target"><span class="">2019 05</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-06" class="link-gray text-emphasized css-truncate-target"><span class="">2019 06</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-07" class="link-gray text-emphasized css-truncate-target"><span class="">2019 07</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-08" class="link-gray text-emphasized css-truncate-target"><span class="">2019 08</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-09" class="link-gray text-emphasized css-truncate-target"><span class="">2019 09</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-10" class="link-gray text-emphasized css-truncate-target"><span class="">2019 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-11" class="link-gray text-emphasized css-truncate-target"><span class="">2019 11</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-12" class="link-gray text-emphasized css-truncate-target"><span class="">2019 12</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-17" class="link-gray text-emphasized css-truncate-target"><span class="">2019 17</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/summarize" class="link-gray text-emphasized css-truncate-target"><span class="">Summarize</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
+  
+</nav>
 
       </div>
 
-    </header>
-
-    <article class="main">
-      <header class="title">
-      <h1>Mark-sweep GC</h1>
-
-
-
-
-    
-    
-    <section class="post-meta">
-        <span class="post-author">付辉
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
         
-            
-            
-             /  2019-02-15
-            
-        </span>
-        
-        <a href="/tags/translate">translate</a>
-        
-    </section>
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Mark-sweep GC</div>
+  </div>
+  <div class="Subhead-description">
     
 
 
 
-<hr>
-      </header>
 
-        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript">
-            var height = parseInt($("#bar").css("top"))
-            $(function () {
-                $(window).scroll(function () {
-                    var currentH = $(document).scrollTop();
-                    if (currentH > height) {
-                        $("#bar").css("top", (currentH) + 'px');
-                    } else {
-                        $('#bar').css('top', height + 'px');
-                    }
-
-                });
-            });
-        </script>
+<a href='/tags/translate' class="muted-link">
+  <span class="Label Label--gray">translate</span>
+</a>
 
 
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2019-02-15. Published at: 2019-02-15.">
+        
+          Published: 2019-02-15
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    
 
 <blockquote>
 <p><code>把事做成的才是赢家，在口头上压倒对手，真的没有那么重要！</code></p>
@@ -419,17 +112,14 @@
 <h2 id="the-algorithm">The algorithm</h2>
 
 <p>程序主要包含3个阶段：列举所有<code>Root</code>对象、标记起始于<code>Root</code>的对象引用、清除无效的对象。</p>
-
-<pre><code class="language-c">void GC()
-{
-    HaltAllProcessing();
-    ObjectCollection roots = GetRoots();
-    for(int i = 0; i &lt; roots.Count(); ++i)
-        Mark(roots[i]);
-    Sweep();
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">GC</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">HaltAllProcessing</span><span class="p">();</span>
+    <span class="n">ObjectCollection</span> <span class="n">roots</span> <span class="o">=</span> <span class="n">GetRoots</span><span class="p">();</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">roots</span><span class="p">.</span><span class="n">Count</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">Mark</span><span class="p">(</span><span class="n">roots</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="n">Sweep</span><span class="p">();</span>
+<span class="p">}</span></code></pre></div>
 <h2 id="root-enumeration"><code>Root Enumeration</code></h2>
 
 <p><code>Root Enumeration</code>会列举系统所有对象引用。运行系统需要为<code>GC</code>提供一种获取<code>Root</code>对象列表的机制。比如，在<code>.NET</code>中<code>JIT</code>维护了当前活跃的<code>root</code>对象，提供了获取根对象列表的<code>API</code>。</p>
@@ -439,27 +129,24 @@
 <h2 id="mark"><code>Mark</code></h2>
 
 <p>每个对象在创建时创建额外的空间，用于去<code>mark</code>这个对象，这个过程也是递归的</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">Mark</span><span class="p">(</span><span class="n">Object</span><span class="o">*</span> <span class="n">pObj</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">Marked</span><span class="p">(</span><span class="n">pObj</span><span class="p">))</span> <span class="c1">// Marked returns the marked flag from object header
+</span><span class="c1"></span>    <span class="p">{</span>
+        <span class="n">MarkBit</span><span class="p">(</span><span class="n">pObj</span><span class="p">);</span> <span class="c1">// Marks the flag in obj header
+</span><span class="c1"></span>
+        <span class="c1">// Get list of references that the current object has
+</span><span class="c1"></span>        <span class="c1">// and recursively mark them as well
+</span><span class="c1"></span>
 
-<pre><code class="language-c">void Mark(Object* pObj)
-{
-    if (!Marked(pObj)) // Marked returns the marked flag from object header
-    {
-        MarkBit(pObj); // Marks the flag in obj header
+        <span class="n">ObjectCollection</span> <span class="n">children</span> <span class="o">=</span> <span class="n">pObj</span><span class="o">-&gt;</span><span class="n">GetChildren</span><span class="p">();</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">children</span><span class="p">.</span><span class="n">Count</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="p">{</span>
 
-        // Get list of references that the current object has
-        // and recursively mark them as well
-
-
-        ObjectCollection children = pObj-&gt;GetChildren();
-        for(int i = 0; i &lt; children.Count(); ++i)
-        {
-
-            Mark(children[i]); // recursively call mark
-        }	
-    }
-}
-</code></pre>
-
+            <span class="n">Mark</span><span class="p">(</span><span class="n">children</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="c1">// recursively call mark
+</span><span class="c1"></span>        <span class="p">}</span>	
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
 <p>递归的结束条件是：</p>
 
 <ol>
@@ -497,45 +184,63 @@
 <li><a href="https://blogs.msdn.microsoft.com/abhinaba/2009/01/30/back-to-basics-mark-and-sweep-garbage-collection/"><code>Mark and Sweep Garbage Collection</code></a></li>
 </ol>
 
+  </section>
 
-  <footer>
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
   
-<nav class="post-nav">
-  <span class="nav-prev">&larr; <a href="/blog/2019/19-02-08-%E6%96%B0%E5%B9%B4%E5%BD%A9%E8%9B%8B%E4%B9%8B%E4%B8%AD%E5%A4%A7%E5%A5%96/">新年彩蛋之中大奖</a></span>
-  <span class="nav-next"><a href="/blog/2019/19-02-22-hbase-region-split/">HBase Region Split</a> &rarr;</span>
-</nav>
-
-
-
-
-
-<script src="//yihui.name/js/math-code.js"></script>
-<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-<script async src="//yihui.name/js/center-img.js"></script>
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Mark-sweep GC</b><nav id="TableOfContents"><ul>
+<li><a href="#whirlwind-introduce">Whirlwind introduce</a></li>
+<li><a href="#the-algorithm">The algorithm</a></li>
+<li><a href="#root-enumeration"><code>Root Enumeration</code></a></li>
+<li><a href="#mark"><code>Mark</code></a></li>
+<li><a href="#sweep"><code>sweep</code></a></li>
+<li><a href="#总结">总结</a></li>
+</ul></li>
+</ul>
+</nav></div>
   
-
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/highlight.min.js"></script>
-
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/r.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/yaml.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/tex.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/go.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
-
-
 
   
-  <hr>
-  <div class="copyright">&copy; <a href="http://neojos.com">DDF</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+    <div>
+      
+    </div>
   
-  </footer>
-  </article>
-  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy;Qiushi Pan 2018-2019 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+    
   </body>
 </html>
-

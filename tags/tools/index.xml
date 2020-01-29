@@ -1,113 +1,69 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>tools on 渐行渐远</title>
-    <link>/tags/tools/</link>
-    <description>Recent content in tools on 渐行渐远</description>
+    <title>Tools on 渐行渐远</title>
+    <link>https://gohugo.io/tags/tools/</link>
+    <description>Recent content in Tools on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
+    <copyright>&amp;copy;Qiushi Pan 2018-2019</copyright>
     <lastBuildDate>Tue, 07 Aug 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://gohugo.io/tags/tools/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Git撤销本地修改</title>
-      <link>/blog/2018/08-07-git%E6%92%A4%E9%94%80%E6%9C%AC%E5%9C%B0%E4%BF%AE%E6%94%B9/</link>
+      <link>https://gohugo.io/blog/2018/08-07-git%E6%92%A4%E9%94%80%E6%9C%AC%E5%9C%B0%E4%BF%AE%E6%94%B9/</link>
       <pubDate>Tue, 07 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/08-07-git%E6%92%A4%E9%94%80%E6%9C%AC%E5%9C%B0%E4%BF%AE%E6%94%B9/</guid>
-      <description>懂得了好多大道理，但还是过不好这一生！
- 用了git就会发现，再也不想用svn了。
-Note：在执行push操作前，所有的修改都发生在本地，可以使用reset随便回滚本地的提交。但要注意：本地修改一旦回滚，无法找回。在push后，想要回滚到指定的版本，便需要使用revert，这样的代价就是：你的回滚记录被记录在了log中，所有人都可以看见。
-使用reset回退 本质上是commit操作的回退。Git工作流可以简化为三个部分：Working Directory、index、HEAD。后两部分对应的git命令便是add和commit。如果使用的是Sourcetree工具，那么这三部分就更直观了。
-该命令的具体功能是移动HEAD，即移动分支的指针。将当前的HEAD重新指向之前的版本，本地工作环境也会跟着切换。适用场景：本地已经commit，但尚未push到远端仓库的回滚操作。
-该命令提供了三个属性：分别是soft、mixed、和hard。
- soft撤销上一次的commit命令，返回到HEAD前的index状态。 mixed撤销了上一次的git add和git commit命令，将index的修改回滚到Working Directory。 hard撤销了最后git add 和 git commit 命令以及工作目录中的所有修改。  所以reset重写的顺序如下：
- 移动 HEAD 指向的分支（如果是soft，则到此停止）。 使索引看起来像 HEAD（如果是mixed，则到此停止）。 使工作目录看起来像索引。  Example 当执行pull命令发生冲突时时，本地代码需要做merge操作。但本地代码只是临时调试修改，并不需要保存提交。执行如下命令，便会清空本地的修改，hard相当于一个版本的指针，origin/master可以替换为具体的版本号
-git reset --hard origin/master git reset --hard version-number git reset --hard HEAD  获取版本号可以通过git log直接查看。
-更多详细介绍，可以查看： 高级合并及 重置揭密
-checkout stash储藏 将工作区的修改进行存储，使本地重新成为一个干净的环境，同时方便在之后应用这些改动。可以用于存储已被索引的文件、或者未跟踪的文件。执行git stash -a来暂存所有改动的文件。常见的包括如下命令：
- git stash 储藏修改 git stash list 查看储藏的列表 将储藏重新应用到当前分支：git statsh apply stash@{1}或者git stash pop stash@{1}。后者会在应用暂存之后从堆栈上删除 git stash drop stash@{1} 移除暂存 git stash clear 清除本地所有的贮藏历史  使用clean清空 用于从==工作区==移除==未被追踪的文件==，执行git clean -d -f来移除所有未被追踪的文件或目录。</description>
+      <guid>https://gohugo.io/blog/2018/08-07-git%E6%92%A4%E9%94%80%E6%9C%AC%E5%9C%B0%E4%BF%AE%E6%94%B9/</guid>
+      <description>懂得了好多大道理，但还是过不好这一生！ 用了git就会发现，再也不想用svn了。 Note：在执行push操作前，所有的修改都发生在本地，可以使</description>
     </item>
     
     <item>
       <title>ngrep抓包</title>
-      <link>/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/</link>
+      <link>https://gohugo.io/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/</link>
       <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/</guid>
-      <description>简单的工具其实挺有用的。警告：不许瞧不起工具，尤其是你还不会用的工具。
-ngrep还是之前跟花椒直播的同事对接项目时，了解到的一个工具。它可以用来抓取服务器上通过网卡的所有请求。跟tcpdump差不多，但却更简单。tcpdump需要借助Wireshark才可以将请求完美展示出来，但这个就跟使用grep一样。
-以前专门请教过一个同事如何使用Wireshark分析网络请求，自己也专门看了相关的Wireshark操作。但最终却发现，如果是抓客户端的请求(非分析TCP)，Wireshark使用起来并不方便。而如果分析的是服务端之间的请求，还需要借助tcpdump先来把请求记录下来，然后再到Wireshark中打开分析。
-Example 经常使用的模式
-# 匹配特定host ngrep -q host api.open.huajiao.com -d any -W byline # 匹配特定host和端口 ngrep –q host api.open.huajiao.com and port 80 –W byline # 报文中包含&amp;quot;search&amp;quot;关键字 ngrep –q –W byline &amp;quot;search&amp;quot; host www.google.com and port 80  Options 详细还是通过man直接查看工具说明吧！这里列举一个：
--d By default ngrep will select a default interface to listen on. Use this option to force ngrep to listen on interface dev.  结果示例 以下是命令输出的结果，跟curl是不是很像：
-interface: any filter: ( host api.</description>
+      <guid>https://gohugo.io/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/</guid>
+      <description>简单的工具其实挺有用的。警告：不许瞧不起工具，尤其是你还不会用的工具。 ngrep还是之前跟花椒直播的同事对接项目时，了解到的一个工具。它可以</description>
     </item>
     
     <item>
       <title>siege压测</title>
-      <link>/blog/2018/07-19-siege%E5%8E%8B%E6%B5%8B/</link>
+      <link>https://gohugo.io/blog/2018/07-19-siege%E5%8E%8B%E6%B5%8B/</link>
       <pubDate>Thu, 19 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/07-19-siege%E5%8E%8B%E6%B5%8B/</guid>
-      <description> 关于压测，首先要了解TPS和并发用户数之间的关系：
- TPS就是每秒事务数，但是事务是基于虚拟用户数的。假如1个虚拟用户在1秒内完成1笔事务，那么TPS明显就是1；如果某笔业务响应时间是1ms，那么1个用户在1秒内能完成1000笔事务，TPS就是1000了；如果某笔业务响应时间是1s,那么1个用户在1秒内只能完 成1笔事务，要想达到1000TPS，至少需要1000个用户；因此可以说1个用户可以产生1000TPS，1000个用户也可以产生1000TPS，无非是看响应时间快慢。
- 针对上面的描述，引申出了命令的三个属性：
--c : This option allows you to set the concurrent number of users -r : This option tells each siege user how times it should run. -t : This option specify the number of times each user should run  对于linux的命令，其实man查看就足够了。
-example 提交json格式的数据请求到服务器。POST后跟数据内容，不需要使用引号处理。
-# linux下执行命令 siege -f ./url.txt -H &amp;quot;Content-Type: application/json&amp;quot; # url.txt中的内容 HOST=neojos.com $(HOST)/v1/buy POST {&amp;quot;bid&amp;quot;: 0, &amp;quot;type&amp;quot;: 13 }  </description>
+      <guid>https://gohugo.io/blog/2018/07-19-siege%E5%8E%8B%E6%B5%8B/</guid>
+      <description>关于压测，首先要了解TPS和并发用户数之间的关系： TPS就是每秒事务数，但是事务是基于虚拟用户数的。假如1个虚拟用户在1秒内完成1笔事务，那</description>
     </item>
     
     <item>
       <title>mitmproxy使用</title>
-      <link>/blog/2018/07-06-mitmproxy%E4%BD%BF%E7%94%A8/</link>
+      <link>https://gohugo.io/blog/2018/07-06-mitmproxy%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Fri, 06 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/07-06-mitmproxy%E4%BD%BF%E7%94%A8/</guid>
-      <description>介绍一款非常好用的抓包工具，官网地址：https://www.mitmproxy.org。实际上，在调试苹果IAP支付时，始终没有抓成功过，反而因为设置了代理，导致苹果沙盒用户无法成功支付。它名字的全拼是Man-in-the-middle-proxy，代表中间人攻击。
-常用的快捷键  在列表界面，按回车进入详情界面 在详情界面，按q返回列表界面 在详情界面，按tab键在Request,Response,Detail三个tab之间切换。按j，k可以滚动查看详情. 在列表界面，按G跳到最新一个请求 在列表界面，按g跳到第一个请求 在列表界面，按d删除当前选中的请求，按D恢复刚才删除的请求 在列表界面，按z清空请求列表  常用的过滤表达式 列表界面,按f进入过滤模式。详细的过滤表达式，可以查看：Filter expressions。
- ~h regex Header ~u regex URL ~m regex Method  原理  Subject Alternative Name：is an extension to X.509 that allows various values to be associated with a security certificate using a subjectAltName field. These values are called Subject Alternative Names (SANs). Names include Server Name Indication： is an extension to the TLS computer networking protocol by which a client indicates which hostname it is attempting to connect to at the start of the handshaking process.</description>
+      <guid>https://gohugo.io/blog/2018/07-06-mitmproxy%E4%BD%BF%E7%94%A8/</guid>
+      <description>介绍一款非常好用的抓包工具，官网地址：https://www.mitmproxy.org。实际上，在调试苹果IAP支付时，始终没有抓成功过，</description>
     </item>
     
     <item>
       <title>docker基本使用</title>
-      <link>/blog/2018/04-20-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <link>https://gohugo.io/blog/2018/04-20-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/04-20-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
-      <description>知道一点比完全不知道要好，对问题有深入了解比仅知道皮毛要好。作为docker的一个初学者，现在对docker做简单记录。希望随着工作、生活，更深入的了解学习docker。这也是一件很有意义的事。
-docker有几个相关的概念：
- image 镜像 container 容器  我觉得之所以说docker好用，是因为Docker Hub提供了很多镜像，比如MySQL、Redis等。对它们安装、卸载异常方便。
-Example 我们想搭建测试服务，安装MySQL，Redis等依赖。我们将他们当作一个项目的依赖，声明一个配置文件·db.yml，然后将这些依赖，类似于composer编辑：
-version: &amp;quot;3&amp;quot; services: db: image: mysql:5.7 volumes: - /Users/neojos/dockerData/mysql restart: always environment: MYSQL_ROOT_PASSWORD: paytest MYSQL_DATABASE: paytest MYSQL_USER: neojos MYSQL_PASSWORD: neojos-pwd ports: - &amp;quot;3306:3306&amp;quot; myredis: image: redis restart: always volumes: - /Users/neojos/dockerData/redis ports: - &amp;quot;6379:6379&amp;quot; command: redis-server --appendonly yes  执行如下命令，MySQL和Redis的服务就启动了
-docker-composer -f db.yml up  可以通过执行如下命令查看，确认是否有两个容器在运行。
-docker container ls  这样很好，但当我想进去MySQL的容器内执行一些命令时，该怎么办呢？比如，我想确认下面的MySQL连接语句是否正确,而且我还一定要进去容器内执行MySQL命令行语句：
-mysql -h 127.0.0.1 -P 3306 -u neojos -p&#39;neojos-pwd&#39; paytest  很简单,只需要执行如下指令。可以发现，已经进到MySQL命令行了。</description>
+      <guid>https://gohugo.io/blog/2018/04-20-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>知道一点比完全不知道要好，对问题有深入了解比仅知道皮毛要好。作为docker的一个初学者，现在对docker做简单记录。希望随着工作、生活，</description>
     </item>
     
     <item>
       <title>Git分支模型</title>
-      <link>/blog/2018/01-14-git%E5%88%86%E6%94%AF%E6%A8%A1%E5%9E%8B/</link>
+      <link>https://gohugo.io/blog/2018/01-14-git%E5%88%86%E6%94%AF%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Sun, 14 Jan 2018 20:10:33 +0000</pubDate>
       
-      <guid>/blog/2018/01-14-git%E5%88%86%E6%94%AF%E6%A8%A1%E5%9E%8B/</guid>
-      <description>Git分支模型 文章将围绕下图来描述我们所使用的分支模型。主要包括master和develop两个主线分支以及feature、release、hotfixes分支。
-为什么选择Git 针对“centralized”和“distributed”版本管理工具的争论，可以在GitSvnComparsion查看。就我个人而言，我更喜欢Git。Git改变了开发者对merge操作和branch操作的思考方式，而且两者也是Git日常工作流中的最常用的操作。
-不集中式又集中式 Git是分布式版本管理系统，不存在集中式版本管理系统的中央存储库。这在技术角度上确实不存在，但在观念上，我们可以将origin看作整个版本管理的中央存储库。
-如下图所示，开发者除了可以从origin中push或pull代码，还可以从别的分支中pull代码。当多个同事共同开发产品的新功能时，彼此间的代码同步显得尤为重要。
-主要分支 Git中央存储库中包含两个重要的分支，它们在项目的生命周期中都一直存在：
- master develop  两个分支有如下特性：
- origin/master分支的HEAD 指针反映的一直都是发布就绪的状态。master分支上的代码也是生产服务的代码。 origin/develop分支的HEAD指针反映当前项目的修改，该分支集成其他分支所做的一切修改。甚至可以运行一个自动化脚本，每天晚上将各个分支的修改merge到develop分支。  当develop分支中的代码趋于稳定，准备发新版的时候，应该将其merger到master分支，并标记本次发布的版本号。稍后详细讨论。
-原则上，master分支的代码都是可发布的，所以我们对merge到master的代码有严格的要求。理论上，我们可以运行一个脚本，一旦检测到master的代码有提交，自动执行编译、并同步代码到生产服务器。
-支承分支 如master和develop旁边的其他分支，它们的生命周期有限，最终会从代码库中被移除。而我们使用分支主要来实现：
- 来帮助各个团队之间并行开发 为新版本发布做准备 修复当前生产环境的bug。  我们使用的分支有以下几种:
- Feature branches Release branches Hotfix branches  各个分支根据不同的目的被创建，对它们的操作也遵循严格的规则。比如分支如何创建、开发完成之后merge到的对象等。
-另外，这些分支其实都是普通的git分支。只是根据我们使用的目的策略给他们赋予了不同的功能。
-Feature 分支 Feature 分支主要用来开新功能。一般来说，只要功能还没有开发完善，它就应该一直存在。但最终应该被merge回develop分支或者丢弃。feature分支遵循以下规则：
- 从develop分支上创建feature分支 feature分支最终merge回develop分支 分支的命名规则：除了master, develop, release-*, or hotfix-*的任何名字  feature分支通常只存在于开发人员的版本库中，而不应该存在于origin仓库中。但考虑到团队成员协作开发的情况，彼此之间需要定期merge对方的代码，这是就需要借助develop分支来实现了。
-创建feature分支 git checkout -b myfeature develop  合并feature 分支 git check develop git merge --no-off myfeature git branch -d myfeature git push origin develop  release分支 release分支主要用来为代码发布做准备。在合并代码之前，它允许做小的bug修改、为版本发布做准备工作（指定版本号、建数据表等）。通过在release分支上做这些操作，可以保证develop分支是干净的，不影响当前新功能的开发。release分支遵循下面的规则：</description>
+      <guid>https://gohugo.io/blog/2018/01-14-git%E5%88%86%E6%94%AF%E6%A8%A1%E5%9E%8B/</guid>
+      <description>Git分支模型 文章将围绕下图来描述我们所使用的分支模型。主要包括master和develop两个主线分支以及feature、release、</description>
     </item>
     
   </channel>

@@ -1,96 +1,60 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>tcp/ip on 渐行渐远</title>
-    <link>/tags/tcp/ip/</link>
-    <description>Recent content in tcp/ip on 渐行渐远</description>
+    <title>Tcp/Ip on 渐行渐远</title>
+    <link>https://gohugo.io/tags/tcp/ip/</link>
+    <description>Recent content in Tcp/Ip on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
+    <copyright>&amp;copy;Qiushi Pan 2018-2019</copyright>
     <lastBuildDate>Tue, 20 Nov 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/tcp/ip/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://gohugo.io/tags/tcp/ip/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>NSS初窥</title>
-      <link>/blog/2018/11-20-nss%E5%88%9D%E7%AA%A5/</link>
+      <link>https://gohugo.io/blog/2018/11-20-nss%E5%88%9D%E7%AA%A5/</link>
       <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/11-20-nss%E5%88%9D%E7%AA%A5/</guid>
-      <description>版本 0.01
-在使用wireshark分析https时，加密传输的内容会解析失败。而NSS可以存储TLS握手过程中的Key，用于解密。很好奇，它是如何实现的？
-wireshark配置  Edit→Preferences→Protocols→SSL→(Pre)-Master-Secret log filename.  key log文件格式 文件的格式：&amp;lt;Label&amp;gt; &amp;lt;space&amp;gt; &amp;lt;ClientRandom&amp;gt; &amp;lt;space&amp;gt; &amp;lt;Secret&amp;gt;
-比较常见的Label和对应日志的内容:
-CLIENT_HANDSHAKE_TRAFFIC_SECRET CLIENT_RANDOM CLIENT_TRAFFIC_SECRET_0 EXPORTER_SECRET SERVER_HANDSHAKE_TRAFFIC_SECRET SERVER_TRAFFIC_SECRET_0  CLIENT_RANDOM 8e40057e8e1c32f42faf87ddc17a81da9e02aa6c4ef4fcec2dcb504982e50691 0df84b6a904cb47940666a9e198dceab94b58dd0f0e61775db52716a37759d25b600b44601b541f5b21669ef0814770e CLIENT_HANDSHAKE_TRAFFIC_SECRET 9aef967472d9d65bf269989ac68c68c6374fd8c2cf9edf98c91593c8df7ffa3f 23b0b29e3edfe6e53114c6d9cb85159902462801c5540fc806c09f5d1711d992 CLIENT_TRAFFIC_SECRET_0 cd12af49c901682f29777821369c167854b047ac27a6a85c3db9dce565debbcf f826d8181c8b751cafd8c60bdbe2e4a4974113eea2a46c2a615e2115d70c9544 EXPORTER_SECRET 51c27befc24dceb18ade59b4a10c1398725848f7130b2ebeeb2e01483ed95e4d 58cc23d6d1db1e674200f7457dc9833ec826a5faf71830a6c5d3f4e63fa2144f  TLS加解密 case 1. 使用wireshark抓取一个TLS的握手过程来简单示例。其中Client Key Exchange, Change Cipher Spec, Encrypted Handshake Message在一个数据包中返回。
-我在网上找到了严格一致的流程分析图（画的真不错）。
-计算对称密钥的过程:
- 在Client Hello阶段生成random_C 在Server Hello阶段生成random_S 在Client Key Exchange阶段，客户端根据这两个随机数，生成Pre-master，并用公钥加密，发送给服务端 Change Cipher Spec阶段，服务端私钥解密，获取PRe-master，用同样的算法计算加密密钥。  关于Change Cipher Spec Protocol  The change cipher spec protocol is used to change the encryption being used by the client and server.</description>
+      <guid>https://gohugo.io/blog/2018/11-20-nss%E5%88%9D%E7%AA%A5/</guid>
+      <description>版本 0.01 在使用wireshark分析https时，加密传输的内容会解析失败。而NSS可以存储TLS握手过程中的Key，用于解密。很好奇，它是如</description>
     </item>
     
     <item>
       <title>Tcp Bulk Data</title>
-      <link>/blog/2018/09-24-tcp-bulk-data/</link>
+      <link>https://gohugo.io/blog/2018/09-24-tcp-bulk-data/</link>
       <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/09-24-tcp-bulk-data/</guid>
-      <description>TCP在数据传输中有receive buffer和send buffer。通过连接中的window size可以看出数据的读取情况。
-sliding window client不需要等待已发送的packet的ACK，可以发送多个准备好的packet。换句话说，server端并不需要对每一个收到的packet，都执行ack操作。因为有缓冲去的存在，所以可以对收到的多个packet，统一回复一个ack。
-window size 通过握手，TCP两端交换window size的大小。sender可以连续发送多个packet来填满receiver&#39;s window，当应用层从buffer中读取数据之后，window size便会更新。比如，在ack的回复中，如果显示win 0，则表示receiver接收到了所有数据，但数据还在buffer中，尚未被应用读取。之后数据被读取，window size便会被更新，通过ack来重新通知sender。需要注意的是，该ack仅仅只是通知window size的更新。
-对于window size，相关的是sliding windows。可以简单的想象成固定长度的“队列”，长度一定，表示window size是固定的。应用读取数据之后，队列末尾便会追加对应数量的size，供sender发送新的数据，队首的数据便彻底被移除了。
-还有一点需要注意的：client端经常有数据需要发送，当收到ACK之后，client就会立即发送buffer中准备好的数据，应用端无法同时读取buffer中的数据来更新window size。所以，一般发送数据的client端的window size要比约定的小点。
-PUSH PUSH flag这是TCP header中的一个标识，用于表示sender不想让该packet在tcp buffer中被缓存，去等待额外的数据到来，而是应立即传递给receiver处理。
-slow start sender和receiver网络连接中可能存在很多hop或者slower links，这也就导致了window size确定的复杂性。这便引入了congestion window,术语slow start。sender在建立连接后，先初始化window为一个segment，每次收到ack，sender便增加一个segment（exponential increae），最终，segment的大小便是congestion window size。
-Delayed Acks sliding window有效的提升了TCP的数据传输效率，使得接收数据的一端可以在收到多个packet后统一回复最后一个packet的ACK消息。发送数据的一端完全不需要等待数据被ACK之后，再才开始发送下一个packet。</description>
+      <guid>https://gohugo.io/blog/2018/09-24-tcp-bulk-data/</guid>
+      <description>TCP在数据传输中有receive buffer和send buffer。通过连接中的window size可以看出数据的读取情况。 sliding window clien</description>
     </item>
     
     <item>
       <title>IP Routing</title>
-      <link>/blog/2018/08-04-ip-routing/</link>
+      <link>https://gohugo.io/blog/2018/08-04-ip-routing/</link>
       <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/08-04-ip-routing/</guid>
-      <description> 假设你在跟小米公司对接服务，那你有没有好奇过：自家的服务器是如何找到小米公司的服务器的。为了安全，公司的服务器可都是在内网的，用户是无法直接访问到的。好好了解一下Ip Routing，它可以给你部分答案。
-概述 当主机IP(Network)层收到一个datagram后，它首先会检查datagram的目标主机是不是自己。如果是，那么它会将datagram发送给其他协议处理。如果不是，它便检查自己是否被配置作为一个路由。如果是，它将按照规则将datagram继续传递。否则，默默的把datagram丢掉。
-所有routing提供的IP地址，都假设下一个hop是离目标地址最近的。在datagram传递的过程中，我们会修改link-layer的地址为下一个hop的地址，而Destination IP一般是不做修改的。
-Routing Table 在命令行执行 netstat -rn，查看系统的routing table。
-# 展示结果做了修改，非真实值 neojos@BJ ~ $ netstat -rn Kernel IP routing table Destination Gateway Genmask Flags MSS Window irtt Iface 140.168.0.0 10.3.206.240 255.255.0.0 UG 0 0 0 eth0  了解Falgs参数：  U 表示当前路由是在使用的 G 表示路由到一个gateway。如果没有设置该flag，则表示跟Destination是直接连接的。 H 表示路由到一个主机地址。如果没有设置该flag，则Destination是一个网络地址。 D 表示路由是通过ICMP Redirect设置的。一般来说，Redirect设置的route都是主机地址。  路由查询的顺序：  查找匹配的主机地址 查找匹配的网络地址 查找default的路由。  Host unreachable 当route没有找到destination时，Destination Host Unreachable的错误会返回给源主机。你可以通过ping路由表中配置错误的destination host address来查看。
-ICMP Redirect Error </description>
+      <guid>https://gohugo.io/blog/2018/08-04-ip-routing/</guid>
+      <description>假设你在跟小米公司对接服务，那你有没有好奇过：自家的服务器是如何找到小米公司的服务器的。为了安全，公司的服务器可都是在内网的，用户是无法直接</description>
     </item>
     
     <item>
       <title>Tcp Server Design</title>
-      <link>/blog/2018/07-28-tcp-server-design/</link>
+      <link>https://gohugo.io/blog/2018/07-28-tcp-server-design/</link>
       <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/07-28-tcp-server-design/</guid>
-      <description> 绝大多数的TCP服务都是支持并发的。当一个连接请求到达时，服务端接收这个连接，然后创建一个新的线程(或进程)来处理这个连接。
-listen状态 在本地启动Go的服务，使用netstat查看：
-netstat -an -f inet  可以看到listen状态的请求连接。其中Local Address的*表示请求会被本地的任意地址处理(如果有多重地址的话)。Foreign Address中*.*表示客户端的ip和port都是未知的。
-Active Internet connections (including servers) Proto Recv-Q Send-Q Local Address Foreign Address (state) tcp46 0 0 *.3900 *.* LISTEN  当新的请求到达，并被接收时，服务器内核中会创建一个ESTABLISHED状态的连接。而listen继续去接收新的连接。
-Proto Recv-Q Send-Q Local Address Foreign Address (state) tcp4 0 0 127.0.0.1.3900 127.0.0.1.51133 ESTABLISHED tcp46 0 0 *.3900 *.* LISTEN  request queue 当listening状态的应用正在忙于处理新的连接，同时有其他的请求进来时，服务器是如何处理的呢？引入另一个概念：请求队列。
- 每一个监听状态的终端都有一个固定长度的队列，用来存放TCP三次握手完成，但还没有被应用接收的连接。client会认为该连接已经创建成功，所以它此时发送的数据也会被缓存起来。如果queue中的连接长时间不被应用读取，便会导致client超时。 当队列满了后，TCP会直接忽略进来的SYN，而非回复RST报文头。这样做便是要client稍后重新发送SYN。因为服务器比较繁忙的状况，可能马上就会恢复。 如果TCP三次握手完成，连接也就被创建成功了。如果此时服务端不想为该ip提供服务，服务端要么发送FIN关闭这个连接，或者发送RST中断这个连接。整个过程中，TCP没有权限去限制client端。  </description>
+      <guid>https://gohugo.io/blog/2018/07-28-tcp-server-design/</guid>
+      <description>绝大多数的TCP服务都是支持并发的。当一个连接请求到达时，服务端接收这个连接，然后创建一个新的线程(或进程)来处理这个连接。 listen状态</description>
     </item>
     
     <item>
       <title>TIME_WAIT状态解读</title>
-      <link>/blog/2018/06-15-time_wait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/</link>
+      <link>https://gohugo.io/blog/2018/06-15-time_wait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/</link>
       <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/06-15-time_wait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/</guid>
-      <description>版本：0.01
-突然想梳理一下TIME_WAIT,毕竟自己遇到它好多次了。经常一块出现的问题：too many open file，当然，这个问题本身跟TIME_WAIT状态没啥必然的关系。
-截取一下官方对TIME_WAIT的描述：
- The socket connection has been closed by the local application, the remote peer has closed its half of the connection, and the system is waiting to be sure that the remote peer received the last acknowledgement.
- time_wait status time_wait作为HTTP连接关闭的一个正常状态。当系统time_wait过多，超过操作系统设定的文件套接字上限时，就会导致整个服务不可用。
-唯一确定连接的4个组成部分，它们是客户端及服务端的IP和PORT。一般来说，处于time_wait状态的port在2mls内是无法被重复使用的。所以瞬间的wait_wait过多，直接导致整个系统无法服务。
-关闭连接包含4次握手，TCP是全双工的，有一端需要主动提出关闭。相应的，对端来被动来关闭。对于我们常见的CS模式，主动和被动的角色是没有明确界限的。
-
-
-active close端的系统中才会出现time_wait的状态。拿请求https://google.com来举例，客户端在创建连接时，其实并不关心连接的端口号，它是系统随机创建的。google服务存在一个443端口,一直处于listen状态。当客户端断开连接时，客户端系统其实就会出现time_wait。当服务端主动断开连接时，客户端会出现close_wait状态。
-2MLS time_wait也被称为2MLS wait。全名maximum segment lifetime, 表示一个数据块在被丢弃之前，在网络中能存在的最长时间。TCP的数据包是作为IP数据传输的，而IP数据包是否有效受限于设置的TTL，所以该MSL存在上限。
- 在2MLS内，该连接不会处理那些迟到的请求，占用的端口号也无法被系统的其他程序使用。 在TCP连接中,ACK消息本身是不安全，因为peer不需要对ACK回复ACK。所以，2MLS保证了当被动关闭的一端没有收到ACK时，重新发送一次FIN报文。  可以通过tcp_tw_reuse来重用time_wait状态的端口号。
-shell查询time_wait连接 查看连接的状态，主要有两个命令netstat和ss。netstat有的ss都有，而且运行非常快。
-netstat -n | awk &#39;/^tcp/ {++S[$NF]} END {for(a in S) {print a, S[a]} }&#39;  匹配tcp连接，声明了数组S，$NF用于获取最后一列的数据，也就是tcp status，最后通过for语句输出。</description>
+      <guid>https://gohugo.io/blog/2018/06-15-time_wait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/</guid>
+      <description>版本：0.01 突然想梳理一下TIME_WAIT,毕竟自己遇到它好多次了。经常一块出现的问题：too many open file，当然，这个问题本身跟TIME</description>
     </item>
     
   </channel>

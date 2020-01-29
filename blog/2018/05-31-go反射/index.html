@@ -1,408 +1,101 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-12345678-0', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>Go反射 - 渐行渐远</title>
-    <meta property="og:title" content="Go反射 - 渐行渐远">
-    
-
-    
+    <title>
       
+  Go反射 &ndash; 渐行渐远
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="人生的挫折感并不取决于境遇本身，而取决于境遇和自我期待之间的落差。 概述 对interface类型操作，如何对内部的值进行处理和分析。比如判断i|Hugo-Primer theme&#39;s example site">
     
 
+    <meta name="apple-mobile-web-app-title" content="渐行渐远">
+    
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="Go反射 | 渐行渐远">
+    <meta name="twitter:description" content="人生的挫折感并不取决于境遇本身，而取决于境遇和自我期待之间的落差。 概述 对interface类型操作，如何对内部的值进行处理和分析。比如判断i|Hugo-Primer theme&#39;s example site">
+    <meta name="twitter:image" content="https://gohugo.io/twitter-card.png">
     
 
-    
-    
 
-
-<link href='//cdn.bootcss.com/highlight.js/9.14.1/styles/googlecode.min.css' rel='stylesheet' type='text/css' />
-
-
-
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
   </head>
 
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://gohugo.io/">
+    渐行渐远
+  </a>
+
   
-  <body class="blog">
-    <header class="masthead">
-      <h1 class="headimg">
-    
-    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
-</h1>
-
-
-
-      <nav class="menu">
-        <input id="menu-check" type="checkbox" />
-        <label id="menu-label" for="menu-check" class="unselectable">
-          <span class="icon close-icon">✕</span>
-          <span class="icon open-icon">☰</span>
-          <span class="text">Menu</span>
-        </label>
-        <ul>
-        
-        
-        <li><a href="/blog/">Blog</a></li>
-        
-        <li><a href="/life/">Life</a></li>
-        
-        <li><a href="/categories/">Categories</a></li>
-        
-        <li><a href="/tags/">Tags</a></li>
-        
-        <li><a href="/about/">About</a></li>
-        
-        </ul>
-      </nav>
-
-      
-      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
-        
-
-  <div class="Box Box--blue p-2 mb-3 mt-5">
-    <a href="/tags/" class="link-gray-dark">
-      <h4>Tags</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/2018" class="link-gray text-emphasized css-truncate-target"><span class="">2018th</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/dailylife" class="link-gray text-emphasized css-truncate-target"><span class="">Daily life</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mq" class="link-gray text-emphasized css-truncate-target"><span class="">M q</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">My s q l</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/cache" class="link-gray text-emphasized css-truncate-target"><span class="">Cache</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/design-pattern" class="link-gray text-emphasized css-truncate-target"><span class="">Design pattern</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/docker" class="link-gray text-emphasized css-truncate-target"><span class="">Docker</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/git" class="link-gray text-emphasized css-truncate-target"><span class="">Git</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/golang" class="link-gray text-emphasized css-truncate-target"><span class="">Golang</span></a>
-      <span class="text-right Counter">34</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/http" class="link-gray text-emphasized css-truncate-target"><span class="">Http</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/js" class="link-gray text-emphasized css-truncate-target"><span class="">Js</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/linux" class="link-gray text-emphasized css-truncate-target"><span class="">Linux</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mongo" class="link-gray text-emphasized css-truncate-target"><span class="">Mongo</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">Mysql</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/net" class="link-gray text-emphasized css-truncate-target"><span class="">Net</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/nginx" class="link-gray text-emphasized css-truncate-target"><span class="">Nginx</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/npm" class="link-gray text-emphasized css-truncate-target"><span class="">Npm</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/pay" class="link-gray text-emphasized css-truncate-target"><span class="">Pay</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/php" class="link-gray text-emphasized css-truncate-target"><span class="">Php</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protobufs" class="link-gray text-emphasized css-truncate-target"><span class="">Protobufs</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protocol" class="link-gray text-emphasized css-truncate-target"><span class="">Protocol</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tcp/ip" class="link-gray text-emphasized css-truncate-target"><span class="">Tcp/ip</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tools" class="link-gray text-emphasized css-truncate-target"><span class="">Tools</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/transaction" class="link-gray text-emphasized css-truncate-target"><span class="">Transaction</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/translate" class="link-gray text-emphasized css-truncate-target"><span class="">Translate</span></a>
-      <span class="text-right Counter">14</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/%e7%bb%9f%e8%ae%a1" class="link-gray text-emphasized css-truncate-target"><span class="">统计</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
-
-
-
-  <div class="Box Box--blue p-2 mb-3">
-    <a href="/categories/" class="link-gray-dark">
-      <h4>Categories</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-01" class="link-gray text-emphasized css-truncate-target"><span class="">2018 01</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-02" class="link-gray text-emphasized css-truncate-target"><span class="">2018 02</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-03" class="link-gray text-emphasized css-truncate-target"><span class="">2018 03</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-04" class="link-gray text-emphasized css-truncate-target"><span class="">2018 04</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-05" class="link-gray text-emphasized css-truncate-target"><span class="">2018 05</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-06" class="link-gray text-emphasized css-truncate-target"><span class="">2018 06</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-07" class="link-gray text-emphasized css-truncate-target"><span class="">2018 07</span></a>
-      <span class="text-right Counter">7</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-08" class="link-gray text-emphasized css-truncate-target"><span class="">2018 08</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-09" class="link-gray text-emphasized css-truncate-target"><span class="">2018 09</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-10" class="link-gray text-emphasized css-truncate-target"><span class="">2018 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-11" class="link-gray text-emphasized css-truncate-target"><span class="">2018 11</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-12" class="link-gray text-emphasized css-truncate-target"><span class="">2018 12</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-01" class="link-gray text-emphasized css-truncate-target"><span class="">2019 01</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-02" class="link-gray text-emphasized css-truncate-target"><span class="">2019 02</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-03" class="link-gray text-emphasized css-truncate-target"><span class="">2019 03</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-04" class="link-gray text-emphasized css-truncate-target"><span class="">2019 04</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-05" class="link-gray text-emphasized css-truncate-target"><span class="">2019 05</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-06" class="link-gray text-emphasized css-truncate-target"><span class="">2019 06</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-07" class="link-gray text-emphasized css-truncate-target"><span class="">2019 07</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-08" class="link-gray text-emphasized css-truncate-target"><span class="">2019 08</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-09" class="link-gray text-emphasized css-truncate-target"><span class="">2019 09</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-10" class="link-gray text-emphasized css-truncate-target"><span class="">2019 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-11" class="link-gray text-emphasized css-truncate-target"><span class="">2019 11</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-12" class="link-gray text-emphasized css-truncate-target"><span class="">2019 12</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-17" class="link-gray text-emphasized css-truncate-target"><span class="">2019 17</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/summarize" class="link-gray text-emphasized css-truncate-target"><span class="">Summarize</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
+  
+</nav>
 
       </div>
 
-    </header>
-
-    <article class="main">
-      <header class="title">
-      <h1>Go反射</h1>
-
-
-
-
-    
-    
-    <section class="post-meta">
-        <span class="post-author">付辉
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
         
-            
-            
-             /  2018-05-31
-            
-        </span>
-        
-        <a href="/tags/golang">golang</a>
-        
-    </section>
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Go反射</div>
+  </div>
+  <div class="Subhead-description">
     
 
 
 
-<hr>
-      </header>
 
-        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript">
-            var height = parseInt($("#bar").css("top"))
-            $(function () {
-                $(window).scroll(function () {
-                    var currentH = $(document).scrollTop();
-                    if (currentH > height) {
-                        $("#bar").css("top", (currentH) + 'px');
-                    } else {
-                        $('#bar').css('top', height + 'px');
-                    }
-
-                });
-            });
-        </script>
+<a href='/tags/golang' class="muted-link">
+  <span class="Label Label--gray">golang</span>
+</a>
 
 
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2018-05-31. Published at: 2018-05-31.">
+        
+          Published: 2018-05-31
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    
 
 <blockquote>
 <p><code>人生的挫折感并不取决于境遇本身，而取决于境遇和自我期待之间的落差。</code></p>
@@ -421,15 +114,12 @@
 <p><code>reflect</code>里两个主要角色：<code>Value</code>和<code>Type</code>。<code>Value</code>用于处理值的操作，反射过程中处理的值是原始值的值拷贝，所以操作中要注意区分值传递和地址传递。</p>
 
 <p>对于指针类型的值，只有获取其原始值，才可以达到修改的目的。如下所示，<code>obj</code>实际类型是一个<code>struct</code>的指针，想要将其转换成“值类型”，调用<code>Elem</code>方法来实现。</p>
-
-<pre><code class="language-go">//获取指针的实际类型
-v := reflect.ValueOf(obj)       //Kind == Ptr
-v = v.Elem()
-if v.Kind() != reflect.Struct {
-    return NewError(http.ErrorInvalidParam, &quot;interface类型必须是struct结构&quot;, nil)
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">//获取指针的实际类型
+</span><span class="c1"></span><span class="nx">v</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>       <span class="c1">//Kind == Ptr
+</span><span class="c1"></span><span class="nx">v</span> <span class="p">=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Elem</span><span class="p">()</span>
+<span class="k">if</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Kind</span><span class="p">()</span> <span class="o">!=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Struct</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">NewError</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ErrorInvalidParam</span><span class="p">,</span> <span class="s">&#34;interface类型必须是struct结构&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
 <p>一些其他的操作，比如通过<code>reflect.Value</code>获取<code>reflect.Type</code>类型，通过诸如<code>Index</code>、<code>Elem</code>、<code>MapIndex</code>、<code>Field</code>等来操作不同的数据类型，当然调用前最好结合<code>Kind</code>对实际类型进行判断，保证调用的安全性。</p>
 
 <h2 id="查找指定的-field">查找指定的<code>Field</code></h2>
@@ -437,23 +127,17 @@ if v.Kind() != reflect.Struct {
 <p>我们假设<code>struct</code>中包含有某个特殊<code>Field</code>，那么在接口层面该如何进行判断呢？比如，查看结构体中是否含有<code>Data</code>的<code>Field</code>.</p>
 
 <p><code>reflect</code>本身提供了多种判断形式。以<code>FieldByName</code>为例，<code>Type</code>和<code>Value</code>都实现了该方法，但返回值不相同。<code>reflect</code>要求调用的值本身需要是<code>struct</code>类型才可以。</p>
-
-<pre><code class="language-go">h := v.FieldByName(HeaderHField)    //HeaderHField为自定义常亮
-if h.IsValid() {
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">h</span> <span class="o">:=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">FieldByName</span><span class="p">(</span><span class="nx">HeaderHField</span><span class="p">)</span>    <span class="c1">//HeaderHField为自定义常亮
+</span><span class="c1"></span><span class="k">if</span> <span class="nx">h</span><span class="p">.</span><span class="nf">IsValid</span><span class="p">()</span> <span class="p">{</span>
 	
-}
-</code></pre>
-
+<span class="p">}</span></code></pre></div>
 <h2 id="将-value-转换为-interface-类型">将<code>value</code>转换为<code>interface</code>类型</h2>
 
 <p><code>reflect</code>操作的<code>interface</code>类型，即由<code>interface</code>转换为<code>reflect.Value</code>类型，同样，逆向的转换也是可以的。</p>
 
 <p>它提供了<code>interface()</code>方法。转换之后，我们就可以继续使用断言进行实际类型转换了。</p>
-
-<pre><code class="language-go">value := h.Interface()      //将value转换为interface
-customHead, isOk := value.(string)  //  断言为string类型
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">value</span> <span class="o">:=</span> <span class="nx">h</span><span class="p">.</span><span class="nf">Interface</span><span class="p">()</span>      <span class="c1">//将value转换为interface
+</span><span class="c1"></span><span class="nx">customHead</span><span class="p">,</span> <span class="nx">isOk</span> <span class="o">:=</span> <span class="nx">value</span><span class="p">.(</span><span class="kt">string</span><span class="p">)</span>  <span class="o">//</span>  <span class="nx">断言为string类型</span></code></pre></div>
 <h2 id="安全设置结构体中的值">安全设置结构体中的值</h2>
 
 <p>为了使反射过程变得更安全，需要了解几个函数</p>
@@ -475,19 +159,16 @@ customHead, isOk := value.(string)  //  断言为string类型
 </blockquote>
 
 <p>在使用函数时，还要注意到函数内部的限制。比如<code>FieldByName</code>要求作用的对象类型必须是结构体。所以，在操作之前一定要做好类型判断：<code>v.Kind() != reflect.Struct</code>。</p>
-
-<pre><code class="language-go">// FieldByName returns the struct field with the given name.
-// It returns the zero Value if no field was found.
-// It panics if v's Kind is not struct.
-func (v Value) FieldByName(name string) Value {
-	v.mustBe(Struct)
-	if f, ok := v.typ.FieldByName(name); ok {
-		return v.FieldByIndex(f.Index)
-	}
-	return Value{}
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// FieldByName returns the struct field with the given name.
+</span><span class="c1">// It returns the zero Value if no field was found.
+</span><span class="c1">// It panics if v&#39;s Kind is not struct.
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">v</span> <span class="nx">Value</span><span class="p">)</span> <span class="nf">FieldByName</span><span class="p">(</span><span class="nx">name</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Value</span> <span class="p">{</span>
+	<span class="nx">v</span><span class="p">.</span><span class="nf">mustBe</span><span class="p">(</span><span class="nx">Struct</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">f</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">v</span><span class="p">.</span><span class="nx">typ</span><span class="p">.</span><span class="nf">FieldByName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span> <span class="nx">ok</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">v</span><span class="p">.</span><span class="nf">FieldByIndex</span><span class="p">(</span><span class="nx">f</span><span class="p">.</span><span class="nx">Index</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">Value</span><span class="p">{}</span>
+<span class="p">}</span></code></pre></div>
 <p>参考文章：</p>
 
 <ol>
@@ -495,45 +176,62 @@ func (v Value) FieldByName(name string) Value {
 <li><a href="https://stackoverflow.com/questions/6395076/using-reflect-how-do-you-set-the-value-of-a-struct-field/6396678#6396678"><code>Using reflect, how do you set the value of a struct field?</code></a></li>
 </ol>
 
+  </section>
 
-  <footer>
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
   
-<nav class="post-nav">
-  <span class="nav-prev">&larr; <a href="/blog/2018/05-15-shell%E6%93%8D%E4%BD%9C%E6%96%87%E6%9C%AC%E5%AE%9E%E4%BE%8B/">shell操作文本实例</a></span>
-  <span class="nav-next"><a href="/blog/2018/06-08-%E8%AE%A2%E5%8D%95%E7%B3%BB%E7%BB%9F%E5%88%9D%E8%AF%86/">订单系统初识</a> &rarr;</span>
-</nav>
-
-
-
-
-
-<script src="//yihui.name/js/math-code.js"></script>
-<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-<script async src="//yihui.name/js/center-img.js"></script>
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Go反射</b><nav id="TableOfContents"><ul>
+<li><a href="#概述"><code>概述</code></a></li>
+<li><a href="#reflect-value"><code>reflect.Value</code></a></li>
+<li><a href="#查找指定的-field">查找指定的<code>Field</code></a></li>
+<li><a href="#将-value-转换为-interface-类型">将<code>value</code>转换为<code>interface</code>类型</a></li>
+<li><a href="#安全设置结构体中的值">安全设置结构体中的值</a></li>
+</ul></li>
+</ul>
+</nav></div>
   
-
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/highlight.min.js"></script>
-
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/r.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/yaml.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/tex.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/go.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
-
-
 
   
-  <hr>
-  <div class="copyright">&copy; <a href="http://neojos.com">DDF</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+    <div>
+      
+    </div>
   
-  </footer>
-  </article>
-  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy;Qiushi Pan 2018-2019 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+    
   </body>
 </html>
-

@@ -1,410 +1,105 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-12345678-0', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>Go net 超时处理 - 渐行渐远</title>
-    <meta property="og:title" content="Go net 超时处理 - 渐行渐远">
-    
-
-    
+    <title>
       
+  Go net 超时处理 &ndash; 渐行渐远
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="序 这篇文章详细介绍了，net/http包中对应HTTP的各个阶段，如何使用timeout来进行读/写超时控制以及服务端和客户端支持设置的ti|Hugo-Primer theme&#39;s example site">
     
 
+    <meta name="apple-mobile-web-app-title" content="渐行渐远">
+    
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="Go net 超时处理 | 渐行渐远">
+    <meta name="twitter:description" content="序 这篇文章详细介绍了，net/http包中对应HTTP的各个阶段，如何使用timeout来进行读/写超时控制以及服务端和客户端支持设置的ti|Hugo-Primer theme&#39;s example site">
+    <meta name="twitter:image" content="https://gohugo.io/twitter-card.png">
     
 
-    
-    
 
-
-<link href='//cdn.bootcss.com/highlight.js/9.14.1/styles/googlecode.min.css' rel='stylesheet' type='text/css' />
-
-
-
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
   </head>
 
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://gohugo.io/">
+    渐行渐远
+  </a>
+
   
-  <body class="blog">
-    <header class="masthead">
-      <h1 class="headimg">
-    
-    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
-</h1>
-
-
-
-      <nav class="menu">
-        <input id="menu-check" type="checkbox" />
-        <label id="menu-label" for="menu-check" class="unselectable">
-          <span class="icon close-icon">✕</span>
-          <span class="icon open-icon">☰</span>
-          <span class="text">Menu</span>
-        </label>
-        <ul>
-        
-        
-        <li><a href="/blog/">Blog</a></li>
-        
-        <li><a href="/life/">Life</a></li>
-        
-        <li><a href="/categories/">Categories</a></li>
-        
-        <li><a href="/tags/">Tags</a></li>
-        
-        <li><a href="/about/">About</a></li>
-        
-        </ul>
-      </nav>
-
-      
-      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
-        
-
-  <div class="Box Box--blue p-2 mb-3 mt-5">
-    <a href="/tags/" class="link-gray-dark">
-      <h4>Tags</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/2018" class="link-gray text-emphasized css-truncate-target"><span class="">2018th</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/dailylife" class="link-gray text-emphasized css-truncate-target"><span class="">Daily life</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mq" class="link-gray text-emphasized css-truncate-target"><span class="">M q</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">My s q l</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/cache" class="link-gray text-emphasized css-truncate-target"><span class="">Cache</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/design-pattern" class="link-gray text-emphasized css-truncate-target"><span class="">Design pattern</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/docker" class="link-gray text-emphasized css-truncate-target"><span class="">Docker</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/git" class="link-gray text-emphasized css-truncate-target"><span class="">Git</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/golang" class="link-gray text-emphasized css-truncate-target"><span class="">Golang</span></a>
-      <span class="text-right Counter">34</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/http" class="link-gray text-emphasized css-truncate-target"><span class="">Http</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/js" class="link-gray text-emphasized css-truncate-target"><span class="">Js</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/linux" class="link-gray text-emphasized css-truncate-target"><span class="">Linux</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mongo" class="link-gray text-emphasized css-truncate-target"><span class="">Mongo</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">Mysql</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/net" class="link-gray text-emphasized css-truncate-target"><span class="">Net</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/nginx" class="link-gray text-emphasized css-truncate-target"><span class="">Nginx</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/npm" class="link-gray text-emphasized css-truncate-target"><span class="">Npm</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/pay" class="link-gray text-emphasized css-truncate-target"><span class="">Pay</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/php" class="link-gray text-emphasized css-truncate-target"><span class="">Php</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protobufs" class="link-gray text-emphasized css-truncate-target"><span class="">Protobufs</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protocol" class="link-gray text-emphasized css-truncate-target"><span class="">Protocol</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tcp/ip" class="link-gray text-emphasized css-truncate-target"><span class="">Tcp/ip</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tools" class="link-gray text-emphasized css-truncate-target"><span class="">Tools</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/transaction" class="link-gray text-emphasized css-truncate-target"><span class="">Transaction</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/translate" class="link-gray text-emphasized css-truncate-target"><span class="">Translate</span></a>
-      <span class="text-right Counter">14</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/%e7%bb%9f%e8%ae%a1" class="link-gray text-emphasized css-truncate-target"><span class="">统计</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
-
-
-
-  <div class="Box Box--blue p-2 mb-3">
-    <a href="/categories/" class="link-gray-dark">
-      <h4>Categories</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-01" class="link-gray text-emphasized css-truncate-target"><span class="">2018 01</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-02" class="link-gray text-emphasized css-truncate-target"><span class="">2018 02</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-03" class="link-gray text-emphasized css-truncate-target"><span class="">2018 03</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-04" class="link-gray text-emphasized css-truncate-target"><span class="">2018 04</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-05" class="link-gray text-emphasized css-truncate-target"><span class="">2018 05</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-06" class="link-gray text-emphasized css-truncate-target"><span class="">2018 06</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-07" class="link-gray text-emphasized css-truncate-target"><span class="">2018 07</span></a>
-      <span class="text-right Counter">7</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-08" class="link-gray text-emphasized css-truncate-target"><span class="">2018 08</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-09" class="link-gray text-emphasized css-truncate-target"><span class="">2018 09</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-10" class="link-gray text-emphasized css-truncate-target"><span class="">2018 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-11" class="link-gray text-emphasized css-truncate-target"><span class="">2018 11</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-12" class="link-gray text-emphasized css-truncate-target"><span class="">2018 12</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-01" class="link-gray text-emphasized css-truncate-target"><span class="">2019 01</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-02" class="link-gray text-emphasized css-truncate-target"><span class="">2019 02</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-03" class="link-gray text-emphasized css-truncate-target"><span class="">2019 03</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-04" class="link-gray text-emphasized css-truncate-target"><span class="">2019 04</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-05" class="link-gray text-emphasized css-truncate-target"><span class="">2019 05</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-06" class="link-gray text-emphasized css-truncate-target"><span class="">2019 06</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-07" class="link-gray text-emphasized css-truncate-target"><span class="">2019 07</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-08" class="link-gray text-emphasized css-truncate-target"><span class="">2019 08</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-09" class="link-gray text-emphasized css-truncate-target"><span class="">2019 09</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-10" class="link-gray text-emphasized css-truncate-target"><span class="">2019 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-11" class="link-gray text-emphasized css-truncate-target"><span class="">2019 11</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-12" class="link-gray text-emphasized css-truncate-target"><span class="">2019 12</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-17" class="link-gray text-emphasized css-truncate-target"><span class="">2019 17</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/summarize" class="link-gray text-emphasized css-truncate-target"><span class="">Summarize</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
+  
+</nav>
 
       </div>
 
-    </header>
-
-    <article class="main">
-      <header class="title">
-      <h1>Go net 超时处理</h1>
-
-
-
-
-    
-    
-    <section class="post-meta">
-        <span class="post-author">付辉
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
         
-            
-            
-             /  2018-10-10
-            
-        </span>
-        
-        <a href="/tags/golang">golang</a>
-        
-        <a href="/tags/translate">translate</a>
-        
-    </section>
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Go net 超时处理</div>
+  </div>
+  <div class="Subhead-description">
     
 
 
 
-<hr>
-      </header>
 
-        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript">
-            var height = parseInt($("#bar").css("top"))
-            $(function () {
-                $(window).scroll(function () {
-                    var currentH = $(document).scrollTop();
-                    if (currentH > height) {
-                        $("#bar").css("top", (currentH) + 'px');
-                    } else {
-                        $('#bar').css('top', height + 'px');
-                    }
+<a href='/tags/golang' class="muted-link">
+  <span class="Label Label--gray">golang</span>
+</a>
 
-                });
-            });
-        </script>
+<a href='/tags/translate' class="muted-link">
+  <span class="Label Label--gray">translate</span>
+</a>
 
 
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2018-10-10. Published at: 2018-10-10.">
+        
+          Published: 2018-10-10
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    
 
 <h2 id="序"><code>序</code></h2>
 
@@ -448,14 +143,11 @@ func main() {
 </code></pre>
 
 <p>在创建<code>http.Server</code>的时候，可以通过<code>ReadTimeout</code>和<code>WriteTimeout</code>来设置超时。你需要明确的声明它们：</p>
-
-<pre><code class="language-go">srv := &amp;http.Server{
-    ReadTimeout: 5 * time.Second,
-    WriteTimeout: 10 * time.Second,
-}
-log.Println(srv.ListenAndServe())
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">srv</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Server</span><span class="p">{</span>
+    <span class="nx">ReadTimeout</span><span class="p">:</span> <span class="mi">5</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">,</span>
+    <span class="nx">WriteTimeout</span><span class="p">:</span> <span class="mi">10</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">srv</span><span class="p">.</span><span class="nf">ListenAndServe</span><span class="p">())</span></code></pre></div>
 <p><code>ReadTimeout</code>指从连接被<code>Accept</code>开始，到<code>request body</code>被完全读取结束（如果读取<code>body</code>的话，否则是读取完<code>header</code>头的时间）。内部是<code>net/http</code>通过在<a href="https://github.com/golang/go/blob/3ba31558d1bca8ae6d2f03209b4cae55381175b3/src/net/http/server.go#L750"><code>Accept</code>后</a>调用<code>SetReadDeadline</code>实现的。</p>
 
 <p><code>WriteTimeout</code>一般指从读取完<code>header</code>头之后到写完<code>response</code>的时间（又称<code>ServerHTTP</code>的处理时间），内部通过在 <a href="https://github.com/golang/go/blob/3ba31558d1bca8ae6d2f03209b4cae55381175b3/src/net/http/server.go#L753-L755"><code>readRequest</code>之后</a>调用<code>SetWriteDeadline</code>实现。</p>
@@ -491,13 +183,10 @@ log.Println(srv.ListenAndServe())
 <p><code>client</code>端的<code>timeout</code>可以很简单，也可以很复杂，这完全取决于你如何使用。但对于阻止内存泄漏或长时间连接占用的问题上，相对于<code>Server</code>端来说，它同样特别重要。</p>
 
 <p>下面是使用<a href="https://golang.org/pkg/net/http/#Client"><code>http.Client</code></a>指定<code>timeout</code>的最简单例子。<code>timeout</code>覆盖了整个请求的时间：从<code>Dial</code>（如果非连接重用）到读取<code>response body</code>。</p>
-
-<pre><code class="language-go">c := &amp;http.Client{
-    Timeout: 15 * time.Second,
-}
-resp, err := c.Get(&quot;https://blog.filippo.io/&quot;)
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">c</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Client</span><span class="p">{</span>
+    <span class="nx">Timeout</span><span class="p">:</span> <span class="mi">15</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="nx">resp</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;https://blog.filippo.io/&#34;</span><span class="p">)</span></code></pre></div>
 <p>像上面列举的那些<code>server</code>端方法一样，<code>client</code>端也封装了类似的方法，比如<code>http.Get</code>。他内部用的就是一个没有设置超时时间的<a href="https://golang.org/pkg/net/http/#DefaultClient">Client</a>。</p>
 
 <p>下面提供了很多类型的<code>timeout</code>，可以让你更精细的控制超时：</p>
@@ -550,116 +239,130 @@ resp, err := c.Get(&quot;https://blog.filippo.io/&quot;)
 </code></pre>
 
 <p>我们可结合<code>Request.Cancel</code>和<code>time.Timer</code>对<code>timeout</code>进行更细的控制。比如，在我们每次从<code>response body</code>中读取数据后，延长<code>timeout</code>的时间。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
 
-<pre><code class="language-go">package main
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;io&#34;</span>
+	<span class="s">&#34;io/ioutil&#34;</span>
+	<span class="s">&#34;log&#34;</span>
+	<span class="s">&#34;net/http&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
 
-import (
-	&quot;io&quot;
-	&quot;io/ioutil&quot;
-	&quot;log&quot;
-	&quot;net/http&quot;
-	&quot;time&quot;
-)
-
-func main() {
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     
-    //定义一个timer：5s后取消该请求，即关闭该channel
-	c := make(chan struct{})
-	timer := time.AfterFunc(5*time.Second, func() {
-		close(c)
-	})
+    <span class="c1">//定义一个timer：5s后取消该请求，即关闭该channel
+</span><span class="c1"></span>	<span class="nx">c</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kd">struct</span><span class="p">{})</span>
+	<span class="nx">timer</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">AfterFunc</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nb">close</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+	<span class="p">})</span>
 
-    // Serve 256 bytes every second.
-	req, err := http.NewRequest(&quot;GET&quot;, &quot;http://httpbin.org/range/2048?duration=8&amp;chunk_size=256&quot;, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-	req.Cancel = c
+    <span class="c1">// Serve 256 bytes every second.
+</span><span class="c1"></span>	<span class="nx">req</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">http</span><span class="p">.</span><span class="nf">NewRequest</span><span class="p">(</span><span class="s">&#34;GET&#34;</span><span class="p">,</span> <span class="s">&#34;http://httpbin.org/range/2048?duration=8&amp;chunk_size=256&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="nx">req</span><span class="p">.</span><span class="nx">Cancel</span> <span class="p">=</span> <span class="nx">c</span>
 
-    //执行请求,请求的时间不应该超过5s
-	log.Println(&quot;Sending request...&quot;)
-	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer resp.Body.Close()
+    <span class="c1">//执行请求,请求的时间不应该超过5s
+</span><span class="c1"></span>	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Sending request...&#34;</span><span class="p">)</span>
+	<span class="nx">resp</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="p">.</span><span class="nf">Do</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">defer</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
 
-	log.Println(&quot;Reading body...&quot;)
-	for {
-		timer.Reset(2 * time.Second)
-        // Try instead: timer.Reset(50 * time.Millisecond)
-		_, err = io.CopyN(ioutil.Discard, resp.Body, 256)
-		if err == io.EOF {
-			break
-		} else if err != nil {
-			log.Fatal(err)
-		}
-	}
-}
-</code></pre>
-
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Reading body...&#34;</span><span class="p">)</span>
+	<span class="k">for</span> <span class="p">{</span>
+		<span class="nx">timer</span><span class="p">.</span><span class="nf">Reset</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+        <span class="c1">// Try instead: timer.Reset(50 * time.Millisecond)
+</span><span class="c1"></span>		<span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">io</span><span class="p">.</span><span class="nf">CopyN</span><span class="p">(</span><span class="nx">ioutil</span><span class="p">.</span><span class="nx">Discard</span><span class="p">,</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">Body</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nx">err</span> <span class="o">==</span> <span class="nx">io</span><span class="p">.</span><span class="nx">EOF</span> <span class="p">{</span>
+			<span class="k">break</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></div>
 <p>上述例子中，我们给<code>Do</code>设置了<code>5s</code>的超时，通过后续8个循环来读取<code>response body</code>的内容，这个操作至少花费了<code>8s</code>的时间。每次<code>read</code>的操作均设置了<code>2s</code>的超时。我们可以持续这样读，不需要考虑任何阻塞的风险。如果在<code>2s</code>内没有接受到数据，<code>io.CopyN</code>将会返回<code>net/http: request canceled</code>。</p>
 
 <p>在<code>1.7</code>的版本中<code>context</code>被引入到了标注库，此处是<a href="https://blog.golang.org/context">一些介绍</a>。接下来我们用它来替换 <code>Request.Cancel</code>，实现相同的功能。</p>
 
 <p>使用<code>context</code>来取消一个请求，我们需要获取一个<code>Context</code>类型，以及调用<code>context.WithCancel</code>返回的<code>cancel()</code>方法，并通过<code>Request.WithContext</code>将<code>context</code>绑定到一个请求上。当我们想取消这个请求时，只需要调用<code>cancel()</code>方法(代替上述关闭<code>channel</code>的做法)</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">//ctx是context.TODO()的子节点
+</span><span class="c1"></span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">cancel</span> <span class="o">:=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">WithCancel</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nf">TODO</span><span class="p">())</span>
+<span class="nx">timer</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">AfterFunc</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nf">cancel</span><span class="p">()</span>
+<span class="p">})</span>
 
-<pre><code class="language-go">//ctx是context.TODO()的子节点
-ctx, cancel := context.WithCancel(context.TODO())
-timer := time.AfterFunc(5*time.Second, func() {
-	cancel()
-})
-
-req, err := http.NewRequest(&quot;GET&quot;, &quot;http://httpbin.org/range/2048?duration=8&amp;chunk_size=256&quot;, nil)
-if err != nil {
-	log.Fatal(err)
-}
-req = req.WithContext(ctx)
-</code></pre>
-
+<span class="nx">req</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">http</span><span class="p">.</span><span class="nf">NewRequest</span><span class="p">(</span><span class="s">&#34;GET&#34;</span><span class="p">,</span> <span class="s">&#34;http://httpbin.org/range/2048?duration=8&amp;chunk_size=256&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">req</span> <span class="p">=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">WithContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span></code></pre></div>
 <p><code>Contexts</code>有很多优，比如一个<code>parent</code>（传递给<code>context.WithCancel</code>的对象）被取消，那么命令会沿着传递的路径一直向下传递，直到关闭所有子<code>context</code>。</p>
 
 <p>阅读原文：<a href="https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/"><code>The complete guide to Go net/http timeouts</code></a></p>
 
+  </section>
 
-  <footer>
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
   
-<nav class="post-nav">
-  <span class="nav-prev">&larr; <a href="/blog/2018/09-24-tcp-bulk-data/">Tcp Bulk Data</a></span>
-  <span class="nav-next"><a href="/blog/2018/10-12-go-interface-%E7%B1%BB%E5%9E%8B/">Go Interface 类型</a> &rarr;</span>
-</nav>
-
-
-
-
-
-<script src="//yihui.name/js/math-code.js"></script>
-<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-<script async src="//yihui.name/js/center-img.js"></script>
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Go net 超时处理</b><nav id="TableOfContents"><ul>
+<li><a href="#序"><code>序</code></a></li>
+<li><a href="#正文">正文</a></li>
+<li><a href="#setdeadline"><code>SetDeadline</code></a></li>
+<li><a href="#server-timeouts"><code>Server Timeouts</code></a></li>
+<li><a href="#http-listenandserve-is-doing-it-wrong"><code>http.ListenAndServe</code> is doing it wrong</a></li>
+<li><a href="#about-streaming"><code>About streaming</code></a></li>
+<li><a href="#client-timeouts"><code>Client Timeouts</code></a></li>
+<li><a href="#cancel-and-context"><code>Cancel and Context</code></a></li>
+</ul></li>
+</ul>
+</nav></div>
   
-
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/highlight.min.js"></script>
-
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/r.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/yaml.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/tex.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/go.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
-
-
 
   
-  <hr>
-  <div class="copyright">&copy; <a href="http://neojos.com">DDF</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+    <div>
+      
+    </div>
   
-  </footer>
-  </article>
-  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy;Qiushi Pan 2018-2019 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+    
   </body>
 </html>
-

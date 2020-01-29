@@ -1,410 +1,105 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-12345678-0', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>数据一致性（二） - 渐行渐远</title>
-    <meta property="og:title" content="数据一致性（二） - 渐行渐远">
-    
-
-    
+    <title>
       
+  数据一致性（二） &ndash; 渐行渐远
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="我们流连于事物的表象，满足浅尝辄止的片刻欢愉，却几乎从不久留。我们在人生的道路上争先恐后，却吝于用片刻思考目标和方向。 概述 至今没有接触过My|Hugo-Primer theme&#39;s example site">
     
 
+    <meta name="apple-mobile-web-app-title" content="渐行渐远">
+    
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="数据一致性（二） | 渐行渐远">
+    <meta name="twitter:description" content="我们流连于事物的表象，满足浅尝辄止的片刻欢愉，却几乎从不久留。我们在人生的道路上争先恐后，却吝于用片刻思考目标和方向。 概述 至今没有接触过My|Hugo-Primer theme&#39;s example site">
+    <meta name="twitter:image" content="https://gohugo.io/twitter-card.png">
     
 
-    
-    
 
-
-<link href='//cdn.bootcss.com/highlight.js/9.14.1/styles/googlecode.min.css' rel='stylesheet' type='text/css' />
-
-
-
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
   </head>
 
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://gohugo.io/">
+    渐行渐远
+  </a>
+
   
-  <body class="blog">
-    <header class="masthead">
-      <h1 class="headimg">
-    
-    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
-</h1>
-
-
-
-      <nav class="menu">
-        <input id="menu-check" type="checkbox" />
-        <label id="menu-label" for="menu-check" class="unselectable">
-          <span class="icon close-icon">✕</span>
-          <span class="icon open-icon">☰</span>
-          <span class="text">Menu</span>
-        </label>
-        <ul>
-        
-        
-        <li><a href="/blog/">Blog</a></li>
-        
-        <li><a href="/life/">Life</a></li>
-        
-        <li><a href="/categories/">Categories</a></li>
-        
-        <li><a href="/tags/">Tags</a></li>
-        
-        <li><a href="/about/">About</a></li>
-        
-        </ul>
-      </nav>
-
-      
-      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
-        
-
-  <div class="Box Box--blue p-2 mb-3 mt-5">
-    <a href="/tags/" class="link-gray-dark">
-      <h4>Tags</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/2018" class="link-gray text-emphasized css-truncate-target"><span class="">2018th</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/dailylife" class="link-gray text-emphasized css-truncate-target"><span class="">Daily life</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mq" class="link-gray text-emphasized css-truncate-target"><span class="">M q</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">My s q l</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/cache" class="link-gray text-emphasized css-truncate-target"><span class="">Cache</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/design-pattern" class="link-gray text-emphasized css-truncate-target"><span class="">Design pattern</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/docker" class="link-gray text-emphasized css-truncate-target"><span class="">Docker</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/git" class="link-gray text-emphasized css-truncate-target"><span class="">Git</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/golang" class="link-gray text-emphasized css-truncate-target"><span class="">Golang</span></a>
-      <span class="text-right Counter">34</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/http" class="link-gray text-emphasized css-truncate-target"><span class="">Http</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/js" class="link-gray text-emphasized css-truncate-target"><span class="">Js</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/linux" class="link-gray text-emphasized css-truncate-target"><span class="">Linux</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mongo" class="link-gray text-emphasized css-truncate-target"><span class="">Mongo</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">Mysql</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/net" class="link-gray text-emphasized css-truncate-target"><span class="">Net</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/nginx" class="link-gray text-emphasized css-truncate-target"><span class="">Nginx</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/npm" class="link-gray text-emphasized css-truncate-target"><span class="">Npm</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/pay" class="link-gray text-emphasized css-truncate-target"><span class="">Pay</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/php" class="link-gray text-emphasized css-truncate-target"><span class="">Php</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protobufs" class="link-gray text-emphasized css-truncate-target"><span class="">Protobufs</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protocol" class="link-gray text-emphasized css-truncate-target"><span class="">Protocol</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tcp/ip" class="link-gray text-emphasized css-truncate-target"><span class="">Tcp/ip</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tools" class="link-gray text-emphasized css-truncate-target"><span class="">Tools</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/transaction" class="link-gray text-emphasized css-truncate-target"><span class="">Transaction</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/translate" class="link-gray text-emphasized css-truncate-target"><span class="">Translate</span></a>
-      <span class="text-right Counter">14</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/%e7%bb%9f%e8%ae%a1" class="link-gray text-emphasized css-truncate-target"><span class="">统计</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
-
-
-
-  <div class="Box Box--blue p-2 mb-3">
-    <a href="/categories/" class="link-gray-dark">
-      <h4>Categories</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-01" class="link-gray text-emphasized css-truncate-target"><span class="">2018 01</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-02" class="link-gray text-emphasized css-truncate-target"><span class="">2018 02</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-03" class="link-gray text-emphasized css-truncate-target"><span class="">2018 03</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-04" class="link-gray text-emphasized css-truncate-target"><span class="">2018 04</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-05" class="link-gray text-emphasized css-truncate-target"><span class="">2018 05</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-06" class="link-gray text-emphasized css-truncate-target"><span class="">2018 06</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-07" class="link-gray text-emphasized css-truncate-target"><span class="">2018 07</span></a>
-      <span class="text-right Counter">7</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-08" class="link-gray text-emphasized css-truncate-target"><span class="">2018 08</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-09" class="link-gray text-emphasized css-truncate-target"><span class="">2018 09</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-10" class="link-gray text-emphasized css-truncate-target"><span class="">2018 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-11" class="link-gray text-emphasized css-truncate-target"><span class="">2018 11</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-12" class="link-gray text-emphasized css-truncate-target"><span class="">2018 12</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-01" class="link-gray text-emphasized css-truncate-target"><span class="">2019 01</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-02" class="link-gray text-emphasized css-truncate-target"><span class="">2019 02</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-03" class="link-gray text-emphasized css-truncate-target"><span class="">2019 03</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-04" class="link-gray text-emphasized css-truncate-target"><span class="">2019 04</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-05" class="link-gray text-emphasized css-truncate-target"><span class="">2019 05</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-06" class="link-gray text-emphasized css-truncate-target"><span class="">2019 06</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-07" class="link-gray text-emphasized css-truncate-target"><span class="">2019 07</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-08" class="link-gray text-emphasized css-truncate-target"><span class="">2019 08</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-09" class="link-gray text-emphasized css-truncate-target"><span class="">2019 09</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-10" class="link-gray text-emphasized css-truncate-target"><span class="">2019 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-11" class="link-gray text-emphasized css-truncate-target"><span class="">2019 11</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-12" class="link-gray text-emphasized css-truncate-target"><span class="">2019 12</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-17" class="link-gray text-emphasized css-truncate-target"><span class="">2019 17</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/summarize" class="link-gray text-emphasized css-truncate-target"><span class="">Summarize</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
+  
+</nav>
 
       </div>
 
-    </header>
-
-    <article class="main">
-      <header class="title">
-      <h1>数据一致性（二）</h1>
-
-
-
-
-    
-    
-    <section class="post-meta">
-        <span class="post-author">付辉
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
         
-            
-            
-             /  2019-03-16
-            
-        </span>
-        
-        <a href="/tags/translate">translate</a>
-        
-        <a href="/tags/mysql">mysql</a>
-        
-    </section>
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">数据一致性（二）</div>
+  </div>
+  <div class="Subhead-description">
     
 
 
 
-<hr>
-      </header>
 
-        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript">
-            var height = parseInt($("#bar").css("top"))
-            $(function () {
-                $(window).scroll(function () {
-                    var currentH = $(document).scrollTop();
-                    if (currentH > height) {
-                        $("#bar").css("top", (currentH) + 'px');
-                    } else {
-                        $('#bar').css('top', height + 'px');
-                    }
+<a href='/tags/translate' class="muted-link">
+  <span class="Label Label--gray">translate</span>
+</a>
 
-                });
-            });
-        </script>
+<a href='/tags/mysql' class="muted-link">
+  <span class="Label Label--gray">mysql</span>
+</a>
 
 
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2019-03-16. Published at: 2019-03-16.">
+        
+          Published: 2019-03-16
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    
 
 <blockquote>
 <p><code>我们流连于事物的表象，满足浅尝辄止的片刻欢愉，却几乎从不久留。我们在人生的道路上争先恐后，却吝于用片刻思考目标和方向。</code></p>
@@ -432,18 +127,15 @@
 <h3 id="master-slave-模式"><code>Master-Slave</code>模式</h3>
 
 <p>通常情况下，<code>MySQL</code>部署都是一主多从。<code>Master</code>作为更新<code>DB</code>的入口，而<code>Slave</code>的数据通过<code>binlog</code>来进行同步。所以<strong>大胆想一想</strong>，有没有可能出现一种情况（假设<code>id=1</code>记录原始的<code>name</code>值为<code>neojos</code>）：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="o">##</span> <span class="err">第一次同步数据</span>
+<span class="k">update</span> <span class="n">s</span><span class="o">-</span><span class="mi">1</span> <span class="k">set</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;neojos-1&#34;</span> <span class="k">where</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>    <span class="o">##</span> <span class="err">失败</span>
+<span class="k">update</span> <span class="n">s</span><span class="o">-</span><span class="mi">2</span> <span class="k">set</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;neojos-1&#34;</span> <span class="k">where</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>    <span class="o">##</span> <span class="err">成功</span>
+<span class="k">update</span> <span class="n">s</span><span class="o">-</span><span class="mi">3</span> <span class="k">set</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;neojos-1&#34;</span> <span class="k">where</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>    <span class="o">##</span> <span class="err">成功</span>
 
-<pre><code class="language-sql">## 第一次同步数据
-update s-1 set name=&quot;neojos-1&quot; where id = 1;    ## 失败
-update s-2 set name=&quot;neojos-1&quot; where id = 1;    ## 成功
-update s-3 set name=&quot;neojos-1&quot; where id = 1;    ## 成功
-
-## 第二次同步数据
-update s-1 set name=&quot;neojos-2&quot; where id = 1;    ## 成功
-update s-2 set name=&quot;neojos-2&quot; where id = 1;    ## 失败
-update s-3 set name=&quot;neojos-2&quot; where id = 1;    ## 成功
-</code></pre>
-
+<span class="o">##</span> <span class="err">第二次同步数据</span>
+<span class="k">update</span> <span class="n">s</span><span class="o">-</span><span class="mi">1</span> <span class="k">set</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;neojos-2&#34;</span> <span class="k">where</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>    <span class="o">##</span> <span class="err">成功</span>
+<span class="k">update</span> <span class="n">s</span><span class="o">-</span><span class="mi">2</span> <span class="k">set</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;neojos-2&#34;</span> <span class="k">where</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>    <span class="o">##</span> <span class="err">失败</span>
+<span class="k">update</span> <span class="n">s</span><span class="o">-</span><span class="mi">3</span> <span class="k">set</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;neojos-2&#34;</span> <span class="k">where</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>    <span class="o">##</span> <span class="err">成功</span></code></pre></div>
 <p>最后，数据库从某一个时间点开始，<code>Master</code>和<code>Salve</code>的数据会变得不一致了当然不可能，<code>MySQL</code>在数据同步上做了非常硬的约束。包括<code>Slave_IO_Running</code>、<code>Slave_SQL_Running</code>以及<a href="https://dev.mysql.com/doc/refman/8.0/en/show-slave-status.html"><code>Seconds_Behind_Master</code></a>等。</p>
 
 <p><img src="https://i.loli.net/2019/03/16/5c8cae8a60bf4.jpg" alt="mysql" /></p>
@@ -505,35 +197,32 @@ update s-3 set name=&quot;neojos-2&quot; where id = 1;    ## 成功
 <h3 id="go的并发问题">Go的并发问题</h3>
 
 <p>下面是一个简单的<code>Go Test</code>代码问题：求1-100的累加和。我们通过<code>Goroutine</code>和最普通的两个方式分别计算。同时，在代码的末尾对两种方式的计算结果进行了比较并打印输出。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 输出结果每次都是变化的。其中一次：5499 != 5050
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">TestSum1To100</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
 
-<pre><code class="language-go">// 输出结果每次都是变化的。其中一次：5499 != 5050
-func TestSum1To100(t *testing.T) {
-
-	result1 := 0
-	result2 := 0
+	<span class="nx">result1</span> <span class="o">:=</span> <span class="mi">0</span>
+	<span class="nx">result2</span> <span class="o">:=</span> <span class="mi">0</span>
 	
-  // 并发的进行计算
-	var wg sync.WaitGroup
-	for i := 1; i &lt;= 100; i++ {
-		wg.Add(1)
-		go func(m int) {
-			defer wg.Done()
-			result1 += m
-		}(i)
-	}
+  <span class="c1">// 并发的进行计算
+</span><span class="c1"></span>	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+		<span class="k">go</span> <span class="kd">func</span><span class="p">(</span><span class="nx">m</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">defer</span> <span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
+			<span class="nx">result1</span> <span class="o">+=</span> <span class="nx">m</span>
+		<span class="p">}(</span><span class="nx">i</span><span class="p">)</span>
+	<span class="p">}</span>
 
-  // 正常的For循环
-	for i := 1; i &lt;= 100; i++ {
-		result2 += i
-	}
+  <span class="c1">// 正常的For循环
+</span><span class="c1"></span>	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nx">result2</span> <span class="o">+=</span> <span class="nx">i</span>
+	<span class="p">}</span>
 
-	wg.Wait()
-	if result1 != result2 {
-		t.Fatalf(&quot; %d != %d&quot;, result1, result2)
-	}
-}
-</code></pre>
-
+	<span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
+	<span class="k">if</span> <span class="nx">result1</span> <span class="o">!=</span> <span class="nx">result2</span> <span class="p">{</span>
+		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34; %d != %d&#34;</span><span class="p">,</span> <span class="nx">result1</span><span class="p">,</span> <span class="nx">result2</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></div>
 <p>并发情况下，每个<code>goroutine</code>在读取<code>result1</code>到<code>result1=result1+1</code>的过程中，无法保证<code>result1</code>不被别的<code>goroutine</code>所修改。</p>
 
 <p>从<code>MySQL</code>解决问题的思路来考虑：加锁。我们要对读取<code>result1</code>到<code>result1=result1+1</code>的过程进行加锁，保证这个过程是同步的。</p>
@@ -608,45 +297,73 @@ func TestSum1To100(t *testing.T) {
 <li><a href="https://www.tutorialspoint.com/cassandra/cassandra_data_model.htm"><code>Cassandra - Data Model</code></a></li>
 </ol>
 
+  </section>
 
-  <footer>
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
   
-<nav class="post-nav">
-  <span class="nav-prev">&larr; <a href="/blog/2019/19-03-09-database-sharding/">Database Sharding</a></span>
-  <span class="nav-next"><a href="/blog/2019/19-03-24-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%80/">Go 调度模型（一）</a> &rarr;</span>
-</nav>
-
-
-
-
-
-<script src="//yihui.name/js/math-code.js"></script>
-<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-<script async src="//yihui.name/js/center-img.js"></script>
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>数据一致性（二）</b><nav id="TableOfContents"><ul>
+<li><a href="#概述">概述</a></li>
+<li><a href="#mysql数据的一致性">MySQL数据的一致性</a>
+<ul>
+<li><a href="#master-slave-模式"><code>Master-Slave</code>模式</a></li>
+<li><a href="#并发下的数据一致性">并发下的数据一致性</a></li>
+</ul></li>
+<li><a href="#理解冲突">理解冲突</a>
+<ul>
+<li><a href="#go的并发问题">Go的并发问题</a></li>
+<li><a href="#一对多情况">一对多情况</a></li>
+</ul></li>
+<li><a href="#cap"><code>CAP</code></a></li>
+<li><a href="#last-write-wins"><code>Last-write-wins</code></a></li>
+<li><a href="#vector-clock"><code>vector clock</code></a></li>
+<li><a href="#cassandra-的思路"><code>Cassandra</code>的思路</a></li>
+<li><a href="#总结">总结</a></li>
+</ul></li>
+</ul>
+</nav></div>
   
 
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/highlight.min.js"></script>
-
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/r.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/yaml.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/tex.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/go.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
-
-
-
   
-  <hr>
-  <div class="copyright">&copy; <a href="http://neojos.com">DDF</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+    <div>
+      
+    </div>
   
-  </footer>
-  </article>
-  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy;Qiushi Pan 2018-2019 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+    
   </body>
 </html>
-

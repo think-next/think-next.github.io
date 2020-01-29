@@ -1,410 +1,105 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-12345678-0', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>垃圾回收之引用计数 - 渐行渐远</title>
-    <meta property="og:title" content="垃圾回收之引用计数 - 渐行渐远">
-    
-
-    
+    <title>
       
+  垃圾回收之引用计数 &ndash; 渐行渐远
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="思来想去，决定总结一下垃圾回收机制。引用计数与我结缘最早，也比较简单、基础，遂决定从引用计数入手。 —— 不管人非笑，不管人毁谤，不管人荣辱，任|Hugo-Primer theme&#39;s example site">
     
 
+    <meta name="apple-mobile-web-app-title" content="渐行渐远">
+    
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="垃圾回收之引用计数 | 渐行渐远">
+    <meta name="twitter:description" content="思来想去，决定总结一下垃圾回收机制。引用计数与我结缘最早，也比较简单、基础，遂决定从引用计数入手。 —— 不管人非笑，不管人毁谤，不管人荣辱，任|Hugo-Primer theme&#39;s example site">
+    <meta name="twitter:image" content="https://gohugo.io/twitter-card.png">
     
 
-    
-    
 
-
-<link href='//cdn.bootcss.com/highlight.js/9.14.1/styles/googlecode.min.css' rel='stylesheet' type='text/css' />
-
-
-
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
   </head>
 
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://gohugo.io/">
+    渐行渐远
+  </a>
+
   
-  <body class="blog">
-    <header class="masthead">
-      <h1 class="headimg">
-    
-    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
-</h1>
-
-
-
-      <nav class="menu">
-        <input id="menu-check" type="checkbox" />
-        <label id="menu-label" for="menu-check" class="unselectable">
-          <span class="icon close-icon">✕</span>
-          <span class="icon open-icon">☰</span>
-          <span class="text">Menu</span>
-        </label>
-        <ul>
-        
-        
-        <li><a href="/blog/">Blog</a></li>
-        
-        <li><a href="/life/">Life</a></li>
-        
-        <li><a href="/categories/">Categories</a></li>
-        
-        <li><a href="/tags/">Tags</a></li>
-        
-        <li><a href="/about/">About</a></li>
-        
-        </ul>
-      </nav>
-
-      
-      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
-        
-
-  <div class="Box Box--blue p-2 mb-3 mt-5">
-    <a href="/tags/" class="link-gray-dark">
-      <h4>Tags</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/2018" class="link-gray text-emphasized css-truncate-target"><span class="">2018th</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/dailylife" class="link-gray text-emphasized css-truncate-target"><span class="">Daily life</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mq" class="link-gray text-emphasized css-truncate-target"><span class="">M q</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">My s q l</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/cache" class="link-gray text-emphasized css-truncate-target"><span class="">Cache</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/design-pattern" class="link-gray text-emphasized css-truncate-target"><span class="">Design pattern</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/docker" class="link-gray text-emphasized css-truncate-target"><span class="">Docker</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/git" class="link-gray text-emphasized css-truncate-target"><span class="">Git</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/golang" class="link-gray text-emphasized css-truncate-target"><span class="">Golang</span></a>
-      <span class="text-right Counter">34</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/http" class="link-gray text-emphasized css-truncate-target"><span class="">Http</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/js" class="link-gray text-emphasized css-truncate-target"><span class="">Js</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/linux" class="link-gray text-emphasized css-truncate-target"><span class="">Linux</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mongo" class="link-gray text-emphasized css-truncate-target"><span class="">Mongo</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">Mysql</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/net" class="link-gray text-emphasized css-truncate-target"><span class="">Net</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/nginx" class="link-gray text-emphasized css-truncate-target"><span class="">Nginx</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/npm" class="link-gray text-emphasized css-truncate-target"><span class="">Npm</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/pay" class="link-gray text-emphasized css-truncate-target"><span class="">Pay</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/php" class="link-gray text-emphasized css-truncate-target"><span class="">Php</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protobufs" class="link-gray text-emphasized css-truncate-target"><span class="">Protobufs</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protocol" class="link-gray text-emphasized css-truncate-target"><span class="">Protocol</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tcp/ip" class="link-gray text-emphasized css-truncate-target"><span class="">Tcp/ip</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tools" class="link-gray text-emphasized css-truncate-target"><span class="">Tools</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/transaction" class="link-gray text-emphasized css-truncate-target"><span class="">Transaction</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/translate" class="link-gray text-emphasized css-truncate-target"><span class="">Translate</span></a>
-      <span class="text-right Counter">14</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/%e7%bb%9f%e8%ae%a1" class="link-gray text-emphasized css-truncate-target"><span class="">统计</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
-
-
-
-  <div class="Box Box--blue p-2 mb-3">
-    <a href="/categories/" class="link-gray-dark">
-      <h4>Categories</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-01" class="link-gray text-emphasized css-truncate-target"><span class="">2018 01</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-02" class="link-gray text-emphasized css-truncate-target"><span class="">2018 02</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-03" class="link-gray text-emphasized css-truncate-target"><span class="">2018 03</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-04" class="link-gray text-emphasized css-truncate-target"><span class="">2018 04</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-05" class="link-gray text-emphasized css-truncate-target"><span class="">2018 05</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-06" class="link-gray text-emphasized css-truncate-target"><span class="">2018 06</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-07" class="link-gray text-emphasized css-truncate-target"><span class="">2018 07</span></a>
-      <span class="text-right Counter">7</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-08" class="link-gray text-emphasized css-truncate-target"><span class="">2018 08</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-09" class="link-gray text-emphasized css-truncate-target"><span class="">2018 09</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-10" class="link-gray text-emphasized css-truncate-target"><span class="">2018 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-11" class="link-gray text-emphasized css-truncate-target"><span class="">2018 11</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-12" class="link-gray text-emphasized css-truncate-target"><span class="">2018 12</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-01" class="link-gray text-emphasized css-truncate-target"><span class="">2019 01</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-02" class="link-gray text-emphasized css-truncate-target"><span class="">2019 02</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-03" class="link-gray text-emphasized css-truncate-target"><span class="">2019 03</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-04" class="link-gray text-emphasized css-truncate-target"><span class="">2019 04</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-05" class="link-gray text-emphasized css-truncate-target"><span class="">2019 05</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-06" class="link-gray text-emphasized css-truncate-target"><span class="">2019 06</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-07" class="link-gray text-emphasized css-truncate-target"><span class="">2019 07</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-08" class="link-gray text-emphasized css-truncate-target"><span class="">2019 08</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-09" class="link-gray text-emphasized css-truncate-target"><span class="">2019 09</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-10" class="link-gray text-emphasized css-truncate-target"><span class="">2019 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-11" class="link-gray text-emphasized css-truncate-target"><span class="">2019 11</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-12" class="link-gray text-emphasized css-truncate-target"><span class="">2019 12</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-17" class="link-gray text-emphasized css-truncate-target"><span class="">2019 17</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/summarize" class="link-gray text-emphasized css-truncate-target"><span class="">Summarize</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
+  
+</nav>
 
       </div>
 
-    </header>
-
-    <article class="main">
-      <header class="title">
-      <h1>垃圾回收之引用计数</h1>
-
-
-
-
-    
-    
-    <section class="post-meta">
-        <span class="post-author">付辉
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
         
-            
-            
-             /  2019-02-01
-            
-        </span>
-        
-        <a href="/tags/translate">translate</a>
-        
-        <a href="/tags/golang">golang</a>
-        
-    </section>
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">垃圾回收之引用计数</div>
+  </div>
+  <div class="Subhead-description">
     
 
 
 
-<hr>
-      </header>
 
-        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript">
-            var height = parseInt($("#bar").css("top"))
-            $(function () {
-                $(window).scroll(function () {
-                    var currentH = $(document).scrollTop();
-                    if (currentH > height) {
-                        $("#bar").css("top", (currentH) + 'px');
-                    } else {
-                        $('#bar').css('top', height + 'px');
-                    }
+<a href='/tags/translate' class="muted-link">
+  <span class="Label Label--gray">translate</span>
+</a>
 
-                });
-            });
-        </script>
+<a href='/tags/golang' class="muted-link">
+  <span class="Label Label--gray">golang</span>
+</a>
 
 
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2019-02-01. Published at: 2019-02-01.">
+        
+          Published: 2019-02-01
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    
 
 <blockquote>
 <p><code>思来想去，决定总结一下垃圾回收机制。引用计数与我结缘最早，也比较简单、基础，遂决定从引用计数入手。</code></p>
@@ -417,41 +112,33 @@
 <p>对象在创建时保存一个自身被引用的计数，初始值为1。每次被新的变量引用，该值加1。相反，则减去1。当该值等于0时，占用空间被系统回收。</p>
 
 <h6 id="什么是对象呢">什么是对象呢？</h6>
-
-<pre><code class="language-Go">var neojos int64 = 32
-var ptrNeojos *int64 = &amp;neojos
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">var</span> <span class="nx">neojos</span> <span class="kt">int64</span> <span class="p">=</span> <span class="mi">32</span>
+<span class="kd">var</span> <span class="nx">ptrNeojos</span> <span class="o">*</span><span class="kt">int64</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">neojos</span></code></pre></div>
 <p>如上所示，我们创建了一个<code>int64</code>类型的<code>object</code>，命名为<code>neojos</code>。程序中对该<code>object</code>的操作都是通过使用<code>neojos</code>来实现的。而<code>ptrNeojos</code>其实又创建了一个<code>*int64</code>类型的<code>object</code>，但它的值保存的是<code>neojos</code>的地址。</p>
 
 <p>对于<code>ptrNeojos</code>来说，它的生命周期跟普通变量的生命周期没有区别。唯一区别的是，当它生命周期结束后，<code>ptrNeojos</code>会被垃圾回收，而底层指向的<code>object</code>却不会。</p>
 
 <h6 id="如何计数呢">如何计数呢？</h6>
+<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">Object</span> <span class="o">*</span> <span class="n">obj1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="p">();</span> <span class="c1">// RefCount(obj1) starts at 1
+</span><span class="c1"></span><span class="n">Object</span> <span class="o">*</span> <span class="n">obj2</span> <span class="o">=</span> <span class="n">obj1</span><span class="p">;</span>         <span class="c1">// RefCount(obj1) incremented to 2 as new reference is added
+</span><span class="c1"></span><span class="n">Object</span> <span class="o">*</span> <span class="n">obj3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="p">();</span> 
 
-<pre><code class="language-c++">Object * obj1 = new Object(); // RefCount(obj1) starts at 1
-Object * obj2 = obj1;         // RefCount(obj1) incremented to 2 as new reference is added
-Object * obj3 = new Object(); 
-
-obj2-&gt;SomeMethod();
-obj2 = NULL;                  // RefCount(obj1) decremented to 1 as ref goes away
-obj1 = obj3;                  // RefCount(obj1) decremented to 0 and can be collected
-</code></pre>
-
+<span class="n">obj2</span><span class="o">-&gt;</span><span class="n">SomeMethod</span><span class="p">();</span>
+<span class="n">obj2</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>                  <span class="c1">// RefCount(obj1) decremented to 1 as ref goes away
+</span><span class="c1"></span><span class="n">obj1</span> <span class="o">=</span> <span class="n">obj3</span><span class="p">;</span>                  <span class="c1">// RefCount(obj1) decremented to 0 and can be collected
+</span></code></pre></div>
 <p><code>obj1</code>指向了一个匿名对象，为了方便，我们叫<code>anonymousObj</code>。上述代码展示了<code>anonymousObj</code>从创建到被垃圾回收的整个过程。<strong>垃圾回收对象的内存空间</strong>，上述过程中<code>obj1</code>对象的地址不会发生改变，只是底层引用的对象发生了变化。</p>
 
 <p>下面的例子，用于测试<code>ptrName</code>代表的对象在赋值过程中不会发生变化。</p>
+<div class="highlight"><pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">func</span> <span class="nf">TestCase2</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">name</span> <span class="kt">int64</span> <span class="p">=</span> <span class="mi">32</span>
 
-<pre><code class="language-Go">func TestCase2(t *testing.T) {
-	var name int64 = 32
-
-	var ptrName *int64 = &amp;name
-	t.Log(&amp;ptrName)		//0xc42000e078
-
-	ptrName = nil
-	t.Log(&amp;ptrName)		//0xc42000e078
-}
-</code></pre>
-
+	<span class="kd">var</span> <span class="nx">ptrName</span> <span class="o">*</span><span class="kt">int64</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">name</span>
+	<span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">ptrName</span><span class="p">)</span>		<span class="c1">//0xc42000e078
+</span><span class="c1"></span>
+	<span class="nx">ptrName</span> <span class="p">=</span> <span class="kc">nil</span>
+	<span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">ptrName</span><span class="p">)</span>		<span class="c1">//0xc42000e078
+</span><span class="c1"></span><span class="p">}</span></code></pre></div>
 <h2 id="如何实现">如何实现</h2>
 
 <p>基于不同的语言会有不同的实现方式，但思路是相通的。</p>
@@ -463,68 +150,62 @@ obj1 = obj3;                  // RefCount(obj1) decremented to 0 and can be coll
 <p><img src="https://msdnshared.blob.core.windows.net/media/TNBlogsFS/BlogFileStorage/blogs_msdn/abhinaba/WindowsLiveWriter/BackToBasicsReferenceCountingGarbageColl_D20A/image_2.png" alt="counter herader" /></p>
 
 <p>如下代码，申请地址时，将引用计数初始化为1。同时，返回<code>ActualData</code>的指针地址。后续的引用计数更新，释放对象空间都通过判断<code>Header</code>来处理。</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="c1">//Header结构
+</span><span class="c1"></span><span class="k">struct</span> <span class="n">MemHeader</span>
+<span class="p">{</span>
+    <span class="n">UINT32</span> <span class="n">refCount</span><span class="p">;</span>
+<span class="p">};</span>
 
-<pre><code class="language-c">//Header结构
-struct MemHeader
-{
-    UINT32 refCount;
-};
+<span class="c1">// cb is the number of bytes to be allocated
+</span><span class="c1"></span><span class="n">PVOID</span> <span class="nf">GC_Alloc</span><span class="p">(</span><span class="n">size_t</span> <span class="n">cb</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// allocate MemHeader + cb but cast it to MemHeader
+</span><span class="c1"></span>    <span class="n">MemHeader</span><span class="o">*</span> <span class="n">pHdr</span> <span class="o">=</span> <span class="p">(</span><span class="n">MemHeader</span><span class="o">*</span><span class="p">)</span><span class="n">PlatformAlloc</span><span class="p">(</span><span class="n">MEMHEADERSIZE</span> <span class="o">+</span> <span class="n">cb</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pHdr</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
 
-// cb is the number of bytes to be allocated
-PVOID GC_Alloc(size_t cb)
-{
-    // allocate MemHeader + cb but cast it to MemHeader
-    MemHeader* pHdr = (MemHeader*)PlatformAlloc(MEMHEADERSIZE + cb);
-    if (pHdr == NULL)
-        return NULL;
+    <span class="c1">// set the initial refCount
+</span><span class="c1"></span>    <span class="n">pHdr</span><span class="o">-&gt;</span><span class="n">refCount</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 
-    // set the initial refCount
-    pHdr-&gt;refCount = 1;
+    <span class="c1">// increment the pointer by the size of MemHeader 
+</span><span class="c1"></span>    <span class="c1">// and make it point to the start of the actual data
+</span><span class="c1"></span>    <span class="o">++</span><span class="n">pHdr</span><span class="p">;</span>
 
-    // increment the pointer by the size of MemHeader 
-    // and make it point to the start of the actual data
-    ++pHdr;
+    <span class="k">return</span> <span class="p">(</span><span class="n">PVOID</span><span class="p">)</span><span class="n">pHdr</span><span class="p">;</span>
+<span class="p">}</span>
 
-    return (PVOID)pHdr;
-}
-
-//访问Header头
-inline MemHeader * GetHeader(PVOID pMem)
-{
-    return ((MemHeader*)pMem) - 1;
-}
-</code></pre>
-
+<span class="c1">//访问Header头
+</span><span class="c1"></span><span class="kr">inline</span> <span class="n">MemHeader</span> <span class="o">*</span> <span class="nf">GetHeader</span><span class="p">(</span><span class="n">PVOID</span> <span class="n">pMem</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">MemHeader</span><span class="o">*</span><span class="p">)</span><span class="n">pMem</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
 <h6 id="基类实现">基类实现</h6>
 
 <p>对象可以意识到引用计数机制的存在，明确的增加或减少引用计数。这种情况适用于：调用者手动释放空间的场合。那么，所有对象需要继承一个通用的基类，来实现这部分计数逻辑。</p>
-
-<pre><code class="language-c">class ReferenceCount
-{
-    int count;
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="n">class</span> <span class="n">ReferenceCount</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">count</span><span class="p">;</span>
  
-    ReferenceCount()
-    {
-        count = 1; //start at 1 as creation implies at least once reference is being made
-    }
+    <span class="n">ReferenceCount</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">//start at 1 as creation implies at least once reference is being made
+</span><span class="c1"></span>    <span class="p">}</span>
  
-    void increment()
-    {
-        count++;
-    }
+    <span class="kt">void</span> <span class="n">increment</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
  
-    void decrement()
-    {
-        count--;
-        if( count == 0 )
-            delete this;
-    }
-};
+    <span class="kt">void</span> <span class="n">decrement</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">count</span><span class="o">--</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span>
+            <span class="n">delete</span> <span class="n">this</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
  
-//any reference counted object simply derives from the above type
-class MyType : public ReferenceCount { ... }
-</code></pre>
-
+<span class="c1">//any reference counted object simply derives from the above type
+</span><span class="c1"></span><span class="n">class</span> <span class="nl">MyType</span> <span class="p">:</span> <span class="n">public</span> <span class="n">ReferenceCount</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span></code></pre></div>
 <h2 id="对象引用关系">对象引用关系</h2>
 
 <p>对象与对象之间存在相互调用，当其中一个对象的引用计数减为0时，该对象“引用链”上其他对象的引用计数都需要被更新。<code>GC</code>如何执行清理的呢？</p>
@@ -532,21 +213,18 @@ class MyType : public ReferenceCount { ... }
 <p><img src="https://msdnshared.blob.core.windows.net/media/TNBlogsFS/BlogFileStorage/blogs_msdn/abhinaba/WindowsLiveWriter/BackToBasicsReferenceCountingGarbageColl_D20A/image_4.png" alt="relation" /></p>
 
 <p>当<code>object1</code>释放<code>object3</code>的引用时，<code>object3</code>和<code>object5</code>的引用计数都需要被更新，而这是一个递归检查、更新的过程。</p>
-
-<pre><code class="language-c">VOID GC_ReleaseRef(PVOID pMem)
-{
-    if (pMem == NULL) return;
-    MemHeader *pHdr = GetHeader(pMem);
-    --(pHdr-&gt;refCount);
-    if (pHdr-&gt;refCount == 0)
-    {
-        foreach(PVOID pChild in Get_Child(pHdr)) 
-            GC_ReleaseRef(pChild);
-        PlatformFree(pHdr);
-    }
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="n">VOID</span> <span class="nf">GC_ReleaseRef</span><span class="p">(</span><span class="n">PVOID</span> <span class="n">pMem</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pMem</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="n">MemHeader</span> <span class="o">*</span><span class="n">pHdr</span> <span class="o">=</span> <span class="n">GetHeader</span><span class="p">(</span><span class="n">pMem</span><span class="p">);</span>
+    <span class="o">--</span><span class="p">(</span><span class="n">pHdr</span><span class="o">-&gt;</span><span class="n">refCount</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pHdr</span><span class="o">-&gt;</span><span class="n">refCount</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">foreach</span><span class="p">(</span><span class="n">PVOID</span> <span class="n">pChild</span> <span class="n">in</span> <span class="n">Get_Child</span><span class="p">(</span><span class="n">pHdr</span><span class="p">))</span> 
+            <span class="n">GC_ReleaseRef</span><span class="p">(</span><span class="n">pChild</span><span class="p">);</span>
+        <span class="n">PlatformFree</span><span class="p">(</span><span class="n">pHdr</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
 <h2 id="gc扫描">GC扫描</h2>
 
 <p>除了自动回收垃圾外，<code>GC</code>的扫描是从哪里开始的？拿<code>Java</code>来解释，<code>GC roots</code>就是<code>Java</code>中的<code>ClassLoader</code>。</p>
@@ -581,45 +259,100 @@ class MyType : public ReferenceCount { ... }
 <li><a href="https://blogs.msdn.microsoft.com/abhinaba/2009/01/27/back-to-basics-reference-counting-garbage-collection/"><code>Back To Basics: Reference Counting Garbage Collection</code></a></li>
 </ol>
 
+  </section>
 
-  <footer>
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
   
-<nav class="post-nav">
-  <span class="nav-prev">&larr; <a href="/blog/2019/19-01-26-grpc%E5%85%A5%E9%97%A8/">gRPC入门</a></span>
-  <span class="nav-next"><a href="/blog/2019/19-02-08-%E6%96%B0%E5%B9%B4%E5%BD%A9%E8%9B%8B%E4%B9%8B%E4%B8%AD%E5%A4%A7%E5%A5%96/">新年彩蛋之中大奖</a> &rarr;</span>
-</nav>
-
-
-
-
-
-<script src="//yihui.name/js/math-code.js"></script>
-<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-<script async src="//yihui.name/js/center-img.js"></script>
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>垃圾回收之引用计数</b><nav id="TableOfContents"><ul>
+<li><a href="#reference-counting"><code>Reference Counting</code></a>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#什么是对象呢">什么是对象呢？</a></li>
+<li><a href="#如何计数呢">如何计数呢？</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#如何实现">如何实现</a>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#存储结构和申请空间">存储结构和申请空间</a></li>
+<li><a href="#基类实现">基类实现</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#对象引用关系">对象引用关系</a></li>
+<li><a href="#gc扫描">GC扫描</a>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#classloader">ClassLoader</a></li>
+<li><a href="#gc-roots"><code>GC roots</code></a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav></div>
   
 
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/highlight.min.js"></script>
-
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/r.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/yaml.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/tex.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/go.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
-
-
-
   
-  <hr>
-  <div class="copyright">&copy; <a href="http://neojos.com">DDF</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+    <div>
+      
+    </div>
   
-  </footer>
-  </article>
-  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy;Qiushi Pan 2018-2019 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+    
   </body>
 </html>
-

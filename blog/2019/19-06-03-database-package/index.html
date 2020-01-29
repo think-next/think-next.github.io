@@ -1,430 +1,120 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-12345678-0', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>database package - 渐行渐远</title>
-    <meta property="og:title" content="database package - 渐行渐远">
-    
-
-    
+    <title>
       
+  database package &ndash; 渐行渐远
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="清除无效连接 在database库下清除过期连接时，使用了如下的代码逻辑。其中freeConn是空闲连接池，d是连接可被重复使用的最长时间，n|Hugo-Primer theme&#39;s example site">
     
 
+    <meta name="apple-mobile-web-app-title" content="渐行渐远">
+    
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="database package | 渐行渐远">
+    <meta name="twitter:description" content="清除无效连接 在database库下清除过期连接时，使用了如下的代码逻辑。其中freeConn是空闲连接池，d是连接可被重复使用的最长时间，n|Hugo-Primer theme&#39;s example site">
+    <meta name="twitter:image" content="https://gohugo.io/twitter-card.png">
     
 
-    
-    
 
-
-<link href='//cdn.bootcss.com/highlight.js/9.14.1/styles/googlecode.min.css' rel='stylesheet' type='text/css' />
-
-
-
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
   </head>
 
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://gohugo.io/">
+    渐行渐远
+  </a>
+
   
-  <body class="blog">
-    <header class="masthead">
-      <h1 class="headimg">
-    
-    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
-</h1>
-
-
-
-      <nav class="menu">
-        <input id="menu-check" type="checkbox" />
-        <label id="menu-label" for="menu-check" class="unselectable">
-          <span class="icon close-icon">✕</span>
-          <span class="icon open-icon">☰</span>
-          <span class="text">Menu</span>
-        </label>
-        <ul>
-        
-        
-        <li><a href="/blog/">Blog</a></li>
-        
-        <li><a href="/life/">Life</a></li>
-        
-        <li><a href="/categories/">Categories</a></li>
-        
-        <li><a href="/tags/">Tags</a></li>
-        
-        <li><a href="/about/">About</a></li>
-        
-        </ul>
-      </nav>
-
-      
-      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
-        
-
-  <div class="Box Box--blue p-2 mb-3 mt-5">
-    <a href="/tags/" class="link-gray-dark">
-      <h4>Tags</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/2018" class="link-gray text-emphasized css-truncate-target"><span class="">2018th</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/dailylife" class="link-gray text-emphasized css-truncate-target"><span class="">Daily life</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mq" class="link-gray text-emphasized css-truncate-target"><span class="">M q</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">My s q l</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/cache" class="link-gray text-emphasized css-truncate-target"><span class="">Cache</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/design-pattern" class="link-gray text-emphasized css-truncate-target"><span class="">Design pattern</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/docker" class="link-gray text-emphasized css-truncate-target"><span class="">Docker</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/git" class="link-gray text-emphasized css-truncate-target"><span class="">Git</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/golang" class="link-gray text-emphasized css-truncate-target"><span class="">Golang</span></a>
-      <span class="text-right Counter">34</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/http" class="link-gray text-emphasized css-truncate-target"><span class="">Http</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/js" class="link-gray text-emphasized css-truncate-target"><span class="">Js</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/linux" class="link-gray text-emphasized css-truncate-target"><span class="">Linux</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mongo" class="link-gray text-emphasized css-truncate-target"><span class="">Mongo</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">Mysql</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/net" class="link-gray text-emphasized css-truncate-target"><span class="">Net</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/nginx" class="link-gray text-emphasized css-truncate-target"><span class="">Nginx</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/npm" class="link-gray text-emphasized css-truncate-target"><span class="">Npm</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/pay" class="link-gray text-emphasized css-truncate-target"><span class="">Pay</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/php" class="link-gray text-emphasized css-truncate-target"><span class="">Php</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protobufs" class="link-gray text-emphasized css-truncate-target"><span class="">Protobufs</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protocol" class="link-gray text-emphasized css-truncate-target"><span class="">Protocol</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tcp/ip" class="link-gray text-emphasized css-truncate-target"><span class="">Tcp/ip</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tools" class="link-gray text-emphasized css-truncate-target"><span class="">Tools</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/transaction" class="link-gray text-emphasized css-truncate-target"><span class="">Transaction</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/translate" class="link-gray text-emphasized css-truncate-target"><span class="">Translate</span></a>
-      <span class="text-right Counter">14</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/%e7%bb%9f%e8%ae%a1" class="link-gray text-emphasized css-truncate-target"><span class="">统计</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
-
-
-
-  <div class="Box Box--blue p-2 mb-3">
-    <a href="/categories/" class="link-gray-dark">
-      <h4>Categories</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-01" class="link-gray text-emphasized css-truncate-target"><span class="">2018 01</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-02" class="link-gray text-emphasized css-truncate-target"><span class="">2018 02</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-03" class="link-gray text-emphasized css-truncate-target"><span class="">2018 03</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-04" class="link-gray text-emphasized css-truncate-target"><span class="">2018 04</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-05" class="link-gray text-emphasized css-truncate-target"><span class="">2018 05</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-06" class="link-gray text-emphasized css-truncate-target"><span class="">2018 06</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-07" class="link-gray text-emphasized css-truncate-target"><span class="">2018 07</span></a>
-      <span class="text-right Counter">7</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-08" class="link-gray text-emphasized css-truncate-target"><span class="">2018 08</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-09" class="link-gray text-emphasized css-truncate-target"><span class="">2018 09</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-10" class="link-gray text-emphasized css-truncate-target"><span class="">2018 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-11" class="link-gray text-emphasized css-truncate-target"><span class="">2018 11</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-12" class="link-gray text-emphasized css-truncate-target"><span class="">2018 12</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-01" class="link-gray text-emphasized css-truncate-target"><span class="">2019 01</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-02" class="link-gray text-emphasized css-truncate-target"><span class="">2019 02</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-03" class="link-gray text-emphasized css-truncate-target"><span class="">2019 03</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-04" class="link-gray text-emphasized css-truncate-target"><span class="">2019 04</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-05" class="link-gray text-emphasized css-truncate-target"><span class="">2019 05</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-06" class="link-gray text-emphasized css-truncate-target"><span class="">2019 06</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-07" class="link-gray text-emphasized css-truncate-target"><span class="">2019 07</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-08" class="link-gray text-emphasized css-truncate-target"><span class="">2019 08</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-09" class="link-gray text-emphasized css-truncate-target"><span class="">2019 09</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-10" class="link-gray text-emphasized css-truncate-target"><span class="">2019 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-11" class="link-gray text-emphasized css-truncate-target"><span class="">2019 11</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-12" class="link-gray text-emphasized css-truncate-target"><span class="">2019 12</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-17" class="link-gray text-emphasized css-truncate-target"><span class="">2019 17</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/summarize" class="link-gray text-emphasized css-truncate-target"><span class="">Summarize</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
+  
+</nav>
 
       </div>
 
-    </header>
-
-    <article class="main">
-      <header class="title">
-      <h1>database package</h1>
-
-
-
-
-    
-    
-    <section class="post-meta">
-        <span class="post-author">付辉
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
         
-            
-            
-             /  2019-06-03
-            
-        </span>
-        
-        <a href="/tags/golang">golang</a>
-        
-    </section>
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">database package</div>
+  </div>
+  <div class="Subhead-description">
     
 
 
 
-<hr>
-      </header>
 
-        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript">
-            var height = parseInt($("#bar").css("top"))
-            $(function () {
-                $(window).scroll(function () {
-                    var currentH = $(document).scrollTop();
-                    if (currentH > height) {
-                        $("#bar").css("top", (currentH) + 'px');
-                    } else {
-                        $('#bar').css('top', height + 'px');
-                    }
-
-                });
-            });
-        </script>
+<a href='/tags/golang' class="muted-link">
+  <span class="Label Label--gray">golang</span>
+</a>
 
 
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2019-06-03. Published at: 2019-06-03.">
+        
+          Published: 2019-06-03
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    
 
 <h2 id="清除无效连接">清除无效连接</h2>
 
 <p>在database库下清除过期连接时，使用了如下的代码逻辑。其中freeConn是空闲连接池，d是连接可被重复使用的最长时间，nowFunc返回的是当前时间。最新生成的连接在freeConn的末尾，而清除的过程则是使用最新的、次新的连接依次替换最早过期的、次早过期的连接。</p>
 
 <p>在for循环中直接使用len来获取总计数，在循环体内部将freeConn末尾的值替换首部的值，并将freeConn的len长度减去1。最后还做了<code>i—</code>操作，重复校验了一次。</p>
-
-<pre><code class="language-go">expiredSince := nowFunc().Add(-d)
-var closing []*driverConn
-for i := 0; i &lt; len(db.freeConn); i++ {
-	c := db.freeConn[i]
-	if c.createdAt.Before(expiredSince) {
-		closing = append(closing, c)
-		last := len(db.freeConn) - 1
-		db.freeConn[i] = db.freeConn[last]
-		db.freeConn[last] = nil
-		db.freeConn = db.freeConn[:last]
-		i--
-	}
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">expiredSince</span> <span class="o">:=</span> <span class="nf">nowFunc</span><span class="p">().</span><span class="nf">Add</span><span class="p">(</span><span class="o">-</span><span class="nx">d</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">closing</span> <span class="p">[]</span><span class="o">*</span><span class="nx">driverConn</span>
+<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">);</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+	<span class="nx">c</span> <span class="o">:=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+	<span class="k">if</span> <span class="nx">c</span><span class="p">.</span><span class="nx">createdAt</span><span class="p">.</span><span class="nf">Before</span><span class="p">(</span><span class="nx">expiredSince</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">closing</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">closing</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span>
+		<span class="nx">last</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+		<span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">[</span><span class="nx">last</span><span class="p">]</span>
+		<span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">[</span><span class="nx">last</span><span class="p">]</span> <span class="p">=</span> <span class="kc">nil</span>
+		<span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span> <span class="p">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">[:</span><span class="nx">last</span><span class="p">]</span>
+		<span class="nx">i</span><span class="o">--</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></div>
 <h3 id="参考点">参考点</h3>
 
 <p>slice中首部和尾部数据的交换过程，以及每次通过<code>i--</code>达到的重复校验的思路。</p>
@@ -432,29 +122,26 @@ for i := 0; i &lt; len(db.freeConn); i++ {
 <h2 id="间隔执行">间隔执行</h2>
 
 <p>清除无效连接的工作是由一个goroutine在后台完成的，下面是截取的部分代码。for循环内部是处理连接的具体实现。每次清除操作完成后，通过Reset来重置Timer。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">DB</span><span class="p">)</span> <span class="nf">connectionCleaner</span><span class="p">(</span><span class="nx">d</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">const</span> <span class="nx">minInterval</span> <span class="p">=</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span>
 
-<pre><code class="language-go">func (db *DB) connectionCleaner(d time.Duration) {
-	const minInterval = time.Second
+	<span class="k">if</span> <span class="nx">d</span> <span class="p">&lt;</span> <span class="nx">minInterval</span> <span class="p">{</span>
+		<span class="nx">d</span> <span class="p">=</span> <span class="nx">minInterval</span>
+	<span class="p">}</span>
+	<span class="nx">t</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">NewTimer</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span>
 
-	if d &lt; minInterval {
-		d = minInterval
-	}
-	t := time.NewTimer(d)
+	<span class="k">for</span> <span class="p">{</span>
+		<span class="k">select</span> <span class="p">{</span>
+		<span class="k">case</span> <span class="o">&lt;-</span><span class="nx">t</span><span class="p">.</span><span class="nx">C</span><span class="p">:</span>
+		<span class="k">case</span> <span class="o">&lt;-</span><span class="nx">db</span><span class="p">.</span><span class="nx">cleanerCh</span><span class="p">:</span> <span class="c1">// maxLifetime was changed or db was closed.
+</span><span class="c1"></span>		<span class="p">}</span>
 
-	for {
-		select {
-		case &lt;-t.C:
-		case &lt;-db.cleanerCh: // maxLifetime was changed or db was closed.
-		}
-
-		if d &lt; minInterval {
-			d = minInterval
-		}
-		t.Reset(d)
-	}
-}
-</code></pre>
-
+		<span class="k">if</span> <span class="nx">d</span> <span class="p">&lt;</span> <span class="nx">minInterval</span> <span class="p">{</span>
+			<span class="nx">d</span> <span class="p">=</span> <span class="nx">minInterval</span>
+		<span class="p">}</span>
+		<span class="nx">t</span><span class="p">.</span><span class="nf">Reset</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></div>
 <h3 id="参考点-1">参考点</h3>
 
 <p>学习NewTimer函数的使用，它在声明后仅仅执行一次。通过Reset来重新使他生效。这样可以忽略操作执行的具体时间，每次都在上次操作完成后，间隔固定时间，再执行下一次操作。</p>
@@ -464,64 +151,85 @@ for i := 0; i &lt; len(db.freeConn); i++ {
 <h2 id="获取连接">获取连接</h2>
 
 <p>从freeConn中获取一个缓存的连接，拿到连接之后并将它从freeConn中移除。同时，校验连接是否已经超过最大连接使用时间。</p>
-
-<pre><code class="language-go">if strategy == cachedOrNewConn &amp;&amp; numFree &gt; 0 {
-	conn := db.freeConn[0]
-	copy(db.freeConn, db.freeConn[1:])
-	db.freeConn = db.freeConn[:numFree-1]
-	conn.inUse = true
-	db.mu.Unlock()
-	if conn.expired(lifetime) {
-		conn.Close()
-		return nil, driver.ErrBadConn
-	}
-	return conn, nil
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">if</span> <span class="nx">strategy</span> <span class="o">==</span> <span class="nx">cachedOrNewConn</span> <span class="o">&amp;&amp;</span> <span class="nx">numFree</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+	<span class="nx">conn</span> <span class="o">:=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="nb">copy</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">,</span> <span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+	<span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span> <span class="p">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">[:</span><span class="nx">numFree</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+	<span class="nx">conn</span><span class="p">.</span><span class="nx">inUse</span> <span class="p">=</span> <span class="kc">true</span>
+	<span class="nx">db</span><span class="p">.</span><span class="nx">mu</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span>
+	<span class="k">if</span> <span class="nx">conn</span><span class="p">.</span><span class="nf">expired</span><span class="p">(</span><span class="nx">lifetime</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">conn</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">driver</span><span class="p">.</span><span class="nx">ErrBadConn</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">conn</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span></code></pre></div>
 <h3 id="参考点-2">参考点</h3>
 
 <p>使用copy对slice的第一个元素进行移除。同时，通过重新赋值来修改slice的len属性。</p>
 
+  </section>
 
-  <footer>
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
   
-<nav class="post-nav">
-  <span class="nav-prev">&larr; <a href="/blog/2019/19-06-11-mongo%E4%B8%ADobjectid/">mongo中ObjectId</a></span>
-  <span class="nav-next"><a href="/blog/2019/19-06-06-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%BC%80%E6%94%BE%E5%85%B3%E9%97%AD/">里氏替换&amp;开放关闭</a> &rarr;</span>
-</nav>
-
-
-
-
-
-<script src="//yihui.name/js/math-code.js"></script>
-<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-<script async src="//yihui.name/js/center-img.js"></script>
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>database package</b><nav id="TableOfContents"><ul>
+<li><a href="#清除无效连接">清除无效连接</a>
+<ul>
+<li><a href="#参考点">参考点</a></li>
+</ul></li>
+<li><a href="#间隔执行">间隔执行</a>
+<ul>
+<li><a href="#参考点-1">参考点</a></li>
+</ul></li>
+<li><a href="#获取连接">获取连接</a>
+<ul>
+<li><a href="#参考点-2">参考点</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav></div>
   
 
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/highlight.min.js"></script>
-
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/r.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/yaml.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/tex.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/go.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
-
-
-
   
-  <hr>
-  <div class="copyright">&copy; <a href="http://neojos.com">DDF</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+    <div>
+      
+    </div>
   
-  </footer>
-  </article>
-  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy;Qiushi Pan 2018-2019 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+    
   </body>
 </html>
-

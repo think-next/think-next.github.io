@@ -1,28 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>docker on 渐行渐远</title>
-    <link>/tags/docker/</link>
-    <description>Recent content in docker on 渐行渐远</description>
+    <title>Docker on 渐行渐远</title>
+    <link>https://gohugo.io/tags/docker/</link>
+    <description>Recent content in Docker on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
+    <copyright>&amp;copy;Qiushi Pan 2018-2019</copyright>
     <lastBuildDate>Sat, 11 May 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://gohugo.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>mongo EOF（二）</title>
-      <link>/blog/2019/19-05-11-mongo-eof%E4%BA%8C/</link>
+      <link>https://gohugo.io/blog/2019/19-05-11-mongo-eof%E4%BA%8C/</link>
       <pubDate>Sat, 11 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/19-05-11-mongo-eof%E4%BA%8C/</guid>
-      <description>任何事情的成功都需要掐准时间
- 上一节mongo EOF中，关于容器的配置，只是粗略的使用了Docker-Compose-MongoDB-Replica-Set项目提供好的docker-compose.yml文件。在使用过程中，我发现这个文件本身一些不如意的地方。首先，services中的creator服务，entrypoint指令太长了，不美；其次，所有的service都没有给容器外部暴露端口，导致外部无法访问容器；再次，直接使用mongo repliSet的连接串进行访问，无法正常访问mongo服务。
-在上一篇文章的基础上，这篇文章对docker-compse.yml做了一些调整，并且也包含了docker使用的入门介绍。更新后的docker-compose.yml请访问githubsi。
-depends_on  However, for startup Compose does not wait until a container is “ready” (whatever that means for your particular application) - only until it’s running. There’s a good reason for this.
- 在creator service中使用了该指令， 但是，实际中creator不会等到mongo1、mongo2、mongo3容器ready后再启动，而是等到它们启动就开始启动。这也是我在setup脚本中执行sleep操作的原因。
-creator: build: context: . dockerfile: dockerfile entrypoint: [&amp;quot;/data/conf/setup.sh&amp;quot;] depends_on: - mongo1 - mongo2 - mongo3  entrypoint  Entrypoint sets the command and parameters that will be executed first when a container is run.</description>
+      <guid>https://gohugo.io/blog/2019/19-05-11-mongo-eof%E4%BA%8C/</guid>
+      <description>任何事情的成功都需要掐准时间 上一节mongo EOF中，关于容器的配置，只是粗略的使用了Docker-Compose-MongoDB-Repl</description>
     </item>
     
   </channel>

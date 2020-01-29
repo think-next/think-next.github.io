@@ -1,408 +1,101 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-12345678-0', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>Net Transport - 渐行渐远</title>
-    <meta property="og:title" content="Net Transport - 渐行渐远">
-    
-
-    
+    <title>
       
+  Net Transport &ndash; 渐行渐远
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="在调用第三方请求时，正确使用Client也不是一件非常容易的事。 下面是截取的一段描述，建议Client或Transport在整个服务期间最好|Hugo-Primer theme&#39;s example site">
     
 
+    <meta name="apple-mobile-web-app-title" content="渐行渐远">
+    
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="Net Transport | 渐行渐远">
+    <meta name="twitter:description" content="在调用第三方请求时，正确使用Client也不是一件非常容易的事。 下面是截取的一段描述，建议Client或Transport在整个服务期间最好|Hugo-Primer theme&#39;s example site">
+    <meta name="twitter:image" content="https://gohugo.io/twitter-card.png">
     
 
-    
-    
 
-
-<link href='//cdn.bootcss.com/highlight.js/9.14.1/styles/googlecode.min.css' rel='stylesheet' type='text/css' />
-
-
-
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
   </head>
 
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://gohugo.io/">
+    渐行渐远
+  </a>
+
   
-  <body class="blog">
-    <header class="masthead">
-      <h1 class="headimg">
-    
-    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
-</h1>
-
-
-
-      <nav class="menu">
-        <input id="menu-check" type="checkbox" />
-        <label id="menu-label" for="menu-check" class="unselectable">
-          <span class="icon close-icon">✕</span>
-          <span class="icon open-icon">☰</span>
-          <span class="text">Menu</span>
-        </label>
-        <ul>
-        
-        
-        <li><a href="/blog/">Blog</a></li>
-        
-        <li><a href="/life/">Life</a></li>
-        
-        <li><a href="/categories/">Categories</a></li>
-        
-        <li><a href="/tags/">Tags</a></li>
-        
-        <li><a href="/about/">About</a></li>
-        
-        </ul>
-      </nav>
-
-      
-      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
-        
-
-  <div class="Box Box--blue p-2 mb-3 mt-5">
-    <a href="/tags/" class="link-gray-dark">
-      <h4>Tags</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/2018" class="link-gray text-emphasized css-truncate-target"><span class="">2018th</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/dailylife" class="link-gray text-emphasized css-truncate-target"><span class="">Daily life</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mq" class="link-gray text-emphasized css-truncate-target"><span class="">M q</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">My s q l</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/cache" class="link-gray text-emphasized css-truncate-target"><span class="">Cache</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/design-pattern" class="link-gray text-emphasized css-truncate-target"><span class="">Design pattern</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/docker" class="link-gray text-emphasized css-truncate-target"><span class="">Docker</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/git" class="link-gray text-emphasized css-truncate-target"><span class="">Git</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/golang" class="link-gray text-emphasized css-truncate-target"><span class="">Golang</span></a>
-      <span class="text-right Counter">34</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/http" class="link-gray text-emphasized css-truncate-target"><span class="">Http</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/js" class="link-gray text-emphasized css-truncate-target"><span class="">Js</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/linux" class="link-gray text-emphasized css-truncate-target"><span class="">Linux</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mongo" class="link-gray text-emphasized css-truncate-target"><span class="">Mongo</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">Mysql</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/net" class="link-gray text-emphasized css-truncate-target"><span class="">Net</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/nginx" class="link-gray text-emphasized css-truncate-target"><span class="">Nginx</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/npm" class="link-gray text-emphasized css-truncate-target"><span class="">Npm</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/pay" class="link-gray text-emphasized css-truncate-target"><span class="">Pay</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/php" class="link-gray text-emphasized css-truncate-target"><span class="">Php</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protobufs" class="link-gray text-emphasized css-truncate-target"><span class="">Protobufs</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protocol" class="link-gray text-emphasized css-truncate-target"><span class="">Protocol</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tcp/ip" class="link-gray text-emphasized css-truncate-target"><span class="">Tcp/ip</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tools" class="link-gray text-emphasized css-truncate-target"><span class="">Tools</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/transaction" class="link-gray text-emphasized css-truncate-target"><span class="">Transaction</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/translate" class="link-gray text-emphasized css-truncate-target"><span class="">Translate</span></a>
-      <span class="text-right Counter">14</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/%e7%bb%9f%e8%ae%a1" class="link-gray text-emphasized css-truncate-target"><span class="">统计</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
-
-
-
-  <div class="Box Box--blue p-2 mb-3">
-    <a href="/categories/" class="link-gray-dark">
-      <h4>Categories</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-01" class="link-gray text-emphasized css-truncate-target"><span class="">2018 01</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-02" class="link-gray text-emphasized css-truncate-target"><span class="">2018 02</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-03" class="link-gray text-emphasized css-truncate-target"><span class="">2018 03</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-04" class="link-gray text-emphasized css-truncate-target"><span class="">2018 04</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-05" class="link-gray text-emphasized css-truncate-target"><span class="">2018 05</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-06" class="link-gray text-emphasized css-truncate-target"><span class="">2018 06</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-07" class="link-gray text-emphasized css-truncate-target"><span class="">2018 07</span></a>
-      <span class="text-right Counter">7</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-08" class="link-gray text-emphasized css-truncate-target"><span class="">2018 08</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-09" class="link-gray text-emphasized css-truncate-target"><span class="">2018 09</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-10" class="link-gray text-emphasized css-truncate-target"><span class="">2018 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-11" class="link-gray text-emphasized css-truncate-target"><span class="">2018 11</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-12" class="link-gray text-emphasized css-truncate-target"><span class="">2018 12</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-01" class="link-gray text-emphasized css-truncate-target"><span class="">2019 01</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-02" class="link-gray text-emphasized css-truncate-target"><span class="">2019 02</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-03" class="link-gray text-emphasized css-truncate-target"><span class="">2019 03</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-04" class="link-gray text-emphasized css-truncate-target"><span class="">2019 04</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-05" class="link-gray text-emphasized css-truncate-target"><span class="">2019 05</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-06" class="link-gray text-emphasized css-truncate-target"><span class="">2019 06</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-07" class="link-gray text-emphasized css-truncate-target"><span class="">2019 07</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-08" class="link-gray text-emphasized css-truncate-target"><span class="">2019 08</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-09" class="link-gray text-emphasized css-truncate-target"><span class="">2019 09</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-10" class="link-gray text-emphasized css-truncate-target"><span class="">2019 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-11" class="link-gray text-emphasized css-truncate-target"><span class="">2019 11</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-12" class="link-gray text-emphasized css-truncate-target"><span class="">2019 12</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-17" class="link-gray text-emphasized css-truncate-target"><span class="">2019 17</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/summarize" class="link-gray text-emphasized css-truncate-target"><span class="">Summarize</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
+  
+</nav>
 
       </div>
 
-    </header>
-
-    <article class="main">
-      <header class="title">
-      <h1>Net Transport</h1>
-
-
-
-
-    
-    
-    <section class="post-meta">
-        <span class="post-author">付辉
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
         
-            
-            
-             /  2018-12-08
-            
-        </span>
-        
-        <a href="/tags/golang">golang</a>
-        
-    </section>
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Net Transport</div>
+  </div>
+  <div class="Subhead-description">
     
 
 
 
-<hr>
-      </header>
 
-        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript">
-            var height = parseInt($("#bar").css("top"))
-            $(function () {
-                $(window).scroll(function () {
-                    var currentH = $(document).scrollTop();
-                    if (currentH > height) {
-                        $("#bar").css("top", (currentH) + 'px');
-                    } else {
-                        $('#bar').css('top', height + 'px');
-                    }
-
-                });
-            });
-        </script>
+<a href='/tags/golang' class="muted-link">
+  <span class="Label Label--gray">golang</span>
+</a>
 
 
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2018-12-08. Published at: 2018-12-08.">
+        
+          Published: 2018-12-08
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    
 
 <p>在调用第三方请求时，正确使用<a href="https://godoc.org/net/http#Client"><code>Client</code></a>也不是一件非常容易的事。</p>
 
@@ -415,21 +108,18 @@
 <h2 id="dial"><code>Dial</code></h2>
 
 <p>关于<code>net</code>包的<a href="https://golang.org/src/net/dial.go?s=9799:9847#L306">Dial</a>方法，下面是文档是的例子：</p>
-
-<pre><code class="language-go">func TestDial(t *testing.T) {
-	conn, err := net.Dial(&quot;tcp&quot;, &quot;baidu.com:80&quot;)
-	if err != nil {
-		// handle error
-	}
-	fmt.Fprintf(conn, &quot;GET /ping HTTP/1.0\r\n\r\n&quot;)
-	status, err := bufio.NewReader(conn).ReadString('\n')
-	if err != nil {
-		t.Fatal(err)
-	}
-	t.Log(status)
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">TestDial</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">conn</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">net</span><span class="p">.</span><span class="nf">Dial</span><span class="p">(</span><span class="s">&#34;tcp&#34;</span><span class="p">,</span> <span class="s">&#34;baidu.com:80&#34;</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="c1">// handle error
+</span><span class="c1"></span>	<span class="p">}</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">conn</span><span class="p">,</span> <span class="s">&#34;GET /ping HTTP/1.0\r\n\r\n&#34;</span><span class="p">)</span>
+	<span class="nx">status</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">bufio</span><span class="p">.</span><span class="nf">NewReader</span><span class="p">(</span><span class="nx">conn</span><span class="p">).</span><span class="nf">ReadString</span><span class="p">(</span><span class="sc">&#39;\n&#39;</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="nx">status</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
 <p>与<code>Dial</code>相关的是类型<a href="https://golang.org/src/net/dial.go?s=652:3413#L16">Dialer</a> ，用来配置<code>Dial</code>的属性，包括<code>Timeout</code>、<code>KeepAlive</code>等。当<code>Dialer</code>的每个<code>field</code>都是零值时，等同于直接调用<code>Dial</code>方法。</p>
 
 <h2 id="transport"><code>Transport</code></h2>
@@ -437,32 +127,26 @@
 <p>类型<a href="https://golang.org/src/net/http/transport.go?s=3397:10477#L85">Transport</a>中包含<code>DialContext</code>，对它的注释如下：函数用来创建非加密的<code>TCP</code>连接，如果字段为<code>nil</code>，则使用<code>net</code>包的<code>Dial</code>方法。</p>
 
 <p>通过封装<code>dial</code>方法，我们可以手动<code>Debug</code>连接的创建过层。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">PrintLocalDial</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">network</span><span class="p">,</span> <span class="nx">addr</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">dial</span> <span class="o">:=</span> <span class="nx">net</span><span class="p">.</span><span class="nx">Dialer</span><span class="p">{</span>
+		<span class="nx">Timeout</span><span class="p">:</span>   <span class="mi">30</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">,</span>
+		<span class="nx">KeepAlive</span><span class="p">:</span> <span class="mi">5</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="nx">conn</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">dial</span><span class="p">.</span><span class="nf">Dial</span><span class="p">(</span><span class="nx">network</span><span class="p">,</span> <span class="nx">addr</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">conn</span><span class="p">,</span> <span class="nx">err</span>
+	<span class="p">}</span>
 
-<pre><code class="language-go">func PrintLocalDial(ctx context.Context, network, addr string) (net.Conn, error) {
-	dial := net.Dialer{
-		Timeout:   30 * time.Second,
-		KeepAlive: 5 * time.Second,
-	}
-	conn, err := dial.Dial(network, addr)
-	if err != nil {
-		return conn, err
-	}
-
-	fmt.Println(&quot;connect done.&quot;, conn.LocalAddr().String(), conn.RemoteAddr().String())
-	return conn, err
-}
-</code></pre>
-
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;connect done.&#34;</span><span class="p">,</span> <span class="nx">conn</span><span class="p">.</span><span class="nf">LocalAddr</span><span class="p">().</span><span class="nf">String</span><span class="p">(),</span> <span class="nx">conn</span><span class="p">.</span><span class="nf">RemoteAddr</span><span class="p">().</span><span class="nf">String</span><span class="p">())</span>
+	<span class="k">return</span> <span class="nx">conn</span><span class="p">,</span> <span class="nx">err</span>
+<span class="p">}</span></code></pre></div>
 <h2 id="roundtripper">RoundTripper</h2>
 
 <p>如下是官方的简要描述。<code>Transport</code>字段在<code>Client</code>中被声明为接口类型，而实现这个接口的是<code>Transport</code>类型（略显绕）。在<code>net</code>包内部也提供了默认的实现变量：<code>DefaultTransport</code>。</p>
-
-<pre><code class="language-go">// Transport specifies the mechanism by which individual
-// HTTP requests are made.
-// If nil, DefaultTransport is used.
-Transport RoundTripper
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// Transport specifies the mechanism by which individual
+</span><span class="c1">// HTTP requests are made.
+</span><span class="c1">// If nil, DefaultTransport is used.
+</span><span class="c1"></span><span class="nx">Transport</span> <span class="nx">RoundTripper</span></code></pre></div>
 <p>看一下<code>RoundTripper</code>这个接口，官方描述：</p>
 
 <blockquote>
@@ -495,30 +179,27 @@ Transport RoundTripper
 <h2 id="缓存-idle-连接">缓存<code>Idle</code>连接</h2>
 
 <p>首先了解缓存长链接的<code>Key</code>是什么，即用来唯一确定连接的<code>Key</code>。我们选来看看它如何从缓存池获取的空闲连接：</p>
-
-<pre><code class="language-go">//1. 获取的方法，截取其中一部分代码
-func (t *Transport) getIdleConn(cm connectMethod) (pconn *persistConn, idleSince time.Time) {
-	key := cm.key()
-	t.idleMu.Lock()
-	defer t.idleMu.Unlock()
-	for {
-		pconns, ok := t.idleConn[key]
-		if !ok {
-			return nil, time.Time{}
-		}
-		if len(pconns) == 1 {
-			pconn = pconns[0]
-			delete(t.idleConn, key)
-		} else {
-			// 2 or more cached connections; use the most
-			// recently used one at the end.
-			pconn = pconns[len(pconns)-1]
-			t.idleConn[key] = pconns[:len(pconns)-1]
-		}
-		t.idleLRU.remove(pconn)
-		//省略之后的代码......
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">//1. 获取的方法，截取其中一部分代码
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">Transport</span><span class="p">)</span> <span class="nf">getIdleConn</span><span class="p">(</span><span class="nx">cm</span> <span class="nx">connectMethod</span><span class="p">)</span> <span class="p">(</span><span class="nx">pconn</span> <span class="o">*</span><span class="nx">persistConn</span><span class="p">,</span> <span class="nx">idleSince</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">key</span> <span class="o">:=</span> <span class="nx">cm</span><span class="p">.</span><span class="nf">key</span><span class="p">()</span>
+	<span class="nx">t</span><span class="p">.</span><span class="nx">idleMu</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
+	<span class="k">defer</span> <span class="nx">t</span><span class="p">.</span><span class="nx">idleMu</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span>
+	<span class="k">for</span> <span class="p">{</span>
+		<span class="nx">pconns</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">idleConn</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
+		<span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">{}</span>
+		<span class="p">}</span>
+		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">pconns</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+			<span class="nx">pconn</span> <span class="p">=</span> <span class="nx">pconns</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+			<span class="nb">delete</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">idleConn</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+			<span class="c1">// 2 or more cached connections; use the most
+</span><span class="c1"></span>			<span class="c1">// recently used one at the end.
+</span><span class="c1"></span>			<span class="nx">pconn</span> <span class="p">=</span> <span class="nx">pconns</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">pconns</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+			<span class="nx">t</span><span class="p">.</span><span class="nx">idleConn</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">=</span> <span class="nx">pconns</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="nx">pconns</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+		<span class="p">}</span>
+		<span class="nx">t</span><span class="p">.</span><span class="nx">idleLRU</span><span class="p">.</span><span class="nf">remove</span><span class="p">(</span><span class="nx">pconn</span><span class="p">)</span>
+		<span class="o">//</span><span class="nx">省略之后的代码</span><span class="o">......</span></code></pre></div>
 <p>通过如下代码，可以确定<code>net</code>包通过当前请求的<code>proxy URL</code>、<code>Scheme</code>、<code>Addr</code>来缓存建立的连接。缓存的连接存储在一个<code>MAP</code>结构中：<code>map[connectMethodKey][]*persistConn</code>。<code>map</code>中的每一个<code>Key</code>对应了连接的<code>slice</code>数组，最新创建的连接会追加到<code>slice</code>的末尾。</p>
 
 <pre><code>func (cm *connectMethod) key() connectMethodKey {
@@ -572,23 +253,20 @@ func (t *Transport) putOrCloseIdleConn(pconn *persistConn) {
 <p>首先我们声明一个<code>Dialer</code>用于创建连接。这里特别注意<code>Dialer</code>下的<code>KeepAlive</code>字段，这是<code>Client</code>为了维持长连接，主动发送<code>TCP keep-alive segment</code>的时间间隔，类比<code>ping-pong</code>模式。官方的解释是：<code>KeepAlive specifies the keep-alive period for an active network connection. If zero, keep-alives are not enabled. Network protocols that do not support keep-alives ignore this field.</code>。</p>
 
 <p>我们在每次创建连接的时候，都将本地<code>socket</code>地址和服务端<code>socket</code>地址打印出来。如果没有新的地址生成，说明当前连接复用了前面创建的连接。这也侧面证明了是否服务端支持<code>Keep-Alive</code>。但需要强调的是，默认情况下只存在<code>DefaultMaxIdleConnsPerHost</code>个长连接。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">PrintLocalDial</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">network</span><span class="p">,</span> <span class="nx">addr</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">dial</span> <span class="o">:=</span> <span class="nx">net</span><span class="p">.</span><span class="nx">Dialer</span><span class="p">{</span>
+		<span class="nx">Timeout</span><span class="p">:</span>   <span class="mi">30</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">,</span>
+		<span class="c1">//指定的这个时间并没有生效，即使在请求完成后Sleep 30s连接仍然有效
+</span><span class="c1"></span>		<span class="nx">KeepAlive</span><span class="p">:</span> <span class="mi">5</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="nx">conn</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">dial</span><span class="p">.</span><span class="nf">Dial</span><span class="p">(</span><span class="nx">network</span><span class="p">,</span> <span class="nx">addr</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">conn</span><span class="p">,</span> <span class="nx">err</span>
+	<span class="p">}</span>
 
-<pre><code class="language-go">func PrintLocalDial(ctx context.Context, network, addr string) (net.Conn, error) {
-	dial := net.Dialer{
-		Timeout:   30 * time.Second,
-		//指定的这个时间并没有生效，即使在请求完成后Sleep 30s连接仍然有效
-		KeepAlive: 5 * time.Second,
-	}
-	conn, err := dial.Dial(network, addr)
-	if err != nil {
-		return conn, err
-	}
-
-	fmt.Println(&quot;connect done, use &quot;, conn.LocalAddr().String(), conn.RemoteAddr().String())
-	return conn, err
-}
-</code></pre>
-
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;connect done, use &#34;</span><span class="p">,</span> <span class="nx">conn</span><span class="p">.</span><span class="nf">LocalAddr</span><span class="p">().</span><span class="nf">String</span><span class="p">(),</span> <span class="nx">conn</span><span class="p">.</span><span class="nf">RemoteAddr</span><span class="p">().</span><span class="nf">String</span><span class="p">())</span>
+	<span class="k">return</span> <span class="nx">conn</span><span class="p">,</span> <span class="nx">err</span>
+<span class="p">}</span></code></pre></div>
 <p>紧接着我们声明<code>Client</code>用于发送请求，<code>Transport</code>中使用上面声明的方法创建连接。并写测试用例用于测试。同时打开抓包工具，分析整个网络请求。</p>
 
 <pre><code>var client = &amp;http.Client{
@@ -645,45 +323,63 @@ func TestRequestBaiDu(t *testing.T) {
 <li><a href="https://www.lovemytool.com/blog/2014/11/are-tcp-keep-alive-messages-bad-by-chris-greer.html#comment-6a00e008d957708834022ad3808ea0200c"><code>Are TCP Keep Alive Messages Bad? (By Chris Greer)</code></a></li>
 </ol>
 
+  </section>
 
-  <footer>
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
   
-<nav class="post-nav">
-  <span class="nav-prev">&larr; <a href="/blog/2018/12-01-deafult-decimal/">Deafult Decimal</a></span>
-  <span class="nav-next"><a href="/blog/2018/12-29-how-to-use-godog/">How to use godog</a> &rarr;</span>
-</nav>
-
-
-
-
-
-<script src="//yihui.name/js/math-code.js"></script>
-<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-<script async src="//yihui.name/js/center-img.js"></script>
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Net Transport</b><nav id="TableOfContents"><ul>
+<li><a href="#dial"><code>Dial</code></a></li>
+<li><a href="#transport"><code>Transport</code></a></li>
+<li><a href="#roundtripper">RoundTripper</a></li>
+<li><a href="#缓存-idle-连接">缓存<code>Idle</code>连接</a></li>
+<li><a href="#test-case"><code>Test Case</code></a></li>
+<li><a href="#tcp-keepalive-timer"><code>TCP KeepAlive Timer</code></a></li>
+</ul></li>
+</ul>
+</nav></div>
   
-
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/highlight.min.js"></script>
-
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/r.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/yaml.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/tex.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/go.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
-
-
 
   
-  <hr>
-  <div class="copyright">&copy; <a href="http://neojos.com">DDF</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+    <div>
+      
+    </div>
   
-  </footer>
-  </article>
-  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy;Qiushi Pan 2018-2019 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+    
   </body>
 </html>
-

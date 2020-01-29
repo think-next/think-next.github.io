@@ -1,553 +1,285 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>golang on 渐行渐远</title>
-    <link>/tags/golang/</link>
-    <description>Recent content in golang on 渐行渐远</description>
+    <title>Golang on 渐行渐远</title>
+    <link>https://gohugo.io/tags/golang/</link>
+    <description>Recent content in Golang on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
+    <copyright>&amp;copy;Qiushi Pan 2018-2019</copyright>
     <lastBuildDate>Tue, 12 Nov 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://gohugo.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>go.1.13中的Modules</title>
-      <link>/blog/2019/blog.015-go.1.13%E4%B8%AD%E7%9A%84modules.2019.11.12/</link>
+      <link>https://gohugo.io/blog/2019/blog.015-go.1.13%E4%B8%AD%E7%9A%84modules.2019.11.12/</link>
       <pubDate>Tue, 12 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/blog.015-go.1.13%E4%B8%AD%E7%9A%84modules.2019.11.12/</guid>
-      <description>环境变量GOPRIVATE
-GOPRIVATE升级到go.1.13不得不调整的一个变量。表示引用到的modules是私有的，无须从proxy下载，也无须校验包的checksum。
-公司内部基本都有自己的git仓库，升级为go.1.13后，需要在GOPRIVATE中设置仓库的通配符地址。如果不设置该环境变量，go加载package时会从GOPROXY获取，而默认的GOPROXY无法找到指定的包。
-参考官方提供的例子：
-GOPRIVATE=*.corp.example.com,rsc.io/private  环境变量GOPROXY
-go.1.13默认将GOPROXY设置为https://proxy.golang.org,direct，但执行go get会发现，这个地址是无法使用的。
-从官方的提供的例子中，简单了解GOPROXY的规范：
-// returns a list of all known versions of the given module, one per line. GET $GOPROXY/&amp;lt;module&amp;gt;/@v/list  当通过GOPROXY找不到具体的module时，会看到404或401的状态码
-如果就是很烦躁，也可以不使用这个环境变量:
-export GOPROXY=off  </description>
+      <guid>https://gohugo.io/blog/2019/blog.015-go.1.13%E4%B8%AD%E7%9A%84modules.2019.11.12/</guid>
+      <description>环境变量GOPRIVATE GOPRIVATE升级到go.1.13不得不调整的一个变量。表示引用到的modules是私有的，无须从proxy下</description>
     </item>
     
     <item>
       <title>runtime中P的理解</title>
-      <link>/blog/2019/blog.014-runtime%E4%B8%ADp%E7%9A%84%E7%90%86%E8%A7%A3.2019.11.11/</link>
+      <link>https://gohugo.io/blog/2019/blog.014-runtime%E4%B8%ADp%E7%9A%84%E7%90%86%E8%A7%A3.2019.11.11/</link>
       <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/blog.014-runtime%E4%B8%ADp%E7%9A%84%E7%90%86%E8%A7%A3.2019.11.11/</guid>
-      <description>P是在Go1.1引入的概念，初始默认等于CPU核的数量。P只是一个逻辑概念，跟CPU也没有任何关系。
-源码go/1.13.4/libexec/src/runtime/proc.go中对P的注释如下：
-// P - processor, a resource that is required to execute Go code. // M must have an associated P to execute Go code, however it can be // blocked or in a syscall w/o an associated P.  再通过源码go/1.13.4/libexec/src/runtime/runtime2.go来简要了解一下P在调度过程中的状态变化：
-const ( // P status _Pidle = iota _Prunning _Psyscall _Pgcstop // _Pdead means a P is no longer used (GOMAXPROCS shrank). We // reuse Ps if GOMAXPROCS increases.</description>
+      <guid>https://gohugo.io/blog/2019/blog.014-runtime%E4%B8%ADp%E7%9A%84%E7%90%86%E8%A7%A3.2019.11.11/</guid>
+      <description>P是在Go1.1引入的概念，初始默认等于CPU核的数量。P只是一个逻辑概念，跟CPU也没有任何关系。 源码go/1.13.4/libexec/</description>
     </item>
     
     <item>
       <title>MySQL增量数据订阅和消费</title>
-      <link>/blog/2019/2019-10-01-mysql%E5%A2%9E%E9%87%8F%E6%95%B0%E6%8D%AE%E8%AE%A2%E9%98%85%E5%92%8C%E6%B6%88%E8%B4%B9/</link>
+      <link>https://gohugo.io/blog/2019/2019-10-01-mysql%E5%A2%9E%E9%87%8F%E6%95%B0%E6%8D%AE%E8%AE%A2%E9%98%85%E5%92%8C%E6%B6%88%E8%B4%B9/</link>
       <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/2019-10-01-mysql%E5%A2%9E%E9%87%8F%E6%95%B0%E6%8D%AE%E8%AE%A2%E9%98%85%E5%92%8C%E6%B6%88%E8%B4%B9/</guid>
-      <description> 在订单交付系统中，做到保证权益数据的实时一致性非常难，很多都选择保证数据的最终一致性。在我们的生产环境中，为了保证数据的最终一致性，专门有一个微服务来处理检验异常订单、发告警通知、及时补偿修复异常订单。
-我们开发了一个独立的微服务，它主要用来做遍历整个订单数据，校验每一个订单的交付流程都正常闭环的工作。如果没有完全闭环，它需要选择对应的异常处理策略进行补偿。
-问题是，该微服务如何获取整个订单数据呢？方法有很多，比如：
- 定期扫描订单系统的全部订单表数据。 订单系统创建一条数据总线，所有创建的订单都发布到数据总线中，微服务订阅该数据总线。 直接订阅订单系统数据表的binlog日志  概述 我们最终确定了使用方法三。这样微服务只处理增量的变更记录，忽略历史已经处理过的记录；同时，binlog就相当于一个数据总线，我们只需要订阅就可以。
-这里引入文章要介绍的重点canal，主要用途是基于 MySQL 数据库增量日志解析，提供增量数据订阅和消费。以及canal-go，它是canal的go语言客户端。具体细节可以直接去链接查看。
-canal的工作原理  canal 模拟 MySQL slave 的交互协议，伪装自己为 MySQL slave ，向 MySQL master 发送 dump 协议 MySQL master 收到 dump 请求，开始推送 binary log 给 slave (即 canal ) canal 解析 binary log 对象(原始为 byte 流)  canal-go的工作原理和流程  Canal连接到mysql数据库，模拟slave canal-go与Canal建立连接 数据库发生变更写入到binlog Canal向数据库发送dump请求，获取binlog并解析 canal-go向Canal请求数据库变更 Canal发送解析后的数据给canal-go canal-go收到数据，消费成功，发送回执。（可选） Canal记录消费位置。  </description>
+      <guid>https://gohugo.io/blog/2019/2019-10-01-mysql%E5%A2%9E%E9%87%8F%E6%95%B0%E6%8D%AE%E8%AE%A2%E9%98%85%E5%92%8C%E6%B6%88%E8%B4%B9/</guid>
+      <description>在订单交付系统中，做到保证权益数据的实时一致性非常难，很多都选择保证数据的最终一致性。在我们的生产环境中，为了保证数据的最终一致性，专门有一</description>
     </item>
     
     <item>
       <title>分布式会话跟踪系统架构设计与实践</title>
-      <link>/blog/2019/19-08-25-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D%E8%B7%9F%E8%B8%AA%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/</link>
+      <link>https://gohugo.io/blog/2019/19-08-25-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D%E8%B7%9F%E8%B8%AA%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/19-08-25-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D%E8%B7%9F%E8%B8%AA%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/</guid>
-      <description> 调用链trace系统可以帮助技术人员快速的定位问题，查看整个请求的调用链路，及各个链路的耗时情况。方便技术人员针对性的对服务进行性能优化。
-概念 参考调用链trace的设计分析的介绍，trace系统的要素包括：traceId、spanId、annotation。
- traceId：贯穿整个调用链路，通过traceId来关联链路的所有相关日志 spanId：标识单次请求调用 annotation：记录请求调用的附加信息  简化trace日志设计 在调用链trace的设计分析文章中，系统log设计相对复杂，先从最简单的入手开始了解。
-微服务A、B、C之间存在相互调用关系，我们为每次请求记录一条log。通过log中的parnetID来确定调用的层级关系，通过spanID来唯标识一个独立请求，通过traceID来收敛所有相关日志。最终就可以确定请求的调用层级结构。
-从SERVER-C可以看出，日志记录在C服务的总处理时间。在结合SERVER-B的发起请求时间，可以初略得出span2的网络耗时。
-特别注意一下span的变化。当向下游服务发起请求时，需要生成一个新的span，并将该span的父节点设置成上一步生成的span。SERVER-B请求SERVER-C描述的就是这个过程。
-而当服务收到一个请求时，只有当请求没有关联新的span时，才需要生成一个span。SERVER-C收到SERVER-B的请求，描述的是这种情况。
-Other日志设计 调用链trace的设计分析文章又是如何实现的呢？文章给出的调用关系如下：
-两者的区别在于：确定层级的方式不同。这里通过span值的创建规则来确定调用的层级。而前者是通过借助parentID来确定层级。
-Annotation 通过基于Zipkin的Thrift服务RPC调用链跟踪文章了解到，存储span信息可以通过Annotation和BinaryAnnotation来实现。
-Annotation用于记录某个时间点发生的event，对event的触发时间、类型有明确规定。而BinaryAnnotation则用来记录用户自定义的信息。也就是说：前者是公用的，后者是个人用的。
-因为反向代理路径重写的原因，客户端请求的path和服务端提供服务的path可能不相同，如果你想在系统中定位这种情况，那么你就可以将http.url追加到BinaryAnnotaion属性中。
-了解一下BinaryAnnotation日志存储的数据内容：
-{ &amp;quot;app&amp;quot;: &amp;quot;app&amp;quot;, //所属应用 &amp;quot;ip&amp;quot;: &amp;quot;ip&amp;quot;, //ip地址,冗余信息 &amp;quot;key&amp;quot;: &amp;quot;key&amp;quot;, //key, 可以设为存储用户session的key, 如果是用来传递用户session信息的, 可以统一约定为: session_id &amp;quot;mname&amp;quot;: &amp;quot;mname&amp;quot;, //方法名 &amp;quot;pid&amp;quot;: &amp;quot;10000&amp;quot;, //进程id,冗余信息 &amp;quot;sid&amp;quot;: &amp;quot;sid&amp;quot;, //spanId &amp;quot;sname&amp;quot;: &amp;quot;sname&amp;quot;, //服务名 &amp;quot;tid&amp;quot;: &amp;quot;tid&amp;quot;, //traceId &amp;quot;timestamp&amp;quot;: 1449038780194, //产生的时间戳, 长整型, 精确到毫秒 &amp;quot;type&amp;quot;: &amp;quot;type&amp;quot;, //类型,用来区分是记录异常的还是业务流程的等等, 默认是&#39;common&#39;即可 &amp;quot;value&amp;quot;: &amp;quot;value&amp;quot; //如果是传递用户session信息 ,可以直接写在该字段中. }  参考地址：
- 调用链trace的设计分析 分布式会话跟踪系统架构设计与实践 基于Zipkin的Thrift服务RPC调用链跟踪  </description>
+      <guid>https://gohugo.io/blog/2019/19-08-25-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D%E8%B7%9F%E8%B8%AA%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/</guid>
+      <description>调用链trace系统可以帮助技术人员快速的定位问题，查看整个请求的调用链路，及各个链路的耗时情况。方便技术人员针对性的对服务进行性能优化。 概</description>
     </item>
     
     <item>
       <title>故障排查</title>
-      <link>/blog/2019/19-07-28-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</link>
+      <link>https://gohugo.io/blog/2019/19-07-28-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</link>
       <pubDate>Sun, 28 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/19-07-28-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</guid>
-      <description> 测试提Bug的基本要素，主要包括：
- 期望得到的结果 实际得到的结果 如何重现问题  生产环境出了故障，当然也脱离不开这3个要点。只不过相对重现问题会略微复杂。毕竟，故障总是我们意外之外的情况。
-根据Bug发生的现象，我们会提出很多假设，然后进行逐步排除。
-当问题发生时，最应想到的是：系统最近是否有过改动。很大概率上，一个正常工作的服务会一直维持工作，直到某种外力出现。如果确实是新功能上线导致的，可以结合具体情况，考虑是否回滚到老版本。但有些时候，回滚可能还会引发二次问题，需要特别注意。
-接下来：
-继续保存冷静，简要评估问题的严重程度，及时给外部作出反馈。这里的反馈特别重要，不仅可以让大家了解故障的进展情况，而且，大家还可能提供非常有价值的建议。
-接下来：
-仔细分析故障发生的现象，不要忽略错误日志的任何细节。这个过程中，日志显得尤为重要。一个好的日志记录，必须能还原或推断出当时故障的现场。日志信息主要包括：上下文信息、报错信息。
-当然，有时候故障会涉及多个微服务，最好能有一个trace_id，用来跟踪故障的发生过程，以及具体是微服务中的哪台服务器发生的故障。
-接下来：
-如果无法绝对确定故障的原因，我们需要复现Bug，也就是前文提到的逐个排除。这开发过程中，追加重要服务的测试用例非常重要，可能会节约好多宝贵的时间。
-但也存在难点，比如一些伪相关的原因误导我们的判断。故障一般都有连锁反应，有时候会很难分辨问题的主次。
-Go开发排查问题 Q1 服务发生panic时，结合日志中打印的堆栈信息，可以很容易定位到出错的代码，并作出很多可能的推测。然后，结合具体的上下文信息，能很快复现问题。整个过程中，日志是问题排查的关键。
-日志必须包含panic的堆栈信息，最好有链路的trace_id信息。如果在开发过程中，有对应的Test就更好了。
-Q2 对于接口响应慢的情况，可以依靠pprof工具进行诊断。其中，最可能的是调用外部服务慢，比如经典的MySQL慢查询。
-如果排除了外部依赖的问题，那很可能是程序代码自身问题。通过pprof的各种信息展示，也能很快定位。
-珍惜Bug 不要放过任何Bug，对Bug的处理过程要做好梳理、总结。下面是总结的模版：
--- 细节 -- 灾难响应 -- 事后总结 -- 做的好的地方 -- 做的不好的地方  </description>
+      <guid>https://gohugo.io/blog/2019/19-07-28-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</guid>
+      <description>测试提Bug的基本要素，主要包括： 期望得到的结果 实际得到的结果 如何重现问题 生产环境出了故障，当然也脱离不开这3个要点。只不过相对重现问题会略</description>
     </item>
     
     <item>
       <title>database.sql.driver</title>
-      <link>/blog/2019/19-07-17-database.sql.driver/</link>
+      <link>https://gohugo.io/blog/2019/19-07-17-database.sql.driver/</link>
       <pubDate>Wed, 17 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/19-07-17-database.sql.driver/</guid>
-      <description>在事务操作中，要求事务的各个阶段都使用一个Conn连接。在连接被关闭之前，还需要执行rollback操作。
-文章翻译了Go源码下database.sql.driver的接口规范，具体实现可以查看源码。
-// 包driver定义了数据驱动要实现的接口，具体的实现会在包sql中用到。 // // 更多还是使用包sql中的代码 package driver import ( &amp;quot;context&amp;quot; &amp;quot;errors&amp;quot; &amp;quot;reflect&amp;quot; ) // Value必须是一个驱动可以处理的值、NamedValueChecker接口能够处理的类型 // 或者下面这些类型的实例 // // int64 // float64 // bool // []byte // string // time.Time // // 如果驱动支持游标，返回值可能也实现Rows接口。举例，当用户 // 执行&amp;quot;select cursor(select * from my_table) from dual&amp;quot;。 // 如果返回的Rows被Close掉了，游标指向的数据也会被Close掉。 type Value interface{} // NameValue 同时包括name和value type NamedValue struct { // 如果Name不为空，它应该被用于参数标识符，而非序号位置。 // // Name 没有符号前缀 Name string // 参数从1开始的序号位置，并且总是被设置 Ordinal int // Value是参数值 Value Value } // Driver是一个必须被各个数据库driver实现的接口 // // 数据库驱动可以实现DriverContext来访问上下文，并且只解析一次连接池的名称， // 而非每个连接都解析一次。 // type Driver interface { // Open返回数据库的一个新连接，参数name是驱动特定格式的字符串 // // Open也可以返回一个缓存的连接（之前被close掉的），但这样 // 做其实没必要。sql包为了连接重复使用维护了一个空闲连接池 // // 返回的连接一次只被一个goroutinue中使用 Open(name string) (Conn, error) } // 如果Driver实现了DriverContext接口，那么sql.</description>
-    </item>
-    
-    <item>
-      <title>Using context cancellation in Go</title>
-      <link>/blog/2019/19-06-23-using-context-cancellation-in-go/</link>
-      <pubDate>Sat, 22 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2019/19-06-23-using-context-cancellation-in-go/</guid>
-      <description>爱因斯坦曾说过：“每当我的头脑没有问题思考时，我就喜欢将知道的定理重新验证一番，这样做并没有什么目的，只是让自己有机会重新享受一下专心思考的快乐”
- 文章地址：Using context cancellation in Go</description>
+      <guid>https://gohugo.io/blog/2019/19-07-17-database.sql.driver/</guid>
+      <description>在事务操作中，要求事务的各个阶段都使用一个Conn连接。在连接被关闭之前，还需要执行rollback操作。 文章翻译了Go源码下databas</description>
     </item>
     
     <item>
       <title>里氏替换&amp;开放关闭</title>
-      <link>/blog/2019/19-06-06-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%BC%80%E6%94%BE%E5%85%B3%E9%97%AD/</link>
+      <link>https://gohugo.io/blog/2019/19-06-06-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%BC%80%E6%94%BE%E5%85%B3%E9%97%AD/</link>
       <pubDate>Thu, 06 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/19-06-06-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%BC%80%E6%94%BE%E5%85%B3%E9%97%AD/</guid>
-      <description>里氏替换  Let Φ(x) be a property provable about objects x of type T. Then Φ(y) should be true for objects y of type S where S is a subtype of T
- 本质上就是类设计中的继承，它强调类所实现的行为。参数的类型指定为基类，而实际传参的时候使用具体的子类。每次扩展新的行为，都通过创建一个新的子类来实现。在Go的设计中，继承是通过接口类型来实现的。
-开放关闭  Software entities (classes, modules, function, etc) should be open for extension, but closed for modification.
-A class is closed, since it may be complied, stored in a library, baselined and used by client classes.</description>
+      <guid>https://gohugo.io/blog/2019/19-06-06-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%BC%80%E6%94%BE%E5%85%B3%E9%97%AD/</guid>
+      <description>里氏替换 Let Φ(x) be a property provable about objects x of type T. Then Φ(y) should be true for objects y of type S where S is a subtype of T 本质上就是类设计中的继承，它强调类所实现的行为。参数的类型指</description>
     </item>
     
     <item>
       <title>database package</title>
-      <link>/blog/2019/19-06-03-database-package/</link>
+      <link>https://gohugo.io/blog/2019/19-06-03-database-package/</link>
       <pubDate>Mon, 03 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/19-06-03-database-package/</guid>
-      <description>清除无效连接 在database库下清除过期连接时，使用了如下的代码逻辑。其中freeConn是空闲连接池，d是连接可被重复使用的最长时间，nowFunc返回的是当前时间。最新生成的连接在freeConn的末尾，而清除的过程则是使用最新的、次新的连接依次替换最早过期的、次早过期的连接。
-在for循环中直接使用len来获取总计数，在循环体内部将freeConn末尾的值替换首部的值，并将freeConn的len长度减去1。最后还做了i—操作，重复校验了一次。
-expiredSince := nowFunc().Add(-d) var closing []*driverConn for i := 0; i &amp;lt; len(db.freeConn); i++ { c := db.freeConn[i] if c.createdAt.Before(expiredSince) { closing = append(closing, c) last := len(db.freeConn) - 1 db.freeConn[i] = db.freeConn[last] db.freeConn[last] = nil db.freeConn = db.freeConn[:last] i-- } }  参考点 slice中首部和尾部数据的交换过程，以及每次通过i--达到的重复校验的思路。
-间隔执行 清除无效连接的工作是由一个goroutine在后台完成的，下面是截取的部分代码。for循环内部是处理连接的具体实现。每次清除操作完成后，通过Reset来重置Timer。
-func (db *DB) connectionCleaner(d time.Duration) { const minInterval = time.Second if d &amp;lt; minInterval { d = minInterval } t := time.</description>
+      <guid>https://gohugo.io/blog/2019/19-06-03-database-package/</guid>
+      <description>清除无效连接 在database库下清除过期连接时，使用了如下的代码逻辑。其中freeConn是空闲连接池，d是连接可被重复使用的最长时间，n</description>
     </item>
     
     <item>
       <title>mongo EOF（二）</title>
-      <link>/blog/2019/19-05-11-mongo-eof%E4%BA%8C/</link>
+      <link>https://gohugo.io/blog/2019/19-05-11-mongo-eof%E4%BA%8C/</link>
       <pubDate>Sat, 11 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/19-05-11-mongo-eof%E4%BA%8C/</guid>
-      <description>任何事情的成功都需要掐准时间
- 上一节mongo EOF中，关于容器的配置，只是粗略的使用了Docker-Compose-MongoDB-Replica-Set项目提供好的docker-compose.yml文件。在使用过程中，我发现这个文件本身一些不如意的地方。首先，services中的creator服务，entrypoint指令太长了，不美；其次，所有的service都没有给容器外部暴露端口，导致外部无法访问容器；再次，直接使用mongo repliSet的连接串进行访问，无法正常访问mongo服务。
-在上一篇文章的基础上，这篇文章对docker-compse.yml做了一些调整，并且也包含了docker使用的入门介绍。更新后的docker-compose.yml请访问githubsi。
-depends_on  However, for startup Compose does not wait until a container is “ready” (whatever that means for your particular application) - only until it’s running. There’s a good reason for this.
- 在creator service中使用了该指令， 但是，实际中creator不会等到mongo1、mongo2、mongo3容器ready后再启动，而是等到它们启动就开始启动。这也是我在setup脚本中执行sleep操作的原因。
-creator: build: context: . dockerfile: dockerfile entrypoint: [&amp;quot;/data/conf/setup.sh&amp;quot;] depends_on: - mongo1 - mongo2 - mongo3  entrypoint  Entrypoint sets the command and parameters that will be executed first when a container is run.</description>
-    </item>
-    
-    <item>
-      <title>mongo EOF</title>
-      <link>/blog/2019/19-04-27-mongo-eof/</link>
-      <pubDate>Sat, 27 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2019/19-04-27-mongo-eof/</guid>
-      <description>很多事情仅仅的是严肃的提出问题都感觉很难，更何况还得要先发现它。
- Question 描述 项目中使用：github.com/globalsign/mgo这个库，在一次主从切换之后，mongo后续的操作都失败了, 错误信息输出：EOF。
-引用网上遇到同样问题的其他描述：
- The problem I have is, when the connection to the mongodb server fails (the server drops the connection sometimes or mongodb server fails), then my pointer to the session variable doesn&#39;t work anymore. Even if the internet connection comes back, mgo driver doesn&#39;t reconnect anymore, instead of this I get the error (when I do Find().One() method call): &amp;quot;EOF&amp;quot;
- 解决思路   Call Refresh on the session, which makes it discard (or put back in the pool, if the connection is good) the connection it&amp;rsquo;s holding, and pick a new one when necessary.</description>
-    </item>
-    
-    <item>
-      <title>Go Module（一）</title>
-      <link>/blog/2019/19-04-21-go-module%E4%B8%80/</link>
-      <pubDate>Sun, 21 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2019/19-04-21-go-module%E4%B8%80/</guid>
-      <description>这世上太多的人，宁愿吃生活苦，也不愿吃自律的苦。大概是因为生活的苦，躺着就来了，而自律的苦，得自己去找。但只有吃得下自律的苦，才有成功的自由，没有一种成功是走得了捷径的，通向真正成功的唯一道路只有自律。越成功，越自律。越自律，越成功。
- GO111MODULE Go 1.1包含了对Go Modules的预支持，包括调整后的go get命令。后续版本总GOPATH和老的go get可能会被官方移除。
-在Go Modules中支持了一个临时环境变量：GO111MODULE，可以赋值为off、on或auto。
- 值为off，表示不支持Go Modules模式，Go仍然在vendor和GoPATH路径下查找依赖； 值为on，表示当前明确使用Go Modules，Go不再去GOPATH下查找任何依赖； 值为auto或未设置，表示是否启用Go Modules依赖当前的目录情况，当编译的项目在GoPATH/src之外，或者当前目录或子目录本身包含go.mod文件，则启用Go Modules模式。  Defining a module module通过源码根目录下的go.mod文件来定义。根路径下的module是项目依赖包的集合，但会排除子目录的go.mod文件。
-下面是go mod文件模版：
-module example.com/m require ( golang.org/x/text v0.3.0 gopkg.in/yaml.v2 v2.1.0 )  要开始使用go mod，仅需要在项目下执行go mod init命令创建go.mod文件即可。
-go mod init example.com/m  The go.mod File go.mod文件的每一行都包还一个简单的指令(module、require、exclude、replace)，然后紧跟参数部分。指令除了单行表示之外，还可以是一个块的形式。其中，文件也是以//作为注释符。
-下面是截取我项目下的go.mod文件的部分内容：
-module gitlab.luojilab.com/igetserver/order_delivery go 1.12 require ( github.com/Shopify/sarama v1.22.1 github.com/bsm/sarama-cluster v2.1.15+incompatible github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b github.com/gopherjs/gopherjs v0.0.0-20181103185306-d547d1d9531e // indirect ) replace ( cloud.</description>
-    </item>
-    
-    <item>
-      <title>Go 调度模型（三）</title>
-      <link>/blog/2019/19-04-14-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%89/</link>
-      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2019/19-04-14-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%89/</guid>
-      <description>  别抱怨，也别自怜，所有的现状都是你自己选择的
- 前面的章节中，我们介绍了操作系统的调度模型：N:1、1:1、M:N。而Go采用了更高效的方式M:N。从进程的角度来说，线程是最小的调度单元。而Go的模型下，可以把P作为最小单元的调度单元，即在单个线程上运行的Go代码。
-执行模型 下图展示了Go的最小调度单元模型。其中的有两个线程，各维持一个P对象，而且正在执行一个G代码。为了运行G，M必须首先持有P对象。图中灰色的G表示还没有被执行，等待被调度。它们被组织在P的一个runqueues的队列中，当M创建新的Goroutine时，对应的G就会被追加到该队列的末尾。
-阻塞模型 为什么要引入P结构，直接将runqueues放在M中，不就可以摆脱P了吗？当然不行，它存在的意义还在于：当M因为其他原因被阻塞时，我们需要将runqueues中的G交给别的M来继续处理。因为线程不可能既执行代码，又阻塞在系统上。
-如上图所示，当M0阻塞在系统调用上时，它会放弃自己的P，以保证M1可以继续执行其他G。当M0系统调用返回时，M0为了继续执行G0，就必须尝试重新获取P对象。正常的执行流程是：它尝试去偷其它线程的P，如果不行，就将G0放到全局的runqueues中，之后进入休眠。
-当P本地的runqueues运行完之后，M会去全局队列取G来执行。同时，全局队列的G也会被间歇性检查，否则里面的G可能永远都得不到执行了。
-偷G模型 当runqueues分布不均衡时，可能存在其中一个M执行完了本地的P，而其他P的本地队列还有很多G等待被执行。如图所示，为了去继续运行Go代码，P1首先会尝试去全局队列获取。如果全局队列没有，那么它就会随机从别的P去偷一半回来。这样做也是用来保证所有线程都一直有工作可以做。
-参考文章：
- The Go scheduler  </description>
-    </item>
-    
-    <item>
-      <title>设计模式-适配器模式</title>
-      <link>/blog/2019/19-04-07-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</link>
-      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2019/19-04-07-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</guid>
-      <description>当你眼里只有赚钱的时候，你就永远无法把事情本身给做好，收获的也会很有限，最后可能还赚不到钱。- From Myself
- 下面的代码是github.com/gin-gonic/gin/binding中获取Binding实例的逻辑。我在想：这段代码体现的是什么设计模式呢？写法上肯定是工厂模式，因为它基于不同的contentType创建返回具体的实例。但从宏观上来看，它算不算一个适配器呢？
-func Default(method, contentType string) Binding { if method == &amp;quot;GET&amp;quot; { return Form } switch contentType { case MIMEJSON: return JSON case MIMEXML, MIMEXML2: return XML case MIMEPROTOBUF: return ProtoBuf case MIMEMSGPACK, MIMEMSGPACK2: return MsgPack default: //case MIMEPOSTForm, MIMEMultipartPOSTForm: return Form } }  Adapter Pattern 适配器模式不仅仅局限于代码设计，在现实世界中也经常会看到。比如苹果手机的转接线，将新的、方形的Lighting接口适配到旧的、圆孔的耳机上。
-Adapter Pattern主要被用来适配两个不兼容的接口，给两个独立或者不兼容的类提供一个兼容模式，而不需要修改两者内部的具体实现。Adapter Pattern可以是一个独立的新对象或者新方法，在设计中扮演一个桥梁的作用，或者是对不相互兼容的数据格式进行转换。又或者是重用系统老的既存类，来提供新的功能。
-Purpose 适配器主要通过转换数据格式，组合、引用不兼容的对象，最终实现我们期盼的功能。
- 老系统到新系统的业务迁移。新老系统首先在接收数据的格式上不尽相同，其次新系统可能也需要调用老系统的内部实现。 重新对对象进行封装，用来提供业务期望的新功能。或者让不兼容的对象可以一起工作。  Design Pattern Diagram  Target：Client端调用的新接口。 Adapter：将Adaptee适配到Target，实现两者间的转换。 Adaptee：需要去适配的既存接口  Implementation 常见的适配实现主要有两种方式：</description>
+      <guid>https://gohugo.io/blog/2019/19-05-11-mongo-eof%E4%BA%8C/</guid>
+      <description>任何事情的成功都需要掐准时间 上一节mongo EOF中，关于容器的配置，只是粗略的使用了Docker-Compose-MongoDB-Repl</description>
     </item>
     
     <item>
       <title>Go 调度模型（二）</title>
-      <link>/blog/2019/19-03-30-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%BA%8C/</link>
+      <link>https://gohugo.io/blog/2019/19-03-30-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%BA%8C/</link>
       <pubDate>Sat, 30 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/19-03-30-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%BA%8C/</guid>
-      <description>真的猛士，敢于直面惨淡的人生，敢于正视淋漓的鲜血。这是怎样的哀痛者和幸福者？然而造化又常常为庸人设计，以时间的流驶，来洗涤旧迹，仅使留下淡红的血色和微漠的悲哀。在这淡红的血色和微漠的悲哀中，又给人暂得偷生，维持着这似人非人的世界。我不知道这样的世界何时是一个尽头！
- 有一种感觉，Go调度模型可能还得再来几篇博客，才能真正读出感觉来。现在还是一个门外汉。越是深入了解，越觉得知之甚少，后背发凉。
-OS调度结构 Go Runtime实现了自己的调度策略，从OS调度结构的演变来看，调度思想都是相似的。当然，我始终觉得设计背后的思想才是整个系统的核心。思想从无到有、从中心化到去中心化、从单任务到并行多任务，当然这肯定不是调度策略的专利，在很多场景都有这种思想的体现，比如分布式设计。
-那为什么我还是没有一眼看出来呢，可能是阅历太少，思考的深度不够，积极接受现状，懒于了解历史吧。不过，越是去了解，就会发现不会的太多，思维发散的太广，难以为继。
-single scheduler 存在一个全局的任务队列和一个全局的调度器，因为整个过程不需要加锁，所以单核吞吐量很高，但无法充分利用多核资源。
-有点类似于：给一个数据表中的所有用户PUSH消息，虽然我们有10台服务器，但我们只在其中一台服务上执行该任务。优点是设计开发简单，缺点是没有充分利用资源，效率不高。
-multi scheduler with global queue 多个调度器共享一个全局的任务队列，该模型需要频繁的对任务队列进行加锁，并发性能存在明显的瓶颈。这同时让我想起了Go的并发问题中介绍的例子，加锁保证了计算的正确性，但却牺牲了效率。当然，这不仅仅是调度系统会面临的问题，比如本地缓存BigCache也遇到了同样的问题。
-还接着上面的例子说，当在多台服务器上都启动Task执行任务时，为了避免同一个用户不被重复PUSH多次，势必也面临着对单条记录加锁的问题。
-multi scheduler with local queue 给每个调度器分配一个本地的任务队列，这样调度器就可以无锁的操作本地任务队列，显著减少锁竞争，提高多核下的调度效率。同时还要保证让各个调度器随时都有事情可做，所以也存在一些任务迁移或者任务窃取的方案。到了这里，我们就已经看到了Go Scheduler的雏形。其实思维很简单，将全局的任务队列划分成多个小的任务队列，各个调度器处理自己的任务队列，跟Database Sharding异曲同工。
-继续上面的例子，我们只需要给各个服务器分配用户表的小块数据，当Task执行完分配的数据块后，再去请求新的数据块就可以了。
-GPM 现在提到Go Scheduler就会直接想到GPM，但之前的设计里Scalable Go Scheduler Design Doc其实并不存在P。P的引入直接将调度模型由multi scheduler with global queue跨越到multi scheduler with local queue。
- 每个Goroutine需要对应一个G结构体，而G保存了当前Goroutine的运行堆栈和状态信息。Goroutine通过G中保存的信息可以执行或恢复执行。 P是专门被引入用来优化原始Go调度系统所抽象的逻辑对象，操作系统并不知道P的存在。对M而言，P提供了其执行的相关环境、以及Goroutine的任务队列等。 M是OS线程的抽象，是物理存在的。M只有和P绑定之后，才可以执行G代码。M本身也不会保存G的状态，在需要任务切换时，M会将堆栈状态保存回G中，任何M都可以根据G中的信息恢复执行。  M阻塞 当M准备执行Goroutine时，首选需要关联一个P，然后从P的队列中取出一个G来执行。如果G中执行的代码使M发生阻塞，比如唤起系统调用。那么M将会一直阻塞，直到系统调用返回。此时全局空闲M队列的另一个M会被唤醒，同时，阻塞状态的M会与P解绑。这样做也是为了保证其他G不会因为缺少M而被阻塞执行。
-但如果Goroutine在channel通讯过程中发生阻塞，M并不会展示相似的阻塞行为。因为OS并不了解channel 的执行机制，channel是被Go Runtime来处理的。如果一个Goroutine在channel通讯上发生了阻塞，那没有任何理由让运行它的M也阻塞。这种情况下，G的状态会被设置为等待，M会继续执行别的Goroutine。当G重新变成可运行状态时，等待别的M去执行。
-P的改进 原始Go的调度并没有P，仅有G、M以及Sched。当时系统只存在一个全局的G队列，通过Sched锁来进行并发控制。存在的问题有：
- 调度的执行依赖全局的Sched锁，修改全局的M队列和G队列、或者其他全局的Sched字段都需要加锁 M的内存问题，执行的内存是跟M相关联的。但即使M并不执行G代码，它也会申请2MB的MCache空间，而这些空间只有M在执行G时才需要。同时，一个阻塞中的M也是不需要MCache的。 系统调用不够清晰，M在执行中会频繁阻塞和恢复，浪费CPU时间 M之间频繁的传递G，而不是选择自己执行它，这增加了系统的额外负载。每个M必须能够执行任何可运行的G，特别是刚刚创建了G的M。  P引入之后，从之前的M和Sched中抽取了部分字段，这样做带来了很多好处：
- MCache就被移动到了P中，而系统最多存在GOMAXPROCES个P，解决了不必要的内存浪费问题 G freelist被移动到P中，每个P都有了一个可运行的本地G队列。本地G队列缓解了全局Sched锁的问题。 当一个G被M创建，它被追加到对应P的本地队列末尾，以保证每个G都能被执行。  参考文章：</description>
+      <guid>https://gohugo.io/blog/2019/19-03-30-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%BA%8C/</guid>
+      <description>真的猛士，敢于直面惨淡的人生，敢于正视淋漓的鲜血。这是怎样的哀痛者和幸福者？然而造化又常常为庸人设计，以时间的流驶，来洗涤旧迹，仅使留下淡红</description>
     </item>
     
     <item>
       <title>基于Go的Cron Job实现</title>
-      <link>/blog/2019/19-03-25-%E5%9F%BA%E4%BA%8Ego%E7%9A%84cron-job%E5%AE%9E%E7%8E%B0/</link>
+      <link>https://gohugo.io/blog/2019/19-03-25-%E5%9F%BA%E4%BA%8Ego%E7%9A%84cron-job%E5%AE%9E%E7%8E%B0/</link>
       <pubDate>Mon, 25 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/19-03-25-%E5%9F%BA%E4%BA%8Ego%E7%9A%84cron-job%E5%AE%9E%E7%8E%B0/</guid>
-      <description>随风要稳，逆风要浪
- timer  The Timer type represents a single event. When the Timer expires, the current time will be sent on C.
- 下面使用timer实现在固定时间点执行task任务。
-处理思路：每次在执行task前，计算当前时间和执行时间点的差值，通过设置timer未来的触发时间来执行任务。在完成本次task之后，重置timer的触发时间，等待下一次执行。
-const IntervalPeriod time.Duration = 24 * time.Hour // 核心函数：在h:m:s的时候执行task任务 func runningRoutine(hour, minute, second int, task func() error) { ticket := time.NewTimer(GetNextTickDuration(hour, minute, second)) for { &amp;lt;-ticket.C if err := task(); err != nil { } ticket.Reset(GetNextTickDuration(hour, minute, second)) } } // 获取Task执行的时间 func GetNextTickDuration(hour, minute, second int) time.</description>
+      <guid>https://gohugo.io/blog/2019/19-03-25-%E5%9F%BA%E4%BA%8Ego%E7%9A%84cron-job%E5%AE%9E%E7%8E%B0/</guid>
+      <description>随风要稳，逆风要浪 timer The Timer type represents a single event. When the Timer expires, the current time will be sent on C. 下面使用timer实现在固定时间点执行task任务。 处理思路：每次在执行task前</description>
     </item>
     
     <item>
       <title>Go 调度模型（一）</title>
-      <link>/blog/2019/19-03-24-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%80/</link>
+      <link>https://gohugo.io/blog/2019/19-03-24-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%80/</link>
       <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/19-03-24-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%80/</guid>
-      <description>想清楚了就去做，做的时候不要再回头想。
- OS Scheduler 在操作系统中保存了运行的进程列表，以及进程的运行状态(运行中、可运行及不可运行)。当进程运行时长超过了被分配的时间片(比如每10ms)，那么该进程会被系统抢占，然后在该CPU上执行别的进程。所以，OS的调度是抢占式的，可能抢占策略略有不同。
-当进程被抢占时，需要保存该进程运行的上下文，并被重新放回到调度器，等待下一次被执行。
-Golang Scheduler  Goroutine scheduler
-The scheduler&amp;rsquo;s job is to distribute ready-to-run goroutines over worker threads.
- 如图所示，OS层看到是只有Go进程以及运行的多个线程，而Goroutine本身是被Golang Runtime Scheduler调度管理的。
-对OS而言，Go Binary是一个系统进程。内部Go Program对系统API的调度都是通过Runtime level解释来实现。Runtine记录了每个Goroutine的信息，在当前进程的线程池中按照顺序依次调度Goroutine。
-Golang在Runtime内部实现了自己的调度，并不是基于时间切片的抢占式调度，而是基于Goroutines的协作式调度，目的就是要让Goroutine在OS-Thread中发挥出更多的并发优势。所以，在Runtime过程中，只有当正在运行的Goroutine被阻塞或者运行结束时，别的Goroutine才会被调度。常见的阻塞情形包括：
- 阻塞的系统调用方式，比如文件或网络操作 垃圾自动回收  整体而言，Goroutine的数量大于Threads数量会更有优势，这样当其他Goroutine阻塞时，别的Goroutine就会被执行。
-Goroutine G用于表示Goroutine及它所包含的栈和状态信息。Goroutine存在于Go Runtime的的虚拟空间，而非OS中。
-// src/runtime/runtime2.go // 以下结构体精简了很多字段 type g struct { stack stack // offset known to runtime/cgo m *m // current m; offset known to arm liblink sched gobuf stktopsp uintptr // expected sp at top of stack, to check in traceback param unsafe.</description>
+      <guid>https://gohugo.io/blog/2019/19-03-24-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%80/</guid>
+      <description>想清楚了就去做，做的时候不要再回头想。 OS Scheduler 在操作系统中保存了运行的进程列表，以及进程的运行状态(运行中、可运行及不可运行)。当进程运行时长超</description>
     </item>
     
     <item>
       <title>新年彩蛋之中大奖</title>
-      <link>/blog/2019/19-02-08-%E6%96%B0%E5%B9%B4%E5%BD%A9%E8%9B%8B%E4%B9%8B%E4%B8%AD%E5%A4%A7%E5%A5%96/</link>
+      <link>https://gohugo.io/blog/2019/19-02-08-%E6%96%B0%E5%B9%B4%E5%BD%A9%E8%9B%8B%E4%B9%8B%E4%B8%AD%E5%A4%A7%E5%A5%96/</link>
       <pubDate>Sat, 09 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/19-02-08-%E6%96%B0%E5%B9%B4%E5%BD%A9%E8%9B%8B%E4%B9%8B%E4%B8%AD%E5%A4%A7%E5%A5%96/</guid>
-      <description>2019年计划通过福利彩票发家致富的，可以好好看一看这篇博客。作为新年彩蛋来送给大家，也希望大家能真的中大奖。—— 新年快乐，给每个有梦想的程序员
- 生成随机号 小概率事件也要做的一丝不苟，大家都是程序员，为啥要用别人家写的随机代码。嘎嘎！
-双色球蓝号1-12、红号1-33，非常简单，只需保证生成的红号不相互重复就可以，然后就是考虑如何做到真正的随机。
-还有一个问题就是如何存储一组号码。首先，分成红区和蓝区两部分，最后一个号约定为蓝号。另外，为了方便存储，我们放弃了将每个数字用符号连接的方式，而是自定义了34进制，用于保证每组号码的长度都是7。
-var redBall = map[int]rune{ 1: &#39;1&#39;, 2: &#39;2&#39;, 3: &#39;3&#39;, //...... 31: &#39;V&#39;, 32: &#39;W&#39;, 33: &#39;X&#39;, } var redFlip = map[rune]int{ &#39;1&#39;: 1, &#39;2&#39;: 2, &#39;3&#39;: 3, //... &#39;V&#39;: 31, &#39;W&#39;: 32, &#39;X&#39;: 33, }  我们提供一个编解码的方法，用于将字符串转换为一组号码。对应的，将一组号码转换为长度为7的字符串。
-随机红号范围控制在1-33，蓝号控制在1-16。所以，我们对当前纳秒进行取余，便可以保证数据的正确。对于去重部分，通过map属性来达到目的，map的key存储生成的随机号，value存储对应的编码。因为map结构读取数据时本身也是随机的，所以在生成红号和蓝号的时候便多生成一部分，最后再取6个红号，1个蓝号。
-type TwoColor struct { } //encode func (color *TwoColor) Encode(origin []int) string { runes := make([]rune, 0) for _, v := range origin { if elem, ok := redBall[v]; ok { runes = append(runes, elem) } return string(runes) } //decode func (color *TwoColor) Decode(origin string) []int { result := make([]int, 0) for _, v := range origin { if elem, ok := redFlip[v]; ok { result = append(result, elem) } } return result } //generate random numbers func (color *TwoColor) GenerateRandom() string { redResult := make(map[int]rune, 12) for len(redResult) &amp;lt; 12 { key := time.</description>
+      <guid>https://gohugo.io/blog/2019/19-02-08-%E6%96%B0%E5%B9%B4%E5%BD%A9%E8%9B%8B%E4%B9%8B%E4%B8%AD%E5%A4%A7%E5%A5%96/</guid>
+      <description>2019年计划通过福利彩票发家致富的，可以好好看一看这篇博客。作为新年彩蛋来送给大家，也希望大家能真的中大奖。—— 新年快乐，给每个有梦想的程</description>
     </item>
     
     <item>
       <title>垃圾回收之引用计数</title>
-      <link>/blog/2019/19-02-01-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B9%8B%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/</link>
+      <link>https://gohugo.io/blog/2019/19-02-01-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B9%8B%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/</link>
       <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/19-02-01-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B9%8B%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/</guid>
-      <description>思来想去，决定总结一下垃圾回收机制。引用计数与我结缘最早，也比较简单、基础，遂决定从引用计数入手。
-—— 不管人非笑，不管人毁谤，不管人荣辱，任他功夫有进有退，我只是这致良知的主宰不息，久久自然有得力处
- Reference Counting 对象在创建时保存一个自身被引用的计数，初始值为1。每次被新的变量引用，该值加1。相反，则减去1。当该值等于0时，占用空间被系统回收。
-什么是对象呢？ var neojos int64 = 32 var ptrNeojos *int64 = &amp;amp;neojos  如上所示，我们创建了一个int64类型的object，命名为neojos。程序中对该object的操作都是通过使用neojos来实现的。而ptrNeojos其实又创建了一个*int64类型的object，但它的值保存的是neojos的地址。
-对于ptrNeojos来说，它的生命周期跟普通变量的生命周期没有区别。唯一区别的是，当它生命周期结束后，ptrNeojos会被垃圾回收，而底层指向的object却不会。
-如何计数呢？ Object * obj1 = new Object(); // RefCount(obj1) starts at 1 Object * obj2 = obj1; // RefCount(obj1) incremented to 2 as new reference is added Object * obj3 = new Object(); obj2-&amp;gt;SomeMethod(); obj2 = NULL; // RefCount(obj1) decremented to 1 as ref goes away obj1 = obj3; // RefCount(obj1) decremented to 0 and can be collected  obj1指向了一个匿名对象，为了方便，我们叫anonymousObj。上述代码展示了anonymousObj从创建到被垃圾回收的整个过程。垃圾回收对象的内存空间，上述过程中obj1对象的地址不会发生改变，只是底层引用的对象发生了变化。</description>
+      <guid>https://gohugo.io/blog/2019/19-02-01-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B9%8B%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/</guid>
+      <description>思来想去，决定总结一下垃圾回收机制。引用计数与我结缘最早，也比较简单、基础，遂决定从引用计数入手。 —— 不管人非笑，不管人毁谤，不管人荣辱，任</description>
     </item>
     
     <item>
       <title>gRPC入门</title>
-      <link>/blog/2019/19-01-26-grpc%E5%85%A5%E9%97%A8/</link>
+      <link>https://gohugo.io/blog/2019/19-01-26-grpc%E5%85%A5%E9%97%A8/</link>
       <pubDate>Sat, 26 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/19-01-26-grpc%E5%85%A5%E9%97%A8/</guid>
-      <description>时间飞逝 如一名携带信息的邮差 但那只不过是我们的比喻 人物是杜撰的 匆忙是假装的 携带的也不是人的讯息
- 为什么使用grpc 主要包括以下两点原因：
- protocl buffer一种高效的序列化结构。 支持http 2.0标准化协议。  很对人经常拿thrift跟grpc比较，现在先不发表任何看法，后续会深入thrift进行介绍。
-http/2  HTTP/2 enables a more efficient use of network resources and a reduced perception of latency by introducing header field compression and allowing multiple concurrent exchanges on the same connection… Specifically, it allows interleaving of request and response messages on the same connection and uses an efficient coding for HTTP header fields.</description>
+      <guid>https://gohugo.io/blog/2019/19-01-26-grpc%E5%85%A5%E9%97%A8/</guid>
+      <description>时间飞逝 如一名携带信息的邮差 但那只不过是我们的比喻 人物是杜撰的 匆忙是假装的 携带的也不是人的讯息 为什么使用grpc 主要包括以下两点原因： protocl bu</description>
     </item>
     
     <item>
       <title>Float的基本介绍</title>
-      <link>/blog/2019/19-01-16-float%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/</link>
+      <link>https://gohugo.io/blog/2019/19-01-16-float%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/</link>
       <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/19-01-16-float%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/</guid>
-      <description>关于浮点数，为什么它生来就可能存在误差？带着好奇查阅了一些介绍，然后做了简单汇总。这只是一段知识的开始，后续还会继续完善。
-—— 荡荡上帝，下民之辟。疾威上帝，其命多辟。天生烝民，其命匪谌。靡不有初，鲜克有终。
- Floating-point represent 浮点数在计算机中是如何表示的？因为它有小数点，那么小数点后面的数，该如何用二进制来表示呢？我们都知道，浮点数本身就存在误差，在工作中，你所使用的float都是一个近似数。这又是什么原因导致的呢？
-1. Fixed-point fixed-point 是将bit位拆分成固定的两部分：小数点前的部分和小数点后的部分。拿32 bit的fixed-point表示举例，可以将其中的24 bit用于表示整数部分，剩余的8 bit表示小数部分。
-假如要表示1.625，我们可以将小数点后面的第一个bit表示$\frac12$，第二个bit表示1/4，第三个1/8一直到最后一个1/256。最后的表示就是00000000 00000000 00000001 10100000。这样其实也好理解，因为小数点前是从$2^0$开始向左成倍递增，小数点后从$2^{-1}$开始向右递减。
-因为小数点后面的部分始终小于1，上面这种表达方式能表达的最大数是255/256。再比这个数小，这种结构就无法表示了。
-Floating-point basics 根据上面的思路，我们用二进制表达一下5.5这个十进制数，转化后是$101.1_{(2)}$。继续转换成二进制科学计数法的形式：$1.011_{(2)} * 2^2$。在转换的二进制科学计数法过程中，我们将小数点向左移了2位。就跟转换十进制的效果一样：$101.1_{(10)}$ 的科学计数形式为$1.011 * 10^2$。
-对于二进制科学计数法表达的5.5，我们将其拆分成2部分，1.011是一部分，我们称为mantissa。指数2是另一部分，称为exponent。下面我们要将$1.011_{(2)} * 2^2$ 映射到计算机存储的8 bit结构上。
-我们用第一个bit来表示正负符号，1表示负数，0表示正数。紧接着的4 bit用来表示exponent + 7后的值。 4 bit最大可以表示到15，这也就意味着当前的exponent不能超过8，不能低于-7。最后的3 bit用于存储mantissa的小数部分。你可能有疑问，它的整数部分怎么办呢？这里我们约定整数部分都调整成1，这样就可以节省1 bit了。举个例子，如果要表示的十进制数是0.5，那么最后的二进制数不是$0.1_{(2)}$，而是$1.0 * 2^{-1}$。最后表示的结果就是：0 1001 011。
-再来一个decode的例子，即将0 0101 100还原回原始值。根据之前的描述0101表示的十进制是5，所以exponent = -2，表示回二进制科学计数法的结果：$1.100 * 2^{-2} = 0.011_{(2)}$。我们继续转换成真实精度的数：0.375。
-最后可以看在，如果mantissa的长度超过3 bit表示的范围，那么数据的存储就会丢失精度，结果就是一个近似值了。
-1. Representable numbers 继续按照上面的思路，现在8 bit的浮点表示能表示的数值区间更大。
-要表示最小正数的话，sign置为0，接下来的4 bits置为0000，最后的mantissa也置为000。那么最终的表示结果就是：$1.000_{(2)} * 2^{-7} = 2^{-7} ≈ 0.0079_{(10)}$。</description>
+      <guid>https://gohugo.io/blog/2019/19-01-16-float%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/</guid>
+      <description>关于浮点数，为什么它生来就可能存在误差？带着好奇查阅了一些介绍，然后做了简单汇总。这只是一段知识的开始，后续还会继续完善。 —— 荡荡上帝，下民</description>
     </item>
     
     <item>
       <title>探讨分布式ID生成系统</title>
-      <link>/blog/2019/19-01-11-%E6%8E%A2%E8%AE%A8%E5%88%86%E5%B8%83%E5%BC%8Fid%E7%94%9F%E6%88%90%E7%B3%BB%E7%BB%9F/</link>
+      <link>https://gohugo.io/blog/2019/19-01-11-%E6%8E%A2%E8%AE%A8%E5%88%86%E5%B8%83%E5%BC%8Fid%E7%94%9F%E6%88%90%E7%B3%BB%E7%BB%9F/</link>
       <pubDate>Fri, 11 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/19-01-11-%E6%8E%A2%E8%AE%A8%E5%88%86%E5%B8%83%E5%BC%8Fid%E7%94%9F%E6%88%90%E7%B3%BB%E7%BB%9F/</guid>
-      <description>全称Universally Unique Identifier，UUID占128bit，也就是16个英文字符的长度（16byte），需要强调的是，它的生成无需中心处理程序。
-UUID被用来标识URN(Uniform Resource Names)，对于Transaction ID以及其他需要唯一标志的场景都可以使用它。
-UUID是空间和时间上的唯一标识，它长度固定，内部中包含时间信息。如果服务器时间存在不同步的情况，UUID可能会出现重复。
-UUID构成 基本格式，由6部分组成：
-time-low - time-mide - time-high-and-version - clock-seq-and-reserved &amp;amp; clock-seq-low - node  一个URN示例：f81d4fae-7dec-11d0-a765-00a0c91e6bf6。
-因为UUID占128bit，16进制数占4bit，所以转换成16进制0-f的字符串总共有32位。组成的各个部分具体由几位16进制表示，请查阅 Namespace Registration Template
-因为UUID太长且无序，导致其不适合做MySQL的主键索引。而且MySQL自带的auto-increment功能，选择bigint的话也只占用64bit。
- All indexes other than the clustered index are known as secondary indexes. In InnoDB, each record in a secondary index contains the primary key columns for the row, as well as the columns specified for the secondary index. InnoDB uses this primary key value to search for the row in the clustered index.</description>
+      <guid>https://gohugo.io/blog/2019/19-01-11-%E6%8E%A2%E8%AE%A8%E5%88%86%E5%B8%83%E5%BC%8Fid%E7%94%9F%E6%88%90%E7%B3%BB%E7%BB%9F/</guid>
+      <description>全称Universally Unique Identifier，UUID占128bit，也就是16个英文字符的长度（16byte），需要强调的是，它的生成</description>
     </item>
     
     <item>
       <title>Gin使用</title>
-      <link>/blog/2019/19-01-06-gin%E4%BD%BF%E7%94%A8/</link>
+      <link>https://gohugo.io/blog/2019/19-01-06-gin%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Sat, 05 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/19-01-06-gin%E4%BD%BF%E7%94%A8/</guid>
-      <description>Gin对net/http包做了封装，支持路由、中间件等特性，极大的方便对Http Server的开发。文章通过一个Test例子，来简要介绍。对于特别基础的部分，请阅读参考文章。
-接口测试 Go中testing包为程序自测提供了便利。可以查阅之前写的博客Go test基础用法，对其内容，我还是挺满意的。
-使用Postman 对于接口测试，很多情况都在使用Postman这样的工具。首先在本地启动服务，然后在Postman中配置请求的地址和参数、执行请求、查看结果。
-这种方式唯一让人不满意的地方在于：每次修改都需要重启服务。跟直接执行一次Test相比，明显多了一步。
-使用Test 测试基类 下面的代码作为接口测试的基类。
-TestMain中，我们为所有的测试用例指定通用的配置。之后在执行其他Test前，都会先执行TestMain中的代码。有效的避免了代码冗余。
-getRouter方法用于返回一个gin的实例。我们将服务的路由重新在Test中指定，并设置了中间件。
-testHttpResponse是我们请求处理的核心代码，发送请求，并保存响应到w中
-//common_test.go func TestMain(m *testing.M) { //声明执行Test前的操作 gin.SetMode(gin.TestMode) testutils.NewTestApp(&amp;quot;../conf.test.toml&amp;quot;) flag.Parse() os.Exit(m.Run()) } //设置路由，获取框架Gin的实例 func getRouter() *gin.Engine { router := gin.Default() //配置路由，这是我项目中的自定义配置 router.Use(middleware.HeaderProcess()) RouteAPI(router) return router } //统一处理请求返回结果 func testHttpResponse(t *testing.T, r *gin.Engine, req *http.Request, f func(w *httptest.ResponseRecorder) error) { w := httptest.NewRecorder() r.ServeHTTP(w, req) if err := f(w); err != nil { t.Fatal(err) } }  测试用例 下面是具体的测试用例。我们构造了一个Json数据格式的POST请求，然后通过调用testHttpResponse方法来读取接口的响应数据。</description>
+      <guid>https://gohugo.io/blog/2019/19-01-06-gin%E4%BD%BF%E7%94%A8/</guid>
+      <description>Gin对net/http包做了封装，支持路由、中间件等特性，极大的方便对Http Server的开发。文章通过一个Test例子，来简要介绍。对</description>
     </item>
     
     <item>
       <title>How to use godog</title>
-      <link>/blog/2018/12-29-how-to-use-godog/</link>
+      <link>https://gohugo.io/blog/2018/12-29-how-to-use-godog/</link>
       <pubDate>Sat, 29 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/12-29-how-to-use-godog/</guid>
-      <description>首先访问Git的地址：Godog，它也是用来做Go Test一样的事情，只是换了一种形式。引入了一个概念：BDD。通俗的讲，就是虚拟现实场景，完成一个业务的测试。
-Godog了解 首先介绍Godog是用来干什么的，我也是根据版本库提供的README来解释的，建议大家自己去看看。首先，我们要定义一个场景：feature。这里我们创建一个文件夹feature，专门用来存储这类文件。然后创建一个文件：godogs.feature。文件内容如下：
-# file: $GOPATH/src/godogs/features/godogs.feature Feature: 购买红酒 这里是一堆对这个Feature的描述 描述的继续... Scenario: 买一瓶红酒 Given Neojos Has 5 coins When I buy Red wine Then should be 1 remaining  在控制台执行godog时，控制台会输出默认建议的代码。输出如下：
-You can implement step definitions for undefined steps with these snippets: func neojosHasCoins(arg1 int) error { return godog.ErrPending } func iBuyRedWine() error { return godog.ErrPending } func shouldBeRemaining(arg1 int) error { return godog.ErrPending } func FeatureContext(s *godog.Suite) { s.Step(`^Neojos Has (\d+) coins$`, neojosHasCoins) s.</description>
+      <guid>https://gohugo.io/blog/2018/12-29-how-to-use-godog/</guid>
+      <description>首先访问Git的地址：Godog，它也是用来做Go Test一样的事情，只是换了一种形式。引入了一个概念：BDD。通俗的讲，就是虚拟现实场景，</description>
     </item>
     
     <item>
       <title>Net Transport</title>
-      <link>/blog/2018/2018.12.09-net-transport/</link>
+      <link>https://gohugo.io/blog/2018/2018.12.09-net-transport/</link>
       <pubDate>Sat, 08 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/2018.12.09-net-transport/</guid>
-      <description>在调用第三方请求时，正确使用Client也不是一件非常容易的事。
-下面是截取的一段描述，建议Client或Transport在整个服务期间最好是全局单例的，Transport本身会维护连接的状态，而且线程安全。强烈建议，不要使用系统提供的任何默认值。
- The Client&amp;rsquo;s Transport typically has internal state (cached TCP connections), so Clients should be reused instead of created as needed. Clients are safe for concurrent use by multiple goroutines.
- Dial 关于net包的Dial方法，下面是文档是的例子：
-func TestDial(t *testing.T) { conn, err := net.Dial(&amp;quot;tcp&amp;quot;, &amp;quot;baidu.com:80&amp;quot;) if err != nil { // handle error } fmt.Fprintf(conn, &amp;quot;GET /ping HTTP/1.0\r\n\r\n&amp;quot;) status, err := bufio.NewReader(conn).ReadString(&#39;\n&#39;) if err != nil { t.Fatal(err) } t.Log(status) }  与Dial相关的是类型Dialer ，用来配置Dial的属性，包括Timeout、KeepAlive等。当Dialer的每个field都是零值时，等同于直接调用Dial方法。</description>
+      <guid>https://gohugo.io/blog/2018/2018.12.09-net-transport/</guid>
+      <description>在调用第三方请求时，正确使用Client也不是一件非常容易的事。 下面是截取的一段描述，建议Client或Transport在整个服务期间最好</description>
     </item>
     
     <item>
       <title>singleton pattern</title>
-      <link>/blog/2018/11-03-singleton-pattern/</link>
+      <link>https://gohugo.io/blog/2018/11-03-singleton-pattern/</link>
       <pubDate>Sat, 03 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/11-03-singleton-pattern/</guid>
-      <description>版本 0.02
-在服务运行期间，针对所有goroutine共用一份数据的情况，比如配置信息，都可以选择只读取一次配置文件。但还是要特别注意：
- 单例中不要保存只属于具体的goroutine的数据，否则会出现相互覆盖的情况。 单例中使用的具体业务数据要通过参数的形式传递，避免有成员变量存在。  单例也是Lazy Initialization的一种，对于经常不使用的变量，只有在使用的时候才进行实例化，整体来说，还是节约资源的。
-或者类似net/http中的client这种类型：
- Clients and Transports are safe for concurrent use by multiple goroutines and for efficiency should only be created once and re-used.
- sync.Once简介 Go语言通过sync包可以方便的实现线程安全的单例模式。最叹为观止的是，sync包的实现如此简单。通常用来处理在服务运行期间，只需要初始化一次的变量。
-// Once is an object that will perform exactly one action. type Once struct { m Mutex done uint32 } func (o *Once) Do(f func()) { if atomic.LoadUint32(&amp;amp;o.done) == 1 { return } // Slow-path.</description>
+      <guid>https://gohugo.io/blog/2018/11-03-singleton-pattern/</guid>
+      <description>版本 0.02 在服务运行期间，针对所有goroutine共用一份数据的情况，比如配置信息，都可以选择只读取一次配置文件。但还是要特别注意： 单例中不要</description>
     </item>
     
     <item>
       <title>Go Interface 类型</title>
-      <link>/blog/2018/10-12-go-interface-%E7%B1%BB%E5%9E%8B/</link>
+      <link>https://gohugo.io/blog/2018/10-12-go-interface-%E7%B1%BB%E5%9E%8B/</link>
       <pubDate>Fri, 12 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/10-12-go-interface-%E7%B1%BB%E5%9E%8B/</guid>
-      <description>草稿 0.02
-introduction duck typing 很形象的解释了interface的本意。它是一种特别的数据类型，内部声明了一组要实现的方法集合，任何实现了这些方法的数据类型都可以认为实现了这个interface。这跟其他语言中的抽象类有异曲同工之处，但却不需要去明确声明实现了这个interface。
-空的interface类型没有声明任何方法，所以GO中所有数据类型都实现了interface{}。这也为我们实现泛型编程提供了可能，虽然使用起来并不舒服。
-protocol interface可以做为一组不相关的对象进行交流的一种规范或约束，类比protobuf，数据字段必须严格按照声明进行传递。只不过interface约束的是待实现的方法。
-比如error接口，所有实现了Error()方法的类型都可以赋值给error类型变量，无需明确声明继承关系，就实现了多态。
-// The error built-in interface type is the conventional interface for // representing an error condition, with the nil value representing no error. type error interface { Error() string }  interface用法 generic algorithm interface类型接受任意类型的参数，结合reflect或者断言可以确定参数的实际类型。比如fmt包就有这样用（具体需要深入方法内部）：
-// Println formats using the default formats for its operands and writes to standard output. // Spaces are always added between operands and a newline is appended.</description>
+      <guid>https://gohugo.io/blog/2018/10-12-go-interface-%E7%B1%BB%E5%9E%8B/</guid>
+      <description>草稿 0.02 introduction duck typing 很形象的解释了interface的本意。它是一种特别的数据类型，内部声明了一组要实现的方法集合，任何实现了这些方法的数据类型都可</description>
     </item>
     
     <item>
       <title>Go net 超时处理</title>
-      <link>/blog/2018/10-10-go-net-%E8%B6%85%E6%97%B6%E5%A4%84%E7%90%86/</link>
+      <link>https://gohugo.io/blog/2018/10-10-go-net-%E8%B6%85%E6%97%B6%E5%A4%84%E7%90%86/</link>
       <pubDate>Wed, 10 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/10-10-go-net-%E8%B6%85%E6%97%B6%E5%A4%84%E7%90%86/</guid>
-      <description>序 这篇文章详细介绍了，net/http包中对应HTTP的各个阶段，如何使用timeout来进行读/写超时控制以及服务端和客户端支持设置的timeout类型。本质上，这些timeout都是代码层面对各个函数设置的处理时间。比如，读取客户端读取请求头、读取响应体的时间，本质上都是响应函数的超时时间。
-作者强烈不建议，在工作中使用net/http包上层封装的默认方法（没有明确设置timeout），很容易出现系统文件套接字被耗尽等令人悲伤的情况。比如：
-// 相信工作中也不会出现这样的代码 func main() { http.ListenAndServe(&amp;quot;127.0.0.1:3900&amp;quot;, nil) }  正文 在使用Go开发HTTP Server或client的过程中，指定timeout很常见，但也很容易犯错。timeout错误一般还不容易被发现，可能只有当系统出现请求超时、服务挂起时，错误才被严肃暴露出来。
-HTTP是一个复杂的多阶段协议，所以也不存在一个timeout值适用于所有场景。想一下StreamingEndpoint、JSON API、 Comet， 很多情况下，默认值根本不是我们所需要的值。
-这篇博客中，我会对HTTP请求的各个阶段进行拆分，列举可能需要设置的timeout值。然后从客户端和服务端的角度，分析它们设置timeout的不同方式。
-SetDeadline 首先，你需要知道Go所暴露出来的，用于实现timeout的方法：Deadline。
-timeout本身通过 net.Conn包中的Set[Read|Write]Deadline(time.Time)方法来控制。Deadline是一个绝对的时间点，当连接的I/O操作超过这个时间点而没有完成时，便会因为超时失败。
-Deadlines不同于timeouts. 对一个连接而言，设置Deadline之后，除非你重新调用SetDeadline，否则这个Deadline不会变化。前面也提了，Deadline是一个绝对的时间点。因此，如果要通过SetDeadline来设置timeout，就不得不在每次执行Read/Write前重新调用它。
-你可能并不想直接调用SetDeadline方法，而是选择 net/http提供的更上层的方法。但你要时刻记住：所有timeout操作都是通过设置Deadline实现的。每次调用，它们并不会去重置的deadline。
-Server Timeouts 关于服务端超时，这篇帖子So you want to expose Go on the Internet也介绍了很多信息，特别是关于HTTP/2和Go 1.7 bugs的部分.
-对于服务端而言，指定timeout至关重要。否则，一些请求很慢或消失的客户端很可能导致系统文件描述符泄漏，最终服务端报错：
-http: Accept error: accept tcp [::]:80: accept4: too many open files; retrying in 5ms  在创建http.Server的时候，可以通过ReadTimeout和WriteTimeout来设置超时。你需要明确的声明它们：
-srv := &amp;amp;http.Server{ ReadTimeout: 5 * time.Second, WriteTimeout: 10 * time.Second, } log.</description>
+      <guid>https://gohugo.io/blog/2018/10-10-go-net-%E8%B6%85%E6%97%B6%E5%A4%84%E7%90%86/</guid>
+      <description>序 这篇文章详细介绍了，net/http包中对应HTTP的各个阶段，如何使用timeout来进行读/写超时控制以及服务端和客户端支持设置的ti</description>
     </item>
     
     <item>
       <title>sync.Once</title>
-      <link>/blog/2018/09-03-sync.once/</link>
+      <link>https://gohugo.io/blog/2018/09-03-sync.once/</link>
       <pubDate>Mon, 03 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/09-03-sync.once/</guid>
-      <description>草稿0.0
-sync.Once Go语言通过sync包可以方便的实现线程安全的单利模式。最叹为观止的是，sync包的实现如此简单。
-// Once is an object that will perform exactly one action. type Once struct { m Mutex done uint32 } func (o *Once) Do(f func()) { if atomic.LoadUint32(&amp;amp;o.done) == 1 { return } // Slow-path. o.m.Lock() defer o.m.Unlock() if o.done == 0 { defer atomic.StoreUint32(&amp;amp;o.done, 1) f() } }  问题用法 下面声明一个获取计算签名的配置包，通过name来获取对应的值。获取是一个Lazy Initialization的过程，在需要使用的时候才会初始化config变量。
-package encrypt_config //key-secret pairs var config map[string]string func loadConfig(name string) string { if config == nil { config = map[string]string{ &amp;quot;zi-ru&amp;quot;: &amp;quot;Mji9##a0LY&amp;quot;, &amp;quot;baidu&amp;quot;: &amp;quot;Kj8*0okhHH&amp;quot;, } } return config[name] }  上述代码最显而易见的问题：并发的情况下，包内变量config被初始化多次。因为各个goroutine访问config时可能都是nil。但还存在一种可能导致错误：某一个goroutine发现config ！= nil，但是当通过name去获取对应的值时，返回的却是空字符串。</description>
+      <guid>https://gohugo.io/blog/2018/09-03-sync.once/</guid>
+      <description>草稿0.0 sync.Once Go语言通过sync包可以方便的实现线程安全的单利模式。最叹为观止的是，sync包的实现如此简单。 // Once is an object that will perform exactly one action. type Once struct {</description>
     </item>
     
     <item>
       <title>本地缓存BigCache</title>
-      <link>/blog/2018/08-19-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98bigcache/</link>
+      <link>https://gohugo.io/blog/2018/08-19-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98bigcache/</link>
       <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/08-19-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98bigcache/</guid>
-      <description>BigCache的作者做了详细的阐述，尽在这里：Writing a very fast cache service with millions of entries in Go。不得不说，作者的表述非常完美，给它点赞。GitHub地址在：github.com/allegro/bigcache。Usage非常简单。
-Omitting GC 当map中存储过百万的object时，Go语言自身的GC甚至会影响不相关的请求，即使是对一个空对象做Marsh操作，响应时间也可能在1s以上。所以，如何避免Go默认对map做的Garbage Collector至关重要。
- GC回收heap中对象，所以我们不把对象创建在heap中就可以避过垃圾回收。查阅offheap。 使用freecache. 在map结构的key和value中不存储pointer，这样便可以将map创建在堆上，同时忽略GC的影响。这来源于Go的优化.  Concurrency 为了避免加锁成为系统的瓶颈，BigTable采用了Shared的方式来解决，确实也有点Redis单线程的感觉。将一块大的数据划分成多块小的数据，为小数据块加锁，确实很好的缓解了加锁的瓶颈。这体现出了拆分的思想，突然想到了曾经被面试的问题：“请将2G的数据进行排序”。
-我比较好奇它的Hash方法，客户端的key转换为实际存储的hashedKey的过程。请看通过hashedKey获取shard的部分，作者没有使用%取余来实现，而是使用了&amp;amp;与运算来替代，确实很注重细节啊！
-说到与运算:0&amp;amp;0=0; 0&amp;amp;1=0; 1&amp;amp;0=0; 1&amp;amp;1=1;，所以，最终拆分个数完全取决与二进制中1的数量。如果shardMask等于3，那就可以拆分成4份，如果等于4，那结果就是2份，以此类推。
-//通过客户端的key获取实际存储的key // Sum64 gets the string and returns its uint64 hash value. func (f fnv64a) Sum64(key string) uint64 { var hash uint64 = offset64 for i := 0; i &amp;lt; len(key); i++ { hash ^= uint64(key[i]) hash *= prime64 } return hash } //通过实际存储的key获取shard块，使用与运算。 func (c *BigCache) getShard(hashedKey uint64) (shard *cacheShard) { return c.</description>
+      <guid>https://gohugo.io/blog/2018/08-19-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98bigcache/</guid>
+      <description>BigCache的作者做了详细的阐述，尽在这里：Writing a very fast cache service with millions of entries in Go。不得不说，作者的表述非常完美，给它点赞。GitHub</description>
     </item>
     
     <item>
       <title>Golang下的Error</title>
-      <link>/blog/2018/08-11-golang%E4%B8%8B%E7%9A%84error/</link>
+      <link>https://gohugo.io/blog/2018/08-11-golang%E4%B8%8B%E7%9A%84error/</link>
       <pubDate>Sat, 11 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/08-11-golang%E4%B8%8B%E7%9A%84error/</guid>
-      <description>感觉error确实没啥可说的，这个简单到极致的package总共也不超过10行有效代码。而且常用的fmt也提供了很方便的返回error的方法：
-// Package errors implements functions to manipulate errors. package errors // New returns an error that formats as the given text. func New(text string) error { return &amp;amp;errorString{text} } // errorString is a trivial implementation of error. type errorString struct { s string } func (e *errorString) Error() string { return e.s }  自定义error error设计的如此简单，导致其判断错误类型就比较麻烦。比如我想判断MySQL的报错是否由主键冲突导致，我可以这样处理：
-const PrimaryKeyDuplicateCode = &amp;quot;1062&amp;quot; if strings.Contains(err.Error(), PrimaryKeyDuplicateCode) { //commands }  这样的判断逻辑，如果仅是用于特殊情况，还勉强可以接收。但如果你要整个项目都使用这种形式的话，就会觉得精神崩溃，心理无法承受（反正我是这样感觉的）。所以，我们要自定义实现一个Error结构。当然，这样搞还有syscall这个package。</description>
+      <guid>https://gohugo.io/blog/2018/08-11-golang%E4%B8%8B%E7%9A%84error/</guid>
+      <description>感觉error确实没啥可说的，这个简单到极致的package总共也不超过10行有效代码。而且常用的fmt也提供了很方便的返回error的方法</description>
     </item>
     
     <item>
       <title>Go反射</title>
-      <link>/blog/2018/05-31-go%E5%8F%8D%E5%B0%84/</link>
+      <link>https://gohugo.io/blog/2018/05-31-go%E5%8F%8D%E5%B0%84/</link>
       <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/05-31-go%E5%8F%8D%E5%B0%84/</guid>
-      <description>人生的挫折感并不取决于境遇本身，而取决于境遇和自我期待之间的落差。
- 概述 对interface类型操作，如何对内部的值进行处理和分析。比如判断interface是否底层存储的是struct类型，以及该struct是否含有某个特定的Field值。
-interface类型包含两部分内容：dynamic type和dynamic value。当转换为interface类型后（操作是默认的），原类型下声明的方法，interface类型就无法再调用了。
-实际工作中，interface类型会接收任意类型的值，处理的过程很多都是通过reflect实现的。
-reflect.Value reflect里两个主要角色：Value和Type。Value用于处理值的操作，反射过程中处理的值是原始值的值拷贝，所以操作中要注意区分值传递和地址传递。
-对于指针类型的值，只有获取其原始值，才可以达到修改的目的。如下所示，obj实际类型是一个struct的指针，想要将其转换成“值类型”，调用Elem方法来实现。
-//获取指针的实际类型 v := reflect.ValueOf(obj) //Kind == Ptr v = v.Elem() if v.Kind() != reflect.Struct { return NewError(http.ErrorInvalidParam, &amp;quot;interface类型必须是struct结构&amp;quot;, nil) }  一些其他的操作，比如通过reflect.Value获取reflect.Type类型，通过诸如Index、Elem、MapIndex、Field等来操作不同的数据类型，当然调用前最好结合Kind对实际类型进行判断，保证调用的安全性。
-查找指定的Field 我们假设struct中包含有某个特殊Field，那么在接口层面该如何进行判断呢？比如，查看结构体中是否含有Data的Field.
-reflect本身提供了多种判断形式。以FieldByName为例，Type和Value都实现了该方法，但返回值不相同。reflect要求调用的值本身需要是struct类型才可以。
-h := v.FieldByName(HeaderHField) //HeaderHField为自定义常亮 if h.IsValid() { }  将value转换为interface类型 reflect操作的interface类型，即由interface转换为reflect.Value类型，同样，逆向的转换也是可以的。
-它提供了interface()方法。转换之后，我们就可以继续使用断言进行实际类型转换了。
-value := h.Interface() //将value转换为interface customHead, isOk := value.(string) // 断言为string类型  安全设置结构体中的值 为了使反射过程变得更安全，需要了解几个函数
- CanAddr   CanAddr reports whether the value&#39;s address can be obtained with Addr.</description>
+      <guid>https://gohugo.io/blog/2018/05-31-go%E5%8F%8D%E5%B0%84/</guid>
+      <description>人生的挫折感并不取决于境遇本身，而取决于境遇和自我期待之间的落差。 概述 对interface类型操作，如何对内部的值进行处理和分析。比如判断i</description>
     </item>
     
     <item>
       <title>Go test基础用法</title>
-      <link>/blog/2018/2018.05.02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</link>
+      <link>https://gohugo.io/blog/2018/2018.05.02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</link>
       <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/2018.05.02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</guid>
-      <description>当直接使用IDE进行单元测试时，有没有好奇它时如何实现的？比如GoLand写的测试用例。
- 所有的代码都需要写测试用例。这不仅仅是对自己的代码负责，也是对别人的负责。
-最近工作中使用glog这个库，因为它对外提供的方法都很简单，想封装处理一下。但却遇到了点麻烦：这个包需要在命令行传递log_dir参数，来指定日志文件的路径。
-所以，正常运行的话，首先需要编译可执行文件，然后命令行指定参数执行。如下示例：
-go build main.go ./main -log_dir=&amp;quot;/data&amp;quot; //当前目录作为日志输出目录  但在go test的时候，如何指定这个参数了？
-Test 调查发现，发现go test也可以生成可执行文件。需要使用-c来指定。示例如下：
-go test -c param_test_dir //最后一个参数是待测试的目录  执行后就会发现：这样的做法，会运行所有的Test用例。如何仅仅执行某一个测试用例了（编译器到底是如何做到的？）。
-这里有另一个属性-run，用来指定执行的测试用例的匹配模式。举个例子：
-func TestGetRootLogger(t *testing.T) { writeLog(&amp;quot;测试&amp;quot;) } func TestGetRootLogger2(t *testing.T) { writeLog(&amp;quot;测试2&amp;quot;) }  当我在命令行明确匹配执行Logger2，运行的时候确实仅仅执行该测试用例
-go test -v -run Logger2 ./util/ //-v表示verbose，输出相信信息  但是，我发现，在指定了c参数之后，run参数无法生效！这样的话，还真是没有好的办法来处理这种情况。
-option -timeout
-默认go test运行超过10m会发生panic。如果需要运行更长的时间，需要明确指定。将timeout指定为0，用于忽略时间限制。
-nohup go test -v -timeout 0 -run TestGetRange . &amp;gt; log.txt  使用map的测试 可以结合使用闭包，设置期望值，来写测试用例。Run函数内部是阻塞的，所以TestSum方法依次执行测试。
-同时testSumFunc返回了test方法使用了闭包的特性，对返回函数内部的值是无法确定的。
-func TestSum(t *testing.</description>
+      <guid>https://gohugo.io/blog/2018/2018.05.02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</guid>
+      <description>当直接使用IDE进行单元测试时，有没有好奇它时如何实现的？比如GoLand写的测试用例。 所有的代码都需要写测试用例。这不仅仅是对自己的代码负</description>
     </item>
     
     <item>
       <title>xorm使用reverse指令创建模版</title>
-      <link>/blog/2018/04-19-xorm%E4%BD%BF%E7%94%A8reverse%E6%8C%87%E4%BB%A4%E5%88%9B%E5%BB%BA%E6%A8%A1%E7%89%88/</link>
+      <link>https://gohugo.io/blog/2018/04-19-xorm%E4%BD%BF%E7%94%A8reverse%E6%8C%87%E4%BB%A4%E5%88%9B%E5%BB%BA%E6%A8%A1%E7%89%88/</link>
       <pubDate>Thu, 19 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/04-19-xorm%E4%BD%BF%E7%94%A8reverse%E6%8C%87%E4%BB%A4%E5%88%9B%E5%BB%BA%E6%A8%A1%E7%89%88/</guid>
-      <description>这只能算作一次小的功能介绍
-结合我们使用过的go数据操作类的库，执行的逻辑基本都是：将数据库返回的数据，转换成我们提前声明的结构体对象，然后返回。
-今天要介绍的就是如何自动创建每个table对应的结构体。
-查看 xorm tool的介绍：
-xorm reverse mysql root:@/xorm_test?charset=utf8 templates/goxorm  初看这个介绍，让我费了一段时间才理解。你可以在命令行查看它的具体含义：
-xorm help reverse  命令中templates/goxorm其实是xorm提供好的模版路径。我错误的理解成了：执行命令生成结果的存储路径。
-tmplPath Template dir for generated. the default templates dir has provide 1 template  其次就是mysql的连接语句：一般来说，都是这样写的：
-username:pwd@ip:port/db?charset=utf8  但是使用上述方式却无法正常执行命令，正确的方式是：
-xorm reverse &amp;quot;username:pwd@tcp(ip:port)/db?charset=utf&amp;quot; templates/goxorm  </description>
+      <guid>https://gohugo.io/blog/2018/04-19-xorm%E4%BD%BF%E7%94%A8reverse%E6%8C%87%E4%BB%A4%E5%88%9B%E5%BB%BA%E6%A8%A1%E7%89%88/</guid>
+      <description>这只能算作一次小的功能介绍 结合我们使用过的go数据操作类的库，执行的逻辑基本都是：将数据库返回的数据，转换成我们提前声明的结构体对象，然后返</description>
+    </item>
+    
+    <item>
+      <title>Using context cancellation in Go</title>
+      <link>https://gohugo.io/blog/2019/19-06-23-using-context-cancellation-in-go/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gohugo.io/blog/2019/19-06-23-using-context-cancellation-in-go/</guid>
+      <description>爱因斯坦曾说过：“每当我的头脑没有问题思考时，我就喜欢将知道的定理重新验证一番，这样做并没有什么目的，只是让自己有机会重新享受一下专心思考的</description>
     </item>
     
   </channel>

@@ -1,410 +1,105 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-12345678-0', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>Go 调度模型（一） - 渐行渐远</title>
-    <meta property="og:title" content="Go 调度模型（一） - 渐行渐远">
-    
-
-    
+    <title>
       
+  Go 调度模型（一） &ndash; 渐行渐远
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="想清楚了就去做，做的时候不要再回头想。 OS Scheduler 在操作系统中保存了运行的进程列表，以及进程的运行状态(运行中、可运行及不可运行)。当进程运行时长超|Hugo-Primer theme&#39;s example site">
     
 
+    <meta name="apple-mobile-web-app-title" content="渐行渐远">
+    
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="Go 调度模型（一） | 渐行渐远">
+    <meta name="twitter:description" content="想清楚了就去做，做的时候不要再回头想。 OS Scheduler 在操作系统中保存了运行的进程列表，以及进程的运行状态(运行中、可运行及不可运行)。当进程运行时长超|Hugo-Primer theme&#39;s example site">
+    <meta name="twitter:image" content="https://gohugo.io/twitter-card.png">
     
 
-    
-    
 
-
-<link href='//cdn.bootcss.com/highlight.js/9.14.1/styles/googlecode.min.css' rel='stylesheet' type='text/css' />
-
-
-
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
   </head>
 
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://gohugo.io/">
+    渐行渐远
+  </a>
+
   
-  <body class="blog">
-    <header class="masthead">
-      <h1 class="headimg">
-    
-    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
-</h1>
-
-
-
-      <nav class="menu">
-        <input id="menu-check" type="checkbox" />
-        <label id="menu-label" for="menu-check" class="unselectable">
-          <span class="icon close-icon">✕</span>
-          <span class="icon open-icon">☰</span>
-          <span class="text">Menu</span>
-        </label>
-        <ul>
-        
-        
-        <li><a href="/blog/">Blog</a></li>
-        
-        <li><a href="/life/">Life</a></li>
-        
-        <li><a href="/categories/">Categories</a></li>
-        
-        <li><a href="/tags/">Tags</a></li>
-        
-        <li><a href="/about/">About</a></li>
-        
-        </ul>
-      </nav>
-
-      
-      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
-        
-
-  <div class="Box Box--blue p-2 mb-3 mt-5">
-    <a href="/tags/" class="link-gray-dark">
-      <h4>Tags</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/2018" class="link-gray text-emphasized css-truncate-target"><span class="">2018th</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/dailylife" class="link-gray text-emphasized css-truncate-target"><span class="">Daily life</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mq" class="link-gray text-emphasized css-truncate-target"><span class="">M q</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">My s q l</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/cache" class="link-gray text-emphasized css-truncate-target"><span class="">Cache</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/design-pattern" class="link-gray text-emphasized css-truncate-target"><span class="">Design pattern</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/docker" class="link-gray text-emphasized css-truncate-target"><span class="">Docker</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/git" class="link-gray text-emphasized css-truncate-target"><span class="">Git</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/golang" class="link-gray text-emphasized css-truncate-target"><span class="">Golang</span></a>
-      <span class="text-right Counter">34</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/http" class="link-gray text-emphasized css-truncate-target"><span class="">Http</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/js" class="link-gray text-emphasized css-truncate-target"><span class="">Js</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/linux" class="link-gray text-emphasized css-truncate-target"><span class="">Linux</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mongo" class="link-gray text-emphasized css-truncate-target"><span class="">Mongo</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">Mysql</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/net" class="link-gray text-emphasized css-truncate-target"><span class="">Net</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/nginx" class="link-gray text-emphasized css-truncate-target"><span class="">Nginx</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/npm" class="link-gray text-emphasized css-truncate-target"><span class="">Npm</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/pay" class="link-gray text-emphasized css-truncate-target"><span class="">Pay</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/php" class="link-gray text-emphasized css-truncate-target"><span class="">Php</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protobufs" class="link-gray text-emphasized css-truncate-target"><span class="">Protobufs</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protocol" class="link-gray text-emphasized css-truncate-target"><span class="">Protocol</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tcp/ip" class="link-gray text-emphasized css-truncate-target"><span class="">Tcp/ip</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tools" class="link-gray text-emphasized css-truncate-target"><span class="">Tools</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/transaction" class="link-gray text-emphasized css-truncate-target"><span class="">Transaction</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/translate" class="link-gray text-emphasized css-truncate-target"><span class="">Translate</span></a>
-      <span class="text-right Counter">14</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/%e7%bb%9f%e8%ae%a1" class="link-gray text-emphasized css-truncate-target"><span class="">统计</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
-
-
-
-  <div class="Box Box--blue p-2 mb-3">
-    <a href="/categories/" class="link-gray-dark">
-      <h4>Categories</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-01" class="link-gray text-emphasized css-truncate-target"><span class="">2018 01</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-02" class="link-gray text-emphasized css-truncate-target"><span class="">2018 02</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-03" class="link-gray text-emphasized css-truncate-target"><span class="">2018 03</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-04" class="link-gray text-emphasized css-truncate-target"><span class="">2018 04</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-05" class="link-gray text-emphasized css-truncate-target"><span class="">2018 05</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-06" class="link-gray text-emphasized css-truncate-target"><span class="">2018 06</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-07" class="link-gray text-emphasized css-truncate-target"><span class="">2018 07</span></a>
-      <span class="text-right Counter">7</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-08" class="link-gray text-emphasized css-truncate-target"><span class="">2018 08</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-09" class="link-gray text-emphasized css-truncate-target"><span class="">2018 09</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-10" class="link-gray text-emphasized css-truncate-target"><span class="">2018 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-11" class="link-gray text-emphasized css-truncate-target"><span class="">2018 11</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-12" class="link-gray text-emphasized css-truncate-target"><span class="">2018 12</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-01" class="link-gray text-emphasized css-truncate-target"><span class="">2019 01</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-02" class="link-gray text-emphasized css-truncate-target"><span class="">2019 02</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-03" class="link-gray text-emphasized css-truncate-target"><span class="">2019 03</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-04" class="link-gray text-emphasized css-truncate-target"><span class="">2019 04</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-05" class="link-gray text-emphasized css-truncate-target"><span class="">2019 05</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-06" class="link-gray text-emphasized css-truncate-target"><span class="">2019 06</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-07" class="link-gray text-emphasized css-truncate-target"><span class="">2019 07</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-08" class="link-gray text-emphasized css-truncate-target"><span class="">2019 08</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-09" class="link-gray text-emphasized css-truncate-target"><span class="">2019 09</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-10" class="link-gray text-emphasized css-truncate-target"><span class="">2019 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-11" class="link-gray text-emphasized css-truncate-target"><span class="">2019 11</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-12" class="link-gray text-emphasized css-truncate-target"><span class="">2019 12</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-17" class="link-gray text-emphasized css-truncate-target"><span class="">2019 17</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/summarize" class="link-gray text-emphasized css-truncate-target"><span class="">Summarize</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
+  
+</nav>
 
       </div>
 
-    </header>
-
-    <article class="main">
-      <header class="title">
-      <h1>Go 调度模型（一）</h1>
-
-
-
-
-    
-    
-    <section class="post-meta">
-        <span class="post-author">付辉
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
         
-            
-            
-             /  2019-03-24
-            
-        </span>
-        
-        <a href="/tags/translate">translate</a>
-        
-        <a href="/tags/golang">golang</a>
-        
-    </section>
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Go 调度模型（一）</div>
+  </div>
+  <div class="Subhead-description">
     
 
 
 
-<hr>
-      </header>
 
-        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript">
-            var height = parseInt($("#bar").css("top"))
-            $(function () {
-                $(window).scroll(function () {
-                    var currentH = $(document).scrollTop();
-                    if (currentH > height) {
-                        $("#bar").css("top", (currentH) + 'px');
-                    } else {
-                        $('#bar').css('top', height + 'px');
-                    }
+<a href='/tags/translate' class="muted-link">
+  <span class="Label Label--gray">translate</span>
+</a>
 
-                });
-            });
-        </script>
+<a href='/tags/golang' class="muted-link">
+  <span class="Label Label--gray">golang</span>
+</a>
 
 
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2019-03-24. Published at: 2019-03-24.">
+        
+          Published: 2019-03-24
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    
 
 <blockquote>
 <p><code>想清楚了就去做，做的时候不要再回头想。</code></p>
@@ -443,106 +138,91 @@ runtime, OS, and programmer defined code`" /></p>
 <h2 id="goroutine">Goroutine</h2>
 
 <p><code>G</code>用于表示<code>Goroutine</code>及它所包含的栈和状态信息。<code>Goroutine</code>存在于<code>Go Runtime</code>的的虚拟空间，而非<code>OS</code>中。</p>
-
-<pre><code class="language-go">// src/runtime/runtime2.go
-// 以下结构体精简了很多字段
-type g struct {
-	stack       stack   // offset known to runtime/cgo
-
-	m              *m      // current m; offset known to arm liblink
-	sched          gobuf
-	stktopsp       uintptr        // expected sp at top of stack, to check in traceback
-	param          unsafe.Pointer // passed parameter on wakeup
-	atomicstatus   uint32
-	stackLock      uint32 // sigprof/scang lock; TODO: fold in to atomicstatus
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// src/runtime/runtime2.go
+</span><span class="c1">// 以下结构体精简了很多字段
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">g</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">stack</span>       <span class="nx">stack</span>   <span class="c1">// offset known to runtime/cgo
+</span><span class="c1"></span>
+	<span class="nx">m</span>              <span class="o">*</span><span class="nx">m</span>      <span class="c1">// current m; offset known to arm liblink
+</span><span class="c1"></span>	<span class="nx">sched</span>          <span class="nx">gobuf</span>
+	<span class="nx">stktopsp</span>       <span class="kt">uintptr</span>        <span class="c1">// expected sp at top of stack, to check in traceback
+</span><span class="c1"></span>	<span class="nx">param</span>          <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="c1">// passed parameter on wakeup
+</span><span class="c1"></span>	<span class="nx">atomicstatus</span>   <span class="kt">uint32</span>
+	<span class="nx">stackLock</span>      <span class="kt">uint32</span> <span class="c1">// sigprof/scang lock; TODO: fold in to atomicstatus
+</span><span class="c1"></span><span class="p">}</span></code></pre></div>
 <p>代码中，通过追加<code>go</code>前缀遍可以创建<code>groutine</code>。</p>
-
-<pre><code class="language-go">go func(){
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">go</span> <span class="kd">func</span><span class="p">(){</span>
+<span class="p">}</span></code></pre></div>
 <h2 id="machine"><code>Machine</code></h2>
 
 <p>物理执行的单元，用于表示<code>OS Threads</code>。<code>M</code>包含当前运行的<code>Goroutine</code>信息等。</p>
-
-<pre><code class="language-go">// src/runtime/runtime2.go
-type m struct {
-	g0      *g     // goroutine with scheduling stack
-	
-	// Fields not known to debuggers.
-	goSigStack    gsignalStack // Go-allocated signal handling stack
-	curg          *g       // current running goroutine
-	p             puintptr // attached p for executing go code (nil if not executing go code)
-	spinning      bool // m is out of work and is actively looking for work
-	blocked       bool // m is blocked on a note
-	freeWait      uint32 // if == 0, safe to free g0 and delete m (atomic)
-	alllink       *m // on allm
-	schedlink     muintptr
-	createstack   [32]uintptr    // stack that created this thread.
-	thread        uintptr // thread handle
-	freelink      *m      // on sched.freem
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// src/runtime/runtime2.go
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">m</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">g0</span>      <span class="o">*</span><span class="nx">g</span>     <span class="c1">// goroutine with scheduling stack
+</span><span class="c1"></span>	
+	<span class="c1">// Fields not known to debuggers.
+</span><span class="c1"></span>	<span class="nx">goSigStack</span>    <span class="nx">gsignalStack</span> <span class="c1">// Go-allocated signal handling stack
+</span><span class="c1"></span>	<span class="nx">curg</span>          <span class="o">*</span><span class="nx">g</span>       <span class="c1">// current running goroutine
+</span><span class="c1"></span>	<span class="nx">p</span>             <span class="nx">puintptr</span> <span class="c1">// attached p for executing go code (nil if not executing go code)
+</span><span class="c1"></span>	<span class="nx">spinning</span>      <span class="kt">bool</span> <span class="c1">// m is out of work and is actively looking for work
+</span><span class="c1"></span>	<span class="nx">blocked</span>       <span class="kt">bool</span> <span class="c1">// m is blocked on a note
+</span><span class="c1"></span>	<span class="nx">freeWait</span>      <span class="kt">uint32</span> <span class="c1">// if == 0, safe to free g0 and delete m (atomic)
+</span><span class="c1"></span>	<span class="nx">alllink</span>       <span class="o">*</span><span class="nx">m</span> <span class="c1">// on allm
+</span><span class="c1"></span>	<span class="nx">schedlink</span>     <span class="nx">muintptr</span>
+	<span class="nx">createstack</span>   <span class="p">[</span><span class="mi">32</span><span class="p">]</span><span class="kt">uintptr</span>    <span class="c1">// stack that created this thread.
+</span><span class="c1"></span>	<span class="nx">thread</span>        <span class="kt">uintptr</span> <span class="c1">// thread handle
+</span><span class="c1"></span>	<span class="nx">freelink</span>      <span class="o">*</span><span class="nx">m</span>      <span class="c1">// on sched.freem
+</span><span class="c1"></span><span class="p">}</span></code></pre></div>
 <h2 id="processor"><code>Processor</code></h2>
 
 <p><code>P</code>记录了<code>G</code>和<code>M</code>的相关信息，<code>P</code>需要调度<code>M</code>来让<code>M</code>执行<code>G</code>的代码。在<code>P</code>中包含了本地可运行的<code>Goroutine</code>队列，这样的设计也是为了优化访问全局<code>Goroutines</code>队列频繁加锁的性能问题。当一个新的<code>G</code>被创建，它会被追加在相应<code>P</code>队列的末尾，以保证最终会被执行。</p>
 
 <p>此外，当<code>P</code>没有可运行的<code>Goroutine</code>处理时，它会随机从其他<code>P</code>的<code>Goroutines</code>队列末尾取一半<code>G</code>用于自己消费。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// src/runtime/runtime2.go
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">p</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">lock</span> <span class="nx">mutex</span>
 
-<pre><code class="language-go">// src/runtime/runtime2.go
-type p struct {
-	lock mutex
+	<span class="nx">id</span>          <span class="kt">int32</span>
+	<span class="nx">m</span>           <span class="nx">muintptr</span>   <span class="c1">// back-link to associated m (nil if idle)
+</span><span class="c1"></span>	<span class="nx">mcache</span>      <span class="o">*</span><span class="nx">mcache</span>
 
-	id          int32
-	m           muintptr   // back-link to associated m (nil if idle)
-	mcache      *mcache
+	<span class="c1">// Queue of runnable goroutines. Accessed without lock.
+</span><span class="c1"></span>	<span class="nx">runqhead</span> <span class="kt">uint32</span>
+	<span class="nx">runqtail</span> <span class="kt">uint32</span>
+	<span class="nx">runq</span>     <span class="p">[</span><span class="mi">256</span><span class="p">]</span><span class="nx">guintptr</span>
+	<span class="c1">// runnext, if non-nil, is a runnable G that was ready&#39;d by
+</span><span class="c1"></span>	<span class="c1">// the current G and should be run next instead of what&#39;s in
+</span><span class="c1"></span>	<span class="c1">// runq if there&#39;s time remaining in the running G&#39;s time
+</span><span class="c1"></span>	<span class="c1">// slice. It will inherit the time left in the current time
+</span><span class="c1"></span>	<span class="c1">// slice. If a set of goroutines is locked in a
+</span><span class="c1"></span>	<span class="c1">// communicate-and-wait pattern, this schedules that set as a
+</span><span class="c1"></span>	<span class="c1">// unit and eliminates the (potentially large) scheduling
+</span><span class="c1"></span>	<span class="c1">// latency that otherwise arises from adding the ready&#39;d
+</span><span class="c1"></span>	<span class="c1">// goroutines to the end of the run queue.
+</span><span class="c1"></span>	<span class="nx">runnext</span> <span class="nx">guintptr</span>
 
-	// Queue of runnable goroutines. Accessed without lock.
-	runqhead uint32
-	runqtail uint32
-	runq     [256]guintptr
-	// runnext, if non-nil, is a runnable G that was ready'd by
-	// the current G and should be run next instead of what's in
-	// runq if there's time remaining in the running G's time
-	// slice. It will inherit the time left in the current time
-	// slice. If a set of goroutines is locked in a
-	// communicate-and-wait pattern, this schedules that set as a
-	// unit and eliminates the (potentially large) scheduling
-	// latency that otherwise arises from adding the ready'd
-	// goroutines to the end of the run queue.
-	runnext guintptr
-
-	// Available G's (status == Gdead)
-	gfree    *g
-}
-</code></pre>
-
+	<span class="c1">// Available G&#39;s (status == Gdead)
+</span><span class="c1"></span>	<span class="nx">gfree</span>    <span class="o">*</span><span class="nx">g</span>
+<span class="p">}</span></code></pre></div>
 <h2 id="code-snippet"><code>Code snippet</code></h2>
 
 <p>尝试执行下面的代码，会发现这其实是一个死循环，最后的打印结果永远得不到输出。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+<span class="kn">import</span> <span class="s">&#34;time&#34;</span>
+<span class="kn">import</span> <span class="s">&#34;runtime&#34;</span>
 
-<pre><code class="language-go">package main
-import &quot;fmt&quot;
-import &quot;time&quot;
-import &quot;runtime&quot;
-
-func main() {
-    var result int
-    processors := runtime.GOMAXPROCS(0)  
-    for i := 0; i &lt; processors; i++ {
-        go func() {
-            for { result++ }
-        }()
-    }
-    time.Sleep(time.Second)       //wait for go function to increment the value.
-    fmt.Println(&quot;result =&quot;, result)
-}
-</code></pre>
-
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">result</span> <span class="kt">int</span>
+    <span class="nx">processors</span> <span class="o">:=</span> <span class="nx">runtime</span><span class="p">.</span><span class="nf">GOMAXPROCS</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  
+    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">processors</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+        <span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">{</span> <span class="nx">result</span><span class="o">++</span> <span class="p">}</span>
+        <span class="p">}()</span>
+    <span class="p">}</span>
+    <span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>       <span class="c1">//wait for go function to increment the value.
+</span><span class="c1"></span>    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;result =&#34;</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
 <p>在<code>Golang</code>运行时，创建的<code>OS Threads</code>最多等于<code>GOMAXPROCS</code>，<code>Goroutine</code>就在这有限的<code>OS Threads</code>上被调度执行。</p>
 
 <p>在代码中，当前并行运行的<code>Goroutine</code>全部用来做无限循环的累加操作，运行数量等于<code>GOMAXPROCS</code>。而<code>main</code>是一个额外的<code>Goroutine</code>。根据<code>Golang Scheduler</code>的设定，因为其他<code>Goroutine</code>都在紧张的运行，调度器并不会将其中的任何一个<code>Goroutine</code>挂起，所以<code>main goroutine</code>永远不会被调度执行。</p>
@@ -559,45 +239,63 @@ func main() {
 <li><a href="http://www1.cs.columbia.edu/~aho/cs6998/reports/12-12-11_DeshpandeSponslerWeiss_GO.pdf"><code>Analysis of the Go runtime scheduler</code></a></li>
 </ol>
 
+  </section>
 
-  <footer>
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
   
-<nav class="post-nav">
-  <span class="nav-prev">&larr; <a href="/blog/2019/19-03-16-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8C/">数据一致性（二）</a></span>
-  <span class="nav-next"><a href="/blog/2019/19-03-25-%E5%9F%BA%E4%BA%8Ego%E7%9A%84cron-job%E5%AE%9E%E7%8E%B0/">基于Go的Cron Job实现</a> &rarr;</span>
-</nav>
-
-
-
-
-
-<script src="//yihui.name/js/math-code.js"></script>
-<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-<script async src="//yihui.name/js/center-img.js"></script>
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Go 调度模型（一）</b><nav id="TableOfContents"><ul>
+<li><a href="#os-scheduler"><code>OS Scheduler</code></a></li>
+<li><a href="#golang-scheduler">Golang Scheduler</a></li>
+<li><a href="#goroutine">Goroutine</a></li>
+<li><a href="#machine"><code>Machine</code></a></li>
+<li><a href="#processor"><code>Processor</code></a></li>
+<li><a href="#code-snippet"><code>Code snippet</code></a></li>
+</ul></li>
+</ul>
+</nav></div>
   
-
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/highlight.min.js"></script>
-
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/r.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/yaml.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/tex.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/go.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
-
-
 
   
-  <hr>
-  <div class="copyright">&copy; <a href="http://neojos.com">DDF</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+    <div>
+      
+    </div>
   
-  </footer>
-  </article>
-  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy;Qiushi Pan 2018-2019 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+    
   </body>
 </html>
-

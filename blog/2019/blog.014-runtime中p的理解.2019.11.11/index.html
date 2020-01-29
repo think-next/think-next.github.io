@@ -1,570 +1,260 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-12345678-0', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>runtime中P的理解 - 渐行渐远</title>
-    <meta property="og:title" content="runtime中P的理解 - 渐行渐远">
-    
-
-    
+    <title>
       
+  runtime中P的理解 &ndash; 渐行渐远
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="P是在Go1.1引入的概念，初始默认等于CPU核的数量。P只是一个逻辑概念，跟CPU也没有任何关系。 源码go/1.13.4/libexec/|Hugo-Primer theme&#39;s example site">
     
 
+    <meta name="apple-mobile-web-app-title" content="渐行渐远">
+    
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="runtime中P的理解 | 渐行渐远">
+    <meta name="twitter:description" content="P是在Go1.1引入的概念，初始默认等于CPU核的数量。P只是一个逻辑概念，跟CPU也没有任何关系。 源码go/1.13.4/libexec/|Hugo-Primer theme&#39;s example site">
+    <meta name="twitter:image" content="https://gohugo.io/twitter-card.png">
     
 
-    
-    
 
-
-<link href='//cdn.bootcss.com/highlight.js/9.14.1/styles/googlecode.min.css' rel='stylesheet' type='text/css' />
-
-
-
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
-
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
   </head>
 
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://gohugo.io/">
+    渐行渐远
+  </a>
+
   
-  <body class="blog">
-    <header class="masthead">
-      <h1 class="headimg">
-    
-    <a href="/"><img src="/img/headimg.png" alt="Fuhui "></a>
-</h1>
-
-
-
-      <nav class="menu">
-        <input id="menu-check" type="checkbox" />
-        <label id="menu-label" for="menu-check" class="unselectable">
-          <span class="icon close-icon">✕</span>
-          <span class="icon open-icon">☰</span>
-          <span class="text">Menu</span>
-        </label>
-        <ul>
-        
-        
-        <li><a href="/blog/">Blog</a></li>
-        
-        <li><a href="/life/">Life</a></li>
-        
-        <li><a href="/categories/">Categories</a></li>
-        
-        <li><a href="/tags/">Tags</a></li>
-        
-        <li><a href="/about/">About</a></li>
-        
-        </ul>
-      </nav>
-
-      
-      <div id="bar" style="position:absolute;z-index:99;background-color:Red;">
-        
-
-  <div class="Box Box--blue p-2 mb-3 mt-5">
-    <a href="/tags/" class="link-gray-dark">
-      <h4>Tags</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/2018" class="link-gray text-emphasized css-truncate-target"><span class="">2018th</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/dailylife" class="link-gray text-emphasized css-truncate-target"><span class="">Daily life</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mq" class="link-gray text-emphasized css-truncate-target"><span class="">M q</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">My s q l</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/cache" class="link-gray text-emphasized css-truncate-target"><span class="">Cache</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/design-pattern" class="link-gray text-emphasized css-truncate-target"><span class="">Design pattern</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/docker" class="link-gray text-emphasized css-truncate-target"><span class="">Docker</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/git" class="link-gray text-emphasized css-truncate-target"><span class="">Git</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/golang" class="link-gray text-emphasized css-truncate-target"><span class="">Golang</span></a>
-      <span class="text-right Counter">34</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/http" class="link-gray text-emphasized css-truncate-target"><span class="">Http</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/js" class="link-gray text-emphasized css-truncate-target"><span class="">Js</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/linux" class="link-gray text-emphasized css-truncate-target"><span class="">Linux</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mongo" class="link-gray text-emphasized css-truncate-target"><span class="">Mongo</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/mysql" class="link-gray text-emphasized css-truncate-target"><span class="">Mysql</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/net" class="link-gray text-emphasized css-truncate-target"><span class="">Net</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/nginx" class="link-gray text-emphasized css-truncate-target"><span class="">Nginx</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/npm" class="link-gray text-emphasized css-truncate-target"><span class="">Npm</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/pay" class="link-gray text-emphasized css-truncate-target"><span class="">Pay</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/php" class="link-gray text-emphasized css-truncate-target"><span class="">Php</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protobufs" class="link-gray text-emphasized css-truncate-target"><span class="">Protobufs</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/protocol" class="link-gray text-emphasized css-truncate-target"><span class="">Protocol</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tcp/ip" class="link-gray text-emphasized css-truncate-target"><span class="">Tcp/ip</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/think" class="link-gray text-emphasized css-truncate-target"><span class="">Think</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/tools" class="link-gray text-emphasized css-truncate-target"><span class="">Tools</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/transaction" class="link-gray text-emphasized css-truncate-target"><span class="">Transaction</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/translate" class="link-gray text-emphasized css-truncate-target"><span class="">Translate</span></a>
-      <span class="text-right Counter">14</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/%e7%bb%9f%e8%ae%a1" class="link-gray text-emphasized css-truncate-target"><span class="">统计</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
-
-
-
-  <div class="Box Box--blue p-2 mb-3">
-    <a href="/categories/" class="link-gray-dark">
-      <h4>Categories</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-01" class="link-gray text-emphasized css-truncate-target"><span class="">2018 01</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-02" class="link-gray text-emphasized css-truncate-target"><span class="">2018 02</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-03" class="link-gray text-emphasized css-truncate-target"><span class="">2018 03</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-04" class="link-gray text-emphasized css-truncate-target"><span class="">2018 04</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-05" class="link-gray text-emphasized css-truncate-target"><span class="">2018 05</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-06" class="link-gray text-emphasized css-truncate-target"><span class="">2018 06</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-07" class="link-gray text-emphasized css-truncate-target"><span class="">2018 07</span></a>
-      <span class="text-right Counter">7</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-08" class="link-gray text-emphasized css-truncate-target"><span class="">2018 08</span></a>
-      <span class="text-right Counter">6</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-09" class="link-gray text-emphasized css-truncate-target"><span class="">2018 09</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-10" class="link-gray text-emphasized css-truncate-target"><span class="">2018 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-11" class="link-gray text-emphasized css-truncate-target"><span class="">2018 11</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2018-12" class="link-gray text-emphasized css-truncate-target"><span class="">2018 12</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-01" class="link-gray text-emphasized css-truncate-target"><span class="">2019 01</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-02" class="link-gray text-emphasized css-truncate-target"><span class="">2019 02</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-03" class="link-gray text-emphasized css-truncate-target"><span class="">2019 03</span></a>
-      <span class="text-right Counter">8</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-04" class="link-gray text-emphasized css-truncate-target"><span class="">2019 04</span></a>
-      <span class="text-right Counter">5</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-05" class="link-gray text-emphasized css-truncate-target"><span class="">2019 05</span></a>
-      <span class="text-right Counter">2</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-06" class="link-gray text-emphasized css-truncate-target"><span class="">2019 06</span></a>
-      <span class="text-right Counter">4</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-07" class="link-gray text-emphasized css-truncate-target"><span class="">2019 07</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-08" class="link-gray text-emphasized css-truncate-target"><span class="">2019 08</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-09" class="link-gray text-emphasized css-truncate-target"><span class="">2019 09</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-10" class="link-gray text-emphasized css-truncate-target"><span class="">2019 10</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-11" class="link-gray text-emphasized css-truncate-target"><span class="">2019 11</span></a>
-      <span class="text-right Counter">3</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-12" class="link-gray text-emphasized css-truncate-target"><span class="">2019 12</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/2019-17" class="link-gray text-emphasized css-truncate-target"><span class="">2019 17</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/summarize" class="link-gray text-emphasized css-truncate-target"><span class="">Summarize</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
+  
+</nav>
 
       </div>
 
-    </header>
-
-    <article class="main">
-      <header class="title">
-      <h1>runtime中P的理解</h1>
-
-
-
-
-    
-    
-    <section class="post-meta">
-        <span class="post-author">付辉
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
         
-            
-            
-             /  2019-11-11
-            
-        </span>
-        
-        <a href="/tags/golang">golang</a>
-        
-    </section>
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">runtime中P的理解</div>
+  </div>
+  <div class="Subhead-description">
     
 
 
 
-<hr>
-      </header>
 
-        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript">
-            var height = parseInt($("#bar").css("top"))
-            $(function () {
-                $(window).scroll(function () {
-                    var currentH = $(document).scrollTop();
-                    if (currentH > height) {
-                        $("#bar").css("top", (currentH) + 'px');
-                    } else {
-                        $('#bar').css('top', height + 'px');
-                    }
+<a href='/tags/golang' class="muted-link">
+  <span class="Label Label--gray">golang</span>
+</a>
 
-                });
-            });
-        </script>
 
-<p><code>P</code>是在<code>Go1.1</code>引入的概念，初始默认等于<code>CPU</code>核的数量。<code>P</code>只是一个逻辑概念，跟<code>CPU</code>也没有任何关系。</p>
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2019-11-11. Published at: 2019-11-11.">
+        
+          Published: 2019-11-11
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p><code>P</code>是在<code>Go1.1</code>引入的概念，初始默认等于<code>CPU</code>核的数量。<code>P</code>只是一个逻辑概念，跟<code>CPU</code>也没有任何关系。</p>
 
 <p>源码<code>go/1.13.4/libexec/src/runtime/proc.go</code>中对<code>P</code>的注释如下：</p>
-
-<pre><code class="language-go">// P - processor, a resource that is required to execute Go code.
-// M must have an associated P to execute Go code, however it can be
-// blocked or in a syscall w/o an associated P.
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// P - processor, a resource that is required to execute Go code.
+</span><span class="c1">// M must have an associated P to execute Go code, however it can be
+</span><span class="c1"></span><span class="o">//</span> <span class="nx">blocked</span> <span class="nx">or</span> <span class="nx">in</span> <span class="nx">a</span> <span class="nx">syscall</span> <span class="nx">w</span><span class="o">/</span><span class="nx">o</span> <span class="nx">an</span> <span class="nx">associated</span> <span class="nx">P</span><span class="p">.</span></code></pre></div>
 <p>再通过源码<code>go/1.13.4/libexec/src/runtime/runtime2.go</code>来简要了解一下<code>P</code>在调度过程中的状态变化：</p>
-
-<pre><code class="language-go">const (
-    // P status
-    _Pidle = iota
-    _Prunning
-    _Psyscall
-    _Pgcstop
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">const</span> <span class="p">(</span>
+    <span class="c1">// P status
+</span><span class="c1"></span>    <span class="nx">_Pidle</span> <span class="p">=</span> <span class="kc">iota</span>
+    <span class="nx">_Prunning</span>
+    <span class="nx">_Psyscall</span>
+    <span class="nx">_Pgcstop</span>
    
-    // _Pdead means a P is no longer used (GOMAXPROCS shrank). We
-    // reuse Ps if GOMAXPROCS increases. A dead P is mostly
-    // stripped of its resources, though a few things remain
-    // (e.g., trace buffers).
-    _Pdead
-)
-</code></pre>
-
+    <span class="c1">// _Pdead means a P is no longer used (GOMAXPROCS shrank). We
+</span><span class="c1"></span>    <span class="c1">// reuse Ps if GOMAXPROCS increases. A dead P is mostly
+</span><span class="c1"></span>    <span class="c1">// stripped of its resources, though a few things remain
+</span><span class="c1"></span>    <span class="c1">// (e.g., trace buffers).
+</span><span class="c1"></span>    <span class="nx">_Pdead</span>
+<span class="p">)</span></code></pre></div>
 <p>通过调整<code>GOMAXPROCS</code>可以控制<code>P</code>的状态，<code>_Pdead</code>专门来说明这一点。</p>
 
 <p>从<code>P</code>的结构体字段中，可以进一步了解<code>P</code>中存储的资源，源码<code>go/1.13.4/libexec/src/runtime/runtime2.go</code>：</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">p</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">id</span>          <span class="kt">int32</span>
+        <span class="nx">status</span>      <span class="kt">uint32</span> <span class="c1">// one of pidle/prunning/...
+</span><span class="c1"></span>        <span class="nx">link</span>        <span class="nx">puintptr</span>
+        <span class="nx">schedtick</span>   <span class="kt">uint32</span>     <span class="c1">// incremented on every scheduler call
+</span><span class="c1"></span>        <span class="nx">syscalltick</span> <span class="kt">uint32</span>     <span class="c1">// incremented on every system call
+</span><span class="c1"></span>        <span class="nx">sysmontick</span>  <span class="nx">sysmontick</span> <span class="c1">// last tick observed by sysmon
+</span><span class="c1"></span>        <span class="nx">m</span>           <span class="nx">muintptr</span>   <span class="c1">// back-link to associated m (nil if idle)
+</span><span class="c1"></span>        <span class="nx">mcache</span>      <span class="o">*</span><span class="nx">mcache</span>
+        <span class="nx">raceprocctx</span> <span class="kt">uintptr</span>
 
-<pre><code class="language-go">type p struct {
-        id          int32
-        status      uint32 // one of pidle/prunning/...
-        link        puintptr
-        schedtick   uint32     // incremented on every scheduler call
-        syscalltick uint32     // incremented on every system call
-        sysmontick  sysmontick // last tick observed by sysmon
-        m           muintptr   // back-link to associated m (nil if idle)
-        mcache      *mcache
-        raceprocctx uintptr
+        <span class="nx">deferpool</span>    <span class="p">[</span><span class="mi">5</span><span class="p">][]</span><span class="o">*</span><span class="nx">_defer</span> <span class="c1">// pool of available defer structs of different sizes (see panic.go)
+</span><span class="c1"></span>        <span class="nx">deferpoolbuf</span> <span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">32</span><span class="p">]</span><span class="o">*</span><span class="nx">_defer</span>
 
-        deferpool    [5][]*_defer // pool of available defer structs of different sizes (see panic.go)
-        deferpoolbuf [5][32]*_defer
+        <span class="c1">// Cache of goroutine ids, amortizes accesses to runtime·sched.goidgen.
+</span><span class="c1"></span>        <span class="nx">goidcache</span>    <span class="kt">uint64</span>
+        <span class="nx">goidcacheend</span> <span class="kt">uint64</span>
 
-        // Cache of goroutine ids, amortizes accesses to runtime·sched.goidgen.
-        goidcache    uint64
-        goidcacheend uint64
+        <span class="c1">// Queue of runnable goroutines. Accessed without lock.
+</span><span class="c1"></span>        <span class="nx">runqhead</span> <span class="kt">uint32</span>
+        <span class="nx">runqtail</span> <span class="kt">uint32</span>
+        <span class="nx">runq</span>     <span class="p">[</span><span class="mi">256</span><span class="p">]</span><span class="nx">guintptr</span>
+        <span class="c1">// runnext, if non-nil, is a runnable G that was ready&#39;d by
+</span><span class="c1"></span>        <span class="c1">// the current G and should be run next instead of what&#39;s in
+</span><span class="c1"></span>        <span class="c1">// runq if there&#39;s time remaining in the running G&#39;s time
+</span><span class="c1"></span>        <span class="c1">// slice. It will inherit the time left in the current time
+</span><span class="c1"></span>        <span class="c1">// slice. If a set of goroutines is locked in a
+</span><span class="c1"></span>        <span class="c1">// communicate-and-wait pattern, this schedules that set as a
+</span><span class="c1"></span>        <span class="c1">// unit and eliminates the (potentially large) scheduling
+</span><span class="c1"></span>        <span class="c1">// latency that otherwise arises from adding the ready&#39;d
+</span><span class="c1"></span>        <span class="c1">// goroutines to the end of the run queue.
+</span><span class="c1"></span>        <span class="nx">runnext</span> <span class="nx">guintptr</span>
 
-        // Queue of runnable goroutines. Accessed without lock.
-        runqhead uint32
-        runqtail uint32
-        runq     [256]guintptr
-        // runnext, if non-nil, is a runnable G that was ready'd by
-        // the current G and should be run next instead of what's in
-        // runq if there's time remaining in the running G's time
-        // slice. It will inherit the time left in the current time
-        // slice. If a set of goroutines is locked in a
-        // communicate-and-wait pattern, this schedules that set as a
-        // unit and eliminates the (potentially large) scheduling
-        // latency that otherwise arises from adding the ready'd
-        // goroutines to the end of the run queue.
-        runnext guintptr
+        <span class="c1">// Available G&#39;s (status == Gdead)
+</span><span class="c1"></span>        <span class="nx">gFree</span> <span class="kd">struct</span> <span class="p">{</span>
+                <span class="nx">gList</span>
+                <span class="nx">n</span> <span class="kt">int32</span>
+        <span class="p">}</span>
 
-        // Available G's (status == Gdead)
-        gFree struct {
-                gList
-                n int32
-        }
+        <span class="nx">sudogcache</span> <span class="p">[]</span><span class="o">*</span><span class="nx">sudog</span>
+        <span class="nx">sudogbuf</span>   <span class="p">[</span><span class="mi">128</span><span class="p">]</span><span class="o">*</span><span class="nx">sudog</span>
 
-        sudogcache []*sudog
-        sudogbuf   [128]*sudog
+        <span class="nx">tracebuf</span> <span class="nx">traceBufPtr</span>
+         <span class="c1">// traceSweep indicates the sweep events should be traced.
+</span><span class="c1"></span>        <span class="c1">// This is used to defer the sweep start event until a span
+</span><span class="c1"></span>        <span class="c1">// has actually been swept.
+</span><span class="c1"></span>        <span class="nx">traceSweep</span> <span class="kt">bool</span>
+        <span class="c1">// traceSwept and traceReclaimed track the number of bytes
+</span><span class="c1"></span>        <span class="c1">// swept and reclaimed by sweeping in the current sweep loop.
+</span><span class="c1"></span>        <span class="nx">traceSwept</span><span class="p">,</span> <span class="nx">traceReclaimed</span> <span class="kt">uintptr</span>
 
-        tracebuf traceBufPtr
-         // traceSweep indicates the sweep events should be traced.
-        // This is used to defer the sweep start event until a span
-        // has actually been swept.
-        traceSweep bool
-        // traceSwept and traceReclaimed track the number of bytes
-        // swept and reclaimed by sweeping in the current sweep loop.
-        traceSwept, traceReclaimed uintptr
+        <span class="nx">palloc</span> <span class="nx">persistentAlloc</span> <span class="c1">// per-P to avoid mutex
+</span><span class="c1"></span>
+        <span class="nx">_</span> <span class="kt">uint32</span> <span class="c1">// Alignment for atomic fields below
+</span><span class="c1"></span>
+        <span class="c1">// Per-P GC state
+</span><span class="c1"></span>        <span class="nx">gcAssistTime</span>         <span class="kt">int64</span>    <span class="c1">// Nanoseconds in assistAlloc
+</span><span class="c1"></span>        <span class="nx">gcFractionalMarkTime</span> <span class="kt">int64</span>    <span class="c1">// Nanoseconds in fractional mark worker (atomic)
+</span><span class="c1"></span>        <span class="nx">gcBgMarkWorker</span>       <span class="nx">guintptr</span> <span class="c1">// (atomic)
+</span><span class="c1"></span>        <span class="nx">gcMarkWorkerMode</span>     <span class="nx">gcMarkWorkerMode</span>
 
-        palloc persistentAlloc // per-P to avoid mutex
+        <span class="c1">// gcMarkWorkerStartTime is the nanotime() at which this mark
+</span><span class="c1"></span>        <span class="c1">// worker started.
+</span><span class="c1"></span>        <span class="nx">gcMarkWorkerStartTime</span> <span class="kt">int64</span>
 
-        _ uint32 // Alignment for atomic fields below
+        <span class="c1">// gcw is this P&#39;s GC work buffer cache. The work buffer is
+</span><span class="c1"></span>        <span class="c1">// filled by write barriers, drained by mutator assists, and
+</span><span class="c1"></span>        <span class="c1">// disposed on certain GC state transitions.
+</span><span class="c1"></span>        <span class="nx">gcw</span> <span class="nx">gcWork</span>
 
-        // Per-P GC state
-        gcAssistTime         int64    // Nanoseconds in assistAlloc
-        gcFractionalMarkTime int64    // Nanoseconds in fractional mark worker (atomic)
-        gcBgMarkWorker       guintptr // (atomic)
-        gcMarkWorkerMode     gcMarkWorkerMode
+        <span class="c1">// wbBuf is this P&#39;s GC write barrier buffer.
+</span><span class="c1"></span>        <span class="c1">//
+</span><span class="c1"></span>        <span class="c1">// TODO: Consider caching this in the running G.
+</span><span class="c1"></span>        <span class="nx">wbBuf</span> <span class="nx">wbBuf</span>
 
-        // gcMarkWorkerStartTime is the nanotime() at which this mark
-        // worker started.
-        gcMarkWorkerStartTime int64
-
-        // gcw is this P's GC work buffer cache. The work buffer is
-        // filled by write barriers, drained by mutator assists, and
-        // disposed on certain GC state transitions.
-        gcw gcWork
-
-        // wbBuf is this P's GC write barrier buffer.
-        //
-        // TODO: Consider caching this in the running G.
-        wbBuf wbBuf
-
-        runSafePointFn uint32 // if 1, run sched.safePointFn at next safe point
-
-        pad cpu.CacheLinePad
-}
-</code></pre>
-
+        <span class="nx">runSafePointFn</span> <span class="kt">uint32</span> <span class="c1">// if 1, run sched.safePointFn at next safe point
+</span><span class="c1"></span>
+        <span class="nx">pad</span> <span class="nx">cpu</span><span class="p">.</span><span class="nx">CacheLinePad</span>
+<span class="p">}</span></code></pre></div>
 <p>字段中<code>mcache</code>再单独说明一下，源码<code>go/1.13.4/libexec/src/runtime/mcache.go</code>:</p>
-
-<pre><code class="language-go">// Per-thread (in Go, per-P) cache for small objects.
-// No locking needed because it is per-thread (per-P).
-//
-// mcaches are allocated from non-GC'd memory, so any heap pointers
-// must be specially handled.
-//
-//go:notinheap
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// Per-thread (in Go, per-P) cache for small objects.
+</span><span class="c1">// No locking needed because it is per-thread (per-P).
+</span><span class="c1">//
+</span><span class="c1">// mcaches are allocated from non-GC&#39;d memory, so any heap pointers
+</span><span class="c1">// must be specially handled.
+</span><span class="c1">//
+</span><span class="c1"></span><span class="o">//</span><span class="k">go</span><span class="p">:</span><span class="nx">notinheap</span></code></pre></div>
 <p><code>mcache</code>反映了对象的创建策略：小对象。</p>
 
+  </section>
 
-  <footer>
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
   
-<nav class="post-nav">
-  <span class="nav-prev">&larr; <a href="/blog/2019/blog.013-%E5%8F%98%E5%BC%82%E6%80%A7%E7%9A%84%E6%95%B0%E5%80%BC%E7%89%B9%E5%BE%81-%E6%96%B9%E5%B7%AE.2019.10.14/">变异性的数值特征-方差</a></span>
-  <span class="nav-next"><a href="/blog/2019/blog.015-go.1.13%E4%B8%AD%E7%9A%84modules.2019.11.12/">go.1.13中的Modules</a> &rarr;</span>
-</nav>
-
-
-
-
-
-<script src="//yihui.name/js/math-code.js"></script>
-<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-<script async src="//yihui.name/js/center-img.js"></script>
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>runtime中P的理解</b></div>
   
-
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/highlight.min.js"></script>
-
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/r.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/yaml.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/tex.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.14.1/languages/go.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
-
-
 
   
-  <hr>
-  <div class="copyright">&copy; <a href="http://neojos.com">DDF</a> 2017 | <a href="https://github.com/GitHubSi">Github</a> | <a href="http://blog.csdn.net/whynottrythis">CSDN</a> | <a href="https://segmentfault.com/u/neojos">segmentfault</a></div>
+    <div>
+      
+    </div>
   
-  </footer>
-  </article>
-  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy;Qiushi Pan 2018-2019 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+    
   </body>
 </html>
-
