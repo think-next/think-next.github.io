@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mongo on 渐行渐远</title>
-    <link>https://gohugo.io/tags/mongo/</link>
+    <link>https://neojos.com/tags/mongo/</link>
     <description>Recent content in Mongo on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;Qiushi Pan 2018-2019</copyright>
     <lastBuildDate>Wed, 13 Nov 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://gohugo.io/tags/mongo/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://neojos.com/tags/mongo/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>mongo中hint的使用</title>
-      <link>https://gohugo.io/blog/2019/blog.016.mongo%E4%B8%ADhint%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <link>https://neojos.com/blog/2019/blog.016.mongo%E4%B8%ADhint%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Wed, 13 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://gohugo.io/blog/2019/blog.016.mongo%E4%B8%ADhint%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https://neojos.com/blog/2019/blog.016.mongo%E4%B8%ADhint%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
       <description>mongo官方文档对hint的解释如下： The $hint operator forces the query optimizer to use a specific index to fulfill the query. Specify the index either by the index name or by document. hint的命令行用法： db.users.find().hint() mongo中使用exp</description>
     </item>
     
     <item>
       <title>mongo中ObjectId</title>
-      <link>https://gohugo.io/blog/2019/19-06-11-mongo%E4%B8%ADobjectid/</link>
+      <link>https://neojos.com/blog/2019/19-06-11-mongo%E4%B8%ADobjectid/</link>
       <pubDate>Mon, 03 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://gohugo.io/blog/2019/19-06-11-mongo%E4%B8%ADobjectid/</guid>
+      <guid>https://neojos.com/blog/2019/19-06-11-mongo%E4%B8%ADobjectid/</guid>
       <description>ObjectId在mongo中是自动生成的_id字段，充当数据表的主键ID。按照_id排序基本上等于按照记录的创建时间排序，但还是必须注意：</description>
     </item>
     

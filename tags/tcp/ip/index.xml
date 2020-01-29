@@ -2,58 +2,58 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tcp/Ip on 渐行渐远</title>
-    <link>https://gohugo.io/tags/tcp/ip/</link>
+    <link>https://neojos.com/tags/tcp/ip/</link>
     <description>Recent content in Tcp/Ip on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;Qiushi Pan 2018-2019</copyright>
     <lastBuildDate>Tue, 20 Nov 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://gohugo.io/tags/tcp/ip/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://neojos.com/tags/tcp/ip/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>NSS初窥</title>
-      <link>https://gohugo.io/blog/2018/11-20-nss%E5%88%9D%E7%AA%A5/</link>
+      <link>https://neojos.com/blog/2018/11-20-nss%E5%88%9D%E7%AA%A5/</link>
       <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://gohugo.io/blog/2018/11-20-nss%E5%88%9D%E7%AA%A5/</guid>
+      <guid>https://neojos.com/blog/2018/11-20-nss%E5%88%9D%E7%AA%A5/</guid>
       <description>版本 0.01 在使用wireshark分析https时，加密传输的内容会解析失败。而NSS可以存储TLS握手过程中的Key，用于解密。很好奇，它是如</description>
     </item>
     
     <item>
       <title>Tcp Bulk Data</title>
-      <link>https://gohugo.io/blog/2018/09-24-tcp-bulk-data/</link>
+      <link>https://neojos.com/blog/2018/09-24-tcp-bulk-data/</link>
       <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://gohugo.io/blog/2018/09-24-tcp-bulk-data/</guid>
+      <guid>https://neojos.com/blog/2018/09-24-tcp-bulk-data/</guid>
       <description>TCP在数据传输中有receive buffer和send buffer。通过连接中的window size可以看出数据的读取情况。 sliding window clien</description>
     </item>
     
     <item>
       <title>IP Routing</title>
-      <link>https://gohugo.io/blog/2018/08-04-ip-routing/</link>
+      <link>https://neojos.com/blog/2018/08-04-ip-routing/</link>
       <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://gohugo.io/blog/2018/08-04-ip-routing/</guid>
+      <guid>https://neojos.com/blog/2018/08-04-ip-routing/</guid>
       <description>假设你在跟小米公司对接服务，那你有没有好奇过：自家的服务器是如何找到小米公司的服务器的。为了安全，公司的服务器可都是在内网的，用户是无法直接</description>
     </item>
     
     <item>
       <title>Tcp Server Design</title>
-      <link>https://gohugo.io/blog/2018/07-28-tcp-server-design/</link>
+      <link>https://neojos.com/blog/2018/07-28-tcp-server-design/</link>
       <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://gohugo.io/blog/2018/07-28-tcp-server-design/</guid>
+      <guid>https://neojos.com/blog/2018/07-28-tcp-server-design/</guid>
       <description>绝大多数的TCP服务都是支持并发的。当一个连接请求到达时，服务端接收这个连接，然后创建一个新的线程(或进程)来处理这个连接。 listen状态</description>
     </item>
     
     <item>
       <title>TIME_WAIT状态解读</title>
-      <link>https://gohugo.io/blog/2018/06-15-time_wait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/</link>
+      <link>https://neojos.com/blog/2018/06-15-time_wait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/</link>
       <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://gohugo.io/blog/2018/06-15-time_wait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/</guid>
+      <guid>https://neojos.com/blog/2018/06-15-time_wait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/</guid>
       <description>版本：0.01 突然想梳理一下TIME_WAIT,毕竟自己遇到它好多次了。经常一块出现的问题：too many open file，当然，这个问题本身跟TIME</description>
     </item>
     
