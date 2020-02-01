@@ -189,7 +189,7 @@
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>https://neojos.com/blog/2019/19-04-14-go-%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B8%89/</guid>
-      <description>别抱怨，也别自怜，所有的现状都是你自己选择的 前面的章节中，我们介绍了操作系统的调度模型：N:1、1:1、M:N。而Go采用了更高效的方式M:</description>
+      <description>别抱怨，也别自怜，所有的现状都是你自己选择的 Scheduler Trace GODEBUG 变量可以控制运行时内的调试变量，参数以逗号分隔，格式为：name=val。本文着重点在调度</description>
     </item>
     
     <item>
