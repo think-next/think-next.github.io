@@ -75,8 +75,8 @@ if (!doNotTrack) {
 
 
 
-<a href='/tags/tools' class="muted-link">
-  <span class="Label Label--gray">tools</span>
+<a href='/tags/docker' class="muted-link">
+  <span class="Label Label--gray">docker</span>
 </a>
 
 
@@ -99,6 +99,55 @@ if (!doNotTrack) {
 
 <p>知道一点比完全不知道要好，对问题有深入了解比仅知道皮毛要好。作为<code>docker</code>的一个初学者，现在对<code>docker</code>做简单记录。希望随着工作、生活，更深入的了解学习<code>docker</code>。这也是一件很有意义的事。</p>
 
+<h2 id="安装redis">安装redis</h2>
+
+<p>在容器中启动redis服务的基本步骤。</p>
+
+<pre><code>➜  one-case docker pull redis:latest
+➜  one-case docker images
+➜  one-case docker run -itd --name redis-test -p 6379:6379 redis
+</code></pre>
+
+<p>docker run中的属性<code>-i</code>表示启动交互模式；<code>-d</code>表示后台运行容器；<code>-t</code>经常和<code>-i</code>一起使用，表示为容器分配一个伪输入终端；</p>
+
+<h3 id="bitmap-使用">bitmap 使用</h3>
+
+<p>查看bitmap占用空间的大小，设置一个最大的offset。然后，通过统计大key来查看所占用空间。</p>
+
+<pre><code>setbit biguid 4294967296 1
+-ERR bit offset is not an integer or out of range
+setbit biguid 4294967295 1
+:0
+</code></pre>
+
+<p>通过输出结果，biguid 占用512M的存储空间。也验证了一个结论：bitmap占用的空间，完全取决于最大的offset值。</p>
+
+<pre><code>➜  one-case docker exec -it redis-test /bin/bash
+root@2661fdf6847f:/data# redis-cli -p 6379 --bigkeys
+
+# Scanning the entire keyspace to find biggest keys as well as
+# average sizes per key type.  You can use -i 0.1 to sleep 0.1 sec
+# per 100 SCAN commands (not usually needed).
+
+[00.00%] Biggest string found so far 'biguid' with 536870912 bytes
+
+-------- summary -------
+
+Sampled 1 keys in the keyspace!
+Total key length in bytes is 6 (avg len 6.00)
+
+Biggest string found 'biguid' has 536870912 bytes
+
+1 strings with 536870912 bytes (100.00% of keys, avg size 536870912.00)
+0 lists with 0 items (00.00% of keys, avg size 0.00)
+0 hashs with 0 fields (00.00% of keys, avg size 0.00)
+0 streams with 0 entries (00.00% of keys, avg size 0.00)
+0 sets with 0 members (00.00% of keys, avg size 0.00)
+0 zsets with 0 members (00.00% of keys, avg size 0.00)
+</code></pre>
+
+<h2 id="example"><code>Example</code></h2>
+
 <p><code>docker</code>有几个相关的概念：</p>
 
 <ol>
@@ -107,8 +156,6 @@ if (!doNotTrack) {
 </ol>
 
 <p>我觉得之所以说<code>docker</code>好用，是因为<a href="https://hub.docker.com/explore/"><code>Docker Hub</code></a>提供了很多镜像，比如<code>MySQL</code>、<code>Redis</code>等。对它们安装、卸载异常方便。</p>
-
-<h2 id="example"><code>Example</code></h2>
 
 <p>我们想搭建测试服务，安装<code>MySQL</code>，<code>Redis</code>等依赖。我们将他们当作一个项目的依赖，声明一个配置文件·<code>db.yml</code>，然后将这些依赖，类似于<code>composer</code>编辑：</p>
 
@@ -267,6 +314,10 @@ CMD [&quot;bash&quot;, &quot;-c&quot;, &quot;/data/src/${RUN_PROG:=baby} --log_d
   
     <div id="toc" class="Box Box--blue mb-3">
       <b>docker基本使用</b><nav id="TableOfContents"><ul>
+<li><a href="#安装redis">安装redis</a>
+<ul>
+<li><a href="#bitmap-使用">bitmap 使用</a></li>
+</ul></li>
 <li><a href="#example"><code>Example</code></a></li>
 <li><a href="#dockerfile-指令"><code>Dockerfile</code>指令</a>
 <ul>

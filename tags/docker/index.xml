@@ -21,5 +21,14 @@
       <description>任何事情的成功都需要掐准时间 上一节mongo EOF中，关于容器的配置，只是粗略的使用了Docker-Compose-MongoDB-Repl</description>
     </item>
     
+    <item>
+      <title>docker基本使用</title>
+      <link>https://neojos.com/blog/2018/04-20-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neojos.com/blog/2018/04-20-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>知道一点比完全不知道要好，对问题有深入了解比仅知道皮毛要好。作为docker的一个初学者，现在对docker做简单记录。希望随着工作、生活，</description>
+    </item>
+    
   </channel>
 </rss>
