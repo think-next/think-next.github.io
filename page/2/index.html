@@ -20,7 +20,7 @@ if (!doNotTrack) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  蜗牛保持乐观才会爬的更远 &ndash; 渐行渐远
+蜗牛保持乐观才会爬的更远 &ndash; 渐行渐远
 
     </title>
     
@@ -41,10 +41,11 @@ if (!doNotTrack) {
     <meta name="twitter:image" content="https://neojos.com/twitter-card.png">
     
 
-
+    <link rel="stylesheet" href="/assets/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/syntax.css">
     <link rel="stylesheet" href="/assets/primer-build.css">
     <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="/assets/font-awesome.min.css">
   </head>
 
 
@@ -68,437 +69,617 @@ if (!doNotTrack) {
 
 <div>
 
-  <h1>蜗牛保持乐观才会爬的更远</h1>
-  <p>这是道道法的个人主页。14年毕业于山西农业大学，学士学位。目前做服务端开发。语言主要用<code>Go</code>和<code>PHP</code>。</p>
+    <h1>蜗牛保持乐观才会爬的更远</h1>
+    <p>这是道道法的个人主页。14年毕业于山西农业大学，学士学位。目前做服务端开发。语言主要用<code>Go</code>和<code>PHP</code>。</p>
 
 <p>一直以来，都没能养成一个好的习惯。博客作为一件工艺品，需要匠人精神来慢慢来打磨。但：<code>过于追求完美，必将不得善终</code>。写给自己，也写给逝去的岁月和记忆。</p>
 
 <p><strong>PS</strong>：<small>如果喜欢博客风格，请查看博客源码：<a href="https://github.com/GitHubSi/blog"><code>github</code></a>。内容均为原创，转载请注明出处。</small></p>
 
 
-  
-  <div>
-    <div>
-      <a href="/blog/2018/08-19-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98bigcache/">
-        <h3>本地缓存BigCache</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/08-19-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98bigcache/</small>
-      2018-08-19
-    </div>
-    BigCache的作者做了详细的阐述，尽在这里：Writing a very fast cache service with millions of entries in Go。不得不说，作者的表述非常完美，给它点赞。GitHub
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/08-11-golang%E4%B8%8B%E7%9A%84error/">
-        <h3>Golang下的Error</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/08-11-golang%E4%B8%8B%E7%9A%84error/</small>
-      2018-08-11
-    </div>
-    感觉error确实没啥可说的，这个简单到极致的package总共也不超过10行有效代码。而且常用的fmt也提供了很方便的返回error的方法
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/08-09-shell%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%801/">
-        <h3>Shell必备基础（1）</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/08-09-shell%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%801/</small>
-      2018-08-09
-    </div>
-    Shell是对Linux命令的深加工，用得好，事半功倍。 本来只想加深Array的用法，但一不小心，又变成了一篇基础大全。 比较运算 习惯在if语
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/08-07-git%E6%92%A4%E9%94%80%E6%9C%AC%E5%9C%B0%E4%BF%AE%E6%94%B9/">
-        <h3>Git撤销本地修改</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/08-07-git%E6%92%A4%E9%94%80%E6%9C%AC%E5%9C%B0%E4%BF%AE%E6%94%B9/</small>
-      2018-08-07
-    </div>
-    懂得了好多大道理，但还是过不好这一生！ 用了git就会发现，再也不想用svn了。 Note：在执行push操作前，所有的修改都发生在本地，可以使
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/08-04-ip-routing/">
-        <h3>IP Routing</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/08-04-ip-routing/</small>
-      2018-08-04
-    </div>
-    假设你在跟小米公司对接服务，那你有没有好奇过：自家的服务器是如何找到小米公司的服务器的。为了安全，公司的服务器可都是在内网的，用户是无法直接
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/">
-        <h3>ngrep抓包</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/</small>
-      2018-08-01
-    </div>
-    简单的工具其实挺有用的。警告：不许瞧不起工具，尤其是你还不会用的工具。 ngrep还是之前跟花椒直播的同事对接项目时，了解到的一个工具。它可以
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/07-28-tcp-server-design/">
-        <h3>Tcp Server Design</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/07-28-tcp-server-design/</small>
-      2018-07-28
-    </div>
-    绝大多数的TCP服务都是支持并发的。当一个连接请求到达时，服务端接收这个连接，然后创建一个新的线程(或进程)来处理这个连接。 listen状态
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/07-24-%E9%87%8D%E8%AF%95/">
-        <h3>重试</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/07-24-%E9%87%8D%E8%AF%95/</small>
-      2018-07-24
-    </div>
-    为了克服网络问题，重试是我们常用的手段之一。但必须记住：重试的姿势非常重要。照应一句古话：“差若毫厘，谬以千里”。 正确的姿势是便是： 如果请求
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/07-19-siege%E5%8E%8B%E6%B5%8B/">
-        <h3>siege压测</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/07-19-siege%E5%8E%8B%E6%B5%8B/</small>
-      2018-07-19
-    </div>
-    关于压测，首先要了解TPS和并发用户数之间的关系： TPS就是每秒事务数，但是事务是基于虚拟用户数的。假如1个虚拟用户在1秒内完成1笔事务，那
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/07-14-kafka%E7%9A%84offset%E5%88%9D%E7%AA%A51/">
-        <h3>Kafka的offset初窥(1)</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/07-14-kafka%E7%9A%84offset%E5%88%9D%E7%AA%A51/</small>
-      2018-07-14
-    </div>
-    kafka适用的场景很多，但用它来异步通知却是让我略感头痛！ 引言 对于kafka的offset问题，先从这篇文章说起：How to disable auto commit? 它阐述了一
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/07-10-linux%E6%9F%A5%E7%9C%8B%E7%9B%91%E5%90%AC%E7%9A%84%E7%AB%AF%E5%8F%A3%E8%BF%9B%E7%A8%8B/">
-        <h3>Linux查看监听的端口进程</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/07-10-linux%E6%9F%A5%E7%9C%8B%E7%9B%91%E5%90%AC%E7%9A%84%E7%AB%AF%E5%8F%A3%E8%BF%9B%E7%A8%8B/</small>
-      2018-07-10
-    </div>
-    Netstat 是一款命令行工具，可用于列出系统上所有的网络套接字连接情况，包括 tcp, udp 以及 unix 套接字。另外它还能列出处于监听状态（即等待接入请求）的套接字。经
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/07-06-mitmproxy%E4%BD%BF%E7%94%A8/">
-        <h3>mitmproxy使用</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/07-06-mitmproxy%E4%BD%BF%E7%94%A8/</small>
-      2018-07-06
-    </div>
-    介绍一款非常好用的抓包工具，官网地址：https://www.mitmproxy.org。实际上，在调试苹果IAP支付时，始终没有抓成功过，
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/07-01-mysql%E4%BA%8B%E5%8A%A1/">
-        <h3>MySQL事务</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/07-01-mysql%E4%BA%8B%E5%8A%A1/</small>
-      2018-07-01
-    </div>
-    关于MySQL事务的诡异问题，至今没有调查出原因。但却也是一个契机，带我重新回忆之前的遇到的事务问题。 诡异的问题 系统中存在A和B两个表。B表
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/06-15-time_wait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/">
-        <h3>TIME_WAIT状态解读</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/06-15-time_wait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/</small>
-      2018-06-15
-    </div>
-    版本：0.01 突然想梳理一下TIME_WAIT,毕竟自己遇到它好多次了。经常一块出现的问题：too many open file，当然，这个问题本身跟TIME
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/06-08-%E8%AE%A2%E5%8D%95%E7%B3%BB%E7%BB%9F%E5%88%9D%E8%AF%86/">
-        <h3>订单系统初识</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/06-08-%E8%AE%A2%E5%8D%95%E7%B3%BB%E7%BB%9F%E5%88%9D%E8%AF%86/</small>
-      2018-06-08
-    </div>
-    计划将订单系统做一下梳理，包括之前写的IAP支付。其中一些细节，自己描述的也不是特别满意。后续慢慢的完善。 整个订单系统，概括的讲，其实就是创
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/05-31-go%E5%8F%8D%E5%B0%84/">
-        <h3>Go反射</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/05-31-go%E5%8F%8D%E5%B0%84/</small>
-      2018-05-31
-    </div>
-    人生的挫折感并不取决于境遇本身，而取决于境遇和自我期待之间的落差。 概述 对interface类型操作，如何对内部的值进行处理和分析。比如判断i
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/05-15-shell%E6%93%8D%E4%BD%9C%E6%96%87%E6%9C%AC%E5%AE%9E%E4%BE%8B/">
-        <h3>shell操作文本实例</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/05-15-shell%E6%93%8D%E4%BD%9C%E6%96%87%E6%9C%AC%E5%AE%9E%E4%BE%8B/</small>
-      2018-05-15
-    </div>
-    从掌握awk的基本指令，到在工作中熟练使用，中间还有一段路要走！通过总结一些工作中需要的案例，来加深理解。 打印符合条件的前一行记录 这个案例很
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/05-12-%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/">
-        <h3>代码重构</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/05-12-%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/</small>
-      2018-05-12
-    </div>
-    重构自己的代码是一件幸福的事，重构别人的代码确是一件不幸的事。尤其是被重构代码的人还没有离职的时候&hellip; 重构切记引入意外复杂度，同
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/05-09-mysql%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93%E4%B8%80-/">
-        <h3>MySQL使用总结(一)</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/05-09-mysql%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93%E4%B8%80-/</small>
-      2018-05-09
-    </div>
-    查询的执行时间 第一次遇到查询时候报超时。很好奇，别的工具是如何修改查询的操时时间。 set max_statement_time = 0; By using max_statement_time, it is possible to limit the execution time of individual queries. The MySQL version of max_statement_time is defined in millseconds, not seconds.
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/2018.05.02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/">
-        <h3>Go test基础用法</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/2018.05.02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</small>
-      2018-05-02
-    </div>
-    当直接使用IDE进行单元测试时，有没有好奇它时如何实现的？比如GoLand写的测试用例。 所有的代码都需要写测试用例。这不仅仅是对自己的代码负
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/04-24-saga-pattern/">
-        <h3>Saga Pattern</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/04-24-saga-pattern/</small>
-      2018-04-24
-    </div>
-    在微服务中，用的比较多的分布式事务模式：SAGA。下面是lysu/go-saga库中的描述： Saga is a long-lived transaction came up with many small sub-transaction.ExecutionCoordinator(SEC) is coordinator for sub-transactions execute and saga-log written.Sub-transaction is normal business operation, it
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/04-20-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
-        <h3>docker基本使用</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/04-20-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</small>
-      2018-04-20
-    </div>
-    知道一点比完全不知道要好，对问题有深入了解比仅知道皮毛要好。作为docker的一个初学者，现在对docker做简单记录。希望随着工作、生活，
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/04-19-xorm%E4%BD%BF%E7%94%A8reverse%E6%8C%87%E4%BB%A4%E5%88%9B%E5%BB%BA%E6%A8%A1%E7%89%88/">
-        <h3>xorm使用reverse指令创建模版</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/04-19-xorm%E4%BD%BF%E7%94%A8reverse%E6%8C%87%E4%BB%A4%E5%88%9B%E5%BB%BA%E6%A8%A1%E7%89%88/</small>
-      2018-04-19
-    </div>
-    这只能算作一次小的功能介绍 结合我们使用过的go数据操作类的库，执行的逻辑基本都是：将数据库返回的数据，转换成我们提前声明的结构体对象，然后返
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/04-05-%E4%BA%86%E8%A7%A3laravel%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">
-        <h3>了解Laravel依赖注入</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/04-05-%E4%BA%86%E8%A7%A3laravel%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</small>
-      2018-04-05
-    </div>
-    随笔 突然想了解一下Laravel，然后发现：它没有我想象的那么简单，很多的调用都找不到入口。加载view的逻辑，看了很长时间，还是没有搞明白
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/03-31-%E5%8C%85%E7%AE%A1%E7%90%86/">
-        <h3>包管理工具</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/03-31-%E5%8C%85%E7%AE%A1%E7%90%86/</small>
-      2018-03-30
-    </div>
-    反思之前的过程，一直没有试图跟上技术的发展。恍然觉得，其实技术比买股票更能让我找到快乐。新的技术越来越多，能做的便是，持续保持蜗牛锲而不舍的
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/03-17-http%E6%80%BB%E7%BB%93-%E7%8A%B6%E6%80%81%E7%A0%81/">
-        <h3>HTTP总结-状态码</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/03-17-http%E6%80%BB%E7%BB%93-%E7%8A%B6%E6%80%81%E7%A0%81/</small>
-      2018-03-17
-    </div>
-    给别人轻松讲明白一个问题，才能算自己真正了解这个问题。 &gt; Origin Header 头让我熟悉了一次sheme 从HTTP的头Origin说起，想起之前客户端定义sc
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/03-01-nginx%E6%80%BB%E7%BB%93/">
-        <h3>Nginx总结</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/03-01-nginx%E6%80%BB%E7%BB%93/</small>
-      2018-03-10
-    </div>
-    location 指令 工作中经常用到的一个指令，用来对某个路径的请求做特殊处理。比如同样的链接在PC和Web显示不同的页面。 location修饰符 location bloc
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/02-08-iap%E6%94%AF%E4%BB%98%E5%88%9D%E8%AF%86/">
-        <h3>IAP支付初识</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/02-08-iap%E6%94%AF%E4%BB%98%E5%88%9D%E8%AF%86/</small>
-      2018-02-28
-    </div>
-    IAP全称In-App Purchase，也可以叫内购。查看百度百科，IAP是一种智能移动终端应用程序的付费模式。大概的意思：用户在APP内通
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/02-25-websocket%E5%9F%BA%E7%A1%80%E5%BC%80%E5%8F%91/">
-        <h3>WebSocket基础开发</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/02-25-websocket%E5%9F%BA%E7%A1%80%E5%BC%80%E5%8F%91/</small>
-      2018-02-25
-    </div>
-    WebSocket是一种网络通讯协议。在服务器端可以将HTTP请求升级为WebSocket请求。区别于普通的HTTP请求，WebSocket
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/01-30-protobufs%E5%9C%A8logstash%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">
-        <h3>Protobufs在Logstash中的应用</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/01-30-protobufs%E5%9C%A8logstash%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</small>
-      2018-01-30
-    </div>
-    ELK 分别是Elasticsearch、Logstash、Kibana技术栈的结合。主要解决的问题在于：系统服务器多，日志数据分散难以查找，日志
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/01-29-requirejs%E5%88%9D%E8%AF%86-/">
-        <h3>RequireJS初识</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/01-29-requirejs%E5%88%9D%E8%AF%86-/</small>
-      2018-01-29
-    </div>
-    开发上想找一个时间选择控件，无意中就找到了layDate 日期与时间组件。 直接下载源码，在文件中引入.js和.css文件，但是调用的时候产生异
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/01-21-memcached%E9%81%87%E5%88%B0%E7%9A%84json_decode%E9%97%AE%E9%A2%98/">
-        <h3>Memcached遇到的json_decode问题</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/01-21-memcached%E9%81%87%E5%88%B0%E7%9A%84json_decode%E9%97%AE%E9%A2%98/</small>
-      2018-01-21
-    </div>
-    Memcached 是一个高性能的分布式缓存系统，使用Key-Value存储字符串和对象。通常来说，它主要用于缓存从数据库中检索到的数据以及第三方服务的数据等
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/01-14-git%E5%88%86%E6%94%AF%E6%A8%A1%E5%9E%8B/">
-        <h3>Git分支模型</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/01-14-git%E5%88%86%E6%94%AF%E6%A8%A1%E5%9E%8B/</small>
-      2018-01-14
-    </div>
-    Git分支模型 文章将围绕下图来描述我们所使用的分支模型。主要包括master和develop两个主线分支以及feature、release、
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2018/01-01-redis%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%83%A8%E7%97%9B%E7%BB%8F%E5%8E%86/">
-        <h3>Redis学习的惨痛经历</h3>
-      </a>
-      <small>https://neojos.com/blog/2018/01-01-redis%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%83%A8%E7%97%9B%E7%BB%8F%E5%8E%86/</small>
-      2018-01-01
-    </div>
-    我们开发的产品类似于 trivago hotel search，Redis也多用来缓存临时数据。比如将操作频繁的流水数据先存储到redis，之后迁移到关系型数据库做持
-  </div>
-  
-  <div>
-    <div>
-      <a href="/about/">
-        <h3>About</h3>
-      </a>
-      <small>https://neojos.com/about/</small>
-      0001-01-01
-    </div>
-    网站是使用hugo + GitHub搭建的静态网页。在这之前，一直用的是hexo，自从无意间看到了https://yihui.name/。不得不
-  </div>
-  
-  <div>
-    <div>
-      <a href="/blog/2019/19-06-23-using-context-cancellation-in-go/">
-        <h3>Using context cancellation in Go</h3>
-      </a>
-      <small>https://neojos.com/blog/2019/19-06-23-using-context-cancellation-in-go/</small>
-      0001-01-01
-    </div>
-    爱因斯坦曾说过：“每当我的头脑没有问题思考时，我就喜欢将知道的定理重新验证一番，这样做并没有什么目的，只是让自己有机会重新享受一下专心思考的
-  </div>
-  
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/08-19-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98bigcache/">本地缓存BigCache</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-08-19</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            BigCache的作者做了详细的阐述，尽在这里：Writing a very fast cache service with millions of entries in Go。不得不说，作者的表述非常完美，给它点赞。GitHub
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/08-11-golang%E4%B8%8B%E7%9A%84error/">Golang下的Error</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-08-11</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            感觉error确实没啥可说的，这个简单到极致的package总共也不超过10行有效代码。而且常用的fmt也提供了很方便的返回error的方法
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/08-09-shell%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%801/">Shell必备基础（1）</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-08-09</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            Shell是对Linux命令的深加工，用得好，事半功倍。 本来只想加深Array的用法，但一不小心，又变成了一篇基础大全。 比较运算 习惯在if语
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/08-07-git%E6%92%A4%E9%94%80%E6%9C%AC%E5%9C%B0%E4%BF%AE%E6%94%B9/">Git撤销本地修改</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-08-07</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            懂得了好多大道理，但还是过不好这一生！ 用了git就会发现，再也不想用svn了。 Note：在执行push操作前，所有的修改都发生在本地，可以使
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/08-04-ip-routing/">IP Routing</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-08-04</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            假设你在跟小米公司对接服务，那你有没有好奇过：自家的服务器是如何找到小米公司的服务器的。为了安全，公司的服务器可都是在内网的，用户是无法直接
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/">ngrep抓包</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-08-01</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            简单的工具其实挺有用的。警告：不许瞧不起工具，尤其是你还不会用的工具。 ngrep还是之前跟花椒直播的同事对接项目时，了解到的一个工具。它可以
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/07-28-tcp-server-design/">Tcp Server Design</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-07-28</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            绝大多数的TCP服务都是支持并发的。当一个连接请求到达时，服务端接收这个连接，然后创建一个新的线程(或进程)来处理这个连接。 listen状态
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/07-24-%E9%87%8D%E8%AF%95/">重试</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-07-24</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            为了克服网络问题，重试是我们常用的手段之一。但必须记住：重试的姿势非常重要。照应一句古话：“差若毫厘，谬以千里”。 正确的姿势是便是： 如果请求
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/07-19-siege%E5%8E%8B%E6%B5%8B/">siege压测</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-07-19</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            关于压测，首先要了解TPS和并发用户数之间的关系： TPS就是每秒事务数，但是事务是基于虚拟用户数的。假如1个虚拟用户在1秒内完成1笔事务，那
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/07-14-kafka%E7%9A%84offset%E5%88%9D%E7%AA%A51/">Kafka的offset初窥(1)</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-07-14</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            kafka适用的场景很多，但用它来异步通知却是让我略感头痛！ 引言 对于kafka的offset问题，先从这篇文章说起：How to disable auto commit? 它阐述了一
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/07-10-linux%E6%9F%A5%E7%9C%8B%E7%9B%91%E5%90%AC%E7%9A%84%E7%AB%AF%E5%8F%A3%E8%BF%9B%E7%A8%8B/">Linux查看监听的端口进程</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-07-10</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            Netstat 是一款命令行工具，可用于列出系统上所有的网络套接字连接情况，包括 tcp, udp 以及 unix 套接字。另外它还能列出处于监听状态（即等待接入请求）的套接字。经
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/07-06-mitmproxy%E4%BD%BF%E7%94%A8/">mitmproxy使用</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-07-06</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            介绍一款非常好用的抓包工具，官网地址：https://www.mitmproxy.org。实际上，在调试苹果IAP支付时，始终没有抓成功过，
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/07-01-mysql%E4%BA%8B%E5%8A%A1/">MySQL事务</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-07-01</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            关于MySQL事务的诡异问题，至今没有调查出原因。但却也是一个契机，带我重新回忆之前的遇到的事务问题。 诡异的问题 系统中存在A和B两个表。B表
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/06-15-time_wait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/">TIME_WAIT状态解读</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-06-15</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            版本：0.01 突然想梳理一下TIME_WAIT,毕竟自己遇到它好多次了。经常一块出现的问题：too many open file，当然，这个问题本身跟TIME
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/06-08-%E8%AE%A2%E5%8D%95%E7%B3%BB%E7%BB%9F%E5%88%9D%E8%AF%86/">订单系统初识</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-06-08</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            计划将订单系统做一下梳理，包括之前写的IAP支付。其中一些细节，自己描述的也不是特别满意。后续慢慢的完善。 整个订单系统，概括的讲，其实就是创
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/05-31-go%E5%8F%8D%E5%B0%84/">Go反射</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-05-31</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            人生的挫折感并不取决于境遇本身，而取决于境遇和自我期待之间的落差。 概述 对interface类型操作，如何对内部的值进行处理和分析。比如判断i
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/05-15-shell%E6%93%8D%E4%BD%9C%E6%96%87%E6%9C%AC%E5%AE%9E%E4%BE%8B/">shell操作文本实例</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-05-15</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            从掌握awk的基本指令，到在工作中熟练使用，中间还有一段路要走！通过总结一些工作中需要的案例，来加深理解。 打印符合条件的前一行记录 这个案例很
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/05-12-%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/">代码重构</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-05-12</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            重构自己的代码是一件幸福的事，重构别人的代码确是一件不幸的事。尤其是被重构代码的人还没有离职的时候&hellip; 重构切记引入意外复杂度，同
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/05-09-mysql%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93%E4%B8%80-/">MySQL使用总结(一)</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-05-09</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            查询的执行时间 第一次遇到查询时候报超时。很好奇，别的工具是如何修改查询的操时时间。 set max_statement_time = 0; By using max_statement_time, it is possible to limit the execution time of individual queries. The MySQL version of max_statement_time is defined in millseconds, not seconds.
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/2018.05.02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/">Go test基础用法</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-05-02</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            当直接使用IDE进行单元测试时，有没有好奇它时如何实现的？比如GoLand写的测试用例。 所有的代码都需要写测试用例。这不仅仅是对自己的代码负
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/04-24-saga-pattern/">Saga Pattern</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-04-24</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            在微服务中，用的比较多的分布式事务模式：SAGA。下面是lysu/go-saga库中的描述： Saga is a long-lived transaction came up with many small sub-transaction.ExecutionCoordinator(SEC) is coordinator for sub-transactions execute and saga-log written.Sub-transaction is normal business operation, it
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/04-20-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">docker基本使用</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-04-20</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            知道一点比完全不知道要好，对问题有深入了解比仅知道皮毛要好。作为docker的一个初学者，现在对docker做简单记录。希望随着工作、生活，
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/04-19-xorm%E4%BD%BF%E7%94%A8reverse%E6%8C%87%E4%BB%A4%E5%88%9B%E5%BB%BA%E6%A8%A1%E7%89%88/">xorm使用reverse指令创建模版</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-04-19</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            这只能算作一次小的功能介绍 结合我们使用过的go数据操作类的库，执行的逻辑基本都是：将数据库返回的数据，转换成我们提前声明的结构体对象，然后返
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/04-05-%E4%BA%86%E8%A7%A3laravel%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">了解Laravel依赖注入</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-04-05</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            随笔 突然想了解一下Laravel，然后发现：它没有我想象的那么简单，很多的调用都找不到入口。加载view的逻辑，看了很长时间，还是没有搞明白
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/03-31-%E5%8C%85%E7%AE%A1%E7%90%86/">包管理工具</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-03-30</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            反思之前的过程，一直没有试图跟上技术的发展。恍然觉得，其实技术比买股票更能让我找到快乐。新的技术越来越多，能做的便是，持续保持蜗牛锲而不舍的
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/03-17-http%E6%80%BB%E7%BB%93-%E7%8A%B6%E6%80%81%E7%A0%81/">HTTP总结-状态码</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-03-17</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            给别人轻松讲明白一个问题，才能算自己真正了解这个问题。 &gt; Origin Header 头让我熟悉了一次sheme 从HTTP的头Origin说起，想起之前客户端定义sc
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/03-01-nginx%E6%80%BB%E7%BB%93/">Nginx总结</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-03-10</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            location 指令 工作中经常用到的一个指令，用来对某个路径的请求做特殊处理。比如同样的链接在PC和Web显示不同的页面。 location修饰符 location bloc
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/02-08-iap%E6%94%AF%E4%BB%98%E5%88%9D%E8%AF%86/">IAP支付初识</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-02-28</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            IAP全称In-App Purchase，也可以叫内购。查看百度百科，IAP是一种智能移动终端应用程序的付费模式。大概的意思：用户在APP内通
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/02-25-websocket%E5%9F%BA%E7%A1%80%E5%BC%80%E5%8F%91/">WebSocket基础开发</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-02-25</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            WebSocket是一种网络通讯协议。在服务器端可以将HTTP请求升级为WebSocket请求。区别于普通的HTTP请求，WebSocket
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/01-30-protobufs%E5%9C%A8logstash%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">Protobufs在Logstash中的应用</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-01-30</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            ELK 分别是Elasticsearch、Logstash、Kibana技术栈的结合。主要解决的问题在于：系统服务器多，日志数据分散难以查找，日志
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/01-29-requirejs%E5%88%9D%E8%AF%86-/">RequireJS初识</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-01-29</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            开发上想找一个时间选择控件，无意中就找到了layDate 日期与时间组件。 直接下载源码，在文件中引入.js和.css文件，但是调用的时候产生异
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/01-21-memcached%E9%81%87%E5%88%B0%E7%9A%84json_decode%E9%97%AE%E9%A2%98/">Memcached遇到的json_decode问题</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-01-21</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            Memcached 是一个高性能的分布式缓存系统，使用Key-Value存储字符串和对象。通常来说，它主要用于缓存从数据库中检索到的数据以及第三方服务的数据等
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/01-14-git%E5%88%86%E6%94%AF%E6%A8%A1%E5%9E%8B/">Git分支模型</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-01-14</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            Git分支模型 文章将围绕下图来描述我们所使用的分支模型。主要包括master和develop两个主线分支以及feature、release、
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2018/01-01-redis%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%83%A8%E7%97%9B%E7%BB%8F%E5%8E%86/">Redis学习的惨痛经历</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">2018-01-01</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            我们开发的产品类似于 trivago hotel search，Redis也多用来缓存临时数据。比如将操作频繁的流水数据先存储到redis，之后迁移到关系型数据库做持
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/about/">About</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">0001-01-01</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            网站是使用hugo + GitHub搭建的静态网页。在这之前，一直用的是hexo，自从无意间看到了https://yihui.name/。不得不
+            
+        </div>
+    </article>
+    
+    <article>
+        <header>
+            <h1 class="li-h1"><a href="https://neojos.com/blog/2019/19-06-23-using-context-cancellation-in-go/">Using context cancellation in Go</a></h1>
+            <div class="clearfix">
+                <div class="post-date pull-left">
+                    <span class="li-small">0001-01-01</span>
+                </div>
+            </div>
+        </header>
+        <div>
+            
+            爱因斯坦曾说过：“每当我的头脑没有问题思考时，我就喜欢将知道的定理重新验证一番，这样做并没有什么目的，只是让自己有机会重新享受一下专心思考的
+            
+        </div>
+    </article>
+    
 
-  
-  <nav class="paginate-container">
-    <div class="pagination">
-      <ul>
-        
-        <a href="/" class="previous_page">Prev</a>
-        
+    
+    <nav class="paginate-container">
+        <div class="pagination">
+            <ul>
+                
+                <a href="/" class="previous_page">Prev</a>
+                
 
-        
-          <a href="/">
-            1
-          </a>
-        
-          <a href="/page/2/">
-            2
-          </a>
-        
+                
+                <a href="/">
+                    1
+                </a>
+                
+                <a href="/page/2/">
+                    2
+                </a>
+                
 
-        
-        <span class="next_page disabled">Next</span>
-        
-      </ul>
-    </div>
-  </nav>
-  
+                
+                <span class="next_page disabled">Next</span>
+                
+            </ul>
+        </div>
+    </nav>
+    
 
 
 </div>

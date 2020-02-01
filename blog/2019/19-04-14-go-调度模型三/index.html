@@ -40,10 +40,11 @@ if (!doNotTrack) {
     <meta name="twitter:image" content="https://neojos.com/twitter-card.png">
     
 
-
+    <link rel="stylesheet" href="/assets/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/syntax.css">
     <link rel="stylesheet" href="/assets/primer-build.css">
     <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="/assets/font-awesome.min.css">
   </head>
 
 
@@ -164,7 +165,7 @@ SCHED 1008ms: gomaxprocs=1 idleprocs=0 threads=3 spinningthreads=0 idlethreads=1
 
 <p>当<code>P</code>本地的<code>runqueues</code>运行完之后，<code>M</code>会去全局队列取<code>G</code>来执行。同时，全局队列的<code>G</code>也会被间歇性检查，否则里面的<code>G</code>可能永远都得不到执行了。</p>
 
-<h2 id="偷-g-模型">偷<code>G</code>模型</h2>
+<h2 id="偷g模型">偷G模型</h2>
 
 <p>当<code>runqueues</code>分布不均衡时，可能存在其中一个<code>M</code>执行完了本地的<code>P</code>，而其他<code>P</code>的本地队列还有很多<code>G</code>等待被执行。如图所示，为了去继续运行<code>Go</code>代码，<code>P1</code>首先会尝试去全局队列获取。如果全局队列没有，那么它就会随机从别的<code>P</code>去偷一半回来。这样做也是用来保证所有线程都一直有工作可以做。</p>
 
@@ -198,7 +199,7 @@ SCHED 1008ms: gomaxprocs=1 idleprocs=0 threads=3 spinningthreads=0 idlethreads=1
 <li><a href="#spinning-thread">Spinning thread</a></li>
 <li><a href="#执行模型">执行模型</a></li>
 <li><a href="#阻塞模型">阻塞模型</a></li>
-<li><a href="#偷-g-模型">偷<code>G</code>模型</a></li>
+<li><a href="#偷g模型">偷G模型</a></li>
 </ul></li>
 </ul>
 </nav></div>
