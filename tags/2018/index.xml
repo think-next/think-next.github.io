@@ -14,10 +14,10 @@
     
     <item>
       <title>Go test基础用法</title>
-      <link>https://neojos.com/blog/2018/2018.05.02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</link>
+      <link>https://neojos.com/blog/2018/05-02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</link>
       <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://neojos.com/blog/2018/2018.05.02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</guid>
+      <guid>https://neojos.com/blog/2018/05-02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</guid>
       <description>当直接使用IDE进行单元测试时，有没有好奇它时如何实现的？比如GoLand写的测试用例。 所有的代码都需要写测试用例。这不仅仅是对自己的代码负</description>
     </item>
     

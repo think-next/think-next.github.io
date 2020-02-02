@@ -365,10 +365,10 @@
     
     <item>
       <title>Net Transport</title>
-      <link>https://neojos.com/blog/2018/2018.12.09-net-transport/</link>
+      <link>https://neojos.com/blog/2018/12-09-net-transport/</link>
       <pubDate>Sat, 08 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://neojos.com/blog/2018/2018.12.09-net-transport/</guid>
+      <guid>https://neojos.com/blog/2018/12-09-net-transport/</guid>
       <description>在调用第三方请求时，正确使用Client也不是一件非常容易的事。 下面是截取的一段描述，建议Client或Transport在整个服务期间最好</description>
     </item>
     
@@ -401,10 +401,10 @@
     
     <item>
       <title>数据一致性（一）</title>
-      <link>https://neojos.com/blog/2018/2018.10.20-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%80/</link>
+      <link>https://neojos.com/blog/2018/10-20-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%80/</link>
       <pubDate>Sat, 20 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://neojos.com/blog/2018/2018.10.20-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%80/</guid>
+      <guid>https://neojos.com/blog/2018/10-20-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%80/</guid>
       <description>MySQL的事务是数据一致性的典范，事务内的执行要么都成功，要么都失败。但业务系统涉及系统间的相互调用，涉及的数据库也不尽相同，所以实现数据</description>
     </item>
     
@@ -617,10 +617,10 @@
     
     <item>
       <title>Go test基础用法</title>
-      <link>https://neojos.com/blog/2018/2018.05.02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</link>
+      <link>https://neojos.com/blog/2018/05-02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</link>
       <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://neojos.com/blog/2018/2018.05.02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</guid>
+      <guid>https://neojos.com/blog/2018/05-02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</guid>
       <description>当直接使用IDE进行单元测试时，有没有好奇它时如何实现的？比如GoLand写的测试用例。 所有的代码都需要写测试用例。这不仅仅是对自己的代码负</description>
     </item>
     

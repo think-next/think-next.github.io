@@ -23,10 +23,10 @@
     
     <item>
       <title>数据一致性（一）</title>
-      <link>https://neojos.com/blog/2018/2018.10.20-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%80/</link>
+      <link>https://neojos.com/blog/2018/10-20-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%80/</link>
       <pubDate>Sat, 20 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://neojos.com/blog/2018/2018.10.20-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%80/</guid>
+      <guid>https://neojos.com/blog/2018/10-20-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%80/</guid>
       <description>MySQL的事务是数据一致性的典范，事务内的执行要么都成功，要么都失败。但业务系统涉及系统间的相互调用，涉及的数据库也不尽相同，所以实现数据</description>
     </item>
     
