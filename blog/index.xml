@@ -387,7 +387,7 @@
       <pubDate>Fri, 12 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>https://neojos.com/blog/2018/10-12-go-interface-%E7%B1%BB%E5%9E%8B/</guid>
-      <description>草稿 0.02 introduction duck typing 很形象的解释了interface的本意。它是一种特别的数据类型，内部声明了一组要实现的方法集合，任何实现了这些方法的数据类型都可</description>
+      <description>introduction duck typing 很形象的解释了interface的本意。它是一种特别的数据类型，内部声明了一组要实现的方法集合，任何实现了这些方法的数据类型都可以认为</description>
     </item>
     
     <item>
