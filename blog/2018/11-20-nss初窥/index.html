@@ -1,8 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     
-    
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+
+<meta name="description" content="Hugo-Primer theme&#39;s example site">
+<title>
+    NSS初窥 - 渐行渐远
+</title>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.min.670da4c21f08f6fb9346ba65b362026a143c88c6d6e4292b05476774b0516a42.css" integrity="sha256-Zw2kwh8I9vuTRrpls2ICahQ8iMbW5CkrBUdndLBRakI=" crossorigin="anonymous" media="screen">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="NSS初窥"/>
+<meta name="twitter:description" content="版本 0.01 在使用wireshark分析https时，加密传输的内容会解析失败。而NSS可以存储TLS握手过程中的Key，用于解密。很好奇，它是如"/>
+
+<meta property="og:title" content="NSS初窥" />
+<meta property="og:description" content="版本 0.01 在使用wireshark分析https时，加密传输的内容会解析失败。而NSS可以存储TLS握手过程中的Key，用于解密。很好奇，它是如" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neojos.com/blog/2018/11-20-nss%E5%88%9D%E7%AA%A5/" />
+<meta property="article:published_time" content="2018-11-20T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2018-11-20T00:00:00&#43;00:00"/>
+
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -15,88 +55,27 @@ if (!doNotTrack) {
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
     
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    
+    
     <title>
-      
-  NSS初窥 &ndash; 渐行渐远
-
+        
+        NSS初窥
+        
     </title>
+</head>
+
+<body>
     
     
-    <meta name="description" property="og:description" content="版本 0.01 在使用wireshark分析https时，加密传输的内容会解析失败。而NSS可以存储TLS握手过程中的Key，用于解密。很好奇，它是如|Hugo-Primer theme&#39;s example site">
+    <header class="wrap flex-container">
+        <h1>NSS初窥</h1>
+    </header>
     
-
-    <meta name="apple-mobile-web-app-title" content="渐行渐远">
-    
-    
-    
-    
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@">
-    <meta name="twitter:creator" content="@">
-    <meta name="twitter:title" content="NSS初窥 | 渐行渐远">
-    <meta name="twitter:description" content="版本 0.01 在使用wireshark分析https时，加密传输的内容会解析失败。而NSS可以存储TLS握手过程中的Key，用于解密。很好奇，它是如|Hugo-Primer theme&#39;s example site">
-    <meta name="twitter:image" content="https://neojos.com/twitter-card.png">
-    
-
-    <link rel="stylesheet" href="/assets/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/syntax.css">
-    <link rel="stylesheet" href="/assets/primer-build.css">
-    <link rel="stylesheet" href="/assets/style.css">
-    <link rel="stylesheet" href="/assets/font-awesome.min.css">
-  </head>
-
-
-  <body class="bg-gray">
-    <div id="holy" class="container-lg bg-white h-100">
-
-      <div id="header" class="px-1 bg-white">
-        <nav class="UnderlineNav UnderlineNav--right px-2">
-  <a class="UnderlineNav-actions muted-link h2" href="https://neojos.com/">
-    渐行渐远
-  </a>
-
-  
-  
-</nav>
-
-      </div>
-
-      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+    <main class="wrap">
         
-
-<div class="Subhead">
-  <div class="Subhead-heading">
-    <div class="h1 mt-3 mb-1">NSS初窥</div>
-  </div>
-  <div class="Subhead-description">
-    
-
-
-
-
-<a href='/tags/tcp/ip' class="muted-link">
-  <span class="Label Label--gray">tcp/ip</span>
-</a>
-
-
-
-    
-    <div class="float-md-right">
-      <span title="Lastmod: 2018-11-20. Published at: 2018-11-20.">
-        
-          Published: 2018-11-20
-        
-      </span>
-    </div>
-    
-  </div>
-</div>
-<article>
-  
-  <section class="pb-6 mb-3 border-bottom">
-    
+        <article role="article" class="flex-container">
 
 <p><em><u>版本 0.01</u></em></p>
 
@@ -165,67 +144,17 @@ EXPORTER_SECRET 51c27befc24dceb18ade59b4a10c1398725848f7130b2ebeeb2e01483ed95e4d
 </code></a></li>
 <li><a href="http://iluoxuan.iteye.com/blog/1736275"><code>SSL身份认证原理</code></a></li>
 </ol>
-
-  </section>
-
-  <section>
-    
-      
-    
-  </section>
 </article>
-
-      </div>
-
-      <div id="side" class="pr-1 bg-white">
-        <aside class="pr-3">
-          
-  
-    <div id="toc" class="Box Box--blue mb-3">
-      <b>NSS初窥</b><nav id="TableOfContents"><ul>
-<li><a href="#wireshark-配置"><code>wireshark</code>配置</a></li>
-<li><a href="#key-log-文件格式"><code>key log</code>文件格式</a></li>
-<li><a href="#tls-加解密"><code>TLS</code>加解密</a>
-<ul>
-<li><a href="#case-1"><code>case 1.</code></a>
-<ul>
-<li><a href="#关于-change-cipher-spec-protocol">关于<code>Change Cipher Spec Protocol</code></a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav></div>
-  
-
-  
-    <div>
-      
-    </div>
-  
-
-        </aside>
-      </div>
-
-      <div id="footer" class="pt-2 pb-3 bg-white text-center">
         
 
-  <span class="text-small text-gray">
-    &copy;Qiushi Pan 2018-2019 &middot; 
-
-    Powered by the
-    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
-    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
-  </span>
-
-
-      </div>
-    </div>
-
+        
+        
+        
+    </main>
+    
+    <footer class="flex-container footer"></footer>
     
     
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
-    
-  </body>
+</body>
+
 </html>

@@ -1,8 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     
-    
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+
+<meta name="description" content="Hugo-Primer theme&#39;s example site">
+<title>
+    Using context cancellation in Go - 渐行渐远
+</title>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.min.670da4c21f08f6fb9346ba65b362026a143c88c6d6e4292b05476774b0516a42.css" integrity="sha256-Zw2kwh8I9vuTRrpls2ICahQ8iMbW5CkrBUdndLBRakI=" crossorigin="anonymous" media="screen">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Using context cancellation in Go"/>
+<meta name="twitter:description" content="爱因斯坦曾说过：“每当我的头脑没有问题思考时，我就喜欢将知道的定理重新验证一番，这样做并没有什么目的，只是让自己有机会重新享受一下专心思考的"/>
+
+<meta property="og:title" content="Using context cancellation in Go" />
+<meta property="og:description" content="爱因斯坦曾说过：“每当我的头脑没有问题思考时，我就喜欢将知道的定理重新验证一番，这样做并没有什么目的，只是让自己有机会重新享受一下专心思考的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neojos.com/blog/2019/19-06-23-using-context-cancellation-in-go/" />
+
+
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -15,141 +54,42 @@ if (!doNotTrack) {
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
     
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    
+    
     <title>
-      
-  Using context cancellation in Go &ndash; 渐行渐远
-
+        
+        Using context cancellation in Go
+        
     </title>
+</head>
+
+<body>
     
     
-    <meta name="description" property="og:description" content="爱因斯坦曾说过：“每当我的头脑没有问题思考时，我就喜欢将知道的定理重新验证一番，这样做并没有什么目的，只是让自己有机会重新享受一下专心思考的|Hugo-Primer theme&#39;s example site">
+    <header class="wrap flex-container">
+        <h1>Using context cancellation in Go</h1>
+    </header>
     
-
-    <meta name="apple-mobile-web-app-title" content="渐行渐远">
-    
-    
-    
-    
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@">
-    <meta name="twitter:creator" content="@">
-    <meta name="twitter:title" content="Using context cancellation in Go | 渐行渐远">
-    <meta name="twitter:description" content="爱因斯坦曾说过：“每当我的头脑没有问题思考时，我就喜欢将知道的定理重新验证一番，这样做并没有什么目的，只是让自己有机会重新享受一下专心思考的|Hugo-Primer theme&#39;s example site">
-    <meta name="twitter:image" content="https://neojos.com/twitter-card.png">
-    
-
-    <link rel="stylesheet" href="/assets/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/syntax.css">
-    <link rel="stylesheet" href="/assets/primer-build.css">
-    <link rel="stylesheet" href="/assets/style.css">
-    <link rel="stylesheet" href="/assets/font-awesome.min.css">
-  </head>
-
-
-  <body class="bg-gray">
-    <div id="holy" class="container-lg bg-white h-100">
-
-      <div id="header" class="px-1 bg-white">
-        <nav class="UnderlineNav UnderlineNav--right px-2">
-  <a class="UnderlineNav-actions muted-link h2" href="https://neojos.com/">
-    渐行渐远
-  </a>
-
-  
-  
-</nav>
-
-      </div>
-
-      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+    <main class="wrap">
         
-
-<div class="Subhead">
-  <div class="Subhead-heading">
-    <div class="h1 mt-3 mb-1">Using context cancellation in Go</div>
-  </div>
-  <div class="Subhead-description">
-    
-
-
-
-
-<a href='/tags/golang' class="muted-link">
-  <span class="Label Label--gray">golang</span>
-</a>
-
-
-
-    
-    <div class="float-md-right">
-      <span title="Lastmod: 0001-01-01. Published at: 0001-01-01.">
-        
-          Published: 0001-01-01
-        
-      </span>
-    </div>
-    
-  </div>
-</div>
-<article>
-  
-  <section class="pb-6 mb-3 border-bottom">
-    <blockquote>
+        <article role="article" class="flex-container"><blockquote>
 <p>爱因斯坦曾说过：“每当我的头脑没有问题思考时，我就喜欢将知道的定理重新验证一番，这样做并没有什么目的，只是让自己有机会重新享受一下专心思考的快乐”</p>
 </blockquote>
 
 <p>文章地址：<a href="https://note.youdao.com/ynoteshare1/index.html?id=824223bbebb6855c45692f70448dec35&amp;type=note"><code>Using context cancellation in Go</code></a></p>
-
-  </section>
-
-  <section>
-    
-      
-    
-  </section>
 </article>
-
-      </div>
-
-      <div id="side" class="pr-1 bg-white">
-        <aside class="pr-3">
-          
-  
-    <div id="toc" class="Box Box--blue mb-3">
-      <b>Using context cancellation in Go</b></div>
-  
-
-  
-    <div>
-      
-    </div>
-  
-
-        </aside>
-      </div>
-
-      <div id="footer" class="pt-2 pb-3 bg-white text-center">
         
 
-  <span class="text-small text-gray">
-    &copy;Qiushi Pan 2018-2019 &middot; 
-
-    Powered by the
-    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
-    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
-  </span>
-
-
-      </div>
-    </div>
-
+        
+        
+        
+    </main>
+    
+    <footer class="flex-container footer"></footer>
     
     
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
-    
-  </body>
+</body>
+
 </html>

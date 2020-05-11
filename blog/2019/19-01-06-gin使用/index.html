@@ -1,8 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     
-    
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+
+<meta name="description" content="Hugo-Primer theme&#39;s example site">
+<title>
+    Gin使用 - 渐行渐远
+</title>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.min.670da4c21f08f6fb9346ba65b362026a143c88c6d6e4292b05476774b0516a42.css" integrity="sha256-Zw2kwh8I9vuTRrpls2ICahQ8iMbW5CkrBUdndLBRakI=" crossorigin="anonymous" media="screen">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Gin使用"/>
+<meta name="twitter:description" content="Gin对net/http包做了封装，支持路由、中间件等特性，极大的方便对Http Server的开发。文章通过一个Test例子，来简要介绍。对"/>
+
+<meta property="og:title" content="Gin使用" />
+<meta property="og:description" content="Gin对net/http包做了封装，支持路由、中间件等特性，极大的方便对Http Server的开发。文章通过一个Test例子，来简要介绍。对" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neojos.com/blog/2019/19-01-06-gin%E4%BD%BF%E7%94%A8/" />
+<meta property="article:published_time" content="2019-01-05T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-01-05T00:00:00&#43;00:00"/>
+
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -15,92 +55,27 @@ if (!doNotTrack) {
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
     
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    
+    
     <title>
-      
-  Gin使用 &ndash; 渐行渐远
-
+        
+        Gin使用
+        
     </title>
+</head>
+
+<body>
     
     
-    <meta name="description" property="og:description" content="Gin对net/http包做了封装，支持路由、中间件等特性，极大的方便对Http Server的开发。文章通过一个Test例子，来简要介绍。对|Hugo-Primer theme&#39;s example site">
+    <header class="wrap flex-container">
+        <h1>Gin使用</h1>
+    </header>
     
-
-    <meta name="apple-mobile-web-app-title" content="渐行渐远">
-    
-    
-    
-    
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@">
-    <meta name="twitter:creator" content="@">
-    <meta name="twitter:title" content="Gin使用 | 渐行渐远">
-    <meta name="twitter:description" content="Gin对net/http包做了封装，支持路由、中间件等特性，极大的方便对Http Server的开发。文章通过一个Test例子，来简要介绍。对|Hugo-Primer theme&#39;s example site">
-    <meta name="twitter:image" content="https://neojos.com/twitter-card.png">
-    
-
-    <link rel="stylesheet" href="/assets/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/syntax.css">
-    <link rel="stylesheet" href="/assets/primer-build.css">
-    <link rel="stylesheet" href="/assets/style.css">
-    <link rel="stylesheet" href="/assets/font-awesome.min.css">
-  </head>
-
-
-  <body class="bg-gray">
-    <div id="holy" class="container-lg bg-white h-100">
-
-      <div id="header" class="px-1 bg-white">
-        <nav class="UnderlineNav UnderlineNav--right px-2">
-  <a class="UnderlineNav-actions muted-link h2" href="https://neojos.com/">
-    渐行渐远
-  </a>
-
-  
-  
-</nav>
-
-      </div>
-
-      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+    <main class="wrap">
         
-
-<div class="Subhead">
-  <div class="Subhead-heading">
-    <div class="h1 mt-3 mb-1">Gin使用</div>
-  </div>
-  <div class="Subhead-description">
-    
-
-
-
-
-<a href='/tags/translate' class="muted-link">
-  <span class="Label Label--gray">translate</span>
-</a>
-
-<a href='/tags/golang' class="muted-link">
-  <span class="Label Label--gray">golang</span>
-</a>
-
-
-
-    
-    <div class="float-md-right">
-      <span title="Lastmod: 2019-01-05. Published at: 2019-01-05.">
-        
-          Published: 2019-01-05
-        
-      </span>
-    </div>
-    
-  </div>
-</div>
-<article>
-  
-  <section class="pb-6 mb-3 border-bottom">
-    
+        <article role="article" class="flex-container">
 
 <p><a href="https://github.com/gin-gonic/gin"><code>Gin</code></a>对<code>net/http</code>包做了封装，支持路由、中间件等特性，极大的方便对<code>Http Server</code>的开发。文章通过一个<code>Test</code>例子，来简要介绍。对于特别基础的部分，请阅读参考文章。</p>
 
@@ -234,72 +209,17 @@ articleRoutes.GET(&quot;/create&quot;, setUserStatus(), showArticleCreationPage)
 <li><a href="https://semaphoreci.com/community/tutorials/building-go-web-applications-and-microservices-using-gin"><code>Building Go Web Applications and Microservices Using Gin</code></a></li>
 <li><a href="https://semaphoreci.com/community/tutorials/test-driven-development-of-go-web-applications-with-gin#"><code>Test-driven Development of Go Web Applications with Gin</code></a></li>
 </ol>
-
-  </section>
-
-  <section>
-    
-      
-    
-  </section>
 </article>
-
-      </div>
-
-      <div id="side" class="pr-1 bg-white">
-        <aside class="pr-3">
-          
-  
-    <div id="toc" class="Box Box--blue mb-3">
-      <b>Gin使用</b><nav id="TableOfContents"><ul>
-<li><a href="#接口测试">接口测试</a>
-<ul>
-<li><a href="#使用-postman">使用<code>Postman</code></a></li>
-</ul></li>
-<li><a href="#使用-test">使用<code>Test</code></a>
-<ul>
-<li>
-<ul>
-<li><a href="#测试基类">测试基类</a></li>
-<li><a href="#测试用例">测试用例</a></li>
-<li><a href="#小结">小结</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#middleware"><code>Middleware</code></a></li>
-</ul></li>
-</ul>
-</nav></div>
-  
-
-  
-    <div>
-      
-    </div>
-  
-
-        </aside>
-      </div>
-
-      <div id="footer" class="pt-2 pb-3 bg-white text-center">
         
 
-  <span class="text-small text-gray">
-    &copy;Qiushi Pan 2018-2019 &middot; 
-
-    Powered by the
-    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
-    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
-  </span>
-
-
-      </div>
-    </div>
-
+        
+        
+        
+    </main>
+    
+    <footer class="flex-container footer"></footer>
     
     
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
-    
-  </body>
+</body>
+
 </html>

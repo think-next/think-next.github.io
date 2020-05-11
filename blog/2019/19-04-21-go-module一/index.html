@@ -1,8 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     
-    
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+
+<meta name="description" content="Hugo-Primer theme&#39;s example site">
+<title>
+    Go Module（一） - 渐行渐远
+</title>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.min.670da4c21f08f6fb9346ba65b362026a143c88c6d6e4292b05476774b0516a42.css" integrity="sha256-Zw2kwh8I9vuTRrpls2ICahQ8iMbW5CkrBUdndLBRakI=" crossorigin="anonymous" media="screen">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go Module（一）"/>
+<meta name="twitter:description" content="这世上太多的人，宁愿吃生活苦，也不愿吃自律的苦。大概是因为生活的苦，躺着就来了，而自律的苦，得自己去找。但只有吃得下自律的苦，才有成功的自由"/>
+
+<meta property="og:title" content="Go Module（一）" />
+<meta property="og:description" content="这世上太多的人，宁愿吃生活苦，也不愿吃自律的苦。大概是因为生活的苦，躺着就来了，而自律的苦，得自己去找。但只有吃得下自律的苦，才有成功的自由" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neojos.com/blog/2019/19-04-21-go-module%E4%B8%80/" />
+<meta property="article:published_time" content="2019-04-21T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-04-21T00:00:00&#43;00:00"/>
+
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -15,84 +55,27 @@ if (!doNotTrack) {
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
     
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    
+    
     <title>
-      
-  Go Module（一） &ndash; 渐行渐远
-
+        
+        Go Module（一）
+        
     </title>
+</head>
+
+<body>
     
     
-    <meta name="description" property="og:description" content="这世上太多的人，宁愿吃生活苦，也不愿吃自律的苦。大概是因为生活的苦，躺着就来了，而自律的苦，得自己去找。但只有吃得下自律的苦，才有成功的自由|Hugo-Primer theme&#39;s example site">
+    <header class="wrap flex-container">
+        <h1>Go Module（一）</h1>
+    </header>
     
-
-    <meta name="apple-mobile-web-app-title" content="渐行渐远">
-    
-    
-    
-    
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@">
-    <meta name="twitter:creator" content="@">
-    <meta name="twitter:title" content="Go Module（一） | 渐行渐远">
-    <meta name="twitter:description" content="这世上太多的人，宁愿吃生活苦，也不愿吃自律的苦。大概是因为生活的苦，躺着就来了，而自律的苦，得自己去找。但只有吃得下自律的苦，才有成功的自由|Hugo-Primer theme&#39;s example site">
-    <meta name="twitter:image" content="https://neojos.com/twitter-card.png">
-    
-
-    <link rel="stylesheet" href="/assets/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/syntax.css">
-    <link rel="stylesheet" href="/assets/primer-build.css">
-    <link rel="stylesheet" href="/assets/style.css">
-    <link rel="stylesheet" href="/assets/font-awesome.min.css">
-  </head>
-
-
-  <body class="bg-gray">
-    <div id="holy" class="container-lg bg-white h-100">
-
-      <div id="header" class="px-1 bg-white">
-        <nav class="UnderlineNav UnderlineNav--right px-2">
-  <a class="UnderlineNav-actions muted-link h2" href="https://neojos.com/">
-    渐行渐远
-  </a>
-
-  
-  
-</nav>
-
-      </div>
-
-      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+    <main class="wrap">
         
-
-<div class="Subhead">
-  <div class="Subhead-heading">
-    <div class="h1 mt-3 mb-1">Go Module（一）</div>
-  </div>
-  <div class="Subhead-description">
-    
-
-
-
-
-
-
-    
-    <div class="float-md-right">
-      <span title="Lastmod: 2019-04-21. Published at: 2019-04-21.">
-        
-          Published: 2019-04-21
-        
-      </span>
-    </div>
-    
-  </div>
-</div>
-<article>
-  
-  <section class="pb-6 mb-3 border-bottom">
-    
+        <article role="article" class="flex-container">
 
 <blockquote>
 <p><code>这世上太多的人，宁愿吃生活苦，也不愿吃自律的苦。大概是因为生活的苦，躺着就来了，而自律的苦，得自己去找。但只有吃得下自律的苦，才有成功的自由，没有一种成功是走得了捷径的，通向真正成功的唯一道路只有自律。越成功，越自律。越自律，越成功。</code></p>
@@ -159,63 +142,17 @@ go build -mod<span class="o">=</span>vendor</code></pre></div>
 
 <p>其次，<code>go get</code>会下载、编译、安装指定的包。包的安装模式也是被允许的，比如使用<code>go get golang.org/x/perf/cmd/..</code>来更新<code>cmd</code>下的所有子包。</p>
 <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">go get -u &lt;repo url&gt;
-go mod vendor</code></pre></div>
-  </section>
-
-  <section>
-    
-      
-    
-  </section>
-</article>
-
-      </div>
-
-      <div id="side" class="pr-1 bg-white">
-        <aside class="pr-3">
-          
-  
-    <div id="toc" class="Box Box--blue mb-3">
-      <b>Go Module（一）</b><nav id="TableOfContents"><ul>
-<li><a href="#go111module"><code>GO111MODULE</code></a></li>
-<li><a href="#defining-a-module"><code>Defining a module</code></a></li>
-<li><a href="#the-go-mod-file"><code>The go.mod File</code></a></li>
-<li><a href="#modules-and-vendoring-https-golang-org-cmd-go-hdr-modules-and-vendoring"><a href="https://golang.org/cmd/go/#hdr-Modules_and_vendoring"><code>Modules and vendoring</code></a></a></li>
-<li><a href="#go-get-https-golang-org-cmd-go-hdr-module-aware-go-get"><a href="https://golang.org/cmd/go/#hdr-Module_aware_go_get"><code>Go Get</code></a></a></li>
-</ul></li>
-</ul>
-</nav></div>
-  
-
-  
-    <div>
-      
-    </div>
-  
-
-        </aside>
-      </div>
-
-      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+go mod vendor</code></pre></div></article>
         
 
-  <span class="text-small text-gray">
-    &copy;Qiushi Pan 2018-2019 &middot; 
-
-    Powered by the
-    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
-    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
-  </span>
-
-
-      </div>
-    </div>
-
+        
+        
+        
+    </main>
+    
+    <footer class="flex-container footer"></footer>
     
     
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
-    
-  </body>
+</body>
+
 </html>

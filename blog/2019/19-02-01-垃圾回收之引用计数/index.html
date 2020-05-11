@@ -1,8 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     
-    
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+
+<meta name="description" content="Hugo-Primer theme&#39;s example site">
+<title>
+    垃圾回收之引用计数 - 渐行渐远
+</title>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.min.670da4c21f08f6fb9346ba65b362026a143c88c6d6e4292b05476774b0516a42.css" integrity="sha256-Zw2kwh8I9vuTRrpls2ICahQ8iMbW5CkrBUdndLBRakI=" crossorigin="anonymous" media="screen">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="垃圾回收之引用计数"/>
+<meta name="twitter:description" content="思来想去，决定总结一下垃圾回收机制。引用计数与我结缘最早，也比较简单、基础，遂决定从引用计数入手。 —— 不管人非笑，不管人毁谤，不管人荣辱，任"/>
+
+<meta property="og:title" content="垃圾回收之引用计数" />
+<meta property="og:description" content="思来想去，决定总结一下垃圾回收机制。引用计数与我结缘最早，也比较简单、基础，遂决定从引用计数入手。 —— 不管人非笑，不管人毁谤，不管人荣辱，任" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neojos.com/blog/2019/19-02-01-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B9%8B%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/" />
+<meta property="article:published_time" content="2019-02-01T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-02-01T00:00:00&#43;00:00"/>
+
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -15,92 +55,27 @@ if (!doNotTrack) {
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
     
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    
+    
     <title>
-      
-  垃圾回收之引用计数 &ndash; 渐行渐远
-
+        
+        垃圾回收之引用计数
+        
     </title>
+</head>
+
+<body>
     
     
-    <meta name="description" property="og:description" content="思来想去，决定总结一下垃圾回收机制。引用计数与我结缘最早，也比较简单、基础，遂决定从引用计数入手。 —— 不管人非笑，不管人毁谤，不管人荣辱，任|Hugo-Primer theme&#39;s example site">
+    <header class="wrap flex-container">
+        <h1>垃圾回收之引用计数</h1>
+    </header>
     
-
-    <meta name="apple-mobile-web-app-title" content="渐行渐远">
-    
-    
-    
-    
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@">
-    <meta name="twitter:creator" content="@">
-    <meta name="twitter:title" content="垃圾回收之引用计数 | 渐行渐远">
-    <meta name="twitter:description" content="思来想去，决定总结一下垃圾回收机制。引用计数与我结缘最早，也比较简单、基础，遂决定从引用计数入手。 —— 不管人非笑，不管人毁谤，不管人荣辱，任|Hugo-Primer theme&#39;s example site">
-    <meta name="twitter:image" content="https://neojos.com/twitter-card.png">
-    
-
-    <link rel="stylesheet" href="/assets/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/syntax.css">
-    <link rel="stylesheet" href="/assets/primer-build.css">
-    <link rel="stylesheet" href="/assets/style.css">
-    <link rel="stylesheet" href="/assets/font-awesome.min.css">
-  </head>
-
-
-  <body class="bg-gray">
-    <div id="holy" class="container-lg bg-white h-100">
-
-      <div id="header" class="px-1 bg-white">
-        <nav class="UnderlineNav UnderlineNav--right px-2">
-  <a class="UnderlineNav-actions muted-link h2" href="https://neojos.com/">
-    渐行渐远
-  </a>
-
-  
-  
-</nav>
-
-      </div>
-
-      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+    <main class="wrap">
         
-
-<div class="Subhead">
-  <div class="Subhead-heading">
-    <div class="h1 mt-3 mb-1">垃圾回收之引用计数</div>
-  </div>
-  <div class="Subhead-description">
-    
-
-
-
-
-<a href='/tags/translate' class="muted-link">
-  <span class="Label Label--gray">translate</span>
-</a>
-
-<a href='/tags/golang' class="muted-link">
-  <span class="Label Label--gray">golang</span>
-</a>
-
-
-
-    
-    <div class="float-md-right">
-      <span title="Lastmod: 2019-02-01. Published at: 2019-02-01.">
-        
-          Published: 2019-02-01
-        
-      </span>
-    </div>
-    
-  </div>
-</div>
-<article>
-  
-  <section class="pb-6 mb-3 border-bottom">
-    
+        <article role="article" class="flex-container">
 
 <blockquote>
 <p><code>思来想去，决定总结一下垃圾回收机制。引用计数与我结缘最早，也比较简单、基础，遂决定从引用计数入手。</code></p>
@@ -259,101 +234,17 @@ if (!doNotTrack) {
 <li><a href="https://mortoray.com/2012/01/08/what-is-reference-counting/"><code>What is reference counting?</code></a></li>
 <li><a href="https://blogs.msdn.microsoft.com/abhinaba/2009/01/27/back-to-basics-reference-counting-garbage-collection/"><code>Back To Basics: Reference Counting Garbage Collection</code></a></li>
 </ol>
-
-  </section>
-
-  <section>
-    
-      
-    
-  </section>
 </article>
-
-      </div>
-
-      <div id="side" class="pr-1 bg-white">
-        <aside class="pr-3">
-          
-  
-    <div id="toc" class="Box Box--blue mb-3">
-      <b>垃圾回收之引用计数</b><nav id="TableOfContents"><ul>
-<li><a href="#reference-counting"><code>Reference Counting</code></a>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#什么是对象呢">什么是对象呢？</a></li>
-<li><a href="#如何计数呢">如何计数呢？</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li><a href="#如何实现">如何实现</a>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#存储结构和申请空间">存储结构和申请空间</a></li>
-<li><a href="#基类实现">基类实现</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li><a href="#对象引用关系">对象引用关系</a></li>
-<li><a href="#gc扫描">GC扫描</a>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#classloader">ClassLoader</a></li>
-<li><a href="#gc-roots"><code>GC roots</code></a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav></div>
-  
-
-  
-    <div>
-      
-    </div>
-  
-
-        </aside>
-      </div>
-
-      <div id="footer" class="pt-2 pb-3 bg-white text-center">
         
 
-  <span class="text-small text-gray">
-    &copy;Qiushi Pan 2018-2019 &middot; 
-
-    Powered by the
-    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
-    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
-  </span>
-
-
-      </div>
-    </div>
-
+        
+        
+        
+    </main>
+    
+    <footer class="flex-container footer"></footer>
     
     
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
-    
-  </body>
+</body>
+
 </html>

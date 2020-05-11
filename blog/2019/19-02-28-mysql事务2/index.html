@@ -1,8 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     
-    
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+
+<meta name="description" content="Hugo-Primer theme&#39;s example site">
+<title>
+    MySQL事务（2） - 渐行渐远
+</title>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.min.670da4c21f08f6fb9346ba65b362026a143c88c6d6e4292b05476774b0516a42.css" integrity="sha256-Zw2kwh8I9vuTRrpls2ICahQ8iMbW5CkrBUdndLBRakI=" crossorigin="anonymous" media="screen">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MySQL事务（2）"/>
+<meta name="twitter:description" content="花繁柳密能拨开方见手段，风狂雨骤时可立定才是脚跟。 引言 在MySQL处理事务的过程中，遇到如下报错： Error 1205: Lock wait timeout exceeded; try restarting transaction 结合日志信息，很快的定位"/>
+
+<meta property="og:title" content="MySQL事务（2）" />
+<meta property="og:description" content="花繁柳密能拨开方见手段，风狂雨骤时可立定才是脚跟。 引言 在MySQL处理事务的过程中，遇到如下报错： Error 1205: Lock wait timeout exceeded; try restarting transaction 结合日志信息，很快的定位" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neojos.com/blog/2019/19-02-28-mysql%E4%BA%8B%E5%8A%A12/" />
+<meta property="article:published_time" content="2019-02-28T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-02-28T00:00:00&#43;00:00"/>
+
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -15,88 +55,27 @@ if (!doNotTrack) {
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
     
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    
+    
     <title>
-      
-  MySQL事务（2） &ndash; 渐行渐远
-
+        
+        MySQL事务（2）
+        
     </title>
+</head>
+
+<body>
     
     
-    <meta name="description" property="og:description" content="花繁柳密能拨开方见手段，风狂雨骤时可立定才是脚跟。 引言 在MySQL处理事务的过程中，遇到如下报错： Error 1205: Lock wait timeout exceeded; try restarting transaction 结合日志信息，很快的定位|Hugo-Primer theme&#39;s example site">
+    <header class="wrap flex-container">
+        <h1>MySQL事务（2）</h1>
+    </header>
     
-
-    <meta name="apple-mobile-web-app-title" content="渐行渐远">
-    
-    
-    
-    
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@">
-    <meta name="twitter:creator" content="@">
-    <meta name="twitter:title" content="MySQL事务（2） | 渐行渐远">
-    <meta name="twitter:description" content="花繁柳密能拨开方见手段，风狂雨骤时可立定才是脚跟。 引言 在MySQL处理事务的过程中，遇到如下报错： Error 1205: Lock wait timeout exceeded; try restarting transaction 结合日志信息，很快的定位|Hugo-Primer theme&#39;s example site">
-    <meta name="twitter:image" content="https://neojos.com/twitter-card.png">
-    
-
-    <link rel="stylesheet" href="/assets/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/syntax.css">
-    <link rel="stylesheet" href="/assets/primer-build.css">
-    <link rel="stylesheet" href="/assets/style.css">
-    <link rel="stylesheet" href="/assets/font-awesome.min.css">
-  </head>
-
-
-  <body class="bg-gray">
-    <div id="holy" class="container-lg bg-white h-100">
-
-      <div id="header" class="px-1 bg-white">
-        <nav class="UnderlineNav UnderlineNav--right px-2">
-  <a class="UnderlineNav-actions muted-link h2" href="https://neojos.com/">
-    渐行渐远
-  </a>
-
-  
-  
-</nav>
-
-      </div>
-
-      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+    <main class="wrap">
         
-
-<div class="Subhead">
-  <div class="Subhead-heading">
-    <div class="h1 mt-3 mb-1">MySQL事务（2）</div>
-  </div>
-  <div class="Subhead-description">
-    
-
-
-
-
-<a href='/tags/transaction' class="muted-link">
-  <span class="Label Label--gray">transaction</span>
-</a>
-
-
-
-    
-    <div class="float-md-right">
-      <span title="Lastmod: 2019-02-28. Published at: 2019-02-28.">
-        
-          Published: 2019-02-28
-        
-      </span>
-    </div>
-    
-  </div>
-</div>
-<article>
-  
-  <section class="pb-6 mb-3 border-bottom">
-    
+        <article role="article" class="flex-container">
 
 <blockquote>
 <p><code>花繁柳密能拨开方见手段，风狂雨骤时可立定才是脚跟。</code></p>
@@ -178,63 +157,17 @@ if (!doNotTrack) {
 <ol>
 <li><a href="https://stackoverflow.com/questions/5836623/getting-lock-wait-timeout-exceeded-try-restarting-transaction-even-though-im"><code>stackoverflow problem</code></a></li>
 </ol>
-
-  </section>
-
-  <section>
-    
-      
-    
-  </section>
 </article>
-
-      </div>
-
-      <div id="side" class="pr-1 bg-white">
-        <aside class="pr-3">
-          
-  
-    <div id="toc" class="Box Box--blue mb-3">
-      <b>MySQL事务（2）</b><nav id="TableOfContents"><ul>
-<li><a href="#引言">引言</a></li>
-<li><a href="#问题">问题</a></li>
-<li><a href="#processlist"><code>PROCESSLIST</code></a></li>
-<li><a href="#show-engine-innodb-status"><code>SHOW ENGINE INNODB STATUS</code></a></li>
-<li><a href="#innodb-lock-wait-timeout-https-dev-mysql-com-doc-refman-5-7-en-innodb-parameters-html-sysvar-innodb-lock-wait-timeout"><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_lock_wait_timeout"><code>innodb_lock_wait_timeout</code></a></a></li>
-</ul></li>
-</ul>
-</nav></div>
-  
-
-  
-    <div>
-      
-    </div>
-  
-
-        </aside>
-      </div>
-
-      <div id="footer" class="pt-2 pb-3 bg-white text-center">
         
 
-  <span class="text-small text-gray">
-    &copy;Qiushi Pan 2018-2019 &middot; 
-
-    Powered by the
-    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
-    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
-  </span>
-
-
-      </div>
-    </div>
-
+        
+        
+        
+    </main>
+    
+    <footer class="flex-container footer"></footer>
     
     
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
-    
-  </body>
+</body>
+
 </html>
