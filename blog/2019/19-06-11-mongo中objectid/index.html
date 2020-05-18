@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>mongo中ObjectId</h1>
+        <h1 class="mb-4 mt-2">mongo中ObjectId</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/mongo/" class="badge badge-success">
+                    mongo
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">06-03-2019 &#183; 314 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p>ObjectId在mongo中是自动生成的_id字段，充当数据表的主键ID。按照_id排序基本上等于按照记录的创建时间排序，但还是必须注意：_id并不是严格单调递增的，前4个byte的也只是精确到了秒级，同一秒内的_id并不能保证有序。</p>
 
@@ -120,15 +138,27 @@ if (!doNotTrack) {
 
 &gt; a[&quot;_id&quot;].getTimestamp()
 </code></pre>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

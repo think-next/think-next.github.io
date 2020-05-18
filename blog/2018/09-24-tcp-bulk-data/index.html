@@ -71,15 +71,41 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>Tcp Bulk Data</h1>
+        <h1 class="mb-4 mt-2">Tcp Bulk Data</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/tcp/ip/" class="badge badge-success">
+                    tcp/ip
+                </a>
+            </span>
+            
+            
+            
+            <span class="tag">
+                <a href="/tags/net/" class="badge badge-success">
+                    net
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">09-24-2018 &#183; 1089 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p><code>TCP</code>在数据传输中有<code>receive buffer</code>和<code>send buffer</code>。通过连接中的<code>window size</code>可以看出数据的读取情况。</p>
 
@@ -106,15 +132,27 @@ if (!doNotTrack) {
 <h2 id="delayed-acks"><code>Delayed Acks</code></h2>
 
 <p><code>sliding window</code>有效的提升了<code>TCP</code>的数据传输效率，使得接收数据的一端可以在收到多个<code>packet</code>后统一回复最后一个<code>packet</code>的<code>ACK</code>消息。发送数据的一端完全不需要等待数据被<code>ACK</code>之后，再才开始发送下一个<code>packet</code>。</p>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

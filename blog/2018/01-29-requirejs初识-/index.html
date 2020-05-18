@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>RequireJS初识</h1>
+        <h1 class="mb-4 mt-2">RequireJS初识</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container"><p>开发上想找一个时间选择控件，无意中就找到了<a href="http://www.layui.com/laydate/">layDate 日期与时间组件</a>。</p>
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/js/" class="badge badge-success">
+                    js
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">01-29-2018 &#183; 502 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        <p>开发上想找一个时间选择控件，无意中就找到了<a href="http://www.layui.com/laydate/">layDate 日期与时间组件</a>。</p>
 
 <p>直接下载源码，在文件中引入.js和.css文件，但是调用的时候产生异常了。很好奇！作为一名服务端开发，我一直都是这样搞的，百试不爽。今天却翻车了！！查看错误发现是require这个方法报的错，主要的原因是：laydate未定义。</p>
 
@@ -120,15 +138,27 @@ if (!doNotTrack) {
     });
 &lt;/script&gt;
 </code></pre>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

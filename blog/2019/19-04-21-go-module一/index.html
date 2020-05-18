@@ -71,15 +71,25 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>Go Module（一）</h1>
+        <h1 class="mb-4 mt-2">Go Module（一）</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+        </div>
+        <div class="float-right badge badge-light">04-21-2019 &#183; 1275 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <blockquote>
 <p><code>这世上太多的人，宁愿吃生活苦，也不愿吃自律的苦。大概是因为生活的苦，躺着就来了，而自律的苦，得自己去找。但只有吃得下自律的苦，才有成功的自由，没有一种成功是走得了捷径的，通向真正成功的唯一道路只有自律。越成功，越自律。越自律，越成功。</code></p>
@@ -146,15 +156,27 @@ go build -mod<span class="o">=</span>vendor</code></pre></div>
 
 <p>其次，<code>go get</code>会下载、编译、安装指定的包。包的安装模式也是被允许的，比如使用<code>go get golang.org/x/perf/cmd/..</code>来更新<code>cmd</code>下的所有子包。</p>
 <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">go get -u &lt;repo url&gt;
-go mod vendor</code></pre></div></article>
-        
+go mod vendor</code></pre></div>
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

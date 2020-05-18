@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>runtime中P的理解</h1>
+        <h1 class="mb-4 mt-2">runtime中P的理解</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container"><p><code>P</code>是在<code>Go1.1</code>引入的概念，初始默认等于<code>CPU</code>核的数量。<code>P</code>只是一个逻辑概念，跟<code>CPU</code>也没有任何关系。</p>
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/golang/" class="badge badge-success">
+                    golang
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">11-11-2019 &#183; 879 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        <p><code>P</code>是在<code>Go1.1</code>引入的概念，初始默认等于<code>CPU</code>核的数量。<code>P</code>只是一个逻辑概念，跟<code>CPU</code>也没有任何关系。</p>
 
 <p>源码<code>go/1.13.4/libexec/src/runtime/proc.go</code>中对<code>P</code>的注释如下：</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// P - processor, a resource that is required to execute Go code.
@@ -190,15 +208,27 @@ if (!doNotTrack) {
 </span><span class="c1">//
 </span><span class="c1"></span><span class="o">//</span><span class="k">go</span><span class="p">:</span><span class="nx">notinheap</span></code></pre></div>
 <p><code>mcache</code>反映了对象的创建策略：小对象。</p>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

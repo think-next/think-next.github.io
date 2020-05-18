@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>xorm使用reverse指令创建模版</h1>
+        <h1 class="mb-4 mt-2">xorm使用reverse指令创建模版</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container"><p>这只能算作一次小的功能介绍</p>
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/golang/" class="badge badge-success">
+                    golang
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">04-19-2018 &#183; 282 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        <p>这只能算作一次小的功能介绍</p>
 
 <p>结合我们使用过的<code>go</code>数据操作类的库，执行的逻辑基本都是：将数据库返回的数据，转换成我们提前声明的结构体对象，然后返回。</p>
 
@@ -109,15 +127,27 @@ if (!doNotTrack) {
 
 <pre><code>xorm reverse &quot;username:pwd@tcp(ip:port)/db?charset=utf&quot; templates/goxorm 
 </code></pre>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

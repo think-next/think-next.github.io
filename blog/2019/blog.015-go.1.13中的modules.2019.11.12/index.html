@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>go.1.13中的Modules</h1>
+        <h1 class="mb-4 mt-2">go.1.13中的Modules</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container"><p>环境变量<code>GOPRIVATE</code></p>
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/golang/" class="badge badge-success">
+                    golang
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">11-12-2019 &#183; 397 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        <p>环境变量<code>GOPRIVATE</code></p>
 
 <p><code>GOPRIVATE</code>升级到<code>go.1.13</code>不得不调整的一个变量。表示引用到的<code>modules</code>是私有的，无须从<code>proxy</code>下载，也无须校验包的<code>checksum</code>。</p>
 
@@ -97,15 +115,27 @@ GET <span class="nv">$GOPROXY</span>/&lt;module&gt;/@v/list</code></pre></div>
 <p>当通过<code>GOPROXY</code>找不到具体的<code>module</code>时，会看到404或401的状态码</p>
 
 <p>如果就是很烦躁，也可以不使用这个环境变量:</p>
-<div class="highlight"><pre class="chroma"><code class="language-basg" data-lang="basg">export GOPROXY=off</code></pre></div></article>
-        
+<div class="highlight"><pre class="chroma"><code class="language-basg" data-lang="basg">export GOPROXY=off</code></pre></div>
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

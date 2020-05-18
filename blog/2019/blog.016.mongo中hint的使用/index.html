@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>mongo中hint的使用</h1>
+        <h1 class="mb-4 mt-2">mongo中hint的使用</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container"><p><code>mongo</code>官方文档对<code>hint</code>的解释如下：</p>
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/mongo/" class="badge badge-success">
+                    mongo
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">11-13-2019 &#183; 476 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        <p><code>mongo</code>官方文档对<code>hint</code>的解释如下：</p>
 
 <blockquote>
 <p>The $hint operator forces the query optimizer to use a specific index to fulfill the query. Specify the index either by the index name or by document.</p>
@@ -117,15 +135,27 @@ if (!doNotTrack) {
 <p>索引先通过<code>userid</code>进行排序，如果<code>user_id</code>相同，再根据<code>score</code>的倒序排。这中形式，对查询有什么影响呢？</p>
 
 <p>从<code>mongo</code>官方文档的例子来尝试理解，索引<code>{ a: 1, b: -1 }</code>支持<code>{ a: 1, b: -1 }</code>和<code>{ a: -1, b: 1 }</code>的排序操作，但不支持<code>{ a: -1, b: -1 }</code>和<code>{a: 1, b: 1}</code>的操作。</p>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

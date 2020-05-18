@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>Saga Pattern</h1>
+        <h1 class="mb-4 mt-2">Saga Pattern</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/transaction/" class="badge badge-success">
+                    transaction
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">04-24-2018 &#183; 877 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p>在微服务中，用的比较多的分布式事务模式：<a href="https://www.cs.cornell.edu/andru/cs711/2002fa/reading/sagas.pdf"><code>SAGA</code></a>。下面是<code>lysu/go-saga</code>库中的描述：</p>
 
@@ -144,15 +162,27 @@ if (!doNotTrack) {
 <p>当服务比较多的时候，<code>topic</code>可能会有很多，程序复杂性提高了不少。而且，一个留神，很可能让监听变成了一个死循环。</p>
 
 <h2 id="command"><code>command</code></h2>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

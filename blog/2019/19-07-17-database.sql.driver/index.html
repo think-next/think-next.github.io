@@ -71,15 +71,41 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>database.sql.driver</h1>
+        <h1 class="mb-4 mt-2">database.sql.driver</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container"><p>在事务操作中，要求事务的各个阶段都使用一个<code>Conn</code>连接。在连接被关闭之前，还需要执行<code>rollback</code>操作。</p>
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/mysql/" class="badge badge-success">
+                    MySQL
+                </a>
+            </span>
+            
+            
+            
+            <span class="tag">
+                <a href="/tags/golang/" class="badge badge-success">
+                    golang
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">07-17-2019 &#183; 6154 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        <p>在事务操作中，要求事务的各个阶段都使用一个<code>Conn</code>连接。在连接被关闭之前，还需要执行<code>rollback</code>操作。</p>
 
 <p>文章翻译了<code>Go</code>源码下<code>database.sql.driver</code>的接口规范，具体实现可以查看源码。</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 包driver定义了数据驱动要实现的接口，具体的实现会在包sql中用到。
@@ -518,15 +544,27 @@ if (!doNotTrack) {
 
 <span class="kd">func</span> <span class="p">(</span><span class="nx">noRows</span><span class="p">)</span> <span class="nf">RowsAffected</span><span class="p">()</span> <span class="p">(</span><span class="kt">int64</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
 	<span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="s">&#34;no RowsAffected available after DDL statement&#34;</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div></article>
-        
+<span class="p">}</span></code></pre></div>
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

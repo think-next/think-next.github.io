@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>Kafka的offset初窥(1)</h1>
+        <h1 class="mb-4 mt-2">Kafka的offset初窥(1)</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/mq/" class="badge badge-success">
+                    MQ
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">07-14-2018 &#183; 1497 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p><code>kafka</code>适用的场景很多，但用它来<code>异步通知</code>却是让我略感头痛！</p>
 
@@ -161,15 +179,27 @@ offset.</p>
 <blockquote>
 <p>The Kafka cluster durably persists all published records—whether or not they have been consumed—using a configurable retention period. For example, if the retention policy is set to two days, then for the two days after a record is published, it is available for consumption, after which it will be discarded to free up space. Kafka&rsquo;s performance is effectively constant with respect to data size so storing data for a long time is not a problem.</p>
 </blockquote>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>docker基本使用</h1>
+        <h1 class="mb-4 mt-2">docker基本使用</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/docker/" class="badge badge-success">
+                    docker
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">04-20-2018 &#183; 1600 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p>知道一点比完全不知道要好，对问题有深入了解比仅知道皮毛要好。作为<code>docker</code>的一个初学者，现在对<code>docker</code>做简单记录。希望随着工作、生活，更深入的了解学习<code>docker</code>。这也是一件很有意义的事。</p>
 
@@ -280,15 +298,27 @@ EXPOSE 3600
 ENTRYPOINT [&quot;/data/src/entrypoint.sh&quot;]
 CMD [&quot;bash&quot;, &quot;-c&quot;, &quot;/data/src/${RUN_PROG:=baby} --log_dir=/data/logs/$RUN_PROG -c /data/src/conf.toml&quot;]
 </code></pre>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

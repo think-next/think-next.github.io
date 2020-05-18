@@ -71,15 +71,41 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>siege压测</h1>
+        <h1 class="mb-4 mt-2">siege压测</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/tools/" class="badge badge-success">
+                    tools
+                </a>
+            </span>
+            
+            
+            
+            <span class="tag">
+                <a href="/tags/net/" class="badge badge-success">
+                    net
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">07-19-2018 &#183; 395 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p>关于压测，首先要了解<code>TPS</code>和并发用户数之间的关系：</p>
 
@@ -107,15 +133,27 @@ siege -f ./url.txt  -H &quot;Content-Type: application/json&quot;
 HOST=neojos.com
 $(HOST)/v1/buy POST {&quot;bid&quot;: 0, &quot;type&quot;: 13 }
 </code></pre>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

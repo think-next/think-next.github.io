@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>Deafult Decimal</h1>
+        <h1 class="mb-4 mt-2">Deafult Decimal</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/mysql/" class="badge badge-success">
+                    MySQL
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">12-01-2018 &#183; 943 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p><em><u>版本 0.00</u></em></p>
 
@@ -133,15 +151,27 @@ if (!doNotTrack) {
 </blockquote>
 
 <p>最终定位：<strong>空字符串在该模式下转换decimal会失败，测试和线上数据库环境不一致</strong></p>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

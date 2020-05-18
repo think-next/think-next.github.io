@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>Net Transport</h1>
+        <h1 class="mb-4 mt-2">Net Transport</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/golang/" class="badge badge-success">
+                    golang
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">12-08-2018 &#183; 2888 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p>在调用第三方请求时，正确使用<a href="https://godoc.org/net/http#Client"><code>Client</code></a>也不是一件非常容易的事。</p>
 
@@ -306,15 +324,27 @@ func TestRequestBaiDu(t *testing.T) {
 <li><a href="https://medium.com/@nate510/don-t-use-go-s-default-http-client-4804cb19f779"><code>Don’t use Go’s default HTTP client (in production)</code></a></li>
 <li><a href="https://www.lovemytool.com/blog/2014/11/are-tcp-keep-alive-messages-bad-by-chris-greer.html#comment-6a00e008d957708834022ad3808ea0200c"><code>Are TCP Keep Alive Messages Bad? (By Chris Greer)</code></a></li>
 </ol>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

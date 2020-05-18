@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>MySQL增量数据订阅和消费</h1>
+        <h1 class="mb-4 mt-2">MySQL增量数据订阅和消费</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/golang/" class="badge badge-success">
+                    golang
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">10-01-2019 &#183; 706 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p>在订单交付系统中，做到保证权益数据的实时一致性非常难，很多都选择保证数据的最终一致性。在我们的生产环境中，为了保证数据的最终一致性，专门有一个微服务来处理检验异常订单、发告警通知、及时补偿修复异常订单。</p>
 
@@ -123,15 +141,27 @@ if (!doNotTrack) {
 <li><code>canal-go</code>收到数据，消费成功，发送回执。（可选）</li>
 <li><code>Canal</code>记录消费位置。</li>
 </ul>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>数据一致性（一）</h1>
+        <h1 class="mb-4 mt-2">数据一致性（一）</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/transaction/" class="badge badge-success">
+                    transaction
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">10-20-2018 &#183; 1587 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p><code>MySQL</code>的事务是数据一致性的典范，事务内的执行要么都成功，要么都失败。但业务系统涉及系统间的相互调用，涉及的数据库也不尽相同，所以实现数据一致性还是有挑战的。</p>
 
@@ -179,15 +197,27 @@ if (!doNotTrack) {
 	<span class="nx">StatusDoPayCompensateFailure</span> <span class="p">=</span> <span class="mi">3</span>
 <span class="p">)</span></code></pre></div>
 <p>这样我们补偿方法中执行的不再是回滚操作，而是<code>Do</code>方法的重试。如果补偿成功，继续执行后续的操作，如果补偿失败，记录下该状态，后续看看怎么补偿。</p>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

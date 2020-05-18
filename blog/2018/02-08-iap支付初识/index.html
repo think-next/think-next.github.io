@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>IAP支付初识</h1>
+        <h1 class="mb-4 mt-2">IAP支付初识</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/pay/" class="badge badge-success">
+                    pay
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">02-28-2018 &#183; 698 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p><code>IAP</code>全称<code>In-App Purchase</code>，也可以叫内购。查看<a href="https://baike.baidu.com/item/IAP/16700121">百度百科</a>，IAP是一种智能移动终端应用程序的付费模式。大概的意思：用户在APP内通过付费，来享受APP内提供的服务或体验。</p>
 
@@ -116,15 +134,27 @@ if (!doNotTrack) {
 <p>服务端需要<code>receipt-data</code>去苹果服务器校验，但苹果网络响应可能不会很及时，有时候还会出现多个请求超时的情况。</p>
 
 <p>未完待续&hellip;</p>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

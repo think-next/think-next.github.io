@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>Memcached遇到的json_decode问题</h1>
+        <h1 class="mb-4 mt-2">Memcached遇到的json_decode问题</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container"><p>Memcached 是一个高性能的分布式缓存系统，使用Key-Value存储字符串和对象。通常来说，它主要用于缓存从数据库中检索到的数据以及第三方服务的数据等。简单的说，它可以提升服务器的性能。几乎所有的程序语言都可以接入它的API。如下例子所示：</p>
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/cache/" class="badge badge-success">
+                    cache
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">01-21-2018 &#183; 2445 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        <p>Memcached 是一个高性能的分布式缓存系统，使用Key-Value存储字符串和对象。通常来说，它主要用于缓存从数据库中检索到的数据以及第三方服务的数据等。简单的说，它可以提升服务器的性能。几乎所有的程序语言都可以接入它的API。如下例子所示：</p>
 <div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php">public function getYouData(string $key) {
    $yourData = $memcached-&gt;get($key);
    if (!$yourData) {
@@ -150,15 +168,27 @@ $jsonDecode = json_decode($jsonEncode);</code></pre></div>
 <p>我们查阅了关于<code>Memcahced</code>, <code>Json encode</code>/<code>decode</code>, 和出现的语法错误，发现Github上的一个<a href="https://github.com/php-memcached-dev/php-memcached/issues/250">Memcached debug</a>的描述：当Memcached存储超过2000字符的json encode的字符串时，对其decode的时候会发生错误。我们立马检查了我们Memcached的版本号，这个版本刚好包含这个bug。幸运的是，新的版本已经修复了这个问题。于是我们将Memcache更新到 3.0.2之后，decode终于正常了。</p>
 
 <p>原文地址：<a href="http://tech.trivago.com/2017/12/19/how-trivago-reduced-memcached-memory-usage-by-50/">http://tech.trivago.com/2017/12/19/how-trivago-reduced-memcached-memory-usage-by-50/</a></p>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

@@ -71,15 +71,41 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>Gin使用</h1>
+        <h1 class="mb-4 mt-2">Gin使用</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/translate/" class="badge badge-success">
+                    translate
+                </a>
+            </span>
+            
+            
+            
+            <span class="tag">
+                <a href="/tags/golang/" class="badge badge-success">
+                    golang
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">01-05-2019 &#183; 1077 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p><a href="https://github.com/gin-gonic/gin"><code>Gin</code></a>对<code>net/http</code>包做了封装，支持路由、中间件等特性，极大的方便对<code>Http Server</code>的开发。文章通过一个<code>Test</code>例子，来简要介绍。对于特别基础的部分，请阅读参考文章。</p>
 
@@ -213,15 +239,27 @@ articleRoutes.GET(&quot;/create&quot;, setUserStatus(), showArticleCreationPage)
 <li><a href="https://semaphoreci.com/community/tutorials/building-go-web-applications-and-microservices-using-gin"><code>Building Go Web Applications and Microservices Using Gin</code></a></li>
 <li><a href="https://semaphoreci.com/community/tutorials/test-driven-development-of-go-web-applications-with-gin#"><code>Test-driven Development of Go Web Applications with Gin</code></a></li>
 </ol>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

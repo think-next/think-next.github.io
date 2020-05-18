@@ -71,15 +71,41 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>Tcp Server Design</h1>
+        <h1 class="mb-4 mt-2">Tcp Server Design</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/tcp/ip/" class="badge badge-success">
+                    tcp/ip
+                </a>
+            </span>
+            
+            
+            
+            <span class="tag">
+                <a href="/tags/net/" class="badge badge-success">
+                    net
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">07-28-2018 &#183; 650 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p>绝大多数的<code>TCP</code>服务都是支持并发的。当一个连接请求到达时，服务端接收这个连接，然后创建一个新的线程(或进程)来处理这个连接。</p>
 
@@ -113,15 +139,27 @@ tcp46      0      0  *.3900                 *.*                    LISTEN
 <li>当队列满了后，<code>TCP</code>会直接忽略进来的<code>SYN</code>，而非回复<code>RST</code>报文头。这样做便是要<code>client</code>稍后重新发送<code>SYN</code>。因为服务器比较繁忙的状况，可能马上就会恢复。</li>
 <li>如果<code>TCP</code>三次握手完成，连接也就被创建成功了。如果此时服务端不想为该<code>ip</code>提供服务，服务端要么发送<code>FIN</code>关闭这个连接，或者发送<code>RST</code>中断这个连接。整个过程中，<code>TCP</code>没有权限去限制<code>client</code>端。</li>
 </ol>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

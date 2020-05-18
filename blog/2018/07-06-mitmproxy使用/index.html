@@ -71,15 +71,41 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>mitmproxy使用</h1>
+        <h1 class="mb-4 mt-2">mitmproxy使用</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/tools/" class="badge badge-success">
+                    tools
+                </a>
+            </span>
+            
+            
+            
+            <span class="tag">
+                <a href="/tags/net/" class="badge badge-success">
+                    net
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">07-06-2018 &#183; 494 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p>介绍一款非常好用的抓包工具，官网地址：<a href="https://www.mitmproxy.org">https://www.mitmproxy.org</a>。实际上，在调试苹果<code>IAP</code>支付时，始终没有抓成功过，反而因为设置了代理，导致苹果<code>沙盒用户</code>无法成功支付。它名字的全拼是<code>Man-in-the-middle-proxy</code>，代表中间人攻击。</p>
 
@@ -111,15 +137,27 @@ if (!doNotTrack) {
 <li><a href="https://en.wikipedia.org/wiki/Subject_Alternative_Name">Subject Alternative Name</a>：is an extension to X.509 that allows various values to be associated with a security certificate using a subjectAltName field. These values are called Subject Alternative Names (SANs). Names include</li>
 <li><a href="https://en.wikipedia.org/wiki/Server_Name_Indication">Server Name Indication</a>： is an extension to the TLS computer networking protocol by which a client indicates which hostname it is attempting to connect to at the start of the handshaking process. This allows a server to present multiple certificates on the same IP address and TCP port number and hence allows multiple secure (HTTPS) websites (or any other service over TLS) to be served by the same IP address without requiring all those sites to use the same certificate.</li>
 </ol>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

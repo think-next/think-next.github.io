@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>Golang下的Error</h1>
+        <h1 class="mb-4 mt-2">Golang下的Error</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/golang/" class="badge badge-success">
+                    golang
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">08-11-2018 &#183; 1668 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p>感觉<code>error</code>确实没啥可说的，这个简单到极致的<code>package</code>总共也不超过10行有效代码。而且常用的<code>fmt</code>也提供了很方便的返回<code>error</code>的方法：</p>
 <div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">// Package errors implements functions to manipulate errors.
@@ -217,15 +235,27 @@ func main() {
 <div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//使用断言来判断错误的类型
 </span><span class="c1"></span><span class="k">if</span> <span class="nx">err</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">err</span><span class="p">.(</span><span class="o">*</span><span class="nx">CustomError</span><span class="p">);</span> <span class="nx">ok</span> <span class="p">{</span>
     
-<span class="p">}</span></code></pre></div></article>
-        
+<span class="p">}</span></code></pre></div>
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

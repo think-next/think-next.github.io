@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>shell操作文本实例</h1>
+        <h1 class="mb-4 mt-2">shell操作文本实例</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/linux/" class="badge badge-success">
+                    linux
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">05-15-2018 &#183; 668 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p>从掌握<code>awk</code>的基本指令，到在工作中熟练使用，中间还有一段路要走！通过总结一些工作中需要的案例，来加深理解。</p>
 
@@ -141,15 +159,27 @@ comm -2 -3 a-sort.txt b-sort.txt
 <pre><code>cat a.txt b.txt &gt; merge.txt
 sort merge.txt | uniq -c | sort | head -10
 </code></pre>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

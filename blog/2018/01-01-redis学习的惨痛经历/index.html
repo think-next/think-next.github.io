@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>Redis学习的惨痛经历</h1>
+        <h1 class="mb-4 mt-2">Redis学习的惨痛经历</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/cache/" class="badge badge-success">
+                    cache
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">01-01-2018 &#183; 4475 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p>我们开发的产品类似于 <a href="http://www.trivago.com/">trivago hotel search</a>，<a href="http://redis.io/">Redis</a>也多用来缓存临时数据。比如将操作频繁的流水数据先存储到redis，之后迁移到关系型数据库做持久化。</p>
 
@@ -309,15 +327,27 @@ min: 0, max: 463, avg: 2.03 (19443 samples)
 </ul>
 
 <p>原文地址：<a href="http://tech.trivago.com/2017/01/25/learn-redis-the-hard-way-in-production/">Learn Redis the hard way (in production)</a></p>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

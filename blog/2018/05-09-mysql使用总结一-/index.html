@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>MySQL使用总结(一)</h1>
+        <h1 class="mb-4 mt-2">MySQL使用总结(一)</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/mysql/" class="badge badge-success">
+                    MySQL
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">05-09-2018 &#183; 433 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <h2 id="查询的执行时间">查询的执行时间</h2>
 
@@ -135,15 +153,27 @@ where table_out.id &gt; 2018
 </span><span class="c1"></span><span class="n">from_unixtime</span><span class="p">()</span>
 
 <span class="c1">-- 把日期转换为 unix 时间戳
-</span><span class="c1"></span><span class="n">unix_timestamp</span><span class="p">()</span></code></pre></div></article>
-        
+</span><span class="c1"></span><span class="n">unix_timestamp</span><span class="p">()</span></code></pre></div>
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

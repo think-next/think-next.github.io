@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>订单系统初识</h1>
+        <h1 class="mb-4 mt-2">订单系统初识</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/think/" class="badge badge-success">
+                    Think
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">06-08-2018 &#183; 1177 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p>计划将订单系统做一下梳理，包括之前写的<code>IAP</code>支付。其中一些细节，自己描述的也不是特别满意。后续慢慢的完善。</p>
 
@@ -140,15 +158,27 @@ if (!doNotTrack) {
 <p>在用户下单、支付的过程中，跟订单内部商品的<code>SKU</code>关系不大，而且为了保证订单的<code>幂等性</code>,将订单设置为唯一索引是必须的。</p>
 
 <p>在签收的过程中，无法做到针对订单来签收，而应该对订单下的<code>SKU</code>做签收。所以<code>签收表</code>应该独立出来。</p>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

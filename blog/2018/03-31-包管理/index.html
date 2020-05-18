@@ -71,15 +71,33 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>包管理工具</h1>
+        <h1 class="mb-4 mt-2">包管理工具</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/npm/" class="badge badge-success">
+                    npm
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">03-30-2018 &#183; 1982 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p>反思之前的过程，一直没有试图跟上技术的发展。恍然觉得，其实技术比买股票更能让我找到快乐。新的技术越来越多，能做的便是，持续保持蜗牛锲而不舍的精神，慢慢爬！</p>
 
@@ -179,15 +197,27 @@ govendor fetch golang.org/x/net/context@=v1
 # 本地存在vendor.json 时候拉取依赖包，匹配所记录的版本
 govendor sync -v
 </code></pre>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>

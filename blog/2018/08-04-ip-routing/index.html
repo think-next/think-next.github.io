@@ -71,15 +71,41 @@ if (!doNotTrack) {
 </head>
 
 <body>
+
     
     
     <header class="text-center container">
-        <h1>IP Routing</h1>
+        <h1 class="mb-4 mt-2">IP Routing</h1>
     </header>
     
     <main class="wrap">
         
-        <article role="article" class="container">
+<div class="container">
+    <aside role="complementary">
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/tcp/ip/" class="badge badge-success">
+                    tcp/ip
+                </a>
+            </span>
+            
+            
+            
+            <span class="tag">
+                <a href="/tags/net/" class="badge badge-success">
+                    net
+                </a>
+            </span>
+            
+            
+        </div>
+        <div class="float-right badge badge-light">08-04-2018 &#183; 734 words</div>
+    </aside>
+    <hr />
+    <article role="article">
+        
 
 <p>假设你在跟小米公司对接服务，那你有没有好奇过：自家的服务器是如何找到小米公司的服务器的。为了安全，公司的服务器可都是在内网的，用户是无法直接访问到的。好好了解一下Ip Routing，它可以给你部分答案。</p>
 
@@ -123,15 +149,27 @@ Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
 <p>当<code>route</code>没有找到<code>destination</code>时，<code>Destination Host Unreachable</code>的错误会返回给源主机。你可以通过<code>ping</code>路由表中配置错误的<code>destination host address</code>来查看。</p>
 
 <h2 id="icmp-redirect-error"><code>ICMP Redirect Error</code></h2>
-</article>
-        
+
+    </article>
+</div>
+
 
         
+<nav role="navigation" class="bottom-menu">
+    
+
+    
+        <a href="/blog">back</a>
         
-        
+    
+
+    
+</p>
+</nav>
+
     </main>
     
-    <footer class="flex-container footer"></footer>
+    <footer class="container footer"></footer>
     
     
 </body>
