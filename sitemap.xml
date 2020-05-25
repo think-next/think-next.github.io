@@ -123,28 +123,13 @@
   </url>
   
   <url>
-    <loc>https://neojos.com/life/2019/19-03-24-%E6%97%A0%E8%81%8A%E7%9A%84%E8%87%AA%E6%88%91%E6%9C%9F%E5%BE%85/</loc>
-    <lastmod>2019-03-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://neojos.com/blog/2019/19-03-16-%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8C/</loc>
     <lastmod>2019-03-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://neojos.com/life/2019/19-03-12-%E5%B9%B3%E5%B8%B8%E5%BF%83/</loc>
-    <lastmod>2019-03-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://neojos.com/blog/2019/19-03-09-database-sharding/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://neojos.com/life/2019/19-03-03-%E8%AF%BB%E4%B9%A6%E6%9C%89%E6%84%9F/</loc>
-    <lastmod>2019-03-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -439,17 +424,6 @@
   </url>
   
   <url>
-    <loc>https://neojos.com/life/</loc>
-    <lastmod>2019-03-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://neojos.com/tags/dailylife/</loc>
-    <lastmod>2019-03-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://neojos.com/tags/docker/</loc>
     <lastmod>2019-05-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -583,6 +557,10 @@
   
   <url>
     <loc>https://neojos.com/blog/2019/19-06-23-using-context-cancellation-in-go/</loc>
+  </url>
+  
+  <url>
+    <loc>https://neojos.com/greatperson/</loc>
   </url>
   
   <url>
