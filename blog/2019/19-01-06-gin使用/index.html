@@ -1,76 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" lang="en">
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Hugo-Primer theme&#39;s example site">
-<title>
-    Gin使用 - 渐行渐远
-</title>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.min.ea2156633063385371d7a4d9db559868e643a3885ab887da32f7ea8a1e05ee11.css" integrity="sha256-6iFWYzBjOFNx16TZ21WYaOZDo4hauIfaMvfqih4F7hE=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
-                 role="img" viewBox="0 0 24 24" focusable="false">
-                <title>Product</title>
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-            </svg>
-        </a>
-
-        
-        <a class="py-2 d-none d-md-inline-block" href="/blog">我的博客</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/greatperson">向大神学习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">刻意练习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">今日计划</a>
-        
-    </div>
-</nav>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-<script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Gin使用"/>
-<meta name="twitter:description" content="Gin对net/http包做了封装，支持路由、中间件等特性，极大的方便对Http Server的开发。文章通过一个Test例子，来简要介绍。对"/>
-
-<meta property="og:title" content="Gin使用" />
-<meta property="og:description" content="Gin对net/http包做了封装，支持路由、中间件等特性，极大的方便对Http Server的开发。文章通过一个Test例子，来简要介绍。对" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://neojos.com/blog/2019/19-01-06-gin%E4%BD%BF%E7%94%A8/" />
-<meta property="article:published_time" content="2019-01-05T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-01-05T00:00:00&#43;00:00"/>
-
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Gin使用 - 渐行渐远</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -82,77 +25,43 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-    
-
-    
-    
-    
-    <title>
-        
-        Gin使用
-        
-    </title>
 </head>
-
-<body>
-
-    
-    
-    <header class="text-center container">
-        <h1 class="mb-4 mt-2">Gin使用</h1>
-    </header>
-    
-    <main class="wrap">
-        
-<div class="container">
-    <aside role="complementary">
-        <div class="tag-container">
-            
-            
-            <span class="tag">
-                <a href="/tags/translate/" class="badge badge-success">
-                    translate
-                </a>
-            </span>
-            
-            
-            
-            <span class="tag">
-                <a href="/tags/golang/" class="badge badge-success">
-                    golang
-                </a>
-            </span>
-            
-            
-        </div>
-        <div class="float-right badge badge-light">01-05-2019 &#183; 1077 words</div>
-    </aside>
-    <hr />
-    <article role="article">
-        
-
-<p><a href="https://github.com/gin-gonic/gin"><code>Gin</code></a>对<code>net/http</code>包做了封装，支持路由、中间件等特性，极大的方便对<code>Http Server</code>的开发。文章通过一个<code>Test</code>例子，来简要介绍。对于特别基础的部分，请阅读参考文章。</p>
-
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">渐行渐远</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Gin使用</h1>
+			
+		</header><div class="content post__content clearfix">
+			<p><a href="https://github.com/gin-gonic/gin"><code>Gin</code></a>对<code>net/http</code>包做了封装，支持路由、中间件等特性，极大的方便对<code>Http Server</code>的开发。文章通过一个<code>Test</code>例子，来简要介绍。对于特别基础的部分，请阅读参考文章。</p>
 <h2 id="接口测试">接口测试</h2>
-
 <p><code>Go</code>中<code>testing</code>包为程序自测提供了便利。可以查阅之前写的博客<a href="http://neojos.com/blog/2018/05-02-go-test%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/"><code>Go test基础用法</code></a>，对其内容，我还是挺满意的。</p>
-
-<h3 id="使用-postman">使用<code>Postman</code></h3>
-
+<h3 id="使用postman">使用<code>Postman</code></h3>
 <p>对于接口测试，很多情况都在使用<code>Postman</code>这样的工具。首先在本地启动服务，然后在<code>Postman</code>中配置请求的地址和参数、执行请求、查看结果。</p>
-
 <p>这种方式唯一让人不满意的地方在于：每次修改都需要重启服务。跟直接执行一次<code>Test</code>相比，明显多了一步。</p>
-
-<h2 id="使用-test">使用<code>Test</code></h2>
-
+<h2 id="使用test">使用<code>Test</code></h2>
 <h4 id="测试基类">测试基类</h4>
-
 <p>下面的代码作为接口测试的基类。</p>
-
 <p><code>TestMain</code>中，我们为所有的测试用例指定通用的配置。之后在执行其他<code>Test</code>前，都会先执行<code>TestMain</code>中的代码。有效的避免了代码冗余。</p>
-
 <p><code>getRouter</code>方法用于返回一个<code>gin</code>的实例。我们将服务的路由重新在<code>Test</code>中指定，并设置了中间件。</p>
-
 <p><code>testHttpResponse</code>是我们请求处理的核心代码，发送请求，并保存响应到<code>w</code>中</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">//common_test.go
 </span><span class="c1"></span>
@@ -185,13 +94,10 @@ if (!doNotTrack) {
 	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">f</span><span class="p">(</span><span class="nx">w</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
 		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
 	<span class="p">}</span>
-<span class="p">}</span></code></pre></div>
-<h4 id="测试用例">测试用例</h4>
-
+<span class="p">}</span>
+</code></pre></div><h4 id="测试用例">测试用例</h4>
 <p>下面是具体的测试用例。我们构造了一个<code>Json</code>数据格式的<code>POST</code>请求，然后通过调用<code>testHttpResponse</code>方法来读取接口的响应数据。</p>
-
 <p>关于<code>NewRequest</code>方法，它参数<code>body</code>传递一个<code>io.Reader</code>接口类型。从源代码可以看出，实现了该接口的分别是：<code>bytes.Buffer</code>   、<code>bytes.Reader</code>、<code>strings.Reader</code>。</p>
-
 <pre><code>func TestWeChatRecharge(t *testing.T) {
 	router := getRouter()
 
@@ -216,76 +122,69 @@ if (!doNotTrack) {
 		return nil
 	})
 }
-</code></pre>
-
-<h4 id="小结">小结</h4>
-
+</code></pre><h4 id="小结">小结</h4>
 <p>通过上述的步骤，我们实现了直接在<code>Test</code>中做接口测试。</p>
-
 <h2 id="middleware"><code>Middleware</code></h2>
-
 <p>声明一个<code>middleware</code>函数，返回类型为<code>type HandlerFunc func(*Context)</code>。</p>
-
 <pre><code>func setUserStatus() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		fmt.Println(&quot;set status&quot;)
 	}
 }
-</code></pre>
-
-<p>如果需要将函数应用于所有的请求，使用<code>Use</code>方法。比如统一的请求头转换、错误输出、日志打印等</p>
-
+</code></pre><p>如果需要将函数应用于所有的请求，使用<code>Use</code>方法。比如统一的请求头转换、错误输出、日志打印等</p>
 <pre><code>//Use adds middleware to the group
 router.Use(setUserStatus())
-</code></pre>
-
-<p>下面是给具体的请求设置中间件。从这里可以看出，中间件处理函数和正常的业务处理函数类型是相同的。</p>
-
+</code></pre><p>下面是给具体的请求设置中间件。从这里可以看出，中间件处理函数和正常的业务处理函数类型是相同的。</p>
 <pre><code>//Use a particular middleware
 articleRoutes.GET(&quot;/create&quot;, setUserStatus(), showArticleCreationPage)
-</code></pre>
-
-<p>最后系统依次调用注册的<code>handler</code>完成请求处理：</p>
-
+</code></pre><p>最后系统依次调用注册的<code>handler</code>完成请求处理：</p>
 <pre><code>func (c *Context) Next() {
 	c.index++
 	for s := int8(len(c.handlers)); c.index &lt; s; c.index++ {
 		c.handlers[c.index](c)
 	}
 }
-</code></pre>
-
-<hr />
-
+</code></pre><hr>
 <p>参考文章：</p>
-
 <ol>
 <li><a href="https://semaphoreci.com/community/tutorials/building-go-web-applications-and-microservices-using-gin"><code>Building Go Web Applications and Microservices Using Gin</code></a></li>
 <li><a href="https://semaphoreci.com/community/tutorials/test-driven-development-of-go-web-applications-with-gin#"><code>Test-driven Development of Go Web Applications with Gin</code></a></li>
 </ol>
 
-    </article>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/translate/" rel="tag">translate</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/golang/" rel="tag">golang</a>
+		</li>
+	</ul>
 </div>
+		</footer>
+	</article>
+</main>
 
 
-        
-<nav role="navigation" class="bottom-menu">
-    
 
-    
-        <a href="/blog">back</a>
-        
-    
 
-    
-</p>
-</nav>
-
-    </main>
-    
-    <footer class="container footer"></footer>
-    
-    
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 渐行渐远.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
 </body>
-
 </html>

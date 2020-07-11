@@ -1,76 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" lang="en">
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Hugo-Primer theme&#39;s example site">
-<title>
-    mongo中ObjectId - 渐行渐远
-</title>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.min.ea2156633063385371d7a4d9db559868e643a3885ab887da32f7ea8a1e05ee11.css" integrity="sha256-6iFWYzBjOFNx16TZ21WYaOZDo4hauIfaMvfqih4F7hE=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
-                 role="img" viewBox="0 0 24 24" focusable="false">
-                <title>Product</title>
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-            </svg>
-        </a>
-
-        
-        <a class="py-2 d-none d-md-inline-block" href="/blog">我的博客</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/greatperson">向大神学习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">刻意练习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">今日计划</a>
-        
-    </div>
-</nav>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-<script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="mongo中ObjectId"/>
-<meta name="twitter:description" content="ObjectId在mongo中是自动生成的_id字段，充当数据表的主键ID。按照_id排序基本上等于按照记录的创建时间排序，但还是必须注意："/>
-
-<meta property="og:title" content="mongo中ObjectId" />
-<meta property="og:description" content="ObjectId在mongo中是自动生成的_id字段，充当数据表的主键ID。按照_id排序基本上等于按照记录的创建时间排序，但还是必须注意：" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://neojos.com/blog/2019/19-06-11-mongo%E4%B8%ADobjectid/" />
-<meta property="article:published_time" content="2019-06-03T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-06-03T00:00:00&#43;00:00"/>
-
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>mongo中ObjectId - 渐行渐远</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -82,58 +25,42 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-    
-
-    
-    
-    
-    <title>
-        
-        mongo中ObjectId
-        
-    </title>
 </head>
-
-<body>
-
-    
-    
-    <header class="text-center container">
-        <h1 class="mb-4 mt-2">mongo中ObjectId</h1>
-    </header>
-    
-    <main class="wrap">
-        
-<div class="container">
-    <aside role="complementary">
-        <div class="tag-container">
-            
-            
-            <span class="tag">
-                <a href="/tags/mongo/" class="badge badge-success">
-                    mongo
-                </a>
-            </span>
-            
-            
-        </div>
-        <div class="float-right badge badge-light">06-03-2019 &#183; 314 words</div>
-    </aside>
-    <hr />
-    <article role="article">
-        
-
-<p>ObjectId在mongo中是自动生成的_id字段，充当数据表的主键ID。按照_id排序基本上等于按照记录的创建时间排序，但还是必须注意：_id并不是严格单调递增的，前4个byte的也只是精确到了秒级，同一秒内的_id并不能保证有序。</p>
-
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">渐行渐远</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">mongo中ObjectId</h1>
+			
+		</header><div class="content post__content clearfix">
+			<p>ObjectId在mongo中是自动生成的_id字段，充当数据表的主键ID。按照_id排序基本上等于按照记录的创建时间排序，但还是必须注意：_id并不是严格单调递增的，前4个byte的也只是精确到了秒级，同一秒内的_id并不能保证有序。</p>
 <blockquote>
-<p>ObjectIds are small, likely unique, faster to generate, and ordered. ObjectId values consist of 12 bytes, where the first four bytes are a timestamp that reflect the objectId&rsquo;s creation. Specifically
-- a 4-byte value representing the seconds since the Unix epoch
-- a 5-byte random value
-- a 3 byte counter, starting with a random value</p>
+<p>ObjectIds are small, likely unique, faster to generate, and ordered. ObjectId values consist of 12 bytes, where the first four bytes are a timestamp that reflect the objectId&rsquo;s creation. Specifically</p>
+<ul>
+<li>a 4-byte value representing the seconds since the Unix epoch</li>
+<li>a 5-byte random value</li>
+<li>a 3 byte counter, starting with a random value</li>
+</ul>
 </blockquote>
-
 <h2 id="排序">排序</h2>
-
 <p>使用<a href="github.com/globalsign/mgo">github.com/globalsign/mgo</a>的翻页逻辑：</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">detail</span> <span class="o">*</span><span class="nx">CounterDetailMapper</span><span class="p">)</span> <span class="nf">GetDetailsByDesc</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">IContext</span><span class="p">,</span>
 	<span class="nx">objectId</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">size</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">startPoint</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">data</span> <span class="o">*</span><span class="p">[]</span><span class="nx">models</span><span class="p">.</span><span class="nx">CounterDetail</span><span class="p">)</span> <span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
@@ -149,11 +76,9 @@ if (!doNotTrack) {
 		<span class="k">return</span> <span class="kc">nil</span>
 	<span class="p">}</span>
 	<span class="k">return</span> <span class="nx">err</span>
-<span class="p">}</span></code></pre></div>
-<h2 id="通过objectid获取时间戳">通过ObjectId获取时间戳</h2>
-
+<span class="p">}</span>
+</code></pre></div><h2 id="通过objectid获取时间戳">通过ObjectId获取时间戳</h2>
 <p>在命令行中输入如下命令，获取ObjectId中的时间戳:</p>
-
 <pre><code>&gt; a = db.badge_progress.findOne({_id:ObjectId(&quot;5cff293017a6b9330facc88d&quot;)})
 
 &gt; a
@@ -162,29 +87,37 @@ if (!doNotTrack) {
 
 &gt; a[&quot;_id&quot;].getTimestamp()
 </code></pre>
-
-    </article>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/mongo/" rel="tag">mongo</a>
+		</li>
+	</ul>
 </div>
+		</footer>
+	</article>
+</main>
 
 
-        
-<nav role="navigation" class="bottom-menu">
-    
 
-    
-        <a href="/blog">back</a>
-        
-    
 
-    
-</p>
-</nav>
-
-    </main>
-    
-    <footer class="container footer"></footer>
-    
-    
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 渐行渐远.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
 </body>
-
 </html>

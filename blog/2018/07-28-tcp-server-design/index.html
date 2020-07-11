@@ -1,76 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" lang="en">
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Hugo-Primer theme&#39;s example site">
-<title>
-    Tcp Server Design - 渐行渐远
-</title>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.min.ea2156633063385371d7a4d9db559868e643a3885ab887da32f7ea8a1e05ee11.css" integrity="sha256-6iFWYzBjOFNx16TZ21WYaOZDo4hauIfaMvfqih4F7hE=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
-                 role="img" viewBox="0 0 24 24" focusable="false">
-                <title>Product</title>
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-            </svg>
-        </a>
-
-        
-        <a class="py-2 d-none d-md-inline-block" href="/blog">我的博客</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/greatperson">向大神学习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">刻意练习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">今日计划</a>
-        
-    </div>
-</nav>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-<script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Tcp Server Design"/>
-<meta name="twitter:description" content="绝大多数的TCP服务都是支持并发的。当一个连接请求到达时，服务端接收这个连接，然后创建一个新的线程(或进程)来处理这个连接。 listen状态"/>
-
-<meta property="og:title" content="Tcp Server Design" />
-<meta property="og:description" content="绝大多数的TCP服务都是支持并发的。当一个连接请求到达时，服务端接收这个连接，然后创建一个新的线程(或进程)来处理这个连接。 listen状态" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://neojos.com/blog/2018/07-28-tcp-server-design/" />
-<meta property="article:published_time" content="2018-07-28T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-07-28T00:00:00&#43;00:00"/>
-
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Tcp Server Design - 渐行渐远</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -82,110 +25,86 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-    
-
-    
-    
-    
-    <title>
-        
-        Tcp Server Design
-        
-    </title>
 </head>
-
-<body>
-
-    
-    
-    <header class="text-center container">
-        <h1 class="mb-4 mt-2">Tcp Server Design</h1>
-    </header>
-    
-    <main class="wrap">
-        
-<div class="container">
-    <aside role="complementary">
-        <div class="tag-container">
-            
-            
-            <span class="tag">
-                <a href="/tags/tcp/ip/" class="badge badge-success">
-                    tcp/ip
-                </a>
-            </span>
-            
-            
-            
-            <span class="tag">
-                <a href="/tags/net/" class="badge badge-success">
-                    net
-                </a>
-            </span>
-            
-            
-        </div>
-        <div class="float-right badge badge-light">07-28-2018 &#183; 650 words</div>
-    </aside>
-    <hr />
-    <article role="article">
-        
-
-<p>绝大多数的<code>TCP</code>服务都是支持并发的。当一个连接请求到达时，服务端接收这个连接，然后创建一个新的线程(或进程)来处理这个连接。</p>
-
-<h2 id="listen-状态"><code>listen</code>状态</h2>
-
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">渐行渐远</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Tcp Server Design</h1>
+			
+		</header><div class="content post__content clearfix">
+			<p>绝大多数的<code>TCP</code>服务都是支持并发的。当一个连接请求到达时，服务端接收这个连接，然后创建一个新的线程(或进程)来处理这个连接。</p>
+<h2 id="listen状态"><code>listen</code>状态</h2>
 <p>在本地启动<code>Go</code>的服务，使用<code>netstat</code>查看：</p>
-
 <pre><code>netstat -an -f inet
-</code></pre>
-
-<p>可以看到<code>listen</code>状态的请求连接。其中<code>Local Address</code>的<code>*</code>表示请求会被本地的任意地址处理(如果有多重地址的话)。<code>Foreign Address</code>中<code>*.*</code>表示客户端的<code>ip</code>和<code>port</code>都是未知的。</p>
-
+</code></pre><p>可以看到<code>listen</code>状态的请求连接。其中<code>Local Address</code>的<code>*</code>表示请求会被本地的任意地址处理(如果有多重地址的话)。<code>Foreign Address</code>中<code>*.*</code>表示客户端的<code>ip</code>和<code>port</code>都是未知的。</p>
 <pre><code>Active Internet connections (including servers)
 Proto Recv-Q Send-Q  Local Address          Foreign Address        (state)
 tcp46      0      0  *.3900                 *.*                    LISTEN
-</code></pre>
-
-<p>当新的请求到达，并被接收时，服务器内核中会创建一个<code>ESTABLISHED</code>状态的连接。而<code>listen</code>继续去接收新的连接。</p>
-
+</code></pre><p>当新的请求到达，并被接收时，服务器内核中会创建一个<code>ESTABLISHED</code>状态的连接。而<code>listen</code>继续去接收新的连接。</p>
 <pre><code>Proto Recv-Q Send-Q  Local Address          Foreign Address        (state)
 tcp4       0      0  127.0.0.1.3900         127.0.0.1.51133        ESTABLISHED
 tcp46      0      0  *.3900                 *.*                    LISTEN
-</code></pre>
-
-<h2 id="request-queue"><code>request queue</code></h2>
-
+</code></pre><h2 id="request-queue"><code>request queue</code></h2>
 <p>当<code>listening</code>状态的应用正在忙于处理新的连接，同时有其他的请求进来时，服务器是如何处理的呢？引入另一个概念：请求队列。</p>
-
 <ol>
 <li>每一个监听状态的终端都有一个固定长度的队列，用来存放<code>TCP</code>三次握手完成，但还没有被应用接收的连接。<code>client</code>会认为该连接已经创建成功，所以它此时发送的数据也会被缓存起来。如果<code>queue</code>中的连接长时间不被应用读取，便会导致<code>client</code>超时。</li>
 <li>当队列满了后，<code>TCP</code>会直接忽略进来的<code>SYN</code>，而非回复<code>RST</code>报文头。这样做便是要<code>client</code>稍后重新发送<code>SYN</code>。因为服务器比较繁忙的状况，可能马上就会恢复。</li>
 <li>如果<code>TCP</code>三次握手完成，连接也就被创建成功了。如果此时服务端不想为该<code>ip</code>提供服务，服务端要么发送<code>FIN</code>关闭这个连接，或者发送<code>RST</code>中断这个连接。整个过程中，<code>TCP</code>没有权限去限制<code>client</code>端。</li>
 </ol>
 
-    </article>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/tcp/ip/" rel="tag">tcp/ip</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/net/" rel="tag">net</a>
+		</li>
+	</ul>
 </div>
+		</footer>
+	</article>
+</main>
 
 
-        
-<nav role="navigation" class="bottom-menu">
-    
 
-    
-        <a href="/blog">back</a>
-        
-    
 
-    
-</p>
-</nav>
-
-    </main>
-    
-    <footer class="container footer"></footer>
-    
-    
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 渐行渐远.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
 </body>
-
 </html>

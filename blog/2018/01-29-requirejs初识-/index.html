@@ -1,76 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" lang="en">
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Hugo-Primer theme&#39;s example site">
-<title>
-    RequireJS初识 - 渐行渐远
-</title>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.min.ea2156633063385371d7a4d9db559868e643a3885ab887da32f7ea8a1e05ee11.css" integrity="sha256-6iFWYzBjOFNx16TZ21WYaOZDo4hauIfaMvfqih4F7hE=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
-                 role="img" viewBox="0 0 24 24" focusable="false">
-                <title>Product</title>
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-            </svg>
-        </a>
-
-        
-        <a class="py-2 d-none d-md-inline-block" href="/blog">我的博客</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/greatperson">向大神学习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">刻意练习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">今日计划</a>
-        
-    </div>
-</nav>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-<script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="RequireJS初识"/>
-<meta name="twitter:description" content="开发上想找一个时间选择控件，无意中就找到了layDate 日期与时间组件。 直接下载源码，在文件中引入.js和.css文件，但是调用的时候产生异"/>
-
-<meta property="og:title" content="RequireJS初识" />
-<meta property="og:description" content="开发上想找一个时间选择控件，无意中就找到了layDate 日期与时间组件。 直接下载源码，在文件中引入.js和.css文件，但是调用的时候产生异" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://neojos.com/blog/2018/01-29-requirejs%E5%88%9D%E8%AF%86-/" />
-<meta property="article:published_time" content="2018-01-29T20:10:33&#43;00:00"/>
-<meta property="article:modified_time" content="2018-01-29T20:10:33&#43;00:00"/>
-
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>RequireJS初识 - 渐行渐远</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -82,53 +25,36 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-    
-
-    
-    
-    
-    <title>
-        
-        RequireJS初识
-        
-    </title>
 </head>
-
-<body>
-
-    
-    
-    <header class="text-center container">
-        <h1 class="mb-4 mt-2">RequireJS初识</h1>
-    </header>
-    
-    <main class="wrap">
-        
-<div class="container">
-    <aside role="complementary">
-        <div class="tag-container">
-            
-            
-            <span class="tag">
-                <a href="/tags/js/" class="badge badge-success">
-                    js
-                </a>
-            </span>
-            
-            
-        </div>
-        <div class="float-right badge badge-light">01-29-2018 &#183; 502 words</div>
-    </aside>
-    <hr />
-    <article role="article">
-        <p>开发上想找一个时间选择控件，无意中就找到了<a href="http://www.layui.com/laydate/">layDate 日期与时间组件</a>。</p>
-
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">渐行渐远</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">RequireJS初识</h1>
+			
+		</header><div class="content post__content clearfix">
+			<p>开发上想找一个时间选择控件，无意中就找到了<a href="http://www.layui.com/laydate/">layDate 日期与时间组件</a>。</p>
 <p>直接下载源码，在文件中引入.js和.css文件，但是调用的时候产生异常了。很好奇！作为一名服务端开发，我一直都是这样搞的，百试不爽。今天却翻车了！！查看错误发现是require这个方法报的错，主要的原因是：laydate未定义。</p>
-
 <p>为什么要引入requirejs，这个东西到底该怎么用呢？从后端的角度看：它其实就是扮演PHP中的 spl_autoload_register的角色。当执行JS的时候，自动去调用执行脚本所需的js。</p>
-
 <p>所以对代码做如下修改,主要用来配置加载js的路径。</p>
-
 <p>注：如果是本地资源，千万不要写成如下代码所示的：域名+路径的形式（见注释掉的baseUrl）。当正式服和测试服域名不相同时，就比较麻烦。我就是因为我们测试服的域名是woniu-test，正式服我的域名是woniu，结果require的加载请求一直请求的是woniu的域名，找了半天才发现这个问题。</p>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
 <span class="nx">requirejs</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
@@ -145,9 +71,7 @@ if (!doNotTrack) {
 </span><span class="c1"></span>    <span class="c1">//}
 </span><span class="c1"></span><span class="p">});</span>
 <span class="o">&lt;</span><span class="err">/script&gt;</span>
-</code></pre></div>
-<p>调用的时候直接如下调用，就ok了！！</p>
-
+</code></pre></div><p>调用的时候直接如下调用，就ok了！！</p>
 <pre><code>&lt;script&gt;
     require(['js/laydate'], function (_){
         // called once the DOM is ready
@@ -162,29 +86,37 @@ if (!doNotTrack) {
     });
 &lt;/script&gt;
 </code></pre>
-
-    </article>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/js/" rel="tag">js</a>
+		</li>
+	</ul>
 </div>
+		</footer>
+	</article>
+</main>
 
 
-        
-<nav role="navigation" class="bottom-menu">
-    
 
-    
-        <a href="/blog">back</a>
-        
-    
 
-    
-</p>
-</nav>
-
-    </main>
-    
-    <footer class="container footer"></footer>
-    
-    
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 渐行渐远.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
 </body>
-
 </html>

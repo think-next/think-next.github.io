@@ -1,76 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" lang="en">
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Hugo-Primer theme&#39;s example site">
-<title>
-    Linux查看监听的端口进程 - 渐行渐远
-</title>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.min.ea2156633063385371d7a4d9db559868e643a3885ab887da32f7ea8a1e05ee11.css" integrity="sha256-6iFWYzBjOFNx16TZ21WYaOZDo4hauIfaMvfqih4F7hE=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
-                 role="img" viewBox="0 0 24 24" focusable="false">
-                <title>Product</title>
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-            </svg>
-        </a>
-
-        
-        <a class="py-2 d-none d-md-inline-block" href="/blog">我的博客</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/greatperson">向大神学习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">刻意练习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">今日计划</a>
-        
-    </div>
-</nav>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-<script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Linux查看监听的端口进程"/>
-<meta name="twitter:description" content="Netstat 是一款命令行工具，可用于列出系统上所有的网络套接字连接情况，包括 tcp, udp 以及 unix 套接字。另外它还能列出处于监听状态（即等待接入请求）的套接字。经"/>
-
-<meta property="og:title" content="Linux查看监听的端口进程" />
-<meta property="og:description" content="Netstat 是一款命令行工具，可用于列出系统上所有的网络套接字连接情况，包括 tcp, udp 以及 unix 套接字。另外它还能列出处于监听状态（即等待接入请求）的套接字。经" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://neojos.com/blog/2018/07-10-linux%E6%9F%A5%E7%9C%8B%E7%9B%91%E5%90%AC%E7%9A%84%E7%AB%AF%E5%8F%A3%E8%BF%9B%E7%A8%8B/" />
-<meta property="article:published_time" content="2018-07-10T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-07-10T00:00:00&#43;00:00"/>
-
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Linux查看监听的端口进程 - 渐行渐远</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -82,92 +25,65 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-    
-
-    
-    
-    
-    <title>
-        
-        Linux查看监听的端口进程
-        
-    </title>
 </head>
-
-<body>
-
-    
-    
-    <header class="text-center container">
-        <h1 class="mb-4 mt-2">Linux查看监听的端口进程</h1>
-    </header>
-    
-    <main class="wrap">
-        
-<div class="container">
-    <aside role="complementary">
-        <div class="tag-container">
-            
-            
-            <span class="tag">
-                <a href="/tags/linux/" class="badge badge-success">
-                    linux
-                </a>
-            </span>
-            
-            
-        </div>
-        <div class="float-right badge badge-light">07-10-2018 &#183; 861 words</div>
-    </aside>
-    <hr />
-    <article role="article">
-        
-
-<blockquote>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">渐行渐远</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Linux查看监听的端口进程</h1>
+			
+		</header><div class="content post__content clearfix">
+			<blockquote>
 <p>Netstat 是一款命令行工具，可用于列出系统上所有的网络套接字连接情况，包括 tcp, udp 以及 unix 套接字。另外它还能列出处于监听状态（即等待接入请求）的套接字。经常使用 netstat 用于查看网络连接信息和系统开启的端口号。</p>
 </blockquote>
-
 <p>还有一个完美替代它的命令<code>ss</code>，全称是<code>socket statistics</code>。<code>ss</code>的优点就在于“天下武功唯快不破”。</p>
-
 <h2 id="引言">引言</h2>
-
-<p>已知服务监听的端口，想查找当前服务的<code>PID</code>。我们可以拆解成2个子问题：
-1. 如何查看该端口是否在被服务监听
-2. 如何查看该端口的<code>PID</code></p>
-
+<p>已知服务监听的端口，想查找当前服务的<code>PID</code>。我们可以拆解成2个子问题：</p>
+<ol>
+<li>如何查看该端口是否在被服务监听</li>
+<li>如何查看该端口的<code>PID</code></li>
+</ol>
 <h2 id="ps"><code>ps</code></h2>
-
 <p>用于查看服务器上的进程信息.最最常用的就是:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">ps -ef</code></pre></div>
-<h2 id="netstat"><code>netstat</code></h2>
-
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">ps -ef
+</code></pre></div><h2 id="netstat"><code>netstat</code></h2>
 <p>显示的状态列：Proto，Recv-Q，Send-Q，Local Address，Foreign Address，State。其中Recv-Q和Send-Q分别代表接收队列和发送队列。这些数字一般都是0，如果不是，则表示软件包正在队列中堆积。</p>
-
 <pre><code>Proto Recv-Q Send-Q Local Address Foreign Address State
 tcp        0    0 enlightened:domain      *:*                     LISTEN     
-</code></pre>
-
-<p>比较有用的选项是：</p>
-
+</code></pre><p>比较有用的选项是：</p>
 <blockquote>
 <p><code>-n</code>：<code>Show network addresses as numbers (normally netstat interprets addresses and attempts to display them symbolically).  This option may be used with any of the display formats.</code></p>
-
+</blockquote>
+<blockquote>
 <p><code>-a</code>：<code>With the default display, show the state of all sockets; normally sockets used by server processes are not shown. With the routing table display (option -r, as described below), show protocol-cloned routes (routes generated by a RTF_PRCLONING parent route); normally these routes are not shown.</code></p>
 </blockquote>
-
 <h3 id="示例">示例</h3>
-
 <p>查看当前服务器上<code>Redis</code>的连接情况。比如<code>TCP</code>协议的<code>time_wait</code>,<code>close</code>,<code>establish</code>等状态。</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">netstat -at <span class="p">|</span> grep <span class="s1">&#39;10.108.82.195:6683&#39;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $5}&#39;</span> 
-<span class="se">\ </span><span class="p">|</span>awk -F: <span class="s1">&#39;{print $1}&#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -nr <span class="p">|</span> head -20</code></pre></div>
-<p>回到那个问题，查看当前是否有服务正在监听3900端口。</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">netstat -an <span class="p">|</span> grep <span class="m">3900</span></code></pre></div>
-<h2 id="ss"><code>ss</code></h2>
-
+<span class="se">\ </span><span class="p">|</span>awk -F: <span class="s1">&#39;{print $1}&#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -nr <span class="p">|</span> head -20
+</code></pre></div><p>回到那个问题，查看当前是否有服务正在监听3900端口。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">netstat -an <span class="p">|</span> grep <span class="m">3900</span>
+</code></pre></div><h2 id="ss"><code>ss</code></h2>
 <p>我个人非常喜欢这个命令，方便，最主要是快。</p>
-
 <p>它的基本选项包括：</p>
-
 <pre><code>-a  打印所有的连接
 -t  列出TCP协议的连接
 -u  列出UDP协议的连接
@@ -179,43 +95,45 @@ tcp        0    0 enlightened:domain      *:*                     LISTEN
 -s  网络统计信息
 -r  打印内核路由信息。打印出来的信息与 route 命令输出的信息一样
 -i  打印网络接口信息。-ei等同于ifconfig
-</code></pre>
-
-<h2 id="telnet"><code>telnet</code></h2>
-
+</code></pre><h2 id="telnet"><code>telnet</code></h2>
 <p>差点忘记这个命令，也可以用来查看端口是否被占用。最常见的就是连接<code>redis</code>：</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">telnet host port</code></pre></div>
-<p>查看网站是否支持<code>https</code>，<code>telnet</code>一下它的443端口就可以搞定。</p>
-
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">telnet host port
+</code></pre></div><p>查看网站是否支持<code>https</code>，<code>telnet</code>一下它的443端口就可以搞定。</p>
 <h2 id="lsof"><code>lsof</code></h2>
-
 <p>命令的全称<code>list open file</code>。</p>
-
 <pre><code>lsof -i:22 #查看22端口连接情况
 </code></pre>
-
-    </article>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/linux/" rel="tag">linux</a>
+		</li>
+	</ul>
 </div>
+		</footer>
+	</article>
+</main>
 
 
-        
-<nav role="navigation" class="bottom-menu">
-    
 
-    
-        <a href="/blog">back</a>
-        
-    
 
-    
-</p>
-</nav>
-
-    </main>
-    
-    <footer class="container footer"></footer>
-    
-    
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 渐行渐远.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
 </body>
-
 </html>

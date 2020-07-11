@@ -1,76 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" lang="en">
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Hugo-Primer theme&#39;s example site">
-<title>
-    Go Interface 类型 - 渐行渐远
-</title>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.min.ea2156633063385371d7a4d9db559868e643a3885ab887da32f7ea8a1e05ee11.css" integrity="sha256-6iFWYzBjOFNx16TZ21WYaOZDo4hauIfaMvfqih4F7hE=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
-                 role="img" viewBox="0 0 24 24" focusable="false">
-                <title>Product</title>
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-            </svg>
-        </a>
-
-        
-        <a class="py-2 d-none d-md-inline-block" href="/blog">我的博客</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/greatperson">向大神学习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">刻意练习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">今日计划</a>
-        
-    </div>
-</nav>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-<script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Go Interface 类型"/>
-<meta name="twitter:description" content="introduction duck typing 很形象的解释了interface的本意。它是一种特别的数据类型，内部声明了一组要实现的方法集合，任何实现了这些方法的数据类型都可以认为"/>
-
-<meta property="og:title" content="Go Interface 类型" />
-<meta property="og:description" content="introduction duck typing 很形象的解释了interface的本意。它是一种特别的数据类型，内部声明了一组要实现的方法集合，任何实现了这些方法的数据类型都可以认为" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://neojos.com/blog/2018/10-12-go-interface-%E7%B1%BB%E5%9E%8B/" />
-<meta property="article:published_time" content="2018-10-12T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-10-12T00:00:00&#43;00:00"/>
-
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Go Interface 类型 - 渐行渐远</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -82,76 +25,53 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-    
-
-    
-    
-    
-    <title>
-        
-        Go Interface 类型
-        
-    </title>
 </head>
-
-<body>
-
-    
-    
-    <header class="text-center container">
-        <h1 class="mb-4 mt-2">Go Interface 类型</h1>
-    </header>
-    
-    <main class="wrap">
-        
-<div class="container">
-    <aside role="complementary">
-        <div class="tag-container">
-            
-            
-            <span class="tag">
-                <a href="/tags/golang/" class="badge badge-success">
-                    golang
-                </a>
-            </span>
-            
-            
-        </div>
-        <div class="float-right badge badge-light">10-12-2018 &#183; 1342 words</div>
-    </aside>
-    <hr />
-    <article role="article">
-        
-
-<h2 id="introduction"><code>introduction</code></h2>
-
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">渐行渐远</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Go Interface 类型</h1>
+			
+		</header><div class="content post__content clearfix">
+			<h2 id="introduction"><code>introduction</code></h2>
 <p><a href="https://en.wikipedia.org/wiki/Duck_typing"><code>duck typing</code></a> 很形象的解释了<code>interface</code>的本意。它是一种特别的数据类型，内部声明了一组要实现的方法集合，任何实现了这些方法的数据类型都可以认为实现了这个<code>interface</code>。这跟其他语言中的<code>抽象类</code>有异曲同工之处，但却不需要去明确声明实现这个<code>interface</code>。</p>
-
 <p>空的<code>interface</code>类型没有声明任何方法，所以<code>GO</code>中所有数据类型都实现了<code>interface{}</code>。这也为我们实现<code>泛型编程</code>提供了可能，虽然使用起来并不舒服。</p>
-
 <h2 id="protocol"><code>protocol</code></h2>
-
 <p><code>interface</code>可以做为一组不相关的对象进行交流的一种规范或约束，类比<a href="https://developers.google.com/protocol-buffers/"><code>protobuf</code></a>，数据字段必须严格按照声明进行传递。只不过<code>interface</code>约束的是待实现的方法。</p>
-
 <p>比如<code>error</code>接口，所有实现了<code>Error()</code>方法的类型都可以赋值给<code>error</code>类型变量，无需明确声明继承关系，就实现了<code>多态</code>。</p>
 <div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">// The error built-in interface type is the conventional interface for
 </span><span class="c1">// representing an error condition, with the nil value representing no error.
 </span><span class="c1"></span><span class="kd">type</span> <span class="kt">error</span> <span class="kd">interface</span> <span class="p">{</span>
 	<span class="nf">Error</span><span class="p">()</span> <span class="kt">string</span>
-<span class="p">}</span></code></pre></div>
-<h2 id="interface"><code>interface</code></h2>
-
+<span class="p">}</span>
+</code></pre></div><h2 id="interface"><code>interface</code></h2>
 <h3 id="generic-algorithm"><code>generic algorithm</code></h3>
-
 <p><code>interface</code>类型接受任意类型的参数，结合<code>reflect</code>或者<code>断言</code>可以确定参数的实际类型。比如<code>fmt</code>包就有这样用（具体需要深入方法内部）：</p>
 <div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">// Println formats using the default formats for its operands and writes to standard output.
 </span><span class="c1">// Spaces are always added between operands and a newline is appended.
 </span><span class="c1">// It returns the number of bytes written and any write error encountered.
 </span><span class="c1"></span><span class="kd">func</span> <span class="nf">Println</span><span class="p">(</span><span class="nx">a</span> <span class="o">...</span><span class="kd">interface</span><span class="p">{})</span> <span class="p">(</span><span class="nx">n</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
 	<span class="k">return</span> <span class="nf">Fprintln</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="nx">a</span><span class="o">...</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>通过<code>interface</code>约束一套行为，也可以实现泛型编程。比如<code>sort</code>包，只要实现了接口对应的方法，就可以使用<code>sort</code>包来进行排序。具体如何排序，操作什么数据类型，都由你自己来实现。要实现的方式依次是：获取集合的长度，两个元素比较大小以及如何交换两个元素。</p>
-
+<span class="p">}</span>
+</code></pre></div><p>通过<code>interface</code>约束一套行为，也可以实现泛型编程。比如<code>sort</code>包，只要实现了接口对应的方法，就可以使用<code>sort</code>包来进行排序。具体如何排序，操作什么数据类型，都由你自己来实现。要实现的方式依次是：获取集合的长度，两个元素比较大小以及如何交换两个元素。</p>
 <pre><code>// A type, typically a collection, that satisfies sort.Interface can be
 // sorted by the routines in this package. The methods require that the
 // elements of the collection be enumerated by an integer index.
@@ -164,22 +84,14 @@ type Interface interface {
 	// Swap swaps the elements with indexes i and j.
 	Swap(i, j int)
 }
-</code></pre>
-
-<h3 id="hiding-implement-detail"><code>hiding implement detail</code></h3>
-
+</code></pre><h3 id="hiding-implement-detail"><code>hiding implement detail</code></h3>
 <p>当函数返回一个具体类型的<code>interface</code>，那么你就能调用<code>interface</code>实现的方法，而内部的具体实现可以一无所知。尤其是提供一个默认的接口实现时，就显得更加方便了。</p>
-
 <h3 id="providing-interception-points"><code>providing interception points</code></h3>
-
 <h4 id="unmarshal"><code>Unmarshal</code></h4>
-
 <p>当使用<code>Unmarshal</code>解析<code>json</code>时，为具体的类型实现<a href="https://golang.org/pkg/encoding/json/#Marshaler"><code>Unmarshaler</code></a>接口，就实现了自定义解析。</p>
-
 <blockquote>
 <p><code>To unmarshal JSON into a value implementing the Unmarshaler interface, Unmarshal calls that value's UnmarshalJSON method, including when the input is a JSON null.</code></p>
 </blockquote>
-
 <pre><code>// Unmarshaler is the interface implemented by types
 // that can unmarshal a JSON description of themselves.
 // The input can be assumed to be a valid encoding of
@@ -191,19 +103,12 @@ type Interface interface {
 type Unmarshaler interface {
 	UnmarshalJSON([]byte) error
 }
-</code></pre>
-
-<p>当然还有<code>Marshaler</code>接口，按照自己的想法去解析<code>json</code></p>
-
+</code></pre><p>当然还有<code>Marshaler</code>接口，按照自己的想法去解析<code>json</code></p>
 <pre><code> type Marshaler interface {
     MarshalJSON() ([]byte, error)
 }
-</code></pre>
-
-<h4 id="handler"><code>Handler</code></h4>
-
+</code></pre><h4 id="handler"><code>Handler</code></h4>
 <p>通过实现<code>Handler</code>接口，来处理不同的请求。</p>
-
 <pre><code>// A Handler responds to an HTTP request.
 //
 // ServeHTTP should write reply headers and data to the ResponseWriter
@@ -215,10 +120,7 @@ type Unmarshaler interface {
 type Handler interface {
 	ServeHTTP(ResponseWriter, *Request)
 }
-</code></pre>
-
-<p><code>ServeMux</code>也实现了<code>handler</code>接口，但它基于<code>request</code>实现了一个路由表。</p>
-
+</code></pre><p><code>ServeMux</code>也实现了<code>handler</code>接口，但它基于<code>request</code>实现了一个路由表。</p>
 <pre><code>// ServeHTTP dispatches the request to the handler whose
 // pattern most closely matches the request URL.
 func (mux *ServeMux) ServeHTTP(w ResponseWriter, r *Request) {
@@ -233,61 +135,60 @@ func (mux *ServeMux) ServeHTTP(w ResponseWriter, r *Request) {
 	h.ServeHTTP(w, r)
 }
 
-</code></pre>
-
-<h2 id="stream-io-interface">Stream IO interface</h2>
-
+</code></pre><h2 id="stream-io-interface">Stream IO interface</h2>
 <p>工作中最常见的两个接口，io.Reader和io.Writer。</p>
-
 <pre><code>type Reader interface {
     Read(p []byte) (n int, err error)
 }
-</code></pre>
-
-<p>Read方法通过for循，结合io.EOF的方式，将读取到的数据写入到参数p中。Write方法将p中的数据写入到实现的对象里。</p>
-
+</code></pre><p>Read方法通过for循，结合io.EOF的方式，将读取到的数据写入到参数p中。Write方法将p中的数据写入到实现的对象里。</p>
 <pre><code>type Writer interface {
     Write(p []byte) (n int, err error)
 }
-</code></pre>
-
-<p>实现了Reader和Writer接口类型包括但不限于：
-- os.File
-- os.Stdout
-- os.Stdin
-- os.Stderr</p>
-
-<hr />
-
+</code></pre><p>实现了Reader和Writer接口类型包括但不限于：</p>
+<ul>
+<li>os.File</li>
+<li>os.Stdout</li>
+<li>os.Stdin</li>
+<li>os.Stderr</li>
+</ul>
+<hr>
 <p>参考文章：</p>
-
 <ol>
 <li><a href="https://research.swtch.com/interfaces"><code>Go Data Structures: Interfaces</code></a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/32926119"><code>https://zhuanlan.zhihu.com/p/32926119</code></a></li>
 </ol>
 
-    </article>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/golang/" rel="tag">golang</a>
+		</li>
+	</ul>
 </div>
+		</footer>
+	</article>
+</main>
 
 
-        
-<nav role="navigation" class="bottom-menu">
-    
 
-    
-        <a href="/blog">back</a>
-        
-    
 
-    
-</p>
-</nav>
-
-    </main>
-    
-    <footer class="container footer"></footer>
-    
-    
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 渐行渐远.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
 </body>
-
 </html>

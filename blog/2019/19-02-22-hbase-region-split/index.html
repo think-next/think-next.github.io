@@ -1,76 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" lang="en">
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Hugo-Primer theme&#39;s example site">
-<title>
-    HBase Region Split - 渐行渐远
-</title>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.min.ea2156633063385371d7a4d9db559868e643a3885ab887da32f7ea8a1e05ee11.css" integrity="sha256-6iFWYzBjOFNx16TZ21WYaOZDo4hauIfaMvfqih4F7hE=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
-                 role="img" viewBox="0 0 24 24" focusable="false">
-                <title>Product</title>
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-            </svg>
-        </a>
-
-        
-        <a class="py-2 d-none d-md-inline-block" href="/blog">我的博客</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/greatperson">向大神学习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">刻意练习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">今日计划</a>
-        
-    </div>
-</nav>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-<script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="HBase Region Split"/>
-<meta name="twitter:description" content="Tables are automatically partitioned horizontally by HBase into regions. Each region comprises a subset of a table&#39;s rows 引言 HBase对Table提供了自动拆分的功能，非常好奇，它的自动拆分是如何实现的呢？在工作中，我们经常"/>
-
-<meta property="og:title" content="HBase Region Split" />
-<meta property="og:description" content="Tables are automatically partitioned horizontally by HBase into regions. Each region comprises a subset of a table&#39;s rows 引言 HBase对Table提供了自动拆分的功能，非常好奇，它的自动拆分是如何实现的呢？在工作中，我们经常" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://neojos.com/blog/2019/19-02-22-hbase-region-split/" />
-<meta property="article:published_time" content="2019-02-22T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-02-22T00:00:00&#43;00:00"/>
-
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>HBase Region Split - 渐行渐远</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -82,116 +25,92 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-    
-
-    
-    
-    
-    <title>
-        
-        HBase Region Split
-        
-    </title>
 </head>
-
-<body>
-
-    
-    
-    <header class="text-center container">
-        <h1 class="mb-4 mt-2">HBase Region Split</h1>
-    </header>
-    
-    <main class="wrap">
-        
-<div class="container">
-    <aside role="complementary">
-        <div class="tag-container">
-            
-            
-            <span class="tag">
-                <a href="/tags/think/" class="badge badge-success">
-                    think
-                </a>
-            </span>
-            
-            
-        </div>
-        <div class="float-right badge badge-light">02-22-2019 &#183; 1448 words</div>
-    </aside>
-    <hr />
-    <article role="article">
-        
-
-<blockquote>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">渐行渐远</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">HBase Region Split</h1>
+			
+		</header><div class="content post__content clearfix">
+			<blockquote>
 <p><code>Tables are automatically partitioned horizontally by HBase into regions. Each region comprises a subset of a table's rows</code></p>
 </blockquote>
-
 <h2 id="引言">引言</h2>
-
 <p><a href="https://hbase.apache.org/book.html"><code>HBase</code></a>对<code>Table</code>提供了自动拆分的功能，非常好奇，它的自动拆分是如何实现的呢？在工作中，我们经常会遇到<code>MySQL</code>数据分表的情况，比如一个数据表已经超过<code>20G</code>了，查询耗时相对严重，我们考虑对其进行分表。又比如，我们预测每个月的交易流水会有几十亿条数据，我们按月对表进行拆分，等等。</p>
-
 <p><code>MySQL</code>提供了分区表，市面上也有很多的<code>Sharding</code>策略。但具体问题需要具体分析，分表策略也必须结合具体的业务来考虑。比如一个博客网站，用户主页需要展示他过去发布的所有博客列表，基于此，按照用户来分表就更为合理，保证同一个用户的所有数据都存储在同一张表里。</p>
-
 <h2 id="concepts"><code>Concepts</code></h2>
-
 <p><code>HBase</code>中<code>column</code>被划分到一个<code>column family</code>里，所有的<code>column family</code>成员有一个唯一的前缀来标识。比如<code>info:190101</code>和<code>info:190102</code>就属于<code>info family</code>的的成员。有趣的是，虽然<code>column families</code>必须在表<code>schema definition</code>中被声明，但它的成员却是能够随意添加。</p>
-
 <p>关于<code>Region</code>，作为分布式<code>HBase</code>集群数据的最小单元，每个<code>RegionServer</code>管理着<code>table regions</code>的若干个子集。客户端在和<code>HBase</code>交互时，都需要请求集群的<code>ZooKeeper</code>来获取集群的服务信息，缓存相关的元信息，之后就跟具体的<code>RegionServer</code>做交互了。</p>
-
 <h2 id="reading-data"><code>Reading Data</code></h2>
-
 <p>专门去查看了<code>HBase</code>获取数据的方式，主要包括两种：</p>
-
 <ol>
 <li>获取行</li>
 <li>获取指定的列</li>
 </ol>
-
 <p>相应的，我们需要了解它写入数据的方式：</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">put</span> <span class="err">’</span><span class="p">&lt;</span><span class="nx">table</span> <span class="nx">name</span><span class="p">&gt;</span><span class="err">’</span><span class="p">,</span><span class="err">’</span><span class="nx">row1</span><span class="err">’</span><span class="p">,</span><span class="err">’</span><span class="p">&lt;</span><span class="nx">colfamily</span><span class="p">:</span><span class="nx">colname</span><span class="p">&gt;</span><span class="err">’</span><span class="p">,</span><span class="err">’</span><span class="p">&lt;</span><span class="nx">value</span><span class="p">&gt;</span><span class="err">’</span></code></pre></div>
-<h2 id="constantsizeregionsplitpolicy"><code>ConstantSizeRegionSplitPolicy</code></h2>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">put</span> <span class="err">’</span><span class="p">&lt;</span><span class="nx">table</span> <span class="nx">name</span><span class="p">&gt;</span><span class="err">’</span><span class="p">,</span><span class="err">’</span><span class="nx">row1</span><span class="err">’</span><span class="p">,</span><span class="err">’</span><span class="p">&lt;</span><span class="nx">colfamily</span><span class="p">:</span><span class="nx">colname</span><span class="p">&gt;</span><span class="err">’</span><span class="p">,</span><span class="err">’</span><span class="p">&lt;</span><span class="nx">value</span><span class="p">&gt;</span><span class="err">’</span>
+</code></pre></div><h2 id="constantsizeregionsplitpolicy"><code>ConstantSizeRegionSplitPolicy</code></h2>
 <p><code>Region</code>有两个重要的属性<code>StartKey</code>和<code>EndKey</code>，用来表示<code>Region</code>维护的<code>RowKey</code>范围，当<code>Region Size</code>达到一定的阈值，<code>HBase</code>就会对其执行<code>split</code>操作，<code>Region</code>被划分为两个，其中一个<code>Region</code>，称呼为<strong><code>Region_1</code></strong>包含的<code>StartKey</code>到<code>MidKey</code>，另一个<strong><code>Region_2</code></strong>包含<code>MidKey</code>到<code>EndKey</code>的数据。这也引申出<code>HBase</code>的前缀范围查询的功能。</p>
-
 <p>之所以可以这样划分，是因为<code>HBase</code>中数据行是以<code>RowKey</code>的字典序排列的，并且<code>RowKey</code>是全局唯一的。这样的划分策略对<code>RowKey</code>的设计有点需求，如果<code>RowKey</code>的随机性不好，在分布式集群中，负责<code>Region_1</code>的<code>RegionServer</code>负载和负责<code>Region_2</code>的负载相差可能会很多，导致资源的利用很不均衡。</p>
-
 <p>其实也很好理解，就比如以中国的姓作为<code>RowKey</code>的前缀，那么负责“王、李”的<code>RegionServer</code>的负载就会很高，因为这些数据都会根据<code>StartKey-EndKey</code>写入到具体的<code>Region</code>上。很多时候，为了使数据分布的更加均匀，充分利用集群的资源，我们需要对原始的<code>RowKey</code>做一次<code>HASH</code>处理，在原始的<code>RowKey</code>和实际存储的<code>RowKey</code>之间生成一个固定的映射关系。</p>
-
 <h2 id="extension"><code>extension</code></h2>
-
 <p>处理问题的思想都是相通的，比如<code>HBase</code>将数据存储到不同<code>Region</code>中。本质上也是：对数据进行分片，来扩展写操作。具体点就是：将数据划分成多个完全独立的子集，客户端通过映射关系，定向到具体的数据分片进行处理。</p>
-
 <p>工作中接触最多的非<code>MySQL</code>莫属，如何对数据分片，根本还在于<strong>业务最终要实现怎样的查询</strong>。注意：设计中要尽量避免分片数据集的关联表查询，可能会有痛苦。</p>
-
 <p>参考文章：</p>
-
 <ol>
 <li><a href="https://www.tutorialspoint.com/hbase/hbase_read_data.htm">HBase - Read Data</a></li>
 </ol>
 
-    </article>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/think/" rel="tag">think</a>
+		</li>
+	</ul>
 </div>
+		</footer>
+	</article>
+</main>
 
 
-        
-<nav role="navigation" class="bottom-menu">
-    
 
-    
-        <a href="/blog">back</a>
-        
-    
 
-    
-</p>
-</nav>
-
-    </main>
-    
-    <footer class="container footer"></footer>
-    
-    
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 渐行渐远.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
 </body>
-
 </html>

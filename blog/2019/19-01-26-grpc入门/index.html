@@ -1,76 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" lang="en">
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Hugo-Primer theme&#39;s example site">
-<title>
-    gRPC入门 - 渐行渐远
-</title>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.min.ea2156633063385371d7a4d9db559868e643a3885ab887da32f7ea8a1e05ee11.css" integrity="sha256-6iFWYzBjOFNx16TZ21WYaOZDo4hauIfaMvfqih4F7hE=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
-                 role="img" viewBox="0 0 24 24" focusable="false">
-                <title>Product</title>
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-            </svg>
-        </a>
-
-        
-        <a class="py-2 d-none d-md-inline-block" href="/blog">我的博客</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/greatperson">向大神学习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">刻意练习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">今日计划</a>
-        
-    </div>
-</nav>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-<script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="gRPC入门"/>
-<meta name="twitter:description" content="时间飞逝 如一名携带信息的邮差 但那只不过是我们的比喻 人物是杜撰的 匆忙是假装的 携带的也不是人的讯息 为什么使用grpc 主要包括以下两点原因： protocl bu"/>
-
-<meta property="og:title" content="gRPC入门" />
-<meta property="og:description" content="时间飞逝 如一名携带信息的邮差 但那只不过是我们的比喻 人物是杜撰的 匆忙是假装的 携带的也不是人的讯息 为什么使用grpc 主要包括以下两点原因： protocl bu" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://neojos.com/blog/2019/19-01-26-grpc%E5%85%A5%E9%97%A8/" />
-<meta property="article:published_time" content="2019-01-26T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-01-26T00:00:00&#43;00:00"/>
-
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>gRPC入门 - 渐行渐远</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -82,109 +25,68 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-    
-
-    
-    
-    
-    <title>
-        
-        gRPC入门
-        
-    </title>
 </head>
-
-<body>
-
-    
-    
-    <header class="text-center container">
-        <h1 class="mb-4 mt-2">gRPC入门</h1>
-    </header>
-    
-    <main class="wrap">
-        
-<div class="container">
-    <aside role="complementary">
-        <div class="tag-container">
-            
-            
-            <span class="tag">
-                <a href="/tags/translate/" class="badge badge-success">
-                    translate
-                </a>
-            </span>
-            
-            
-            
-            <span class="tag">
-                <a href="/tags/golang/" class="badge badge-success">
-                    golang
-                </a>
-            </span>
-            
-            
-        </div>
-        <div class="float-right badge badge-light">01-26-2019 &#183; 2907 words</div>
-    </aside>
-    <hr />
-    <article role="article">
-        
-
-<blockquote>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">渐行渐远</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">gRPC入门</h1>
+			
+		</header><div class="content post__content clearfix">
+			<blockquote>
 <p><code>时间飞逝  如一名携带信息的邮差  但那只不过是我们的比喻  人物是杜撰的  匆忙是假装的  携带的也不是人的讯息</code></p>
 </blockquote>
-
-<h2 id="为什么使用-grpc">为什么使用<code>grpc</code></h2>
-
+<h2 id="为什么使用grpc">为什么使用<code>grpc</code></h2>
 <p>主要包括以下两点原因：</p>
-
 <ol>
 <li><code>protocl buffer</code>一种高效的序列化结构。</li>
 <li>支持<code>http 2.0</code>标准化协议。</li>
 </ol>
-
 <p>很对人经常拿<a href="https://thrift.apache.org/"><code>thrift</code></a>跟<a href="https://grpc.io/docs/tutorials/basic/go.html"><code>grpc</code></a>比较，现在先不发表任何看法，后续会深入<code>thrift</code>进行介绍。</p>
-
-<h2 id="http-2"><code>http/2</code></h2>
-
+<h2 id="http2"><code>http/2</code></h2>
 <blockquote>
 <p>HTTP/2 enables a more efficient use of network resources and a reduced perception of latency by introducing header field compression and allowing multiple concurrent exchanges on the same connection… Specifically, it allows interleaving of request and response messages on the same connection and uses an efficient coding for HTTP header fields. It also allows prioritization of requests, letting more important requests complete more quickly, further improving performance.</p>
-
 <p>The resulting protocol is more friendly to the network, because fewer TCP connections can be used in comparison to HTTP/1.x. This means less competition with other flows, and longer-lived connections, which in turn leads to better utilization of available network capacity. Finally, HTTP/2 also enables more efficient processing of messages through use of binary message framing.</p>
 </blockquote>
-
 <p><code>http/2</code>带来了网络性能的巨大提升，下面列举一些个人觉得比较重要的细节：</p>
-
 <ol>
 <li><code>http/2</code>对每个源只需创建一个持久连接，在这一个连接内，可以并行的处理多个请求和响应，而且做到不相互影响。</li>
 <li>允许客户端和服务端实现自己的数据流和连接流控制，这对我们传输大数据非常有帮助。</li>
 </ol>
-
 <p>更多细节，请参考文章末尾的链接，当然，后续也会专门介绍。</p>
-
 <h2 id="准备工作"><code>准备工作</code></h2>
-
 <p>大家可以参考<a href="https://github.com/golang/protobuf"><code>protobuf</code></a>的介绍，具体包括：</p>
-
 <ol>
 <li>安装<code>Go</code>的开发环境，因为后续是基于<code>Go</code>语言的开发项目</li>
 <li>安装<a href="https://developers.google.com/protocol-buffers/"><code>protocol-buffers</code></a></li>
 <li>安装<code>protoc-gen-go</code>，用于自动生成源码</li>
 </ol>
-
 <p>生成源码的命令如下，其中，<code>--go_out</code>用于指定生成源码的保存路径；而<code>-I</code>是<code>-IPATH</code>的简写，用于指定查找<code>import</code>文件的路径，可以指定多个；最后的<code>order</code>是编译的<code>grpc</code>文件的存储路径。</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">protoc -I proto/ proto/order.proto --go_out<span class="o">=</span><span class="nv">plugins</span><span class="o">=</span>grpc:order</code></pre></div>
-<h2 id="protocol-buffer"><code>protocol buffer</code></h2>
-
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">protoc -I proto/ proto/order.proto --go_out<span class="o">=</span><span class="nv">plugins</span><span class="o">=</span>grpc:order
+</code></pre></div><h2 id="protocol-buffer"><code>protocol buffer</code></h2>
 <p><code>google</code>开发的高效、跨平台的数据传输格式。当然，本质还是数据传输结构。但<code>google</code>赋予了它丰富的功能，比如<code>import</code>、<code>package</code>、消息嵌套等等。<code>import</code>用于引入别的<code>.proto</code>文件；<code>package</code>用于定义命名空间，转换到<code>go</code>源码中就是包名；<code>repeated</code>用于定义重复的数据；<code>enum</code>用于定义枚举类型等。</p>
-
 <p><code>.proto</code>内字段的基本定义：</p>
-<div class="highlight"><pre class="chroma"><code class="language-protobuf" data-lang="protobuf"><span class="n">type</span> <span class="n">name</span> <span class="o">=</span> <span class="n">tag</span><span class="p">;</span></code></pre></div>
-<p><code>Protocol buffer</code>本身不包含类型的描述信息，因此获取了没有<code>.proto</code>描述文件的二进制信息是毫无用处的，我们很难提取出非常有用的信息。<code>Go</code>语言<code>complier</code>生成的文件后缀是<code>.pb.go</code>，它自动生成了<code>set</code>、<code>get</code>以及<code>read</code>、<code>write</code>方法，我们可以很方便的序列化数据。</p>
-
+<div class="highlight"><pre class="chroma"><code class="language-protobuf" data-lang="protobuf"><span class="n">type</span> <span class="n">name</span> <span class="o">=</span> <span class="n">tag</span><span class="p">;</span><span class="err">
+</span></code></pre></div><p><code>Protocol buffer</code>本身不包含类型的描述信息，因此获取了没有<code>.proto</code>描述文件的二进制信息是毫无用处的，我们很难提取出非常有用的信息。<code>Go</code>语言<code>complier</code>生成的文件后缀是<code>.pb.go</code>，它自动生成了<code>set</code>、<code>get</code>以及<code>read</code>、<code>write</code>方法，我们可以很方便的序列化数据。</p>
 <p>下面我们定义一个创建订单的<code>.proto</code>文件，概括的描述：<code>buyerID</code>在<code>device</code>上支付<code>amount</code>买<a href="https://baike.baidu.com/item/SKU"><code>sku</code></a>商品。</p>
-
 <ol>
 <li>声明版本为<code>proto3</code>，<code>package</code>是<code>order</code>。</li>
 <li>设备类型定义为枚举类型，包括<code>ANDROID</code>和<code>IOS</code>两种，而且类型被嵌套声明在<code>OrderParams</code>内。</li>
@@ -224,80 +126,72 @@ if (!doNotTrack) {
 </span><span class="err"></span><span class="kd">message</span> <span class="nc">OrderResult</span> <span class="p">{</span><span class="err">
 </span><span class="err"></span>    <span class="kt">int32</span> <span class="n">statusCode</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
 </span><span class="err"></span>    <span class="kt">string</span> <span class="n">orderID</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="err">
-</span><span class="err"></span><span class="p">}</span></code></pre></div>
-<h2 id="grpc-接口"><code>grpc</code>接口</h2>
-
+</span><span class="err"></span><span class="p">}</span><span class="err">
+</span></code></pre></div><h2 id="grpc接口"><code>grpc</code>接口</h2>
 <p>通过定义的<code>.proto</code>文件生成<code>grpc client</code>和<code>server</code>端实现的接口类型。生成的内容主要包括：</p>
-
 <ol>
 <li><code>protocol buffer</code>各种消息类型的序列化操作</li>
 <li><code>grpc client</code>实现的接口类型，以及<code>client</code>实现的<code>grpc</code>方法</li>
 <li><code>grpc server</code>待实现的接口类型</li>
 </ol>
-
-<h2 id="service-处理流程"><code>service</code>处理流程</h2>
-
+<h2 id="service处理流程"><code>service</code>处理流程</h2>
 <p><strong>第一步</strong>. 服务端为每个接收的连接创建单独的<code>goroutine</code>进行处理。</p>
-
 <p><strong>第二步</strong>. 自动生成的代码中，声明了服务的具体描述，也是该服务的“路由”。包括服务名称<code>ServiceName</code>以<code>Methods</code>、<code>Streams</code>。当<code>rpc</code>接收到新的数据时，会根据路由执行对应的方法。因为我们的设定没有处理流的场景，所以<code>Streams</code>为空的结构体。</p>
-
 <p>代码中的服务名称被指定为:<code>order.Order</code>，对应创建订单的方法是：<code>Add</code>。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">   <span class="kd">var</span> <span class="nx">_Order_serviceDesc</span> <span class="p">=</span> <span class="nx">grpc</span><span class="p">.</span><span class="nx">ServiceDesc</span><span class="p">{</span>
-   	<span class="nx">ServiceName</span><span class="p">:</span> <span class="s">&#34;order.Order&#34;</span><span class="p">,</span>
-   	<span class="nx">HandlerType</span><span class="p">:</span> <span class="p">(</span><span class="o">*</span><span class="nx">OrderServer</span><span class="p">)(</span><span class="kc">nil</span><span class="p">),</span>
-   	<span class="nx">Methods</span><span class="p">:</span> <span class="p">[]</span><span class="nx">grpc</span><span class="p">.</span><span class="nx">MethodDesc</span><span class="p">{</span>
-   		<span class="p">{</span>
-   			<span class="nx">MethodName</span><span class="p">:</span> <span class="s">&#34;Add&#34;</span><span class="p">,</span>
-   			<span class="nx">Handler</span><span class="p">:</span>    <span class="nx">_Order_Add_Handler</span><span class="p">,</span>
-   		<span class="p">},</span>
-   	<span class="p">},</span>
-   	<span class="nx">Streams</span><span class="p">:</span>  <span class="p">[]</span><span class="nx">grpc</span><span class="p">.</span><span class="nx">StreamDesc</span><span class="p">{},</span>
-   	<span class="nx">Metadata</span><span class="p">:</span> <span class="s">&#34;order.proto&#34;</span><span class="p">,</span>
-   <span class="p">}</span></code></pre></div>
-<p><strong>第三步</strong>. 将路由注册到<code>rpc</code>服务中。如下所示，就是将上述的路由转换为<code>map</code>对应关系的过程。类比<code>restful</code>风格的接口定义，等价于<code>/order/</code>这种请求都由这个<code>service</code>来进行处理。</p>
-
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">_Order_serviceDesc</span> <span class="p">=</span> <span class="nx">grpc</span><span class="p">.</span><span class="nx">ServiceDesc</span><span class="p">{</span>
+ <span class="nx">ServiceName</span><span class="p">:</span> <span class="s">&#34;order.Order&#34;</span><span class="p">,</span>
+ <span class="nx">HandlerType</span><span class="p">:</span> <span class="p">(</span><span class="o">*</span><span class="nx">OrderServer</span><span class="p">)(</span><span class="kc">nil</span><span class="p">),</span>
+ <span class="nx">Methods</span><span class="p">:</span> <span class="p">[]</span><span class="nx">grpc</span><span class="p">.</span><span class="nx">MethodDesc</span><span class="p">{</span>
+     <span class="p">{</span>
+         <span class="nx">MethodName</span><span class="p">:</span> <span class="s">&#34;Add&#34;</span><span class="p">,</span>
+         <span class="nx">Handler</span><span class="p">:</span>    <span class="nx">_Order_Add_Handler</span><span class="p">,</span>
+     <span class="p">},</span>
+ <span class="p">},</span>
+ <span class="nx">Streams</span><span class="p">:</span>  <span class="p">[]</span><span class="nx">grpc</span><span class="p">.</span><span class="nx">StreamDesc</span><span class="p">{},</span>
+ <span class="nx">Metadata</span><span class="p">:</span> <span class="s">&#34;order.proto&#34;</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div><p><strong>第三步</strong>. 将路由注册到<code>rpc</code>服务中。如下所示，就是将上述的路由转换为<code>map</code>对应关系的过程。类比<code>restful</code>风格的接口定义，等价于<code>/order/</code>这种请求都由这个<code>service</code>来进行处理。</p>
 <p>最终将<code>service</code>注册到<code>gRPC server</code>上。同时，我们可以逆向猜出服务的处理过程：通过请求的路径获取<code>service</code>，然后通过<code>MethodName</code>调用相应的处理方法。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">   <span class="nx">srv</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">service</span><span class="p">{</span>
-   	<span class="nx">server</span><span class="p">:</span> <span class="nx">ss</span><span class="p">,</span>
-   	<span class="nx">md</span><span class="p">:</span>     <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="o">*</span><span class="nx">MethodDesc</span><span class="p">),</span>
-   	<span class="nx">sd</span><span class="p">:</span>     <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="o">*</span><span class="nx">StreamDesc</span><span class="p">),</span>
-   	<span class="nx">mdata</span><span class="p">:</span>  <span class="nx">sd</span><span class="p">.</span><span class="nx">Metadata</span><span class="p">,</span>
-   <span class="p">}</span>
-   <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">sd</span><span class="p">.</span><span class="nx">Methods</span> <span class="p">{</span>
-   	<span class="nx">d</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">sd</span><span class="p">.</span><span class="nx">Methods</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
-   	<span class="nx">srv</span><span class="p">.</span><span class="nx">md</span><span class="p">[</span><span class="nx">d</span><span class="p">.</span><span class="nx">MethodName</span><span class="p">]</span> <span class="p">=</span> <span class="nx">d</span>
-   <span class="p">}</span>
-   <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">sd</span><span class="p">.</span><span class="nx">Streams</span> <span class="p">{</span>
-   	<span class="nx">d</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">sd</span><span class="p">.</span><span class="nx">Streams</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
-   	<span class="nx">srv</span><span class="p">.</span><span class="nx">sd</span><span class="p">[</span><span class="nx">d</span><span class="p">.</span><span class="nx">StreamName</span><span class="p">]</span> <span class="p">=</span> <span class="nx">d</span>
-   <span class="p">}</span>
-   <span class="nx">s</span><span class="p">.</span><span class="nx">m</span><span class="p">[</span><span class="nx">sd</span><span class="p">.</span><span class="nx">ServiceName</span><span class="p">]</span> <span class="p">=</span> <span class="nx">srv</span></code></pre></div>
-<p><strong>第四步</strong>. <code>gRPC</code>服务处理请求。通过请求的<code>:path</code>，获取对应的<code>service</code>和<code>MethodName</code>进行处理。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">   <span class="nx">service</span> <span class="o">:=</span> <span class="nx">sm</span><span class="p">[:</span><span class="nx">pos</span><span class="p">]</span>
-   <span class="nx">method</span> <span class="o">:=</span> <span class="nx">sm</span><span class="p">[</span><span class="nx">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
-   
-   <span class="k">if</span> <span class="nx">srv</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">m</span><span class="p">[</span><span class="nx">service</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
-   	<span class="k">if</span> <span class="nx">md</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">srv</span><span class="p">.</span><span class="nx">md</span><span class="p">[</span><span class="nx">method</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
-   		<span class="nx">s</span><span class="p">.</span><span class="nf">processUnaryRPC</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">stream</span><span class="p">,</span> <span class="nx">srv</span><span class="p">,</span> <span class="nx">md</span><span class="p">,</span> <span class="nx">trInfo</span><span class="p">)</span>
-   		<span class="k">return</span>
-   	<span class="p">}</span>
-   	<span class="k">if</span> <span class="nx">sd</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">srv</span><span class="p">.</span><span class="nx">sd</span><span class="p">[</span><span class="nx">method</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
-   		<span class="nx">s</span><span class="p">.</span><span class="nf">processStreamingRPC</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">stream</span><span class="p">,</span> <span class="nx">srv</span><span class="p">,</span> <span class="nx">sd</span><span class="p">,</span> <span class="nx">trInfo</span><span class="p">)</span>
-   		<span class="k">return</span>
-   	<span class="p">}</span>
-   <span class="p">}</span></code></pre></div>
-<p>通过结合<code>protoc</code>自动生成的<code>client</code>端代码，无需抓包，我们就可以推断出<code>path</code>的格式，以及系统是如何处理路由的。代码中定义的：<code>/order.Order/Add</code>就是依据。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">   <span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">orderClient</span><span class="p">)</span> <span class="nf">Add</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">in</span> <span class="o">*</span><span class="nx">OrderParams</span><span class="p">,</span> <span class="nx">opts</span> <span class="o">...</span><span class="nx">grpc</span><span class="p">.</span><span class="nx">CallOption</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">OrderResult</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-   	<span class="nx">out</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">OrderResult</span><span class="p">)</span>
-   	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">cc</span><span class="p">.</span><span class="nf">Invoke</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;/order.Order/Add&#34;</span><span class="p">,</span> <span class="nx">in</span><span class="p">,</span> <span class="nx">out</span><span class="p">,</span> <span class="nx">opts</span><span class="o">...</span><span class="p">)</span>
-   	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-   		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
-   	<span class="p">}</span>
-   	<span class="k">return</span> <span class="nx">out</span><span class="p">,</span> <span class="kc">nil</span>
-   <span class="p">}</span>
-   </code></pre></div>
-<h2 id="创建订单"><code>创建订单</code></h2>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">srv</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">service</span><span class="p">{</span>
+ <span class="nx">server</span><span class="p">:</span> <span class="nx">ss</span><span class="p">,</span>
+ <span class="nx">md</span><span class="p">:</span>     <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="o">*</span><span class="nx">MethodDesc</span><span class="p">),</span>
+ <span class="nx">sd</span><span class="p">:</span>     <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="o">*</span><span class="nx">StreamDesc</span><span class="p">),</span>
+ <span class="nx">mdata</span><span class="p">:</span>  <span class="nx">sd</span><span class="p">.</span><span class="nx">Metadata</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">sd</span><span class="p">.</span><span class="nx">Methods</span> <span class="p">{</span>
+ <span class="nx">d</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">sd</span><span class="p">.</span><span class="nx">Methods</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+ <span class="nx">srv</span><span class="p">.</span><span class="nx">md</span><span class="p">[</span><span class="nx">d</span><span class="p">.</span><span class="nx">MethodName</span><span class="p">]</span> <span class="p">=</span> <span class="nx">d</span>
+<span class="p">}</span>
+<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">sd</span><span class="p">.</span><span class="nx">Streams</span> <span class="p">{</span>
+ <span class="nx">d</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">sd</span><span class="p">.</span><span class="nx">Streams</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+ <span class="nx">srv</span><span class="p">.</span><span class="nx">sd</span><span class="p">[</span><span class="nx">d</span><span class="p">.</span><span class="nx">StreamName</span><span class="p">]</span> <span class="p">=</span> <span class="nx">d</span>
+<span class="p">}</span>
+<span class="nx">s</span><span class="p">.</span><span class="nx">m</span><span class="p">[</span><span class="nx">sd</span><span class="p">.</span><span class="nx">ServiceName</span><span class="p">]</span> <span class="p">=</span> <span class="nx">srv</span>
+</code></pre></div><p><strong>第四步</strong>. <code>gRPC</code>服务处理请求。通过请求的<code>:path</code>，获取对应的<code>service</code>和<code>MethodName</code>进行处理。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">service</span> <span class="o">:=</span> <span class="nx">sm</span><span class="p">[:</span><span class="nx">pos</span><span class="p">]</span>
+<span class="nx">method</span> <span class="o">:=</span> <span class="nx">sm</span><span class="p">[</span><span class="nx">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
 
+<span class="k">if</span> <span class="nx">srv</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">m</span><span class="p">[</span><span class="nx">service</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
+ <span class="k">if</span> <span class="nx">md</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">srv</span><span class="p">.</span><span class="nx">md</span><span class="p">[</span><span class="nx">method</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
+     <span class="nx">s</span><span class="p">.</span><span class="nf">processUnaryRPC</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">stream</span><span class="p">,</span> <span class="nx">srv</span><span class="p">,</span> <span class="nx">md</span><span class="p">,</span> <span class="nx">trInfo</span><span class="p">)</span>
+     <span class="k">return</span>
+ <span class="p">}</span>
+ <span class="k">if</span> <span class="nx">sd</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">srv</span><span class="p">.</span><span class="nx">sd</span><span class="p">[</span><span class="nx">method</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
+     <span class="nx">s</span><span class="p">.</span><span class="nf">processStreamingRPC</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">stream</span><span class="p">,</span> <span class="nx">srv</span><span class="p">,</span> <span class="nx">sd</span><span class="p">,</span> <span class="nx">trInfo</span><span class="p">)</span>
+     <span class="k">return</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>通过结合<code>protoc</code>自动生成的<code>client</code>端代码，无需抓包，我们就可以推断出<code>path</code>的格式，以及系统是如何处理路由的。代码中定义的：<code>/order.Order/Add</code>就是依据。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">orderClient</span><span class="p">)</span> <span class="nf">Add</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">in</span> <span class="o">*</span><span class="nx">OrderParams</span><span class="p">,</span> <span class="nx">opts</span> <span class="o">...</span><span class="nx">grpc</span><span class="p">.</span><span class="nx">CallOption</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">OrderResult</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+ <span class="nx">out</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">OrderResult</span><span class="p">)</span>
+ <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">cc</span><span class="p">.</span><span class="nf">Invoke</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;/order.Order/Add&#34;</span><span class="p">,</span> <span class="nx">in</span><span class="p">,</span> <span class="nx">out</span><span class="p">,</span> <span class="nx">opts</span><span class="o">...</span><span class="p">)</span>
+ <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+     <span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+ <span class="p">}</span>
+ <span class="k">return</span> <span class="nx">out</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="创建订单"><code>创建订单</code></h2>
 <p>为了简单起见，我们只保证订单的唯一性。这里我们实现一个简易版本，而且也不做过多介绍。感兴趣的同学可以移步到另一篇文章：<a href="http://neojos.com/blog/2018/19-01-11-%E6%8E%A2%E8%AE%A8%E5%88%86%E5%B8%83%E5%BC%8Fid%E7%94%9F%E6%88%90%E7%B3%BB%E7%BB%9F/">探讨分布式ID生成系统</a>去了解，毕竟不应该是本节的重心。</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">//上次创建订单使用的毫秒时间
 </span><span class="c1"></span><span class="kd">var</span> <span class="nx">lastTimestamp</span> <span class="p">=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">UnixNano</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000000</span>
@@ -335,9 +229,8 @@ if (!doNotTrack) {
 		<span class="nx">currentTimestamp</span> <span class="p">=</span> <span class="nf">getCurrentTimestamp</span><span class="p">()</span>
 	<span class="p">}</span>
 	<span class="k">return</span> <span class="nx">currentTimestamp</span>
-<span class="p">}</span></code></pre></div>
-<h2 id="运行系统"><code>运行系统</code></h2>
-
+<span class="p">}</span>
+</code></pre></div><h2 id="运行系统"><code>运行系统</code></h2>
 <p>创建服务端代码。注意：使用<code>grpc</code>提供的默认选项，其实是很危险的行为。在生产开发中，被不熟悉的默认选项坑到的情况比比皆是。这里的代码不要作为后续生产环境开发的参考。服务端的代码相比客户端要复杂一点，需要我们去实现处理请求的接口。</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Order</span> <span class="kd">struct</span> <span class="p">{</span>
 <span class="p">}</span>
@@ -357,8 +250,8 @@ if (!doNotTrack) {
 	<span class="nx">grpcServer</span> <span class="o">:=</span> <span class="nx">grpc</span><span class="p">.</span><span class="nf">NewServer</span><span class="p">()</span>
 	<span class="nx">order</span><span class="p">.</span><span class="nf">RegisterOrderServer</span><span class="p">(</span><span class="nx">grpcServer</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">Order</span><span class="p">{})</span>
 	<span class="nx">grpcServer</span><span class="p">.</span><span class="nf">Serve</span><span class="p">(</span><span class="nx">lis</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>客户端的代码非常简单，构造参数，处理返回就<code>Ok</code>了。</p>
+<span class="p">}</span>
+</code></pre></div><p>客户端的代码非常简单，构造参数，处理返回就<code>Ok</code>了。</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">createOrder</span><span class="p">(</span><span class="nx">client</span> <span class="nx">order</span><span class="p">.</span><span class="nx">OrderClient</span><span class="p">,</span> <span class="nx">params</span> <span class="o">*</span><span class="nx">order</span><span class="p">.</span><span class="nx">OrderParams</span><span class="p">)</span> <span class="p">{</span>
 	<span class="nx">ctx</span><span class="p">,</span> <span class="nx">cancel</span> <span class="o">:=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">WithTimeout</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">(),</span> <span class="mi">10</span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
 	<span class="k">defer</span> <span class="nf">cancel</span><span class="p">()</span>
@@ -383,19 +276,13 @@ if (!doNotTrack) {
 		<span class="nx">BuyerID</span><span class="p">:</span> <span class="mi">10318003</span><span class="p">,</span>
 	<span class="p">}</span>
 	<span class="nf">createOrder</span><span class="p">(</span><span class="nx">client</span><span class="p">,</span> <span class="nx">orderParams</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<h2 id="总结">总结</h2>
-
+<span class="p">}</span>
+</code></pre></div><h2 id="总结">总结</h2>
 <p>文章介绍了<code>gRPC</code>的入门知识，包括<code>protocol buffer</code>以及<code>http/2</code>，<code>gRPC</code>封装了很多东西，对于一般场合，我们只需要指定配置，实现接口就可以了，非常简单。</p>
-
 <p>在入门的介绍里，大家会觉得<code>gRPC</code>不就跟<code>RESTFUL</code>请求一样吗？确实是，我也这样觉得。但存在一个最直观的优点：通过使用<code>gRPC</code>，可以将复杂的接口调用关系封装在<code>SDK</code>中，直接提供给第三方使用，而且还能有效避免错误调用接口的情况。</p>
-
 <p>如果<code>gRPC</code>只能这样的话，它就太失败了，他用<code>HTTP/2</code>简直就是用来打蚊子的，让我们后续继续深入了解吧。</p>
-
-<hr />
-
+<hr>
 <p>参考文章：</p>
-
 <ol>
 <li><a href="https://www.infoq.cn/article/2015%2F03%2Fgrpc-google-http2-protobuf"><code>gRPC：Google 开源的基于 HTTP/2 和 ProtoBuf 的通用 RPC 框架</code></a></li>
 <li><a href="https://grpc.io/"><code>GRPC</code></a></li>
@@ -403,28 +290,40 @@ if (!doNotTrack) {
 <li><a href="https://hpbn.co/http2/"><code>http2</code></a></li>
 </ol>
 
-    </article>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/translate/" rel="tag">translate</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/golang/" rel="tag">golang</a>
+		</li>
+	</ul>
 </div>
+		</footer>
+	</article>
+</main>
 
 
-        
-<nav role="navigation" class="bottom-menu">
-    
 
-    
-        <a href="/blog">back</a>
-        
-    
 
-    
-</p>
-</nav>
-
-    </main>
-    
-    <footer class="container footer"></footer>
-    
-    
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 渐行渐远.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
 </body>
-
 </html>

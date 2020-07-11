@@ -1,76 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" lang="en">
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Hugo-Primer theme&#39;s example site">
-<title>
-    MySQL事务 - 渐行渐远
-</title>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.min.ea2156633063385371d7a4d9db559868e643a3885ab887da32f7ea8a1e05ee11.css" integrity="sha256-6iFWYzBjOFNx16TZ21WYaOZDo4hauIfaMvfqih4F7hE=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
-                 role="img" viewBox="0 0 24 24" focusable="false">
-                <title>Product</title>
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-            </svg>
-        </a>
-
-        
-        <a class="py-2 d-none d-md-inline-block" href="/blog">我的博客</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/greatperson">向大神学习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">刻意练习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">今日计划</a>
-        
-    </div>
-</nav>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-<script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="MySQL事务"/>
-<meta name="twitter:description" content="关于MySQL事务的诡异问题，至今没有调查出原因。但却也是一个契机，带我重新回忆之前的遇到的事务问题。 诡异的问题 系统中存在A和B两个表。B表"/>
-
-<meta property="og:title" content="MySQL事务" />
-<meta property="og:description" content="关于MySQL事务的诡异问题，至今没有调查出原因。但却也是一个契机，带我重新回忆之前的遇到的事务问题。 诡异的问题 系统中存在A和B两个表。B表" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://neojos.com/blog/2018/07-01-mysql%E4%BA%8B%E5%8A%A1/" />
-<meta property="article:published_time" content="2018-07-01T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-07-01T00:00:00&#43;00:00"/>
-
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>MySQL事务 - 渐行渐远</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -82,55 +25,36 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-    
-
-    
-    
-    
-    <title>
-        
-        MySQL事务
-        
-    </title>
 </head>
-
-<body>
-
-    
-    
-    <header class="text-center container">
-        <h1 class="mb-4 mt-2">MySQL事务</h1>
-    </header>
-    
-    <main class="wrap">
-        
-<div class="container">
-    <aside role="complementary">
-        <div class="tag-container">
-            
-            
-            <span class="tag">
-                <a href="/tags/mysql/" class="badge badge-success">
-                    MySQL
-                </a>
-            </span>
-            
-            
-        </div>
-        <div class="float-right badge badge-light">07-01-2018 &#183; 1095 words</div>
-    </aside>
-    <hr />
-    <article role="article">
-        
-
-<p>关于<code>MySQL事务</code>的诡异问题，至今没有调查出原因。但却也是一个契机，带我重新回忆之前的遇到的事务问题。</p>
-
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">渐行渐远</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">MySQL事务</h1>
+			
+		</header><div class="content post__content clearfix">
+			<p>关于<code>MySQL事务</code>的诡异问题，至今没有调查出原因。但却也是一个契机，带我重新回忆之前的遇到的事务问题。</p>
 <h2 id="诡异的问题">诡异的问题</h2>
-
 <p>系统中存在A和B两个表。B表中有两个关键字段：一个是唯一索引<code>transaction_id</code>，还有一个是标识处理状态的<code>status</code>。当<code>status=0</code>表示记录未被处理，<code>status=1</code>表示记录处理过了，不需要再处理了。</p>
-
 <p>如果B中记录未处理，则在A表中插入一条权益记录，同时更新<code>status=1</code>，后续就不能再给用户加权益了。</p>
-
 <p>代码做了如下处理：</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">sessPart</span><span class="p">()</span> <span class="p">{</span>
 
@@ -178,50 +102,60 @@ if (!doNotTrack) {
 	<span class="p">}</span>
 
 	<span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
-<span class="p">}</span></code></pre></div>
-<p><strong>结论</strong>：无论我怎么模拟并发，事务都很好的保证了：整个过程，只成功插入了一条记录。这倒是跟我预期一样。<strong>但为什么我们线上环境，这样的代码能插入两条权益记录？</strong></p>
-
+<span class="p">}</span>
+</code></pre></div><p><strong>结论</strong>：无论我怎么模拟并发，事务都很好的保证了：整个过程，只成功插入了一条记录。这倒是跟我预期一样。<strong>但为什么我们线上环境，这样的代码能插入两条权益记录？</strong></p>
 <h2 id="事务隔离级别">事务隔离级别</h2>
-
 <p><code>SQL</code>标准中定义了4种数据库事务的隔离级别。</p>
-
 <ol>
-<li><p><code>Read uncommited</code>表示未提交读。可能读取到其他会话中未提交事务修改的数据。也就是所谓的“脏读”。</p></li>
-
-<li><p><code>Read Commited</code>只能读取到已经提交的数据。但同一个事务执行同样的查询语句，读取的数据可能不一致。<strong>原因是</strong>：只会对记录加记录锁，而不会在记录之间加间隙锁，所以允许新的记录插入到被锁定记录的附近。当多次执行查询语句时，可能得到不同的结果。<strong>解决了<code>Dirty Read</code>的问题</strong>。</p></li>
-
-<li><p><code>Repeatable Read</code>在同一事务内的查询始终和事务开始时刻一致。在事务内，对数据读取或写入时会锁定这些数据行，但是这种方式存在幻读问题，因为只能锁定读取或写入的行，不能阻止另一个事务插入数据。<strong>原因是</strong>：多次读取同一范围的数据会返回第一次查询的快照，不会返回不同的数据行，靠自身的<code>MVCC</code>控制机制实现。<strong>解决了<code>Non Repeatable Read</code>的问题</strong>。</p></li>
-
-<li><p><code>Serializable</code>，与可重复读的唯一区别是，默认把普通的SELECT语句修改为<code>SELECT...LOCK IN SHARE MODE</code>，即查询语句返回的数据加上共享锁，阻碍其他事务修改真实数据。<strong>解决了<code>Phantom Read</code>问题</strong>。</p></li>
+<li>
+<p><code>Read uncommited</code>表示未提交读。可能读取到其他会话中未提交事务修改的数据。也就是所谓的“脏读”。</p>
+</li>
+<li>
+<p><code>Read Commited</code>只能读取到已经提交的数据。但同一个事务执行同样的查询语句，读取的数据可能不一致。<strong>原因是</strong>：只会对记录加记录锁，而不会在记录之间加间隙锁，所以允许新的记录插入到被锁定记录的附近。当多次执行查询语句时，可能得到不同的结果。<strong>解决了<code>Dirty Read</code>的问题</strong>。</p>
+</li>
+<li>
+<p><code>Repeatable Read</code>在同一事务内的查询始终和事务开始时刻一致。在事务内，对数据读取或写入时会锁定这些数据行，但是这种方式存在幻读问题，因为只能锁定读取或写入的行，不能阻止另一个事务插入数据。<strong>原因是</strong>：多次读取同一范围的数据会返回第一次查询的快照，不会返回不同的数据行，靠自身的<code>MVCC</code>控制机制实现。<strong>解决了<code>Non Repeatable Read</code>的问题</strong>。</p>
+</li>
+<li>
+<p><code>Serializable</code>，与可重复读的唯一区别是，默认把普通的SELECT语句修改为<code>SELECT...LOCK IN SHARE MODE</code>，即查询语句返回的数据加上共享锁，阻碍其他事务修改真实数据。<strong>解决了<code>Phantom Read</code>问题</strong>。</p>
+</li>
 </ol>
-
 <h2 id="查询数据库的隔离级别">查询数据库的隔离级别</h2>
 <div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 返回：READ-COMMITTED
-</span><span class="c1"></span><span class="k">SELECT</span> <span class="o">@@</span><span class="n">tx_isolation</span><span class="p">;</span></code></pre></div>
-<p>正如查询所示，我们设置的是<code>READ-COMMITTED</code>。所以针对B表来说，如果并发两个事务，那第二个事务需要等待第一个事务释放锁之后才能执行<code>update</code>语句。此时第二个事务在回写时会发现<code>status != 0</code>，则回写失败，理应触发回滚。</p>
+</span><span class="c1"></span><span class="k">SELECT</span> <span class="o">@@</span><span class="n">tx_isolation</span><span class="p">;</span>
+</code></pre></div><p>正如查询所示，我们设置的是<code>READ-COMMITTED</code>。所以针对B表来说，如果并发两个事务，那第二个事务需要等待第一个事务释放锁之后才能执行<code>update</code>语句。此时第二个事务在回写时会发现<code>status != 0</code>，则回写失败，理应触发回滚。</p>
 
-    </article>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/mysql/" rel="tag">MySQL</a>
+		</li>
+	</ul>
 </div>
+		</footer>
+	</article>
+</main>
 
 
-        
-<nav role="navigation" class="bottom-menu">
-    
 
-    
-        <a href="/blog">back</a>
-        
-    
 
-    
-</p>
-</nav>
-
-    </main>
-    
-    <footer class="container footer"></footer>
-    
-    
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 渐行渐远.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
 </body>
-
 </html>

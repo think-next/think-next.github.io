@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tcp/Ip on 渐行渐远</title>
+    <title>tcp/ip on 渐行渐远</title>
     <link>https://neojos.com/tags/tcp/ip/</link>
-    <description>Recent content in Tcp/Ip on 渐行渐远</description>
+    <description>Recent content in tcp/ip on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy;Qiushi Pan 2018-2019</copyright>
-    <lastBuildDate>Tue, 20 Nov 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://neojos.com/tags/tcp/ip/index.xml" rel="self" type="application/rss+xml" />
     

@@ -1,76 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" lang="en">
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Hugo-Primer theme&#39;s example site">
-<title>
-    Golang下的Error - 渐行渐远
-</title>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.min.ea2156633063385371d7a4d9db559868e643a3885ab887da32f7ea8a1e05ee11.css" integrity="sha256-6iFWYzBjOFNx16TZ21WYaOZDo4hauIfaMvfqih4F7hE=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
-                 role="img" viewBox="0 0 24 24" focusable="false">
-                <title>Product</title>
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-            </svg>
-        </a>
-
-        
-        <a class="py-2 d-none d-md-inline-block" href="/blog">我的博客</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/greatperson">向大神学习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">刻意练习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">今日计划</a>
-        
-    </div>
-</nav>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-<script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Golang下的Error"/>
-<meta name="twitter:description" content="感觉error确实没啥可说的，这个简单到极致的package总共也不超过10行有效代码。而且常用的fmt也提供了很方便的返回error的方法"/>
-
-<meta property="og:title" content="Golang下的Error" />
-<meta property="og:description" content="感觉error确实没啥可说的，这个简单到极致的package总共也不超过10行有效代码。而且常用的fmt也提供了很方便的返回error的方法" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://neojos.com/blog/2018/08-11-golang%E4%B8%8B%E7%9A%84error/" />
-<meta property="article:published_time" content="2018-08-11T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-08-11T00:00:00&#43;00:00"/>
-
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Golang下的Error - 渐行渐远</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -82,48 +25,33 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-    
-
-    
-    
-    
-    <title>
-        
-        Golang下的Error
-        
-    </title>
 </head>
-
-<body>
-
-    
-    
-    <header class="text-center container">
-        <h1 class="mb-4 mt-2">Golang下的Error</h1>
-    </header>
-    
-    <main class="wrap">
-        
-<div class="container">
-    <aside role="complementary">
-        <div class="tag-container">
-            
-            
-            <span class="tag">
-                <a href="/tags/golang/" class="badge badge-success">
-                    golang
-                </a>
-            </span>
-            
-            
-        </div>
-        <div class="float-right badge badge-light">08-11-2018 &#183; 1668 words</div>
-    </aside>
-    <hr />
-    <article role="article">
-        
-
-<p>感觉<code>error</code>确实没啥可说的，这个简单到极致的<code>package</code>总共也不超过10行有效代码。而且常用的<code>fmt</code>也提供了很方便的返回<code>error</code>的方法：</p>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">渐行渐远</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Golang下的Error</h1>
+			
+		</header><div class="content post__content clearfix">
+			<p>感觉<code>error</code>确实没啥可说的，这个简单到极致的<code>package</code>总共也不超过10行有效代码。而且常用的<code>fmt</code>也提供了很方便的返回<code>error</code>的方法：</p>
 <div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">// Package errors implements functions to manipulate errors.
 </span><span class="c1"></span><span class="kn">package</span> <span class="nx">errors</span>
 
@@ -139,25 +67,19 @@ if (!doNotTrack) {
 
 <span class="kd">func</span> <span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">errorString</span><span class="p">)</span> <span class="nf">Error</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
 	<span class="k">return</span> <span class="nx">e</span><span class="p">.</span><span class="nx">s</span>
-<span class="p">}</span></code></pre></div>
-<h2 id="自定义-error">自定义<code>error</code></h2>
-
+<span class="p">}</span>
+</code></pre></div><h2 id="自定义error">自定义<code>error</code></h2>
 <p><code>error</code>设计的如此简单，导致其判断错误类型就比较麻烦。比如我想判断<code>MySQL</code>的报错是否由主键冲突导致，我可以这样处理：</p>
-
 <pre><code>const PrimaryKeyDuplicateCode = &quot;1062&quot;
 if strings.Contains(err.Error(), PrimaryKeyDuplicateCode) {
 	//commands
 }
-</code></pre>
-
-<p>这样的判断逻辑，如果仅是用于特殊情况，还勉强可以接收。但如果你要整个项目都使用这种形式的话，就会觉得精神崩溃，心理无法承受（反正我是这样感觉的）。所以，我们要自定义实现一个<code>Error</code>结构。当然，这样搞还有<code>syscall</code>这个<code>package</code>。</p>
-
+</code></pre><p>这样的判断逻辑，如果仅是用于特殊情况，还勉强可以接收。但如果你要整个项目都使用这种形式的话，就会觉得精神崩溃，心理无法承受（反正我是这样感觉的）。所以，我们要自定义实现一个<code>Error</code>结构。当然，这样搞还有<code>syscall</code>这个<code>package</code>。</p>
 <p>实现自定义的<code>Error</code>非常简单，我们要<code>Error</code>里面包含状态码、错误描述、上下文数据，然后实现<code>error</code>接口就可以。</p>
 <div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">type</span> <span class="kt">error</span> <span class="kd">interface</span> <span class="p">{</span>
 	<span class="nf">Error</span><span class="p">()</span> <span class="kt">string</span>
-<span class="p">}</span></code></pre></div>
-<p>下面便是我们自定义的<code>error</code>，<code>Data</code>用来存储错误的上下文信息。当然，我们其实可以为<code>Data</code>专门定义新的结构类型，由它来封装数据的操作。然后，我们实现了<code>Error</code>方法，以此来实现<code>error</code>接口。该方法返回<code>json</code>编码的字符串，如果<code>json</code>编码失败，则<code>fmt</code>输出。</p>
-
+<span class="p">}</span>
+</code></pre></div><p>下面便是我们自定义的<code>error</code>，<code>Data</code>用来存储错误的上下文信息。当然，我们其实可以为<code>Data</code>专门定义新的结构类型，由它来封装数据的操作。然后，我们实现了<code>Error</code>方法，以此来实现<code>error</code>接口。该方法返回<code>json</code>编码的字符串，如果<code>json</code>编码失败，则<code>fmt</code>输出。</p>
 <pre><code>type CustomError struct {
 	Code int
 	Msg  string
@@ -172,16 +94,10 @@ unc (e *CustomError) Error() string {
 	}
 	return string(data)
 }
-</code></pre>
-
-<p>你有没有发现这段代码隐藏了一个大坑！<code>fmt.Sprintf(&quot;%v&quot;, e)</code>这段代码背后到底执行了怎样的操作。下面便是可能会出现的错误：</p>
-
+</code></pre><p>你有没有发现这段代码隐藏了一个大坑！<code>fmt.Sprintf(&quot;%v&quot;, e)</code>这段代码背后到底执行了怎样的操作。下面便是可能会出现的错误：</p>
 <pre><code>runtime: goroutine stack exceeds 1000000000-byte limit
 fatal error: stack overflow
-</code></pre>
-
-<p>无限的递归最终导致栈溢出，当<code>err != nil</code>的时候，便会无限次的调用<code>Error</code>方法，最终导致了栈溢出。结果就是程序彻底崩溃了。下面来看<code>fmt.Sprintf</code>的方法实现：</p>
-
+</code></pre><p>无限的递归最终导致栈溢出，当<code>err != nil</code>的时候，便会无限次的调用<code>Error</code>方法，最终导致了栈溢出。结果就是程序彻底崩溃了。下面来看<code>fmt.Sprintf</code>的方法实现：</p>
 <pre><code>// If a string is acceptable according to the format, see if
 // the value satisfies one of the string-valued interfaces.
 // Println etc. set verb to %v, which is &quot;stringable&quot;.
@@ -206,14 +122,9 @@ case 'v', 's', 'x', 'X', 'q':
 		return
 	}
 }
-</code></pre>
-
-<h2 id="判断-error-是否为-nil">判断<code>Error</code>是否为<code>nil</code></h2>
-
+</code></pre><h2 id="判断error是否为nil">判断<code>Error</code>是否为<code>nil</code></h2>
 <p><code>go</code>中相当常见的判断，估计就是<code>err != nil</code>了。它遵循<code>提前退出</code>的原则，当<code>err</code>不为空是，函数体就应立即中断，然后返回（当然也有特殊的了，就比如<code>io.EOF</code>）。但如果你没有好好推敲过<code>err != nil</code>这个比较逻辑的话，很可能就会吃点小亏。</p>
-
 <p>通过一个简化版的例子，来说明问题。首先，声明一个函数，返回自定义的<code>error</code>。当<code>errSwitch</code>设置为<code>false</code>时，返回<code>nil</code>。</p>
-
 <pre><code>func returnCustomError(errSwitch bool) *CustomError {
 
 	if errSwitch == true {
@@ -224,10 +135,7 @@ case 'v', 's', 'x', 'X', 'q':
 
 	return nil
 }
-</code></pre>
-
-<p>之后再声明另外一个函数，返回<code>error</code>接口类型，内部调用<code>returnCustomError</code>函数：</p>
-
+</code></pre><p>之后再声明另外一个函数，返回<code>error</code>接口类型，内部调用<code>returnCustomError</code>函数：</p>
 <pre><code>func returnOfficialError() error {
 	return returnCustomError(false)
 }
@@ -243,45 +151,48 @@ func main() {
 
 //output
 //err is not equal to nil
-</code></pre>
-
-<p>是不是挺奇怪的，我明明返回了一个<code>nil</code>，但最后判断的结果却<code>!= nil</code>。问题出在<code>interface</code>类型的比较上，它会比较<code>interface type</code>和<code>interafce value</code>，只有两者均为<code>nil</code>，最终结果才为<code>nil</code>。</p>
-
-<h2 id="interface-比较"><code>interface</code>比较</h2>
-
+</code></pre><p>是不是挺奇怪的，我明明返回了一个<code>nil</code>，但最后判断的结果却<code>!= nil</code>。问题出在<code>interface</code>类型的比较上，它会比较<code>interface type</code>和<code>interafce value</code>，只有两者均为<code>nil</code>，最终结果才为<code>nil</code>。</p>
+<h2 id="interface比较"><code>interface</code>比较</h2>
 <p><code>Go</code>语言中，变量均会被初始化为预定义的零值，<code>interface</code>也不例外。但<code>interface</code>的零值却由两部分组成：<code>dynamic type</code>和<code>dynamic value</code>，只有两者均为<code>nil</code>，最终结果才为<code>nil</code>。</p>
-
 <p>从上面都示例也可以看出，<code>interface</code>是可以比较的。所以，<code>interface</code>类型也可以作为<code>map</code>类型的<code>key</code>值。但如果<code>interface</code>中的<code>dynamic type</code>本身是不可比较的，比如<code>slice</code>、<code>map</code>、<code>function</code>，强行比较的话，就会引起<code>panic</code>。因此，在比较<code>interface</code>之前，一定要确定<code>dynamic type</code>是可以比较的。</p>
-
 <h2 id="总结">总结</h2>
-
 <p>在项目中，函数的<code>error</code>返回类型尽量要做到统一，要么所有的函数均返回<code>error interface</code>类型（建议），要么返回自定义的类型。这样可以避免上述的情况。在处理特殊<code>error</code>的类型时，使用断言来做特殊处理。</p>
 <div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//使用断言来判断错误的类型
 </span><span class="c1"></span><span class="k">if</span> <span class="nx">err</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">err</span><span class="p">.(</span><span class="o">*</span><span class="nx">CustomError</span><span class="p">);</span> <span class="nx">ok</span> <span class="p">{</span>
     
-<span class="p">}</span></code></pre></div>
-    </article>
+<span class="p">}</span>
+</code></pre></div>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/golang/" rel="tag">golang</a>
+		</li>
+	</ul>
 </div>
+		</footer>
+	</article>
+</main>
 
 
-        
-<nav role="navigation" class="bottom-menu">
-    
 
-    
-        <a href="/blog">back</a>
-        
-    
 
-    
-</p>
-</nav>
-
-    </main>
-    
-    <footer class="container footer"></footer>
-    
-    
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 渐行渐远.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
 </body>
-
 </html>

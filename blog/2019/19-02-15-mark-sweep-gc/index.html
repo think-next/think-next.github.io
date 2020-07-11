@@ -1,76 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" lang="en">
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Hugo-Primer theme&#39;s example site">
-<title>
-    Mark-sweep GC - 渐行渐远
-</title>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.min.ea2156633063385371d7a4d9db559868e643a3885ab887da32f7ea8a1e05ee11.css" integrity="sha256-6iFWYzBjOFNx16TZ21WYaOZDo4hauIfaMvfqih4F7hE=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
-                 role="img" viewBox="0 0 24 24" focusable="false">
-                <title>Product</title>
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-            </svg>
-        </a>
-
-        
-        <a class="py-2 d-none d-md-inline-block" href="/blog">我的博客</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/greatperson">向大神学习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">刻意练习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">今日计划</a>
-        
-    </div>
-</nav>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-<script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Mark-sweep GC"/>
-<meta name="twitter:description" content="把事做成的才是赢家，在口头上压倒对手，真的没有那么重要！ Whirlwind introduce 当对象不再被引用时，对象不会立即被垃圾回收。也不存在任何子系统来专门记录使用的内"/>
-
-<meta property="og:title" content="Mark-sweep GC" />
-<meta property="og:description" content="把事做成的才是赢家，在口头上压倒对手，真的没有那么重要！ Whirlwind introduce 当对象不再被引用时，对象不会立即被垃圾回收。也不存在任何子系统来专门记录使用的内" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://neojos.com/blog/2019/19-02-15-mark-sweep-gc/" />
-<meta property="article:published_time" content="2019-02-15T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-02-15T00:00:00&#43;00:00"/>
-
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Mark-sweep GC - 渐行渐远</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -82,61 +25,40 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-    
-
-    
-    
-    
-    <title>
-        
-        Mark-sweep GC
-        
-    </title>
 </head>
-
-<body>
-
-    
-    
-    <header class="text-center container">
-        <h1 class="mb-4 mt-2">Mark-sweep GC</h1>
-    </header>
-    
-    <main class="wrap">
-        
-<div class="container">
-    <aside role="complementary">
-        <div class="tag-container">
-            
-            
-            <span class="tag">
-                <a href="/tags/translate/" class="badge badge-success">
-                    translate
-                </a>
-            </span>
-            
-            
-        </div>
-        <div class="float-right badge badge-light">02-15-2019 &#183; 723 words</div>
-    </aside>
-    <hr />
-    <article role="article">
-        
-
-<blockquote>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">渐行渐远</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Mark-sweep GC</h1>
+			
+		</header><div class="content post__content clearfix">
+			<blockquote>
 <p><code>把事做成的才是赢家，在口头上压倒对手，真的没有那么重要！</code></p>
 </blockquote>
-
 <h2 id="whirlwind-introduce">Whirlwind introduce</h2>
-
 <p>当对象不再被引用时，对象不会立即被垃圾回收。也不存在任何子系统来专门记录使用的内存情况。</p>
-
 <p>当系统没有内存空间时，触发<code>GC</code>处理。它首先会枚举所有的<code>Root</code>对象，然后递归的遍历根对象的引用关系。给遍历到的对象设置一个特殊标记，表明该对象是可达的，空间不能被回收。</p>
-
 <p>当标记结束后，<code>GC</code>进入清洗阶段，任何在内存中没有被这次垃圾回收标记的对象都会被系统回收。</p>
-
 <h2 id="the-algorithm">The algorithm</h2>
-
 <p>程序主要包含3个阶段：列举所有<code>Root</code>对象、标记起始于<code>Root</code>的对象引用、清除无效的对象。</p>
 <div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">GC</span><span class="p">()</span>
 <span class="p">{</span>
@@ -145,15 +67,11 @@ if (!doNotTrack) {
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">roots</span><span class="p">.</span><span class="n">Count</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
         <span class="n">Mark</span><span class="p">(</span><span class="n">roots</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
     <span class="n">Sweep</span><span class="p">();</span>
-<span class="p">}</span></code></pre></div>
-<h2 id="root-enumeration"><code>Root Enumeration</code></h2>
-
+<span class="p">}</span>
+</code></pre></div><h2 id="root-enumeration"><code>Root Enumeration</code></h2>
 <p><code>Root Enumeration</code>会列举系统所有对象引用。运行系统需要为<code>GC</code>提供一种获取<code>Root</code>对象列表的机制。比如，在<code>.NET</code>中<code>JIT</code>维护了当前活跃的<code>root</code>对象，提供了获取根对象列表的<code>API</code>。</p>
-
 <p>一个函数接受一个指针类型的参数，当方法返回时，<code>jitter</code>会识别出该参数不会再被使用，而将其从<code>root</code>中移除。</p>
-
 <h2 id="mark"><code>Mark</code></h2>
-
 <p>每个对象在创建时创建额外的空间，用于去<code>mark</code>这个对象，这个过程也是递归的</p>
 <div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">Mark</span><span class="p">(</span><span class="n">Object</span><span class="o">*</span> <span class="n">pObj</span><span class="p">)</span>
 <span class="p">{</span>
@@ -172,18 +90,14 @@ if (!doNotTrack) {
             <span class="n">Mark</span><span class="p">(</span><span class="n">children</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="c1">// recursively call mark
 </span><span class="c1"></span>        <span class="p">}</span>	
     <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
-<p>递归的结束条件是：</p>
-
+<span class="p">}</span>
+</code></pre></div><p>递归的结束条件是：</p>
 <ol>
 <li>任何一个对象都不再有孩子节点</li>
 <li>如果一个对象已经标记过了，要避免出现循环引用的情况</li>
 </ol>
-
 <h2 id="sweep"><code>sweep</code></h2>
-
 <p><code>sweep</code>会遍历整个内存空间，释放没有被标记的内存。同时，它会清除标记的<code>bit</code>位，以便下次<code>GC</code>的正常标记。</p>
-
 <pre><code>void Sweep()
 {
     Object *pHeap = pHeapStart;
@@ -198,40 +112,44 @@ if (!doNotTrack) {
         pHeap = GetNext(pHeap);
     }
 }
-</code></pre>
-
-<h2 id="总结">总结</h2>
-
+</code></pre><h2 id="总结">总结</h2>
 <p><code>Mark-sweep</code>天然适合清除循环引用的情况，然而它每次的循环遍历回收操作，会导致整个系统短暂的暂停，影响系统的正常交互。</p>
-
 <p>参考文章：</p>
-
 <ol>
 <li><a href="https://blogs.msdn.microsoft.com/abhinaba/2009/01/30/back-to-basics-mark-and-sweep-garbage-collection/"><code>Mark and Sweep Garbage Collection</code></a></li>
 </ol>
 
-    </article>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/translate/" rel="tag">translate</a>
+		</li>
+	</ul>
 </div>
+		</footer>
+	</article>
+</main>
 
 
-        
-<nav role="navigation" class="bottom-menu">
-    
 
-    
-        <a href="/blog">back</a>
-        
-    
 
-    
-</p>
-</nav>
-
-    </main>
-    
-    <footer class="container footer"></footer>
-    
-    
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 渐行渐远.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
 </body>
-
 </html>

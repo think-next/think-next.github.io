@@ -1,76 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" lang="en">
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Hugo-Primer theme&#39;s example site">
-<title>
-    垃圾回收之引用计数 - 渐行渐远
-</title>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.min.ea2156633063385371d7a4d9db559868e643a3885ab887da32f7ea8a1e05ee11.css" integrity="sha256-6iFWYzBjOFNx16TZ21WYaOZDo4hauIfaMvfqih4F7hE=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
-                 role="img" viewBox="0 0 24 24" focusable="false">
-                <title>Product</title>
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-            </svg>
-        </a>
-
-        
-        <a class="py-2 d-none d-md-inline-block" href="/blog">我的博客</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/greatperson">向大神学习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">刻意练习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">今日计划</a>
-        
-    </div>
-</nav>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-<script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="垃圾回收之引用计数"/>
-<meta name="twitter:description" content="思来想去，决定总结一下垃圾回收机制。引用计数与我结缘最早，也比较简单、基础，遂决定从引用计数入手。 —— 不管人非笑，不管人毁谤，不管人荣辱，任"/>
-
-<meta property="og:title" content="垃圾回收之引用计数" />
-<meta property="og:description" content="思来想去，决定总结一下垃圾回收机制。引用计数与我结缘最早，也比较简单、基础，遂决定从引用计数入手。 —— 不管人非笑，不管人毁谤，不管人荣辱，任" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://neojos.com/blog/2019/19-02-01-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B9%8B%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/" />
-<meta property="article:published_time" content="2019-02-01T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-02-01T00:00:00&#43;00:00"/>
-
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>垃圾回收之引用计数 - 渐行渐远</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -82,72 +25,43 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-    
-
-    
-    
-    
-    <title>
-        
-        垃圾回收之引用计数
-        
-    </title>
 </head>
-
-<body>
-
-    
-    
-    <header class="text-center container">
-        <h1 class="mb-4 mt-2">垃圾回收之引用计数</h1>
-    </header>
-    
-    <main class="wrap">
-        
-<div class="container">
-    <aside role="complementary">
-        <div class="tag-container">
-            
-            
-            <span class="tag">
-                <a href="/tags/translate/" class="badge badge-success">
-                    translate
-                </a>
-            </span>
-            
-            
-            
-            <span class="tag">
-                <a href="/tags/golang/" class="badge badge-success">
-                    golang
-                </a>
-            </span>
-            
-            
-        </div>
-        <div class="float-right badge badge-light">02-01-2019 &#183; 1502 words</div>
-    </aside>
-    <hr />
-    <article role="article">
-        
-
-<blockquote>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">渐行渐远</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">垃圾回收之引用计数</h1>
+			
+		</header><div class="content post__content clearfix">
+			<blockquote>
 <p><code>思来想去，决定总结一下垃圾回收机制。引用计数与我结缘最早，也比较简单、基础，遂决定从引用计数入手。</code></p>
-
 <p>—— <code>不管人非笑，不管人毁谤，不管人荣辱，任他功夫有进有退，我只是这致良知的主宰不息，久久自然有得力处</code></p>
 </blockquote>
-
 <h2 id="reference-counting"><code>Reference Counting</code></h2>
-
 <p>对象在创建时保存一个自身被引用的计数，初始值为1。每次被新的变量引用，该值加1。相反，则减去1。当该值等于0时，占用空间被系统回收。</p>
-
 <h6 id="什么是对象呢">什么是对象呢？</h6>
 <div class="highlight"><pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">var</span> <span class="nx">neojos</span> <span class="kt">int64</span> <span class="p">=</span> <span class="mi">32</span>
-<span class="kd">var</span> <span class="nx">ptrNeojos</span> <span class="o">*</span><span class="kt">int64</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">neojos</span></code></pre></div>
-<p>如上所示，我们创建了一个<code>int64</code>类型的<code>object</code>，命名为<code>neojos</code>。程序中对该<code>object</code>的操作都是通过使用<code>neojos</code>来实现的。而<code>ptrNeojos</code>其实又创建了一个<code>*int64</code>类型的<code>object</code>，但它的值保存的是<code>neojos</code>的地址。</p>
-
+<span class="kd">var</span> <span class="nx">ptrNeojos</span> <span class="o">*</span><span class="kt">int64</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">neojos</span>
+</code></pre></div><p>如上所示，我们创建了一个<code>int64</code>类型的<code>object</code>，命名为<code>neojos</code>。程序中对该<code>object</code>的操作都是通过使用<code>neojos</code>来实现的。而<code>ptrNeojos</code>其实又创建了一个<code>*int64</code>类型的<code>object</code>，但它的值保存的是<code>neojos</code>的地址。</p>
 <p>对于<code>ptrNeojos</code>来说，它的生命周期跟普通变量的生命周期没有区别。唯一区别的是，当它生命周期结束后，<code>ptrNeojos</code>会被垃圾回收，而底层指向的<code>object</code>却不会。</p>
-
 <h6 id="如何计数呢">如何计数呢？</h6>
 <div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">Object</span> <span class="o">*</span> <span class="n">obj1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="p">();</span> <span class="c1">// RefCount(obj1) starts at 1
 </span><span class="c1"></span><span class="n">Object</span> <span class="o">*</span> <span class="n">obj2</span> <span class="o">=</span> <span class="n">obj1</span><span class="p">;</span>         <span class="c1">// RefCount(obj1) incremented to 2 as new reference is added
@@ -156,9 +70,7 @@ if (!doNotTrack) {
 <span class="n">obj2</span><span class="o">-&gt;</span><span class="n">SomeMethod</span><span class="p">();</span>
 <span class="n">obj2</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>                  <span class="c1">// RefCount(obj1) decremented to 1 as ref goes away
 </span><span class="c1"></span><span class="n">obj1</span> <span class="o">=</span> <span class="n">obj3</span><span class="p">;</span>                  <span class="c1">// RefCount(obj1) decremented to 0 and can be collected
-</span></code></pre></div>
-<p><code>obj1</code>指向了一个匿名对象，为了方便，我们叫<code>anonymousObj</code>。上述代码展示了<code>anonymousObj</code>从创建到被垃圾回收的整个过程。<strong>垃圾回收对象的内存空间</strong>，上述过程中<code>obj1</code>对象的地址不会发生改变，只是底层引用的对象发生了变化。</p>
-
+</span></code></pre></div><p><code>obj1</code>指向了一个匿名对象，为了方便，我们叫<code>anonymousObj</code>。上述代码展示了<code>anonymousObj</code>从创建到被垃圾回收的整个过程。<strong>垃圾回收对象的内存空间</strong>，上述过程中<code>obj1</code>对象的地址不会发生改变，只是底层引用的对象发生了变化。</p>
 <p>下面的例子，用于测试<code>ptrName</code>代表的对象在赋值过程中不会发生变化。</p>
 <div class="highlight"><pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">func</span> <span class="nf">TestCase2</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
 	<span class="kd">var</span> <span class="nx">name</span> <span class="kt">int64</span> <span class="p">=</span> <span class="mi">32</span>
@@ -168,17 +80,12 @@ if (!doNotTrack) {
 </span><span class="c1"></span>
 	<span class="nx">ptrName</span> <span class="p">=</span> <span class="kc">nil</span>
 	<span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">ptrName</span><span class="p">)</span>		<span class="c1">//0xc42000e078
-</span><span class="c1"></span><span class="p">}</span></code></pre></div>
-<h2 id="如何实现">如何实现</h2>
-
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></div><h2 id="如何实现">如何实现</h2>
 <p>基于不同的语言会有不同的实现方式，但思路是相通的。</p>
-
 <h6 id="存储结构和申请空间">存储结构和申请空间</h6>
-
 <p>创建对象的时候，申请额外的空间用于存储引用计数，同时对外隐藏该空间的存在。如下图，<code>Header</code>部分就用于存储引用计数。所以，程序返回的指针实际是<code>ActualData</code>的首地址，调用者完全意识不到<code>header</code>的存在，而<code>GC</code>执行的时候却可以通过对象的地址访问<code>Header</code>。</p>
-
-<p><img src="https://msdnshared.blob.core.windows.net/media/TNBlogsFS/BlogFileStorage/blogs_msdn/abhinaba/WindowsLiveWriter/BackToBasicsReferenceCountingGarbageColl_D20A/image_2.png" alt="counter herader" /></p>
-
+<p><img src="https://msdnshared.blob.core.windows.net/media/TNBlogsFS/BlogFileStorage/blogs_msdn/abhinaba/WindowsLiveWriter/BackToBasicsReferenceCountingGarbageColl_D20A/image_2.png" alt="counter herader"></p>
 <p>如下代码，申请地址时，将引用计数初始化为1。同时，返回<code>ActualData</code>的指针地址。后续的引用计数更新，释放对象空间都通过判断<code>Header</code>来处理。</p>
 <div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="c1">//Header结构
 </span><span class="c1"></span><span class="k">struct</span> <span class="n">MemHeader</span>
@@ -208,9 +115,8 @@ if (!doNotTrack) {
 </span><span class="c1"></span><span class="kr">inline</span> <span class="n">MemHeader</span> <span class="o">*</span> <span class="nf">GetHeader</span><span class="p">(</span><span class="n">PVOID</span> <span class="n">pMem</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">((</span><span class="n">MemHeader</span><span class="o">*</span><span class="p">)</span><span class="n">pMem</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
-<h6 id="基类实现">基类实现</h6>
-
+<span class="p">}</span>
+</code></pre></div><h6 id="基类实现">基类实现</h6>
 <p>对象可以意识到引用计数机制的存在，明确的增加或减少引用计数。这种情况适用于：调用者手动释放空间的场合。那么，所有对象需要继承一个通用的基类，来实现这部分计数逻辑。</p>
 <div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="n">class</span> <span class="n">ReferenceCount</span>
 <span class="p">{</span>
@@ -235,13 +141,10 @@ if (!doNotTrack) {
 <span class="p">};</span>
  
 <span class="c1">//any reference counted object simply derives from the above type
-</span><span class="c1"></span><span class="n">class</span> <span class="nl">MyType</span> <span class="p">:</span> <span class="n">public</span> <span class="n">ReferenceCount</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span></code></pre></div>
-<h2 id="对象引用关系">对象引用关系</h2>
-
+</span><span class="c1"></span><span class="n">class</span> <span class="nl">MyType</span> <span class="p">:</span> <span class="n">public</span> <span class="n">ReferenceCount</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+</code></pre></div><h2 id="对象引用关系">对象引用关系</h2>
 <p>对象与对象之间存在相互调用，当其中一个对象的引用计数减为0时，该对象“引用链”上其他对象的引用计数都需要被更新。<code>GC</code>如何执行清理的呢？</p>
-
-<p><img src="https://msdnshared.blob.core.windows.net/media/TNBlogsFS/BlogFileStorage/blogs_msdn/abhinaba/WindowsLiveWriter/BackToBasicsReferenceCountingGarbageColl_D20A/image_4.png" alt="relation" /></p>
-
+<p><img src="https://msdnshared.blob.core.windows.net/media/TNBlogsFS/BlogFileStorage/blogs_msdn/abhinaba/WindowsLiveWriter/BackToBasicsReferenceCountingGarbageColl_D20A/image_4.png" alt="relation"></p>
 <p>当<code>object1</code>释放<code>object3</code>的引用时，<code>object3</code>和<code>object5</code>的引用计数都需要被更新，而这是一个递归检查、更新的过程。</p>
 <div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="n">VOID</span> <span class="nf">GC_ReleaseRef</span><span class="p">(</span><span class="n">PVOID</span> <span class="n">pMem</span><span class="p">)</span>
 <span class="p">{</span>
@@ -254,31 +157,21 @@ if (!doNotTrack) {
             <span class="n">GC_ReleaseRef</span><span class="p">(</span><span class="n">pChild</span><span class="p">);</span>
         <span class="n">PlatformFree</span><span class="p">(</span><span class="n">pHdr</span><span class="p">);</span>
     <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
-<h2 id="gc扫描">GC扫描</h2>
-
+<span class="p">}</span>
+</code></pre></div><h2 id="gc扫描">GC扫描</h2>
 <p>除了自动回收垃圾外，<code>GC</code>的扫描是从哪里开始的？拿<code>Java</code>来解释，<code>GC roots</code>就是<code>Java</code>中的<code>ClassLoader</code>。</p>
-
 <h6 id="classloader">ClassLoader</h6>
-
 <blockquote>
 <p>After that when we try to use a Class, Java ClassLoader loads that class into memory</p>
 </blockquote>
-
 <p><code>ClassLoader</code>按需将使用到的<code>class</code>加载到内存，熟悉<code>PHP</code>的可以跟<code>Laravel Container</code>做类比。</p>
-
 <h6 id="gc-roots"><code>GC roots</code></h6>
-
 <blockquote>
 <p>In Java, there are special objects called <strong>Garbage Collection Roots</strong> (GC roots). They serve as a root objects for Garbage Collection marking mechanism (see picture).</p>
 </blockquote>
-
-<p><img src="https://i.stack.imgur.com/8ehun.jpg" alt="GC roots" /></p>
-
-<hr />
-
+<p><img src="https://i.stack.imgur.com/8ehun.jpg" alt="GC roots"></p>
+<hr>
 <p>参考文章：</p>
-
 <ol>
 <li><a href="https://www.journaldev.com/349/java-classloader"><code>Java ClassLoader</code></a></li>
 <li><a href="https://stackoverflow.com/questions/27186799/what-are-gc-roots-for-classes"><code>What are GC roots for classes?</code></a></li>
@@ -289,28 +182,40 @@ if (!doNotTrack) {
 <li><a href="https://blogs.msdn.microsoft.com/abhinaba/2009/01/27/back-to-basics-reference-counting-garbage-collection/"><code>Back To Basics: Reference Counting Garbage Collection</code></a></li>
 </ol>
 
-    </article>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/translate/" rel="tag">translate</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/golang/" rel="tag">golang</a>
+		</li>
+	</ul>
 </div>
+		</footer>
+	</article>
+</main>
 
 
-        
-<nav role="navigation" class="bottom-menu">
-    
 
-    
-        <a href="/blog">back</a>
-        
-    
 
-    
-</p>
-</nav>
-
-    </main>
-    
-    <footer class="container footer"></footer>
-    
-    
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 渐行渐远.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
 </body>
-
 </html>

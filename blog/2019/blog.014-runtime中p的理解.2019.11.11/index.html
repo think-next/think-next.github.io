@@ -1,76 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" lang="en">
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Hugo-Primer theme&#39;s example site">
-<title>
-    runtime中P的理解 - 渐行渐远
-</title>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.min.ea2156633063385371d7a4d9db559868e643a3885ab887da32f7ea8a1e05ee11.css" integrity="sha256-6iFWYzBjOFNx16TZ21WYaOZDo4hauIfaMvfqih4F7hE=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
-                 role="img" viewBox="0 0 24 24" focusable="false">
-                <title>Product</title>
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-            </svg>
-        </a>
-
-        
-        <a class="py-2 d-none d-md-inline-block" href="/blog">我的博客</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/greatperson">向大神学习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">刻意练习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">今日计划</a>
-        
-    </div>
-</nav>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-<script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="runtime中P的理解"/>
-<meta name="twitter:description" content="P是在Go1.1引入的概念，初始默认等于CPU核的数量。P只是一个逻辑概念，跟CPU也没有任何关系。 源码go/1.13.4/libexec/"/>
-
-<meta property="og:title" content="runtime中P的理解" />
-<meta property="og:description" content="P是在Go1.1引入的概念，初始默认等于CPU核的数量。P只是一个逻辑概念，跟CPU也没有任何关系。 源码go/1.13.4/libexec/" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://neojos.com/blog/2019/blog.014-runtime%E4%B8%ADp%E7%9A%84%E7%90%86%E8%A7%A3.2019.11.11/" />
-<meta property="article:published_time" content="2019-11-11T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-11-11T00:00:00&#43;00:00"/>
-
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>runtime中P的理解 - 渐行渐远</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -82,52 +25,38 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-    
-
-    
-    
-    
-    <title>
-        
-        runtime中P的理解
-        
-    </title>
 </head>
-
-<body>
-
-    
-    
-    <header class="text-center container">
-        <h1 class="mb-4 mt-2">runtime中P的理解</h1>
-    </header>
-    
-    <main class="wrap">
-        
-<div class="container">
-    <aside role="complementary">
-        <div class="tag-container">
-            
-            
-            <span class="tag">
-                <a href="/tags/golang/" class="badge badge-success">
-                    golang
-                </a>
-            </span>
-            
-            
-        </div>
-        <div class="float-right badge badge-light">11-11-2019 &#183; 879 words</div>
-    </aside>
-    <hr />
-    <article role="article">
-        <p><code>P</code>是在<code>Go1.1</code>引入的概念，初始默认等于<code>CPU</code>核的数量。<code>P</code>只是一个逻辑概念，跟<code>CPU</code>也没有任何关系。</p>
-
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">渐行渐远</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">runtime中P的理解</h1>
+			
+		</header><div class="content post__content clearfix">
+			<p><code>P</code>是在<code>Go1.1</code>引入的概念，初始默认等于<code>CPU</code>核的数量。<code>P</code>只是一个逻辑概念，跟<code>CPU</code>也没有任何关系。</p>
 <p>源码<code>go/1.13.4/libexec/src/runtime/proc.go</code>中对<code>P</code>的注释如下：</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// P - processor, a resource that is required to execute Go code.
 </span><span class="c1">// M must have an associated P to execute Go code, however it can be
-</span><span class="c1"></span><span class="o">//</span> <span class="nx">blocked</span> <span class="nx">or</span> <span class="nx">in</span> <span class="nx">a</span> <span class="nx">syscall</span> <span class="nx">w</span><span class="o">/</span><span class="nx">o</span> <span class="nx">an</span> <span class="nx">associated</span> <span class="nx">P</span><span class="p">.</span></code></pre></div>
-<p>再通过源码<code>go/1.13.4/libexec/src/runtime/runtime2.go</code>来简要了解一下<code>P</code>在调度过程中的状态变化：</p>
+</span><span class="c1">// blocked or in a syscall w/o an associated P.
+</span></code></pre></div><p>再通过源码<code>go/1.13.4/libexec/src/runtime/runtime2.go</code>来简要了解一下<code>P</code>在调度过程中的状态变化：</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">const</span> <span class="p">(</span>
     <span class="c1">// P status
 </span><span class="c1"></span>    <span class="nx">_Pidle</span> <span class="p">=</span> <span class="kc">iota</span>
@@ -140,9 +69,8 @@ if (!doNotTrack) {
 </span><span class="c1"></span>    <span class="c1">// stripped of its resources, though a few things remain
 </span><span class="c1"></span>    <span class="c1">// (e.g., trace buffers).
 </span><span class="c1"></span>    <span class="nx">_Pdead</span>
-<span class="p">)</span></code></pre></div>
-<p>通过调整<code>GOMAXPROCS</code>可以控制<code>P</code>的状态，<code>_Pdead</code>专门来说明这一点。</p>
-
+<span class="p">)</span>
+</code></pre></div><p>通过调整<code>GOMAXPROCS</code>可以控制<code>P</code>的状态，<code>_Pdead</code>专门来说明这一点。</p>
 <p>从<code>P</code>的结构体字段中，可以进一步了解<code>P</code>中存储的资源，源码<code>go/1.13.4/libexec/src/runtime/runtime2.go</code>：</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">p</span> <span class="kd">struct</span> <span class="p">{</span>
         <span class="nx">id</span>          <span class="kt">int32</span>
@@ -222,39 +150,48 @@ if (!doNotTrack) {
         <span class="nx">runSafePointFn</span> <span class="kt">uint32</span> <span class="c1">// if 1, run sched.safePointFn at next safe point
 </span><span class="c1"></span>
         <span class="nx">pad</span> <span class="nx">cpu</span><span class="p">.</span><span class="nx">CacheLinePad</span>
-<span class="p">}</span></code></pre></div>
-<p>字段中<code>mcache</code>再单独说明一下，源码<code>go/1.13.4/libexec/src/runtime/mcache.go</code>:</p>
+<span class="p">}</span>
+</code></pre></div><p>字段中<code>mcache</code>再单独说明一下，源码<code>go/1.13.4/libexec/src/runtime/mcache.go</code>:</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// Per-thread (in Go, per-P) cache for small objects.
 </span><span class="c1">// No locking needed because it is per-thread (per-P).
 </span><span class="c1">//
 </span><span class="c1">// mcaches are allocated from non-GC&#39;d memory, so any heap pointers
 </span><span class="c1">// must be specially handled.
 </span><span class="c1">//
-</span><span class="c1"></span><span class="o">//</span><span class="k">go</span><span class="p">:</span><span class="nx">notinheap</span></code></pre></div>
-<p><code>mcache</code>反映了对象的创建策略：小对象。</p>
+</span><span class="c1">//go:notinheap
+</span></code></pre></div><p><code>mcache</code>反映了对象的创建策略：小对象。</p>
 
-    </article>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/golang/" rel="tag">golang</a>
+		</li>
+	</ul>
 </div>
+		</footer>
+	</article>
+</main>
 
 
-        
-<nav role="navigation" class="bottom-menu">
-    
 
-    
-        <a href="/blog">back</a>
-        
-    
 
-    
-</p>
-</nav>
-
-    </main>
-    
-    <footer class="container footer"></footer>
-    
-    
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 渐行渐远.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
 </body>
-
 </html>

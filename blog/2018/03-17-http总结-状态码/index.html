@@ -1,76 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" lang="en">
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Hugo-Primer theme&#39;s example site">
-<title>
-    HTTP总结-状态码 - 渐行渐远
-</title>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.min.ea2156633063385371d7a4d9db559868e643a3885ab887da32f7ea8a1e05ee11.css" integrity="sha256-6iFWYzBjOFNx16TZ21WYaOZDo4hauIfaMvfqih4F7hE=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
-                 role="img" viewBox="0 0 24 24" focusable="false">
-                <title>Product</title>
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-            </svg>
-        </a>
-
-        
-        <a class="py-2 d-none d-md-inline-block" href="/blog">我的博客</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/greatperson">向大神学习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">刻意练习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">今日计划</a>
-        
-    </div>
-</nav>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-<script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="HTTP总结-状态码"/>
-<meta name="twitter:description" content="给别人轻松讲明白一个问题，才能算自己真正了解这个问题。 &gt; Origin Header 头让我熟悉了一次sheme 从HTTP的头Origin说起，想起之前客户端定义sc"/>
-
-<meta property="og:title" content="HTTP总结-状态码" />
-<meta property="og:description" content="给别人轻松讲明白一个问题，才能算自己真正了解这个问题。 &gt; Origin Header 头让我熟悉了一次sheme 从HTTP的头Origin说起，想起之前客户端定义sc" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://neojos.com/blog/2018/03-17-http%E6%80%BB%E7%BB%93-%E7%8A%B6%E6%80%81%E7%A0%81/" />
-<meta property="article:published_time" content="2018-03-17T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-03-17T00:00:00&#43;00:00"/>
-
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>HTTP总结-状态码 - 渐行渐远</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -82,101 +25,66 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-    
-
-    
-    
-    
-    <title>
-        
-        HTTP总结-状态码
-        
-    </title>
 </head>
-
-<body>
-
-    
-    
-    <header class="text-center container">
-        <h1 class="mb-4 mt-2">HTTP总结-状态码</h1>
-    </header>
-    
-    <main class="wrap">
-        
-<div class="container">
-    <aside role="complementary">
-        <div class="tag-container">
-            
-            
-            <span class="tag">
-                <a href="/tags/http/" class="badge badge-success">
-                    http
-                </a>
-            </span>
-            
-            
-        </div>
-        <div class="float-right badge badge-light">03-17-2018 &#183; 1648 words</div>
-    </aside>
-    <hr />
-    <article role="article">
-        
-
-<p>给别人轻松讲明白一个问题，才能算自己真正了解这个问题。
-&gt; Origin Header 头让我熟悉了一次sheme</p>
-
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">渐行渐远</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">HTTP总结-状态码</h1>
+			
+		</header><div class="content post__content clearfix">
+			<p>给别人轻松讲明白一个问题，才能算自己真正了解这个问题。</p>
+<blockquote>
+<p>Origin Header 头让我熟悉了一次sheme</p>
+</blockquote>
 <p>从HTTP的头Origin说起，想起之前客户端定义scheme，因为不了解，问了开发的同事“scheme是什么？”反正我当时是不明白他们讲的。</p>
-
 <p>在了解HTTP Origin语法的时候，我其实才真正明白：scheme 指请求所使用的协议，通常是HTTP、HTTPS或者其他。</p>
-
 <pre><code>Origin: &lt;scheme&gt; &quot;://&quot; &lt;host&gt; [&quot;:&quot; &lt;port&gt;]
-</code></pre>
-
-<p>Origin表示请求来至哪个站点。在WebSocket通信的时候，明确指明要校验这个参数。</p>
-
+</code></pre><p>Origin表示请求来至哪个站点。在WebSocket通信的时候，明确指明要校验这个参数。</p>
 <h2 id="405">405</h2>
-
 <p>方法不被允许 (Method not allowed)。用来访问本页面的谓词不被允许，有时将POST请求修改为GET请求之后异常就解决了。</p>
-
 <p>比如：<code>Web</code>端通过<code>Ajax</code>异步提交数据，并且是<code>POST</code>的方式。莫名奇妙的的发现返回的状态码是<code>405</code>。很有可能是服务端在处理请求时出错了，在<code>Nginx</code>返回时，返回了<code>404.html</code>或者<code>500.html</code>导致的。</p>
-
 <h2 id="500">500</h2>
-
 <p>服务器内部错误。比如：服务端处理出现异常。同时，在PHP错误日志中可以查看异常发生的调用栈信息。</p>
-
 <h2 id="502">502</h2>
-
 <p>作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。比如<code>nginx</code>从<code>php-fpm</code>接收到了不完整的<code>response</code>数据。</p>
-
 <p>比如：服务端尝试连接<code>mysql</code>，但长时间链接不上，就会返回502错误。</p>
-
 <p>可以浏览一些具体的文章：</p>
-
 <ol>
 <li><a href="https://juejin.im/entry/589148f92f301e00690e863d">http 502 和 504 的区别</a></li>
 <li><a href="https://mp.weixin.qq.com/s/_6GWNojX0hAvupX906nhwQ">Nginx一次奇怪的502 报错探究</a></li>
 </ol>
-
 <h2 id="503">503</h2>
-
 <p>服务暂时不可用，一段时间后服务就可以正常工作了。</p>
-
 <p>在代码发布的时候可能会使用到。比如<code>go</code>服务，在发版前需要将之前运行的进程<code>kill</code>掉，之后启动新的进程。但这个过程间隙，会导致已连接的客户端处理中断。所以在发版之前，先返回<code>503</code>,等待已经接收的请求处理完成，然后升级。</p>
-
 <h2 id="504">504</h2>
-
 <p>网关超时。为了完成您的 HTTP 请求，该服务器访问一个上游服务器，但没得到及时的响应</p>
-
 <p>比如：nginx超过了自己设置的超时时间，不等待php-fpm的返回结果，直接给客户端返回504错误。但是此时php-fpm依然还在处理请求（在没有超出自己的超时时间的情况下）。</p>
-
-<h2 id="0-超时-客户端主动断开连接">0、超时、客户端主动断开连接</h2>
-
-<p>If you connect with the server, then you can get a return code from it, otherwise it will fail and you get a 0.
-1. So if you try to connect to &ldquo;www.google.com/lksdfk&rdquo; you will get a return code of 400,
-2. if you go directly to google.com, you will get 302 (and then 200 if you forward to the next page&hellip; well I do because it forwards to google.com.br, so you might not get that),
-3. and if you go to &ldquo;googlecom&rdquo; you will get a 0 (host no found), so with the last one, there is nobody to send a code back.</p>
-
+<h2 id="0超时客户端主动断开连接">0、超时、客户端主动断开连接</h2>
+<p>If you connect with the server, then you can get a return code from it, otherwise it will fail and you get a 0.</p>
+<ol>
+<li>So if you try to connect to &ldquo;<a href="http://www.google.com/lksdfk%22">www.google.com/lksdfk&quot;</a> you will get a return code of 400,</li>
+<li>if you go directly to google.com, you will get 302 (and then 200 if you forward to the next page&hellip; well I do because it forwards to google.com.br, so you might not get that),</li>
+<li>and if you go to &ldquo;googlecom&rdquo; you will get a 0 (host no found), so with the last one, there is nobody to send a code back.</li>
+</ol>
 <pre><code> $errorMsg = curl_error($ch);
 curl_close($ch);
 if (!$response || $httpCode != 200) {
@@ -187,64 +95,59 @@ if (!$response || $httpCode != 200) {
 
 Fail to request mobile traffic api, httpCode=0, 
 Curl error: Operation timed out after 1001 milliseconds with 0 bytes received
-</code></pre>
-
-<h2 id="408">408</h2>
-
-<p>您的 Web 服务器认为，在 1 ）建立客户端（如您的浏览器或我们的 CheckUpDown 机器人） 和服务器之间 IP 连接（套解字 - socket ）， 和 2 ）通过该套解字收到数据，之间的时间间隔太长， 所以服务器放弃该连接。 套接字连接实际上已失效 - 您的 Web 服务器已就对该特定套接字连接发出 &lsquo; 超时 &rsquo; 信号。客户端的请求必须及时重复。</p>
-
+</code></pre><h2 id="408">408</h2>
+<p>您的 Web 服务器认为，在 1 ）建立客户端（如您的浏览器或我们的 CheckUpDown 机器人） 和服务器之间 IP 连接（套解字 - socket ）， 和 2 ）通过该套解字收到数据，之间的时间间隔太长， 所以服务器放弃该连接。 套接字连接实际上已失效 - 您的 Web 服务器已就对该特定套接字连接发出 ' 超时 ' 信号。客户端的请求必须及时重复。</p>
 <p>常见在上传大文件的过程中，PHP程序处理超时（最长执行时间一般为30s）。</p>
-
 <h2 id="499">499</h2>
-
 <p>An Nginx HTTP server extension. This code introduced to log the case when the connection is closed by client while HTTP server is processing its request, making server unable to send the HTTP header back</p>
-
-<p>可能的原因：
-1. 可能表明服务器upstream处理过慢，导致用户提前关闭连接
-2. 用户频繁刷新</p>
-
+<p>可能的原因：</p>
+<ol>
+<li>可能表明服务器upstream处理过慢，导致用户提前关闭连接</li>
+<li>用户频繁刷新</li>
+</ol>
 <pre><code>#让代理服务端不要主动关闭客户端的连接。
 proxy_ignore_client_abort  on; 
-</code></pre>
-
-<p>默认 proxy_ignore_client_abort 是关闭的，此时在请求过程中如果客户端端主动关闭请求或者客户端网络断掉，那么 Nginx 会记录 499，同时 request_time 是「<strong>后端已经处理</strong>」的时间，而upstream_response_time 为“-“ (已验证)。</p>
-
+</code></pre><p>默认 proxy_ignore_client_abort 是关闭的，此时在请求过程中如果客户端端主动关闭请求或者客户端网络断掉，那么 Nginx 会记录 499，同时 request_time 是「<strong>后端已经处理</strong>」的时间，而upstream_response_time 为“-“ (已验证)。</p>
 <p>如果使用了 proxy_ignore_client_abort on ;
 那么客户端主动断掉连接之后，Nginx 会等待后端处理完(或者超时)，然后记录「后端的返回信息」到日志。所以，如果后端返回 200，就记录 200 ；如果后端放回 5XX ，那么就记录 5XX 。</p>
-
 <p>如果超时(默认60s，可以用 proxy_read_timeout 设置)，Nginx 会主动断开连接，记录 504
 注：只在做反向代理的时候加入，作为其他服务器的时候，关闭为好，默认设置是关闭的！</p>
-
 <p>参考链接<a href="http://yucanghai.blog.51cto.com/5260262/1713803">：http://yucanghai.blog.51cto.com/5260262/1713803</a></p>
-
 <h2 id="403">403</h2>
-
 <p>禁止访问。您的Web服务器无条件拒绝，并且不允许进一步探讨。</p>
-
 <p>多数常见公司服务器接口扫描情况。</p>
 
-    </article>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/http/" rel="tag">http</a>
+		</li>
+	</ul>
 </div>
+		</footer>
+	</article>
+</main>
 
 
-        
-<nav role="navigation" class="bottom-menu">
-    
 
-    
-        <a href="/blog">back</a>
-        
-    
 
-    
-</p>
-</nav>
-
-    </main>
-    
-    <footer class="container footer"></footer>
-    
-    
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 渐行渐远.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
 </body>
-
 </html>

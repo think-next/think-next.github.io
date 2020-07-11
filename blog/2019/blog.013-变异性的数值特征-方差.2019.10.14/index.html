@@ -1,76 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" lang="en">
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Hugo-Primer theme&#39;s example site">
-<title>
-    变异性的数值特征-方差 - 渐行渐远
-</title>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.min.ea2156633063385371d7a4d9db559868e643a3885ab887da32f7ea8a1e05ee11.css" integrity="sha256-6iFWYzBjOFNx16TZ21WYaOZDo4hauIfaMvfqih4F7hE=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
-                 role="img" viewBox="0 0 24 24" focusable="false">
-                <title>Product</title>
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-            </svg>
-        </a>
-
-        
-        <a class="py-2 d-none d-md-inline-block" href="/blog">我的博客</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/greatperson">向大神学习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">刻意练习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">今日计划</a>
-        
-    </div>
-</nav>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-<script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="变异性的数值特征-方差"/>
-<meta name="twitter:description" content="文章主要介绍通过样本方差来了解数据集变化的原理。 我们对两个数据集做观察，数据集A和数据集B： A: 1,2,3,4,5 B: 2,3,3,3,4 对于定量数据集，最常用、也最容易理解的集"/>
-
-<meta property="og:title" content="变异性的数值特征-方差" />
-<meta property="og:description" content="文章主要介绍通过样本方差来了解数据集变化的原理。 我们对两个数据集做观察，数据集A和数据集B： A: 1,2,3,4,5 B: 2,3,3,3,4 对于定量数据集，最常用、也最容易理解的集" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://neojos.com/blog/2019/blog.013-%E5%8F%98%E5%BC%82%E6%80%A7%E7%9A%84%E6%95%B0%E5%80%BC%E7%89%B9%E5%BE%81-%E6%96%B9%E5%B7%AE.2019.10.14/" />
-<meta property="article:published_time" content="2019-10-14T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-10-14T00:00:00&#43;00:00"/>
-
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>变异性的数值特征-方差 - 渐行渐远</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -82,101 +25,85 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-    
-
-    
-    
-    
-    <title>
-        
-        变异性的数值特征-方差
-        
-    </title>
 </head>
-
-<body>
-
-    
-    
-    <header class="text-center container">
-        <h1 class="mb-4 mt-2">变异性的数值特征-方差</h1>
-    </header>
-    
-    <main class="wrap">
-        
-<div class="container">
-    <aside role="complementary">
-        <div class="tag-container">
-            
-            
-            
-        </div>
-        <div class="float-right badge badge-light">10-14-2019 &#183; 544 words</div>
-    </aside>
-    <hr />
-    <article role="article">
-        <p>文章主要介绍通过<code>样本方差</code>来了解数据集变化的原理。</p>
-
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">渐行渐远</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">变异性的数值特征-方差</h1>
+			
+		</header><div class="content post__content clearfix">
+			<p>文章主要介绍通过<code>样本方差</code>来了解数据集变化的原理。</p>
 <p>我们对两个数据集做观察，数据集A和数据集B：</p>
-
 <pre><code>A: 1,2,3,4,5
 B: 2,3,3,3,4
-</code></pre>
-
-<p>对于定量数据集，最常用、也最容易理解的集中趋势测度是数据集的算数平均数。类比我们学生年代，经常谈论的班级平均分。那么，我们对数据集A、B做平均数计算：</p>
-
+</code></pre><p>对于定量数据集，最常用、也最容易理解的集中趋势测度是数据集的算数平均数。类比我们学生年代，经常谈论的班级平均分。那么，我们对数据集A、B做平均数计算：</p>
 <pre><code>A: 3
 B: 3
-</code></pre>
-
-<p>两个样本集的均值都是3。接着，我们计算每个值与均值之间的差值，观察这些偏差数据：</p>
-
+</code></pre><p>两个样本集的均值都是3。接着，我们计算每个值与均值之间的差值，观察这些偏差数据：</p>
 <pre><code>A: (1-3),(2-3),(3-3),(4-3),(5-3)
 B: (2-3),(3-3),(3-3),(3-3),(4-3)
-</code></pre>
-
-<p>从距离的角度，我们在坐标图上做体现。数据集中的每个点跟均值的距离：</p>
-
-<p><img src="https://i.loli.net/2019/10/14/7jfzAxvJT1eol3O.png" alt="distance.png" /></p>
-
+</code></pre><p>从距离的角度，我们在坐标图上做体现。数据集中的每个点跟均值的距离：</p>
+<p><img src="https://i.loli.net/2019/10/14/7jfzAxvJT1eol3O.png" alt="distance.png"></p>
 <p>从图上可以看出，数据集A这些点是向外分散的，或者说有较大的变异。数据集B的点都集中在均值3附近，没有太大的变异。</p>
-
 <p>下一步是要将这些有关偏差的信息精简为变异程度的数字度量。距离平均值的偏差有正数，也有负数，取平均值是不可取的。那么，消除偏差的负号的方法就是进行平方处理。</p>
-
 <p>在统计学上，一个含有n个测量值的样本的样本方差等于距离均值的偏差平方和除以(n-1)。</p>
-
 <p>方差的单位是具体单位的平方，我们再对数据做一次处理，计算样本方差的平方根。即标准差。最后，我们通过标准差认为样本值到均值之前的“典型”距离。</p>
-
 <p>在整个过程中，我们通过抽象，最终使用标准差来表示样本的变异性。需要注意的是，计算样本方差的时候，分母是<code>n-1</code>而不是<code>n</code>，主要是因为在使用了<code>n</code>后，会降低总体方差。</p>
-
 <p>参考文章：</p>
-
 <ol>
 <li><a href="https://book.douban.com/subject/26410924/">商务与经济统计学</a></li>
 </ol>
 
-    </article>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/%E7%BB%9F%E8%AE%A1/" rel="tag">统计</a>
+		</li>
+	</ul>
 </div>
+		</footer>
+	</article>
+</main>
 
 
-        
-<nav role="navigation" class="bottom-menu">
-    
 
-    
-        <a href="/blog">back</a>
-        
-    
 
-    
-</p>
-</nav>
-
-    </main>
-    
-    <footer class="container footer"></footer>
-    
-    
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 渐行渐远.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
 </body>
-
 </html>

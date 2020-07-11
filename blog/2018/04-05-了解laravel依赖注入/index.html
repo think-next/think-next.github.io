@@ -1,76 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" lang="en">
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Hugo-Primer theme&#39;s example site">
-<title>
-    了解Laravel依赖注入 - 渐行渐远
-</title>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.min.ea2156633063385371d7a4d9db559868e643a3885ab887da32f7ea8a1e05ee11.css" integrity="sha256-6iFWYzBjOFNx16TZ21WYaOZDo4hauIfaMvfqih4F7hE=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
-                 role="img" viewBox="0 0 24 24" focusable="false">
-                <title>Product</title>
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-            </svg>
-        </a>
-
-        
-        <a class="py-2 d-none d-md-inline-block" href="/blog">我的博客</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/greatperson">向大神学习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">刻意练习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">今日计划</a>
-        
-    </div>
-</nav>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-<script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="了解Laravel依赖注入"/>
-<meta name="twitter:description" content="随笔 突然想了解一下Laravel，然后发现：它没有我想象的那么简单，很多的调用都找不到入口。加载view的逻辑，看了很长时间，还是没有搞明白"/>
-
-<meta property="og:title" content="了解Laravel依赖注入" />
-<meta property="og:description" content="随笔 突然想了解一下Laravel，然后发现：它没有我想象的那么简单，很多的调用都找不到入口。加载view的逻辑，看了很长时间，还是没有搞明白" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://neojos.com/blog/2018/04-05-%E4%BA%86%E8%A7%A3laravel%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" />
-<meta property="article:published_time" content="2018-04-05T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-04-05T00:00:00&#43;00:00"/>
-
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>了解Laravel依赖注入 - 渐行渐远</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -82,189 +25,129 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-    
-
-    
-    
-    
-    <title>
-        
-        了解Laravel依赖注入
-        
-    </title>
 </head>
-
-<body>
-
-    
-    
-    <header class="text-center container">
-        <h1 class="mb-4 mt-2">了解Laravel依赖注入</h1>
-    </header>
-    
-    <main class="wrap">
-        
-<div class="container">
-    <aside role="complementary">
-        <div class="tag-container">
-            
-            
-            <span class="tag">
-                <a href="/tags/php/" class="badge badge-success">
-                    php
-                </a>
-            </span>
-            
-            
-        </div>
-        <div class="float-right badge badge-light">04-05-2018 &#183; 2543 words</div>
-    </aside>
-    <hr />
-    <article role="article">
-        
-
-<h2 id="随笔">随笔</h2>
-
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">渐行渐远</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">了解Laravel依赖注入</h1>
+			
+		</header><div class="content post__content clearfix">
+			<h2 id="随笔">随笔</h2>
 <p>突然想了解一下<code>Laravel</code>，然后发现：它没有我想象的那么简单，很多的调用都找不到入口。加载<code>view</code>的逻辑，看了很长时间，还是没有搞明白：一个值传递的参数，怎么好好的就变了呢？下面都是看别的的文章的总结，我还要继续完善，直到搞清楚这个<code>view</code>是怎么实现的。</p>
-
 <p>看了两篇文章，介绍了如何使用<a href="https://xdebug.org/"><code>xdebug</code></a>断点调试<code>php</code>及测试性能。作为了解<code>Laravel</code>的必要工具，也介绍进来。</p>
-
 <ol>
 <li><a href="https://www.sitepoint.com/install-xdebug-phpstorm-vagrant/"><code>How to Install Xdebug with PHPStorm and Vagrant</code></a></li>
 <li><a href="https://www.sitepoint.com/debugging-and-profiling-php-with-xdebug/"><code>Debugging and Profiling PHP with Xdebug</code></a></li>
 </ol>
-
 <h2 id="概要">概要</h2>
-
 <p>使用<code>use Illuminate\Container\Container;</code>作为参考的例子。</p>
-
 <p>可以浏览原创：<a href="https://segmentfault.com/a/1190000011560253#articleHeader4">Laravel Container (容器) 深入理解 (下)</a>。</p>
-
 <p>摘抄<code>Laravel</code></p>
-
 <blockquote>
 <p>The Laravel service container is a powerful tool for managing class dependencies and performing dependency injection.</p>
 </blockquote>
-
 <p>通过<code>config/app.php</code>可以查看<code>Laravel</code>的<code>Service container</code>。<code>Service</code>下的<code>register</code>便是用来创建<code>binding</code>的。通过<code>php artisan make:provider CustomServiceProvider</code>创建自定义的<code>ServiceProvider</code>。</p>
-
 <blockquote>
 <p>There is no need to bind classes into the container if they do not depend on any interfaces. The container does not need to be instructed on how to build these objects, since it can automatically resolve these objects using reflection.</p>
 </blockquote>
-
 <h2 id="type-hint"><code>type hint</code></h2>
-
 <p>对于<code>type hint</code>类型的注入。比如<code>MyContainer</code>构造函数注入：<code>public function __construct(AnotherClass $dependency)</code>，在构造函数中声明了依赖类。当我们直接使用<code>Container</code>去创建该对象时，<code>Container</code>会尝试为我们自动创建<code>AnotherClass</code>这个类。</p>
-
 <p>比如我们执行<code>$container-&gt;make(MyContainer::class);</code>，框架自动帮我们去创建<code>AnotherClass</code>类。<strong>但</strong>也需要看<code>AnotherClass</code>类是否配合。如果<code>AnotherClass</code>的构造函数中指定了传递参数<code>__construct($a, $b)</code>，但在<code>make</code>函数中我们并没有传递任何参数，此时系统并不能帮我们自动生成。而是会报错：</p>
-
 <p><code>make</code>主要来创建该实例类，等同于代码中的<code>new</code>。</p>
-
 <pre><code>Illuminate\Contracts\Container\BindingResolutionException : 
 Unresolvable dependency resolving [Parameter #0 [ &lt;required&gt; $a ]] in class Tests\Unit\AnotherClass
 
-</code></pre>
-
-<h2 id="binding-interfaces-to-implementations"><code>Binding Interfaces to Implementations</code></h2>
-
+</code></pre><h2 id="binding-interfaces-to-implementations"><code>Binding Interfaces to Implementations</code></h2>
 <blockquote>
 <p>代码开发中，上层模型不应该依赖底层，两者应该依赖抽象。抽象不应该依赖具体，具体却应该依赖抽象。</p>
 </blockquote>
-
 <p>例子也请参照这篇文章：<a href="https://www.sitepoint.com/dependency-injection-laravels-ioc/"><code>Dependency Injection</code></a>。简要介绍：<code>FileSessionStorage</code>和<code>MySqlSessionStorage</code>实现了<code>SessionStorage</code>接口。之后在<code>SimpleAuth</code>构造函数中注入依赖<code>public function __construct(SessionStorage $session )</code>。</p>
-
 <p>当我们调用<code>make</code>去实例化<code>SimpleAuth</code>对象时，因为仅通过接口，无法明确实例化一个实现该接口的类。系统报错：</p>
-
 <pre><code>Illuminate\Contracts\Container\BindingResolutionException : 
 Target [Tests\Unit\SessionStorage] is not instantiable while building [Tests\Unit\SimpleAuth].
-</code></pre>
-
-<p>解决的办法是<code>Register a binding</code>。明确告诉系统，这个<code>interface</code>去具体实现那个类：<code>$container-&gt;bind( SessionStorage::class, MysqlSessionStorage::class);</code>。</p>
-
+</code></pre><p>解决的办法是<code>Register a binding</code>。明确告诉系统，这个<code>interface</code>去具体实现那个类：<code>$container-&gt;bind( SessionStorage::class, MysqlSessionStorage::class);</code>。</p>
 <p>结合这个例子，绑定之后意味着：通过这个<code>interface</code>，<code>make</code>再也无法创建<code>FileSessionStorage</code>类了。只能更新<code>binding</code>才能切换了。</p>
-
 <h2 id="closure-binding"><code>Closure Binding</code></h2>
-
 <p>方法：<code>bind($abstract, $concrete = null, $shared = false)</code></p>
-
 <p>方法主要是<code>Register a binding</code>，保存了<code>abstract</code>和<code>concrete</code>及<code>shared</code>的对应关系。</p>
-
 <p>内部其实对<code>concrete</code>做了处理：<code>if (! $concrete instanceof Closure){</code>，最终还是会将该<code>concrete</code>转换为一个闭包函数，在框架初始化<code>abstract</code>时调用该闭包函数。</p>
-
 <p>这样设计属于<code>lazily mode</code>，只有当对象对调用时，才会创建对象。具体可以查看<a href="http://php-di.org/doc/php-definitions.html#factories"><code>Factories</code></a>。闭包函数的唯一参数是：<code>Container $container</code>。当实例化对象时，<code>this</code>会被传入：<code>return $concrete($this, $this-&gt;getLastParameterOverride());</code></p>
-
 <h2 id="resolving-callbacks"><code>Resolving Callbacks</code></h2>
-
 <p><code>Container</code>创建完对象之后，执行的回调函数。</p>
-
 <p>方法：<code>resolving($abstract, Closure $callback = null)</code>。</p>
-
 <p><code>Container</code>将回调函数保存到<code>resolvingCallbacks</code>变量中：<code>$this-&gt;resolvingCallbacks[$abstract][] = $callback;</code>，可以创建多个<code>callback</code>回调。</p>
-
 <p>当对象创建完成之后，执行<code>fireResolvingCallbacks($abstract, $object)</code>来调用函数。</p>
-
 <h2 id="extending-a-class"><code>Extending a Class</code></h2>
-
 <p>用来对一个对象进行扩展，可以封装一个类然后返回一个不同的对象 (装饰模式)。代码中<code>$object = $extender($object, $this);</code>负责处理这个逻辑。</p>
-
 <p>方法：<code>extend($abstract, Closure $closure)</code>。</p>
-
 <p>当实例已经存在，直接调用回调函数处理。否则，将<code>Closure</code>存储到成员变量中：<code>$this-&gt;extenders[$abstract][] = $closure;</code></p>
-
 <p>当<code>resolve</code>创建对象成功之后，依次调用<code>extenders</code>中的回调进行处理。所以，回调定义的顺序就显得重要了。而且回调函数最后也必须返回一个正确的对象。</p>
-
 <h2 id="singleton"><code>singleton</code></h2>
-
 <p><code>Container</code>使用<code>instances</code>来存储单例对象，且通过<code>isShared</code>方法来判断是否为单例对象</p>
-
 <p>方法：<code>singleton($abstract, $concrete = null)</code></p>
-
 <p>跟<code>bind</code>方法完全相同，只是明确的将<code>shared</code>参数设置为<code>true</code>。之后，在<code>$this-&gt;bindings[$abstract] = compact('concrete', 'shared');</code>将<code>shared</code>标识保存在<code>binding</code>数组中。</p>
-
 <p>当调用<code>make</code>创建对象之前，首先查看<code>isset($this-&gt;instances[$abstract])</code>是否存在。</p>
-
 <p>方法：<code>instance($abstract, $instance)</code></p>
-
 <p>将已经存在的实例，设置为单例模式。其实就是将该实例保存到<code>instances</code>中：<code>$this-&gt;instances[$abstract] = $instance;</code></p>
-
 <h2 id="arbitrary-binding-names"><code>Arbitrary Binding Names</code></h2>
-
 <p>方法：<code>bind($abstract, $concrete = null, $shared = false)</code></p>
-
 <p>对于<code>abstract</code>可以指定任意的字符串，而不是类/接口名称。但这种情况下不能使用类型提示，并且只能用<code>make()</code> 来获取实例。</p>
-
 <p>方法：<code>alias($abstract, $alias)</code></p>
-
 <p>给一个类型指定一个别名。该方法操作两个变量<code>aliases</code>，<code>abstractAliases</code>。具体如下：<code>$this-&gt;aliases[$alias] = $abstract; $this-&gt;abstractAliases[$abstract][] = $alias;</code></p>
-
 <p>可以看出：别名唯一对应一个类型，类型可以对应多个别名。</p>
-
 <h2 id="contextual-binding"><code>Contextual Binding</code></h2>
-
 <p>参照：<a href="https://segmentfault.com/a/1190000011560253#articleHeader19">传送门</a></p>
 
-    </article>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/php/" rel="tag">php</a>
+		</li>
+	</ul>
 </div>
+		</footer>
+	</article>
+</main>
 
 
-        
-<nav role="navigation" class="bottom-menu">
-    
 
-    
-        <a href="/blog">back</a>
-        
-    
 
-    
-</p>
-</nav>
-
-    </main>
-    
-    <footer class="container footer"></footer>
-    
-    
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 渐行渐远.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
 </body>
-
 </html>

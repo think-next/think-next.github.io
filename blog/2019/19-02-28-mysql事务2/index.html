@@ -1,76 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" lang="en">
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Hugo-Primer theme&#39;s example site">
-<title>
-    MySQL事务（2） - 渐行渐远
-</title>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.min.ea2156633063385371d7a4d9db559868e643a3885ab887da32f7ea8a1e05ee11.css" integrity="sha256-6iFWYzBjOFNx16TZ21WYaOZDo4hauIfaMvfqih4F7hE=" crossorigin="anonymous" media="screen">
-
-
-
-
-
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
-                 role="img" viewBox="0 0 24 24" focusable="false">
-                <title>Product</title>
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
-            </svg>
-        </a>
-
-        
-        <a class="py-2 d-none d-md-inline-block" href="/blog">我的博客</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/greatperson">向大神学习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">刻意练习</a>
-        
-        <a class="py-2 d-none d-md-inline-block" href="/index">今日计划</a>
-        
-    </div>
-</nav>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-<script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="MySQL事务（2）"/>
-<meta name="twitter:description" content="花繁柳密能拨开方见手段，风狂雨骤时可立定才是脚跟。 引言 在MySQL处理事务的过程中，遇到如下报错： Error 1205: Lock wait timeout exceeded; try restarting transaction 结合日志信息，很快的定位"/>
-
-<meta property="og:title" content="MySQL事务（2）" />
-<meta property="og:description" content="花繁柳密能拨开方见手段，风狂雨骤时可立定才是脚跟。 引言 在MySQL处理事务的过程中，遇到如下报错： Error 1205: Lock wait timeout exceeded; try restarting transaction 结合日志信息，很快的定位" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://neojos.com/blog/2019/19-02-28-mysql%E4%BA%8B%E5%8A%A12/" />
-<meta property="article:published_time" content="2019-02-28T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-02-28T00:00:00&#43;00:00"/>
-
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>MySQL事务（2） - 渐行渐远</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -82,62 +25,40 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-    
-
-    
-    
-    
-    <title>
-        
-        MySQL事务（2）
-        
-    </title>
 </head>
-
-<body>
-
-    
-    
-    <header class="text-center container">
-        <h1 class="mb-4 mt-2">MySQL事务（2）</h1>
-    </header>
-    
-    <main class="wrap">
-        
-<div class="container">
-    <aside role="complementary">
-        <div class="tag-container">
-            
-            
-            <span class="tag">
-                <a href="/tags/transaction/" class="badge badge-success">
-                    transaction
-                </a>
-            </span>
-            
-            
-        </div>
-        <div class="float-right badge badge-light">02-28-2019 &#183; 922 words</div>
-    </aside>
-    <hr />
-    <article role="article">
-        
-
-<blockquote>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">渐行渐远</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">MySQL事务（2）</h1>
+			
+		</header><div class="content post__content clearfix">
+			<blockquote>
 <p><code>花繁柳密能拨开方见手段，风狂雨骤时可立定才是脚跟。</code></p>
 </blockquote>
-
 <h2 id="引言">引言</h2>
-
 <p>在<code>MySQL</code>处理事务的过程中，遇到如下报错：</p>
-
 <pre><code>Error 1205: Lock wait timeout exceeded; try restarting transaction
-</code></pre>
-
-<p>结合日志信息，很快的定位了问题代码并做了修复，但这个报错却一直存在。观念里，只要等待一段时间，这个错误就应该消失啊，是哪里出问题了？</p>
-
+</code></pre><p>结合日志信息，很快的定位了问题代码并做了修复，但这个报错却一直存在。观念里，只要等待一段时间，这个错误就应该消失啊，是哪里出问题了？</p>
 <h2 id="问题">问题</h2>
-
 <p>代码在执行<code>Begin</code>之后，处理到某个逻辑直接<code>return</code>处理，没有关闭事务导致的。因为<code>SQL</code>操作的记录一直占着锁得不到释放，所以后续对该行记录进行写操作时，就会报这个错误。示例代码如下：</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">notify</span> <span class="o">*</span><span class="nx">Sign</span><span class="p">)</span> <span class="nf">HandleSign</span><span class="p">(</span><span class="nx">ctx</span> <span class="o">*</span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
 
@@ -163,69 +84,66 @@ if (!doNotTrack) {
 		<span class="k">return</span> <span class="nx">err</span>
 	<span class="p">}</span>
 	<span class="nx">ses</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-<span class="p">}</span></code></pre></div>
-<p>问题的关键就在于<code>Begin</code>后，没有执行<code>Rollback</code>或<code>Commit</code>，导致事务没有被关闭。这里特别强调<code>defer close()</code>的作用，下面是文档对<code>Close</code>的注释。</p>
-
+<span class="p">}</span>
+</code></pre></div><p>问题的关键就在于<code>Begin</code>后，没有执行<code>Rollback</code>或<code>Commit</code>，导致事务没有被关闭。这里特别强调<code>defer close()</code>的作用，下面是文档对<code>Close</code>的注释。</p>
 <blockquote>
 <p><code>Close release the connection from pool</code></p>
-
 <p><code>When Close be called, if session is a transaction and do not call Commit or Rollback, then call Rollback</code></p>
 </blockquote>
-
 <h2 id="processlist"><code>PROCESSLIST</code></h2>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SHOW</span> <span class="p">[</span><span class="k">FULL</span><span class="p">]</span> <span class="n">PROCESSLIST</span></code></pre></div>
-<p>使用如上命令，查看是否存在一个线程执行占用了很长的时间，这体现在它<code>Sleep</code>的时间上。果不其然，确实有那么一个，但我忍住没有<code>KILL</code>它。因为我无法确定就是这个线程导致的。</p>
-
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SHOW</span> <span class="p">[</span><span class="k">FULL</span><span class="p">]</span> <span class="n">PROCESSLIST</span>
+</code></pre></div><p>使用如上命令，查看是否存在一个线程执行占用了很长的时间，这体现在它<code>Sleep</code>的时间上。果不其然，确实有那么一个，但我忍住没有<code>KILL</code>它。因为我无法确定就是这个线程导致的。</p>
 <blockquote>
 <p><a href="https://dev.mysql.com/doc/refman/8.0/en/show-processlist.html"><code>SHOW PROCESSLIST</code></a> shows which threads are running. If you have the <a href="https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process"><code>PROCESS</code></a> privilege, you can see all threads. Otherwise, you can see only your own threads (that is, threads associated with the MySQL account that you are using). If you do not use the <code>FULL</code> keyword, only the first 100 characters of each statement are shown in the <code>Info</code> field.</p>
 </blockquote>
-
 <h2 id="show-engine-innodb-status"><code>SHOW ENGINE INNODB STATUS</code></h2>
-
 <blockquote>
 <p><a href="https://dev.mysql.com/doc/refman/8.0/en/show-engine.html"><code>SHOW ENGINE INNODB STATUS</code></a> displays extensive information from the standard <code>InnoDB</code> Monitor about the state of the <code>InnoDB</code> storage engine. For information about the standard monitor and other <code>InnoDB</code> Monitors that provide information about <code>InnoDB</code> processing, see <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-monitors.html">Section 15.16, “InnoDB Monitors”</a>.</p>
 </blockquote>
-
 <p>一上来就引用<a href="https://dev.mysql.com/doc/refman/8.0/en/show-engine.html"><code>SHOW ENGINE Syntax</code></a>也是因为没有接触过这个命令，网上说：当你更新表中的某条记录时，如果一些别的线程对这条记录上了锁，并且执行占用时间较长的话，就会导致你对该条记录的操作超时。</p>
-
 <p>不过非常遗憾，我查看了它输出的结果，并没有显示出这条问题<code>SQL</code>。</p>
-
-<h2 id="innodb-lock-wait-timeout-https-dev-mysql-com-doc-refman-5-7-en-innodb-parameters-html-sysvar-innodb-lock-wait-timeout"><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_lock_wait_timeout"><code>innodb_lock_wait_timeout</code></a></h2>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s1">&#39;innodb_lock_wait_timeout&#39;</span><span class="p">;</span></code></pre></div>
-<p>当事务没有被释放时，后续事务执行失败的等待时间就是由这个设置决定的。当事务访问这条记录超过这个时间还无法获得锁，就会报引言中的错误。</p>
-
+<h2 id="innodb_lock_wait_timeouthttpsdevmysqlcomdocrefman57eninnodb-parametershtmlsysvar_innodb_lock_wait_timeout"><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_lock_wait_timeout"><code>innodb_lock_wait_timeout</code></a></h2>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s1">&#39;innodb_lock_wait_timeout&#39;</span><span class="p">;</span>
+</code></pre></div><p>当事务没有被释放时，后续事务执行失败的等待时间就是由这个设置决定的。当事务访问这条记录超过这个时间还无法获得锁，就会报引言中的错误。</p>
 <blockquote>
 <p>The length of time in seconds an <code>InnoDB</code> <a href="https://dev.mysql.com/doc/refman/5.7/en/glossary.html#glos_transaction">transaction</a> waits for a <a href="https://dev.mysql.com/doc/refman/5.7/en/glossary.html#glos_row_lock">row lock</a> before giving up. The default value is 50 seconds. A transaction that tries to access a row that is locked by another <code>InnoDB</code> transaction waits at most this many seconds for write access to the row before issuing the following error</p>
 </blockquote>
-
 <p>参考文章：</p>
-
 <ol>
 <li><a href="https://stackoverflow.com/questions/5836623/getting-lock-wait-timeout-exceeded-try-restarting-transaction-even-though-im"><code>stackoverflow problem</code></a></li>
 </ol>
 
-    </article>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/transaction/" rel="tag">transaction</a>
+		</li>
+	</ul>
 </div>
+		</footer>
+	</article>
+</main>
 
 
-        
-<nav role="navigation" class="bottom-menu">
-    
 
-    
-        <a href="/blog">back</a>
-        
-    
 
-    
-</p>
-</nav>
-
-    </main>
-    
-    <footer class="container footer"></footer>
-    
-    
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 渐行渐远.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
 </body>
-
 </html>
