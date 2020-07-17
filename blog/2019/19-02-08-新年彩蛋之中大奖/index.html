@@ -11,31 +11,22 @@
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
-	
+	<link rel="stylesheet" href="/css/custom.css">
 	<link rel="shortcut icon" href="/favicon.ico">
 		
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-12345678-0', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
 </head>
 <body class="body">
 	<div class="container container--outer">
 		<header class="header">
 	<div class="container header__container">
 		
-	<div class="logo">
+	<div class="logo logo--mixed">
 		<a class="logo__link" href="/" title="渐行渐远" rel="home">
-			<div class="logo__item logo__text">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/placeholder.png">
+				</div><div class="logo__item logo__text">
 					<div class="logo__title">渐行渐远</div>
-					
+					<div class="logo__tagline">往者不可谏，来者犹可追</div>
 				</div>
 		</a>
 	</div>
@@ -49,231 +40,289 @@ if (!doNotTrack) {
 	<article class="post">
 		<header class="post__header">
 			<h1 class="post__title">新年彩蛋之中大奖</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Neojos</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-02-09T00:00:00Z">2019-02-09</time></div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#生成随机号">生成随机号</a></li>
+<li><a href="#批量生成随机数">批量生成随机数</a></li>
+<li><a href="#存储开奖号码">存储开奖号码</a></li>
+<li><a href="#生成图">生成图</a></li>
+<li><a href="#总结">总结</a></li>
+</ul></li>
+</ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
 			
-		</header><div class="content post__content clearfix">
-			<blockquote>
+
+<blockquote>
 <p><code>2019年计划通过福利彩票发家致富的，可以好好看一看这篇博客。作为新年彩蛋来送给大家，也希望大家能真的中大奖。—— 新年快乐，给每个有梦想的程序员</code></p>
 </blockquote>
+
 <h2 id="生成随机号">生成随机号</h2>
+
 <p>小概率事件也要做的一丝不苟，大家都是程序员，为啥要用别人家写的随机代码。嘎嘎！</p>
+
 <p>双色球蓝号1-12、红号1-33，非常简单，只需保证生成的红号不相互重复就可以，然后就是考虑如何做到真正的<code>随机</code>。</p>
+
 <p>还有一个问题就是如何存储一组号码。首先，分成红区和蓝区两部分，最后一个号约定为蓝号。另外，为了方便存储，我们放弃了将每个数字用符号连接的方式，而是自定义了<code>34进制</code>，用于保证每组号码的长度都是7。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">redBall</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">rune</span><span class="p">{</span>
-	<span class="mi">1</span><span class="p">:</span>  <span class="sc">&#39;1&#39;</span><span class="p">,</span>
-	<span class="mi">2</span><span class="p">:</span>  <span class="sc">&#39;2&#39;</span><span class="p">,</span>
-	<span class="mi">3</span><span class="p">:</span>  <span class="sc">&#39;3&#39;</span><span class="p">,</span>
-	<span class="c1">//......
-</span><span class="c1"></span>	<span class="mi">31</span><span class="p">:</span> <span class="sc">&#39;V&#39;</span><span class="p">,</span>
-	<span class="mi">32</span><span class="p">:</span> <span class="sc">&#39;W&#39;</span><span class="p">,</span>
-	<span class="mi">33</span><span class="p">:</span> <span class="sc">&#39;X&#39;</span><span class="p">,</span>
-<span class="p">}</span>
-<span class="kd">var</span> <span class="nx">redFlip</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">rune</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span>
-	<span class="sc">&#39;1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-	<span class="sc">&#39;2&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-	<span class="sc">&#39;3&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-	<span class="c1">//...
-</span><span class="c1"></span>	<span class="sc">&#39;V&#39;</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span>
-	<span class="sc">&#39;W&#39;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
-	<span class="sc">&#39;X&#39;</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
-<span class="p">}</span>
-</code></pre></div><p>我们提供一个编解码的方法，用于将字符串转换为一组号码。对应的，将一组号码转换为长度为7的字符串。</p>
+
+<pre><code class="language-go">var redBall = map[int]rune{
+	1:  '1',
+	2:  '2',
+	3:  '3',
+	//......
+	31: 'V',
+	32: 'W',
+	33: 'X',
+}
+var redFlip = map[rune]int{
+	'1': 1,
+	'2': 2,
+	'3': 3,
+	//...
+	'V': 31,
+	'W': 32,
+	'X': 33,
+}
+</code></pre>
+
+<p>我们提供一个编解码的方法，用于将字符串转换为一组号码。对应的，将一组号码转换为长度为7的字符串。</p>
+
 <p>随机红号范围控制在<code>1-33</code>，蓝号控制在<code>1-16</code>。所以，我们对当前纳秒进行取余，便可以保证数据的正确。对于去重部分，通过<code>map</code>属性来达到目的，<code>map</code>的<code>key</code>存储生成的随机号，<code>value</code>存储对应的编码。因为<code>map</code>结构读取数据时本身也是随机的，所以在生成红号和蓝号的时候便多生成一部分，最后再取6个红号，1个蓝号。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">TwoColor</span> <span class="kd">struct</span> <span class="p">{</span>
-<span class="p">}</span>
 
-<span class="c1">//encode
-</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">color</span> <span class="o">*</span><span class="nx">TwoColor</span><span class="p">)</span> <span class="nf">Encode</span><span class="p">(</span><span class="nx">origin</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
-	<span class="nx">runes</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">rune</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">origin</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="nx">elem</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">redBall</span><span class="p">[</span><span class="nx">v</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
-			<span class="nx">runes</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">runes</span><span class="p">,</span> <span class="nx">elem</span><span class="p">)</span>
-	<span class="p">}</span>
+<pre><code class="language-go">type TwoColor struct {
+}
 
-	<span class="k">return</span> <span class="nb">string</span><span class="p">(</span><span class="nx">runes</span><span class="p">)</span>
-<span class="p">}</span>
+//encode
+func (color *TwoColor) Encode(origin []int) string {
+	runes := make([]rune, 0)
+	for _, v := range origin {
+		if elem, ok := redBall[v]; ok {
+			runes = append(runes, elem)
+	}
 
-<span class="c1">//decode
-</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">color</span> <span class="o">*</span><span class="nx">TwoColor</span><span class="p">)</span> <span class="nf">Decode</span><span class="p">(</span><span class="nx">origin</span> <span class="kt">string</span><span class="p">)</span> <span class="p">[]</span><span class="kt">int</span> <span class="p">{</span>
-	<span class="nx">result</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">origin</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="nx">elem</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">redFlip</span><span class="p">[</span><span class="nx">v</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
-			<span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">elem</span><span class="p">)</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
+	return string(runes)
+}
 
-	<span class="k">return</span> <span class="nx">result</span>
-<span class="p">}</span>
+//decode
+func (color *TwoColor) Decode(origin string) []int {
+	result := make([]int, 0)
+	for _, v := range origin {
+		if elem, ok := redFlip[v]; ok {
+			result = append(result, elem)
+		}
+	}
 
-<span class="c1">//generate random numbers
-</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">color</span> <span class="o">*</span><span class="nx">TwoColor</span><span class="p">)</span> <span class="nf">GenerateRandom</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
-	<span class="nx">redResult</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">rune</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
-	<span class="k">for</span> <span class="nb">len</span><span class="p">(</span><span class="nx">redResult</span><span class="p">)</span> <span class="p">&lt;</span> <span class="mi">12</span> <span class="p">{</span>
-		<span class="nx">key</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Nanosecond</span><span class="p">()</span><span class="o">%</span><span class="mi">33</span> <span class="o">+</span> <span class="mi">1</span>
-		<span class="nx">redResult</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">=</span> <span class="nx">redBall</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
-	<span class="p">}</span>
+	return result
+}
 
-	<span class="nx">blueBall</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">rune</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-	<span class="k">for</span> <span class="nb">len</span><span class="p">(</span><span class="nx">blueBall</span><span class="p">)</span> <span class="p">&lt;</span> <span class="mi">2</span> <span class="p">{</span>
-		<span class="nx">key</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Nanosecond</span><span class="p">()</span><span class="o">%</span><span class="mi">16</span> <span class="o">+</span> <span class="mi">1</span>
-		<span class="nx">blueBall</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">=</span> <span class="nx">redBall</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
-	<span class="p">}</span>
+//generate random numbers
+func (color *TwoColor) GenerateRandom() string {
+	redResult := make(map[int]rune, 12)
+	for len(redResult) &lt; 12 {
+		key := time.Now().Nanosecond()%33 + 1
+		redResult[key] = redBall[key]
+	}
 
-	<span class="nx">index</span> <span class="o">:=</span> <span class="mi">0</span>
-	<span class="nx">result</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">rune</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
-	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">redBall</span> <span class="p">{</span>
-		<span class="nx">index</span><span class="o">++</span>
-		<span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
-		<span class="k">if</span> <span class="nx">index</span> <span class="o">==</span> <span class="mi">6</span> <span class="p">{</span>
-			<span class="k">break</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">blueBall</span> <span class="p">{</span>
-		<span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
-		<span class="k">break</span>
-	<span class="p">}</span>
+	blueBall := make(map[int]rune, 2)
+	for len(blueBall) &lt; 2 {
+		key := time.Now().Nanosecond()%16 + 1
+		blueBall[key] = redBall[key]
+	}
 
-	<span class="k">return</span> <span class="nb">string</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div><h2 id="批量生成随机数">批量生成随机数</h2>
+	index := 0
+	result := make([]rune, 7)
+	for _, v := range redBall {
+		index++
+		result = append(result, v)
+		if index == 6 {
+			break
+		}
+	}
+	for _, v := range blueBall {
+		result = append(result, v)
+		break
+	}
+
+	return string(result)
+}
+</code></pre>
+
+<h2 id="批量生成随机数">批量生成随机数</h2>
+
 <p>批量生成不重复的随机数，核心就是解决如何存储的问题。每次都得跟之前生成的记录做比较，保证当前生成的记录是不重复的。</p>
+
 <p>之所以有批量生成的需求，首先是为了使生成的记录更随机。其次，试想一下，如果你内存足够大，生成<code>5000W</code>条记录，官方开奖后，看看这<code>5000W</code>会不会中一注。如果这么多都没有中，那真是一件令人伤心的事情啊。</p>
+
 <p>为了简单方便，我们直接将生成的记录存储到本地内存中，这里使用前面讲到的<a href="https://github.com/allegro/bigcache"><code>bigcache</code></a>。我们将生成的记录作为<code>Key</code>，<code>Value</code>不存储实际的值了。</p>
+
 <p><strong>对于<code>ZSet</code></strong>，我们这里只想体现它的唯一属性。只有当记录不存在时才进行存储。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">DBCenter</span> <span class="kd">struct</span> <span class="p">{</span>
-<span class="p">}</span>
 
-<span class="kd">func</span> <span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">DBCenter</span><span class="p">)</span> <span class="nf">ZSet</span><span class="p">(</span><span class="nx">key</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Exists</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
-	<span class="nx">cache</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
-<span class="p">}</span>
+<pre><code class="language-go">type DBCenter struct {
+}
 
-<span class="kd">func</span> <span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">DBCenter</span><span class="p">)</span> <span class="nf">Exists</span><span class="p">(</span><span class="nx">key</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
-	<span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">cache</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">err</span><span class="p">.(</span><span class="o">*</span><span class="nx">bigcache</span><span class="p">.</span><span class="nx">EntryNotFoundError</span><span class="p">);</span> <span class="nx">ok</span> <span class="p">{</span>
-			<span class="k">return</span> <span class="kc">false</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
+func (db *DBCenter) ZSet(key string) {
+	if db.Exists(key) {
+		return
+	}
+	cache.Set(key, nil)
+}
 
-	<span class="k">return</span> <span class="kc">true</span>
-<span class="p">}</span>
+func (db *DBCenter) Exists(key string) bool {
+	_, err := cache.Get(key)
+	if err != nil {
+		if _, ok := err.(*bigcache.EntryNotFoundError); ok {
+			return false
+		}
+	}
 
-<span class="kd">func</span> <span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">DBCenter</span><span class="p">)</span> <span class="nf">Len</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="nx">cache</span><span class="p">.</span><span class="nf">Len</span><span class="p">()</span>
-<span class="p">}</span>
-</code></pre></div><p>批量生成的过程就是一个<code>for</code>循环的过程，并通过<code>Len</code>方法获取当前生成的记录数。</p>
+	return true
+}
+
+func (db *DBCenter) Len() int {
+	return cache.Len()
+}
+</code></pre>
+
+<p>批量生成的过程就是一个<code>for</code>循环的过程，并通过<code>Len</code>方法获取当前生成的记录数。</p>
+
 <h2 id="存储开奖号码">存储开奖号码</h2>
+
 <p>将每期的开奖号码作为下一期的参考，是每个迷信中彩人的执着。</p>
+
 <p>我们选择将每期的中奖号码存储到文件中，实在没有必要使用关系型数据库。在使用过程中，我们不会部署到多台服务器上。这个项目就是在个人电脑上运行设计的，单文件存储足够了。</p>
+
 <p><strong>关于<code>write</code>方法</strong>，写入的内容包括日期和中奖号码，连接符使用了<code>SeparatorData</code>。在打开文件的模式中，我们指定了<code>O_APPEND</code>，将写入追加到文件末尾。这也导致最新的开奖号码出现在文件的末尾。当读取最近几期的开奖号码时，需要定位开始读取的位置。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">const</span> <span class="p">(</span>
-	<span class="nx">FilePath</span>      <span class="p">=</span> <span class="s">&#34;/Users/neojos/src/boredom/data/history.txt&#34;</span>
-	<span class="nx">SeparatorData</span> <span class="p">=</span> <span class="s">&#34;\t&#34;</span>
-<span class="p">)</span>
 
-<span class="kd">type</span> <span class="nx">FileData</span> <span class="kd">struct</span> <span class="p">{</span>
-<span class="p">}</span>
+<pre><code class="language-go">const (
+	FilePath      = &quot;/Users/neojos/src/boredom/data/history.txt&quot;
+	SeparatorData = &quot;\t&quot;
+)
 
-<span class="kd">func</span> <span class="p">(</span><span class="nx">f</span> <span class="o">*</span><span class="nx">FileData</span><span class="p">)</span> <span class="nf">GetLatestHistory</span><span class="p">(</span><span class="nx">limit</span> <span class="kt">int64</span><span class="p">)</span> <span class="p">([]</span><span class="kt">string</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">file</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">OpenFile</span><span class="p">(</span><span class="nx">FilePath</span><span class="p">,</span> <span class="nx">os</span><span class="p">.</span><span class="nx">O_CREATE</span><span class="p">|</span><span class="nx">os</span><span class="p">.</span><span class="nx">O_RDONLY</span><span class="p">,</span> <span class="mo">0755</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
-	<span class="p">}</span>
-	<span class="k">defer</span> <span class="nx">file</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+type FileData struct {
+}
 
-	<span class="nx">info</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">file</span><span class="p">.</span><span class="nf">Stat</span><span class="p">()</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
-	<span class="p">}</span>
+func (f *FileData) GetLatestHistory(limit int64) ([]string, error) {
+	file, err := os.OpenFile(FilePath, os.O_CREATE|os.O_RDONLY, 0755)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
 
-	<span class="nx">rowLength</span> <span class="o">:=</span> <span class="mi">0</span>
-	<span class="nx">scan</span> <span class="o">:=</span> <span class="nx">bufio</span><span class="p">.</span><span class="nf">NewScanner</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span>
-	<span class="k">for</span> <span class="nx">scan</span><span class="p">.</span><span class="nf">Scan</span><span class="p">()</span> <span class="p">{</span>
-		<span class="nx">rowLength</span> <span class="p">=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">scan</span><span class="p">.</span><span class="nf">Text</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1">//&#39;\n&#39;
-</span><span class="c1"></span>		<span class="k">break</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">scan</span><span class="p">.</span><span class="nf">Err</span><span class="p">();</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
-	<span class="p">}</span>
+	info, err := file.Stat()
+	if err != nil {
+		return nil, err
+	}
 
-	<span class="nx">result</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">string</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-	<span class="nx">file</span><span class="p">.</span><span class="nf">Seek</span><span class="p">((</span><span class="nx">info</span><span class="p">.</span><span class="nf">Size</span><span class="p">()</span><span class="o">/</span><span class="nb">int64</span><span class="p">(</span><span class="nx">rowLength</span><span class="p">)</span><span class="o">-</span><span class="nx">limit</span><span class="p">)</span><span class="o">*</span><span class="nb">int64</span><span class="p">(</span><span class="nx">rowLength</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
-	<span class="nx">scan</span> <span class="p">=</span> <span class="nx">bufio</span><span class="p">.</span><span class="nf">NewScanner</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span>
-	<span class="k">for</span> <span class="nx">scan</span><span class="p">.</span><span class="nf">Scan</span><span class="p">()</span> <span class="p">{</span>
-		<span class="nx">tmp</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Split</span><span class="p">(</span><span class="nx">scan</span><span class="p">.</span><span class="nf">Text</span><span class="p">(),</span> <span class="nx">SeparatorData</span><span class="p">)</span>
-		<span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">tmp</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">tmp</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">scan</span><span class="p">.</span><span class="nf">Err</span><span class="p">();</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">result</span><span class="p">,</span> <span class="nx">err</span>
-	<span class="p">}</span>
+	rowLength := 0
+	scan := bufio.NewScanner(file)
+	for scan.Scan() {
+		rowLength = len(scan.Text()) + 1 //'\n'
+		break
+	}
+	if err = scan.Err(); err != nil {
+		return nil, err
+	}
 
-	<span class="nx">reverseResult</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">string</span><span class="p">,</span> <span class="nx">limit</span><span class="p">)</span>
-	<span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">result</span> <span class="p">{</span>
-		<span class="nx">reverseResult</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nx">limit</span><span class="p">)</span><span class="o">-</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">=</span> <span class="nx">v</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="nx">reverseResult</span><span class="p">,</span> <span class="kc">nil</span>
-<span class="p">}</span>
+	result := make([]string, 0)
+	file.Seek((info.Size()/int64(rowLength)-limit)*int64(rowLength), 0)
+	scan = bufio.NewScanner(file)
+	for scan.Scan() {
+		tmp := strings.Split(scan.Text(), SeparatorData)
+		result = append(result, tmp[len(tmp)-1])
+	}
+	if err = scan.Err(); err != nil {
+		return result, err
+	}
 
-<span class="kd">func</span> <span class="p">(</span><span class="nx">f</span> <span class="o">*</span><span class="nx">FileData</span><span class="p">)</span> <span class="nf">Write</span><span class="p">(</span><span class="nx">date</span><span class="p">,</span> <span class="nx">number</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
-	<span class="nx">file</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">OpenFile</span><span class="p">(</span><span class="nx">FilePath</span><span class="p">,</span> <span class="nx">os</span><span class="p">.</span><span class="nx">O_CREATE</span><span class="p">|</span><span class="nx">os</span><span class="p">.</span><span class="nx">O_WRONLY</span><span class="p">|</span><span class="nx">os</span><span class="p">.</span><span class="nx">O_APPEND</span><span class="p">,</span> <span class="mo">0755</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">err</span>
-	<span class="p">}</span>
-	<span class="k">defer</span> <span class="nx">file</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+	reverseResult := make([]string, limit)
+	for i, v := range result {
+		reverseResult[int(limit)-i-1] = v
+	}
+	return reverseResult, nil
+}
 
-	<span class="nx">line</span> <span class="o">:=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s\t%s\n&#34;</span><span class="p">,</span> <span class="nx">date</span><span class="p">,</span> <span class="nx">number</span><span class="p">)</span>
-	<span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">file</span><span class="p">.</span><span class="nf">WriteString</span><span class="p">(</span><span class="nx">line</span><span class="p">)</span>
-	<span class="k">return</span> <span class="nx">err</span>
-<span class="p">}</span>
-</code></pre></div><p><strong><code>GetLatestHistory</code></strong>用于获取最近几期的开奖号码。因为每行写入的长度相同，所以通过计算，可以得出当前文件的行数，并将文件的<code>offset</code>定位到指定的位置，从具体的<code>offset</code>开始读取。另外，因为我们写入的模式是<code>APPEND</code>，所以将获取到的<code>slice</code>再做一次顺序反转，便得到最近几期的开奖记录了。</p>
+func (f *FileData) Write(date, number string) error {
+	file, err := os.OpenFile(FilePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0755)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	line := fmt.Sprintf(&quot;%s\t%s\n&quot;, date, number)
+	_, err = file.WriteString(line)
+	return err
+}
+</code></pre>
+
+<p><strong><code>GetLatestHistory</code></strong>用于获取最近几期的开奖号码。因为每行写入的长度相同，所以通过计算，可以得出当前文件的行数，并将文件的<code>offset</code>定位到指定的位置，从具体的<code>offset</code>开始读取。另外，因为我们写入的模式是<code>APPEND</code>，所以将获取到的<code>slice</code>再做一次顺序反转，便得到最近几期的开奖记录了。</p>
+
 <h2 id="生成图">生成图</h2>
+
 <p>通过<a href="https://github.com/gonum/plot"><code>plot</code></a>来绘制一些简易的图形。将最近的开奖号码作为数据源，来观察数据的走势。虽然确实没啥用处。</p>
+
 <p>这段代码直接运行会<code>panic</code>，因为修改了<code>plot</code>中的部分代码。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Curve</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">elements</span> <span class="p">[][]</span><span class="kt">int</span>
-<span class="p">}</span>
 
-<span class="kd">func</span> <span class="p">(</span><span class="nx">curve</span> <span class="o">*</span><span class="nx">Curve</span><span class="p">)</span> <span class="nf">SetElem</span><span class="p">(</span><span class="nx">input</span> <span class="p">[][]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">curve</span><span class="p">.</span><span class="nx">elements</span> <span class="p">=</span> <span class="nx">input</span>
-<span class="p">}</span>
+<pre><code class="language-go">type Curve struct {
+	elements [][]int
+}
 
-<span class="kd">func</span> <span class="p">(</span><span class="nx">curve</span> <span class="o">*</span><span class="nx">Curve</span><span class="p">)</span> <span class="nf">GetBaseImg</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
-	<span class="nx">pic</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">plot</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">err</span>
-	<span class="p">}</span>
+func (curve *Curve) SetElem(input [][]int) {
+	curve.elements = input
+}
 
-	<span class="nx">pic</span><span class="p">.</span><span class="nx">X</span><span class="p">.</span><span class="nx">Label</span><span class="p">.</span><span class="nx">Text</span> <span class="p">=</span> <span class="s">&#34;ball&#34;</span>
-	<span class="nx">pic</span><span class="p">.</span><span class="nx">Y</span><span class="p">.</span><span class="nx">Label</span><span class="p">.</span><span class="nx">Text</span> <span class="p">=</span> <span class="s">&#34;number&#34;</span>
+func (curve *Curve) GetBaseImg() error {
+	pic, err := plot.New()
+	if err != nil {
+		return err
+	}
 
-	<span class="c1">// Draw a grid behind the data
-</span><span class="c1"></span>	<span class="nx">pic</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="nx">plotter</span><span class="p">.</span><span class="nf">NewGrid</span><span class="p">())</span>
+	pic.X.Label.Text = &quot;ball&quot;
+	pic.Y.Label.Text = &quot;number&quot;
 
-	<span class="nx">customTick</span> <span class="o">:=</span> <span class="nx">commaTicks</span><span class="p">{</span>
-		<span class="nx">CustomTicks</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-	<span class="p">}</span>
-	<span class="nx">pic</span><span class="p">.</span><span class="nx">X</span><span class="p">.</span><span class="nx">Tick</span><span class="p">.</span><span class="nx">Marker</span> <span class="p">=</span> <span class="nx">customTick</span>
+	// Draw a grid behind the data
+	pic.Add(plotter.NewGrid())
 
-	<span class="nx">customTick</span><span class="p">.</span><span class="nx">CustomTicks</span> <span class="p">=</span> <span class="mi">33</span>
-	<span class="nx">pic</span><span class="p">.</span><span class="nx">Y</span><span class="p">.</span><span class="nx">Tick</span><span class="p">.</span><span class="nx">Marker</span> <span class="p">=</span> <span class="nx">customTick</span>
+	customTick := commaTicks{
+		CustomTicks: 7,
+	}
+	pic.X.Tick.Marker = customTick
 
-	<span class="nx">picElem</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">plotter</span><span class="p">.</span><span class="nx">XYer</span><span class="p">)</span>
-	<span class="k">for</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">element</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">elements</span> <span class="p">{</span>
-		<span class="nx">points</span> <span class="o">:=</span> <span class="nx">plotter</span><span class="p">.</span><span class="nx">XYs</span><span class="p">{}</span>
-		<span class="k">for</span> <span class="nx">k</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">element</span> <span class="p">{</span>
-			<span class="nx">points</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">points</span><span class="p">,</span> <span class="nx">plotter</span><span class="p">.</span><span class="nx">XY</span><span class="p">{</span><span class="nx">X</span><span class="p">:</span> <span class="nb">float64</span><span class="p">(</span><span class="nx">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="nx">Y</span><span class="p">:</span> <span class="nb">float64</span><span class="p">(</span><span class="nx">v</span><span class="p">)})</span>
-		<span class="p">}</span>
-		<span class="nx">picElem</span><span class="p">[</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="nx">index</span><span class="p">)]</span> <span class="p">=</span> <span class="nx">points</span>
-	<span class="p">}</span>
+	customTick.CustomTicks = 33
+	pic.Y.Tick.Marker = customTick
 
-	<span class="nx">plotutil</span><span class="p">.</span><span class="nf">AddLinePoints</span><span class="p">(</span><span class="nx">pic</span><span class="p">,</span> <span class="nx">picElem</span><span class="p">)</span>
-	<span class="k">return</span> <span class="nx">pic</span><span class="p">.</span><span class="nf">Save</span><span class="p">(</span><span class="nx">vgsvg</span><span class="p">.</span><span class="nx">DefaultWidth</span><span class="p">,</span> <span class="nx">vgsvg</span><span class="p">.</span><span class="nx">DefaultWidth</span><span class="p">,</span> <span class="s">&#34;base.png&#34;</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div><p>生成的图片如下：</p>
-<p><img src="https://i.loli.net/2019/02/09/5c5eb729854c9.png" alt="pic"></p>
+	picElem := make(map[string]plotter.XYer)
+	for index, element := range curve.elements {
+		points := plotter.XYs{}
+		for k, v := range element {
+			points = append(points, plotter.XY{X: float64(k + 1), Y: float64(v)})
+		}
+		picElem[fmt.Sprintf(&quot;%d&quot;, index)] = points
+	}
+
+	plotutil.AddLinePoints(pic, picElem)
+	return pic.Save(vgsvg.DefaultWidth, vgsvg.DefaultWidth, &quot;base.png&quot;)
+}
+</code></pre>
+
+<p>生成的图片如下：</p>
+
+<p><img src="https://i.loli.net/2019/02/09/5c5eb729854c9.png" alt="pic" /></p>
+
 <h2 id="总结">总结</h2>
+
 <p>项目的代码在<a href="https://github.com/GitHubSi/boredom"><code>boredom</code></a>，代码非常简单。祝大家早日中大奖！</p>
 
 		</div>
@@ -291,7 +340,32 @@ if (!doNotTrack) {
 	</article>
 </main>
 
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Neojos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Neojos</span>
+	</div>
+	<div class="authorbox__description">
+		John Doe&rsquo;s true identity is unknown. Maybe he is a successful blogger or writer. Nobody knows it.
+	</div>
+</div>
 
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2019/19-02-01-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B9%8B%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">垃圾回收之引用计数</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2019/19-02-15-mark-sweep-gc/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">Mark-sweep GC</p>
+		</a>
+	</div>
+</nav>
 
 
 			</div>
@@ -301,12 +375,14 @@ if (!doNotTrack) {
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 渐行渐远.
+			&copy; 2020 John Doe.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>
 </footer>
 	</div>
 <script async defer src="/js/menu.js"></script>
+<script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
 </body>
 </html>

@@ -11,31 +11,22 @@
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
-	
+	<link rel="stylesheet" href="/css/custom.css">
 	<link rel="shortcut icon" href="/favicon.ico">
 		
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-12345678-0', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
 </head>
 <body class="body">
 	<div class="container container--outer">
 		<header class="header">
 	<div class="container header__container">
 		
-	<div class="logo">
+	<div class="logo logo--mixed">
 		<a class="logo__link" href="/" title="渐行渐远" rel="home">
-			<div class="logo__item logo__text">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/placeholder.png">
+				</div><div class="logo__item logo__text">
 					<div class="logo__title">渐行渐远</div>
-					
+					<div class="logo__tagline">往者不可谏，来者犹可追</div>
 				</div>
 		</a>
 	</div>
@@ -49,66 +40,116 @@ if (!doNotTrack) {
 	<article class="post">
 		<header class="post__header">
 			<h1 class="post__title">database package</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Neojos</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-06-03T00:00:00Z">2019-06-03</time></div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#清除无效连接">清除无效连接</a>
+<ul>
+<li><a href="#参考点">参考点</a></li>
+</ul></li>
+<li><a href="#间隔执行">间隔执行</a>
+<ul>
+<li><a href="#参考点-1">参考点</a></li>
+</ul></li>
+<li><a href="#获取连接">获取连接</a>
+<ul>
+<li><a href="#参考点-2">参考点</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
 			
-		</header><div class="content post__content clearfix">
-			<h2 id="清除无效连接">清除无效连接</h2>
+
+<h2 id="清除无效连接">清除无效连接</h2>
+
 <p>在database库下清除过期连接时，使用了如下的代码逻辑。其中freeConn是空闲连接池，d是连接可被重复使用的最长时间，nowFunc返回的是当前时间。最新生成的连接在freeConn的末尾，而清除的过程则是使用最新的、次新的连接依次替换最早过期的、次早过期的连接。</p>
+
 <p>在for循环中直接使用len来获取总计数，在循环体内部将freeConn末尾的值替换首部的值，并将freeConn的len长度减去1。最后还做了<code>i—</code>操作，重复校验了一次。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">expiredSince</span> <span class="o">:=</span> <span class="nf">nowFunc</span><span class="p">().</span><span class="nf">Add</span><span class="p">(</span><span class="o">-</span><span class="nx">d</span><span class="p">)</span>
-<span class="kd">var</span> <span class="nx">closing</span> <span class="p">[]</span><span class="o">*</span><span class="nx">driverConn</span>
-<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">);</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-	<span class="nx">c</span> <span class="o">:=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
-	<span class="k">if</span> <span class="nx">c</span><span class="p">.</span><span class="nx">createdAt</span><span class="p">.</span><span class="nf">Before</span><span class="p">(</span><span class="nx">expiredSince</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">closing</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">closing</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span>
-		<span class="nx">last</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-		<span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">[</span><span class="nx">last</span><span class="p">]</span>
-		<span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">[</span><span class="nx">last</span><span class="p">]</span> <span class="p">=</span> <span class="kc">nil</span>
-		<span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span> <span class="p">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">[:</span><span class="nx">last</span><span class="p">]</span>
-		<span class="nx">i</span><span class="o">--</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><h3 id="参考点">参考点</h3>
+
+<pre><code class="language-go">expiredSince := nowFunc().Add(-d)
+var closing []*driverConn
+for i := 0; i &lt; len(db.freeConn); i++ {
+	c := db.freeConn[i]
+	if c.createdAt.Before(expiredSince) {
+		closing = append(closing, c)
+		last := len(db.freeConn) - 1
+		db.freeConn[i] = db.freeConn[last]
+		db.freeConn[last] = nil
+		db.freeConn = db.freeConn[:last]
+		i--
+	}
+}
+</code></pre>
+
+<h3 id="参考点">参考点</h3>
+
 <p>slice中首部和尾部数据的交换过程，以及每次通过<code>i--</code>达到的重复校验的思路。</p>
+
 <h2 id="间隔执行">间隔执行</h2>
+
 <p>清除无效连接的工作是由一个goroutine在后台完成的，下面是截取的部分代码。for循环内部是处理连接的具体实现。每次清除操作完成后，通过Reset来重置Timer。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">DB</span><span class="p">)</span> <span class="nf">connectionCleaner</span><span class="p">(</span><span class="nx">d</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">const</span> <span class="nx">minInterval</span> <span class="p">=</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span>
 
-	<span class="k">if</span> <span class="nx">d</span> <span class="p">&lt;</span> <span class="nx">minInterval</span> <span class="p">{</span>
-		<span class="nx">d</span> <span class="p">=</span> <span class="nx">minInterval</span>
-	<span class="p">}</span>
-	<span class="nx">t</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">NewTimer</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span>
+<pre><code class="language-go">func (db *DB) connectionCleaner(d time.Duration) {
+	const minInterval = time.Second
 
-	<span class="k">for</span> <span class="p">{</span>
-		<span class="k">select</span> <span class="p">{</span>
-		<span class="k">case</span> <span class="o">&lt;-</span><span class="nx">t</span><span class="p">.</span><span class="nx">C</span><span class="p">:</span>
-		<span class="k">case</span> <span class="o">&lt;-</span><span class="nx">db</span><span class="p">.</span><span class="nx">cleanerCh</span><span class="p">:</span> <span class="c1">// maxLifetime was changed or db was closed.
-</span><span class="c1"></span>		<span class="p">}</span>
+	if d &lt; minInterval {
+		d = minInterval
+	}
+	t := time.NewTimer(d)
 
-		<span class="k">if</span> <span class="nx">d</span> <span class="p">&lt;</span> <span class="nx">minInterval</span> <span class="p">{</span>
-			<span class="nx">d</span> <span class="p">=</span> <span class="nx">minInterval</span>
-		<span class="p">}</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Reset</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><h3 id="参考点-1">参考点</h3>
+	for {
+		select {
+		case &lt;-t.C:
+		case &lt;-db.cleanerCh: // maxLifetime was changed or db was closed.
+		}
+
+		if d &lt; minInterval {
+			d = minInterval
+		}
+		t.Reset(d)
+	}
+}
+</code></pre>
+
+<h3 id="参考点-1">参考点</h3>
+
 <p>学习NewTimer函数的使用，它在声明后仅仅执行一次。通过Reset来重新使他生效。这样可以忽略操作执行的具体时间，每次都在上次操作完成后，间隔固定时间，再执行下一次操作。</p>
+
 <p>还可以对比NewTicker做比较。</p>
+
 <h2 id="获取连接">获取连接</h2>
+
 <p>从freeConn中获取一个缓存的连接，拿到连接之后并将它从freeConn中移除。同时，校验连接是否已经超过最大连接使用时间。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">if</span> <span class="nx">strategy</span> <span class="o">==</span> <span class="nx">cachedOrNewConn</span> <span class="o">&amp;&amp;</span> <span class="nx">numFree</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
-	<span class="nx">conn</span> <span class="o">:=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-	<span class="nb">copy</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">,</span> <span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-	<span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span> <span class="p">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">freeConn</span><span class="p">[:</span><span class="nx">numFree</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-	<span class="nx">conn</span><span class="p">.</span><span class="nx">inUse</span> <span class="p">=</span> <span class="kc">true</span>
-	<span class="nx">db</span><span class="p">.</span><span class="nx">mu</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span>
-	<span class="k">if</span> <span class="nx">conn</span><span class="p">.</span><span class="nf">expired</span><span class="p">(</span><span class="nx">lifetime</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">conn</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">driver</span><span class="p">.</span><span class="nx">ErrBadConn</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="nx">conn</span><span class="p">,</span> <span class="kc">nil</span>
-<span class="p">}</span>
-</code></pre></div><h3 id="参考点-2">参考点</h3>
+
+<pre><code class="language-go">if strategy == cachedOrNewConn &amp;&amp; numFree &gt; 0 {
+	conn := db.freeConn[0]
+	copy(db.freeConn, db.freeConn[1:])
+	db.freeConn = db.freeConn[:numFree-1]
+	conn.inUse = true
+	db.mu.Unlock()
+	if conn.expired(lifetime) {
+		conn.Close()
+		return nil, driver.ErrBadConn
+	}
+	return conn, nil
+}
+</code></pre>
+
+<h3 id="参考点-2">参考点</h3>
+
 <p>使用copy对slice的第一个元素进行移除。同时，通过重新赋值来修改slice的len属性。</p>
 
 		</div>
@@ -126,7 +167,32 @@ if (!doNotTrack) {
 	</article>
 </main>
 
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Neojos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Neojos</span>
+	</div>
+	<div class="authorbox__description">
+		John Doe&rsquo;s true identity is unknown. Maybe he is a successful blogger or writer. Nobody knows it.
+	</div>
+</div>
 
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2019/19-06-11-mongo%E4%B8%ADobjectid/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">mongo中ObjectId</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2019/19-06-06-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%BC%80%E6%94%BE%E5%85%B3%E9%97%AD/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">里氏替换&amp;开放关闭</p>
+		</a>
+	</div>
+</nav>
 
 
 			</div>
@@ -136,12 +202,14 @@ if (!doNotTrack) {
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 渐行渐远.
+			&copy; 2020 John Doe.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>
 </footer>
 	</div>
 <script async defer src="/js/menu.js"></script>
+<script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
 </body>
 </html>
