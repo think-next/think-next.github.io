@@ -7,19 +7,15 @@
 	<title>WebSocket基础开发 - 渐行渐远</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		
-<meta itemprop="name" content="WebSocket基础开发">
+		<meta itemprop="name" content="WebSocket基础开发">
 <meta itemprop="description" content="WebSocket是一种网络通讯协议。在服务器端可以将HTTP请求升级为WebSocket请求。区别于普通的HTTP请求，WebSocket中存在特殊的字段标识：">
-
-
 <meta itemprop="datePublished" content="2018-02-25T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-02-25T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="392">
+<meta itemprop="wordCount" content="393">
 
 
 
 <meta itemprop="keywords" content="protocol," />
-
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
@@ -34,16 +30,38 @@
 	<div class="container header__container">
 		
 	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+		<a class="logo__link" href="/" title="我思故我在" rel="home">
 			<div class="logo__item logo__imagebox">
-					<img class="logo__img" src="/img/placeholder.png">
+					<img class="logo__img" src="/img/headimg.png">
 				</div><div class="logo__item logo__text">
-					<div class="logo__title">渐行渐远</div>
+					<div class="logo__title">我思故我在</div>
 					<div class="logo__tagline">往者不可谏，来者犹可追</div>
 				</div>
 		</a>
 	</div>
-		<div class="divider"></div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog">
+				
+				<span class="menu__text">Blog</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
 	</div>
 </header>
 		<div class="wrapper flex">
@@ -63,26 +81,21 @@
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
 		<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#模拟聊天室">模拟聊天室</a></li>
-<li><a href="#部署websocket集群服务">部署WebSocket集群服务</a>
-<ul>
-<li><a href="#redis的发布-订阅">Redis的发布/订阅</a></li>
-</ul></li>
-<li><a href="#连接断开到重连的数据处理">连接断开到重连的数据处理</a></li>
-<li><a href="#用户与用户间的相互通讯">用户与用户间的相互通讯</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#模拟聊天室">模拟聊天室</a></li>
+    <li><a href="#部署websocket集群服务">部署WebSocket集群服务</a>
+      <ul>
+        <li><a href="#redis的发布订阅">Redis的发布/订阅</a></li>
+      </ul>
+    </li>
+    <li><a href="#连接断开到重连的数据处理">连接断开到重连的数据处理</a></li>
+    <li><a href="#用户与用户间的相互通讯">用户与用户间的相互通讯</a></li>
+  </ul>
 </nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
-			
-
-<p>WebSocket是一种网络通讯协议。在服务器端可以将HTTP请求升级为WebSocket请求。区别于普通的HTTP请求，WebSocket中存在特殊的字段标识：</p>
-
+			<p>WebSocket是一种网络通讯协议。在服务器端可以将HTTP请求升级为WebSocket请求。区别于普通的HTTP请求，WebSocket中存在特殊的字段标识：</p>
 <pre><code>GET /chat HTTP/1.1
 Host: server.example.com
 Upgrade: websocket
@@ -91,18 +104,11 @@ Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==
 Sec-WebSocket-Protocol: chat, superchat
 Sec-WebSocket-Version: 13
 Origin: http://example.com
-</code></pre>
-
-<p>这种协议升级，是在应用层实现的。所以一个服务器本身既可以提供WebSocket服务，也可以提供正常的HTTP服务。</p>
-
+</code></pre><p>这种协议升级，是在应用层实现的。所以一个服务器本身既可以提供WebSocket服务，也可以提供正常的HTTP服务。</p>
 <p>我们下面对服务做区分。<code>/ws</code>负责对外提供WebSocket服务。</p>
-
 <pre><code>http.HandleFunc(&quot;/&quot;, serveForHttp)
 http.HandleFunc(&quot;/ws&quot;, serveForWs)
-</code></pre>
-
-<p>将HTTP请求升级为WebSocket请求,处理连接的读写操作：</p>
-
+</code></pre><p>将HTTP请求升级为WebSocket请求,处理连接的读写操作：</p>
 <pre><code>func serveForWs(w http.ResponseWriter, r *http.Request) {
     if r.Method != &quot;GET&quot; {
         http.Error(w, &quot;Method not allowed&quot;, http.StatusMethodNotAllowed)
@@ -118,10 +124,7 @@ http.HandleFunc(&quot;/ws&quot;, serveForWs)
     go client.write()
 	go client.read()
 }
-</code></pre>
-
-<p><a href="https://godoc.org/github.com/gorilla/websocket#Upgrader.Upgrade">Upgrader</a>负责连接升级，同时指定连接的部分属性。包括<code>ReadBufferSize</code>，<code>WriteBufferSize</code>，<code>CheckOrigin</code>等。<code>Upgrader</code>默认会检查<code>header</code>头中<code>Origin</code>是否有效，如果你要使用这个默认函数的话，需要确保客户端请求头中包含<code>Origin</code>。</p>
-
+</code></pre><p><a href="https://godoc.org/github.com/gorilla/websocket#Upgrader.Upgrade">Upgrader</a>负责连接升级，同时指定连接的部分属性。包括<code>ReadBufferSize</code>，<code>WriteBufferSize </code>，<code>CheckOrigin</code>等。<code>Upgrader</code>默认会检查<code>header</code>头中<code>Origin</code>是否有效，如果你要使用这个默认函数的话，需要确保客户端请求头中包含<code>Origin</code>。</p>
 <pre><code>var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
@@ -129,12 +132,8 @@ http.HandleFunc(&quot;/ws&quot;, serveForWs)
 		return true
 	},
 }
-</code></pre>
-
-<p>具体<a href="http://blog.csdn.net/huwh_/article/details/76383208">请求流程</a>：<code>Client</code>端<code>Dial</code>到<code>Server</code>，<code>Server</code>端<code>Accept</code>这个<code>sock</code>连接后，底层<code>go</code>出一个协程，负责升级成<code>WebSocket</code>协议，进行读写等操作。</p>
-
+</code></pre><p>具体<a href="http://blog.csdn.net/huwh_/article/details/76383208">请求流程</a>：<code>Client</code>端<code>Dial</code>到<code>Server</code>，<code>Server</code>端<code>Accept</code>这个<code>sock</code>连接后，底层<code>go</code>出一个协程，负责升级成<code>WebSocket</code>协议，进行读写等操作。</p>
 <p>从WebSocket中读取数据。WebSocket支持的数据类型有两种，分别是UTF-8编码的文本消息和二进制消息。当读消息异常时，可能是客户端将Sock关闭的原因或者其他，我们需要将它从内存的记录中删除掉。</p>
-
 <pre><code>defer room.hub.unregister &lt;- c
 
 mt, data, err := ws.ReadMessage()
@@ -146,12 +145,8 @@ if err != nil {
     }
     break
 }
-</code></pre>
-
-<p>WebSocket支持三种<a href="https://tools.ietf.org/html/rfc6455#section-5.5.1">控制消息</a>，分别是：<code>close</code>, <code>ping</code>和<code>pong</code>。<code>ping</code>和<code>pong</code>出错时，我们需要<code>close</code>掉连接。<code>ping/pong</code>有效的避免了通讯过程中，因为中间节点问题，导致链接异常的情况。</p>
-
+</code></pre><p>WebSocket支持三种<a href="https://tools.ietf.org/html/rfc6455#section-5.5.1">控制消息</a>，分别是：<code>close</code>, <code>ping</code>和<code>pong</code>。<code>ping</code>和<code>pong</code>出错时，我们需要<code>close</code>掉连接。<code>ping/pong</code>有效的避免了通讯过程中，因为中间节点问题，导致链接异常的情况。</p>
 <p>我们还对所有的写操作，设置了过期时间点。当写操作超时时，链接应该被销毁、关闭。</p>
-
 <pre><code>func ping(ws *websocket.Conn, done chan struct{}) {
     ticker := time.NewTicker(pingPeriod)
     defer ticker.Stop()
@@ -166,20 +161,12 @@ if err != nil {
         }
     }
 }
-</code></pre>
-
-<p>H5并没有提供<code>ping/pong</code>的API，<code>pong</code>是由浏览器发起的。对于<code>pong</code>消息,我们不需要做任何处理。</p>
-
+</code></pre><p>H5并没有提供<code>ping/pong</code>的API，<code>pong</code>是由浏览器发起的。对于<code>pong</code>消息,我们不需要做任何处理。</p>
 <pre><code>c.conn.SetReadDeadline(time.Now().Add(pongWait))
 c.conn.SetPongHandler(func(string) error { c.conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })
-</code></pre>
-
-<p>WebSocket支持UTF-8编码的文本消息、及二进制消息。</p>
-
+</code></pre><p>WebSocket支持UTF-8编码的文本消息、及二进制消息。</p>
 <h2 id="模拟聊天室">模拟聊天室</h2>
-
 <p>在聊天室的应用中，需要保存所有在线用户的连接信息，我们引入<code>room</code>的结构。当用户进入<code>room</code>时，保存连接。当用户离开<code>room</code>时，取消连接。这些数据均保存在内存中。</p>
-
 <pre><code>type room struct {
 	ID         string
 	clients    map[*Client]bool
@@ -193,10 +180,7 @@ type Client struct {
 	conn *websocket.Conn
 	send chan []byte
 }
-</code></pre>
-
-<p>Room主要提供注册、取消注册和广播消息的功能。也是一个后台运行的常驻协程。</p>
-
+</code></pre><p>Room主要提供注册、取消注册和广播消息的功能。也是一个后台运行的常驻协程。</p>
 <pre><code>func (room *Room) Run() {
     for {
     	select {
@@ -219,19 +203,13 @@ type Client struct {
     	}
     }
 }
-</code></pre>
-
-<p>接下来，我们需要管理各个房间。引入<code>Hub</code>的结构，主要负责房间的创建、房间的取消及为指定房间广播消息。</p>
-
+</code></pre><p>接下来，我们需要管理各个房间。引入<code>Hub</code>的结构，主要负责房间的创建、房间的取消及为指定房间广播消息。</p>
 <pre><code>type Hub struct {
 	rooms       map[string]*Room
 	register    chan *Client
 	unregister  chan *Client
 }
-</code></pre>
-
-<p>所有暴露对象的地方，采用单利模式。保证在并发情况下，实例被初始化一次。这里充分利用Go中<code>once.Do</code>仅执行一次的特性，将代码简化到最佳。</p>
-
+</code></pre><p>所有暴露对象的地方，采用单利模式。保证在并发情况下，实例被初始化一次。这里充分利用Go中<code>once.Do</code>仅执行一次的特性，将代码简化到最佳。</p>
 <pre><code>var hub *Hub
 func GetInstance() *Hub {
     once.Do(func() {
@@ -239,22 +217,13 @@ func GetInstance() *Hub {
     })
     return hub 
 }
-</code></pre>
-
-<h2 id="部署websocket集群服务">部署WebSocket集群服务</h2>
-
+</code></pre><h2 id="部署websocket集群服务">部署WebSocket集群服务</h2>
 <p>当WebSocket部署到多台服务器时，同一个房间内的用户就会连接到不同的服务器。所以，每台服务器都只是保存了房间的部分连接。这样可以有效的降低单机负载，及避免单点问题。</p>
-
 <p>当系统决定对某个房间进行<code>广播</code>时，需要保证每台WebSocket服务器同时对该房间的用户进行广播。这涉及到WebSocket服务的水平扩展问题，也可以抽象为：不同服务间该如何通讯？</p>
-
 <p>我们引入<code>pub/sub Broker</code>，用它来负责各个WebSocket服务间的通讯。这样的工具其实很多，比如<code>Redis</code>、<code>NSQ</code>、<code>Kafka</code>等。下面先介绍<code>Redis</code>的发布订阅功能。</p>
-
-<h3 id="redis的发布-订阅">Redis的发布/订阅</h3>
-
+<h3 id="redis的发布订阅">Redis的发布/订阅</h3>
 <p>利用Redis<a href="http://redisbook.readthedocs.io/en/latest/feature/pubsub.html">发布/订阅</a>模式，每台WebSocket服务后台常驻一个协程，用来接收后台发布的消息。Redis订阅后会接收三种类型消息：错误消息、发布的消息及订阅<code>Channel</code>的消息。</p>
-
 <p>采用这种方式会存在丢数据的情况。比如，<code>Client</code>订阅某个<code>Channel</code>后，该连接会一直挂着，等待接收订阅的消息，直到连接超时或异常断开。当连接超时时，我们需要重新发起订阅。但就在这个间隙<code>PUBLISH</code>的数据，永远也找不回来了。我们需要加一个<code>ping/pong</code>检查，以及持久化Redis <code>PUBLISH</code>消息的代码补丁。</p>
-
 <pre><code>psc := redis.PubSubConn{Conn: c}
 if err := psc.Subscribe(redis.Args{}.AddFlat(channels)...); err != nil {
     return err
@@ -288,24 +257,14 @@ go func() {
         }
     }
 }()
-</code></pre>
-
-<h2 id="连接断开到重连的数据处理">连接断开到重连的数据处理</h2>
-
+</code></pre><h2 id="连接断开到重连的数据处理">连接断开到重连的数据处理</h2>
 <p>如果某个时刻，<code>Client</code>突然断开了连接，过了一会又重新连接上了,那么中间推送的数据如何处理？</p>
-
 <p>这涉及是消息的持久化问题，以及消息推送的数据结构。每次推送的数据中都携带当前时间戳信息，当<code>Client</code>重新连接到服务时，需要携带最后一次接受到消息的时间戳。这样服务端只需要推送这段时间内的消息就OK了。</p>
-
 <h2 id="用户与用户间的相互通讯">用户与用户间的相互通讯</h2>
-
 <p>当两个用户连接到同一台服务器上时，实现两者之间的通讯比较容易。但我们引入了WebSocket集群。</p>
-
 <p>我们创建用户和服务器的关联关系，通过用户查找当前所在的服务器。这样通过服务器内存中的MAP映射关系，就可以操作用户的WebSocket连接了。</p>
-
 <p>或许，我们还可以充分利用<code>Pub/Sub</code>的思路。每个<code>Client</code>都订阅一个唯一的<code>Channel</code>，这样可以很轻松的确保两个用户的通讯。哈哈，但还必须要考虑<code>Sub</code>所创建的链接数、文件描述符是否够用、并发。</p>
-
 <p>参考文章：</p>
-
 <blockquote>
 <ol>
 <li><a href="https://github.com/gorilla/websocket/tree/master">websocket repository</a></li>
@@ -333,7 +292,7 @@ go func() {
 
 <div class="authorbox clearfix">
 	<figure class="authorbox__avatar">
-		<img alt="Neojos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+		<img alt="Neojos avatar" src="/img/headimg.png" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
 		<span class="authorbox__name">About Neojos</span>
@@ -385,28 +344,28 @@ go func() {
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/2018/" title="2018">2018</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="Cache">Cache</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="Docker">Docker</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="Git">Git</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="Golang">Golang</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="Http">Http</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="Js">Js</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="Linux">Linux</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="Mongo">Mongo</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="Mq">Mq</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="Mysql">Mysql</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="Net">Net</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="Nginx">Nginx</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="Npm">Npm</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="Pay">Pay</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="Php">Php</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="Protobufs">Protobufs</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="Protocol">Protocol</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="Tcp/Ip">Tcp/Ip</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="cache">cache</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="git">git</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="golang">golang</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="http">http</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="js">js</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="linux">linux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="mongo">mongo</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="MQ">MQ</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="MySQL">MySQL</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="net">net</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="nginx">nginx</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="npm">npm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="pay">pay</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="php">php</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="protobufs">protobufs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="protocol">protocol</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="tcp/ip">tcp/ip</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/think/" title="Think">Think</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="Tools">Tools</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="Transaction">Transaction</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="Translate">Translate</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="tools">tools</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="transaction">transaction</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="translate">translate</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E7%BB%9F%E8%AE%A1/" title="统计">统计</a>
 	</div>
 </div>

@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Nginx on 渐行渐远</title>
+    <title>nginx on 渐行渐远</title>
     <link>https://neojos.com/tags/nginx/</link>
-    <description>Recent content in Nginx on 渐行渐远</description>
+    <description>Recent content in nginx on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 10 Mar 2018 00:00:00 +0000</lastBuildDate>

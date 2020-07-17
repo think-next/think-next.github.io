@@ -7,11 +7,8 @@
 	<title>基于Go的Cron Job实现 - 渐行渐远</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		
-<meta itemprop="name" content="基于Go的Cron Job实现">
+		<meta itemprop="name" content="基于Go的Cron Job实现">
 <meta itemprop="description" content="随风要稳，逆风要浪">
-
-
 <meta itemprop="datePublished" content="2019-03-25T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-03-25T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="126">
@@ -19,7 +16,6 @@
 
 
 <meta itemprop="keywords" content="golang," />
-
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
@@ -34,16 +30,38 @@
 	<div class="container header__container">
 		
 	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+		<a class="logo__link" href="/" title="我思故我在" rel="home">
 			<div class="logo__item logo__imagebox">
-					<img class="logo__img" src="/img/placeholder.png">
+					<img class="logo__img" src="/img/headimg.png">
 				</div><div class="logo__item logo__text">
-					<div class="logo__title">渐行渐远</div>
+					<div class="logo__title">我思故我在</div>
 					<div class="logo__tagline">往者不可谏，来者犹可追</div>
 				</div>
 		</a>
 	</div>
-		<div class="divider"></div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog">
+				
+				<span class="menu__text">Blog</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
 	</div>
 </header>
 		<div class="wrapper flex">
@@ -63,79 +81,61 @@
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
 		<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#timer"><code>timer</code></a></li>
-<li><a href="#ticker"><code>ticker</code></a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#timer"><code>timer</code></a></li>
+    <li><a href="#ticker"><code>ticker</code></a></li>
+  </ul>
 </nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
-			
-
-<blockquote>
+			<blockquote>
 <p><code>随风要稳，逆风要浪</code></p>
 </blockquote>
-
 <h2 id="timer"><code>timer</code></h2>
-
 <blockquote>
 <p>The Timer type represents a single event. When the Timer expires, the current time will be sent on C.</p>
 </blockquote>
-
 <p>下面使用<code>timer</code>实现在固定时间点执行<code>task</code>任务。</p>
-
 <p>处理思路：每次在执行<code>task</code>前，计算<code>当前时间</code>和<code>执行时间点</code>的差值，通过设置<code>timer</code>未来的触发时间来执行任务。在完成本次<code>task</code>之后，重置<code>timer</code>的触发时间，等待下一次执行。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">IntervalPeriod</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span> = <span style="color:#ae81ff">24</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Hour</span>
 
-<pre><code class="language-go">const IntervalPeriod time.Duration = 24 * time.Hour
-
-// 核心函数：在h:m:s的时候执行task任务
-func runningRoutine(hour, minute, second int, task func() error) {
-	ticket := time.NewTimer(GetNextTickDuration(hour, minute, second))
-	for {
-		&lt;-ticket.C
-		if err := task(); err != nil {
+<span style="color:#75715e">// 核心函数：在h:m:s的时候执行task任务
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">runningRoutine</span>(<span style="color:#a6e22e">hour</span>, <span style="color:#a6e22e">minute</span>, <span style="color:#a6e22e">second</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">task</span> <span style="color:#66d9ef">func</span>() <span style="color:#66d9ef">error</span>) {
+	<span style="color:#a6e22e">ticket</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">NewTimer</span>(<span style="color:#a6e22e">GetNextTickDuration</span>(<span style="color:#a6e22e">hour</span>, <span style="color:#a6e22e">minute</span>, <span style="color:#a6e22e">second</span>))
+	<span style="color:#66d9ef">for</span> {
+		<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ticket</span>.<span style="color:#a6e22e">C</span>
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">task</span>(); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
 		}
-		ticket.Reset(GetNextTickDuration(hour, minute, second))
+		<span style="color:#a6e22e">ticket</span>.<span style="color:#a6e22e">Reset</span>(<span style="color:#a6e22e">GetNextTickDuration</span>(<span style="color:#a6e22e">hour</span>, <span style="color:#a6e22e">minute</span>, <span style="color:#a6e22e">second</span>))
 	}
 }
 
-// 获取Task执行的时间
-func GetNextTickDuration(hour, minute, second int) time.Duration {
-	nextTick := time.Date(time.Now().Year(), time.Now().Month(), time.Now().Day(),
-		hour, minute, second, 0, time.Local)
-	if !nextTick.After(time.Now()) {
-		nextTick = nextTick.Add(IntervalPeriod)
+<span style="color:#75715e">// 获取Task执行的时间
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetNextTickDuration</span>(<span style="color:#a6e22e">hour</span>, <span style="color:#a6e22e">minute</span>, <span style="color:#a6e22e">second</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span> {
+	<span style="color:#a6e22e">nextTick</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Date</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">Year</span>(), <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">Month</span>(), <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">Day</span>(),
+		<span style="color:#a6e22e">hour</span>, <span style="color:#a6e22e">minute</span>, <span style="color:#a6e22e">second</span>, <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Local</span>)
+	<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">nextTick</span>.<span style="color:#a6e22e">After</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>()) {
+		<span style="color:#a6e22e">nextTick</span> = <span style="color:#a6e22e">nextTick</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#a6e22e">IntervalPeriod</span>)
 	}
 
-	return nextTick.Sub(time.Now())
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">nextTick</span>.<span style="color:#a6e22e">Sub</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>())
 }
-</code></pre>
-
-<h2 id="ticker"><code>ticker</code></h2>
-
+</code></pre></div><h2 id="ticker"><code>ticker</code></h2>
 <p>ticker只要定义完成，从此刻开始计时，不需要任何其他的操作，每隔固定时间都会触发。</p>
-
-<pre><code class="language-go">func simulateCronByInterval(interval time.Duration, task func()) {
-	ticker := time.NewTicker(interval)
-	defer func() {
-		ticker.Stop()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">simulateCronByInterval</span>(<span style="color:#a6e22e">interval</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>, <span style="color:#a6e22e">task</span> <span style="color:#66d9ef">func</span>()) {
+	<span style="color:#a6e22e">ticker</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">NewTicker</span>(<span style="color:#a6e22e">interval</span>)
+	<span style="color:#66d9ef">defer</span> <span style="color:#66d9ef">func</span>() {
+		<span style="color:#a6e22e">ticker</span>.<span style="color:#a6e22e">Stop</span>()
 	}()
 
-	for {
-		&lt;-ticker.C:
-			task()
+	<span style="color:#66d9ef">for</span> {
+		<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ticker</span>.<span style="color:#a6e22e">C</span>:
+			<span style="color:#a6e22e">task</span>()
 	}
 }
-</code></pre>
-
-<hr />
-
+</code></pre></div><hr>
 <p>参考文章：</p>
-
 <ol>
 <li><a href="https://stackoverflow.com/questions/19549199/golang-implementing-a-cron-executing-tasks-at-a-specific-time">Golang: Implementing a cron / executing tasks at a specific time</a></li>
 </ol>
@@ -157,7 +157,7 @@ func GetNextTickDuration(hour, minute, second int) time.Duration {
 
 <div class="authorbox clearfix">
 	<figure class="authorbox__avatar">
-		<img alt="Neojos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+		<img alt="Neojos avatar" src="/img/headimg.png" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
 		<span class="authorbox__name">About Neojos</span>
@@ -209,28 +209,28 @@ func GetNextTickDuration(hour, minute, second int) time.Duration {
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/2018/" title="2018">2018</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="Cache">Cache</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="Docker">Docker</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="Git">Git</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="Golang">Golang</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="Http">Http</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="Js">Js</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="Linux">Linux</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="Mongo">Mongo</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="Mq">Mq</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="Mysql">Mysql</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="Net">Net</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="Nginx">Nginx</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="Npm">Npm</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="Pay">Pay</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="Php">Php</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="Protobufs">Protobufs</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="Protocol">Protocol</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="Tcp/Ip">Tcp/Ip</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="cache">cache</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="git">git</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="golang">golang</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="http">http</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="js">js</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="linux">linux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="mongo">mongo</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="MQ">MQ</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="MySQL">MySQL</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="net">net</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="nginx">nginx</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="npm">npm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="pay">pay</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="php">php</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="protobufs">protobufs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="protocol">protocol</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="tcp/ip">tcp/ip</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/think/" title="Think">Think</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="Tools">Tools</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="Transaction">Transaction</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="Translate">Translate</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="tools">tools</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="transaction">transaction</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="translate">translate</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E7%BB%9F%E8%AE%A1/" title="统计">统计</a>
 	</div>
 </div>

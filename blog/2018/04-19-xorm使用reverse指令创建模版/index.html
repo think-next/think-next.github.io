@@ -7,11 +7,8 @@
 	<title>xorm使用reverse指令创建模版 - 渐行渐远</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		
-<meta itemprop="name" content="xorm使用reverse指令创建模版">
+		<meta itemprop="name" content="xorm使用reverse指令创建模版">
 <meta itemprop="description" content="这只能算作一次小的功能介绍">
-
-
 <meta itemprop="datePublished" content="2018-04-19T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-04-19T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="36">
@@ -19,7 +16,6 @@
 
 
 <meta itemprop="keywords" content="golang," />
-
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
@@ -34,16 +30,38 @@
 	<div class="container header__container">
 		
 	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+		<a class="logo__link" href="/" title="我思故我在" rel="home">
 			<div class="logo__item logo__imagebox">
-					<img class="logo__img" src="/img/placeholder.png">
+					<img class="logo__img" src="/img/headimg.png">
 				</div><div class="logo__item logo__text">
-					<div class="logo__title">渐行渐远</div>
+					<div class="logo__title">我思故我在</div>
 					<div class="logo__tagline">往者不可谏，来者犹可追</div>
 				</div>
 		</a>
 	</div>
-		<div class="divider"></div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog">
+				
+				<span class="menu__text">Blog</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
 	</div>
 </header>
 		<div class="wrapper flex">
@@ -62,41 +80,24 @@
 <div class="post__toc toc">
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
-		
+		<nav id="TableOfContents"></nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
 			<p>这只能算作一次小的功能介绍</p>
-
 <p>结合我们使用过的<code>go</code>数据操作类的库，执行的逻辑基本都是：将数据库返回的数据，转换成我们提前声明的结构体对象，然后返回。</p>
-
 <p>今天要介绍的就是如何自动创建每个<code>table</code>对应的结构体。</p>
-
 <p>查看 <a href="http://xorm.io/docs/">xorm tool</a>的介绍：</p>
-
 <pre><code>xorm reverse mysql root:@/xorm_test?charset=utf8 templates/goxorm
-</code></pre>
-
-<p>初看这个介绍，让我费了一段时间才理解。你可以在命令行查看它的具体含义：</p>
-
+</code></pre><p>初看这个介绍，让我费了一段时间才理解。你可以在命令行查看它的具体含义：</p>
 <pre><code>xorm help reverse
-</code></pre>
-
-<p>命令中<code>templates/goxorm</code>其实是<code>xorm</code>提供好的模版路径。我错误的理解成了：执行命令生成结果的存储路径。</p>
-
+</code></pre><p>命令中<code>templates/goxorm</code>其实是<code>xorm</code>提供好的模版路径。我错误的理解成了：执行命令生成结果的存储路径。</p>
 <pre><code>tmplPath          Template dir for generated. the default templates dir has provide 1 template
-</code></pre>
-
-<p>其次就是<code>mysql</code>的连接语句：一般来说，都是这样写的：</p>
-
+</code></pre><p>其次就是<code>mysql</code>的连接语句：一般来说，都是这样写的：</p>
 <pre><code>username:pwd@ip:port/db?charset=utf8
-</code></pre>
-
-<p>但是使用上述方式却无法正常执行命令，正确的方式是：</p>
-
+</code></pre><p>但是使用上述方式却无法正常执行命令，正确的方式是：</p>
 <pre><code>xorm reverse &quot;username:pwd@tcp(ip:port)/db?charset=utf&quot; templates/goxorm 
 </code></pre>
-
 		</div>
 		<footer class="post__footer">
 			
@@ -114,7 +115,7 @@
 
 <div class="authorbox clearfix">
 	<figure class="authorbox__avatar">
-		<img alt="Neojos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+		<img alt="Neojos avatar" src="/img/headimg.png" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
 		<span class="authorbox__name">About Neojos</span>
@@ -166,28 +167,28 @@
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/2018/" title="2018">2018</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="Cache">Cache</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="Docker">Docker</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="Git">Git</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="Golang">Golang</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="Http">Http</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="Js">Js</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="Linux">Linux</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="Mongo">Mongo</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="Mq">Mq</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="Mysql">Mysql</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="Net">Net</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="Nginx">Nginx</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="Npm">Npm</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="Pay">Pay</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="Php">Php</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="Protobufs">Protobufs</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="Protocol">Protocol</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="Tcp/Ip">Tcp/Ip</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="cache">cache</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="git">git</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="golang">golang</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="http">http</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="js">js</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="linux">linux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="mongo">mongo</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="MQ">MQ</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="MySQL">MySQL</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="net">net</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="nginx">nginx</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="npm">npm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="pay">pay</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="php">php</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="protobufs">protobufs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="protocol">protocol</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="tcp/ip">tcp/ip</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/think/" title="Think">Think</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="Tools">Tools</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="Transaction">Transaction</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="Translate">Translate</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="tools">tools</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="transaction">transaction</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="translate">translate</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E7%BB%9F%E8%AE%A1/" title="统计">统计</a>
 	</div>
 </div>

@@ -7,19 +7,15 @@
 	<title>mongo中hint的使用 - 渐行渐远</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		
-<meta itemprop="name" content="mongo中hint的使用">
+		<meta itemprop="name" content="mongo中hint的使用">
 <meta itemprop="description" content="mongo官方文档对hint的解释如下：">
-
-
 <meta itemprop="datePublished" content="2019-11-13T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-11-13T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="145">
+<meta itemprop="wordCount" content="146">
 
 
 
 <meta itemprop="keywords" content="mongo," />
-
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
@@ -34,16 +30,38 @@
 	<div class="container header__container">
 		
 	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+		<a class="logo__link" href="/" title="我思故我在" rel="home">
 			<div class="logo__item logo__imagebox">
-					<img class="logo__img" src="/img/placeholder.png">
+					<img class="logo__img" src="/img/headimg.png">
 				</div><div class="logo__item logo__text">
-					<div class="logo__title">渐行渐远</div>
+					<div class="logo__title">我思故我在</div>
 					<div class="logo__tagline">往者不可谏，来者犹可追</div>
 				</div>
 		</a>
 	</div>
-		<div class="divider"></div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog">
+				
+				<span class="menu__text">Blog</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
 	</div>
 </header>
 		<div class="wrapper flex">
@@ -62,51 +80,32 @@
 <div class="post__toc toc">
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
-		
+		<nav id="TableOfContents"></nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
 			<p><code>mongo</code>官方文档对<code>hint</code>的解释如下：</p>
-
 <blockquote>
 <p>The $hint operator forces the query optimizer to use a specific index to fulfill the query. Specify the index either by the index name or by document.</p>
 </blockquote>
-
 <p><code>hint</code>的命令行用法：</p>
-
 <pre><code>db.users.find().hint()
-</code></pre>
-
-<p><code>mongo</code>中使用<code>explain</code>来确定查询使用的索引方案，对比<code>explain</code>的结果，可以反向校验<code>hint</code>的使用。<code>explain</code>的命令行用法:</p>
-
+</code></pre><p><code>mongo</code>中使用<code>explain</code>来确定查询使用的索引方案，对比<code>explain</code>的结果，可以反向校验<code>hint</code>的使用。<code>explain</code>的命令行用法:</p>
 <pre><code>db.collection.explain()
-</code></pre>
-
-<p><code>github.com/globalsign/mgo</code>下对<code>hint</code>方法的注释如下：</p>
-
-<pre><code class="language-go">// Hint will include an explicit &quot;hint&quot; in the query to force the server
-// to use a specified index, potentially improving performance in some
-// situations.  The provided parameters are the fields that compose the
-// key of the index to be used.  For details on how the indexKey may be
-// built, see the EnsureIndex method.
-</code></pre>
-
-<p><code>hint</code>参数列表是用作索引的字段，更多细节请参考<code>EnsureIndex</code>方法。</p>
-
+</code></pre><p><code>github.com/globalsign/mgo</code>下对<code>hint</code>方法的注释如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Hint will include an explicit &#34;hint&#34; in the query to force the server
+</span><span style="color:#75715e">// to use a specified index, potentially improving performance in some
+</span><span style="color:#75715e">// situations.  The provided parameters are the fields that compose the
+</span><span style="color:#75715e">// key of the index to be used.  For details on how the indexKey may be
+</span><span style="color:#75715e">// built, see the EnsureIndex method.
+</span></code></pre></div><p><code>hint</code>参数列表是用作索引的字段，更多细节请参考<code>EnsureIndex</code>方法。</p>
 <pre><code>// To obtain an index with a descending order,
 // the field name should be prefixed by a dash 
-</code></pre>
-
-<p>组合索引</p>
-
+</code></pre><p>组合索引</p>
 <p><code>mongo</code>中组合索引称为<a href="https://docs.mongodb.com/manual/indexes/#compound-index"><code>Compound Index</code></a>，不同于<code>MySQL</code>，它可以指定索引字段排列顺序。对于下面的索引：</p>
-
 <pre><code>{ userid: 1, score: -1 }
-</code></pre>
-
-<p>索引先通过<code>userid</code>进行排序，如果<code>user_id</code>相同，再根据<code>score</code>的倒序排。这中形式，对查询有什么影响呢？</p>
-
-<p>从<code>mongo</code>官方文档的例子来尝试理解，索引<code>{ a: 1, b: -1 }</code>支持<code>{ a: 1, b: -1 }</code>和<code>{ a: -1, b: 1 }</code>的排序操作，但不支持<code>{ a: -1, b: -1 }</code>和<code>{a: 1, b: 1}</code>的操作。</p>
+</code></pre><p>索引先通过<code>userid</code>进行排序，如果<code>user_id</code>相同，再根据<code>score</code>的倒序排。这中形式，对查询有什么影响呢？</p>
+<p>从<code>mongo</code>官方文档的例子来尝试理解，索引<code>{ a: 1, b: -1 }</code>支持<code>{ a: 1, b: -1 }</code>和<code>{ a: -1, b: 1 }</code>的排序操作，但不支持<code>{ a: -1, b: -1 } </code>和<code>{a: 1, b: 1}</code>的操作。</p>
 
 		</div>
 		<footer class="post__footer">
@@ -125,7 +124,7 @@
 
 <div class="authorbox clearfix">
 	<figure class="authorbox__avatar">
-		<img alt="Neojos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+		<img alt="Neojos avatar" src="/img/headimg.png" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
 		<span class="authorbox__name">About Neojos</span>
@@ -177,28 +176,28 @@
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/2018/" title="2018">2018</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="Cache">Cache</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="Docker">Docker</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="Git">Git</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="Golang">Golang</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="Http">Http</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="Js">Js</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="Linux">Linux</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="Mongo">Mongo</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="Mq">Mq</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="Mysql">Mysql</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="Net">Net</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="Nginx">Nginx</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="Npm">Npm</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="Pay">Pay</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="Php">Php</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="Protobufs">Protobufs</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="Protocol">Protocol</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="Tcp/Ip">Tcp/Ip</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="cache">cache</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="git">git</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="golang">golang</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="http">http</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="js">js</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="linux">linux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="mongo">mongo</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="MQ">MQ</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="MySQL">MySQL</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="net">net</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="nginx">nginx</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="npm">npm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="pay">pay</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="php">php</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="protobufs">protobufs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="protocol">protocol</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="tcp/ip">tcp/ip</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/think/" title="Think">Think</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="Tools">Tools</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="Transaction">Transaction</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="Translate">Translate</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="tools">tools</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="transaction">transaction</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="translate">translate</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E7%BB%9F%E8%AE%A1/" title="统计">统计</a>
 	</div>
 </div>

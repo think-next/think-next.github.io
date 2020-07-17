@@ -7,18 +7,14 @@
 	<title>Using context cancellation in Go - 渐行渐远</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		
-<meta itemprop="name" content="Using context cancellation in Go">
+		<meta itemprop="name" content="Using context cancellation in Go">
 <meta itemprop="description" content="爱因斯坦曾说过：“每当我的头脑没有问题思考时，我就喜欢将知道的定理重新验证一番，这样做并没有什么目的，只是让自己有机会重新享受一下专心思考的快乐”">
-
-
 
 <meta itemprop="wordCount" content="6">
 
 
 
 <meta itemprop="keywords" content="golang," />
-
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
@@ -33,16 +29,38 @@
 	<div class="container header__container">
 		
 	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+		<a class="logo__link" href="/" title="我思故我在" rel="home">
 			<div class="logo__item logo__imagebox">
-					<img class="logo__img" src="/img/placeholder.png">
+					<img class="logo__img" src="/img/headimg.png">
 				</div><div class="logo__item logo__text">
-					<div class="logo__title">渐行渐远</div>
+					<div class="logo__title">我思故我在</div>
 					<div class="logo__tagline">往者不可谏，来者犹可追</div>
 				</div>
 		</a>
 	</div>
-		<div class="divider"></div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog">
+				
+				<span class="menu__text">Blog</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
 	</div>
 </header>
 		<div class="wrapper flex">
@@ -59,14 +77,13 @@
 <div class="post__toc toc">
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
-		
+		<nav id="TableOfContents"></nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
 			<blockquote>
 <p>爱因斯坦曾说过：“每当我的头脑没有问题思考时，我就喜欢将知道的定理重新验证一番，这样做并没有什么目的，只是让自己有机会重新享受一下专心思考的快乐”</p>
 </blockquote>
-
 <p>文章地址：<a href="https://note.youdao.com/ynoteshare1/index.html?id=824223bbebb6855c45692f70448dec35&amp;type=note"><code>Using context cancellation in Go</code></a></p>
 
 		</div>
@@ -86,7 +103,7 @@
 
 <div class="authorbox clearfix">
 	<figure class="authorbox__avatar">
-		<img alt="Neojos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+		<img alt="Neojos avatar" src="/img/headimg.png" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
 		<span class="authorbox__name">About Neojos</span>
@@ -132,28 +149,28 @@
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/2018/" title="2018">2018</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="Cache">Cache</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="Docker">Docker</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="Git">Git</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="Golang">Golang</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="Http">Http</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="Js">Js</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="Linux">Linux</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="Mongo">Mongo</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="Mq">Mq</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="Mysql">Mysql</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="Net">Net</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="Nginx">Nginx</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="Npm">Npm</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="Pay">Pay</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="Php">Php</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="Protobufs">Protobufs</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="Protocol">Protocol</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="Tcp/Ip">Tcp/Ip</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="cache">cache</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="git">git</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="golang">golang</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="http">http</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="js">js</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="linux">linux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="mongo">mongo</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="MQ">MQ</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="MySQL">MySQL</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="net">net</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="nginx">nginx</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="npm">npm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="pay">pay</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="php">php</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="protobufs">protobufs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="protocol">protocol</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="tcp/ip">tcp/ip</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/think/" title="Think">Think</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="Tools">Tools</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="Transaction">Transaction</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="Translate">Translate</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="tools">tools</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="transaction">transaction</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="translate">translate</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E7%BB%9F%E8%AE%A1/" title="统计">统计</a>
 	</div>
 </div>

@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Net on 渐行渐远</title>
+    <title>net on 渐行渐远</title>
     <link>https://neojos.com/tags/net/</link>
-    <description>Recent content in Net on 渐行渐远</description>
+    <description>Recent content in net on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 08 Dec 2019 00:00:00 +0000</lastBuildDate>
@@ -71,7 +71,7 @@
       <pubDate>Fri, 06 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>https://neojos.com/blog/2018/07-06-mitmproxy%E4%BD%BF%E7%94%A8/</guid>
-      <description>介绍一款非常好用的抓包工具，官网地址：https://www.</description>
+      <description>介绍一款非常好用的抓包工具，官网地址：https://www.mitmproxy.org。实际上，在调试苹果IAP支付时，始终没有抓成功过，反而因为设置了代理，导致苹果沙盒用户无法成功支付。它名字的全拼是Man-in-the-middle-proxy，代表中间人攻击。</description>
     </item>
     
     <item>
@@ -80,7 +80,7 @@
       <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>https://neojos.com/blog/2018/06-15-time_wait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/</guid>
-      <description>版本：0.</description>
+      <description>版本：0.01</description>
     </item>
     
   </channel>

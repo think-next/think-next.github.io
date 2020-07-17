@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Golang on 渐行渐远</title>
+    <title>golang on 渐行渐远</title>
     <link>https://neojos.com/tags/golang/</link>
-    <description>Recent content in Golang on 渐行渐远</description>
+    <description>Recent content in golang on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 12 Nov 2019 00:00:00 +0000</lastBuildDate>
@@ -224,7 +224,7 @@
       <pubDate>Mon, 03 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>https://neojos.com/blog/2018/09-03-sync.once/</guid>
-      <description>草稿0.</description>
+      <description>草稿0.0</description>
     </item>
     
     <item>

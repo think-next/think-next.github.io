@@ -7,11 +7,8 @@
 	<title>IP Routing - 渐行渐远</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		
-<meta itemprop="name" content="IP Routing">
+		<meta itemprop="name" content="IP Routing">
 <meta itemprop="description" content="假设你在跟小米公司对接服务，那你有没有好奇过：自家的服务器是如何找到小米公司的服务器的。为了安全，公司的服务器可都是在内网的，用户是无法直接访问到的。好好了解一下Ip Routing，它可以给你部分答案。">
-
-
 <meta itemprop="datePublished" content="2018-08-04T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-08-04T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="63">
@@ -19,7 +16,6 @@
 
 
 <meta itemprop="keywords" content="tcp/ip,net," />
-
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
@@ -34,16 +30,38 @@
 	<div class="container header__container">
 		
 	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+		<a class="logo__link" href="/" title="我思故我在" rel="home">
 			<div class="logo__item logo__imagebox">
-					<img class="logo__img" src="/img/placeholder.png">
+					<img class="logo__img" src="/img/headimg.png">
 				</div><div class="logo__item logo__text">
-					<div class="logo__title">渐行渐远</div>
+					<div class="logo__title">我思故我在</div>
 					<div class="logo__tagline">往者不可谏，来者犹可追</div>
 				</div>
 		</a>
 	</div>
-		<div class="divider"></div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog">
+				
+				<span class="menu__text">Blog</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
 	</div>
 </header>
 		<div class="wrapper flex">
@@ -63,66 +81,48 @@
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
 		<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#概述">概述</a></li>
-<li><a href="#routing-table"><code>Routing Table</code></a>
-<ul>
-<li><a href="#了解-falgs-参数">了解<code>Falgs</code>参数：</a></li>
-<li><a href="#路由查询的顺序">路由查询的顺序：</a></li>
-</ul></li>
-<li><a href="#host-unreachable"><code>Host unreachable</code></a></li>
-<li><a href="#icmp-redirect-error"><code>ICMP Redirect Error</code></a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#routing-table"><code>Routing Table</code></a>
+      <ul>
+        <li><a href="#了解falgs参数">了解<code>Falgs</code>参数：</a></li>
+        <li><a href="#路由查询的顺序">路由查询的顺序：</a></li>
+      </ul>
+    </li>
+    <li><a href="#host-unreachable"><code>Host unreachable</code></a></li>
+    <li><a href="#icmp-redirect-error"><code>ICMP Redirect Error</code></a></li>
+  </ul>
 </nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
-			
-
-<p>假设你在跟小米公司对接服务，那你有没有好奇过：自家的服务器是如何找到小米公司的服务器的。为了安全，公司的服务器可都是在内网的，用户是无法直接访问到的。好好了解一下Ip Routing，它可以给你部分答案。</p>
-
+			<p>假设你在跟小米公司对接服务，那你有没有好奇过：自家的服务器是如何找到小米公司的服务器的。为了安全，公司的服务器可都是在内网的，用户是无法直接访问到的。好好了解一下Ip Routing，它可以给你部分答案。</p>
 <h2 id="概述">概述</h2>
-
 <p>当主机<code>IP(Network)</code>层收到一个<code>datagram</code>后，它首先会检查<code>datagram</code>的目标主机是不是自己。如果是，那么它会将<code>datagram</code>发送给其他协议处理。如果不是，它便检查自己是否被配置作为一个路由。如果是，它将按照规则将<code>datagram</code>继续传递。否则，默默的把<code>datagram</code>丢掉。</p>
-
 <p>所有<code>routing</code>提供的<code>IP</code>地址，都假设下一个<code>hop</code>是离目标地址最近的。在<code>datagram</code>传递的过程中，我们会修改<code>link-layer</code>的地址为下一个<code>hop</code>的地址，而<code>Destination IP</code>一般是不做修改的。</p>
-
 <h2 id="routing-table"><code>Routing Table</code></h2>
-
 <p>在命令行执行 <code>netstat -rn</code>，查看系统的<code>routing table</code>。</p>
-
 <pre><code># 展示结果做了修改，非真实值
 
 neojos@BJ ~ $ netstat -rn
 Kernel IP routing table
 Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
 140.168.0.0     10.3.206.240   255.255.0.0     UG        0 0          0 eth0
-</code></pre>
-
-<h3 id="了解-falgs-参数">了解<code>Falgs</code>参数：</h3>
-
+</code></pre><h3 id="了解falgs参数">了解<code>Falgs</code>参数：</h3>
 <ol>
 <li><code>U</code>  表示当前路由是在使用的</li>
 <li><code>G</code>  表示路由到一个<code>gateway</code>。如果没有设置该<code>flag</code>，则表示跟<code>Destination</code>是直接连接的。</li>
 <li><code>H</code>  表示路由到一个主机地址。如果没有设置该<code>flag</code>，则<code>Destination</code>是一个网络地址。</li>
 <li><code>D</code>  表示路由是通过<code>ICMP Redirect</code>设置的。一般来说，<code>Redirect</code>设置的<code>route</code>都是主机地址。</li>
 </ol>
-
 <h3 id="路由查询的顺序">路由查询的顺序：</h3>
-
 <ol>
 <li>查找匹配的主机地址</li>
 <li>查找匹配的网络地址</li>
 <li>查找<code>default</code>的路由。</li>
 </ol>
-
 <h2 id="host-unreachable"><code>Host unreachable</code></h2>
-
 <p>当<code>route</code>没有找到<code>destination</code>时，<code>Destination Host Unreachable</code>的错误会返回给源主机。你可以通过<code>ping</code>路由表中配置错误的<code>destination host address</code>来查看。</p>
-
 <h2 id="icmp-redirect-error"><code>ICMP Redirect Error</code></h2>
 
 		</div>
@@ -145,7 +145,7 @@ Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
 
 <div class="authorbox clearfix">
 	<figure class="authorbox__avatar">
-		<img alt="Neojos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+		<img alt="Neojos avatar" src="/img/headimg.png" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
 		<span class="authorbox__name">About Neojos</span>
@@ -197,28 +197,28 @@ Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/2018/" title="2018">2018</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="Cache">Cache</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="Docker">Docker</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="Git">Git</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="Golang">Golang</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="Http">Http</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="Js">Js</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="Linux">Linux</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="Mongo">Mongo</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="Mq">Mq</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="Mysql">Mysql</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="Net">Net</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="Nginx">Nginx</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="Npm">Npm</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="Pay">Pay</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="Php">Php</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="Protobufs">Protobufs</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="Protocol">Protocol</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="Tcp/Ip">Tcp/Ip</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="cache">cache</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="git">git</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="golang">golang</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="http">http</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="js">js</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="linux">linux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="mongo">mongo</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="MQ">MQ</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="MySQL">MySQL</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="net">net</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="nginx">nginx</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="npm">npm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="pay">pay</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="php">php</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="protobufs">protobufs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="protocol">protocol</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="tcp/ip">tcp/ip</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/think/" title="Think">Think</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="Tools">Tools</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="Transaction">Transaction</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="Translate">Translate</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="tools">tools</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="transaction">transaction</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="translate">translate</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E7%BB%9F%E8%AE%A1/" title="统计">统计</a>
 	</div>
 </div>

@@ -7,11 +7,8 @@
 	<title>Protobufs在Logstash中的应用 - 渐行渐远</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		
-<meta itemprop="name" content="Protobufs在Logstash中的应用">
+		<meta itemprop="name" content="Protobufs在Logstash中的应用">
 <meta itemprop="description" content="ELK 分别是Elasticsearch、Logstash、Kibana技术栈的结合。主要解决的问题在于：系统服务器多，日志数据分散难以查找，日志数据量大，查询速度慢，或者不够实时。">
-
-
 <meta itemprop="datePublished" content="2018-01-30T20:10:33&#43;00:00" />
 <meta itemprop="dateModified" content="2018-01-30T20:10:33&#43;00:00" />
 <meta itemprop="wordCount" content="181">
@@ -19,7 +16,6 @@
 
 
 <meta itemprop="keywords" content="protobufs," />
-
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
@@ -34,16 +30,38 @@
 	<div class="container header__container">
 		
 	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+		<a class="logo__link" href="/" title="我思故我在" rel="home">
 			<div class="logo__item logo__imagebox">
-					<img class="logo__img" src="/img/placeholder.png">
+					<img class="logo__img" src="/img/headimg.png">
 				</div><div class="logo__item logo__text">
-					<div class="logo__title">渐行渐远</div>
+					<div class="logo__title">我思故我在</div>
 					<div class="logo__tagline">往者不可谏，来者犹可追</div>
 				</div>
 		</a>
 	</div>
-		<div class="divider"></div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog">
+				
+				<span class="menu__text">Blog</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
 	</div>
 </header>
 		<div class="wrapper flex">
@@ -63,76 +81,51 @@
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
 		<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#如何写logstash的编码器">如何写Logstash的编码器</a></li>
-<li><a href="#获取protobufs">获取protobufs</a></li>
-<li><a href="#安装插件">安装插件</a></li>
-<li><a href="#创建ruby版本的protobufs文件">创建Ruby版本的protobufs文件</a></li>
-<li><a href="#logstash配置">Logstash配置</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#如何写logstash的编码器">如何写Logstash的编码器</a></li>
+        <li><a href="#获取protobufs">获取protobufs</a></li>
+        <li><a href="#安装插件">安装插件</a></li>
+        <li><a href="#创建ruby版本的protobufs文件">创建Ruby版本的protobufs文件</a></li>
+        <li><a href="#logstash配置">Logstash配置</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
-			
-
-<blockquote>
+			<blockquote>
 <p>ELK 分别是Elasticsearch、Logstash、Kibana技术栈的结合。主要解决的问题在于：系统服务器多，日志数据分散难以查找，日志数据量大，查询速度慢，或者不够实时。</p>
 </blockquote>
-
 <p>在trivago，我们主要依靠ELK来处理日志。我们通过使用Kafaka，将服务器的访问日志、错误日志、性能基准数据及各种各样的诊断日志，传递给<a href="https://www.elastic.co/products/logstash">Logstash</a>，Logstash处理之后将日志存放到Elasticsearch。在数据传输中，我们更倾向使用<a href="https://developers.google.com/protocol-buffers/">protocol buffer</a>对数据进行编码。这篇博客，我们将主要介绍如何使用Logstash来解析protobuf编码的消息。
-<img src="http://tech.trivago.com/img/posts/logstash_protobuf/logstash_dataflow.png" alt="image" /></p>
-
+<img src="http://tech.trivago.com/img/posts/logstash_protobuf/logstash_dataflow.png" alt="image"></p>
 <p>相比无模式的JSON格式，Protobufs是一种有模式、高效的数据序列化格式。我们在Kafaka中传输的数据，很多都在使用Protocol Buffers进行编码。它的优势就在于：首先，编码后的数据size明显要比其他的编码方式要小。以JSON编码举例，消息体中不仅仅包含实际数据，还有对应的Key值及很多的中括号。对于文档结构基本不变的数据，传输中包含这些附加信息，是一种资源的浪费。当发送端和接收端对交互的文档结构达成一致后，传输过程还携带这部分结构信息就显得多余。在整个日志处理过程中，该部分消耗的资源是可以被节省下来。其次，消费者所处理的数据，数据格式都是约定好的，完全不会像JSON一样，莫名奇妙多出一个字段。同时，给数据字段的理解产生误解。</p>
-
 <p>不开心的是，Logstash不支持Protobufs编解码。目前，它支持纯文本、JSON格式和其他别的消息格式。因此，我们决定自己实现这部分功能。</p>
-
 <h3 id="如何写logstash的编码器">如何写Logstash的编码器</h3>
-
 <p>写一个Logstash插件是相对容易的，你只需要掌握一些基本的Ruby知识。Ruby语言天生直观简单，你很可能在查看示例代码的同时，就将它学会了。对初学者而言，<a href="http://tryruby.org/">tryruby.org</a>是很不错的学习网站。你需要在电脑上安装Jruby，其他环境部分请参照<a href="https://www.elastic.co/guide/en/logstash/current/_how_to_write_a_logstash_codec_plugin.html">elastic&rsquo;s documentation</a>。当你发现github上codec项目是空的时候，请不要困惑，请你clone <a href="https://github.com/logstash-plugins/logstash-codec-json">JSON codec</a>或<a href="https://github.com/logstash-plugins/logstash-codec-plain">plain codec</a>来代替。通过这个过程，你将会了解到现存的插件是如何开发的，同时，你还能掌握ruby的相关知识。</p>
-
 <p>校验JAVA环境变量是否设置成功</p>
-
 <pre><code>java -version
-</code></pre>
-
-<h3 id="获取protobufs">获取protobufs</h3>
-
+</code></pre><h3 id="获取protobufs">获取protobufs</h3>
 <p>最后，你下载<a href="https://github.com/logstash-plugins/logstash-codec-protobuf">logstash-codec-protobuf</a>插件来解码protobuf消息。要使用这个插件，你需要一些proto文件和使用该proto格式编码的数据。如果这个proto文件已经在别的工程中使用了，那么你就仅仅需要创建proto文件的Ruby版本。如果这完全是一个新的项目，那么你可能需要先从<a href="https://developers.google.com/protocol-buffers/?hl=en">Google&rsquo;s developer pages</a>了解一下proto 文件的语法规则，找到适合你项目的工具链，然后编译proto文件。</p>
-
 <p>列举一个proto文件的sample，使用Go编码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">//使用proto3， 不支持optional选项
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">syntax</span> = <span style="color:#e6db74">&#34;proto3&#34;</span>;
+<span style="color:#f92672">package</span> <span style="color:#a6e22e">tutorial</span>;
 
-<pre><code class="language-go">//使用proto3， 不支持optional选项
-syntax = &quot;proto3&quot;;
-package tutorial;
-
-message Person {
-  string name = 1;
-  int32 id = 2;  // Unique ID number for this person.
-  string email = 3;
+<span style="color:#a6e22e">message</span> <span style="color:#a6e22e">Person</span> {
+  <span style="color:#66d9ef">string</span> <span style="color:#a6e22e">name</span> = <span style="color:#ae81ff">1</span>;
+  <span style="color:#66d9ef">int32</span> <span style="color:#a6e22e">id</span> = <span style="color:#ae81ff">2</span>;  <span style="color:#75715e">// Unique ID number for this person.
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">string</span> <span style="color:#a6e22e">email</span> = <span style="color:#ae81ff">3</span>;
 }
 
-</code></pre>
-
-<h3 id="安装插件">安装插件</h3>
-
+</code></pre></div><h3 id="安装插件">安装插件</h3>
 <p>从<a href="https://rubygems.org/gems/logstash-codec-protobuf">rubygems</a>下载logstash的插件，执行如下命令：</p>
-
 <pre><code>bin/plugin install PATH_TO_DOWNLOADED FILE
-</code></pre>
-
-<p>这个解码器支持Logstash 1.x和2.x版本。</p>
-
+</code></pre><p>这个解码器支持Logstash 1.x和2.x版本。</p>
 <h3 id="创建ruby版本的protobufs文件">创建Ruby版本的protobufs文件</h3>
-
 <p>假设下面的 unicorn.pb文件是我们定义的proto文件，我们将要使用它去解码消息：</p>
-
 <pre><code>package Animal;
 
 message Unicorn {
@@ -147,15 +140,9 @@ message Unicorn {
   optional int64 last_seen = 3;
 
 }
-</code></pre>
-
-<p>下载<a href="https://github.com/codekitchen/ruby-protocol-buffers">ruby-protoc</a>的编译器，然后运行:</p>
-
+</code></pre><p>下载<a href="https://github.com/codekitchen/ruby-protocol-buffers">ruby-protoc</a>的编译器，然后运行:</p>
 <pre><code>ruby-protoc unicorn.pb
-</code></pre>
-
-<p>编译器最终会使用后缀.rb生成一个新的文件，比如unicorn.rb.pb。它就是我们定义的proto文件的Ruby版本。</p>
-
+</code></pre><p>编译器最终会使用后缀.rb生成一个新的文件，比如unicorn.rb.pb。它就是我们定义的proto文件的Ruby版本。</p>
 <pre><code>#!/usr/bin/env ruby
 # Generated by the protocol buffer compiler. DO NOT EDIT!
 
@@ -174,14 +161,9 @@ module Animal
   end
 
 end
-</code></pre>
-
-<p>现在，你需要在配置中指定这个文件的路径，以便Logstash可以知道它。</p>
-
+</code></pre><p>现在，你需要在配置中指定这个文件的路径，以便Logstash可以知道它。</p>
 <h3 id="logstash配置">Logstash配置</h3>
-
 <p>你可以在Logstash的input中使用该编解码器。在下面例子中，我们使用kafka作为数据源。使用protobuf读取消息的配置如下：</p>
-
 <pre><code>kafka
 {
   zk_connect =&gt; &quot;127.0.0.1&quot;
@@ -192,12 +174,8 @@ end
     include_path =&gt; ['/path/to/compiled/protobuf/definitions/unicorn.pb.rb']
   }
 }
-</code></pre>
-
-<p>一个更加复杂的例子，可以参考<a href="https://github.com/trivago/logstash-codec-protobuf">documentation on GitHub</a>。现在启动你的Logstash，让我们看看它是如何工作的。</p>
-
+</code></pre><p>一个更加复杂的例子，可以参考<a href="https://github.com/trivago/logstash-codec-protobuf">documentation on GitHub</a>。现在启动你的Logstash，让我们看看它是如何工作的。</p>
 <p>文章涉及的内容相对较多，原计划将实现的细节最佳到文章结尾，但发现对Logstash和Ruby还是理解的不够，所以决定，后面的文章继续对这篇文章介绍。</p>
-
 <p>原文地址：<a href="http://tech.trivago.com/2016/01/19/logstash_protobuf_codec/">Better Log Parsing with Logstash and Google Protocol Buffers</a></p>
 
 		</div>
@@ -217,7 +195,7 @@ end
 
 <div class="authorbox clearfix">
 	<figure class="authorbox__avatar">
-		<img alt="Neojos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+		<img alt="Neojos avatar" src="/img/headimg.png" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
 		<span class="authorbox__name">About Neojos</span>
@@ -269,28 +247,28 @@ end
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/2018/" title="2018">2018</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="Cache">Cache</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="Docker">Docker</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="Git">Git</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="Golang">Golang</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="Http">Http</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="Js">Js</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="Linux">Linux</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="Mongo">Mongo</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="Mq">Mq</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="Mysql">Mysql</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="Net">Net</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="Nginx">Nginx</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="Npm">Npm</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="Pay">Pay</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="Php">Php</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="Protobufs">Protobufs</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="Protocol">Protocol</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="Tcp/Ip">Tcp/Ip</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="cache">cache</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="git">git</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="golang">golang</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="http">http</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="js">js</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="linux">linux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="mongo">mongo</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="MQ">MQ</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="MySQL">MySQL</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="net">net</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="nginx">nginx</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="npm">npm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="pay">pay</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="php">php</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="protobufs">protobufs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="protocol">protocol</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="tcp/ip">tcp/ip</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/think/" title="Think">Think</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="Tools">Tools</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="Transaction">Transaction</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="Translate">Translate</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="tools">tools</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="transaction">transaction</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="translate">translate</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E7%BB%9F%E8%AE%A1/" title="统计">统计</a>
 	</div>
 </div>

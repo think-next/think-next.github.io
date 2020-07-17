@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tcp/Ip on 渐行渐远</title>
+    <title>tcp/ip on 渐行渐远</title>
     <link>https://neojos.com/tags/tcp/ip/</link>
-    <description>Recent content in Tcp/Ip on 渐行渐远</description>
+    <description>Recent content in tcp/ip on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Nov 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://neojos.com/tags/tcp/ip/index.xml" rel="self" type="application/rss+xml" />
     
@@ -53,7 +52,7 @@
       <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>https://neojos.com/blog/2018/06-15-time_wait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/</guid>
-      <description>版本：0.</description>
+      <description>版本：0.01</description>
     </item>
     
   </channel>

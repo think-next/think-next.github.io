@@ -7,11 +7,8 @@
 	<title>runtime中P的理解 - 渐行渐远</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		
-<meta itemprop="name" content="runtime中P的理解">
+		<meta itemprop="name" content="runtime中P的理解">
 <meta itemprop="description" content="P是在Go1.1引入的概念，初始默认等于CPU核的数量。P只是一个逻辑概念，跟CPU也没有任何关系。">
-
-
 <meta itemprop="datePublished" content="2019-11-11T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-11-11T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="514">
@@ -19,7 +16,6 @@
 
 
 <meta itemprop="keywords" content="golang," />
-
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
@@ -34,16 +30,38 @@
 	<div class="container header__container">
 		
 	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+		<a class="logo__link" href="/" title="我思故我在" rel="home">
 			<div class="logo__item logo__imagebox">
-					<img class="logo__img" src="/img/placeholder.png">
+					<img class="logo__img" src="/img/headimg.png">
 				</div><div class="logo__item logo__text">
-					<div class="logo__title">渐行渐远</div>
+					<div class="logo__title">我思故我在</div>
 					<div class="logo__tagline">往者不可谏，来者犹可追</div>
 				</div>
 		</a>
 	</div>
-		<div class="divider"></div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog">
+				
+				<span class="menu__text">Blog</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
 	</div>
 </header>
 		<div class="wrapper flex">
@@ -62,133 +80,119 @@
 <div class="post__toc toc">
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
-		
+		<nav id="TableOfContents"></nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
 			<p><code>P</code>是在<code>Go1.1</code>引入的概念，初始默认等于<code>CPU</code>核的数量。<code>P</code>只是一个逻辑概念，跟<code>CPU</code>也没有任何关系。</p>
-
 <p>源码<code>go/1.13.4/libexec/src/runtime/proc.go</code>中对<code>P</code>的注释如下：</p>
-
-<pre><code class="language-go">// P - processor, a resource that is required to execute Go code.
-// M must have an associated P to execute Go code, however it can be
-// blocked or in a syscall w/o an associated P.
-</code></pre>
-
-<p>再通过源码<code>go/1.13.4/libexec/src/runtime/runtime2.go</code>来简要了解一下<code>P</code>在调度过程中的状态变化：</p>
-
-<pre><code class="language-go">const (
-    // P status
-    _Pidle = iota
-    _Prunning
-    _Psyscall
-    _Pgcstop
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// P - processor, a resource that is required to execute Go code.
+</span><span style="color:#75715e">// M must have an associated P to execute Go code, however it can be
+</span><span style="color:#75715e">// blocked or in a syscall w/o an associated P.
+</span></code></pre></div><p>再通过源码<code>go/1.13.4/libexec/src/runtime/runtime2.go</code>来简要了解一下<code>P</code>在调度过程中的状态变化：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">const</span> (
+    <span style="color:#75715e">// P status
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">_Pidle</span> = <span style="color:#66d9ef">iota</span>
+    <span style="color:#a6e22e">_Prunning</span>
+    <span style="color:#a6e22e">_Psyscall</span>
+    <span style="color:#a6e22e">_Pgcstop</span>
    
-    // _Pdead means a P is no longer used (GOMAXPROCS shrank). We
-    // reuse Ps if GOMAXPROCS increases. A dead P is mostly
-    // stripped of its resources, though a few things remain
-    // (e.g., trace buffers).
-    _Pdead
+    <span style="color:#75715e">// _Pdead means a P is no longer used (GOMAXPROCS shrank). We
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// reuse Ps if GOMAXPROCS increases. A dead P is mostly
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// stripped of its resources, though a few things remain
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// (e.g., trace buffers).
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">_Pdead</span>
 )
-</code></pre>
-
-<p>通过调整<code>GOMAXPROCS</code>可以控制<code>P</code>的状态，<code>_Pdead</code>专门来说明这一点。</p>
-
+</code></pre></div><p>通过调整<code>GOMAXPROCS</code>可以控制<code>P</code>的状态，<code>_Pdead</code>专门来说明这一点。</p>
 <p>从<code>P</code>的结构体字段中，可以进一步了解<code>P</code>中存储的资源，源码<code>go/1.13.4/libexec/src/runtime/runtime2.go</code>：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">p</span> <span style="color:#66d9ef">struct</span> {
+        <span style="color:#a6e22e">id</span>          <span style="color:#66d9ef">int32</span>
+        <span style="color:#a6e22e">status</span>      <span style="color:#66d9ef">uint32</span> <span style="color:#75715e">// one of pidle/prunning/...
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">link</span>        <span style="color:#a6e22e">puintptr</span>
+        <span style="color:#a6e22e">schedtick</span>   <span style="color:#66d9ef">uint32</span>     <span style="color:#75715e">// incremented on every scheduler call
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">syscalltick</span> <span style="color:#66d9ef">uint32</span>     <span style="color:#75715e">// incremented on every system call
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">sysmontick</span>  <span style="color:#a6e22e">sysmontick</span> <span style="color:#75715e">// last tick observed by sysmon
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">m</span>           <span style="color:#a6e22e">muintptr</span>   <span style="color:#75715e">// back-link to associated m (nil if idle)
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">mcache</span>      <span style="color:#f92672">*</span><span style="color:#a6e22e">mcache</span>
+        <span style="color:#a6e22e">raceprocctx</span> <span style="color:#66d9ef">uintptr</span>
 
-<pre><code class="language-go">type p struct {
-        id          int32
-        status      uint32 // one of pidle/prunning/...
-        link        puintptr
-        schedtick   uint32     // incremented on every scheduler call
-        syscalltick uint32     // incremented on every system call
-        sysmontick  sysmontick // last tick observed by sysmon
-        m           muintptr   // back-link to associated m (nil if idle)
-        mcache      *mcache
-        raceprocctx uintptr
+        <span style="color:#a6e22e">deferpool</span>    [<span style="color:#ae81ff">5</span>][]<span style="color:#f92672">*</span><span style="color:#a6e22e">_defer</span> <span style="color:#75715e">// pool of available defer structs of different sizes (see panic.go)
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">deferpoolbuf</span> [<span style="color:#ae81ff">5</span>][<span style="color:#ae81ff">32</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">_defer</span>
 
-        deferpool    [5][]*_defer // pool of available defer structs of different sizes (see panic.go)
-        deferpoolbuf [5][32]*_defer
+        <span style="color:#75715e">// Cache of goroutine ids, amortizes accesses to runtime·sched.goidgen.
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">goidcache</span>    <span style="color:#66d9ef">uint64</span>
+        <span style="color:#a6e22e">goidcacheend</span> <span style="color:#66d9ef">uint64</span>
 
-        // Cache of goroutine ids, amortizes accesses to runtime·sched.goidgen.
-        goidcache    uint64
-        goidcacheend uint64
+        <span style="color:#75715e">// Queue of runnable goroutines. Accessed without lock.
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">runqhead</span> <span style="color:#66d9ef">uint32</span>
+        <span style="color:#a6e22e">runqtail</span> <span style="color:#66d9ef">uint32</span>
+        <span style="color:#a6e22e">runq</span>     [<span style="color:#ae81ff">256</span>]<span style="color:#a6e22e">guintptr</span>
+        <span style="color:#75715e">// runnext, if non-nil, is a runnable G that was ready&#39;d by
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// the current G and should be run next instead of what&#39;s in
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// runq if there&#39;s time remaining in the running G&#39;s time
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// slice. It will inherit the time left in the current time
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// slice. If a set of goroutines is locked in a
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// communicate-and-wait pattern, this schedules that set as a
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// unit and eliminates the (potentially large) scheduling
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// latency that otherwise arises from adding the ready&#39;d
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// goroutines to the end of the run queue.
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">runnext</span> <span style="color:#a6e22e">guintptr</span>
 
-        // Queue of runnable goroutines. Accessed without lock.
-        runqhead uint32
-        runqtail uint32
-        runq     [256]guintptr
-        // runnext, if non-nil, is a runnable G that was ready'd by
-        // the current G and should be run next instead of what's in
-        // runq if there's time remaining in the running G's time
-        // slice. It will inherit the time left in the current time
-        // slice. If a set of goroutines is locked in a
-        // communicate-and-wait pattern, this schedules that set as a
-        // unit and eliminates the (potentially large) scheduling
-        // latency that otherwise arises from adding the ready'd
-        // goroutines to the end of the run queue.
-        runnext guintptr
-
-        // Available G's (status == Gdead)
-        gFree struct {
-                gList
-                n int32
+        <span style="color:#75715e">// Available G&#39;s (status == Gdead)
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">gFree</span> <span style="color:#66d9ef">struct</span> {
+                <span style="color:#a6e22e">gList</span>
+                <span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int32</span>
         }
 
-        sudogcache []*sudog
-        sudogbuf   [128]*sudog
+        <span style="color:#a6e22e">sudogcache</span> []<span style="color:#f92672">*</span><span style="color:#a6e22e">sudog</span>
+        <span style="color:#a6e22e">sudogbuf</span>   [<span style="color:#ae81ff">128</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">sudog</span>
 
-        tracebuf traceBufPtr
-         // traceSweep indicates the sweep events should be traced.
-        // This is used to defer the sweep start event until a span
-        // has actually been swept.
-        traceSweep bool
-        // traceSwept and traceReclaimed track the number of bytes
-        // swept and reclaimed by sweeping in the current sweep loop.
-        traceSwept, traceReclaimed uintptr
+        <span style="color:#a6e22e">tracebuf</span> <span style="color:#a6e22e">traceBufPtr</span>
+         <span style="color:#75715e">// traceSweep indicates the sweep events should be traced.
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// This is used to defer the sweep start event until a span
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// has actually been swept.
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">traceSweep</span> <span style="color:#66d9ef">bool</span>
+        <span style="color:#75715e">// traceSwept and traceReclaimed track the number of bytes
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// swept and reclaimed by sweeping in the current sweep loop.
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">traceSwept</span>, <span style="color:#a6e22e">traceReclaimed</span> <span style="color:#66d9ef">uintptr</span>
 
-        palloc persistentAlloc // per-P to avoid mutex
+        <span style="color:#a6e22e">palloc</span> <span style="color:#a6e22e">persistentAlloc</span> <span style="color:#75715e">// per-P to avoid mutex
+</span><span style="color:#75715e"></span>
+        <span style="color:#a6e22e">_</span> <span style="color:#66d9ef">uint32</span> <span style="color:#75715e">// Alignment for atomic fields below
+</span><span style="color:#75715e"></span>
+        <span style="color:#75715e">// Per-P GC state
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">gcAssistTime</span>         <span style="color:#66d9ef">int64</span>    <span style="color:#75715e">// Nanoseconds in assistAlloc
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">gcFractionalMarkTime</span> <span style="color:#66d9ef">int64</span>    <span style="color:#75715e">// Nanoseconds in fractional mark worker (atomic)
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">gcBgMarkWorker</span>       <span style="color:#a6e22e">guintptr</span> <span style="color:#75715e">// (atomic)
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">gcMarkWorkerMode</span>     <span style="color:#a6e22e">gcMarkWorkerMode</span>
 
-        _ uint32 // Alignment for atomic fields below
+        <span style="color:#75715e">// gcMarkWorkerStartTime is the nanotime() at which this mark
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// worker started.
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">gcMarkWorkerStartTime</span> <span style="color:#66d9ef">int64</span>
 
-        // Per-P GC state
-        gcAssistTime         int64    // Nanoseconds in assistAlloc
-        gcFractionalMarkTime int64    // Nanoseconds in fractional mark worker (atomic)
-        gcBgMarkWorker       guintptr // (atomic)
-        gcMarkWorkerMode     gcMarkWorkerMode
+        <span style="color:#75715e">// gcw is this P&#39;s GC work buffer cache. The work buffer is
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// filled by write barriers, drained by mutator assists, and
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// disposed on certain GC state transitions.
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">gcw</span> <span style="color:#a6e22e">gcWork</span>
 
-        // gcMarkWorkerStartTime is the nanotime() at which this mark
-        // worker started.
-        gcMarkWorkerStartTime int64
+        <span style="color:#75715e">// wbBuf is this P&#39;s GC write barrier buffer.
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// TODO: Consider caching this in the running G.
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">wbBuf</span> <span style="color:#a6e22e">wbBuf</span>
 
-        // gcw is this P's GC work buffer cache. The work buffer is
-        // filled by write barriers, drained by mutator assists, and
-        // disposed on certain GC state transitions.
-        gcw gcWork
-
-        // wbBuf is this P's GC write barrier buffer.
-        //
-        // TODO: Consider caching this in the running G.
-        wbBuf wbBuf
-
-        runSafePointFn uint32 // if 1, run sched.safePointFn at next safe point
-
-        pad cpu.CacheLinePad
+        <span style="color:#a6e22e">runSafePointFn</span> <span style="color:#66d9ef">uint32</span> <span style="color:#75715e">// if 1, run sched.safePointFn at next safe point
+</span><span style="color:#75715e"></span>
+        <span style="color:#a6e22e">pad</span> <span style="color:#a6e22e">cpu</span>.<span style="color:#a6e22e">CacheLinePad</span>
 }
-</code></pre>
-
-<p>字段中<code>mcache</code>再单独说明一下，源码<code>go/1.13.4/libexec/src/runtime/mcache.go</code>:</p>
-
-<pre><code class="language-go">// Per-thread (in Go, per-P) cache for small objects.
-// No locking needed because it is per-thread (per-P).
-//
-// mcaches are allocated from non-GC'd memory, so any heap pointers
-// must be specially handled.
-//
-//go:notinheap
-</code></pre>
-
-<p><code>mcache</code>反映了对象的创建策略：小对象。</p>
+</code></pre></div><p>字段中<code>mcache</code>再单独说明一下，源码<code>go/1.13.4/libexec/src/runtime/mcache.go</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Per-thread (in Go, per-P) cache for small objects.
+</span><span style="color:#75715e">// No locking needed because it is per-thread (per-P).
+</span><span style="color:#75715e">//
+</span><span style="color:#75715e">// mcaches are allocated from non-GC&#39;d memory, so any heap pointers
+</span><span style="color:#75715e">// must be specially handled.
+</span><span style="color:#75715e">//
+</span><span style="color:#75715e">//go:notinheap
+</span></code></pre></div><p><code>mcache</code>反映了对象的创建策略：小对象。</p>
 
 		</div>
 		<footer class="post__footer">
@@ -207,7 +211,7 @@
 
 <div class="authorbox clearfix">
 	<figure class="authorbox__avatar">
-		<img alt="Neojos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+		<img alt="Neojos avatar" src="/img/headimg.png" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
 		<span class="authorbox__name">About Neojos</span>
@@ -259,28 +263,28 @@
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/2018/" title="2018">2018</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="Cache">Cache</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="Docker">Docker</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="Git">Git</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="Golang">Golang</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="Http">Http</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="Js">Js</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="Linux">Linux</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="Mongo">Mongo</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="Mq">Mq</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="Mysql">Mysql</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="Net">Net</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="Nginx">Nginx</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="Npm">Npm</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="Pay">Pay</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="Php">Php</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="Protobufs">Protobufs</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="Protocol">Protocol</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="Tcp/Ip">Tcp/Ip</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="cache">cache</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="git">git</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="golang">golang</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="http">http</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="js">js</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="linux">linux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="mongo">mongo</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="MQ">MQ</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="MySQL">MySQL</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="net">net</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="nginx">nginx</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="npm">npm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="pay">pay</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="php">php</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="protobufs">protobufs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="protocol">protocol</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="tcp/ip">tcp/ip</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/think/" title="Think">Think</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="Tools">Tools</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="Transaction">Transaction</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="Translate">Translate</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="tools">tools</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="transaction">transaction</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="translate">translate</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E7%BB%9F%E8%AE%A1/" title="统计">统计</a>
 	</div>
 </div>

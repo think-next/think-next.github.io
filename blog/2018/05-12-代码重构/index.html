@@ -7,11 +7,8 @@
 	<title>代码重构 - 渐行渐远</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		
-<meta itemprop="name" content="代码重构">
+		<meta itemprop="name" content="代码重构">
 <meta itemprop="description" content="重构自己的代码是一件幸福的事，重构别人的代码确是一件不幸的事。尤其是被重构代码的人还没有离职的时候&hellip;">
-
-
 <meta itemprop="datePublished" content="2018-05-12T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-05-12T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="45">
@@ -19,7 +16,6 @@
 
 
 <meta itemprop="keywords" content="Think," />
-
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
@@ -34,16 +30,38 @@
 	<div class="container header__container">
 		
 	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+		<a class="logo__link" href="/" title="我思故我在" rel="home">
 			<div class="logo__item logo__imagebox">
-					<img class="logo__img" src="/img/placeholder.png">
+					<img class="logo__img" src="/img/headimg.png">
 				</div><div class="logo__item logo__text">
-					<div class="logo__title">渐行渐远</div>
+					<div class="logo__title">我思故我在</div>
 					<div class="logo__tagline">往者不可谏，来者犹可追</div>
 				</div>
 		</a>
 	</div>
-		<div class="divider"></div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog">
+				
+				<span class="menu__text">Blog</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
 	</div>
 </header>
 		<div class="wrapper flex">
@@ -63,84 +81,56 @@
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
 		<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#临时变量">临时变量</a></li>
-<li><a href="#重复">重复</a></li>
-<li><a href="#多态">多态</a>
-<ul>
-<li><a href="#使用类替换枚举类型">使用类替换枚举类型</a></li>
-</ul></li>
-<li><a href="#访问成员变量">访问成员变量</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#临时变量">临时变量</a></li>
+    <li><a href="#重复">重复</a></li>
+    <li><a href="#多态">多态</a>
+      <ul>
+        <li><a href="#使用类替换枚举类型">使用类替换枚举类型</a></li>
+      </ul>
+    </li>
+    <li><a href="#访问成员变量">访问成员变量</a></li>
+  </ul>
 </nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
-			
-
-<p>重构自己的代码是一件幸福的事，重构别人的代码确是一件不幸的事。尤其是被重构代码的人还没有离职的时候&hellip;</p>
-
+			<p>重构自己的代码是一件幸福的事，重构别人的代码确是一件不幸的事。尤其是被重构代码的人还没有离职的时候&hellip;</p>
 <p>重构切记引入<code>意外复杂度</code>，同时要保证代码功能单一，没有冗余的、意义不明的代码存在。还要保证<code>最简API原则</code>。一个接口好坏，一定要明确区分：它不能再处理更多业务了，还是这些业务已经不能再被剥离了。</p>
-
 <h2 id="临时变量">临时变量</h2>
-
 <p>这是重构的一个重要切入点。方法体内临时变量太多，尤其是一些<code>词不表意</code>的临时变量，理解维护是一件非常痛苦的事情。</p>
-
 <p>是否可以将临时变量直接替换成方法调用，或者将临时变量规整到一个粒度更小的方法体中。</p>
-
 <h2 id="重复">重复</h2>
-
 <p>代码重复，多处<code>copy</code>相同的代码，会让人迫不及待的想要重构。</p>
-
 <p>项目中重复代码过多，会给维护、开发带来很大的不便。一个简单的逻辑修改，但却涉及修改好多处代码，还不能保证涉及的部分都修改了。这确实是一件头疼的事。</p>
-
 <p>所以代码要做好封装：</p>
-
 <ol>
 <li>封装的粒度要把握好。一方面便于测试需要，另一方面通过组合，还能满足其他需求。</li>
 <li>封装要考虑参数如何传递。包括是否应该包含成员变量，参数的个数多少合适。</li>
 <li>封装的方法应该如何归类。怎样可以将方法归到最合适的类。</li>
 </ol>
-
 <h2 id="多态">多态</h2>
-
 <p>当遇到很多的<code>switch</code>或者<code>if-elseif</code>的时候，可以考虑是否能用多态来替换。</p>
-
 <p>比如下面的方法：</p>
-
-<pre><code class="language-go">switch type {
-    case movie.TV:
-    case movie.Release
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">switch</span> <span style="color:#66d9ef">type</span> {
+    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">movie</span>.<span style="color:#a6e22e">TV</span>:
+    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">movie</span>.<span style="color:#a6e22e">Release</span>
 }
-</code></pre>
-
-<p>需要特别提醒：<code>movie</code>包的常量作为判断条件，该方法就最好应该在<code>movie</code>包中。这样当需求变更时，便体现出<code>最小修改</code>原则。</p>
-
+</code></pre></div><p>需要特别提醒：<code>movie</code>包的常量作为判断条件，该方法就最好应该在<code>movie</code>包中。这样当需求变更时，便体现出<code>最小修改</code>原则。</p>
 <p>我们提取一个<code>movieType</code>的抽象类，然后依次对每个类型实现相应的方法，通过声明类型为<code>movieType</code>的成员变量，实现不同类型的统一调用。</p>
-
 <p>这里体现的是<code>模块化</code>的思想。将系统拆分成独立的模块，降低<code>耦合度</code>。这样做的好处：便于扩展。当新的类型添加时，对老的业务来说：零干扰。</p>
-
 <p>但某些情况下，这样的拆分模式可能会有小缺陷。当类型是一个频繁被添加、修改的参数时，这样的模式就显得很冗余。这时可以使用<code>属性拆分</code>。将各个类型中的属性实现多态，也可以称做是一种策略转移。</p>
-
 <h3 id="使用类替换枚举类型">使用类替换枚举类型</h3>
-
 <p>当一个类内含有多个常量枚举类型时，可以考虑将枚举类型的值封装成新的对象。这也是一个切入点。举个例子：</p>
-
-<pre><code class="language-go">// original code
-const(
-    Month int = iota
-    Year int
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// original code
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span>(
+    <span style="color:#a6e22e">Month</span> <span style="color:#66d9ef">int</span> = <span style="color:#66d9ef">iota</span>
+    <span style="color:#a6e22e">Year</span> <span style="color:#66d9ef">int</span>
 ) 
 
-//modified code
-//将这些常量封装到另一个package中
-</code></pre>
-
-<h2 id="访问成员变量">访问成员变量</h2>
-
+<span style="color:#75715e">//modified code
+</span><span style="color:#75715e">//将这些常量封装到另一个package中
+</span></code></pre></div><h2 id="访问成员变量">访问成员变量</h2>
 <p>两个分歧：直接访问<code>VS</code>间接访问。两者均有好处，</p>
 
 		</div>
@@ -160,7 +150,7 @@ const(
 
 <div class="authorbox clearfix">
 	<figure class="authorbox__avatar">
-		<img alt="Neojos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+		<img alt="Neojos avatar" src="/img/headimg.png" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
 		<span class="authorbox__name">About Neojos</span>
@@ -212,28 +202,28 @@ const(
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/2018/" title="2018">2018</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="Cache">Cache</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="Docker">Docker</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="Git">Git</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="Golang">Golang</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="Http">Http</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="Js">Js</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="Linux">Linux</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="Mongo">Mongo</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="Mq">Mq</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="Mysql">Mysql</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="Net">Net</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="Nginx">Nginx</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="Npm">Npm</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="Pay">Pay</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="Php">Php</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="Protobufs">Protobufs</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="Protocol">Protocol</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="Tcp/Ip">Tcp/Ip</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="cache">cache</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="git">git</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="golang">golang</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="http">http</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="js">js</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="linux">linux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="mongo">mongo</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="MQ">MQ</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="MySQL">MySQL</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="net">net</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="nginx">nginx</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="npm">npm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="pay">pay</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="php">php</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="protobufs">protobufs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="protocol">protocol</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="tcp/ip">tcp/ip</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/think/" title="Think">Think</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="Tools">Tools</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="Transaction">Transaction</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="Translate">Translate</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="tools">tools</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="transaction">transaction</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="translate">translate</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E7%BB%9F%E8%AE%A1/" title="统计">统计</a>
 	</div>
 </div>

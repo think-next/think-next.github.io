@@ -7,11 +7,8 @@
 	<title>变异性的数值特征-方差 - 渐行渐远</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		
-<meta itemprop="name" content="变异性的数值特征-方差">
+		<meta itemprop="name" content="变异性的数值特征-方差">
 <meta itemprop="description" content="文章主要介绍通过样本方差来了解数据集变化的原理。">
-
-
 <meta itemprop="datePublished" content="2019-10-14T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-10-14T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="24">
@@ -19,7 +16,6 @@
 
 
 <meta itemprop="keywords" content="统计," />
-
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
@@ -34,16 +30,38 @@
 	<div class="container header__container">
 		
 	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+		<a class="logo__link" href="/" title="我思故我在" rel="home">
 			<div class="logo__item logo__imagebox">
-					<img class="logo__img" src="/img/placeholder.png">
+					<img class="logo__img" src="/img/headimg.png">
 				</div><div class="logo__item logo__text">
-					<div class="logo__title">渐行渐远</div>
+					<div class="logo__title">我思故我在</div>
 					<div class="logo__tagline">往者不可谏，来者犹可追</div>
 				</div>
 		</a>
 	</div>
-		<div class="divider"></div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog">
+				
+				<span class="menu__text">Blog</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
 	</div>
 </header>
 		<div class="wrapper flex">
@@ -62,46 +80,28 @@
 <div class="post__toc toc">
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
-		
+		<nav id="TableOfContents"></nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
 			<p>文章主要介绍通过<code>样本方差</code>来了解数据集变化的原理。</p>
-
 <p>我们对两个数据集做观察，数据集A和数据集B：</p>
-
 <pre><code>A: 1,2,3,4,5
 B: 2,3,3,3,4
-</code></pre>
-
-<p>对于定量数据集，最常用、也最容易理解的集中趋势测度是数据集的算数平均数。类比我们学生年代，经常谈论的班级平均分。那么，我们对数据集A、B做平均数计算：</p>
-
+</code></pre><p>对于定量数据集，最常用、也最容易理解的集中趋势测度是数据集的算数平均数。类比我们学生年代，经常谈论的班级平均分。那么，我们对数据集A、B做平均数计算：</p>
 <pre><code>A: 3
 B: 3
-</code></pre>
-
-<p>两个样本集的均值都是3。接着，我们计算每个值与均值之间的差值，观察这些偏差数据：</p>
-
+</code></pre><p>两个样本集的均值都是3。接着，我们计算每个值与均值之间的差值，观察这些偏差数据：</p>
 <pre><code>A: (1-3),(2-3),(3-3),(4-3),(5-3)
 B: (2-3),(3-3),(3-3),(3-3),(4-3)
-</code></pre>
-
-<p>从距离的角度，我们在坐标图上做体现。数据集中的每个点跟均值的距离：</p>
-
-<p><img src="https://i.loli.net/2019/10/14/7jfzAxvJT1eol3O.png" alt="distance.png" /></p>
-
+</code></pre><p>从距离的角度，我们在坐标图上做体现。数据集中的每个点跟均值的距离：</p>
+<p><img src="https://i.loli.net/2019/10/14/7jfzAxvJT1eol3O.png" alt="distance.png"></p>
 <p>从图上可以看出，数据集A这些点是向外分散的，或者说有较大的变异。数据集B的点都集中在均值3附近，没有太大的变异。</p>
-
 <p>下一步是要将这些有关偏差的信息精简为变异程度的数字度量。距离平均值的偏差有正数，也有负数，取平均值是不可取的。那么，消除偏差的负号的方法就是进行平方处理。</p>
-
 <p>在统计学上，一个含有n个测量值的样本的样本方差等于距离均值的偏差平方和除以(n-1)。</p>
-
 <p>方差的单位是具体单位的平方，我们再对数据做一次处理，计算样本方差的平方根。即标准差。最后，我们通过标准差认为样本值到均值之前的“典型”距离。</p>
-
 <p>在整个过程中，我们通过抽象，最终使用标准差来表示样本的变异性。需要注意的是，计算样本方差的时候，分母是<code>n-1</code>而不是<code>n</code>，主要是因为在使用了<code>n</code>后，会降低总体方差。</p>
-
 <p>参考文章：</p>
-
 <ol>
 <li><a href="https://book.douban.com/subject/26410924/">商务与经济统计学</a></li>
 </ol>
@@ -123,7 +123,7 @@ B: (2-3),(3-3),(3-3),(3-3),(4-3)
 
 <div class="authorbox clearfix">
 	<figure class="authorbox__avatar">
-		<img alt="Neojos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+		<img alt="Neojos avatar" src="/img/headimg.png" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
 		<span class="authorbox__name">About Neojos</span>
@@ -175,28 +175,28 @@ B: (2-3),(3-3),(3-3),(3-3),(4-3)
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/2018/" title="2018">2018</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="Cache">Cache</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="Docker">Docker</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="Git">Git</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="Golang">Golang</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="Http">Http</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="Js">Js</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="Linux">Linux</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="Mongo">Mongo</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="Mq">Mq</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="Mysql">Mysql</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="Net">Net</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="Nginx">Nginx</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="Npm">Npm</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="Pay">Pay</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="Php">Php</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="Protobufs">Protobufs</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="Protocol">Protocol</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="Tcp/Ip">Tcp/Ip</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="cache">cache</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="git">git</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="golang">golang</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="http">http</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="js">js</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="linux">linux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="mongo">mongo</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="MQ">MQ</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="MySQL">MySQL</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="net">net</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="nginx">nginx</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="npm">npm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="pay">pay</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="php">php</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="protobufs">protobufs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="protocol">protocol</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="tcp/ip">tcp/ip</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/think/" title="Think">Think</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="Tools">Tools</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="Transaction">Transaction</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="Translate">Translate</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="tools">tools</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="transaction">transaction</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="translate">translate</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E7%BB%9F%E8%AE%A1/" title="统计">统计</a>
 	</div>
 </div>

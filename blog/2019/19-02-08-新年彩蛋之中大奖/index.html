@@ -7,11 +7,8 @@
 	<title>新年彩蛋之中大奖 - 渐行渐远</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		
-<meta itemprop="name" content="新年彩蛋之中大奖">
+		<meta itemprop="name" content="新年彩蛋之中大奖">
 <meta itemprop="description" content="2019年计划通过福利彩票发家致富的，可以好好看一看这篇博客。作为新年彩蛋来送给大家，也希望大家能真的中大奖。—— 新年快乐，给每个有梦想的程序员">
-
-
 <meta itemprop="datePublished" content="2019-02-09T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-02-09T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="556">
@@ -19,7 +16,6 @@
 
 
 <meta itemprop="keywords" content="golang," />
-
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
@@ -34,16 +30,38 @@
 	<div class="container header__container">
 		
 	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="渐行渐远" rel="home">
+		<a class="logo__link" href="/" title="我思故我在" rel="home">
 			<div class="logo__item logo__imagebox">
-					<img class="logo__img" src="/img/placeholder.png">
+					<img class="logo__img" src="/img/headimg.png">
 				</div><div class="logo__item logo__text">
-					<div class="logo__title">渐行渐远</div>
+					<div class="logo__title">我思故我在</div>
 					<div class="logo__tagline">往者不可谏，来者犹可追</div>
 				</div>
 		</a>
 	</div>
-		<div class="divider"></div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog">
+				
+				<span class="menu__text">Blog</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
 	</div>
 </header>
 		<div class="wrapper flex">
@@ -63,279 +81,240 @@
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
 		<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#生成随机号">生成随机号</a></li>
-<li><a href="#批量生成随机数">批量生成随机数</a></li>
-<li><a href="#存储开奖号码">存储开奖号码</a></li>
-<li><a href="#生成图">生成图</a></li>
-<li><a href="#总结">总结</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#生成随机号">生成随机号</a></li>
+    <li><a href="#批量生成随机数">批量生成随机数</a></li>
+    <li><a href="#存储开奖号码">存储开奖号码</a></li>
+    <li><a href="#生成图">生成图</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
 </nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
-			
-
-<blockquote>
+			<blockquote>
 <p><code>2019年计划通过福利彩票发家致富的，可以好好看一看这篇博客。作为新年彩蛋来送给大家，也希望大家能真的中大奖。—— 新年快乐，给每个有梦想的程序员</code></p>
 </blockquote>
-
 <h2 id="生成随机号">生成随机号</h2>
-
 <p>小概率事件也要做的一丝不苟，大家都是程序员，为啥要用别人家写的随机代码。嘎嘎！</p>
-
 <p>双色球蓝号1-12、红号1-33，非常简单，只需保证生成的红号不相互重复就可以，然后就是考虑如何做到真正的<code>随机</code>。</p>
-
 <p>还有一个问题就是如何存储一组号码。首先，分成红区和蓝区两部分，最后一个号约定为蓝号。另外，为了方便存储，我们放弃了将每个数字用符号连接的方式，而是自定义了<code>34进制</code>，用于保证每组号码的长度都是7。</p>
-
-<pre><code class="language-go">var redBall = map[int]rune{
-	1:  '1',
-	2:  '2',
-	3:  '3',
-	//......
-	31: 'V',
-	32: 'W',
-	33: 'X',
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">redBall</span> = <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">int</span>]<span style="color:#66d9ef">rune</span>{
+	<span style="color:#ae81ff">1</span>:  <span style="color:#e6db74">&#39;1&#39;</span>,
+	<span style="color:#ae81ff">2</span>:  <span style="color:#e6db74">&#39;2&#39;</span>,
+	<span style="color:#ae81ff">3</span>:  <span style="color:#e6db74">&#39;3&#39;</span>,
+	<span style="color:#75715e">//......
+</span><span style="color:#75715e"></span>	<span style="color:#ae81ff">31</span>: <span style="color:#e6db74">&#39;V&#39;</span>,
+	<span style="color:#ae81ff">32</span>: <span style="color:#e6db74">&#39;W&#39;</span>,
+	<span style="color:#ae81ff">33</span>: <span style="color:#e6db74">&#39;X&#39;</span>,
 }
-var redFlip = map[rune]int{
-	'1': 1,
-	'2': 2,
-	'3': 3,
-	//...
-	'V': 31,
-	'W': 32,
-	'X': 33,
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">redFlip</span> = <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">rune</span>]<span style="color:#66d9ef">int</span>{
+	<span style="color:#e6db74">&#39;1&#39;</span>: <span style="color:#ae81ff">1</span>,
+	<span style="color:#e6db74">&#39;2&#39;</span>: <span style="color:#ae81ff">2</span>,
+	<span style="color:#e6db74">&#39;3&#39;</span>: <span style="color:#ae81ff">3</span>,
+	<span style="color:#75715e">//...
+</span><span style="color:#75715e"></span>	<span style="color:#e6db74">&#39;V&#39;</span>: <span style="color:#ae81ff">31</span>,
+	<span style="color:#e6db74">&#39;W&#39;</span>: <span style="color:#ae81ff">32</span>,
+	<span style="color:#e6db74">&#39;X&#39;</span>: <span style="color:#ae81ff">33</span>,
 }
-</code></pre>
-
-<p>我们提供一个编解码的方法，用于将字符串转换为一组号码。对应的，将一组号码转换为长度为7的字符串。</p>
-
+</code></pre></div><p>我们提供一个编解码的方法，用于将字符串转换为一组号码。对应的，将一组号码转换为长度为7的字符串。</p>
 <p>随机红号范围控制在<code>1-33</code>，蓝号控制在<code>1-16</code>。所以，我们对当前纳秒进行取余，便可以保证数据的正确。对于去重部分，通过<code>map</code>属性来达到目的，<code>map</code>的<code>key</code>存储生成的随机号，<code>value</code>存储对应的编码。因为<code>map</code>结构读取数据时本身也是随机的，所以在生成红号和蓝号的时候便多生成一部分，最后再取6个红号，1个蓝号。</p>
-
-<pre><code class="language-go">type TwoColor struct {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">TwoColor</span> <span style="color:#66d9ef">struct</span> {
 }
 
-//encode
-func (color *TwoColor) Encode(origin []int) string {
-	runes := make([]rune, 0)
-	for _, v := range origin {
-		if elem, ok := redBall[v]; ok {
-			runes = append(runes, elem)
+<span style="color:#75715e">//encode
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">color</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">TwoColor</span>) <span style="color:#a6e22e">Encode</span>(<span style="color:#a6e22e">origin</span> []<span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">string</span> {
+	<span style="color:#a6e22e">runes</span> <span style="color:#f92672">:=</span> make([]<span style="color:#66d9ef">rune</span>, <span style="color:#ae81ff">0</span>)
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">origin</span> {
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">elem</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">redBall</span>[<span style="color:#a6e22e">v</span>]; <span style="color:#a6e22e">ok</span> {
+			<span style="color:#a6e22e">runes</span> = append(<span style="color:#a6e22e">runes</span>, <span style="color:#a6e22e">elem</span>)
 	}
 
-	return string(runes)
+	<span style="color:#66d9ef">return</span> string(<span style="color:#a6e22e">runes</span>)
 }
 
-//decode
-func (color *TwoColor) Decode(origin string) []int {
-	result := make([]int, 0)
-	for _, v := range origin {
-		if elem, ok := redFlip[v]; ok {
-			result = append(result, elem)
+<span style="color:#75715e">//decode
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">color</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">TwoColor</span>) <span style="color:#a6e22e">Decode</span>(<span style="color:#a6e22e">origin</span> <span style="color:#66d9ef">string</span>) []<span style="color:#66d9ef">int</span> {
+	<span style="color:#a6e22e">result</span> <span style="color:#f92672">:=</span> make([]<span style="color:#66d9ef">int</span>, <span style="color:#ae81ff">0</span>)
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">origin</span> {
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">elem</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">redFlip</span>[<span style="color:#a6e22e">v</span>]; <span style="color:#a6e22e">ok</span> {
+			<span style="color:#a6e22e">result</span> = append(<span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">elem</span>)
 		}
 	}
 
-	return result
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>
 }
 
-//generate random numbers
-func (color *TwoColor) GenerateRandom() string {
-	redResult := make(map[int]rune, 12)
-	for len(redResult) &lt; 12 {
-		key := time.Now().Nanosecond()%33 + 1
-		redResult[key] = redBall[key]
+<span style="color:#75715e">//generate random numbers
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">color</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">TwoColor</span>) <span style="color:#a6e22e">GenerateRandom</span>() <span style="color:#66d9ef">string</span> {
+	<span style="color:#a6e22e">redResult</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">int</span>]<span style="color:#66d9ef">rune</span>, <span style="color:#ae81ff">12</span>)
+	<span style="color:#66d9ef">for</span> len(<span style="color:#a6e22e">redResult</span>) &lt; <span style="color:#ae81ff">12</span> {
+		<span style="color:#a6e22e">key</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">Nanosecond</span>()<span style="color:#f92672">%</span><span style="color:#ae81ff">33</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+		<span style="color:#a6e22e">redResult</span>[<span style="color:#a6e22e">key</span>] = <span style="color:#a6e22e">redBall</span>[<span style="color:#a6e22e">key</span>]
 	}
 
-	blueBall := make(map[int]rune, 2)
-	for len(blueBall) &lt; 2 {
-		key := time.Now().Nanosecond()%16 + 1
-		blueBall[key] = redBall[key]
+	<span style="color:#a6e22e">blueBall</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">int</span>]<span style="color:#66d9ef">rune</span>, <span style="color:#ae81ff">2</span>)
+	<span style="color:#66d9ef">for</span> len(<span style="color:#a6e22e">blueBall</span>) &lt; <span style="color:#ae81ff">2</span> {
+		<span style="color:#a6e22e">key</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">Nanosecond</span>()<span style="color:#f92672">%</span><span style="color:#ae81ff">16</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+		<span style="color:#a6e22e">blueBall</span>[<span style="color:#a6e22e">key</span>] = <span style="color:#a6e22e">redBall</span>[<span style="color:#a6e22e">key</span>]
 	}
 
-	index := 0
-	result := make([]rune, 7)
-	for _, v := range redBall {
-		index++
-		result = append(result, v)
-		if index == 6 {
-			break
+	<span style="color:#a6e22e">index</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+	<span style="color:#a6e22e">result</span> <span style="color:#f92672">:=</span> make([]<span style="color:#66d9ef">rune</span>, <span style="color:#ae81ff">7</span>)
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">redBall</span> {
+		<span style="color:#a6e22e">index</span><span style="color:#f92672">++</span>
+		<span style="color:#a6e22e">result</span> = append(<span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">v</span>)
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">index</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">6</span> {
+			<span style="color:#66d9ef">break</span>
 		}
 	}
-	for _, v := range blueBall {
-		result = append(result, v)
-		break
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">blueBall</span> {
+		<span style="color:#a6e22e">result</span> = append(<span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">v</span>)
+		<span style="color:#66d9ef">break</span>
 	}
 
-	return string(result)
+	<span style="color:#66d9ef">return</span> string(<span style="color:#a6e22e">result</span>)
 }
-</code></pre>
-
-<h2 id="批量生成随机数">批量生成随机数</h2>
-
+</code></pre></div><h2 id="批量生成随机数">批量生成随机数</h2>
 <p>批量生成不重复的随机数，核心就是解决如何存储的问题。每次都得跟之前生成的记录做比较，保证当前生成的记录是不重复的。</p>
-
 <p>之所以有批量生成的需求，首先是为了使生成的记录更随机。其次，试想一下，如果你内存足够大，生成<code>5000W</code>条记录，官方开奖后，看看这<code>5000W</code>会不会中一注。如果这么多都没有中，那真是一件令人伤心的事情啊。</p>
-
 <p>为了简单方便，我们直接将生成的记录存储到本地内存中，这里使用前面讲到的<a href="https://github.com/allegro/bigcache"><code>bigcache</code></a>。我们将生成的记录作为<code>Key</code>，<code>Value</code>不存储实际的值了。</p>
-
 <p><strong>对于<code>ZSet</code></strong>，我们这里只想体现它的唯一属性。只有当记录不存在时才进行存储。</p>
-
-<pre><code class="language-go">type DBCenter struct {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">DBCenter</span> <span style="color:#66d9ef">struct</span> {
 }
 
-func (db *DBCenter) ZSet(key string) {
-	if db.Exists(key) {
-		return
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">db</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">DBCenter</span>) <span style="color:#a6e22e">ZSet</span>(<span style="color:#a6e22e">key</span> <span style="color:#66d9ef">string</span>) {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">Exists</span>(<span style="color:#a6e22e">key</span>) {
+		<span style="color:#66d9ef">return</span>
 	}
-	cache.Set(key, nil)
+	<span style="color:#a6e22e">cache</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#a6e22e">key</span>, <span style="color:#66d9ef">nil</span>)
 }
 
-func (db *DBCenter) Exists(key string) bool {
-	_, err := cache.Get(key)
-	if err != nil {
-		if _, ok := err.(*bigcache.EntryNotFoundError); ok {
-			return false
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">db</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">DBCenter</span>) <span style="color:#a6e22e">Exists</span>(<span style="color:#a6e22e">key</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">bool</span> {
+	<span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">cache</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">key</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">err</span>.(<span style="color:#f92672">*</span><span style="color:#a6e22e">bigcache</span>.<span style="color:#a6e22e">EntryNotFoundError</span>); <span style="color:#a6e22e">ok</span> {
+			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
 		}
 	}
 
-	return true
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
 }
 
-func (db *DBCenter) Len() int {
-	return cache.Len()
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">db</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">DBCenter</span>) <span style="color:#a6e22e">Len</span>() <span style="color:#66d9ef">int</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">cache</span>.<span style="color:#a6e22e">Len</span>()
 }
-</code></pre>
-
-<p>批量生成的过程就是一个<code>for</code>循环的过程，并通过<code>Len</code>方法获取当前生成的记录数。</p>
-
+</code></pre></div><p>批量生成的过程就是一个<code>for</code>循环的过程，并通过<code>Len</code>方法获取当前生成的记录数。</p>
 <h2 id="存储开奖号码">存储开奖号码</h2>
-
 <p>将每期的开奖号码作为下一期的参考，是每个迷信中彩人的执着。</p>
-
 <p>我们选择将每期的中奖号码存储到文件中，实在没有必要使用关系型数据库。在使用过程中，我们不会部署到多台服务器上。这个项目就是在个人电脑上运行设计的，单文件存储足够了。</p>
-
 <p><strong>关于<code>write</code>方法</strong>，写入的内容包括日期和中奖号码，连接符使用了<code>SeparatorData</code>。在打开文件的模式中，我们指定了<code>O_APPEND</code>，将写入追加到文件末尾。这也导致最新的开奖号码出现在文件的末尾。当读取最近几期的开奖号码时，需要定位开始读取的位置。</p>
-
-<pre><code class="language-go">const (
-	FilePath      = &quot;/Users/neojos/src/boredom/data/history.txt&quot;
-	SeparatorData = &quot;\t&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">const</span> (
+	<span style="color:#a6e22e">FilePath</span>      = <span style="color:#e6db74">&#34;/Users/neojos/src/boredom/data/history.txt&#34;</span>
+	<span style="color:#a6e22e">SeparatorData</span> = <span style="color:#e6db74">&#34;\t&#34;</span>
 )
 
-type FileData struct {
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">FileData</span> <span style="color:#66d9ef">struct</span> {
 }
 
-func (f *FileData) GetLatestHistory(limit int64) ([]string, error) {
-	file, err := os.OpenFile(FilePath, os.O_CREATE|os.O_RDONLY, 0755)
-	if err != nil {
-		return nil, err
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">f</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">FileData</span>) <span style="color:#a6e22e">GetLatestHistory</span>(<span style="color:#a6e22e">limit</span> <span style="color:#66d9ef">int64</span>) ([]<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#a6e22e">file</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">OpenFile</span>(<span style="color:#a6e22e">FilePath</span>, <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">O_CREATE</span>|<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">O_RDONLY</span>, <span style="color:#ae81ff">0755</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
 	}
-	defer file.Close()
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">Close</span>()
 
-	info, err := file.Stat()
-	if err != nil {
-		return nil, err
-	}
-
-	rowLength := 0
-	scan := bufio.NewScanner(file)
-	for scan.Scan() {
-		rowLength = len(scan.Text()) + 1 //'\n'
-		break
-	}
-	if err = scan.Err(); err != nil {
-		return nil, err
+	<span style="color:#a6e22e">info</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">Stat</span>()
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
 	}
 
-	result := make([]string, 0)
-	file.Seek((info.Size()/int64(rowLength)-limit)*int64(rowLength), 0)
-	scan = bufio.NewScanner(file)
-	for scan.Scan() {
-		tmp := strings.Split(scan.Text(), SeparatorData)
-		result = append(result, tmp[len(tmp)-1])
+	<span style="color:#a6e22e">rowLength</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+	<span style="color:#a6e22e">scan</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewScanner</span>(<span style="color:#a6e22e">file</span>)
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">scan</span>.<span style="color:#a6e22e">Scan</span>() {
+		<span style="color:#a6e22e">rowLength</span> = len(<span style="color:#a6e22e">scan</span>.<span style="color:#a6e22e">Text</span>()) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e">//&#39;\n&#39;
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">break</span>
 	}
-	if err = scan.Err(); err != nil {
-		return result, err
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">scan</span>.<span style="color:#a6e22e">Err</span>(); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
 	}
 
-	reverseResult := make([]string, limit)
-	for i, v := range result {
-		reverseResult[int(limit)-i-1] = v
+	<span style="color:#a6e22e">result</span> <span style="color:#f92672">:=</span> make([]<span style="color:#66d9ef">string</span>, <span style="color:#ae81ff">0</span>)
+	<span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">Seek</span>((<span style="color:#a6e22e">info</span>.<span style="color:#a6e22e">Size</span>()<span style="color:#f92672">/</span>int64(<span style="color:#a6e22e">rowLength</span>)<span style="color:#f92672">-</span><span style="color:#a6e22e">limit</span>)<span style="color:#f92672">*</span>int64(<span style="color:#a6e22e">rowLength</span>), <span style="color:#ae81ff">0</span>)
+	<span style="color:#a6e22e">scan</span> = <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewScanner</span>(<span style="color:#a6e22e">file</span>)
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">scan</span>.<span style="color:#a6e22e">Scan</span>() {
+		<span style="color:#a6e22e">tmp</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Split</span>(<span style="color:#a6e22e">scan</span>.<span style="color:#a6e22e">Text</span>(), <span style="color:#a6e22e">SeparatorData</span>)
+		<span style="color:#a6e22e">result</span> = append(<span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">tmp</span>[len(<span style="color:#a6e22e">tmp</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
 	}
-	return reverseResult, nil
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">scan</span>.<span style="color:#a6e22e">Err</span>(); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">err</span>
+	}
+
+	<span style="color:#a6e22e">reverseResult</span> <span style="color:#f92672">:=</span> make([]<span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">limit</span>)
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">result</span> {
+		<span style="color:#a6e22e">reverseResult</span>[int(<span style="color:#a6e22e">limit</span>)<span style="color:#f92672">-</span><span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] = <span style="color:#a6e22e">v</span>
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">reverseResult</span>, <span style="color:#66d9ef">nil</span>
 }
 
-func (f *FileData) Write(date, number string) error {
-	file, err := os.OpenFile(FilePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0755)
-	if err != nil {
-		return err
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">f</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">FileData</span>) <span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">date</span>, <span style="color:#a6e22e">number</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">error</span> {
+	<span style="color:#a6e22e">file</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">OpenFile</span>(<span style="color:#a6e22e">FilePath</span>, <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">O_CREATE</span>|<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">O_WRONLY</span>|<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">O_APPEND</span>, <span style="color:#ae81ff">0755</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
 	}
-	defer file.Close()
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">Close</span>()
 
-	line := fmt.Sprintf(&quot;%s\t%s\n&quot;, date, number)
-	_, err = file.WriteString(line)
-	return err
+	<span style="color:#a6e22e">line</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%s\t%s\n&#34;</span>, <span style="color:#a6e22e">date</span>, <span style="color:#a6e22e">number</span>)
+	<span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">line</span>)
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
 }
-</code></pre>
-
-<p><strong><code>GetLatestHistory</code></strong>用于获取最近几期的开奖号码。因为每行写入的长度相同，所以通过计算，可以得出当前文件的行数，并将文件的<code>offset</code>定位到指定的位置，从具体的<code>offset</code>开始读取。另外，因为我们写入的模式是<code>APPEND</code>，所以将获取到的<code>slice</code>再做一次顺序反转，便得到最近几期的开奖记录了。</p>
-
+</code></pre></div><p><strong><code>GetLatestHistory</code></strong>用于获取最近几期的开奖号码。因为每行写入的长度相同，所以通过计算，可以得出当前文件的行数，并将文件的<code>offset</code>定位到指定的位置，从具体的<code>offset</code>开始读取。另外，因为我们写入的模式是<code>APPEND</code>，所以将获取到的<code>slice</code>再做一次顺序反转，便得到最近几期的开奖记录了。</p>
 <h2 id="生成图">生成图</h2>
-
 <p>通过<a href="https://github.com/gonum/plot"><code>plot</code></a>来绘制一些简易的图形。将最近的开奖号码作为数据源，来观察数据的走势。虽然确实没啥用处。</p>
-
 <p>这段代码直接运行会<code>panic</code>，因为修改了<code>plot</code>中的部分代码。</p>
-
-<pre><code class="language-go">type Curve struct {
-	elements [][]int
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Curve</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">elements</span> [][]<span style="color:#66d9ef">int</span>
 }
 
-func (curve *Curve) SetElem(input [][]int) {
-	curve.elements = input
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">curve</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Curve</span>) <span style="color:#a6e22e">SetElem</span>(<span style="color:#a6e22e">input</span> [][]<span style="color:#66d9ef">int</span>) {
+	<span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">elements</span> = <span style="color:#a6e22e">input</span>
 }
 
-func (curve *Curve) GetBaseImg() error {
-	pic, err := plot.New()
-	if err != nil {
-		return err
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">curve</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Curve</span>) <span style="color:#a6e22e">GetBaseImg</span>() <span style="color:#66d9ef">error</span> {
+	<span style="color:#a6e22e">pic</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">plot</span>.<span style="color:#a6e22e">New</span>()
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
 	}
 
-	pic.X.Label.Text = &quot;ball&quot;
-	pic.Y.Label.Text = &quot;number&quot;
+	<span style="color:#a6e22e">pic</span>.<span style="color:#a6e22e">X</span>.<span style="color:#a6e22e">Label</span>.<span style="color:#a6e22e">Text</span> = <span style="color:#e6db74">&#34;ball&#34;</span>
+	<span style="color:#a6e22e">pic</span>.<span style="color:#a6e22e">Y</span>.<span style="color:#a6e22e">Label</span>.<span style="color:#a6e22e">Text</span> = <span style="color:#e6db74">&#34;number&#34;</span>
 
-	// Draw a grid behind the data
-	pic.Add(plotter.NewGrid())
+	<span style="color:#75715e">// Draw a grid behind the data
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">pic</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#a6e22e">plotter</span>.<span style="color:#a6e22e">NewGrid</span>())
 
-	customTick := commaTicks{
-		CustomTicks: 7,
+	<span style="color:#a6e22e">customTick</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">commaTicks</span>{
+		<span style="color:#a6e22e">CustomTicks</span>: <span style="color:#ae81ff">7</span>,
 	}
-	pic.X.Tick.Marker = customTick
+	<span style="color:#a6e22e">pic</span>.<span style="color:#a6e22e">X</span>.<span style="color:#a6e22e">Tick</span>.<span style="color:#a6e22e">Marker</span> = <span style="color:#a6e22e">customTick</span>
 
-	customTick.CustomTicks = 33
-	pic.Y.Tick.Marker = customTick
+	<span style="color:#a6e22e">customTick</span>.<span style="color:#a6e22e">CustomTicks</span> = <span style="color:#ae81ff">33</span>
+	<span style="color:#a6e22e">pic</span>.<span style="color:#a6e22e">Y</span>.<span style="color:#a6e22e">Tick</span>.<span style="color:#a6e22e">Marker</span> = <span style="color:#a6e22e">customTick</span>
 
-	picElem := make(map[string]plotter.XYer)
-	for index, element := range curve.elements {
-		points := plotter.XYs{}
-		for k, v := range element {
-			points = append(points, plotter.XY{X: float64(k + 1), Y: float64(v)})
+	<span style="color:#a6e22e">picElem</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#a6e22e">plotter</span>.<span style="color:#a6e22e">XYer</span>)
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">index</span>, <span style="color:#a6e22e">element</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">elements</span> {
+		<span style="color:#a6e22e">points</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">plotter</span>.<span style="color:#a6e22e">XYs</span>{}
+		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">k</span>, <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">element</span> {
+			<span style="color:#a6e22e">points</span> = append(<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">plotter</span>.<span style="color:#a6e22e">XY</span>{<span style="color:#a6e22e">X</span>: float64(<span style="color:#a6e22e">k</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>), <span style="color:#a6e22e">Y</span>: float64(<span style="color:#a6e22e">v</span>)})
 		}
-		picElem[fmt.Sprintf(&quot;%d&quot;, index)] = points
+		<span style="color:#a6e22e">picElem</span>[<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#a6e22e">index</span>)] = <span style="color:#a6e22e">points</span>
 	}
 
-	plotutil.AddLinePoints(pic, picElem)
-	return pic.Save(vgsvg.DefaultWidth, vgsvg.DefaultWidth, &quot;base.png&quot;)
+	<span style="color:#a6e22e">plotutil</span>.<span style="color:#a6e22e">AddLinePoints</span>(<span style="color:#a6e22e">pic</span>, <span style="color:#a6e22e">picElem</span>)
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">pic</span>.<span style="color:#a6e22e">Save</span>(<span style="color:#a6e22e">vgsvg</span>.<span style="color:#a6e22e">DefaultWidth</span>, <span style="color:#a6e22e">vgsvg</span>.<span style="color:#a6e22e">DefaultWidth</span>, <span style="color:#e6db74">&#34;base.png&#34;</span>)
 }
-</code></pre>
-
-<p>生成的图片如下：</p>
-
-<p><img src="https://i.loli.net/2019/02/09/5c5eb729854c9.png" alt="pic" /></p>
-
+</code></pre></div><p>生成的图片如下：</p>
+<p><img src="https://i.loli.net/2019/02/09/5c5eb729854c9.png" alt="pic"></p>
 <h2 id="总结">总结</h2>
-
 <p>项目的代码在<a href="https://github.com/GitHubSi/boredom"><code>boredom</code></a>，代码非常简单。祝大家早日中大奖！</p>
 
 		</div>
@@ -355,7 +334,7 @@ func (curve *Curve) GetBaseImg() error {
 
 <div class="authorbox clearfix">
 	<figure class="authorbox__avatar">
-		<img alt="Neojos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+		<img alt="Neojos avatar" src="/img/headimg.png" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
 		<span class="authorbox__name">About Neojos</span>
@@ -407,28 +386,28 @@ func (curve *Curve) GetBaseImg() error {
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/2018/" title="2018">2018</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="Cache">Cache</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="Docker">Docker</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="Git">Git</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="Golang">Golang</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="Http">Http</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="Js">Js</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="Linux">Linux</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="Mongo">Mongo</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="Mq">Mq</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="Mysql">Mysql</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="Net">Net</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="Nginx">Nginx</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="Npm">Npm</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="Pay">Pay</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="Php">Php</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="Protobufs">Protobufs</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="Protocol">Protocol</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="Tcp/Ip">Tcp/Ip</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cache/" title="cache">cache</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="git">git</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="golang">golang</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="http">http</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/js/" title="js">js</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="linux">linux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mongo/" title="mongo">mongo</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mq/" title="MQ">MQ</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mysql/" title="MySQL">MySQL</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/net/" title="net">net</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="nginx">nginx</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/npm/" title="npm">npm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pay/" title="pay">pay</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/php/" title="php">php</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protobufs/" title="protobufs">protobufs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protocol/" title="protocol">protocol</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tcp/ip/" title="tcp/ip">tcp/ip</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/think/" title="Think">Think</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="Tools">Tools</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="Transaction">Transaction</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="Translate">Translate</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="tools">tools</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/transaction/" title="transaction">transaction</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/translate/" title="translate">translate</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E7%BB%9F%E8%AE%A1/" title="统计">统计</a>
 	</div>
 </div>
