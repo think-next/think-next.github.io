@@ -6,10 +6,28 @@
     <description>Recent content in Tags on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 18 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://neojos.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Another test</title>
+      <link>https://neojos.com/tags/another-test/</link>
+      <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://neojos.com/tags/another-test/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Test</title>
+      <link>https://neojos.com/tags/test/</link>
+      <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://neojos.com/tags/test/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>net</title>
