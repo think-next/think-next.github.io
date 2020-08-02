@@ -4,14 +4,14 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>让时间给结果 - 渐行渐远</title>
+	<title>Go使用Pprof定位问题 - 渐行渐远</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta itemprop="name" content="让时间给结果">
-<meta itemprop="description" content="想起了余光中的一句话：“年轻人你的职责是平整土地，而非焦虑时光。你做三四月的事情，在八九月份自然会得到答案。”">
-<meta itemprop="datePublished" content="2020-07-18T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-07-18T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1">
+		<meta itemprop="name" content="Go使用Pprof定位问题">
+<meta itemprop="description" content="两种使用 pprof 定位问题的形式：">
+<meta itemprop="datePublished" content="2020-08-02T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-08-02T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="123">
 
 
 
@@ -70,13 +70,13 @@
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">让时间给结果</h1>
-			<p class="post__lead">Example lead - highlighted near the title</p>
+			<h1 class="post__title">Go使用Pprof定位问题</h1>
+			<p class="post__lead">flat和cum的区别是什么</p>
 			<div class="post__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Neojos</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-18T00:00:00Z">2020-07-18</time></div></div>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-08-02T00:00:00Z">2020-08-02</time></div></div>
 		</header>
 <div class="post__toc toc">
 	<div class="toc__title">Page content</div>
@@ -85,7 +85,23 @@
 	</div>
 </div>
 <div class="content post__content clearfix">
-			<p>想起了余光中的一句话：“年轻人你的职责是平整土地，而非焦虑时光。你做三四月的事情，在八九月份自然会得到答案。”</p>
+			<p>两种使用 pprof 定位问题的形式：</p>
+<ol>
+<li>在 test 用例中使用 <code>runtime/pprof</code> 中提供的方法</li>
+<li>在 web 服务中引入 <code>&quot;net/http/pprof&quot;</code></li>
+</ol>
+<p>定位问题的过程，经常会用到火焰图。但火焰图也只能算是一个扩展加分项，数据同样还是从<code>go tool pprof</code>中获取的。一般也只看cpu、和堆栈的内存分配情况。</p>
+<p>但我依旧存在一个疑问，针对CPU的Profile文件，在执行top命令时，这些列头究竟是什么意思？换一句话描述我的问题， flat 和 cum 的区别是什么？</p>
+<pre><code> flat  flat%   sum%        cum   cum%
+</code></pre><p>查阅官方的解释文档，下面是自认为官网比较关键性的解释：</p>
+<blockquote>
+<p>The first two columns show the number of samples in which the function was running (as opposed to waiting for a called function to return), as a raw count and as a percentage of total samples</p>
+<p>The third column shows the running total during the listing</p>
+<p>The fourth and fifth columns show the number of samples in which the function appeared (either running or waiting for a called function to return). To sort by the fourth and fifth columns, use the -cum (for cumulative) flag:</p>
+</blockquote>
+<p>字面上的意思很好理解： flat 表示样本中当前函数占用的CPU时间，cum表示当前函数以及当前函数调用其他函数的时间。但到底是不是这个意思呢，我也不是很清楚。</p>
+<p>思考了很久之后，我突然意识到另一个问题：在火焰图上，标识函数占比的数据，依靠了是 flat 还是 cum 呢？我顿悟式的有了一个假设：火焰图上使用的肯定是 cum，而 cum 数据是用于反应函数调用栈信息的。</p>
+<p>果不其然，确实如此。</p>
 
 		</div>
 	</article>
@@ -104,10 +120,10 @@
 </div>
 
 <nav class="pager flex">
-	<div class="pager__item pager__item--next">
-		<a class="pager__link" href="/greatperson/%E7%A7%98%E5%AF%86%E9%A1%B9%E7%9B%AE/" rel="next">
-			<span class="pager__subtitle">Next&thinsp;»</span>
-			<p class="pager__title">秘密项目</p>
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2019/19-12-08-protocol-stack/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">protocol stack</p>
 		</a>
 	</div>
 </nav>

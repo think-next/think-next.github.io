@@ -6,10 +6,19 @@
     <description>Recent content on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 02 Aug 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://neojos.com/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go使用Pprof定位问题</title>
+      <link>https://neojos.com/blog/2020/go%E4%BD%BF%E7%94%A8-pprof-%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Sun, 02 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://neojos.com/blog/2020/go%E4%BD%BF%E7%94%A8-pprof-%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98/</guid>
+      <description>两种使用 pprof 定位问题的形式：</description>
+    </item>
     
     <item>
       <title>protocol stack</title>

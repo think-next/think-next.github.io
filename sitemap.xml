@@ -4,8 +4,19 @@
   
   <url>
     <loc>https://neojos.com/</loc>
-    <lastmod>2020-07-22T00:00:00+00:00</lastmod>
+    <lastmod>2020-08-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://neojos.com/blog/</loc>
+    <lastmod>2020-08-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://neojos.com/blog/2020/go%E4%BD%BF%E7%94%A8-pprof-%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2020-08-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -22,12 +33,6 @@
   <url>
     <loc>https://neojos.com/greatperson/%E8%AE%A9%E6%97%B6%E9%97%B4%E7%BB%99%E7%BB%93%E6%9E%9C/</loc>
     <lastmod>2020-07-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://neojos.com/blog/</loc>
-    <lastmod>2019-12-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
