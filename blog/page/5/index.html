@@ -64,6 +64,25 @@
 <main class="main list" role="main"><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
+			<a href="/blog/2018/08-11-golang%E4%B8%8B%E7%9A%84error/" rel="bookmark">
+			Golang下的Error
+			</a>
+		</h3>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Neojos</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-08-11T00:00:00Z">2018-08-11</time></div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		感觉error确实没啥可说的，这个简单到极致的package总共也不超过10行有效代码。而且常用的fmt也提供了很方便的返回error的方法：
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2018/08-11-golang%E4%B8%8B%E7%9A%84error/">Read more…</a>
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
 			<a href="/blog/2018/08-09-shell%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%801/" rel="bookmark">
 			Shell必备基础（1）
 			</a>
@@ -270,25 +289,6 @@
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2018/07-01-mysql%E4%BA%8B%E5%8A%A1/">Read more…</a>
 	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/blog/2018/06-15-time_wait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/" rel="bookmark">
-			TIME_WAIT状态解读
-			</a>
-		</h3>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Neojos</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-06-15T00:00:00Z">2018-06-15</time></div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		版本：0.01
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/blog/2018/06-15-time_wait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/">Read more…</a>
-	</div>
 </article>
 </main>
 
@@ -314,10 +314,10 @@
 	<div class="widget__content">
 		<ul class="widget__list">
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/go%E4%BD%BF%E7%94%A8-pprof-%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98/">Go使用Pprof定位问题</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E6%98%AF%E5%90%A6%E4%BC%9A%E5%BD%B1%E5%93%8D%E4%B9%90%E8%A7%82%E9%94%81/">乐观锁</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2019/19-12-08-protocol-stack/">protocol stack</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2019/blog.016.mongo%E4%B8%ADhint%E7%9A%84%E4%BD%BF%E7%94%A8/">mongo中hint的使用</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2019/blog.015-go.1.13%E4%B8%AD%E7%9A%84modules.2019.11.12/">go.1.13中的Modules</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2019/blog.014-runtime%E4%B8%ADp%E7%9A%84%E7%90%86%E8%A7%A3.2019.11.11/">runtime中P的理解</a></li>
 		</ul>
 	</div>
 </div>

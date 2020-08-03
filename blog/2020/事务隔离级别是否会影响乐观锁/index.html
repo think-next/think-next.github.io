@@ -4,14 +4,14 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Go使用Pprof定位问题 - 渐行渐远</title>
+	<title>乐观锁 - 渐行渐远</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta itemprop="name" content="Go使用Pprof定位问题">
-<meta itemprop="description" content="两种使用 pprof 定位问题的形式：">
+		<meta itemprop="name" content="乐观锁">
+<meta itemprop="description" content="MySQL 事务的隔离级别包括下面四种，以及不同隔离级别的影响：">
 <meta itemprop="datePublished" content="2020-08-02T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-08-02T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="123">
+<meta itemprop="wordCount" content="55">
 
 
 
@@ -70,8 +70,8 @@
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">Go使用Pprof定位问题</h1>
-			<p class="post__lead">flat和cum的区别是什么</p>
+			<h1 class="post__title">乐观锁</h1>
+			<p class="post__lead">事务隔离级别是否会影响乐观锁的执行</p>
 			<div class="post__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Neojos</span>
 </div>
@@ -85,23 +85,56 @@
 	</div>
 </div>
 <div class="content post__content clearfix">
-			<p>两种使用 pprof 定位问题的形式：</p>
-<ol>
-<li>在 test 用例中使用 <code>runtime/pprof</code> 中提供的方法</li>
-<li>在 web 服务中引入 <code>&quot;net/http/pprof&quot;</code></li>
-</ol>
-<p>定位问题的过程，经常会用到火焰图。但火焰图也只能算是一个扩展加分项，数据同样还是从<code>go tool pprof</code>中获取的。一般也只看cpu、和堆栈的内存分配情况。</p>
-<p>但我依旧存在一个疑问，针对CPU的Profile文件，在执行top命令时，这些列头究竟是什么意思？换一句话描述我的问题， flat 和 cum 的区别是什么？</p>
-<pre><code> flat  flat%   sum%        cum   cum%
-</code></pre><p>查阅官方的解释文档，下面是自认为官网比较关键性的解释：</p>
+			<p>MySQL 事务的隔离级别包括下面四种，以及不同隔离级别的影响：</p>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>读脏数据</th>
+<th>不可重复读</th>
+<th>产生幽灵数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>READ UNCOMMITTED</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>READ COMMITTED</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>REPEATEBLE READ</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>SERIALIZABLE</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+</tr>
+</tbody>
+</table>
+<p>可以通过使用如下语句来查询数据库的隔离级别：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">@@</span>tx_isolation;
+</code></pre></div><p>设置，或者修改数据库的隔离级可以执行如下语句：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">设置事务的隔离级别（</span><span style="color:#66d9ef">REPEATABLE</span> <span style="color:#66d9ef">READ</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">READ</span> <span style="color:#66d9ef">COMMITTED</span><span style="color:#960050;background-color:#1e0010">）</span>
+<span style="color:#66d9ef">set</span> <span style="color:#66d9ef">global</span> <span style="color:#66d9ef">transaction</span> <span style="color:#66d9ef">isolation</span> <span style="color:#66d9ef">level</span> <span style="color:#66d9ef">read</span> <span style="color:#66d9ef">committed</span>;
+</code></pre></div><p>谈到事务，一般会想到 START TRANSACTION。但执行单条语句的时候，默认是自动提交模式。如果我们想观察单条语句的事务执行效果，我们需要禁止这种自动提交的模式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">设置</span>MySQL为非autocommit模式<span style="color:#960050;background-color:#1e0010">：</span>
+<span style="color:#66d9ef">set</span> autocommit<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</code></pre></div><p>再来谈论乐观锁，乐观锁是相对悲观锁而言的。本质上就是给数据行增加一个“版本号”。当读取数据时，将version字段的值一同读出，数据每更新一次，对此version值加一。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的version值进行比对，如果数据库表当前版本号与第一次取出来的version值相等，则予以更新，否则认为是过期数据。</p>
+<p>这里有一个疑问，如果事务的隔离级别是 REPEATED READ，那么乐观锁还有效果吗？我看了知乎上的一个帖子，觉得写的很好。表述的很到位：</p>
 <blockquote>
-<p>The first two columns show the number of samples in which the function was running (as opposed to waiting for a called function to return), as a raw count and as a percentage of total samples</p>
-<p>The third column shows the running total during the listing</p>
-<p>The fourth and fifth columns show the number of samples in which the function appeared (either running or waiting for a called function to return). To sort by the fourth and fifth columns, use the -cum (for cumulative) flag:</p>
+<p>不需要的，update的时候是按照真实数据的，意思就是其他事务commit了的数据，update的时候也能看到的。隔离模式重点在于 “读”</p>
 </blockquote>
-<p>字面上的意思很好理解： flat 表示样本中当前函数占用的CPU时间，cum表示当前函数以及当前函数调用其他函数的时间。但到底是不是这个意思呢，我也不是很清楚。</p>
-<p>思考了很久之后，我突然意识到另一个问题：在火焰图上，标识函数占比的数据，依靠了是 flat 还是 cum 呢？我顿悟式的有了一个假设：火焰图上使用的肯定是 cum，而 cum 数据是用于反应函数调用栈信息的。</p>
-<p>果不其然，确实如此。</p>
 
 		</div>
 	</article>
@@ -118,9 +151,15 @@
 
 <nav class="pager flex">
 	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/blog/2020/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E6%98%AF%E5%90%A6%E4%BC%9A%E5%BD%B1%E5%93%8D%E4%B9%90%E8%A7%82%E9%94%81/" rel="prev">
+		<a class="pager__link" href="/blog/2019/19-12-08-protocol-stack/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;Previous</span>
-			<p class="pager__title">乐观锁</p>
+			<p class="pager__title">protocol stack</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2020/go%E4%BD%BF%E7%94%A8-pprof-%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">Go使用Pprof定位问题</p>
 		</a>
 	</div>
 </nav>
