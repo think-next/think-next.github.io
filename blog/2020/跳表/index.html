@@ -4,14 +4,14 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Go使用Pprof定位问题 - 渐行渐远</title>
+	<title>跳表 - 渐行渐远</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta itemprop="name" content="Go使用Pprof定位问题">
-<meta itemprop="description" content="两种使用 pprof 定位问题的形式：">
-<meta itemprop="datePublished" content="2020-08-02T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-08-02T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="123">
+		<meta itemprop="name" content="跳表">
+<meta itemprop="description" content="跳表是基于链表的，在链表的基础上加了多层索引结构。在 Redis 的有序集中就使用了跳表，但 Redis 在跳表的基础上做了定制。">
+<meta itemprop="datePublished" content="2020-08-07T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-08-07T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="29">
 
 
 
@@ -70,13 +70,13 @@
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">Go使用Pprof定位问题</h1>
-			<p class="post__lead">flat和cum的区别是什么</p>
+			<h1 class="post__title">跳表</h1>
+			<p class="post__lead">如何实现跳表</p>
 			<div class="post__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Neojos</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-08-02T00:00:00Z">2020-08-02</time></div></div>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-08-07T00:00:00Z">2020-08-07</time></div></div>
 		</header>
 <div class="post__toc toc">
 	<div class="toc__title">Page content</div>
@@ -85,23 +85,25 @@
 	</div>
 </div>
 <div class="content post__content clearfix">
-			<p>两种使用 pprof 定位问题的形式：</p>
+			<p>跳表是基于链表的，在链表的基础上加了多层索引结构。在 Redis 的有序集中就使用了跳表，但 Redis 在跳表的基础上做了定制。</p>
+<p>跳表拥多层链表，最底层的链表包含所有的数据。越往上层，链表的节点也越稀疏。但是，高层的节点一定是底层的节点。下面是一个跳表的示例：</p>
+<p><img src="/img/skiplist/skiplist-base.jpeg" alt="skiplist-base"></p>
+<p>表头节点就是图中最左边的那一列，它的每个节点都只包含两个引用（ down 和 nex t），down指向下层的表头节点，next指向同层的数据节点。</p>
+<p>而数据节点由4部分组成，比如层3中唯一的数据节点，31表示节点的键，or 表示节点的值，同时也包含两个引用（ down 和 next）。跟表头节点 down 区别在于，down 指向的数据类型是数据节点。</p>
+<p>需要特别指出的是，针对数据中的每个节点，它应该创建几层的结构，是算法随机决定的。平均而言，1/2个元素有两个索引，1/4个元素有三个索引，以此类推。</p>
+<p>跳表是如何实现的查找呢？从表头开始搜索键为54的数据，标红的星星表示查找节点的过程：</p>
+<p><img src="/img/skiplist/skiplist-search.jpeg" alt="skiplist-search"></p>
 <ol>
-<li>在 test 用例中使用 <code>runtime/pprof</code> 中提供的方法</li>
-<li>在 web 服务中引入 <code>&quot;net/http/pprof&quot;</code></li>
+<li>从表头节点开始搜索，头节点的next指向键为31的节点，且31小于54，然后继续判断31节点的next节点，发现引用为 nil。开始通过down向下一层（层2）搜索。</li>
+<li>继续获取层2中键为31的节点的next节点，发现值等于77，数据大于54，则继续向下一层（层1）查找。</li>
+<li>继续读取层3中键值为31节点的next，发现值为54，数据找到了，结束本次查询。</li>
 </ol>
-<p>定位问题的过程，经常会用到火焰图。但火焰图也只能算是一个扩展加分项，数据同样还是从<code>go tool pprof</code>中获取的。一般也只看cpu、和堆栈的内存分配情况。</p>
-<p>但我依旧存在一个疑问，针对CPU的Profile文件，在执行top命令时，这些列头究竟是什么意思？换一句话描述我的问题， flat 和 cum 的区别是什么？</p>
-<pre><code> flat  flat%   sum%        cum   cum%
-</code></pre><p>查阅官方的解释文档，下面是自认为官网比较关键性的解释：</p>
-<blockquote>
-<p>The first two columns show the number of samples in which the function was running (as opposed to waiting for a called function to return), as a raw count and as a percentage of total samples</p>
-<p>The third column shows the running total during the listing</p>
-<p>The fourth and fifth columns show the number of samples in which the function appeared (either running or waiting for a called function to return). To sort by the fourth and fifth columns, use the -cum (for cumulative) flag:</p>
-</blockquote>
-<p>字面上的意思很好理解： flat 表示样本中当前函数占用的CPU时间，cum表示当前函数以及当前函数调用其他函数的时间。但到底是不是这个意思呢，我也不是很清楚。</p>
-<p>思考了很久之后，我突然意识到另一个问题：在火焰图上，标识函数占比的数据，依靠了是 flat 还是 cum 呢？我顿悟式的有了一个假设：火焰图上使用的肯定是 cum，而 cum 数据是用于反应函数调用栈信息的。</p>
-<p>果不其然，确实如此。</p>
+<p>插入是如何实现的呢？为了方便，我们以插入键值65为例。我们需要找到每一层插入65节点的位置。图中带星星的就是可能要插入的位置。前面提到过，数据节点的层是随机确定的，在插入65节点时，这条规则当然需要遵守。</p>
+<ol>
+<li>我们在层0进行插入，将65插入到54的后面</li>
+<li>判断是否要建立层1节点，如果需要，将65插入到层1的54之后</li>
+<li>以此类推</li>
+</ol>
 
 		</div>
 	</article>
@@ -121,14 +123,8 @@
 
 <nav class="pager flex">
 	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/blog/2019/19-12-08-protocol-stack/" rel="prev">
+		<a class="pager__link" href="/blog/2020/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E6%98%AF%E5%90%A6%E4%BC%9A%E5%BD%B1%E5%93%8D%E4%B9%90%E8%A7%82%E9%94%81/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;Previous</span>
-			<p class="pager__title">protocol stack</p>
-		</a>
-	</div>
-	<div class="pager__item pager__item--next">
-		<a class="pager__link" href="/blog/2020/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E6%98%AF%E5%90%A6%E4%BC%9A%E5%BD%B1%E5%93%8D%E4%B9%90%E8%A7%82%E9%94%81/" rel="next">
-			<span class="pager__subtitle">Next&thinsp;»</span>
 			<p class="pager__title">乐观锁</p>
 		</a>
 	</div>
