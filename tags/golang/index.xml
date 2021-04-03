@@ -6,11 +6,7 @@
     <description>Recent content in golang on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 12 Nov 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://neojos.com/tags/golang/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 12 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://neojos.com/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>go.1.13中的Modules</title>
       <link>https://neojos.com/blog/2019/blog.015-go.1.13%E4%B8%AD%E7%9A%84modules.2019.11.12/</link>

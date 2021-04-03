@@ -6,11 +6,7 @@
     <description>Recent content in net on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Dec 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://neojos.com/tags/net/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 08 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://neojos.com/tags/net/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>protocol stack</title>
       <link>https://neojos.com/blog/2019/19-12-08-protocol-stack/</link>

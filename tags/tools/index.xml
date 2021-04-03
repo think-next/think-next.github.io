@@ -6,11 +6,7 @@
     <description>Recent content in tools on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Aug 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://neojos.com/tags/tools/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 07 Aug 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://neojos.com/tags/tools/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Git撤销本地修改</title>
       <link>https://neojos.com/blog/2018/08-07-git%E6%92%A4%E9%94%80%E6%9C%AC%E5%9C%B0%E4%BF%AE%E6%94%B9/</link>
