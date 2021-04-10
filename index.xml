@@ -6,15 +6,10 @@
     <description>Recent content on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 05 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://neojos.com/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>将博客搬至CSDN</title>
-      <link>https://neojos.com/blog/2020/%E5%B0%86%E5%8D%9A%E5%AE%A2%E6%90%AC%E8%87%B3csdn/</link>
-      <pubDate>Mon, 05 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://neojos.com/blog/2020/%E5%B0%86%E5%8D%9A%E5%AE%A2%E6%90%AC%E8%87%B3csdn/</guid>
-      <description>准备将博客搬迁到CSDN了，博客地址：https://blog.csdn.net/whynottrythis。</description>
-    </item>
+    <lastBuildDate>Tue, 11 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://neojos.com/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Oh My ZSH使用</title>

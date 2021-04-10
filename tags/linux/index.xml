@@ -6,7 +6,11 @@
     <description>Recent content in linux on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 Sep 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://neojos.com/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 20 Sep 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://neojos.com/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>IO多路复用</title>
       <link>https://neojos.com/blog/2019/19-09-20-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link>

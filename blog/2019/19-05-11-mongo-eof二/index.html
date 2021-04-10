@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> mongo EOF（二） | 渐行渐远</title>
-  <meta name="description" content="John Doe&#39;s Personal blog about everything">
+  <meta name="description" content="Neojos Personal blog about everything">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
@@ -20,6 +20,8 @@
 <meta name="twitter:description" content="任何事情的成功都需要掐准时间"/>
 
   
+  
+    
   
   
   <link rel="stylesheet" href="https://neojos.com/css/style-white.css">
@@ -45,7 +47,7 @@
     <header id="header">
   <a href="https://neojos.com/">
   
-    <div id="logo" style="background-image: url()"></div>
+    <div id="logo" style="background-image: url(https://neojos.com/img/mifeng.jpeg)"></div>
   
   <div id="title">
     <h1>渐行渐远</h1>
@@ -56,6 +58,8 @@
       <li class="icon">
         <a href="#"><i class="fas fa-bars fa-2x"></i></a>
       </li>
+      
+        <li><a href="/">主页</a></li>
       
         <li><a href="/blog">技术</a></li>
       
@@ -70,6 +74,7 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
+  <h1 id="title">mongo EOF（二）</h1>
   <div class="content" itemprop="articleBody">
   
     <blockquote>
@@ -82,15 +87,15 @@
 <p>However, for startup Compose does not wait until a container is “ready” (whatever that means for your particular application) - only until it’s running. <a href="https://docs.docker.com/compose/startup-order/">There’s a good reason for this</a>.</p>
 </blockquote>
 <p>在<code>creator service</code>中使用了该指令， 但是，实际中<code>creator</code>不会等到<code>mongo1</code>、<code>mongo2</code>、<code>mongo3</code>容器<code>ready</code>后再启动，而是等到它们启动就开始启动。这也是我在<code>setup</code>脚本中执行<code>sleep</code>操作的原因。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">creator</span>:
-    <span style="color:#f92672">build</span>:
-      <span style="color:#f92672">context</span>: <span style="color:#ae81ff">.</span>
-      <span style="color:#f92672">dockerfile</span>: <span style="color:#ae81ff">dockerfile</span>
-    <span style="color:#f92672">entrypoint</span>: [<span style="color:#e6db74">&#34;/data/conf/setup.sh&#34;</span>]
-    <span style="color:#f92672">depends_on</span>:
-      - <span style="color:#ae81ff">mongo1</span>
-      - <span style="color:#ae81ff">mongo2</span>
-      - <span style="color:#ae81ff">mongo3</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#66d9ef">creator</span>:
+    <span style="color:#66d9ef">build</span>:
+      <span style="color:#66d9ef">context</span>: .
+      <span style="color:#66d9ef">dockerfile</span>: dockerfile
+    <span style="color:#66d9ef">entrypoint</span>: [<span style="color:#e6db74">&#34;/data/conf/setup.sh&#34;</span>]
+    <span style="color:#66d9ef">depends_on</span>:
+      - mongo1
+      - mongo2
+      - mongo3
 </code></pre></div><h2 id="entrypoint">entrypoint</h2>
 <blockquote>
 <p>Entrypoint sets the command and parameters that will be executed first when a container is run.</p>
@@ -99,16 +104,16 @@
 <p>命令的语法格式：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#66d9ef">ENTRYPOINT</span> [<span style="color:#e6db74">&#34;executable&#34;</span> <span style="color:#e6db74">&#34;param1&#34;</span> <span style="color:#e6db74">&#34;param2&#34;</span>]<span style="color:#960050;background-color:#1e0010">
 </span></code></pre></div><p>在修改后的<code>docker-compose.yml</code>中，<code>entrypoint</code>指令用于执行<code>shell</code>脚本。按照规范来说，可执行文件名称中需要包含<code>entrypoint</code>字段，也就是将下列指令中的<code>setup.sh</code>重命名为<code>setup-entrypoint.sh</code>。但是，重命名之后的文件，容器执行会报错，所以，这里也并没有使用这个规范。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">entrypoint</span>: [<span style="color:#e6db74">&#34;/data/conf/setup.sh&#34;</span>]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#66d9ef">entrypoint</span>: [<span style="color:#e6db74">&#34;/data/conf/setup.sh&#34;</span>]
 </code></pre></div><h2 id="调整creator中的entrypoint指令">调整<code>creator</code>中的<code>entrypoint</code>指令</h2>
 <p>原始的文件如下所示，<code>entrypoint</code>指令的参数非常难看：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">creator</span>:
-    <span style="color:#f92672">build</span>: <span style="color:#ae81ff">creator</span>
-    <span style="color:#f92672">entrypoint</span>: [<span style="color:#e6db74">&#34;mongo&#34;</span>,<span style="color:#e6db74">&#34;--host&#34;</span>,<span style="color:#e6db74">&#34;mongo1&#34;</span>,<span style="color:#e6db74">&#34;--port&#34;</span>,<span style="color:#e6db74">&#34;27017&#34;</span>,<span style="color:#e6db74">&#34;--eval&#34;</span>, <span style="color:#e6db74">&#39;rs.initiate( { _id : &#34;rs0&#34;,members: [{ _id: 0, host: &#34;mongo1:27017&#34; },{ _id: 1, host: &#34;mongo2:27017&#34; },{ _id: 2, host: &#34;mongo3:27017&#34; }   ]})&#39;</span>]
-    <span style="color:#f92672">depends_on</span>:
-      - <span style="color:#ae81ff">mongo1</span>
-      - <span style="color:#ae81ff">mongo2</span>
-      - <span style="color:#ae81ff">mongo3</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#66d9ef">creator</span>:
+    <span style="color:#66d9ef">build</span>: creator
+    <span style="color:#66d9ef">entrypoint</span>: [<span style="color:#e6db74">&#34;mongo&#34;</span>,<span style="color:#e6db74">&#34;--host&#34;</span>,<span style="color:#e6db74">&#34;mongo1&#34;</span>,<span style="color:#e6db74">&#34;--port&#34;</span>,<span style="color:#e6db74">&#34;27017&#34;</span>,<span style="color:#e6db74">&#34;--eval&#34;</span>, <span style="color:#e6db74">&#39;rs.initiate( { _id : &#34;rs0&#34;,members: [{ _id: 0, host: &#34;mongo1:27017&#34; },{ _id: 1, host: &#34;mongo2:27017&#34; },{ _id: 2, host: &#34;mongo3:27017&#34; }   ]})&#39;</span>]
+    <span style="color:#66d9ef">depends_on</span>:
+      - mongo1
+      - mongo2
+      - mongo3
 </code></pre></div><p>如果将<code>entrypoint</code>的执行命令提取到一个单独的的脚本中，会让整个页面看起来更加简洁。所以，新建一个<code>setup.sh</code>文件。其中的<a href="https://github.com/GitHubSi/Docker-Compose-MongoDB-Replica-Set/blob/master/replicaSet.js"><code>replicaSet.js</code></a>用于执行<code>rs.initiate</code>操作，详情可以查看<code>github</code>项目。其中的<code>sleep</code>指令只是为了保证：在执行<code>initiate</code>时<code>mongo</code>的3个服务都启动了。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#! /bin/bash
 </span><span style="color:#75715e"></span>
@@ -137,51 +142,51 @@ mongo mongodb://mongo1:37017 replicaSet.js
 docker run &lt;image&gt;
 </code></pre></div><h2 id="容器访问">容器访问</h2>
 <p>以<code>mongo1</code>为例，在原始的文件中，<code>docker-compose.yml</code>如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">mongo1</span>:
-    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">mongo1</span>
-    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">mongo:4-xenial</span>
-    <span style="color:#f92672">expose</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#66d9ef">mongo1</span>:
+    <span style="color:#66d9ef">container_name</span>: mongo1
+    <span style="color:#66d9ef">image</span>: mongo:<span style="color:#ae81ff">4</span>-xenial
+    <span style="color:#66d9ef">expose</span>:
       - <span style="color:#ae81ff">27017</span>
-    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
-    <span style="color:#f92672">entrypoint</span>: [ <span style="color:#e6db74">&#34;mongod&#34;</span>, <span style="color:#e6db74">&#34;--bind_ip_all&#34;</span>, <span style="color:#e6db74">&#34;--replSet&#34;</span>, <span style="color:#e6db74">&#34;rs0&#34;</span> ]
+    <span style="color:#66d9ef">restart</span>: always
+    <span style="color:#66d9ef">entrypoint</span>: [ <span style="color:#e6db74">&#34;mongod&#34;</span>, <span style="color:#e6db74">&#34;--bind_ip_all&#34;</span>, <span style="color:#e6db74">&#34;--replSet&#34;</span>, <span style="color:#e6db74">&#34;rs0&#34;</span> ]
 </code></pre></div><p>上面的配置，本地主机是无法访问容器的，我们至少需要暴露出一个端口。下面通过添加<code>ports</code>来指定容器外到容器内的端口映射。在<a href="https://neojos.com/blog/2019/2019-04-27-mongo-eof/">上一篇</a>中已经介绍过<code>ports</code>和<code>expose</code>的相关内容，感兴趣的可以去查看。之后，我们就可以通过37017端口来访问容器内的<code>mongo1</code>服务了。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">mongo1</span>:
-    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">mongo1</span>
-    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">mongo:4.0.4</span>
-    <span style="color:#f92672">expose</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#66d9ef">mongo1</span>:
+    <span style="color:#66d9ef">container_name</span>: mongo1
+    <span style="color:#66d9ef">image</span>: mongo:<span style="color:#ae81ff">4.0.4</span>
+    <span style="color:#66d9ef">expose</span>:
       - <span style="color:#ae81ff">37017</span>
-    <span style="color:#f92672">ports</span>:
+    <span style="color:#66d9ef">ports</span>:
       - <span style="color:#e6db74">&#34;37017:37017&#34;</span>
-    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
-    <span style="color:#f92672">entrypoint</span>: [ <span style="color:#e6db74">&#34;mongod&#34;</span>, <span style="color:#e6db74">&#34;--port&#34;</span>, <span style="color:#e6db74">&#34;37017&#34;</span>, <span style="color:#e6db74">&#34;--bind_ip_all&#34;</span>, <span style="color:#e6db74">&#34;--replSet&#34;</span>, <span style="color:#e6db74">&#34;rs0&#34;</span> ]
+    <span style="color:#66d9ef">restart</span>: always
+    <span style="color:#66d9ef">entrypoint</span>: [ <span style="color:#e6db74">&#34;mongod&#34;</span>, <span style="color:#e6db74">&#34;--port&#34;</span>, <span style="color:#e6db74">&#34;37017&#34;</span>, <span style="color:#e6db74">&#34;--bind_ip_all&#34;</span>, <span style="color:#e6db74">&#34;--replSet&#34;</span>, <span style="color:#e6db74">&#34;rs0&#34;</span> ]
 </code></pre></div><p>查看<a href="https://docs.mongodb.com/manual/reference/default-mongodb-port/">Default MongoDB Port</a>，<code>mongod</code>的默认端口其实是27017，而这里写成37017也是有原因的。未修改之前<code>mongod</code>的端口映射，如下所示。每个容器中的<code>mongo</code>服务都使用默认的27017端口，通过暴露不通的宿主主机端口来达到区分容器服务的目的。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">mongo1</span>:
-    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">mongo1</span>
-    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">mongo:4.0.4</span>
-    <span style="color:#f92672">expose</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#66d9ef">mongo1</span>:
+    <span style="color:#66d9ef">container_name</span>: mongo1
+    <span style="color:#66d9ef">image</span>: mongo:<span style="color:#ae81ff">4.0.4</span>
+    <span style="color:#66d9ef">expose</span>:
       - <span style="color:#ae81ff">27017</span>
-    <span style="color:#f92672">ports</span>:
+    <span style="color:#66d9ef">ports</span>:
       - <span style="color:#e6db74">&#34;27017:27017&#34;</span>
-    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
-    <span style="color:#f92672">entrypoint</span>: [ <span style="color:#e6db74">&#34;mongod&#34;</span>, <span style="color:#e6db74">&#34;--bind_ip_all&#34;</span>, <span style="color:#e6db74">&#34;--replSet&#34;</span>, <span style="color:#e6db74">&#34;rs0&#34;</span> ]
-  <span style="color:#f92672">mongo2</span>:
-    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">mongo2</span>
-    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">mongo:4.0.4</span>
-    <span style="color:#f92672">expose</span>:
+    <span style="color:#66d9ef">restart</span>: always
+    <span style="color:#66d9ef">entrypoint</span>: [ <span style="color:#e6db74">&#34;mongod&#34;</span>, <span style="color:#e6db74">&#34;--bind_ip_all&#34;</span>, <span style="color:#e6db74">&#34;--replSet&#34;</span>, <span style="color:#e6db74">&#34;rs0&#34;</span> ]
+  <span style="color:#66d9ef">mongo2</span>:
+    <span style="color:#66d9ef">container_name</span>: mongo2
+    <span style="color:#66d9ef">image</span>: mongo:<span style="color:#ae81ff">4.0.4</span>
+    <span style="color:#66d9ef">expose</span>:
       - <span style="color:#ae81ff">27017</span>
-    <span style="color:#f92672">ports</span>:
+    <span style="color:#66d9ef">ports</span>:
       - <span style="color:#e6db74">&#34;27018:27017&#34;</span>
-    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
-    <span style="color:#f92672">entrypoint</span>: [ <span style="color:#e6db74">&#34;mongod&#34;</span>, <span style="color:#e6db74">&#34;--bind_ip_all&#34;</span>, <span style="color:#e6db74">&#34;--replSet&#34;</span>, <span style="color:#e6db74">&#34;rs0&#34;</span> ]
-  <span style="color:#f92672">mongo3</span>:
-    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">mongo3</span>
-    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">mongo:4.0.4</span>
-    <span style="color:#f92672">expose</span>:
+    <span style="color:#66d9ef">restart</span>: always
+    <span style="color:#66d9ef">entrypoint</span>: [ <span style="color:#e6db74">&#34;mongod&#34;</span>, <span style="color:#e6db74">&#34;--bind_ip_all&#34;</span>, <span style="color:#e6db74">&#34;--replSet&#34;</span>, <span style="color:#e6db74">&#34;rs0&#34;</span> ]
+  <span style="color:#66d9ef">mongo3</span>:
+    <span style="color:#66d9ef">container_name</span>: mongo3
+    <span style="color:#66d9ef">image</span>: mongo:<span style="color:#ae81ff">4.0.4</span>
+    <span style="color:#66d9ef">expose</span>:
       - <span style="color:#ae81ff">27017</span>
-    <span style="color:#f92672">ports</span>:
+    <span style="color:#66d9ef">ports</span>:
       - <span style="color:#e6db74">&#34;27019:27017&#34;</span>
-    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
-    <span style="color:#f92672">entrypoint</span>: [ <span style="color:#e6db74">&#34;mongod&#34;</span>, <span style="color:#e6db74">&#34;--bind_ip_all&#34;</span>, <span style="color:#e6db74">&#34;--replSet&#34;</span>, <span style="color:#e6db74">&#34;rs0&#34;</span> ]
+    <span style="color:#66d9ef">restart</span>: always
+    <span style="color:#66d9ef">entrypoint</span>: [ <span style="color:#e6db74">&#34;mongod&#34;</span>, <span style="color:#e6db74">&#34;--bind_ip_all&#34;</span>, <span style="color:#e6db74">&#34;--replSet&#34;</span>, <span style="color:#e6db74">&#34;rs0&#34;</span> ]
 </code></pre></div><p>在单独连接<code>mongo</code>服务的时候，这样的配置是没有任何问题的。我们在命令行输入<code>mongo</code>，也会连接到其中任意一个<code>mongo</code>服务。如果恰好连接的不是<code>PRIMARY</code>节点，可以执行<code>rs.slaveOk()</code>来执行查询。</p>
 <p>但当使用<code>replicaSet</code>连接串来访问<code>mongo</code>服务时，连接却会失败。看看这个连接串，感觉不出任何问题。</p>
 <pre><code>mongo mongodb://127.0.0.1:27017,127.0.0.1:27018,127.0.0.1:27019/admin?replicaSet=rs0
@@ -194,33 +199,33 @@ less /etc/hosts
 <pre><code class="language-host" data-lang="host"># file: /etc/hosts
 127.0.0.1 mongo1, mongo2, mongo3
 </code></pre><p>基于这个原因，我们修改了容器内外暴露的端口。同时，修改各个服务<code>mongod</code>启动时的默认端口以及<code>replica set</code>的配置信息：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">mongo1</span>:
-    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">mongo1</span>
-    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">mongo:4.0.4</span>
-    <span style="color:#f92672">expose</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#66d9ef">mongo1</span>:
+    <span style="color:#66d9ef">container_name</span>: mongo1
+    <span style="color:#66d9ef">image</span>: mongo:<span style="color:#ae81ff">4.0.4</span>
+    <span style="color:#66d9ef">expose</span>:
       - <span style="color:#ae81ff">37017</span>
-    <span style="color:#f92672">ports</span>:
+    <span style="color:#66d9ef">ports</span>:
       - <span style="color:#e6db74">&#34;37017:37017&#34;</span>
-    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
-    <span style="color:#f92672">entrypoint</span>: [ <span style="color:#e6db74">&#34;mongod&#34;</span>, <span style="color:#e6db74">&#34;--port&#34;</span>, <span style="color:#e6db74">&#34;37017&#34;</span>, <span style="color:#e6db74">&#34;--bind_ip_all&#34;</span>, <span style="color:#e6db74">&#34;--replSet&#34;</span>, <span style="color:#e6db74">&#34;rs0&#34;</span> ]
-  <span style="color:#f92672">mongo2</span>:
-    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">mongo2</span>
-    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">mongo:4.0.4</span>
-    <span style="color:#f92672">expose</span>:
+    <span style="color:#66d9ef">restart</span>: always
+    <span style="color:#66d9ef">entrypoint</span>: [ <span style="color:#e6db74">&#34;mongod&#34;</span>, <span style="color:#e6db74">&#34;--port&#34;</span>, <span style="color:#e6db74">&#34;37017&#34;</span>, <span style="color:#e6db74">&#34;--bind_ip_all&#34;</span>, <span style="color:#e6db74">&#34;--replSet&#34;</span>, <span style="color:#e6db74">&#34;rs0&#34;</span> ]
+  <span style="color:#66d9ef">mongo2</span>:
+    <span style="color:#66d9ef">container_name</span>: mongo2
+    <span style="color:#66d9ef">image</span>: mongo:<span style="color:#ae81ff">4.0.4</span>
+    <span style="color:#66d9ef">expose</span>:
       - <span style="color:#ae81ff">37018</span>
-    <span style="color:#f92672">ports</span>:
+    <span style="color:#66d9ef">ports</span>:
       - <span style="color:#e6db74">&#34;37018:37018&#34;</span>
-    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
-    <span style="color:#f92672">entrypoint</span>: [ <span style="color:#e6db74">&#34;mongod&#34;</span>, <span style="color:#e6db74">&#34;--port&#34;</span>, <span style="color:#e6db74">&#34;37018&#34;</span>, <span style="color:#e6db74">&#34;--bind_ip_all&#34;</span>, <span style="color:#e6db74">&#34;--replSet&#34;</span>, <span style="color:#e6db74">&#34;rs0&#34;</span> ]
-  <span style="color:#f92672">mongo3</span>:
-    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">mongo3</span>
-    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">mongo:4.0.4</span>
-    <span style="color:#f92672">expose</span>:
+    <span style="color:#66d9ef">restart</span>: always
+    <span style="color:#66d9ef">entrypoint</span>: [ <span style="color:#e6db74">&#34;mongod&#34;</span>, <span style="color:#e6db74">&#34;--port&#34;</span>, <span style="color:#e6db74">&#34;37018&#34;</span>, <span style="color:#e6db74">&#34;--bind_ip_all&#34;</span>, <span style="color:#e6db74">&#34;--replSet&#34;</span>, <span style="color:#e6db74">&#34;rs0&#34;</span> ]
+  <span style="color:#66d9ef">mongo3</span>:
+    <span style="color:#66d9ef">container_name</span>: mongo3
+    <span style="color:#66d9ef">image</span>: mongo:<span style="color:#ae81ff">4.0.4</span>
+    <span style="color:#66d9ef">expose</span>:
       - <span style="color:#ae81ff">37019</span>
-    <span style="color:#f92672">ports</span>:
+    <span style="color:#66d9ef">ports</span>:
       - <span style="color:#e6db74">&#34;37019:37019&#34;</span>
-    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
-    <span style="color:#f92672">entrypoint</span>: [ <span style="color:#e6db74">&#34;mongod&#34;</span>, <span style="color:#e6db74">&#34;--port&#34;</span>, <span style="color:#e6db74">&#34;37019&#34;</span>, <span style="color:#e6db74">&#34;--bind_ip_all&#34;</span>, <span style="color:#e6db74">&#34;--replSet&#34;</span>, <span style="color:#e6db74">&#34;rs0&#34;</span> ]
+    <span style="color:#66d9ef">restart</span>: always
+    <span style="color:#66d9ef">entrypoint</span>: [ <span style="color:#e6db74">&#34;mongod&#34;</span>, <span style="color:#e6db74">&#34;--port&#34;</span>, <span style="color:#e6db74">&#34;37019&#34;</span>, <span style="color:#e6db74">&#34;--bind_ip_all&#34;</span>, <span style="color:#e6db74">&#34;--replSet&#34;</span>, <span style="color:#e6db74">&#34;rs0&#34;</span> ]
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// file :replicaSet.js
 </span><span style="color:#75715e"></span>
 <span style="color:#a6e22e">rsconf</span> <span style="color:#f92672">=</span> {
@@ -265,6 +270,8 @@ less /etc/hosts
   <div class="footer-right">
     <nav>
       <ul>
+         
+        <li><a href="/">主页</a></li>
          
         <li><a href="/blog">技术</a></li>
          

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> 新年彩蛋之中大奖 | 渐行渐远</title>
-  <meta name="description" content="John Doe&#39;s Personal blog about everything">
+  <meta name="description" content="Neojos Personal blog about everything">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
@@ -20,6 +20,8 @@
 <meta name="twitter:description" content="2019年计划通过福利彩票发家致富的，可以好好看一看这篇博客。作为新年彩蛋来送给大家，也希望大家能真的中大奖。—— 新年快乐，给每个有梦想的程序员"/>
 
   
+  
+    
   
   
   <link rel="stylesheet" href="https://neojos.com/css/style-white.css">
@@ -45,7 +47,7 @@
     <header id="header">
   <a href="https://neojos.com/">
   
-    <div id="logo" style="background-image: url()"></div>
+    <div id="logo" style="background-image: url(https://neojos.com/img/mifeng.jpeg)"></div>
   
   <div id="title">
     <h1>渐行渐远</h1>
@@ -56,6 +58,8 @@
       <li class="icon">
         <a href="#"><i class="fas fa-bars fa-2x"></i></a>
       </li>
+      
+        <li><a href="/">主页</a></li>
       
         <li><a href="/blog">技术</a></li>
       
@@ -70,6 +74,7 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
+  <h1 id="title">新年彩蛋之中大奖</h1>
   <div class="content" itemprop="articleBody">
   
     <blockquote>
@@ -248,7 +253,7 @@
 	<span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">line</span>)
 	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
 }
-</code></pre></div><p>**<code>GetLatestHistory</code>**用于获取最近几期的开奖号码。因为每行写入的长度相同，所以通过计算，可以得出当前文件的行数，并将文件的<code>offset</code>定位到指定的位置，从具体的<code>offset</code>开始读取。另外，因为我们写入的模式是<code>APPEND</code>，所以将获取到的<code>slice</code>再做一次顺序反转，便得到最近几期的开奖记录了。</p>
+</code></pre></div><p><strong><code>GetLatestHistory</code></strong>用于获取最近几期的开奖号码。因为每行写入的长度相同，所以通过计算，可以得出当前文件的行数，并将文件的<code>offset</code>定位到指定的位置，从具体的<code>offset</code>开始读取。另外，因为我们写入的模式是<code>APPEND</code>，所以将获取到的<code>slice</code>再做一次顺序反转，便得到最近几期的开奖记录了。</p>
 <h2 id="生成图">生成图</h2>
 <p>通过<a href="https://github.com/gonum/plot"><code>plot</code></a>来绘制一些简易的图形。将最近的开奖号码作为数据源，来观察数据的走势。虽然确实没啥用处。</p>
 <p>这段代码直接运行会<code>panic</code>，因为修改了<code>plot</code>中的部分代码。</p>
@@ -309,6 +314,8 @@
   <div class="footer-right">
     <nav>
       <ul>
+         
+        <li><a href="/">主页</a></li>
          
         <li><a href="/blog">技术</a></li>
          

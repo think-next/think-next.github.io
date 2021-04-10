@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> HBase Region Split | 渐行渐远</title>
-  <meta name="description" content="John Doe&#39;s Personal blog about everything">
+  <meta name="description" content="Neojos Personal blog about everything">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
@@ -20,6 +20,8 @@
 <meta name="twitter:description" content="Tables are automatically partitioned horizontally by HBase into regions."/>
 
   
+  
+    
   
   
   <link rel="stylesheet" href="https://neojos.com/css/style-white.css">
@@ -45,7 +47,7 @@
     <header id="header">
   <a href="https://neojos.com/">
   
-    <div id="logo" style="background-image: url()"></div>
+    <div id="logo" style="background-image: url(https://neojos.com/img/mifeng.jpeg)"></div>
   
   <div id="title">
     <h1>渐行渐远</h1>
@@ -56,6 +58,8 @@
       <li class="icon">
         <a href="#"><i class="fas fa-bars fa-2x"></i></a>
       </li>
+      
+        <li><a href="/">主页</a></li>
       
         <li><a href="/blog">技术</a></li>
       
@@ -70,6 +74,7 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
+  <h1 id="title">HBase Region Split</h1>
   <div class="content" itemprop="articleBody">
   
     <blockquote>
@@ -90,7 +95,7 @@
 <p>相应的，我们需要了解它写入数据的方式：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">put</span> <span style="color:#960050;background-color:#1e0010">’</span>&lt;<span style="color:#a6e22e">table</span> <span style="color:#a6e22e">name</span>&gt;<span style="color:#960050;background-color:#1e0010">’</span>,<span style="color:#960050;background-color:#1e0010">’</span><span style="color:#a6e22e">row1</span><span style="color:#960050;background-color:#1e0010">’</span>,<span style="color:#960050;background-color:#1e0010">’</span>&lt;<span style="color:#a6e22e">colfamily</span>:<span style="color:#a6e22e">colname</span>&gt;<span style="color:#960050;background-color:#1e0010">’</span>,<span style="color:#960050;background-color:#1e0010">’</span>&lt;<span style="color:#a6e22e">value</span>&gt;<span style="color:#960050;background-color:#1e0010">’</span>
 </code></pre></div><h2 id="constantsizeregionsplitpolicy"><code>ConstantSizeRegionSplitPolicy</code></h2>
-<p><code>Region</code>有两个重要的属性<code>StartKey</code>和<code>EndKey</code>，用来表示<code>Region</code>维护的<code>RowKey</code>范围，当<code>Region Size</code>达到一定的阈值，<code>HBase</code>就会对其执行<code>split</code>操作，<code>Region</code>被划分为两个，其中一个<code>Region</code>，称呼为**<code>Region_1</code>**包含的<code>StartKey</code>到<code>MidKey</code>，另一个**<code>Region_2</code>**包含<code>MidKey</code>到<code>EndKey</code>的数据。这也引申出<code>HBase</code>的前缀范围查询的功能。</p>
+<p><code>Region</code>有两个重要的属性<code>StartKey</code>和<code>EndKey</code>，用来表示<code>Region</code>维护的<code>RowKey</code>范围，当<code>Region Size</code>达到一定的阈值，<code>HBase</code>就会对其执行<code>split</code>操作，<code>Region</code>被划分为两个，其中一个<code>Region</code>，称呼为<strong><code>Region_1</code></strong>包含的<code>StartKey</code>到<code>MidKey</code>，另一个<strong><code>Region_2</code></strong>包含<code>MidKey</code>到<code>EndKey</code>的数据。这也引申出<code>HBase</code>的前缀范围查询的功能。</p>
 <p>之所以可以这样划分，是因为<code>HBase</code>中数据行是以<code>RowKey</code>的字典序排列的，并且<code>RowKey</code>是全局唯一的。这样的划分策略对<code>RowKey</code>的设计有点需求，如果<code>RowKey</code>的随机性不好，在分布式集群中，负责<code>Region_1</code>的<code>RegionServer</code>负载和负责<code>Region_2</code>的负载相差可能会很多，导致资源的利用很不均衡。</p>
 <p>其实也很好理解，就比如以中国的姓作为<code>RowKey</code>的前缀，那么负责“王、李”的<code>RegionServer</code>的负载就会很高，因为这些数据都会根据<code>StartKey-EndKey</code>写入到具体的<code>Region</code>上。很多时候，为了使数据分布的更加均匀，充分利用集群的资源，我们需要对原始的<code>RowKey</code>做一次<code>HASH</code>处理，在原始的<code>RowKey</code>和实际存储的<code>RowKey</code>之间生成一个固定的映射关系。</p>
 <h2 id="extension"><code>extension</code></h2>
@@ -113,6 +118,8 @@
   <div class="footer-right">
     <nav>
       <ul>
+         
+        <li><a href="/">主页</a></li>
          
         <li><a href="/blog">技术</a></li>
          

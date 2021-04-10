@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> 了解Laravel依赖注入 | 渐行渐远</title>
-  <meta name="description" content="John Doe&#39;s Personal blog about everything">
+  <meta name="description" content="Neojos Personal blog about everything">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
@@ -20,6 +20,8 @@
 <meta name="twitter:description" content="随笔 突然想了解一下Laravel，然后发现：它没有我想象的那么简单，很多的调用都找不到入口。加载view的逻辑，看了很长时间，还是没有搞明白：一个值传递的参数，怎么好好的就变了呢？下面都是看别的的文章的总结，我还要继续完善，直到搞清楚这个view是怎么实现的。"/>
 
   
+  
+    
   
   
   <link rel="stylesheet" href="https://neojos.com/css/style-white.css">
@@ -45,7 +47,7 @@
     <header id="header">
   <a href="https://neojos.com/">
   
-    <div id="logo" style="background-image: url()"></div>
+    <div id="logo" style="background-image: url(https://neojos.com/img/mifeng.jpeg)"></div>
   
   <div id="title">
     <h1>渐行渐远</h1>
@@ -56,6 +58,8 @@
       <li class="icon">
         <a href="#"><i class="fas fa-bars fa-2x"></i></a>
       </li>
+      
+        <li><a href="/">主页</a></li>
       
         <li><a href="/blog">技术</a></li>
       
@@ -70,6 +74,7 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
+  <h1 id="title">了解Laravel依赖注入</h1>
   <div class="content" itemprop="articleBody">
   
     <h2 id="随笔">随笔</h2>
@@ -150,6 +155,8 @@ Target [Tests\Unit\SessionStorage] is not instantiable while building [Tests\Uni
   <div class="footer-right">
     <nav>
       <ul>
+         
+        <li><a href="/">主页</a></li>
          
         <li><a href="/blog">技术</a></li>
          

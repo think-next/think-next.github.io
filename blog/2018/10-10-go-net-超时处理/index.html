@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> Go net 超时处理 | 渐行渐远</title>
-  <meta name="description" content="John Doe&#39;s Personal blog about everything">
+  <meta name="description" content="Neojos Personal blog about everything">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
@@ -20,6 +20,8 @@
 <meta name="twitter:description" content="序 这篇文章详细介绍了，net/http包中对应HTTP的各个阶段，如何使用timeout来进行读/写超时控制以及服务端和客户端支持设置的timeout类型。本质上，这些timeout都是代码层面对各个函数设置的处理时间。比如，读取客户端读取请求头、读取响应体的时间，本质上都是响应函数的超时时间。"/>
 
   
+  
+    
   
   
   <link rel="stylesheet" href="https://neojos.com/css/style-white.css">
@@ -45,7 +47,7 @@
     <header id="header">
   <a href="https://neojos.com/">
   
-    <div id="logo" style="background-image: url()"></div>
+    <div id="logo" style="background-image: url(https://neojos.com/img/mifeng.jpeg)"></div>
   
   <div id="title">
     <h1>渐行渐远</h1>
@@ -56,6 +58,8 @@
       <li class="icon">
         <a href="#"><i class="fas fa-bars fa-2x"></i></a>
       </li>
+      
+        <li><a href="/">主页</a></li>
       
         <li><a href="/blog">技术</a></li>
       
@@ -70,6 +74,7 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
+  <h1 id="title">Go net 超时处理</h1>
   <div class="content" itemprop="articleBody">
   
     <h2 id="序"><code>序</code></h2>
@@ -234,6 +239,8 @@ func main() {
   <div class="footer-right">
     <nav>
       <ul>
+         
+        <li><a href="/">主页</a></li>
          
         <li><a href="/blog">技术</a></li>
          
