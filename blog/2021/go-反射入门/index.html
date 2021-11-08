@@ -78,20 +78,39 @@
   <div class="content" itemprop="articleBody">
   
     <p>通过下面的例子，我们来深入了解 <code>reflect</code> 数据包。我们定义<code>People</code>的结构体类型，来开始探索。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">People</span> <span style="color:#66d9ef">struct</span> {
-    <span style="color:#a6e22e">Age</span> <span style="color:#66d9ef">int64</span>
-}
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="display:block;width:100%;background-color:#e5e5e5"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span></span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="display:block;width:100%;background-color:#e5e5e5"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span></span><span style="display:block;width:100%;background-color:#e5e5e5"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span></span><span style="display:block;width:100%;background-color:#e5e5e5"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span></span><span style="display:block;width:100%;background-color:#e5e5e5"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span></span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">type</span> <span style="color:#000">People</span> <span style="color:#00f">struct</span> {
+<span style="display:block;width:100%;background-color:#e5e5e5">    <span style="color:#000">Age</span> <span style="color:#00f">int64</span>
+</span>}
+<span style="display:block;width:100%;background-color:#e5e5e5">
+</span><span style="display:block;width:100%;background-color:#e5e5e5"><span style="color:#00f">func</span> <span style="color:#000">main</span>() {
+</span><span style="display:block;width:100%;background-color:#e5e5e5">    <span style="color:#000">p</span> := &amp;<span style="color:#000">People</span>{
+</span><span style="display:block;width:100%;background-color:#e5e5e5">        <span style="color:#000">Age</span>: <span style="color:#3af">30</span>,
+</span>    }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">p</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">People</span>{
-        <span style="color:#a6e22e">Age</span>: <span style="color:#ae81ff">30</span>,
-    }
-
-  	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">reflect</span>.<span style="color:#a6e22e">ValueOf</span>(<span style="color:#a6e22e">p</span>).<span style="color:#a6e22e">Kind</span>())		<span style="color:#75715e">// ouput: ptr
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">value</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">reflect</span>.<span style="color:#a6e22e">Indirect</span>(<span style="color:#a6e22e">reflect</span>.<span style="color:#a6e22e">ValueOf</span>(<span style="color:#a6e22e">p</span>))
-  	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">Kind</span>())		<span style="color:#75715e">// output: struct
-</span><span style="color:#75715e"></span>}
-</code></pre></div><p>上面这个例子，<code>reflect.Indirect</code> 返回的是底层的值类型，所以，调用<code>Kind</code>返回的类型为 <code>struct</code>。而它本身的 <code>Kind</code> 类型为<code>ptr</code>。查看源码中  <code>Kind</code> 的数据类型定义。通过这些常量的声明，可以帮助我们理解 Go 的基础类型。</p>
+  	<span style="color:#000">fmt</span>.<span style="color:#000">Println</span>(<span style="color:#000">reflect</span>.<span style="color:#000">ValueOf</span>(<span style="color:#000">p</span>).<span style="color:#000">Kind</span>())		<span style="color:#888;font-style:italic">// ouput: ptr
+</span><span style="color:#888;font-style:italic"></span>    <span style="color:#000">value</span> := <span style="color:#000">reflect</span>.<span style="color:#000">Indirect</span>(<span style="color:#000">reflect</span>.<span style="color:#000">ValueOf</span>(<span style="color:#000">p</span>))
+  	<span style="color:#000">fmt</span>.<span style="color:#000">Println</span>(<span style="color:#000">value</span>.<span style="color:#000">Kind</span>())		<span style="color:#888;font-style:italic">// output: struct
+</span><span style="color:#888;font-style:italic"></span>}</code></pre></td></tr></table>
+</div>
+</div>
+<p>上面这个例子，<code>reflect.Indirect</code> 返回的是底层的值类型，所以，调用<code>Kind</code>返回的类型为 <code>struct</code>。而它本身的 <code>Kind</code> 类型为<code>ptr</code>。查看源码中  <code>Kind</code> 的数据类型定义。通过这些常量的声明，可以帮助我们理解 Go 的基础类型。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// The zero Kind is not a valid kind.
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Kind</span> <span style="color:#66d9ef">uint</span>
 
