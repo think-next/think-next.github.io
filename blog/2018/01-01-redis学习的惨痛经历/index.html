@@ -74,7 +74,27 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 id="title">Redis学习的惨痛经历</h1>
+  <h1 id="title">Redis学习的惨痛经历</h1>文章 357 字
+  <aside>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#调试和修复">调试和修复</a>
+      <ul>
+        <li><a href="#在调用redis结束后关闭连接">在调用redis结束后关闭连接</a></li>
+        <li><a href="#ab-testing-redis库">A/B-Testing Redis库</a></li>
+        <li><a href="#更新redis">更新redis</a></li>
+        <li><a href="#调试延迟问题">调试延迟问题</a></li>
+        <li><a href="#为每个业务创建专门的实例">为每个业务创建专门的实例</a></li>
+        <li><a href="#on时间复杂度">O(n)时间复杂度</a></li>
+        <li><a href="#每个连接创建一个请求">每个连接创建一个请求</a></li>
+        <li><a href="#数据拆分">数据拆分</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+  </aside>
   <div class="content" itemprop="articleBody">
   
     <p>我们开发的产品类似于 <a href="http://www.trivago.com/">trivago hotel search</a>，<a href="http://redis.io/">Redis</a>也多用来缓存临时数据。比如将操作频繁的流水数据先存储到redis，之后迁移到关系型数据库做持久化。</p>
@@ -255,7 +275,6 @@ min: 0, max: 463, avg: 2.03 (19443 samples)
     </nav>
   </div>
 </footer>
-
 
   </div>
 </body>

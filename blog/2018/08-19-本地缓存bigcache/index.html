@@ -74,7 +74,17 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 id="title">本地缓存BigCache</h1>
+  <h1 id="title">本地缓存BigCache</h1>文章 260 字
+  <aside>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#omitting-gc"><code>Omitting GC</code></a></li>
+    <li><a href="#concurrency"><code>Concurrency</code></a></li>
+    <li><a href="#entry中存储的数据"><code>Entry</code>中存储的数据</a></li>
+    <li><a href="#queue存储"><code>queue</code>存储</a></li>
+  </ul>
+</nav>
+  </aside>
   <div class="content" itemprop="articleBody">
   
     <p><code>BigCache</code>的作者做了详细的阐述，尽在这里：<a href="https://allegro.tech/2016/03/writing-fast-cache-service-in-go.html"><code>Writing a very fast cache service with millions of entries in Go</code></a>。不得不说，作者的表述非常完美，给它点赞。<code>GitHub</code>地址在：<a href="https://github.com/allegro/bigcache">github.com/allegro/bigcache</a>。<code>Usage</code>非常简单。</p>
@@ -190,7 +200,6 @@ q.push(make([]byte, emptyBlobLen), emptyBlobLen)
     </nav>
   </div>
 </footer>
-
 
   </div>
 </body>

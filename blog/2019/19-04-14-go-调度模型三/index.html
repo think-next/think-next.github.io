@@ -74,7 +74,19 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 id="title">Go 调度模型（三）</h1>
+  <h1 id="title">Go 调度模型（三）</h1>文章 141 字
+  <aside>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#scheduler-trace">Scheduler Trace</a></li>
+    <li><a href="#memory-allocator-trace">Memory Allocator Trace</a></li>
+    <li><a href="#spinning-thread">Spinning thread</a></li>
+    <li><a href="#执行模型">执行模型</a></li>
+    <li><a href="#阻塞模型">阻塞模型</a></li>
+    <li><a href="#偷g模型">偷G模型</a></li>
+  </ul>
+</nav>
+  </aside>
   <div class="content" itemprop="articleBody">
   
     <blockquote>
@@ -156,7 +168,6 @@ SCHED 1008ms: gomaxprocs=1 idleprocs=0 threads=3 spinningthreads=0 idlethreads=1
     </nav>
   </div>
 </footer>
-
 
   </div>
 </body>

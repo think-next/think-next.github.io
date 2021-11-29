@@ -74,7 +74,20 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 id="title">shell操作文本实例</h1>
+  <h1 id="title">shell操作文本实例</h1>文章 76 字
+  <aside>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#打印符合条件的前一行记录">打印符合条件的前一行记录</a></li>
+    <li><a href="#求解两个文件的差集">求解两个文件的差集</a>
+      <ul>
+        <li><a href="#使用comm实现">使用<code>comm</code>实现</a></li>
+        <li><a href="#使用uniq及sort实现">使用<code>uniq</code>及<code>sort</code>实现</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </aside>
   <div class="content" itemprop="articleBody">
   
     <p>从掌握<code>awk</code>的基本指令，到在工作中熟练使用，中间还有一段路要走！通过总结一些工作中需要的案例，来加深理解。</p>
@@ -140,7 +153,6 @@ sort merge.txt | uniq -c | sort | head -10
     </nav>
   </div>
 </footer>
-
 
   </div>
 </body>

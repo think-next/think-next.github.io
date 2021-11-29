@@ -74,7 +74,22 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 id="title">IP Routing</h1>
+  <h1 id="title">IP Routing</h1>文章 63 字
+  <aside>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#routing-table"><code>Routing Table</code></a>
+      <ul>
+        <li><a href="#了解falgs参数">了解<code>Falgs</code>参数：</a></li>
+        <li><a href="#路由查询的顺序">路由查询的顺序：</a></li>
+      </ul>
+    </li>
+    <li><a href="#host-unreachable"><code>Host unreachable</code></a></li>
+    <li><a href="#icmp-redirect-error"><code>ICMP Redirect Error</code></a></li>
+  </ul>
+</nav>
+  </aside>
   <div class="content" itemprop="articleBody">
   
     <p>假设你在跟小米公司对接服务，那你有没有好奇过：自家的服务器是如何找到小米公司的服务器的。为了安全，公司的服务器可都是在内网的，用户是无法直接访问到的。好好了解一下Ip Routing，它可以给你部分答案。</p>
@@ -129,7 +144,6 @@ Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
     </nav>
   </div>
 </footer>
-
 
   </div>
 </body>

@@ -74,7 +74,27 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 id="title">数据一致性（一）</h1>
+  <h1 id="title">数据一致性（一）</h1>文章 81 字
+  <aside>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基础理论">基础理论</a>
+      <ul>
+        <li><a href="#acid"><code>ACID</code></a></li>
+        <li><a href="#cap"><code>CAP</code></a></li>
+        <li><a href="#base"><code>BASE</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#购买业务">购买业务</a></li>
+    <li><a href="#代码设计">代码设计</a></li>
+    <li><a href="#如何补偿">如何补偿</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </aside>
   <div class="content" itemprop="articleBody">
   
     <p><code>MySQL</code>的事务是数据一致性的典范，事务内的执行要么都成功，要么都失败。但业务系统涉及系统间的相互调用，涉及的数据库也不尽相同，所以实现数据一致性还是有挑战的。</p>
@@ -177,7 +197,6 @@
     </nav>
   </div>
 </footer>
-
 
   </div>
 </body>

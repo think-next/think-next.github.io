@@ -74,7 +74,21 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 id="title">WebSocket基础开发</h1>
+  <h1 id="title">WebSocket基础开发</h1>文章 393 字
+  <aside>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#模拟聊天室">模拟聊天室</a></li>
+    <li><a href="#部署websocket集群服务">部署WebSocket集群服务</a>
+      <ul>
+        <li><a href="#redis的发布订阅">Redis的发布/订阅</a></li>
+      </ul>
+    </li>
+    <li><a href="#连接断开到重连的数据处理">连接断开到重连的数据处理</a></li>
+    <li><a href="#用户与用户间的相互通讯">用户与用户间的相互通讯</a></li>
+  </ul>
+</nav>
+  </aside>
   <div class="content" itemprop="articleBody">
   
     <p>WebSocket是一种网络通讯协议。在服务器端可以将HTTP请求升级为WebSocket请求。区别于普通的HTTP请求，WebSocket中存在特殊的字段标识：</p>
@@ -280,7 +294,6 @@ go func() {
     </nav>
   </div>
 </footer>
-
 
   </div>
 </body>

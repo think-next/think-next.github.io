@@ -74,7 +74,19 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 id="title">Net Transport</h1>
+  <h1 id="title">Net Transport</h1>文章 565 字
+  <aside>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#dial"><code>Dial</code></a></li>
+    <li><a href="#transport"><code>Transport</code></a></li>
+    <li><a href="#roundtripper">RoundTripper</a></li>
+    <li><a href="#缓存idle连接">缓存<code>Idle</code>连接</a></li>
+    <li><a href="#test-case"><code>Test Case</code></a></li>
+    <li><a href="#tcp-keepalive-timer"><code>TCP KeepAlive Timer</code></a></li>
+  </ul>
+</nav>
+  </aside>
   <div class="content" itemprop="articleBody">
   
     <p>在调用第三方请求时，正确使用<a href="https://godoc.org/net/http#Client"><code>Client</code></a>也不是一件非常容易的事。</p>
@@ -282,7 +294,6 @@ func TestRequestBaiDu(t *testing.T) {
     </nav>
   </div>
 </footer>
-
 
   </div>
 </body>

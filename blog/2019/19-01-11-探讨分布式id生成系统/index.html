@@ -74,7 +74,18 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 id="title">探讨分布式ID生成系统</h1>
+  <h1 id="title">探讨分布式ID生成系统</h1>文章 339 字
+  <aside>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#uuid构成"><code>UUID</code>构成</a></li>
+    <li><a href="#mongodbs-objectid"><code>MongoDB's ObjectId</code></a></li>
+    <li><a href="#twitter-snowflake"><code>Twitter Snowflake</code></a></li>
+    <li><a href="#database-ticket-servers"><code>Database Ticket Servers</code></a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+  </aside>
   <div class="content" itemprop="articleBody">
   
     <p>全称<code>Universally Unique Identifier</code>，<code>UUID</code>占128<code>bit</code>，也就是16个英文字符的长度（16<code>byte</code>），需要强调的是，它的生成无需中心处理程序。</p>
@@ -169,7 +180,6 @@ id <span style="color:#f92672">|=</span> sequence<span style="color:#f92672">;</
     </nav>
   </div>
 </footer>
-
 
   </div>
 </body>

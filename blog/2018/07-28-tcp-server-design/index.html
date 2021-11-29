@@ -74,7 +74,15 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 id="title">Tcp Server Design</h1>
+  <h1 id="title">Tcp Server Design</h1>文章 56 字
+  <aside>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#listen状态"><code>listen</code>状态</a></li>
+    <li><a href="#request-queue"><code>request queue</code></a></li>
+  </ul>
+</nav>
+  </aside>
   <div class="content" itemprop="articleBody">
   
     <p>绝大多数的<code>TCP</code>服务都是支持并发的。当一个连接请求到达时，服务端接收这个连接，然后创建一个新的线程(或进程)来处理这个连接。</p>
@@ -120,7 +128,6 @@ tcp46      0      0  *.3900                 *.*                    LISTEN
     </nav>
   </div>
 </footer>
-
 
   </div>
 </body>

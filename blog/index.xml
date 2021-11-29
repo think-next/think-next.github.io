@@ -6,10 +6,28 @@
     <description>Recent content on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 19 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 29 Nov 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://neojos.com/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>回溯算法</title>
+      <link>https://neojos.com/blog/2021/002.-%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Mon, 29 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neojos.com/blog/2021/002.-%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/</guid>
+      <description>遇到计算排列或者组合的问题，总是可以通过回溯的思想来解决。回溯的处理思路，就是遇到了岔路口，按照顺序依次去走每一个小路，当前的小路走不通时， 重新回到上一个岔路口，记录走另一条没有走的路。</description>
+    </item>
+    
+    <item>
+      <title>算法题 - 组合总数</title>
+      <link>https://neojos.com/blog/2021/001.-%E7%AE%97%E6%B3%95%E9%A2%98-%E7%BB%84%E5%90%88%E6%80%BB%E6%95%B0/</link>
+      <pubDate>Sun, 28 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neojos.com/blog/2021/001.-%E7%AE%97%E6%B3%95%E9%A2%98-%E7%BB%84%E5%90%88%E6%80%BB%E6%95%B0/</guid>
+      <description>力扣上的一道算法题，39题，内容如下</description>
+    </item>
     
     <item>
       <title>Go 反射入门</title>

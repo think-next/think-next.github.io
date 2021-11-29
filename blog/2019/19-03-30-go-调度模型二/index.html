@@ -74,7 +74,23 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 id="title">Go 调度模型（二）</h1>
+  <h1 id="title">Go 调度模型（二）</h1>文章 69 字
+  <aside>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#os调度结构"><code>OS</code>调度结构</a>
+      <ul>
+        <li><a href="#single-scheduler"><code>single scheduler</code></a></li>
+        <li><a href="#multi-scheduler-with-global-queue"><code>multi scheduler with global queue</code></a></li>
+        <li><a href="#multi-scheduler-with-local-queue"><code>multi scheduler with local queue</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#gpm"><code>GPM</code></a></li>
+    <li><a href="#m阻塞"><code>M</code>阻塞</a></li>
+    <li><a href="#p的改进"><code>P</code>的改进</a></li>
+  </ul>
+</nav>
+  </aside>
   <div class="content" itemprop="articleBody">
   
     <blockquote>
@@ -151,7 +167,6 @@
     </nav>
   </div>
 </footer>
-
 
   </div>
 </body>

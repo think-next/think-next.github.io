@@ -74,7 +74,16 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 id="title">MySQL增量数据订阅和消费</h1>
+  <h1 id="title">MySQL增量数据订阅和消费</h1>文章 53 字
+  <aside>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#canal的工作原理"><code>canal</code>的工作原理</a></li>
+    <li><a href="#canal-go的工作原理和流程"><code>canal-go</code>的工作原理和流程</a></li>
+  </ul>
+</nav>
+  </aside>
   <div class="content" itemprop="articleBody">
   
     <p>在订单交付系统中，做到保证权益数据的实时一致性非常难，很多都选择保证数据的最终一致性。在我们的生产环境中，为了保证数据的最终一致性，专门有一个微服务来处理检验异常订单、发告警通知、及时补偿修复异常订单。</p>
@@ -131,7 +140,6 @@
     </nav>
   </div>
 </footer>
-
 
   </div>
 </body>

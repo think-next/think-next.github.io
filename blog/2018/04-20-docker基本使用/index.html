@@ -74,7 +74,36 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 id="title">docker基本使用</h1>
+  <h1 id="title">docker基本使用</h1>文章 407 字
+  <aside>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装redis">安装redis</a>
+      <ul>
+        <li><a href="#bitmap-使用">bitmap 使用</a></li>
+      </ul>
+    </li>
+    <li><a href="#example"><code>Example</code></a></li>
+    <li><a href="#dockerfile指令"><code>Dockerfile</code>指令</a>
+      <ul>
+        <li><a href="#from"><code>FROM</code></a></li>
+        <li><a href="#run"><code>RUN</code></a></li>
+        <li><a href="#env"><code>ENV</code></a></li>
+        <li><a href="#copy"><code>COPY</code></a></li>
+        <li><a href="#cmd"><code>CMD</code></a></li>
+        <li><a href="#entrypoint"><code>ENTRYPOINT</code></a></li>
+        <li><a href="#expose"><code>EXPOSE</code></a></li>
+        <li><a href="#workdir"><code>WORKDIR</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#多阶段构建">多阶段构建</a>
+      <ul>
+        <li><a href="#example-1"><code>Example</code></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </aside>
   <div class="content" itemprop="articleBody">
   
     <p>知道一点比完全不知道要好，对问题有深入了解比仅知道皮毛要好。作为<code>docker</code>的一个初学者，现在对<code>docker</code>做简单记录。希望随着工作、生活，更深入的了解学习<code>docker</code>。这也是一件很有意义的事。</p>
@@ -236,7 +265,6 @@ CMD [&quot;bash&quot;, &quot;-c&quot;, &quot;/data/src/${RUN_PROG:=baby} --log_d
     </nav>
   </div>
 </footer>
-
 
   </div>
 </body>

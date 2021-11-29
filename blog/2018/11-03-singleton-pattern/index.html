@@ -74,7 +74,20 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 id="title">singleton pattern</h1>
+  <h1 id="title">singleton pattern</h1>文章 220 字
+  <aside>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#synconce简介"><code>sync.Once</code>简介</a></li>
+    <li><a href="#synconce设计思路"><code>sync.Once</code>设计思路</a>
+      <ul>
+        <li><a href="#reason"><code>reason</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#lock"><code>lock</code></a></li>
+  </ul>
+</nav>
+  </aside>
   <div class="content" itemprop="articleBody">
   
     <p><em><!-- raw HTML omitted -->版本 0.02<!-- raw HTML omitted --></em></p>
@@ -187,7 +200,6 @@ func (m *Mutex) Lock() {
     </nav>
   </div>
 </footer>
-
 
   </div>
 </body>

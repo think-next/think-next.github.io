@@ -74,7 +74,24 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 id="title">Gin使用</h1>
+  <h1 id="title">Gin使用</h1>文章 199 字
+  <aside>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#接口测试">接口测试</a>
+      <ul>
+        <li><a href="#使用postman">使用<code>Postman</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#使用test">使用<code>Test</code></a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#middleware"><code>Middleware</code></a></li>
+  </ul>
+</nav>
+  </aside>
   <div class="content" itemprop="articleBody">
   
     <p><a href="https://github.com/gin-gonic/gin"><code>Gin</code></a>对<code>net/http</code>包做了封装，支持路由、中间件等特性，极大的方便对<code>Http Server</code>的开发。文章通过一个<code>Test</code>例子，来简要介绍。对于特别基础的部分，请阅读参考文章。</p>
@@ -200,7 +217,6 @@ articleRoutes.GET(&quot;/create&quot;, setUserStatus(), showArticleCreationPage)
     </nav>
   </div>
 </footer>
-
 
   </div>
 </body>

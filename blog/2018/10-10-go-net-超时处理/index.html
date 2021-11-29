@@ -74,7 +74,21 @@
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 id="title">Go net 超时处理</h1>
+  <h1 id="title">Go net 超时处理</h1>文章 509 字
+  <aside>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#序"><code>序</code></a></li>
+    <li><a href="#正文">正文</a></li>
+    <li><a href="#setdeadline"><code>SetDeadline</code></a></li>
+    <li><a href="#server-timeouts"><code>Server Timeouts</code></a></li>
+    <li><a href="#httplistenandserve-is-doing-it-wrong"><code>http.ListenAndServe</code> is doing it wrong</a></li>
+    <li><a href="#about-streaming"><code>About streaming</code></a></li>
+    <li><a href="#client-timeouts"><code>Client Timeouts</code></a></li>
+    <li><a href="#cancel-and-context"><code>Cancel and Context</code></a></li>
+  </ul>
+</nav>
+  </aside>
   <div class="content" itemprop="articleBody">
   
     <h2 id="序"><code>序</code></h2>
@@ -250,7 +264,6 @@ func main() {
     </nav>
   </div>
 </footer>
-
 
   </div>
 </body>
