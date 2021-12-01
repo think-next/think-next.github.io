@@ -39,6 +39,22 @@
 
   
   
+
+  <style>
+    :root {
+      font-size: 1em;
+      --main-font: orange;
+    }
+
+    .featured {
+      width: 20em;
+      height: calc(6em - 16px);
+      font-size: 1rem;
+      border-radius: .15em;
+      background-color: var(--main-font);
+      box-shadow: .45em .25em #6f9090;
+    }
+  </style>
 </head>
 
 <body class="max-width mx-auto px3 ltr">
@@ -175,6 +191,9 @@
 </code></pre></div><p>这样我们补偿方法中执行的不再是回滚操作，而是<code>Do</code>方法的重试。如果补偿成功，继续执行后续的操作，如果补偿失败，记录下该状态，后续看看怎么补偿。</p>
 
   
+
+    
+    
   </div>
 </article>
 

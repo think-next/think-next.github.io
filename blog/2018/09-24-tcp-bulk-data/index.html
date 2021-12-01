@@ -39,6 +39,22 @@
 
   
   
+
+  <style>
+    :root {
+      font-size: 1em;
+      --main-font: orange;
+    }
+
+    .featured {
+      width: 20em;
+      height: calc(6em - 16px);
+      font-size: 1rem;
+      border-radius: .15em;
+      background-color: var(--main-font);
+      box-shadow: .45em .25em #6f9090;
+    }
+  </style>
 </head>
 
 <body class="max-width mx-auto px3 ltr">
@@ -103,6 +119,9 @@
 <p><code>sliding window</code>有效的提升了<code>TCP</code>的数据传输效率，使得接收数据的一端可以在收到多个<code>packet</code>后统一回复最后一个<code>packet</code>的<code>ACK</code>消息。发送数据的一端完全不需要等待数据被<code>ACK</code>之后，再才开始发送下一个<code>packet</code>。</p>
 
   
+
+    
+    
   </div>
 </article>
 

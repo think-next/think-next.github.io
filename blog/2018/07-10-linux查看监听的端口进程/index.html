@@ -39,6 +39,22 @@
 
   
   
+
+  <style>
+    :root {
+      font-size: 1em;
+      --main-font: orange;
+    }
+
+    .featured {
+      width: 20em;
+      height: calc(6em - 16px);
+      font-size: 1rem;
+      border-radius: .15em;
+      background-color: var(--main-font);
+      box-shadow: .45em .25em #6f9090;
+    }
+  </style>
 </head>
 
 <body class="max-width mx-auto px3 ltr">
@@ -146,6 +162,9 @@ tcp        0    0 enlightened:domain      *:*                     LISTEN
 <pre><code>lsof -i:22 #查看22端口连接情况
 </code></pre>
   
+
+    
+    
   </div>
 </article>
 

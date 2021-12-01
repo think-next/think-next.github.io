@@ -39,6 +39,22 @@
 
   
   
+
+  <style>
+    :root {
+      font-size: 1em;
+      --main-font: orange;
+    }
+
+    .featured {
+      width: 20em;
+      height: calc(6em - 16px);
+      font-size: 1rem;
+      border-radius: .15em;
+      background-color: var(--main-font);
+      box-shadow: .45em .25em #6f9090;
+    }
+  </style>
 </head>
 
 <body class="max-width mx-auto px3 ltr">
@@ -243,6 +259,9 @@ ENTRYPOINT [&quot;/data/src/entrypoint.sh&quot;]
 CMD [&quot;bash&quot;, &quot;-c&quot;, &quot;/data/src/${RUN_PROG:=baby} --log_dir=/data/logs/$RUN_PROG -c /data/src/conf.toml&quot;]
 </code></pre>
   
+
+    
+    
   </div>
 </article>
 

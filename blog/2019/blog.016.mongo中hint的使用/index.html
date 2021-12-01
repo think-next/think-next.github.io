@@ -39,6 +39,22 @@
 
   
   
+
+  <style>
+    :root {
+      font-size: 1em;
+      --main-font: orange;
+    }
+
+    .featured {
+      width: 20em;
+      height: calc(6em - 16px);
+      font-size: 1rem;
+      border-radius: .15em;
+      background-color: var(--main-font);
+      box-shadow: .45em .25em #6f9090;
+    }
+  </style>
 </head>
 
 <body class="max-width mx-auto px3 ltr">
@@ -104,6 +120,9 @@
 <p>从<code>mongo</code>官方文档的例子来尝试理解，索引<code>{ a: 1, b: -1 }</code>支持<code>{ a: 1, b: -1 }</code>和<code>{ a: -1, b: 1 }</code>的排序操作，但不支持<code>{ a: -1, b: -1 } </code>和<code>{a: 1, b: 1}</code>的操作。</p>
 
   
+
+    
+    
   </div>
 </article>
 

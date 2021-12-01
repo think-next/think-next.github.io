@@ -39,6 +39,22 @@
 
   
   
+
+  <style>
+    :root {
+      font-size: 1em;
+      --main-font: orange;
+    }
+
+    .featured {
+      width: 20em;
+      height: calc(6em - 16px);
+      font-size: 1rem;
+      border-radius: .15em;
+      background-color: var(--main-font);
+      box-shadow: .45em .25em #6f9090;
+    }
+  </style>
 </head>
 
 <body class="max-width mx-auto px3 ltr">
@@ -161,6 +177,9 @@
 </code></pre></div><p>正如查询所示，我们设置的是<code>READ-COMMITTED</code>。所以针对B表来说，如果并发两个事务，那第二个事务需要等待第一个事务释放锁之后才能执行<code>update</code>语句。此时第二个事务在回写时会发现<code>status != 0</code>，则回写失败，理应触发回滚。</p>
 
   
+
+    
+    
   </div>
 </article>
 

@@ -6,10 +6,19 @@
     <description>Recent content on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Dec 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://neojos.com/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CSS阴影</title>
+      <link>https://neojos.com/blog/2021/003.-css-%E9%98%B4%E5%BD%B1/</link>
+      <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neojos.com/blog/2021/003.-css-%E9%98%B4%E5%BD%B1/</guid>
+      <description>别小看下面的 CSS 代码，对于一个 CSS 门外汉来说，隐藏的信息是足够丰富的。比如属性的长度单位，一些人可能还不知道 px、em、rem 的区别。简单来说， em 是基于 font-size 的继承属性，rem 是在 em 的基础上重新定义了一个参照标准。默认情况下，1 em = 16 px。一般来说，使用 rem 设置字号，em 设置其他大部分的属性</description>
+    </item>
     
     <item>
       <title>回溯算法</title>
