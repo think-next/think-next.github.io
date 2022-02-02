@@ -6,10 +6,19 @@
     <description>Recent content on 渐行渐远</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 02 Dec 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://neojos.com/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>unsafe类型转换</title>
+      <link>https://neojos.com/blog/2021/004.-unsafe-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</link>
+      <pubDate>Thu, 02 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neojos.com/blog/2021/004.-unsafe-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</guid>
+      <description>reflect.Value 的类型定义,下面是我机器上的代码路径。typ 存储了元素的真实类型， ptr 是元素实际存储的值</description>
+    </item>
     
     <item>
       <title>CSS阴影</title>
@@ -44,7 +53,7 @@
       <pubDate>Mon, 19 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>https://neojos.com/blog/2021/go-%E5%8F%8D%E5%B0%84%E5%85%A5%E9%97%A8/</guid>
-      <description>通过下面的例子，我们来深入了解 reflect 数据包。我们定义People的结构体类型，来开始探索。</description>
+      <description>针对文章中代码的行号，我都在试图和源码保持一致，但源码也在不停地迭代，无法做到 100% 一致，主要还是看一个参考，了解一个脉络。</description>
     </item>
     
     <item>
