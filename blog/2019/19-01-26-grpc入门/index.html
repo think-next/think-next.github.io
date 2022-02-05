@@ -57,10 +57,25 @@
   </style>
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-  <div class="content index py4">
-
-    <header id="header">
+<body class="column mx-auto px3 ltr">
+  <div class="column-left">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#为什么使用grpc">为什么使用<code>grpc</code></a></li>
+    <li><a href="#http2"><code>http/2</code></a></li>
+    <li><a href="#准备工作"><code>准备工作</code></a></li>
+    <li><a href="#protocol-buffer"><code>protocol buffer</code></a></li>
+    <li><a href="#grpc接口"><code>grpc</code>接口</a></li>
+    <li><a href="#service处理流程"><code>service</code>处理流程</a></li>
+    <li><a href="#创建订单"><code>创建订单</code></a></li>
+    <li><a href="#运行系统"><code>运行系统</code></a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+  </div>
+  <div class="column-middle">
+    <div class="content max-width index py4">
+      <header id="header">
   <a href="https://neojos.com/">
   
     <div id="logo" style="background-image: url(https://neojos.com/img/mifeng.jpeg)"></div>
@@ -87,24 +102,12 @@
 
 
 
-    
+      
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <h1 id="title">gRPC入门</h1>文章 638 字
   <aside>
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#为什么使用grpc">为什么使用<code>grpc</code></a></li>
-    <li><a href="#http2"><code>http/2</code></a></li>
-    <li><a href="#准备工作"><code>准备工作</code></a></li>
-    <li><a href="#protocol-buffer"><code>protocol buffer</code></a></li>
-    <li><a href="#grpc接口"><code>grpc</code>接口</a></li>
-    <li><a href="#service处理流程"><code>service</code>处理流程</a></li>
-    <li><a href="#创建订单"><code>创建订单</code></a></li>
-    <li><a href="#运行系统"><code>运行系统</code></a></li>
-    <li><a href="#总结">总结</a></li>
-  </ul>
-</nav>
+
   </aside>
   <div class="content" itemprop="articleBody">
   
@@ -355,7 +358,7 @@
 </article>
 
 
-    <footer id="footer">
+      <footer id="footer">
   <div class="footer-left">
     Copyright  &copy; 2022  渐行渐远 
   </div>
@@ -374,7 +377,9 @@
   </div>
 </footer>
 
+    </div>
   </div>
+  <div class="column-right"></div>
 </body>
 
 <link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>

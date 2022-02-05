@@ -57,10 +57,24 @@
   </style>
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-  <div class="content index py4">
-
-    <header id="header">
+<body class="column mx-auto px3 ltr">
+  <div class="column-left">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#序"><code>序</code></a></li>
+    <li><a href="#正文">正文</a></li>
+    <li><a href="#setdeadline"><code>SetDeadline</code></a></li>
+    <li><a href="#server-timeouts"><code>Server Timeouts</code></a></li>
+    <li><a href="#httplistenandserve-is-doing-it-wrong"><code>http.ListenAndServe</code> is doing it wrong</a></li>
+    <li><a href="#about-streaming"><code>About streaming</code></a></li>
+    <li><a href="#client-timeouts"><code>Client Timeouts</code></a></li>
+    <li><a href="#cancel-and-context"><code>Cancel and Context</code></a></li>
+  </ul>
+</nav>
+  </div>
+  <div class="column-middle">
+    <div class="content max-width index py4">
+      <header id="header">
   <a href="https://neojos.com/">
   
     <div id="logo" style="background-image: url(https://neojos.com/img/mifeng.jpeg)"></div>
@@ -87,23 +101,12 @@
 
 
 
-    
+      
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <h1 id="title">Go net 超时处理</h1>文章 509 字
   <aside>
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#序"><code>序</code></a></li>
-    <li><a href="#正文">正文</a></li>
-    <li><a href="#setdeadline"><code>SetDeadline</code></a></li>
-    <li><a href="#server-timeouts"><code>Server Timeouts</code></a></li>
-    <li><a href="#httplistenandserve-is-doing-it-wrong"><code>http.ListenAndServe</code> is doing it wrong</a></li>
-    <li><a href="#about-streaming"><code>About streaming</code></a></li>
-    <li><a href="#client-timeouts"><code>Client Timeouts</code></a></li>
-    <li><a href="#cancel-and-context"><code>Cancel and Context</code></a></li>
-  </ul>
-</nav>
+
   </aside>
   <div class="content" itemprop="articleBody">
   
@@ -265,7 +268,7 @@ func main() {
 </article>
 
 
-    <footer id="footer">
+      <footer id="footer">
   <div class="footer-left">
     Copyright  &copy; 2022  渐行渐远 
   </div>
@@ -284,7 +287,9 @@ func main() {
   </div>
 </footer>
 
+    </div>
   </div>
+  <div class="column-right"></div>
 </body>
 
 <link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>

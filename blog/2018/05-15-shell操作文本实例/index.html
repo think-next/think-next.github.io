@@ -57,10 +57,23 @@
   </style>
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-  <div class="content index py4">
-
-    <header id="header">
+<body class="column mx-auto px3 ltr">
+  <div class="column-left">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#打印符合条件的前一行记录">打印符合条件的前一行记录</a></li>
+    <li><a href="#求解两个文件的差集">求解两个文件的差集</a>
+      <ul>
+        <li><a href="#使用comm实现">使用<code>comm</code>实现</a></li>
+        <li><a href="#使用uniq及sort实现">使用<code>uniq</code>及<code>sort</code>实现</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+  <div class="column-middle">
+    <div class="content max-width index py4">
+      <header id="header">
   <a href="https://neojos.com/">
   
     <div id="logo" style="background-image: url(https://neojos.com/img/mifeng.jpeg)"></div>
@@ -87,22 +100,12 @@
 
 
 
-    
+      
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <h1 id="title">shell操作文本实例</h1>文章 76 字
   <aside>
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#打印符合条件的前一行记录">打印符合条件的前一行记录</a></li>
-    <li><a href="#求解两个文件的差集">求解两个文件的差集</a>
-      <ul>
-        <li><a href="#使用comm实现">使用<code>comm</code>实现</a></li>
-        <li><a href="#使用uniq及sort实现">使用<code>uniq</code>及<code>sort</code>实现</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+
   </aside>
   <div class="content" itemprop="articleBody">
   
@@ -154,7 +157,7 @@ sort merge.txt | uniq -c | sort | head -10
 </article>
 
 
-    <footer id="footer">
+      <footer id="footer">
   <div class="footer-left">
     Copyright  &copy; 2022  渐行渐远 
   </div>
@@ -173,7 +176,9 @@ sort merge.txt | uniq -c | sort | head -10
   </div>
 </footer>
 
+    </div>
   </div>
+  <div class="column-right"></div>
 </body>
 
 <link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>

@@ -57,10 +57,21 @@
   </style>
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-  <div class="content index py4">
-
-    <header id="header">
+<body class="column mx-auto px3 ltr">
+  <div class="column-left">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#uuid构成"><code>UUID</code>构成</a></li>
+    <li><a href="#mongodbs-objectid"><code>MongoDB's ObjectId</code></a></li>
+    <li><a href="#twitter-snowflake"><code>Twitter Snowflake</code></a></li>
+    <li><a href="#database-ticket-servers"><code>Database Ticket Servers</code></a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+  </div>
+  <div class="column-middle">
+    <div class="content max-width index py4">
+      <header id="header">
   <a href="https://neojos.com/">
   
     <div id="logo" style="background-image: url(https://neojos.com/img/mifeng.jpeg)"></div>
@@ -87,20 +98,12 @@
 
 
 
-    
+      
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <h1 id="title">探讨分布式ID生成系统</h1>文章 339 字
   <aside>
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#uuid构成"><code>UUID</code>构成</a></li>
-    <li><a href="#mongodbs-objectid"><code>MongoDB's ObjectId</code></a></li>
-    <li><a href="#twitter-snowflake"><code>Twitter Snowflake</code></a></li>
-    <li><a href="#database-ticket-servers"><code>Database Ticket Servers</code></a></li>
-    <li><a href="#总结">总结</a></li>
-  </ul>
-</nav>
+
   </aside>
   <div class="content" itemprop="articleBody">
   
@@ -181,7 +184,7 @@ id <span style="color:#f92672">|=</span> sequence<span style="color:#f92672">;</
 </article>
 
 
-    <footer id="footer">
+      <footer id="footer">
   <div class="footer-left">
     Copyright  &copy; 2022  渐行渐远 
   </div>
@@ -200,7 +203,9 @@ id <span style="color:#f92672">|=</span> sequence<span style="color:#f92672">;</
   </div>
 </footer>
 
+    </div>
   </div>
+  <div class="column-right"></div>
 </body>
 
 <link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>

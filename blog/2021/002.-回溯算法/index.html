@@ -57,10 +57,23 @@
   </style>
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-  <div class="content index py4">
-
-    <header id="header">
+<body class="column mx-auto px3 ltr">
+  <div class="column-left">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#回溯算法">回溯算法</a>
+      <ul>
+        <li><a href="#构造一个树的结构">构造一个树的结构</a></li>
+        <li><a href="#递归的退出条件">递归的退出条件</a></li>
+        <li><a href="#递归中状态的更新和回退">递归中状态的更新和回退</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+  <div class="column-middle">
+    <div class="content max-width index py4">
+      <header id="header">
   <a href="https://neojos.com/">
   
     <div id="logo" style="background-image: url(https://neojos.com/img/mifeng.jpeg)"></div>
@@ -87,22 +100,12 @@
 
 
 
-    
+      
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <h1 id="title">回溯算法</h1>文章 97 字
   <aside>
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#回溯算法">回溯算法</a>
-      <ul>
-        <li><a href="#构造一个树的结构">构造一个树的结构</a></li>
-        <li><a href="#递归的退出条件">递归的退出条件</a></li>
-        <li><a href="#递归中状态的更新和回退">递归中状态的更新和回退</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+
   </aside>
   <div class="content" itemprop="articleBody">
   
@@ -176,7 +179,7 @@
 </article>
 
 
-    <footer id="footer">
+      <footer id="footer">
   <div class="footer-left">
     Copyright  &copy; 2022  渐行渐远 
   </div>
@@ -195,7 +198,9 @@
   </div>
 </footer>
 
+    </div>
   </div>
+  <div class="column-right"></div>
 </body>
 
 <link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>

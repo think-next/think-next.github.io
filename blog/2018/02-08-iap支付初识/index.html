@@ -57,10 +57,23 @@
   </style>
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-  <div class="content index py4">
-
-    <header id="header">
+<body class="column mx-auto px3 ltr">
+  <div class="column-left">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#交易的唯一标识">交易的唯一标识</a>
+      <ul>
+        <li><a href="#iap支付的流程">IAP支付的流程</a></li>
+        <li><a href="#transaction理解">transaction理解</a></li>
+        <li><a href="#receipt校验">receipt校验</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+  <div class="column-middle">
+    <div class="content max-width index py4">
+      <header id="header">
   <a href="https://neojos.com/">
   
     <div id="logo" style="background-image: url(https://neojos.com/img/mifeng.jpeg)"></div>
@@ -87,22 +100,12 @@
 
 
 
-    
+      
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <h1 id="title">IAP支付初识</h1>文章 90 字
   <aside>
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#交易的唯一标识">交易的唯一标识</a>
-      <ul>
-        <li><a href="#iap支付的流程">IAP支付的流程</a></li>
-        <li><a href="#transaction理解">transaction理解</a></li>
-        <li><a href="#receipt校验">receipt校验</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+
   </aside>
   <div class="content" itemprop="articleBody">
   
@@ -136,7 +139,7 @@
 </article>
 
 
-    <footer id="footer">
+      <footer id="footer">
   <div class="footer-left">
     Copyright  &copy; 2022  渐行渐远 
   </div>
@@ -155,7 +158,9 @@
   </div>
 </footer>
 
+    </div>
   </div>
+  <div class="column-right"></div>
 </body>
 
 <link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>

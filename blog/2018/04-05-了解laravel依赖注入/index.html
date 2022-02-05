@@ -57,10 +57,26 @@
   </style>
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-  <div class="content index py4">
-
-    <header id="header">
+<body class="column mx-auto px3 ltr">
+  <div class="column-left">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#随笔">随笔</a></li>
+    <li><a href="#概要">概要</a></li>
+    <li><a href="#type-hint"><code>type hint</code></a></li>
+    <li><a href="#binding-interfaces-to-implementations"><code>Binding Interfaces to Implementations</code></a></li>
+    <li><a href="#closure-binding"><code>Closure Binding</code></a></li>
+    <li><a href="#resolving-callbacks"><code>Resolving Callbacks</code></a></li>
+    <li><a href="#extending-a-class"><code>Extending a Class</code></a></li>
+    <li><a href="#singleton"><code>singleton</code></a></li>
+    <li><a href="#arbitrary-binding-names"><code>Arbitrary Binding Names</code></a></li>
+    <li><a href="#contextual-binding"><code>Contextual Binding</code></a></li>
+  </ul>
+</nav>
+  </div>
+  <div class="column-middle">
+    <div class="content max-width index py4">
+      <header id="header">
   <a href="https://neojos.com/">
   
     <div id="logo" style="background-image: url(https://neojos.com/img/mifeng.jpeg)"></div>
@@ -87,25 +103,12 @@
 
 
 
-    
+      
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <h1 id="title">了解Laravel依赖注入</h1>文章 230 字
   <aside>
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#随笔">随笔</a></li>
-    <li><a href="#概要">概要</a></li>
-    <li><a href="#type-hint"><code>type hint</code></a></li>
-    <li><a href="#binding-interfaces-to-implementations"><code>Binding Interfaces to Implementations</code></a></li>
-    <li><a href="#closure-binding"><code>Closure Binding</code></a></li>
-    <li><a href="#resolving-callbacks"><code>Resolving Callbacks</code></a></li>
-    <li><a href="#extending-a-class"><code>Extending a Class</code></a></li>
-    <li><a href="#singleton"><code>singleton</code></a></li>
-    <li><a href="#arbitrary-binding-names"><code>Arbitrary Binding Names</code></a></li>
-    <li><a href="#contextual-binding"><code>Contextual Binding</code></a></li>
-  </ul>
-</nav>
+
   </aside>
   <div class="content" itemprop="articleBody">
   
@@ -183,7 +186,7 @@ Target [Tests\Unit\SessionStorage] is not instantiable while building [Tests\Uni
 </article>
 
 
-    <footer id="footer">
+      <footer id="footer">
   <div class="footer-left">
     Copyright  &copy; 2022  渐行渐远 
   </div>
@@ -202,7 +205,9 @@ Target [Tests\Unit\SessionStorage] is not instantiable while building [Tests\Uni
   </div>
 </footer>
 
+    </div>
   </div>
+  <div class="column-right"></div>
 </body>
 
 <link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>

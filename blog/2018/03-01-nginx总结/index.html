@@ -57,10 +57,28 @@
   </style>
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-  <div class="content index py4">
-
-    <header id="header">
+<body class="column mx-auto px3 ltr">
+  <div class="column-left">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#location-指令">location 指令</a>
+      <ul>
+        <li><a href="#location修饰符">location修饰符</a></li>
+        <li><a href="#location匹配规则">location匹配规则</a></li>
+        <li><a href="#举个例子">举个例子</a></li>
+      </ul>
+    </li>
+    <li><a href="#error_page-返回状态码">error_page 返回状态码</a>
+      <ul>
+        <li><a href="#举个例子-1">举个例子</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+  <div class="column-middle">
+    <div class="content max-width index py4">
+      <header id="header">
   <a href="https://neojos.com/">
   
     <div id="logo" style="background-image: url(https://neojos.com/img/mifeng.jpeg)"></div>
@@ -87,27 +105,12 @@
 
 
 
-    
+      
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <h1 id="title">Nginx总结</h1>文章 122 字
   <aside>
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#location-指令">location 指令</a>
-      <ul>
-        <li><a href="#location修饰符">location修饰符</a></li>
-        <li><a href="#location匹配规则">location匹配规则</a></li>
-        <li><a href="#举个例子">举个例子</a></li>
-      </ul>
-    </li>
-    <li><a href="#error_page-返回状态码">error_page 返回状态码</a>
-      <ul>
-        <li><a href="#举个例子-1">举个例子</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+
   </aside>
   <div class="content" itemprop="articleBody">
   
@@ -184,7 +187,7 @@ location @403error {
 </article>
 
 
-    <footer id="footer">
+      <footer id="footer">
   <div class="footer-left">
     Copyright  &copy; 2022  渐行渐远 
   </div>
@@ -203,7 +206,9 @@ location @403error {
   </div>
 </footer>
 
+    </div>
   </div>
+  <div class="column-right"></div>
 </body>
 
 <link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>

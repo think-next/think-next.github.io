@@ -57,10 +57,26 @@
   </style>
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-  <div class="content index py4">
-
-    <header id="header">
+<body class="column mx-auto px3 ltr">
+  <div class="column-left">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction"><code>introduction</code></a></li>
+    <li><a href="#protocol"><code>protocol</code></a></li>
+    <li><a href="#interface"><code>interface</code></a>
+      <ul>
+        <li><a href="#generic-algorithm"><code>generic algorithm</code></a></li>
+        <li><a href="#hiding-implement-detail"><code>hiding implement detail</code></a></li>
+        <li><a href="#providing-interception-points"><code>providing interception points</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#stream-io-interface">Stream IO interface</a></li>
+  </ul>
+</nav>
+  </div>
+  <div class="column-middle">
+    <div class="content max-width index py4">
+      <header id="header">
   <a href="https://neojos.com/">
   
     <div id="logo" style="background-image: url(https://neojos.com/img/mifeng.jpeg)"></div>
@@ -87,25 +103,12 @@
 
 
 
-    
+      
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <h1 id="title">Go Interface 类型</h1>文章 450 字
   <aside>
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#introduction"><code>introduction</code></a></li>
-    <li><a href="#protocol"><code>protocol</code></a></li>
-    <li><a href="#interface"><code>interface</code></a>
-      <ul>
-        <li><a href="#generic-algorithm"><code>generic algorithm</code></a></li>
-        <li><a href="#hiding-implement-detail"><code>hiding implement detail</code></a></li>
-        <li><a href="#providing-interception-points"><code>providing interception points</code></a></li>
-      </ul>
-    </li>
-    <li><a href="#stream-io-interface">Stream IO interface</a></li>
-  </ul>
-</nav>
+
   </aside>
   <div class="content" itemprop="articleBody">
   
@@ -224,7 +227,7 @@ func (mux *ServeMux) ServeHTTP(w ResponseWriter, r *Request) {
 </article>
 
 
-    <footer id="footer">
+      <footer id="footer">
   <div class="footer-left">
     Copyright  &copy; 2022  渐行渐远 
   </div>
@@ -243,7 +246,9 @@ func (mux *ServeMux) ServeHTTP(w ResponseWriter, r *Request) {
   </div>
 </footer>
 
+    </div>
   </div>
+  <div class="column-right"></div>
 </body>
 
 <link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
