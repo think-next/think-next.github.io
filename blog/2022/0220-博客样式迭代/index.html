@@ -110,12 +110,12 @@
 </blockquote>
 <p>虽然博客是静态的，但博客的样式完全可控。我自己是做后端开发的，对前端几乎没有涉猎，对博客的样式改动就有些力不从心。但追求美观的心人人都有，我也在不断的对博客的样式做调整。</p>
 <h2 id="引言">引言</h2>
-<p>比如说引言，我习惯在每一篇文章的开头引用在别的地方看到的一段话，内容多偏向于心灵鸡汤类的。我特别想把引言部分明确区分出来，前期是加了边框，后期调整成了背景色，但其实并没有让我满意，甚至在有多个引言的文章中，还存在一些预料之外的样式（我只希望文章开头的引言出现样式调整）。</p>
+<p>比如说引言，我习惯在每一篇文章的开头引用在别的地方看到的一段话，内容多偏向于心灵鸡汤类的。我特别想把引言部分明确区分出来，前期是加了边框，后期调整成了背景色，但其实并没有让我满意，甚至在有多个引言的文章中，还存在一些预料之外的样式（我只希望文章开头的引言有样式调整）。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#f92672">article</span> .<span style="color:#a6e22e">content</span> <span style="color:#f92672">&gt;</span> <span style="color:#f92672">blockquote</span> {
     <span style="color:#66d9ef">color</span>: <span style="color:#ae81ff">#c07814</span>;
     <span style="color:#66d9ef">background-color</span>: <span style="color:#66d9ef">aliceblue</span>;
 }
-</code></pre></div><p>这便是设置引言的样式，<code>&gt;</code> 标识紧跟 <code>.content</code>  类出现的第一个 <code>blockquote</code> 标签。文章中如果存在多个引言，其实会触发这种样式多次</p>
+</code></pre></div><p>这便是设置引言的样式，<code>&gt;</code> 标识紧跟 <code>.content</code>  类出现的第一个 <code>blockquote</code> 标签。文章中如果存在多个引言，其实会触发这种样式多次。</p>
 
   
 
