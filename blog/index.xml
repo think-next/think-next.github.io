@@ -30,6 +30,15 @@
     </item>
     
     <item>
+      <title>Goland Scratch File</title>
+      <link>https://neojos.com/blog/2022/0506-goland-scratch-file/</link>
+      <pubDate>Fri, 06 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://neojos.com/blog/2022/0506-goland-scratch-file/</guid>
+      <description>如果你也使用 Goland 作为 Go 的开发工具，遇到一些临时想要验证的 case 你都是如何处理的呢？我们总会经常有一些拿捏不准的函数或者方法，或者就是想通过 Go 来完成一个数学计算，再或者想整一个临时的 Job 跑一份数据。</description>
+    </item>
+    
+    <item>
       <title>Go Module 依赖包管理 - Replace</title>
       <link>https://neojos.com/blog/2022/0502-go-modules%E4%BE%9D%E8%B5%96%E5%8C%85%E7%AE%A1%E7%90%86-replace/</link>
       <pubDate>Mon, 02 May 2022 00:00:00 +0000</pubDate>
