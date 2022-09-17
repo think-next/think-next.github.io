@@ -30,11 +30,11 @@
     </item>
     
     <item>
-      <title>Go Module 依赖包管理</title>
-      <link>https://neojos.com/blog/2022/0502-go-modules%E4%BE%9D%E8%B5%96%E5%8C%85%E7%AE%A1%E7%90%86/</link>
+      <title>Go Module 依赖包管理 - Replace</title>
+      <link>https://neojos.com/blog/2022/0502-go-modules%E4%BE%9D%E8%B5%96%E5%8C%85%E7%AE%A1%E7%90%86-replace/</link>
       <pubDate>Mon, 02 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://neojos.com/blog/2022/0502-go-modules%E4%BE%9D%E8%B5%96%E5%8C%85%E7%AE%A1%E7%90%86/</guid>
+      <guid>https://neojos.com/blog/2022/0502-go-modules%E4%BE%9D%E8%B5%96%E5%8C%85%E7%AE%A1%E7%90%86-replace/</guid>
       <description>module 用来定义当前项目的模块路径，这个路径会作为其他命令路径的参考。比如，replace 命令指定模块到本地的时候，使用的相对路径就是模块路径。</description>
     </item>
     
