@@ -39,6 +39,15 @@
     </item>
     
     <item>
+      <title>Go Module 依赖包管理 - Indirect</title>
+      <link>https://neojos.com/blog/2022/0503-go-modules%E4%BE%9D%E8%B5%96%E5%8C%85%E7%AE%A1%E7%90%86-indirect/</link>
+      <pubDate>Tue, 03 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://neojos.com/blog/2022/0503-go-modules%E4%BE%9D%E8%B5%96%E5%8C%85%E7%AE%A1%E7%90%86-indirect/</guid>
+      <description>如果 go.</description>
+    </item>
+    
+    <item>
       <title>Go Module 依赖包管理 - Replace</title>
       <link>https://neojos.com/blog/2022/0502-go-modules%E4%BE%9D%E8%B5%96%E5%8C%85%E7%AE%A1%E7%90%86-replace/</link>
       <pubDate>Mon, 02 May 2022 00:00:00 +0000</pubDate>
