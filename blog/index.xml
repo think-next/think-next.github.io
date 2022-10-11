@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>框架设计</title>
+      <link>https://neojos.com/blog/2022/0830-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1/</link>
+      <pubDate>Tue, 30 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://neojos.com/blog/2022/0830-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1/</guid>
+      <description>在做功能开发时，其实有很多实现的方式，比如，我们可以通过 context 来传递参数，也可以通过函数参数的方式来传递。我们可以把行为抽象为单个接口， 也可以是多个组合接口。思考这些问题，有时候会让人特别苦恼。</description>
+    </item>
+    
+    <item>
       <title>sentinel 计数器限流</title>
       <link>https://neojos.com/blog/2022/0829-sentinel-%E8%AE%A1%E6%95%B0%E5%99%A8%E9%99%90%E6%B5%81/</link>
       <pubDate>Mon, 29 Aug 2022 00:00:00 +0000</pubDate>
