@@ -165,6 +165,15 @@
     </item>
     
     <item>
+      <title>Go 切片小问题</title>
+      <link>https://neojos.com/blog/2021/0507-go-%E5%88%87%E7%89%87%E5%B0%8F%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Fri, 07 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neojos.com/blog/2021/0507-go-%E5%88%87%E7%89%87%E5%B0%8F%E9%97%AE%E9%A2%98/</guid>
+      <description>Go 切片有很多细节的点，比如切片的 append、copy 操作，我们经常使用 append 操作，如果切片预申请容量不足的话，底层会触发 growslice 的操作，会 重新生成一个新的切片。这个过程就有可能触发两个问题：</description>
+    </item>
+    
+    <item>
       <title>Go 反射入门</title>
       <link>https://neojos.com/blog/2021/0419-go-%E5%8F%8D%E5%B0%84%E5%85%A5%E9%97%A8/</link>
       <pubDate>Mon, 19 Apr 2021 00:00:00 +0000</pubDate>
