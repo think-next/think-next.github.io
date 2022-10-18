@@ -104,7 +104,7 @@
       
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 id="title">Go 反射入门</h1>文章 1904 字
+  <h1 id="title">Go 反射入门</h1>文章 1909 字
   <aside>
 
   </aside>
@@ -821,7 +821,8 @@
 </div>
 <p>通过 <code>reflect</code> 包我们可以获取到方法的入参个数、出参个数，执行方法、获取方法返回值、在运行时实现方法等操作。观察一些 RPC 的客户端也是这样实现的。
 我们只需要在结构体中声明方法类型的字段，在函数调用的时候将它实现。</p>
-<p>我们声明了结构体中字段 PrintName 为方法类型，然后在 main 方法中将它示例话了，最后，调用这个方法。</p>
+<p>我们声明了结构体中字段 PrintName 为方法类型，然后在 main 方法中将它实例化了，最后，直接调用这个方法。这是对原理的简化版例子，如果我们把声明函数的入参都当做 HTTP 的请求参数，
+然后统一编码发送给服务端，就是一套统一的 RPC 实现。</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
