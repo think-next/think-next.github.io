@@ -84,6 +84,15 @@
     </item>
     
     <item>
+      <title>Go 切片的容量</title>
+      <link>https://neojos.com/blog/2022/0507-go-%E5%88%87%E7%89%87%E7%9A%84%E5%AE%B9%E9%87%8F/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://neojos.com/blog/2022/0507-go-%E5%88%87%E7%89%87%E7%9A%84%E5%AE%B9%E9%87%8F/</guid>
+      <description>Go 切片有很多细节的点，比如切片的 append、copy 操作，我们经常使用 append 操作，如果切片预申请容量不足的话，底层会触发 growslice 的操作，会 重新生成一个新的切片。这个过程就有可能触发两个问题：</description>
+    </item>
+    
+    <item>
       <title>Goland Scratch File</title>
       <link>https://neojos.com/blog/2022/0506-goland-scratch-file/</link>
       <pubDate>Fri, 06 May 2022 00:00:00 +0000</pubDate>
@@ -183,6 +192,15 @@
     </item>
     
     <item>
+      <title>runtime Caller 方法</title>
+      <link>https://neojos.com/blog/2022/0104-runtime-caller-%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Tue, 04 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://neojos.com/blog/2022/0104-runtime-caller-%E6%96%B9%E6%B3%95/</guid>
+      <description>在 Go单元测试——资源初始化 里获取配置文件的绝对路径时，提到了 Caller 方法。这个方法在日志打印的包中特别常见。 日志文件中记录的文件路径和行号，就是这个函数的返回值。</description>
+    </item>
+    
+    <item>
       <title>unsafe类型转换</title>
       <link>https://neojos.com/blog/2022/0103.-unsafe-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</link>
       <pubDate>Mon, 03 Jan 2022 00:00:00 +0000</pubDate>
@@ -234,15 +252,6 @@
       
       <guid>https://neojos.com/blog/2021/001.-%E7%AE%97%E6%B3%95%E9%A2%98-%E7%BB%84%E5%90%88%E6%80%BB%E6%95%B0/</guid>
       <description>力扣上的一道算法题，39题，内容如下</description>
-    </item>
-    
-    <item>
-      <title>Go 切片小问题</title>
-      <link>https://neojos.com/blog/2021/0507-go-%E5%88%87%E7%89%87%E5%B0%8F%E9%97%AE%E9%A2%98/</link>
-      <pubDate>Fri, 07 May 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://neojos.com/blog/2021/0507-go-%E5%88%87%E7%89%87%E5%B0%8F%E9%97%AE%E9%A2%98/</guid>
-      <description>Go 切片有很多细节的点，比如切片的 append、copy 操作，我们经常使用 append 操作，如果切片预申请容量不足的话，底层会触发 growslice 的操作，会 重新生成一个新的切片。这个过程就有可能触发两个问题：</description>
     </item>
     
     <item>
