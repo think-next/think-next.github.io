@@ -4,219 +4,170 @@
     <title>Tags on 渐行渐远</title>
     <link>https://neojos.com/tags/</link>
     <description>Recent content in Tags on 渐行渐远</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 02 Jan 2022 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://neojos.com/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="https://neojos.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>golang</title>
+      <title>Golang</title>
       <link>https://neojos.com/tags/golang/</link>
       <pubDate>Sun, 02 Jan 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/golang/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>translate</title>
+      <title>Translate</title>
       <link>https://neojos.com/tags/translate/</link>
       <pubDate>Sun, 02 Jan 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/translate/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>net</title>
+      <title>Net</title>
       <link>https://neojos.com/tags/net/</link>
       <pubDate>Sun, 08 Dec 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/net/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>mongo</title>
+      <title>Mongo</title>
       <link>https://neojos.com/tags/mongo/</link>
       <pubDate>Wed, 13 Nov 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/mongo/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>统计</title>
       <link>https://neojos.com/tags/%E7%BB%9F%E8%AE%A1/</link>
       <pubDate>Mon, 14 Oct 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/%E7%BB%9F%E8%AE%A1/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>linux</title>
+      <title>Linux</title>
       <link>https://neojos.com/tags/linux/</link>
       <pubDate>Fri, 20 Sep 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/linux/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>MySQL</title>
       <link>https://neojos.com/tags/mysql/</link>
       <pubDate>Wed, 17 Jul 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/mysql/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>docker</title>
+      <title>Docker</title>
       <link>https://neojos.com/tags/docker/</link>
       <pubDate>Sat, 11 May 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/docker/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>transaction</title>
+      <title>Transaction</title>
       <link>https://neojos.com/tags/transaction/</link>
       <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/transaction/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Think</title>
       <link>https://neojos.com/tags/think/</link>
       <pubDate>Fri, 22 Feb 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/think/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>git</title>
+      <title>Tcp/Ip</title>
+      <link>https://neojos.com/tags/tcp/ip/</link>
+      <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://neojos.com/tags/tcp/ip/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Git</title>
       <link>https://neojos.com/tags/git/</link>
       <pubDate>Tue, 07 Aug 2018 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/git/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>tools</title>
+      <title>Tools</title>
       <link>https://neojos.com/tags/tools/</link>
       <pubDate>Tue, 07 Aug 2018 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/tools/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>MQ</title>
       <link>https://neojos.com/tags/mq/</link>
       <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/mq/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>php</title>
+      <title>Php</title>
       <link>https://neojos.com/tags/php/</link>
       <pubDate>Thu, 05 Apr 2018 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/php/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>npm</title>
+      <title>Npm</title>
       <link>https://neojos.com/tags/npm/</link>
       <pubDate>Fri, 30 Mar 2018 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/npm/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>http</title>
+      <title>Http</title>
       <link>https://neojos.com/tags/http/</link>
       <pubDate>Sat, 17 Mar 2018 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/http/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>nginx</title>
+      <title>Nginx</title>
       <link>https://neojos.com/tags/nginx/</link>
       <pubDate>Sat, 10 Mar 2018 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/nginx/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>pay</title>
+      <title>Pay</title>
       <link>https://neojos.com/tags/pay/</link>
       <pubDate>Wed, 28 Feb 2018 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/pay/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>protocol</title>
+      <title>Protocol</title>
       <link>https://neojos.com/tags/protocol/</link>
       <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/protocol/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>protobufs</title>
+      <title>Protobufs</title>
       <link>https://neojos.com/tags/protobufs/</link>
       <pubDate>Tue, 30 Jan 2018 20:10:33 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/protobufs/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>js</title>
+      <title>Js</title>
       <link>https://neojos.com/tags/js/</link>
       <pubDate>Mon, 29 Jan 2018 20:10:33 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/js/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>cache</title>
+      <title>Cache</title>
       <link>https://neojos.com/tags/cache/</link>
       <pubDate>Sun, 21 Jan 2018 15:48:33 +0000</pubDate>
-      
       <guid>https://neojos.com/tags/cache/</guid>
       <description></description>
     </item>
-    
-    <item>
-      <title>tcp/ip</title>
-      <link>https://neojos.com/tags/tcp/ip/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://neojos.com/tags/tcp/ip/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>
