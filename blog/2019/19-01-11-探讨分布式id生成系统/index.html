@@ -39,7 +39,7 @@
     
   
   
-  <link rel="stylesheet" href="https://neojos.com/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+  <link rel="stylesheet" href="https://neojos.com/css/styles.72a235e5c6dd9cc0ae131957afffbdb6ce9d72f556c788d8f112ed053a677884fb82f801304e3a09b3275b2c00348c22613611edb8d968bc197ed27d53186954.css" integrity="sha512-cqI15cbdnMCuExlXr/&#43;9ts6dcvVWx4jY8RLtBTpneIT7gvgBME46CbMnWywANIwiYTYR7bjZaLwZftJ9UxhpVA=="> 
 
   
   
@@ -80,6 +80,99 @@
   
   
 </head>
+
+<style>
+  .timeline {
+    position: relative;
+    padding: 0;
+    list-style-type: none;
+    margin-left: 20px;
+  }
+  
+  .timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #ccc;
+    left: 0;
+  }
+  
+  .timeline li {
+    position: relative;
+    padding: 1rem 0;
+  }
+  
+  .timeline li .timeline-badge {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 1.0em;
+    text-align: center;
+    position: absolute;
+    top: 16px;
+    left: -10px;
+    background-color: #999;
+    border-radius: 50%;
+    z-index: 100;
+  }
+  
+  .timeline li .timeline-panel {
+    width: calc(100% - 40px);
+    float: right;
+    padding: 1rem;
+    position: relative;
+    text-align: left;
+    background-color: #fff;
+    border: 1px solid #d4d4d4;
+    border-radius: 2px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .timeline li .timeline-panel:before {
+    right: auto;
+    left: -15px;
+    border-top: 15px solid transparent;
+    border-left: 15px solid #ccc;
+    border-right: 0 solid #ccc;
+    border-bottom: 15px solid transparent;
+    position: absolute;
+    top: 26px;
+  }
+  
+  .timeline li .timeline-panel:after {
+    right: auto;
+    left: -14px;
+    border-top: 14px solid transparent;
+    border-left: 14px solid #fff;
+    border-right: 0 solid #fff;
+    border-bottom: 14px solid transparent;
+    position: absolute;
+    top: 27px;
+  }
+
+   
+  .timeline li:nth-child(odd) .timeline-badge {
+    background-color: #f0ad4e;
+  }
+  
+  .timeline li:nth-child(even) .timeline-badge {
+    background-color: #5cb85c;
+  }
+
+   
+  :root {
+    --color-array: #f0ad4e, #5cb85c, #5bc0de, #d9534f, #337ab7;
+  }
+
+   
+  .timeline li:nth-child(1) .timeline-badge { background-color: #f0ad4e; }
+  .timeline li:nth-child(2) .timeline-badge { background-color: #5cb85c; }
+  .timeline li:nth-child(3) .timeline-badge { background-color: #5bc0de; }
+  .timeline li:nth-child(4) .timeline-badge { background-color: #d9534f; }
+  .timeline li:nth-child(5) .timeline-badge { background-color: #337ab7; }
+</style>
 
 <body class="max-width mx-auto px3 ltr">
   <div class="content index py4">
