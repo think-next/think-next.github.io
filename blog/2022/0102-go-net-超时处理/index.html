@@ -20,7 +20,7 @@
   <meta property="og:url" content="https://neojos.com/blog/2022/0102-go-net-%E8%B6%85%E6%97%B6%E5%A4%84%E7%90%86/">
   <meta property="og:site_name" content="渐行渐远">
   <meta property="og:title" content="Go net 超时处理">
-  <meta property="og:description" content="序 这篇文章详细介绍了，net/http包中对应HTTP的各个阶段，如何使用timeout来进行读/写超时控制以及服务端和客户端支持设置的timeout类型。本质上，这些timeout都是代码层面对各个函数设置的处理时间。比如，读取客户端读取请求头、读取响应体的时间，本质上都是响应函数的超时时间。">
+  <meta property="og:description" content="序">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="blog">
@@ -32,7 +32,7 @@
   
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Go net 超时处理">
-  <meta name="twitter:description" content="序 这篇文章详细介绍了，net/http包中对应HTTP的各个阶段，如何使用timeout来进行读/写超时控制以及服务端和客户端支持设置的timeout类型。本质上，这些timeout都是代码层面对各个函数设置的处理时间。比如，读取客户端读取请求头、读取响应体的时间，本质上都是响应函数的超时时间。">
+  <meta name="twitter:description" content="序">
 
   
   
@@ -210,6 +210,10 @@
 
     
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <h1 class="subheading">Go net 超时处理</h1>
+  <span  class="meta">Posted by 付辉 on Sunday, January 2, 2022
+    共4019字
+</span>
 
   <div class="content" itemprop="articleBody">
   
