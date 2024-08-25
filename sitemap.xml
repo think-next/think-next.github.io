@@ -3,16 +3,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://neojos.com/</loc>
-    <lastmod>2024-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2024-08-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://neojos.com/blog/</loc>
+    <lastmod>2024-08-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://neojos.com/blog/2024/rust%E6%A8%A1%E5%9D%97/</loc>
+    <lastmod>2024-08-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://neojos.com/hugo/</loc>
     <lastmod>2024-07-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://neojos.com/hugo/%E9%87%8D%E6%96%B0%E6%95%B4%E6%95%B4%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2024-07-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://neojos.com/blog/</loc>
-    <lastmod>2024-07-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://neojos.com/hugo/%E4%BA%A7%E5%93%81%E8%BF%AD%E4%BB%A3/</loc>
     <lastmod>2024-07-19T00:00:00+00:00</lastmod>
@@ -436,6 +439,10 @@
   </url><url>
     <loc>https://neojos.com/blog/2018/01-01-redis%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%83%A8%E7%97%9B%E7%BB%8F%E5%8E%86/</loc>
     <lastmod>2018-01-01T20:10:33+00:00</lastmod>
+  </url><url>
+    <loc>https://neojos.com/blog/2024/discordgo/</loc>
+  </url><url>
+    <loc>https://neojos.com/blog/2024/rust-gui-%E8%AE%BE%E8%AE%A1/</loc>
   </url><url>
     <loc>https://neojos.com/about/</loc>
   </url><url>
