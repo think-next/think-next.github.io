@@ -6,8 +6,15 @@
     <description>Recent content on 渐行渐远</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Nov 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 14 Nov 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://neojos.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ssh-agent github</title>
+      <link>https://neojos.com/blog/2024/ssh-agent/</link>
+      <pubDate>Thu, 14 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>https://neojos.com/blog/2024/ssh-agent/</guid>
+      <description>不</description>
+    </item>
     <item>
       <title>rust 异步</title>
       <link>https://neojos.com/blog/2024/rust-%E5%BC%82%E6%AD%A5/</link>
