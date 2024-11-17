@@ -20,7 +20,7 @@
   <meta property="og:url" content="https://neojos.com/blog/2024/ssh-agent/">
   <meta property="og:site_name" content="渐行渐远">
   <meta property="og:title" content="ssh-agent github">
-  <meta property="og:description" content="不">
+  <meta property="og:description" content="最">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="blog">
@@ -30,7 +30,7 @@
   
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="ssh-agent github">
-  <meta name="twitter:description" content="不">
+  <meta name="twitter:description" content="最">
 
   
   
@@ -198,7 +198,7 @@
       
         <li><a href="/greatperson">生活</a></li>
       
-        <li><a href="/">About</a></li>
+        <li><a href="/about">About</a></li>
       
     </ul>
   </div>
@@ -210,31 +210,34 @@
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <h1 class="subheading">ssh-agent github</h1>
   <span  class="blog-single-desc">Posted by 付辉 on Thursday, November 14, 2024
-    共268字
+    共1378字
   <div class="separator"></div>
 </span>
 
   <div class="content" itemprop="articleBody">
   
-    <p>不知道从什么时候开始，在执行 git push 指令的时候会触发 ERROR 提示，摸不着头脑的报错，不过这个仓库的账户确实不是 i-neojos。</p>
+    <p>最近注册了一个新的 github 账户 i-neojos，本地还有之前注册的 github 账号 think-next，主要是感觉原账号下的工程比较杂乱，就决定重新注册一个新的，感觉就和遇到问题重启电脑一样爽！新账号的 git 管理非常顺利，git push 很顺畅，春风得意马蹄疾，一点就能push代码。</p>
+<p>后知后觉，我在 think-next 的仓库下提交代码时会触发了下面的这误提示，这个仓库的代码不是 i-neojos 账户的，错误的提示很直白，但账号怎么就错乱了呢？</p>
 <pre tabindex="0"><code>➜  githubsi.github.io git:(master) git push
 ERROR: Permission to think-next/githubsi.github.io.git denied to i-neojos.
 fatal: Could not read from remote repository.
 
 Please make sure you have the correct access rights
 and the repository exists.
-</code></pre><p>通过下面的指令可以用来查看 git 的配置信息，我们要查看配置信息中用户名和仓库是否匹配。配置信息中的账号的 email 和仓库确实是不匹配的。这里的 email 明显是我另一个 github 注册使用的邮箱。</p>
+</code></pre><p>我快速回忆+反思注册 i-neojos 账户的过程，其中，SSH 按照下面的官方文件做了配置，这个文档介绍的非常清晰简单，我反复看了3遍就看懂了。关于 ssh-agent 代理，很久之前压根就没有这个配置流程，好在按照命令执行就行啦。</p>
+<blockquote>
+<p><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account"># Adding a new SSH key to your GitHub account</a></p>
+</blockquote>
+<p>另外一点是 2FA 验证，很早之前 github 建议过我加强安全防护，但对我而言，这样的验证意义不大，我一个 start 为 0 的有什么好担心的，但好在 github 看的起我，新账户 i-neojos 开通了 2FA 验证。</p>
+<p>我有必要说两句2FA验证，我首先尝试手机随便上下载了一个APP，但居然是收费的，只有前3天免费，果断直接卸载。最后网上找了一圈，找到了一个浏览器插件，叫「身份验证器」，免费好用。好用其次，关键是免费啊，这里推荐给大家。</p>
+<p>诊断问题的过程，就和维修家用电器一样，首先需要把外面的壳子打开，找个梅花锥，然后扭开一个一个螺丝。我首先在提交出问题的仓库下查看 git 的配置信息，下面就是第一的指令查看当前项目的 git 配置信息</p>
+<blockquote>
+<p>git config &ndash;list</p>
+</blockquote>
+<p>我发现：配置信息中的账号的 email 和仓库确实是不匹配的。这里的 email 是 i-neojos 账号的的邮箱。如果只是账号问题不匹配，这也太好解决了，我们尝试在命令行手动修改 git 的配置信息</p>
 <pre tabindex="0"><code>git config --list
 
-credential.helper=osxkeychain
-init.defaultbranch=main
-core.excludesfile=/Users/fuhui/.gitignore_global
-difftool.sourcetree.cmd=opendiff &#34;$LOCAL&#34; &#34;$REMOTE&#34;
-difftool.sourcetree.path=
-mergetool.sourcetree.cmd=/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh &#34;$LOCAL&#34; &#34;$REMOTE&#34; -ancestor &#34;$BASE&#34; -merge &#34;$MERGED&#34;
-mergetool.sourcetree.trustexitcode=true
-url.git@github.com:.insteadof=https://github.com/
-user.name=付辉
+*****省略前序******
 user.email=1520107395@qq.com
 pull.rebase=false
 core.repositoryformatversion=0
@@ -247,10 +250,71 @@ remote.origin.url=git@github.com:think-next/githubsi.github.io.git
 remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
 branch.master.remote=origin
 branch.master.merge=refs/heads/master
-</code></pre><p>我尝试通过使用人工指定用户名的方式来修改，这样的话，配置文件看起来是正确的。</p>
+</code></pre><p>执行下面的指令，手动修改当前仓库的配置信息，经过我重新查看，当前项目下确实生效了。但比较遗憾，git push 的报错并没有得到解决</p>
 <pre tabindex="0"><code>➜  githubsi.github.io git:(master) git config user.email &#34;2493393471@qq.com&#34;
 ➜  githubsi.github.io git:(master) git config user.name &#34;think-next&#34;
-</code></pre>
+</code></pre><p>我现在怀疑 ssh-agent 了，网上说 ssh-agent 是一个用户级别的守护进程，用于设置一个对解密的私钥进行高速缓存的环境。而 ssh-add 用于向这个高速缓冲添加私钥。我重新用给 think-next 配置了新的 SSH 公钥，但我没有使用 ssh-add 进行操作，会不会是这个原因呢？</p>
+<p>求助大模型，使用 <code>ssh-agent</code> 管理多个 GitHub 账号的 SSH 密钥是一种有效的方法。大模型给出的解题步骤：</p>
+<ol>
+<li>
+<p><strong>生成多个SSH密钥：</strong></p>
+<p>为每个GitHub账号生成单独的SSH密钥。例如：</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e"># 为账号一生成密钥</span>
+</span></span><span style="display:flex;"><span>   ssh-keygen -t rsa -b <span style="color:#ae81ff">4096</span> -C <span style="color:#e6db74">&#34;email1@example.com&#34;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e"># 保存文件名可以设为：~/.ssh/id_rsa_github_account1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e"># 为账号二生成密钥</span>
+</span></span><span style="display:flex;"><span>   ssh-keygen -t rsa -b <span style="color:#ae81ff">4096</span> -C <span style="color:#e6db74">&#34;email2@example.com&#34;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e"># 保存文件名可以设为：~/.ssh/id_rsa_github_account2</span>
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>启动ssh-agent:</strong></p>
+<p>确保<code>ssh-agent</code>正在运行，可以通过以下命令启动它：</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   eval <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>ssh-agent -s<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>添加SSH密钥到ssh-agent:</strong></p>
+<p>使用<code>ssh-add</code>命令将生成的密钥添加到<code>ssh-agent</code>：</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   ssh-add ~/.ssh/id_rsa_github_account1
+</span></span><span style="display:flex;"><span>   ssh-add ~/.ssh/id_rsa_github_account2
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>配置<code>~/.ssh/config</code>：</strong></p>
+<p>修改SSH配置文件以区分不同的GitHub账号。在<code>~/.ssh/config</code>中添加以下内容：</p>
+</li>
+</ol>
+<pre tabindex="0"><code>
+   # 账号一
+   Host github-account1
+     HostName github.com
+     User git
+     IdentityFile ~/.ssh/id_rsa_github_account1
+
+   # 账号二
+   Host github-account2
+     HostName github.com
+     User git
+     IdentityFile ~/.ssh/id_rsa_github_account2
+</code></pre><ol>
+<li>
+<p><strong>克隆和访问仓库：</strong></p>
+<p>当你克隆或访问某个仓库时，要指定对应的主机别名。例如：</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   git clone git@github-account1:username/repository.git
+</span></span><span style="display:flex;"><span>   git clone git@github-account2:username/repository.git
+</span></span></code></pre></div><p>通过这种方式，你可以方便地在同一台机器上管理多个GitHub账号的SSH密钥。务必确保你将每个账号的公钥添加到了相应GitHub账号的SSH keys设置中。</p>
+
   
   </div>
 </article>
@@ -272,7 +336,7 @@ branch.master.merge=refs/heads/master
          
         <li><a href="/greatperson">生活</a></li>
          
-        <li><a href="/">About</a></li>
+        <li><a href="/about">About</a></li>
         
       </ul>
     </nav>

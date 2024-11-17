@@ -13,7 +13,7 @@
       <link>https://neojos.com/blog/2024/ssh-agent/</link>
       <pubDate>Thu, 14 Nov 2024 00:00:00 +0000</pubDate>
       <guid>https://neojos.com/blog/2024/ssh-agent/</guid>
-      <description>不</description>
+      <description>最</description>
     </item>
     <item>
       <title>rust 异步</title>
@@ -21,6 +21,13 @@
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       <guid>https://neojos.com/blog/2024/rust-%E5%BC%82%E6%AD%A5/</guid>
       <description>future</description>
+    </item>
+    <item>
+      <title>rust gui 设计</title>
+      <link>https://neojos.com/blog/2024/rust-gui-%E8%AE%BE%E8%AE%A1/</link>
+      <pubDate>Sat, 09 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>https://neojos.com/blog/2024/rust-gui-%E8%AE%BE%E8%AE%A1/</guid>
+      <description>iced</description>
     </item>
     <item>
       <title>rust option的处理</title>
@@ -42,6 +49,13 @@
       <pubDate>Sun, 25 Aug 2024 00:00:00 +0000</pubDate>
       <guid>https://neojos.com/blog/2024/rust-%E6%A8%A1%E5%9D%97/</guid>
       <description>模</description>
+    </item>
+    <item>
+      <title>discordgo 库</title>
+      <link>https://neojos.com/blog/2024/discordgo/</link>
+      <pubDate>Sun, 11 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>https://neojos.com/blog/2024/discordgo/</guid>
+      <description>代</description>
     </item>
     <item>
       <title>重新整整博客·如何让编辑效率更高</title>
@@ -857,20 +871,6 @@
     </item>
     <item>
       <title></title>
-      <link>https://neojos.com/blog/2024/discordgo/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/blog/2024/discordgo/</guid>
-      <description>代</description>
-    </item>
-    <item>
-      <title></title>
-      <link>https://neojos.com/blog/2024/rust-gui-%E8%AE%BE%E8%AE%A1/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/blog/2024/rust-gui-%E8%AE%BE%E8%AE%A1/</guid>
-      <description>iced</description>
-    </item>
-    <item>
-      <title></title>
       <link>https://neojos.com/blog/2024/untitled/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://neojos.com/blog/2024/untitled/</guid>
@@ -881,7 +881,7 @@
       <link>https://neojos.com/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://neojos.com/about/</guid>
-      <description>欢</description>
+      <description>时</description>
     </item>
     <item>
       <title>Using context cancellation in Go</title>
