@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/GitHubSi/blog#readme",
   "dependencies": {
-    "autoprefixer": "^9.7.6",
-    "postcss-cli": "^7.1.1"
+    "autoprefixer": "^10.4.20",
+    "postcss-cli": "^11.0.0"
   }
 }
