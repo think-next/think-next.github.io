@@ -51,18 +51,18 @@
       <description>其</description>
     </item>
     <item>
-      <title>hugo 博客本地编辑提效</title>
-      <link>https://neojos.com/blog/2024/08-25-hugo-%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E7%BC%96%E8%BE%91%E6%8F%90%E6%95%88/</link>
-      <pubDate>Sun, 25 Aug 2024 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/blog/2024/08-25-hugo-%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E7%BC%96%E8%BE%91%E6%8F%90%E6%95%88/</guid>
-      <description>之</description>
-    </item>
-    <item>
       <title>rust 模块笔记</title>
       <link>https://neojos.com/blog/2024/rust-%E6%A8%A1%E5%9D%97/</link>
       <pubDate>Sun, 25 Aug 2024 00:00:00 +0000</pubDate>
       <guid>https://neojos.com/blog/2024/rust-%E6%A8%A1%E5%9D%97/</guid>
       <description>模</description>
+    </item>
+    <item>
+      <title>hugo 博客本地编辑提效</title>
+      <link>https://neojos.com/blog/2024/08-25-hugo-%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E7%BC%96%E8%BE%91%E6%8F%90%E6%95%88/</link>
+      <pubDate>Sat, 24 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>https://neojos.com/blog/2024/08-25-hugo-%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E7%BC%96%E8%BE%91%E6%8F%90%E6%95%88/</guid>
+      <description>之</description>
     </item>
     <item>
       <title>discordgo 库</title>
