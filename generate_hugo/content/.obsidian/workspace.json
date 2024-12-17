@@ -56,7 +56,7 @@
               "type": "markdown",
               "state": {
                 "file": "blog/2024/08-25 hugo 博客本地编辑提效/index.md",
-                "mode": "preview",
+                "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
@@ -207,11 +207,11 @@
   },
   "active": "15e15881761180e7",
   "lastOpenFiles": [
-    "blog/2024/11-14 github ssh-agent 配置/s2.png",
+    "blog/2024/11-14 github ssh-agent 配置/index.md",
     "blog/2024/08-25 hugo 博客本地编辑提效/index.md",
+    "blog/2024/11-14 github ssh-agent 配置/s2.png",
     "blog/2024/08-25 hugo 博客本地编辑提效/images/src-repos.png",
     "blog/2024/08-25 hugo 博客本地编辑提效/images",
-    "blog/2024/11-14 github ssh-agent 配置/index.md",
     "blog/2024/11-14 github ssh-agent 配置/images/ssh.png",
     "blog/2024/rust gui 设计/index.md",
     "blog/2024/rust gui 设计/Pasted image 20240812002219.png",
