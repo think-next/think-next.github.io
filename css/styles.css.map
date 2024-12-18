@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "styles.css",
-	"sourceRoot": "/Users/fuhui/Code/src/github.com/think-next/think-next.github.io/generate_hugo",
+	"sourceRoot": "/Users/fuhui/Code/src/github.com/think-next/think-next.github.io/_generate_hugo",
 	"sources": [
 		"themes/hugo-theme-cactus/assets/scss/style.scss",
 		"themes/hugo-theme-cactus/assets/scss/_variables.scss",
