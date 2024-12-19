@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>渐行渐远</title>
-    <link>https://neojos.com/readbook/</link>
+    <link>http://localhost:1313/readbook/</link>
     <description>Recent content on 渐行渐远</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 17 Feb 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://neojos.com/readbook/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/readbook/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>时间贫困</title>
-      <link>https://neojos.com/readbook/2024/02.17_%E6%97%B6%E9%97%B4%E8%B4%AB%E5%9B%B0/</link>
+      <link>http://localhost:1313/readbook/2024/02.17_%E6%97%B6%E9%97%B4%E8%B4%AB%E5%9B%B0/</link>
       <pubDate>Sat, 17 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/readbook/2024/02.17_%E6%97%B6%E9%97%B4%E8%B4%AB%E5%9B%B0/</guid>
+      <guid>http://localhost:1313/readbook/2024/02.17_%E6%97%B6%E9%97%B4%E8%B4%AB%E5%9B%B0/</guid>
       <description>我</description>
     </item>
     <item>
       <title>大脑健身房</title>
-      <link>https://neojos.com/readbook/2024/02.14_%E5%A4%A7%E8%84%91%E5%81%A5%E8%BA%AB%E6%88%BF/</link>
+      <link>http://localhost:1313/readbook/2024/02.14_%E5%A4%A7%E8%84%91%E5%81%A5%E8%BA%AB%E6%88%BF/</link>
       <pubDate>Wed, 14 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/readbook/2024/02.14_%E5%A4%A7%E8%84%91%E5%81%A5%E8%BA%AB%E6%88%BF/</guid>
+      <guid>http://localhost:1313/readbook/2024/02.14_%E5%A4%A7%E8%84%91%E5%81%A5%E8%BA%AB%E6%88%BF/</guid>
       <description>规</description>
     </item>
   </channel>
