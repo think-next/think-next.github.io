@@ -1,0 +1,19 @@
+{
+  "list": [
+    {
+      "name": "github",
+      "url": "https://github.com/think-next",
+      "desc": "..."
+    },
+    {
+      "name": "csdn",
+      "url": "https://neojos.blog.csdn.net/?type=blog",
+      "desc": "冷静观察，稳住阵脚，沉着应对，韬光养晦，善于守拙，决不当头，所有作为"
+    },
+    {
+      "name": "segmentfault",
+      "url": "https://segmentfault.com/u/neojos/articles",
+      "desc": "说好的东风爽约了，我在雾霾中，等下一阵风"
+    }
+  ]
+}
