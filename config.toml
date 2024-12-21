@@ -8,6 +8,7 @@ disqusShortname = "" # Enable Disqus comments by entering your Disqus shortname
 GoogleAnalytics = false # Enable Google Analytics by entering your tracking id
 summaryLength = 1
 hasCJKLanguage = true
+publishDir = "/Users/fuhui/Code/src/github.com/think-next/think-next.github.io"
 
 [Author] # Used in authorbox
 name = "Neojos"
