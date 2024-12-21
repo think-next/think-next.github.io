@@ -210,7 +210,7 @@
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <h1 class="subheading">hugo 博客本地编辑提效</h1>
   <span  class="blog-single-desc">Posted by 付辉 on Saturday, August 24, 2024
-    共334字
+    共697字
   <div class="separator"></div>
 </span>
 
@@ -221,7 +221,12 @@
 <h2 id="仓库合并保留一个项目">仓库合并，保留一个项目</h2>
 <p><img src="./images/src-repos.png" alt="仓库现状"></p>
 <p>当前项目下的两个仓库用来做博客这件事，其中一个是 hugo 项目，另一个就是服务 github page 的项目，两个项目也算得上是父子关系。但其实没必要分的那么清楚，分成两个项目只是徒劳地给代码提交带来了很多不便。</p>
-<p>我们计划将其合并成一个项目，</p>
+<p>我们计划将其合并成一个项目，网上有人的做法是：一个项目，两个分支。其中一个用来保存hugo项目，另一个用来保存 public 的结果。这两个分支内容可谓是天差地别，不过也没有那么重要。这样的话，两个分支其实需要分别提交，各自提交各自的。</p>
+<p><img src="./images/repo-branch.png" alt="两个分支模式"></p>
+<p>聪明的你应该已经想到，hugo 项目最终的产出其实是项目下的 public 目录，我们直接用 public 作为仓库，将 hugo 项目作为 public 的一个子目录，hugo 每次编译的时候将产出路径指定为当前目录的父目录。</p>
+<p>我其实也是这么想的，但这种方法行不通。文件的变更确确实实生效了，但是访问博客的时候却访问不到新编译的变更。这很奇怪，但是也不知道其中原理。即使我将目录指定为隐藏目录，也依旧不行。希望理解原理的人能给指导一下。</p>
+<p><img src="./images/hugo-dir.png" alt="不可见目录"></p>
+<p>折腾了半天，姑且不考虑效果，我总结这几种方式没有优劣之分，效率提升上基本毫无差别，主要还是看个人的喜好，最终我计划使用第二种模式：一个项目，两个分支。·</p>
 
   
   </div>
