@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
@@ -12,12 +12,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> hugo 博客本地编辑提效 | 渐行渐远</title>
-  <link rel = 'canonical' href = 'https://neojos.com/blog/2024/08-25-hugo-%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E7%BC%96%E8%BE%91%E6%8F%90%E6%95%88/'>
+  <link rel = 'canonical' href = 'http://localhost:1313/blog/2024/08-25-hugo-%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E7%BC%96%E8%BE%91%E6%8F%90%E6%95%88/'>
   
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
-  <meta property="og:url" content="https://neojos.com/blog/2024/08-25-hugo-%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E7%BC%96%E8%BE%91%E6%8F%90%E6%95%88/">
+  <meta property="og:url" content="http://localhost:1313/blog/2024/08-25-hugo-%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E7%BC%96%E8%BE%91%E6%8F%90%E6%95%88/">
   <meta property="og:site_name" content="渐行渐远">
   <meta property="og:title" content="hugo 博客本地编辑提效">
   <meta property="og:description" content="之">
@@ -37,7 +37,7 @@
     
   
   
-  <link rel="stylesheet" href="https://neojos.com/css/styles.dcec1d679f130468430e713aaa52d0eda82310e8cb61730bf67f408221cfda0be536a449e711e772dfc87490c88fcd6939e2ebeadc6c0f858ff69d0ceeb799ce.css" integrity="sha512-3OwdZ58TBGhDDnE6qlLQ7agjEOjLYXML9n9AgiHP2gvlNqRJ5xHnct/IdJDIj81pOeLr6txsD4WP9p0M7reZzg=="> 
+  <link rel="stylesheet" href="http://localhost:1313/css/styles.dcec1d679f130468430e713aaa52d0eda82310e8cb61730bf67f408221cfda0be536a449e711e772dfc87490c88fcd6939e2ebeadc6c0f858ff69d0ceeb799ce.css" integrity="sha512-3OwdZ58TBGhDDnE6qlLQ7agjEOjLYXML9n9AgiHP2gvlNqRJ5xHnct/IdJDIj81pOeLr6txsD4WP9p0M7reZzg=="> 
 
   
   
@@ -49,7 +49,7 @@
   
 
   
-<link rel="icon" type="image/png" href="https://neojos.com/images/favicon.ico" />
+<link rel="icon" type="image/png" href="http://localhost:1313/images/favicon.ico" />
 
   
   
@@ -176,9 +176,9 @@
   <div class="content index py4">
 
     <header id="header">
-  <a href="https://neojos.com/">
+  <a href="http://localhost:1313/">
   
-    <div id="logo" style="background-image: url(https://neojos.com/img/mifeng.jpeg)"></div>
+    <div id="logo" style="background-image: url(http://localhost:1313/img/mifeng.jpeg)"></div>
   
   <div id="title">
     <h1>渐行渐远</h1>
@@ -210,7 +210,7 @@
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <h1 class="subheading">hugo 博客本地编辑提效</h1>
   <span  class="blog-single-desc">Posted by 付辉 on Saturday, August 24, 2024
-    共948字
+    共1014字
   <div class="separator"></div>
 </span>
 
@@ -231,7 +231,7 @@
 <p>因为这两个分支的内容是完全不相同的，现在将仓库存储在两个不同的目录，两个目录之前有代码生成关系，真正起作用的其实就是一个 hugo 命令，这个命令的作用是编译项目，将生成的文件发布到 publish 目录中。</p>
 <p><img src="./images/public-dir.png" alt="hugo命令生成"></p>
 <p>可以通过命令实现如上图所示的生成操作，但每次单独在命令行执行其实是一种重复劳动，即使现在的命令行都有记忆的能力，这样执行的次数多了也会让人很不耐烦。最好的方式其实是本地执行 hugo server 时，自动将变更的代码同步到 public 项目。</p>
-<p>hugo 支持了一个属性 publishDir，它指定一个目录的路径，最终 hugo 的产出都会输出到这个目录下。</p>
+<p>hugo 支持了一个属性 <strong>publishDir</strong>，它指定一个目录的路径，最终 hugo 的产出都会输出到这个目录下。在配置这个属性之后，操作方式上其实是有简化的，虽然非常有限！之前我们需要执行 <code>hugo -d public_path</code>，而现在只需要执行 <code>hugo</code> 单个命令。</p>
 
   
   </div>
