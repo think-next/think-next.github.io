@@ -1,0 +1,256 @@
+{
+  "main": {
+    "id": "8b8be3c4c8cde38e",
+    "type": "split",
+    "children": [
+      {
+        "id": "c2acda73e19fed06",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ba802ecedc187ccc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "blog/2024/rust 异步/index.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          },
+          {
+            "id": "a55dc14b93721b48",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "blog/2024/ssh agent/index.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          },
+          {
+            "id": "9871b5f642e29f40",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "about.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "about"
+            }
+          },
+          {
+            "id": "15e15881761180e7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "blog/2024/08-25 hugo 博客本地编辑提效/index.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "642b333c0daf4ea7",
+    "type": "split",
+    "children": [
+      {
+        "id": "a68e63e1b66543dd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4dc1ddf66f8bb832",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "d2f877315c116b6a",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "55a0ed63e0bb5bf6",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 354.5
+  },
+  "right": {
+    "id": "8d000694e1bb185b",
+    "type": "split",
+    "children": [
+      {
+        "id": "4f994f0b841a6577",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1045e3f569bf5afc",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "blog/2024/08-25 hugo 博客本地编辑提效/index.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for index"
+            }
+          },
+          {
+            "id": "3a24237967310cbd",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "blog/2024/寸剑/index.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from index"
+            }
+          },
+          {
+            "id": "ad7ec95ebdb7e510",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "78385f96f77f2e42",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "blog/2024/寸剑/index.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of index"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
+    }
+  },
+  "active": "15e15881761180e7",
+  "lastOpenFiles": [
+    "blog/2024/08-25 hugo 博客本地编辑提效/images/hugo-dir.png",
+    "blog/2024/08-25 hugo 博客本地编辑提效/index.md",
+    "blog/2024/08-25 hugo 博客本地编辑提效/images/repo-branch.png",
+    "blog/2024/寸剑/index.md",
+    "blog/2023/01. go 中 string 并发写导致的 panic/index.md",
+    "blog/2024/11-14 github ssh-agent 配置/index.md",
+    "blog/2024/11-14 github ssh-agent 配置/s2.png",
+    "blog/2024/08-25 hugo 博客本地编辑提效/images/src-repos.png",
+    "blog/2024/08-25 hugo 博客本地编辑提效/images",
+    "blog/2024/11-14 github ssh-agent 配置/images/ssh.png",
+    "blog/2024/rust gui 设计/index.md",
+    "blog/2024/rust gui 设计/Pasted image 20240812002219.png",
+    "blog/2024/discordgo/Pasted image 20240811221149.png",
+    "blog/2023/01. go 中 string 并发写导致的 panic/panic.png",
+    "blog/2024/discordgo/index.md",
+    "blog/2024/数据统计/index.md",
+    "blog/2024/数据统计/Pasted image 20240804220823.png",
+    "blog/2024/Untitled.md",
+    "blog/2024/11-14 github ssh-agent 配置/images",
+    "blog/2024/hugo使用模板/index.md",
+    "blog/2024/rust 模块/index.md",
+    "blog/2024/hugo使用模板",
+    "greatperson/2022.03.12. 认真地看待炒股.md",
+    "blog/2024/rust option/index.md",
+    "blog/2024/08-25 hugo 博客本地编辑提效",
+    "blog/_index.md",
+    "blog/2021/001. 算法题 - 组合总数.md",
+    "blog/2021/0420 Go 反射用例.md",
+    "blog/2021/0419 Go 反射入门.md",
+    "blog/2021/0220 博客样式迭代.md",
+    "about.md",
+    "_index.md",
+    "index.md",
+    "hugo/重新整整博客/index.md",
+    "blog/2024/rust 异步/index.md",
+    "blog/2024/11-14 github ssh-agent 配置",
+    "blog/2024/rust 异步",
+    "blog/2024/rust option",
+    "blog/2024/寸剑",
+    "blog/2024/数据统计/api_key.png",
+    "blog/2024/rust 模块",
+    "blog/2024/rust gui 设计",
+    "blog/2023/Untitled.md",
+    "blog/2022/0101-Go test基础用法.md",
+    "hugo/产品迭代/index.md"
+  ]
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Net on 渐行渐远</title>
+    <link>http://localhost:1313/tags/net/</link>
+    <description>Recent content in Net on 渐行渐远</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 08 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>protocol stack</title>
+      <link>http://localhost:1313/blog/2019/19-12-08-protocol-stack/</link>
+      <pubDate>Sun, 08 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2019/19-12-08-protocol-stack/</guid>
+      <description>盗</description>
+    </item>
+    <item>
+      <title>Tcp Bulk Data</title>
+      <link>http://localhost:1313/blog/2018/09-24-tcp-bulk-data/</link>
+      <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2018/09-24-tcp-bulk-data/</guid>
+      <description>T</description>
+    </item>
+    <item>
+      <title>IP Routing</title>
+      <link>http://localhost:1313/blog/2018/08-04-ip-routing/</link>
+      <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2018/08-04-ip-routing/</guid>
+      <description>假</description>
+    </item>
+    <item>
+      <title>ngrep抓包</title>
+      <link>http://localhost:1313/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/</link>
+      <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2018/08-01-ngrep%E6%8A%93%E5%8C%85/</guid>
+      <description>简</description>
+    </item>
+    <item>
+      <title>Tcp Server Design</title>
+      <link>http://localhost:1313/blog/2018/07-28-tcp-server-design/</link>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2018/07-28-tcp-server-design/</guid>
+      <description>绝</description>
+    </item>
+    <item>
+      <title>siege压测</title>
+      <link>http://localhost:1313/blog/2018/07-19-siege%E5%8E%8B%E6%B5%8B/</link>
+      <pubDate>Thu, 19 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2018/07-19-siege%E5%8E%8B%E6%B5%8B/</guid>
+      <description>关</description>
+    </item>
+    <item>
+      <title>mitmproxy使用</title>
+      <link>http://localhost:1313/blog/2018/07-06-mitmproxy%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 06 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2018/07-06-mitmproxy%E4%BD%BF%E7%94%A8/</guid>
+      <description>介</description>
+    </item>
+    <item>
+      <title>TIME_WAIT状态解读</title>
+      <link>http://localhost:1313/blog/2018/06-15-time_wait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/</link>
+      <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2018/06-15-time_wait%E7%8A%B6%E6%80%81%E8%A7%A3%E8%AF%BB/</guid>
+      <description>版</description>
+    </item>
+  </channel>
+</rss>
