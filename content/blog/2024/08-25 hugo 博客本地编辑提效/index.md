@@ -44,5 +44,15 @@ hugo 支持了一个属性 **publishDir**，它指定一个目录的路径，最
 
 ![hugo-commit.png](./images/hugo-commit.png)
 
+总体来说，博客整体流程上没有什么问题。这个操作的提效要明显优于之前的操作。
 
+## 使用博客模板
+
+说到博客模板，拿这篇文章来说明，文章需要插入图片，而图片资源就需要有明确的地址，可以将图片放到 hugo 静态资源文件中，但文章其实是使用了 `Page bundles` 下的 `leaf bundle` 模式来处理。
+
+`leaf bundle` 本质上表示一个`page`页，`hugo`中的一篇博客，内部包含文件名`index.md`以及其它图片资源，而`index.md`中加载资源图片可以使用相对路径进行引用。我用这篇博客来解释一下（马赛克并非是出于隐私，目的是为了图片突出重点）
+
+![page-bundle.png](./images/page-bundle.png)
+
+只有先解释清楚了 `leaf bundle` ，接下来就说明下博客模板。 
 
