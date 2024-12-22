@@ -54,5 +54,12 @@ hugo 支持了一个属性 **publishDir**，它指定一个目录的路径，最
 
 ![page-bundle.png](./images/page-bundle.png)
 
-只有先解释清楚了 `leaf bundle` ，接下来就说明下博客模板。 
+只有先解释清楚了 `leaf bundle` ，接下来就说明下博客模板。`hugo`项目有个叫`archetypes`的目录，中文翻译“原型”。这个目录主要作用于 `hugo new` 这个命令有，用来创建一个新的博客。
 
+![image-md.png](./images/image-md.png)
+
+```
+hugo new --kind imagemd content/blog/2024/使用模板创建一篇博客
+```
+
+这样的效率提升是比较有限的，好在它省去了复制-粘贴-修改的麻烦，我们也可以加一些自定义的处理
