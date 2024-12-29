@@ -55,7 +55,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/2024/08-25 hugo 博客本地编辑提效/index.md",
+                "file": "blog/2024/12-29 辅助编程应用/index.md",
                 "mode": "source",
                 "source": true
               },
@@ -207,12 +207,15 @@
   },
   "active": "15e15881761180e7",
   "lastOpenFiles": [
+    "blog/2024/08-25 hugo 博客本地编辑提效/index.md",
+    "blog/2024/12-29 辅助编程应用/index.md",
+    "blog/2024/12-29 辅助编程应用/Untitled",
+    "blog/2024/12-29 辅助编程应用",
     "blog/2024/使用模板创建一篇博客/images/placehold.png",
     "blog/2024/使用模板创建一篇博客/index.md",
     "blog/2024/使用模板创建一篇博客/images",
     "blog/2024/使用模板创建一篇博客",
     "blog/2024/08-25 hugo 博客本地编辑提效/images/image-md.png",
-    "blog/2024/08-25 hugo 博客本地编辑提效/index.md",
     "blog/2024/hugo11111/images/placehold.png",
     "blog/2024/hugo11111/index.md",
     "blog/2024/hugo11111/images",
@@ -228,7 +231,6 @@
     "blog/2023/01. go 中 string 并发写导致的 panic/index.md",
     "blog/2024/11-14 github ssh-agent 配置/index.md",
     "blog/2024/11-14 github ssh-agent 配置/s2.png",
-    "blog/2024/08-25 hugo 博客本地编辑提效/images/src-repos.png",
     "blog/2024/08-25 hugo 博客本地编辑提效/images",
     "blog/2024/rust gui 设计/index.md",
     "blog/2024/discordgo/index.md",
@@ -250,8 +252,6 @@
     "index.md",
     "hugo/重新整整博客/index.md",
     "blog/2024/rust 异步/index.md",
-    "blog/2024/11-14 github ssh-agent 配置",
-    "blog/2024/rust 异步",
     "blog/2023/Untitled.md"
   ]
 }
