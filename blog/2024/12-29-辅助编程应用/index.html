@@ -20,7 +20,7 @@
   <meta property="og:url" content="https://neojos.com/blog/2024/12-29-%E8%BE%85%E5%8A%A9%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8/">
   <meta property="og:site_name" content="渐行渐远">
   <meta property="og:title" content="辅助编程应用">
-  <meta property="og:description" content="有">
+  <meta property="og:description" content="s">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="blog">
@@ -30,7 +30,7 @@
   
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="辅助编程应用">
-  <meta name="twitter:description" content="有">
+  <meta name="twitter:description" content="s">
 
   
   
@@ -210,13 +210,14 @@
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <h1 class="subheading">辅助编程应用</h1>
   <span  class="blog-single-desc">Posted by 付辉 on Sunday, December 29, 2024
-    共397字
+    共938字
   <div class="separator"></div>
 </span>
 
   <div class="content" itemprop="articleBody">
   
-    <p>有下面的开源模型供参考：</p>
+    <p>status：草稿&hellip;&hellip;</p>
+<p>有下面的开源模型供参考：</p>
 <ol>
 <li>Salesforce AI Research发布的Codegen</li>
 <li>Llama Code</li>
@@ -231,6 +232,14 @@
 </ul>
 <p>关于训练模型，其实并不是一件简单的事情，要训练一个Coding模型，单靠学习代码并不足以微调模型一边有效地生成代码，模型还需要其它领域的知识。而所学内容的类型和比例，我们称之为数据配比，将直接决预训练模型的最终效果。</p>
 <p>这让我想到模型的评测指标，评测一个模型在不同方面的打分</p>
+<h2 id="知识库rag">知识库RAG</h2>
+<p>基于文档和知识库的RAG问答技术，可以考虑应用到私有代码仓库。结合大模型的深度思考分析理解能力以及语法树解析，创建一个针对代码库的RAG系统，通过自然语言和代码仓库进行交互，理解项目的架构和业务实现。</p>
+<p>通过大模型可以高效地定位到具体的功能实现、可以清晰的梳理出当前方法引用到的结构体和其它依赖声明、可以给出当前实现和产品需求的差异点。</p>
+<p>比如，我要为具体的方法生成单元测试，那我可以通过知识库来获取当前方法所有要使用的结构体声明、函数声明、方法声明，通过优化 prompt 的方法来优化自动生成代码的质量。</p>
+<p><strong>方向</strong>：为私有仓库创建RAG系统，通过大模型来获取函数的具体实现，主要是含义内部变量的类型、使用到的方法声明、使用到的函数声明。从这个角度进行考虑的话，更需要的是一个检索+大模型的系统。</p>
+<h2 id="钩子-hook">钩子 hook</h2>
+<p>对于大模型的应用，我们可以重复利用两个时机来进行介入处理，其一是在真实发起调用大模型之前，其二是在拿到大模型的返回结果之后。之前看到过有 Function call，用来扩展AI的能力。</p>
+<p>通过 Function Call，模型可以和外部系统进行交互集成，执行更加复杂的操作，比如提供额外的上下文、或者修复 prompt。<strong>但</strong>本质是调度，关键还在于 Call 什么，我希望可以 Call 到上面的知识库RAG</p>
 
   
   </div>
@@ -239,7 +248,7 @@
 
     <footer id="footer">
   <div class="footer-left">
-    Copyright  &copy; 2024  渐行渐远 
+    Copyright  &copy; 2025  渐行渐远 
   </div>
   <div class="footer-right">
     <nav>
