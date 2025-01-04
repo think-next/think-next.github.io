@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/2024/12-29 辅助编程应用/index.md",
+                "file": "blog/2020/20180706_mitmproxy使用/index.md",
                 "mode": "source",
                 "source": true
               },
@@ -186,11 +186,19 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "ba802ecedc187ccc",
+  "active": "4dc1ddf66f8bb832",
   "lastOpenFiles": [
+    "blog/2020/20180706_mitmproxy使用",
+    "blog/2018/08-11-Golang下的Error.md",
+    "blog/2018/09-03-sync.Once.md",
+    "blog/2018/12-29-How to use godog.md",
+    "blog/2018/12-09-Net Transport.md",
+    "blog/2018/11-20-NSS初窥.md",
+    "blog/2018/07-28-Tcp Server Design.md",
+    "blog/2018/03-31-包管理.md",
+    "blog/2024/12-29 辅助编程应用/index.md",
     "blog/2024/rust 异步/index.md",
     "about.md",
-    "blog/2024/12-29 辅助编程应用/index.md",
     "blog/2024/08-25 hugo 博客本地编辑提效/index.md",
     "blog/2024/12-29 辅助编程应用/Untitled",
     "blog/2024/12-29 辅助编程应用",
@@ -225,14 +233,6 @@
     "greatperson/2022.03.12. 认真地看待炒股.md",
     "blog/2024/rust option/index.md",
     "blog/2024/08-25 hugo 博客本地编辑提效",
-    "blog/_index.md",
-    "blog/2021/001. 算法题 - 组合总数.md",
-    "blog/2021/0420 Go 反射用例.md",
-    "blog/2021/0419 Go 反射入门.md",
-    "blog/2021/0220 博客样式迭代.md",
-    "_index.md",
-    "index.md",
-    "hugo/重新整整博客/index.md",
-    "blog/2023/Untitled.md"
+    "blog/_index.md"
   ]
 }
