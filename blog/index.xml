@@ -296,6 +296,13 @@
       <description>MySQL</description>
     </item>
     <item>
+      <title>网络抓包</title>
+      <link>https://neojos.com/blog/2020/20180706_mitmproxy%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 06 Jul 2020 00:00:00 +0000</pubDate>
+      <guid>https://neojos.com/blog/2020/20180706_mitmproxy%E4%BD%BF%E7%94%A8/</guid>
+      <description>要</description>
+    </item>
+    <item>
       <title>protocol stack</title>
       <link>https://neojos.com/blog/2019/19-12-08-protocol-stack/</link>
       <pubDate>Sun, 08 Dec 2019 00:00:00 +0000</pubDate>
@@ -679,13 +686,6 @@
       <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
       <guid>https://neojos.com/blog/2018/07-10-linux%E6%9F%A5%E7%9C%8B%E7%9B%91%E5%90%AC%E7%9A%84%E7%AB%AF%E5%8F%A3%E8%BF%9B%E7%A8%8B/</guid>
       <description>Netstat</description>
-    </item>
-    <item>
-      <title>mitmproxy使用</title>
-      <link>https://neojos.com/blog/2018/07-06-mitmproxy%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Fri, 06 Jul 2018 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/blog/2018/07-06-mitmproxy%E4%BD%BF%E7%94%A8/</guid>
-      <description>介</description>
     </item>
     <item>
       <title>MySQL事务</title>
