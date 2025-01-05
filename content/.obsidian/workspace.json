@@ -186,8 +186,13 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "4dc1ddf66f8bb832",
+  "active": "ba802ecedc187ccc",
   "lastOpenFiles": [
+    "blog/2020/20180706_mitmproxy使用/images/ca_install.png",
+    "blog/2020/20180706_mitmproxy使用/index.md",
+    "blog/2020/20180706_mitmproxy使用/images/wireshark_tls.png",
+    "blog/2020/20180706_mitmproxy使用/images/proxy.png",
+    "blog/2020/20180706_mitmproxy使用/images",
     "blog/2020/20180706_mitmproxy使用",
     "blog/2018/08-11-Golang下的Error.md",
     "blog/2018/09-03-sync.Once.md",
@@ -216,12 +221,9 @@
     "blog/2024/08-25 hugo 博客本地编辑提效/images/hugo-commit.png",
     "blog/2024/08-25 hugo 博客本地编辑提效/images/public-dir.png",
     "blog/2024/08-25 hugo 博客本地编辑提效/images/public-dir.png",
-    "blog/2024/08-25 hugo 博客本地编辑提效/images/hugo-dir.png",
-    "blog/2024/08-25 hugo 博客本地编辑提效/images/repo-branch.png",
     "blog/2024/寸剑/index.md",
     "blog/2023/01. go 中 string 并发写导致的 panic/index.md",
     "blog/2024/11-14 github ssh-agent 配置/index.md",
-    "blog/2024/11-14 github ssh-agent 配置/s2.png",
     "blog/2024/08-25 hugo 博客本地编辑提效/images",
     "blog/2024/rust gui 设计/index.md",
     "blog/2024/discordgo/index.md",
@@ -229,10 +231,7 @@
     "blog/2024/Untitled.md",
     "blog/2024/11-14 github ssh-agent 配置/images",
     "blog/2024/rust 模块/index.md",
-    "blog/2024/hugo使用模板",
     "greatperson/2022.03.12. 认真地看待炒股.md",
-    "blog/2024/rust option/index.md",
-    "blog/2024/08-25 hugo 博客本地编辑提效",
-    "blog/_index.md"
+    "blog/2024/rust option/index.md"
   ]
 }
