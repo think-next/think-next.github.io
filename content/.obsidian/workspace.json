@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/2020/20180706_mitmproxy使用/index.md",
+                "file": "greatperson/2022.03.12.坚持习惯.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "2022.03.12.坚持习惯"
             }
           },
           {
@@ -188,8 +188,8 @@
   },
   "active": "ba802ecedc187ccc",
   "lastOpenFiles": [
-    "blog/2020/20180706_mitmproxy使用/images/ca_install.png",
     "blog/2020/20180706_mitmproxy使用/index.md",
+    "blog/2020/20180706_mitmproxy使用/images/ca_install.png",
     "blog/2020/20180706_mitmproxy使用/images/wireshark_tls.png",
     "blog/2020/20180706_mitmproxy使用/images/proxy.png",
     "blog/2020/20180706_mitmproxy使用/images",
