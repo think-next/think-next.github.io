@@ -211,7 +211,7 @@
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <h1 class="subheading">网络抓包</h1>
   <span  class="blog-single-desc">Posted by 渐行渐远 on Monday, July 6, 2020
-    共1004字
+    共1626字
   <div class="separator"></div>
 </span>
 
@@ -225,9 +225,18 @@
 <h2 id="https-编解码">https 编解码</h2>
 <p>HTTPS交互引入了数据加密，对称加密、非对称加密、数字证书等内容，理解它的基本原理可以帮助我们理解网络抓包。</p>
 <p>什么是对称加密？我的理解是“一把锁两把钥匙”，你和我做安全交易，我们都可以把东西锁起来，通过公开的途径邮寄给对方，对方收到后，用钥匙直接打开。但你和我在网络上是两个不熟悉人，我买了锁之后怎么把钥匙给你就很困难。</p>
-<p>什么是非对称加密？我的理解是“一把锁一把钥匙”，你和我做安全交易，你拿锁，我拿钥匙，你把东西锁起来然后邮寄给我，我用钥匙直接打开。但是，如果我要给你邮寄东西怎么办呢？还需要另外一把锁和钥匙，这次换我那锁，你拿钥匙。</p>
+<p>什么是非对称加密？我的理解是“一把锁一把钥匙”，你和我做安全交易，你拿锁，我拿钥匙，你把东西锁起来然后邮寄给我，我用钥匙直接打开。但是，如果我要给你邮寄东西怎么办呢？还需要另外一把锁和钥匙，这次换我拿锁，你拿钥匙。</p>
+<p>对于非对称加密的比喻，还是不够全面，缺点意思。分对称加密有公钥和私钥，公钥加密的数据必须使用私钥进行解密；私钥加密的数据，必须使用公钥解密；但公钥是公开的，任何人都可以获取到，私钥加密、公钥解密的意义就很不明确。</p>
+<p>如果我们抓包想要显示加密传输的内容，需要将抓包工具当做一个代理来使用，如果使用Wireshark抓包，该如何设置代理以及展示传输的内容呢？首先要给这个工具一个定位：Wireshark 可以作为一个网络代理吗？</p>
+<p><img src="./images/proxy.png" alt="proxy.png"></p>
+<p>我查阅了一下，Wireshark 本身并不是一个网络代理，它无法代理和转发网络流量，它通常被用作网络分析工具，用来捕获和分析网络通讯数据包。</p>
+<p>基于我认知的角度来说，在https协商秘钥的过程中，总共有3个随机数：客户端的随机数、服务端的随机数、以及pre-master随机数，因为pre-master是加密传输的的，Wireshark应该是不知道的。所以在Wireshark解析TLS协议的配置项中，可以指定 pre-master-secret log file。难道这个文件的内部是明文？</p>
+<p><img src="./images/wireshark_tls.png" alt="tls"></p>
+<p>选择使用mitmproxy抓包，只需要安装信任证书，就可以正常查看https的请求。或者，如果不行的话，可以尝试重启下机器。</p>
 <h2 id="mitmproxy">mitmproxy</h2>
 <p>介绍一款非常好用的抓包工具，官网地址：<a href="https://www.mitmproxy.org">https://www.mitmproxy.org</a>。实际上，在调试苹果<code>IAP</code>支付时，始终没有抓成功过，反而因为设置了代理，导致苹果<code>沙盒用户</code>无法成功支付。它名字的全拼是<code>Man-in-the-middle-proxy</code>，代表中间人攻击。</p>
+<p>要顺利抓包，最关键的步骤是安装证书，我是macOs笔记本电脑，只需要安装官方的介绍进行安装。mitmproxy 的CA证书被安装在home目录下的<code>~/.mitmproxy</code>中，证书文件<code>mitmproxy-ca-cert.pem</code>拖动到钥匙串访问中，注意点击始终信任</p>
+<p><img src="./images/ca_install.png" alt="ca_install.png"></p>
 <h2 id="常用的快捷键">常用的快捷键</h2>
 <ol>
 <li>在列表界面，按<code>回车</code>进入详情界面</li>
