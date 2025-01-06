@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "greatperson/2022.03.12.坚持习惯.md",
+                "file": "blog/2024/08-25 hugo 博客本地编辑提效/index.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "2022.03.12.坚持习惯"
+              "title": "index"
             }
           },
           {
@@ -188,10 +188,17 @@
   },
   "active": "ba802ecedc187ccc",
   "lastOpenFiles": [
+    "blog/2024/08-25 hugo 博客本地编辑提效/images/hugo-commit.png",
+    "blog/2024/08-25 hugo 博客本地编辑提效/index.md",
+    "greatperson/2022.03.12. 认真地看待炒股.md",
+    "greatperson/2022.03.12.结构话思维.md",
+    "greatperson/2022.03.12.知识焦虑.md",
     "blog/2020/20180706_mitmproxy使用/index.md",
+    "blog/2020/20180706_mitmproxy使用/images/nav_bar.png",
+    "blog/2020/20180706_mitmproxy使用/images/proxy.png",
+    "greatperson/2022.03.12.坚持习惯.md",
     "blog/2020/20180706_mitmproxy使用/images/ca_install.png",
     "blog/2020/20180706_mitmproxy使用/images/wireshark_tls.png",
-    "blog/2020/20180706_mitmproxy使用/images/proxy.png",
     "blog/2020/20180706_mitmproxy使用/images",
     "blog/2020/20180706_mitmproxy使用",
     "blog/2018/08-11-Golang下的Error.md",
@@ -204,7 +211,6 @@
     "blog/2024/12-29 辅助编程应用/index.md",
     "blog/2024/rust 异步/index.md",
     "about.md",
-    "blog/2024/08-25 hugo 博客本地编辑提效/index.md",
     "blog/2024/12-29 辅助编程应用/Untitled",
     "blog/2024/12-29 辅助编程应用",
     "blog/2024/使用模板创建一篇博客/images/placehold.png",
@@ -218,8 +224,6 @@
     "blog/2024/hugo11111",
     "blog/2024/08-25 hugo 博客本地编辑提效/images/page-bundle.png",
     "blog/2024/hugo使用模板/index.md",
-    "blog/2024/08-25 hugo 博客本地编辑提效/images/hugo-commit.png",
-    "blog/2024/08-25 hugo 博客本地编辑提效/images/public-dir.png",
     "blog/2024/08-25 hugo 博客本地编辑提效/images/public-dir.png",
     "blog/2024/寸剑/index.md",
     "blog/2023/01. go 中 string 并发写导致的 panic/index.md",
@@ -228,10 +232,6 @@
     "blog/2024/rust gui 设计/index.md",
     "blog/2024/discordgo/index.md",
     "blog/2024/数据统计/index.md",
-    "blog/2024/Untitled.md",
-    "blog/2024/11-14 github ssh-agent 配置/images",
-    "blog/2024/rust 模块/index.md",
-    "greatperson/2022.03.12. 认真地看待炒股.md",
-    "blog/2024/rust option/index.md"
+    "blog/2024/11-14 github ssh-agent 配置/images"
   ]
 }

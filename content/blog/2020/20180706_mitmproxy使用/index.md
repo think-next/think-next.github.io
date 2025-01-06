@@ -43,6 +43,13 @@ HTTPS交互引入了数据加密，对称加密、非对称加密、数字证书
 
 ![ca_install.png](./images/ca_install.png)
 
+最近重新拾起抓包还是因为大模型，市面上有很多代码自动生成插件，就拿自动生成单元测试来说，那些插件究竟提交给了大模型哪些代码，我想通过网络抓包来一探究竟。很开心的是，确实可以抓到。
+
+而且，我发现 mitmproxy 的命令行操作其实特别间接，很多操作通过快捷键就搞定了，最主要是，你不用担心忘记快捷键，快捷键就在界面的最下栏。最让我用起来感觉比较棒的地方，是查看单个请求的请求头或者请求体，一键进入编辑模式，再配合 sublime，感觉自己马上就要起飞了。
+
+![nav_bar.png](./images/nav_bar.png)
+
+更给人意外的是，mitmproxy官方文档中还介绍到了wireshark，mitmproxy支持将 SSL/TLS master keys 记录到指定的文件以便提供给 Wireshark 解密 SSL/TLS 的数据包。不过，我觉得，mitmproxy已经完全可以了，就没有理由再去鼓捣一下 Wireshark了
 
 ## 常用的快捷键
 
@@ -58,8 +65,6 @@ HTTPS交互引入了数据加密，对称加密、非对称加密、数字证书
 ## 常用的过滤表达式
 
 列表界面,按`f`进入过滤模式。详细的过滤表达式，可以查看：[`Filter expressions`](https://docs.mitmproxy.org/stable/concepts-filters/)。
-
-
 
 1. `~h regex	Header`
 2. `~u regex	URL`
