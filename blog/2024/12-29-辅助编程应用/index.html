@@ -20,7 +20,7 @@
   <meta property="og:url" content="https://neojos.com/blog/2024/12-29-%E8%BE%85%E5%8A%A9%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8/">
   <meta property="og:site_name" content="渐行渐远">
   <meta property="og:title" content="辅助编程应用">
-  <meta property="og:description" content="s">
+  <meta property="og:description" content="有">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="blog">
@@ -30,7 +30,7 @@
   
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="辅助编程应用">
-  <meta name="twitter:description" content="s">
+  <meta name="twitter:description" content="有">
 
   
   
@@ -210,14 +210,13 @@
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <h1 class="subheading">辅助编程应用</h1>
   <span  class="blog-single-desc">Posted by 付辉 on Sunday, December 29, 2024
-    共1659字
+    共1964字
   <div class="separator"></div>
 </span>
 
   <div class="content" itemprop="articleBody">
   
-    <p>status：草稿&hellip;&hellip;</p>
-<p>有下面的开源模型供参考：</p>
+    <p>有下面的开源模型供参考：</p>
 <ol>
 <li>Salesforce AI Research发布的Codegen</li>
 <li>Llama Code</li>
@@ -247,7 +246,13 @@
 </ol>
 <p><img src="./images/rag-workflow.png" alt="rag-workflow"></p>
 <p>当前RAG操作私有的代码仓库，在数据检索阶段，我们可以搜索到最相近的K个候选集，需要有效地对这部分候选集进行过滤。另外，检索结果的相似性要符合逻辑因果上的关联性，具体到给某个函数自动生成单元测试，函数的内部实现、类依赖、调用场景，我们希望通过检索RAG来得到。</p>
+<p>说到底，本质上是 prompt工程，通过不断优化和大模型交互的prompt来提高结果的质量。有些场景下，在我们最终提问LLM之前，我们还可以优先让LLM优化一下我们的prompt，或者让LLM给出若干个优化后的prompt，人为选择最好的输出结果。</p>
+<p>之前做处理大模型文生图的时，我们就前置了一次文生文的交互，目前来看，你可以做任意次数的这种交互，更像是经过一层层的干预，最后筛选出一个最优解。</p>
+<p><img src="./images/n-m-llm.png" alt="n-m-llm.png"></p>
 <p>基于文档和知识库的RAG问答技术，可以考虑应用到私有代码仓库。结合大模型的深度思考分析理解能力以及语法树解析，创建一个针对代码库的RAG系统，通过自然语言和代码仓库进行交互，理解项目的架构和业务实现。</p>
+<p>RAG检索的流程从整体上可以分成两个环节：文本向量化和相似度计算。我们要构建的私域文本都需要经过向量化模型存储到向量数据库中，而我们做检索其实就是将问题问题向量化后，计算其与向量数据库中其它文本的相似度，选择相似度最高的文本片段。</p>
+<p>对于“相似度”的理解，可以从两个角度来考虑</p>
+<p><img src="./images/rag-flow.png" alt="rag-flow.png"></p>
 <p>通过大模型可以高效地定位到具体的功能实现、可以清晰的梳理出当前方法引用到的结构体和其它依赖声明、可以给出当前实现和产品需求的差异点。</p>
 <p>比如，我要为具体的方法生成单元测试，那我可以通过知识库来获取当前方法所有要使用的结构体声明、函数声明、方法声明，通过优化 prompt 的方法来优化自动生成代码的质量。</p>
 <p><strong>方向</strong>：为私有仓库创建RAG系统，通过大模型来获取函数的具体实现，主要是含义内部变量的类型、使用到的方法声明、使用到的函数声明。从这个角度进行考虑的话，更需要的是一个检索+大模型的系统。</p>
