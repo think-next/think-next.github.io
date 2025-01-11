@@ -9,11 +9,18 @@
     <lastBuildDate>Sun, 29 Dec 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://neojos.com/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>辅助编程应用</title>
-      <link>https://neojos.com/blog/2024/12-29-%E8%BE%85%E5%8A%A9%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8/</link>
+      <title>大模型辅助编程应用</title>
+      <link>https://neojos.com/blog/2024/12-29-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%BE%85%E5%8A%A9%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8/</link>
       <pubDate>Sun, 29 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/blog/2024/12-29-%E8%BE%85%E5%8A%A9%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8/</guid>
+      <guid>https://neojos.com/blog/2024/12-29-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%BE%85%E5%8A%A9%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8/</guid>
       <description>有</description>
+    </item>
+    <item>
+      <title>网络抓包</title>
+      <link>https://neojos.com/blog/2024/08-24-mitmproxy%E7%BD%91%E7%BB%9C%E6%8A%93%E5%8C%85/</link>
+      <pubDate>Sat, 28 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>https://neojos.com/blog/2024/08-24-mitmproxy%E7%BD%91%E7%BB%9C%E6%8A%93%E5%8C%85/</guid>
+      <description>-2000</description>
     </item>
     <item>
       <title>VS Code 使用技巧</title>
@@ -73,9 +80,9 @@
     </item>
     <item>
       <title>hugo 博客本地编辑提效</title>
-      <link>https://neojos.com/blog/2024/08-25-hugo-%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E7%BC%96%E8%BE%91%E6%8F%90%E6%95%88/</link>
+      <link>https://neojos.com/blog/2024/12-28-hugo-%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E7%BC%96%E8%BE%91%E6%8F%90%E6%95%88/</link>
       <pubDate>Sat, 24 Aug 2024 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/blog/2024/08-25-hugo-%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E7%BC%96%E8%BE%91%E6%8F%90%E6%95%88/</guid>
+      <guid>https://neojos.com/blog/2024/12-28-hugo-%E5%8D%9A%E5%AE%A2%E6%9C%AC%E5%9C%B0%E7%BC%96%E8%BE%91%E6%8F%90%E6%95%88/</guid>
       <description>之</description>
     </item>
     <item>
@@ -294,13 +301,6 @@
       <pubDate>Mon, 03 Aug 2020 00:00:00 +0000</pubDate>
       <guid>https://neojos.com/blog/2020/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E6%98%AF%E5%90%A6%E4%BC%9A%E5%BD%B1%E5%93%8D%E4%B9%90%E8%A7%82%E9%94%81/</guid>
       <description>MySQL</description>
-    </item>
-    <item>
-      <title>网络抓包</title>
-      <link>https://neojos.com/blog/2020/20180706_mitmproxy%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Mon, 06 Jul 2020 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/blog/2020/20180706_mitmproxy%E4%BD%BF%E7%94%A8/</guid>
-      <description>要</description>
     </item>
     <item>
       <title>protocol stack</title>
