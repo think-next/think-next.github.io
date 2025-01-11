@@ -25,13 +25,13 @@ HTTPS交互引入了数据加密，对称加密、非对称加密、数字证书
 
 如果我们抓包想要显示加密传输的内容，需要将抓包工具当做一个代理来使用，如果使用Wireshark抓包，该如何设置代理以及展示传输的内容呢？首先要给这个工具一个定位：Wireshark 可以作为一个网络代理吗？
 
-![proxy.png](proxy.png)
+![proxy.png](./images/proxy.png)
 
 我查阅了一下，Wireshark 本身并不是一个网络代理，它无法代理和转发网络流量，它通常被用作网络分析工具，用来捕获和分析网络通讯数据包。
 
 基于我认知的角度来说，在https协商秘钥的过程中，总共有3个随机数：客户端的随机数、服务端的随机数、以及pre-master随机数，因为pre-master是加密传输的的，Wireshark应该是不知道的。所以在Wireshark解析TLS协议的配置项中，可以指定 pre-master-secret log file。难道这个文件的内部是明文？
 
-![tls](wireshark_tls.png)
+![tls](./images/wireshark_tls.png)
 
 选择使用mitmproxy抓包，只需要安装信任证书，就可以正常查看https的请求。或者，如果不行的话，可以尝试重启下机器。
 
@@ -41,13 +41,13 @@ HTTPS交互引入了数据加密，对称加密、非对称加密、数字证书
 
 要顺利抓包，最关键的步骤是安装证书，我是macOs笔记本电脑，只需要安装官方的介绍进行安装。mitmproxy 的CA证书被安装在home目录下的`~/.mitmproxy`中，证书文件`mitmproxy-ca-cert.pem`拖动到钥匙串访问中，注意点击始终信任
 
-![ca_install.png](ca_install.png)
+![ca_install.png](./images/ca_install.png)
 
 最近重新拾起抓包还是因为大模型，市面上有很多代码自动生成插件，就拿自动生成单元测试来说，那些插件究竟提交给了大模型哪些代码，我想通过网络抓包来一探究竟。很开心的是，确实可以抓到。
 
 而且，我发现 mitmproxy 的命令行操作其实特别间接，很多操作通过快捷键就搞定了，最主要是，你不用担心忘记快捷键，快捷键就在界面的最下栏。最让我用起来感觉比较棒的地方，是查看单个请求的请求头或者请求体，一键进入编辑模式，再配合 sublime，感觉自己马上就要起飞了。
 
-![nav_bar.png](nav_bar.png)
+![nav_bar.png](./images/nav_bar.png)
 
 更给人意外的是，mitmproxy官方文档中还介绍到了wireshark，mitmproxy支持将 SSL/TLS master keys 记录到指定的文件以便提供给 Wireshark 解密 SSL/TLS 的数据包。不过，我觉得，mitmproxy已经完全可以了，就没有理由再去鼓捣一下 Wireshark了
 
