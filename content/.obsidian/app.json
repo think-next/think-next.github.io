@@ -2,5 +2,6 @@
   "defaultViewMode": "source",
   "livePreview": false,
   "attachmentFolderPath": "./images",
-  "alwaysUpdateLinks": true
+  "alwaysUpdateLinks": true,
+  "useMarkdownLinks": true
 }
