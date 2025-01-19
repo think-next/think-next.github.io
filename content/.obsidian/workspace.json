@@ -8,27 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "ba802ecedc187ccc",
+            "id": "a55dc14b93721b48",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/2025/01-01 Go代码数据清洗/index.md",
+                "file": "greatperson/2022.03.13. 我该如何看待炒股.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "index"
-            }
-          },
-          {
-            "id": "a55dc14b93721b48",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
+              "title": "2022.03.13. 我该如何看待炒股"
             }
           },
           {
@@ -186,10 +176,15 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "ba802ecedc187ccc",
+  "active": "a55dc14b93721b48",
   "lastOpenFiles": [
-    "blog/2025/01-01 Go代码数据清洗/images/element.png",
+    "greatperson/秘密项目.md",
+    "greatperson/2022.03.13. 我该如何看待炒股.md",
+    "greatperson/2022.03.10.知识焦虑.md",
+    "greatperson/2022.03.11.坚持习惯.md",
+    "greatperson/2022.03.12.结构话思维.md",
     "blog/2025/01-01 Go代码数据清洗/index.md",
+    "blog/2025/01-01 Go代码数据清洗/images/element.png",
     "blog/2025/01-01 Go代码数据清洗/images",
     "blog/2024/11-14 github ssh-agent 配置/index.md",
     "blog/2024/11-27 obsidian 工具使用/index.md",
@@ -201,12 +196,8 @@
     "blog/2024/12-28 mitmproxy网络抓包/index.md",
     "blog/2024/12-29 大模型辅助编程应用/index.md",
     "blog/2024/11-29 vscode 工具使用/index.md",
-    "greatperson/2022.03.12.知识焦虑.md",
     "blog/2024/11-27 obsidian 工具使用/images",
     "blog/2024/11-27 obsidian 工具使用",
-    "greatperson/2022.03.12.认真地看待炒股.md",
-    "greatperson/2022.03.12.结构话思维.md",
-    "greatperson/2022.03.12.坚持习惯.md",
     "blog/2024/寸剑/index.md",
     "blog/2024/11-30 hugo 博客本地编辑提效/index.md",
     "blog/_index.md",
