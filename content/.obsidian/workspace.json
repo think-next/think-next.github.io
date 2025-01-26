@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "greatperson/2022.03.13. 我该如何看待炒股.md",
+                "file": "blog/2024/12-30 搭建RAG系统/index.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "2022.03.13. 我该如何看待炒股"
+              "title": "index"
             }
           },
           {
@@ -178,8 +178,14 @@
   },
   "active": "a55dc14b93721b48",
   "lastOpenFiles": [
-    "greatperson/秘密项目.md",
+    "blog/2024/12-30 搭建RAG系统/images/demo_result.png",
+    "blog/2024/12-30 搭建RAG系统/index.md",
+    "blog/2024/12-30 搭建RAG系统/images/chroma.png",
+    "blog/2024/12-30 搭建RAG系统/images",
+    "blog/2024/12-29 大模型辅助编程应用/index.md",
     "greatperson/2022.03.13. 我该如何看待炒股.md",
+    "blog/2024/12-30 搭建RAG系统",
+    "greatperson/秘密项目.md",
     "greatperson/2022.03.10.知识焦虑.md",
     "greatperson/2022.03.11.坚持习惯.md",
     "greatperson/2022.03.12.结构话思维.md",
@@ -194,7 +200,6 @@
     "blog/2024/11-27 obsidian 工具使用/images/Pasted image 20250112163202.png",
     "blog/2024/11-27 obsidian 工具使用/images/option-links.png",
     "blog/2024/12-28 mitmproxy网络抓包/index.md",
-    "blog/2024/12-29 大模型辅助编程应用/index.md",
     "blog/2024/11-29 vscode 工具使用/index.md",
     "blog/2024/11-27 obsidian 工具使用/images",
     "blog/2024/11-27 obsidian 工具使用",
@@ -211,18 +216,12 @@
     "blog/2024/11-30 hugo 博客本地编辑提效/images/hugo-dir.png",
     "blog/2024/11-30 hugo 博客本地编辑提效/images/hugo-commit.png",
     "blog/2024/11-14 github ssh-agent 配置/images/ssh.png",
-    "blog/2024/12-28 mitmproxy网络抓包/images/sslkeylog.png",
-    "blog/2024/12-28 mitmproxy网络抓包/images/proxy.png",
     "blog/2024/12-29 大模型辅助编程应用/images",
     "blog/2024/12-28 mitmproxy网络抓包/images",
-    "blog/2024/12-28 mitmproxy网络抓包",
     "blog/2018/08-11-Golang下的Error.md",
     "blog/2018/09-03-sync.Once.md",
     "blog/2018/12-29-How to use godog.md",
     "blog/2018/12-09-Net Transport.md",
-    "blog/2018/11-20-NSS初窥.md",
-    "blog/2018/07-28-Tcp Server Design.md",
-    "blog/2018/03-31-包管理.md",
-    "blog/2024/12-29 大模型辅助编程应用"
+    "blog/2018/11-20-NSS初窥.md"
   ]
 }
