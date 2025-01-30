@@ -37,7 +37,7 @@
     
   
   
-  <link rel="stylesheet" href="https://neojos.com/css/styles.dcec1d679f130468430e713aaa52d0eda82310e8cb61730bf67f408221cfda0be536a449e711e772dfc87490c88fcd6939e2ebeadc6c0f858ff69d0ceeb799ce.css" integrity="sha512-3OwdZ58TBGhDDnE6qlLQ7agjEOjLYXML9n9AgiHP2gvlNqRJ5xHnct/IdJDIj81pOeLr6txsD4WP9p0M7reZzg=="> 
+  <link rel="stylesheet" href="https://neojos.com/css/styles.d4d613475242ce8425fa29acc8023fa88ec33b662054beda1842edcc8fd36486e399c74c52c03341318ad4b1316ab97122f609194d479732b2b82658c913ee1f.css" integrity="sha512-1NYTR1JCzoQl&#43;imsyAI/qI7DO2YgVL7aGELtzI/TZIbjmcdMUsAzQTGK1LExarlxIvYJGU1HlzKyuCZYyRPuHw=="> 
 
   
   
@@ -210,7 +210,7 @@
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <h1 class="subheading">搭建RAG系统</h1>
   <span  class="blog-single-desc">Posted by 付辉 on Monday, December 30, 2024
-    共1859字
+    共2340字
   <div class="separator"></div>
 </span>
 
@@ -236,7 +236,32 @@
 <li>语言模型的训练并未考虑利用召回数据，这可能导致推理过程中的数据分布存在偏差，对于参数量小的模型更容易产生幻觉</li>
 <li>向量模型并没有针对语言模型所需应对的场景和领域进行优化，这可能对模型的跨域能力提出较高的要求</li>
 </ol>
-<h3 id="安装依赖-chroma">安装依赖 chroma</h3>
+<h3 id="miniforge-环境管理">Miniforge 环境管理</h3>
+<p>后面的内容也会有提到 Miniforge 的安装，按照我当下的认知，它主要维护的 python 版本环境，如果你在安装执行 chroma 中遇到问题，建议你尝试更换 python 版本试试。</p>
+<p>不同 python 版本差异比较大，向后兼容性不好，所以，本地安装多版本管理非常重要，在尝试了诸多手段还没有效果的情况下，不妨尝试下切换 python 版本。</p>
+<p>pyenv 是一个用于管理多个Python版本的工具，可以方便地安装和切换不同版本的 Python。在mac环境下安装 Python 3.9.0 版本，可以使用以下步骤，这样就成功在 mac 环境下安装并切换到了Python 3.9.0 版本：</p>
+<ol>
+<li>首先打开终端，使用以下命令安装pyenv</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>brew install pyenv
+</span></span></code></pre></div><ol start="2">
+<li>安装完成后，使用以下命令安装Python 3.9.0版本</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pyenv install 3.9.0
+</span></span></code></pre></div><ol start="3">
+<li>安装完成后，使用以下命令将全局默认的Python版本切换到3.9.0</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pyenv global 3.9.0
+</span></span></code></pre></div><p>安装了 miniforge 作为包管理和环境管理工具，默认会安装一个固定 Python 版本的初始化环境，如果要切换为其它版本的 Python，我们需要创建一个指定版本的环境，这很重要：</p>
+<ol>
+<li>创建一个新环境，环境使用 Python 3.9.0 版本，环境命名为 envpy390，想对应的路径会被存储在 miniforge3/envs 下</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>conda create -n envpy390 python<span style="color:#f92672">=</span>3.9.0
+</span></span></code></pre></div><ol start="2">
+<li>激活环境，注意：如果没有将 miniforge 加入到PATH路径，conda 需要使用全路径</li>
+</ol>
+<pre tabindex="0"><code>conda activate envpy390
+</code></pre><h3 id="安装依赖-chroma">安装依赖 chroma</h3>
 <p>向量数据库选用 <a href="https://docs.trychroma.com/docs/overview/introduction">chroma</a> 开源数据库，图示来源于官方文档，可以通过 pip 进行安装，首先需要安装 python，一般来说，安装 python 的时候会默认安装好 pip。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pip install chromadb
 </span></span></code></pre></div><p><img src="./images/chroma.png" alt="chroma"></p>
