@@ -27,6 +27,45 @@ RAG系统最常见的方法通过独立训练的方式构建
 1. 语言模型的训练并未考虑利用召回数据，这可能导致推理过程中的数据分布存在偏差，对于参数量小的模型更容易产生幻觉
 2. 向量模型并没有针对语言模型所需应对的场景和领域进行优化，这可能对模型的跨域能力提出较高的要求
 
+### Miniforge 环境管理
+
+后面的内容也会有提到 Miniforge 的安装，按照我当下的认知，它主要维护的 python 版本环境，如果你在安装执行 chroma 中遇到问题，建议你尝试更换 python 版本试试。
+
+不同 python 版本差异比较大，向后兼容性不好，所以，本地安装多版本管理非常重要，在尝试了诸多手段还没有效果的情况下，不妨尝试下切换 python 版本。
+
+pyenv 是一个用于管理多个Python版本的工具，可以方便地安装和切换不同版本的 Python。在mac环境下安装 Python 3.9.0 版本，可以使用以下步骤，这样就成功在 mac 环境下安装并切换到了Python 3.9.0 版本：
+
+1. 首先打开终端，使用以下命令安装pyenv
+
+```shell
+brew install pyenv
+```
+
+2. 安装完成后，使用以下命令安装Python 3.9.0版本
+
+```shell
+pyenv install 3.9.0
+```
+
+3. 安装完成后，使用以下命令将全局默认的Python版本切换到3.9.0
+
+```shell
+pyenv global 3.9.0
+```
+
+安装了 miniforge 作为包管理和环境管理工具，默认会安装一个固定 Python 版本的初始化环境，如果要切换为其它版本的 Python，我们需要创建一个指定版本的环境，这很重要：
+
+1. 创建一个新环境，环境使用 Python 3.9.0 版本，环境命名为 envpy390，想对应的路径会被存储在 miniforge3/envs 下
+
+```shell
+conda create -n envpy390 python=3.9.0
+```
+
+2. 激活环境，注意：如果没有将 miniforge 加入到PATH路径，conda 需要使用全路径
+```
+conda activate envpy390
+```
+
 ### 安装依赖 chroma
 
 向量数据库选用 [chroma](https://docs.trychroma.com/docs/overview/introduction) 开源数据库，图示来源于官方文档，可以通过 pip 进行安装，首先需要安装 python，一般来说，安装 python 的时候会默认安装好 pip。
