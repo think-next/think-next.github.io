@@ -6,8 +6,22 @@
     <description>Recent content on 渐行渐远</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Jan 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://neojos.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>大模型微调</title>
+      <link>https://neojos.com/blog/2025/01-03-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/</link>
+      <pubDate>Fri, 03 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>https://neojos.com/blog/2025/01-03-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/</guid>
+      <description>第</description>
+    </item>
+    <item>
+      <title>大模型的命名</title>
+      <link>https://neojos.com/blog/2025/01-02-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%91%BD%E5%90%8D/</link>
+      <pubDate>Thu, 02 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>https://neojos.com/blog/2025/01-02-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%91%BD%E5%90%8D/</guid>
+      <description>「</description>
+    </item>
     <item>
       <title>Go代码数据清洗</title>
       <link>https://neojos.com/blog/2025/01-01-go%E4%BB%A3%E7%A0%81%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/</link>

@@ -210,7 +210,7 @@
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <h1 class="subheading">搭建RAG系统</h1>
   <span  class="blog-single-desc">Posted by 付辉 on Monday, December 30, 2024
-    共2340字
+    共2771字
   <div class="separator"></div>
 </span>
 
@@ -296,9 +296,19 @@ onnxruntime.capi.onnxruntime_pybind11_state.Fail: [ONNXRuntimeError] : 1 : FAIL 
 </span></span><span style="display:flex;"><span>default_ef <span style="color:#f92672">=</span> embedding_functions<span style="color:#f92672">.</span>DefaultEmbeddingFunction()
 </span></span><span style="display:flex;"><span>val <span style="color:#f92672">=</span> default_ef([<span style="color:#e6db74">&#34;foo&#34;</span>]) 
 </span></span><span style="display:flex;"><span>print(val)
-</span></span></code></pre></div><p>结合前面提到的 stackoverflow 的问题，锁定「onnxruntime.capi.onnxruntime_pybind11_state」关键字，尤其是 <code>onnxruntime</code> 和 <code>pybind11</code> 这两个依赖包，反正就是这么一折腾，程序就开心的 run 起来了。</p>
+</span></span></code></pre></div><p>结合前面提到的 stackoverflow 的问题，锁定「onnxruntime.capi.onnxruntime_pybind11_state」关键字，尤其是 <code>onnxruntime</code> 和 <code>pybind11</code> 这两个依赖包，反正就是这么一折腾，程序就开心的 run 起来了。后来才后知后觉，和 python 的版本其实有很大的关系。</p>
 <p>回归向量模型的话题，chroma 集成对接了很多三方的矢量模型，可以通过 API 的方式进行调用，具体细节可以查看 <a href="https://docs.trychroma.com/docs/embeddings/embedding-functions">Embedding Functions</a>。</p>
 <p>我需要这样的能力，但我的诉求其实是调用我自己本地安装的矢量模型。我希望可以找到满足我需求的，更好的矢量化模型，最好可以通过数据对比得出一个最优解。</p>
+<h2 id="向量模型浅谈">向量模型浅谈</h2>
+<p>向量模型有很多使用的场景，有基于编码器训练的，也有基于解码器训练的，使用的场景也各不相同。这里面其实有很多细节点，可以通过查看 chroma 使用示例来体会，尝试从多个角度去看。数据写入主要包括两部分：</p>
+<ol>
+<li>数据文本通过向量化模型转换为向量</li>
+<li>向量相似度的检索算法</li>
+</ol>
+<p>文本是如何转换为向量的呢？一句话可以由很多词语组成，每个词语又可以用一个向量表示，那最终的句子如何用向量表示呢？</p>
+<p>通过对字向量进行压缩（通常的做法是取BERT的CLS位置的向量或者堆所有字向量取平均）来作为文本段的向量表示。但是，如果文本段过长，压缩过长中必然会引入较大的语义损失。</p>
+<p>调用模型生成向量的过程中，向量模型存在token数量限制，如果是超过token数量限制的长文本就会被截断，为了避免丢失文本信息，长文本就需要被特殊处理。但特殊处理也可能会损失语义信息。</p>
+<p>这本身要突出了一种冲突，向量化模型需要短文本而LLM需要长文本，所以，就出现了很多手段来填补这个冲突。</p>
 
   
   </div>
