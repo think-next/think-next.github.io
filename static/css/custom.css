@@ -5,7 +5,8 @@
 }
 
 /* 定义菜单栏和文件的间距*/
-.main, .masthead {
+.main,
+.masthead {
     padding: 1em 37px;
 }
 
@@ -20,7 +21,9 @@
     }
 }
 
-.copyright a, .menu li:not([class]) a, a:hover {
+.copyright a,
+.menu li:not([class]) a,
+a:hover {
     border-bottom: none
 }
 
@@ -28,17 +31,18 @@
     hyphens: auto
 }
 
-.main, .masthead {
+.main,
+.masthead {
     padding: 1em 37px;
 }
 
-.en .main header ~ p:first-of-type::first-line {
+.en .main header~p:first-of-type::first-line {
     font-variant: small-caps;
     letter-spacing: .05em;
     font-size: 1.1em
 }
 
-.en .main header ~ p:first-of-type::first-letter {
+.en .main header~p:first-of-type::first-letter {
     font-size: 3em;
     padding: .1em .1em 0 0;
     float: left;
@@ -49,7 +53,9 @@ code {
     hyphens: none
 }
 
-iframe, twitterwidget, video {
+iframe,
+twitterwidget,
+video {
     max-width: 100%;
     display: block;
     margin: auto
@@ -92,7 +98,10 @@ pre .nohighlight {
 }
 
 @media print {
-    .masthead, del, footer {
+
+    .masthead,
+    del,
+    footer {
         display: none
     }
 
