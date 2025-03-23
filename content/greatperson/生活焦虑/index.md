@@ -1,7 +1,7 @@
 ---
 
 # Common-Defined params
-title: "知识焦虑"
+title: "生活焦虑"
 date: "2022-03-10"
 comments: false # Enable Disqus comments for specific page
 authorbox: true # Enable authorbox for specific page
@@ -11,6 +11,14 @@ sidebar: "right" # Enable sidebar (on the right side) per page
 widgets: # Enable sidebar widgets in given order per page
   - "recent"
 ---
+
+鲁迅说：“从来如此，便对吗？”。习惯了，不等于是合理的，时刻提防自己变成一直温水里的青蛙。
+
+有研究反复证明，残疾人，比如失去了两根手指，甚至失去了一条大腿的人，他们平时的幸福感其实跟身体健全的人没有什么区别。他们没有整天抱怨我怎么残疾了，他们想的也是健全人日常想的那些事情。甚至连那些每周必须去做透析的肾病患者，日常绝大部分时间的幸福感也不低。
+
+他们习惯了！但不好就是不好，不能因为习惯了就接受不好。我们不能根据老百姓的忍受能力判断一个环境好不好。你习惯也好，不习惯也好，空气污染会增加疾病这个规律是不会改变的。
+
+仔细想想工作加班，你可能已经习惯了，但这是合理的吗？
 
 ## 老鼠赛道
 
