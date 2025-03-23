@@ -16,12 +16,6 @@ bio = "我们听到的一切都是一个观点，不是事实。我们看到的�
 avatar = "img/mifeng.jpeg"
 
 [[menu.main]]
-identifier = "ReadBook"
-name = "读书笔记"
-url = "/readbook"
-weight = 2
-
-[[menu.main]]
 identifier = "Blog"
 name = "技术"
 url = "/blog"
@@ -36,7 +30,7 @@ weight = 4
 [[menu.main]]
 identifier = "hugo"
 name = "我的博客"
-url = "/hugo"
+url = "/"
 weight = 1
 
 [[menu.main]]
