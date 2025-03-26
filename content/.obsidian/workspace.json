@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "greatperson/谈35岁就业/index.md",
+                "file": "blog/2024/11-29 vscode 工具使用/index.md",
                 "mode": "source",
                 "source": true
               },
@@ -108,7 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "greatperson/谈35岁就业/index.md",
+                "file": "blog/2024/11-29 vscode 工具使用/index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -176,18 +176,24 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "4dc1ddf66f8bb832",
+  "active": "a55dc14b93721b48",
   "lastOpenFiles": [
-    "readbook/_index.md",
+    "blog/2024/12-30 搭建RAG系统/index.md",
+    "blog/2025/01-02 大模型的命名/index.md",
+    "blog/2025/01-03 大模型微调/index.md",
+    "blog/2025/01-04 大模型Agent/index.md",
+    "blog/2025/01-02 大模型的命名/images/cal.png",
+    "blog/2025/01-01 Go代码数据清洗/index.md",
+    "greatperson/生活焦虑/index.md",
+    "greatperson/产品迭代/index.md",
+    "greatperson/2022.03.13.我的炒股观念.md",
     "greatperson/谈35岁就业/index.md",
+    "readbook/_index.md",
     "greatperson/_index.md",
     "greatperson/2022.03.11.坚持习惯.md",
-    "greatperson/生活焦虑/index.md",
     "greatperson/生活焦虑",
-    "blog/2025/01-04 大模型Agent/index.md",
     "blog/2025/01-04 大模型Agent/images/town.png",
     "blog/2025/01-04 大模型Agent/images",
-    "blog/2025/01-03 大模型微调/index.md",
     "blog/2025/01-04 大模型Agent",
     "blog/2024/10-01 go语言goland编辑器debug失效/index.md",
     "blog/2024/10-01 go语言goland编辑器debug失效/images/Pasted image 20250307180847.png",
@@ -196,7 +202,6 @@
     "blog/2024/10-01 go语言goland编辑器debug失效/images/sonic-upgrade.png",
     "blog/2024/10-01 go语言goland编辑器debug失效/images/goland-issues-answer.png",
     "blog/2024/10-01 go语言goland编辑器debug失效/images/goland-issues.png",
-    "greatperson/产品迭代/index.md",
     "blog/2024/10-01 go语言goland编辑器debug失效/images",
     "blog/2024/10-01 go语言goland编辑器debug失效",
     "blog/2022/0830 框架设计.md",
@@ -205,24 +210,18 @@
     "blog/2022/0507 Go 切片的容量.md",
     "greatperson/产品迭代/images/quoteblock.png",
     "greatperson/产品迭代/images",
-    "blog/2025/01-02 大模型的命名/index.md",
     "greatperson/产品迭代/images/change.png",
-    "blog/2025/01-01 Go代码数据清洗/index.md",
     "greatperson/谈35岁就业",
     "greatperson/秘密项目.md",
-    "greatperson/2022.03.13.如何看待炒股.md",
     "greatperson/2022.03.12.结构话思维.md",
     "blog/2024/寸剑/index.md",
     "blog/2025/01-03 大模型微调",
-    "blog/2025/01-02 大模型的命名/images/cal.png",
     "blog/2025/01-02 大模型的命名/images",
     "blog/2025/01-02 大模型的命名",
-    "blog/2024/12-30 搭建RAG系统/index.md",
     "blog/2024/12-29 大模型辅助编程应用/index.md",
     "blog/2024/11-14 github ssh-agent 配置/index.md",
     "blog/2024/11-27 obsidian 工具使用/index.md",
     "blog/2024/12-28 mitmproxy网络抓包/index.md",
-    "blog/2024/11-29 vscode 工具使用/index.md",
-    "blog/2024/11-30 hugo 博客本地编辑提效/index.md"
+    "blog/2024/11-29 vscode 工具使用/index.md"
   ]
 }

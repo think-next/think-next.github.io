@@ -5,4 +5,8 @@ author: 付辉
 
 ---
 
-为什么要使用 VS Code 工具呢，主要是因为它免费。
+## Python 环境
+
+Python [Environments](https://code.visualstudio.com/docs/languages/python#_environments) 在导航栏可以进行切换，可以自动检测虚拟环境或者 conda 环境。Python环境有两类区分：
+- Virtual environments
+- Conda environments
