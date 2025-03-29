@@ -202,8 +202,10 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "4dc1ddf66f8bb832",
+  "active": "47d10e262fe40118",
   "lastOpenFiles": [
+    "blog/2024/11-29 vscode 工具使用/index.md",
+    "greatperson/2022.03.13.我的炒股观念/index.md",
     "greatperson/2022.03.13.我的炒股观念",
     "Excalidraw/Drawing 2025-03-29 22.17.22.excalidraw.md",
     "blog/2025/01-04 大模型Agent/index.md",
@@ -218,14 +220,12 @@
     "blog/2024/07-19 数据统计/index.md",
     "blog/2024/07-19 数据统计/pyhthon.png",
     "blog/2024/11-04 寸剑/index.md",
-    "blog/2024/11-29 vscode 工具使用/index.md",
     "Excalidraw",
     "blog/2024/12-30 搭建RAG系统/index.md",
     "blog/2025/01-02 大模型基础入门/images/cal.png",
     "blog/2025/01-01 Go代码数据清洗/index.md",
     "greatperson/生活焦虑/index.md",
     "greatperson/产品迭代/index.md",
-    "greatperson/2022.03.13.我的炒股观念/index.md",
     "greatperson/谈35岁就业/index.md",
     "readbook/_index.md",
     "greatperson/_index.md",
@@ -248,7 +248,6 @@
     "blog/2022/0829 sentinel 计数器限流.md",
     "greatperson/产品迭代/images",
     "greatperson/谈35岁就业",
-    "blog/2025/01-03 大模型微调",
-    "blog/2025/01-02 大模型基础入门/images"
+    "blog/2025/01-03 大模型微调"
   ]
 }
