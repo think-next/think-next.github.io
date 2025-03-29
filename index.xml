@@ -23,11 +23,11 @@
       <description>第</description>
     </item>
     <item>
-      <title>大模型的命名</title>
-      <link>https://neojos.com/blog/2025/01-02-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%91%BD%E5%90%8D/</link>
+      <title>大模型基础入门</title>
+      <link>https://neojos.com/blog/2025/01-02-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</link>
       <pubDate>Thu, 02 Jan 2025 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/blog/2025/01-02-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%91%BD%E5%90%8D/</guid>
-      <description>「</description>
+      <guid>https://neojos.com/blog/2025/01-02-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</guid>
+      <description>对</description>
     </item>
     <item>
       <title>Go代码数据清洗</title>
@@ -94,30 +94,30 @@
     </item>
     <item>
       <title>rust 异步</title>
-      <link>https://neojos.com/blog/2024/rust-%E5%BC%82%E6%AD%A5/</link>
+      <link>https://neojos.com/blog/2024/11-11-rust-%E5%BC%82%E6%AD%A5/</link>
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/blog/2024/rust-%E5%BC%82%E6%AD%A5/</guid>
+      <guid>https://neojos.com/blog/2024/11-11-rust-%E5%BC%82%E6%AD%A5/</guid>
       <description>future</description>
     </item>
     <item>
-      <title>rust gui 设计</title>
-      <link>https://neojos.com/blog/2024/rust-gui-%E8%AE%BE%E8%AE%A1/</link>
-      <pubDate>Sat, 09 Nov 2024 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/blog/2024/rust-gui-%E8%AE%BE%E8%AE%A1/</guid>
-      <description>iced</description>
-    </item>
-    <item>
       <title>rust option的处理</title>
-      <link>https://neojos.com/blog/2024/rust-option/</link>
+      <link>https://neojos.com/blog/2024/11-09-rust-option/</link>
       <pubDate>Sat, 09 Nov 2024 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/blog/2024/rust-option/</guid>
+      <guid>https://neojos.com/blog/2024/11-09-rust-option/</guid>
       <description>对</description>
     </item>
     <item>
+      <title>rust gui 设计</title>
+      <link>https://neojos.com/blog/2024/11-08-rust-gui-%E8%AE%BE%E8%AE%A1/</link>
+      <pubDate>Fri, 08 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>https://neojos.com/blog/2024/11-08-rust-gui-%E8%AE%BE%E8%AE%A1/</guid>
+      <description>iced</description>
+    </item>
+    <item>
       <title>寸剑</title>
-      <link>https://neojos.com/blog/2024/%E5%AF%B8%E5%89%91/</link>
+      <link>https://neojos.com/blog/2024/11-04-%E5%AF%B8%E5%89%91/</link>
       <pubDate>Mon, 04 Nov 2024 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/blog/2024/%E5%AF%B8%E5%89%91/</guid>
+      <guid>https://neojos.com/blog/2024/11-04-%E5%AF%B8%E5%89%91/</guid>
       <description>其</description>
     </item>
     <item>
@@ -129,16 +129,16 @@
     </item>
     <item>
       <title>rust 模块笔记</title>
-      <link>https://neojos.com/blog/2024/rust-%E6%A8%A1%E5%9D%97/</link>
+      <link>https://neojos.com/blog/2024/08-25-rust-%E6%A8%A1%E5%9D%97/</link>
       <pubDate>Sun, 25 Aug 2024 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/blog/2024/rust-%E6%A8%A1%E5%9D%97/</guid>
+      <guid>https://neojos.com/blog/2024/08-25-rust-%E6%A8%A1%E5%9D%97/</guid>
       <description>模</description>
     </item>
     <item>
       <title>discordgo 库</title>
-      <link>https://neojos.com/blog/2024/discordgo/</link>
+      <link>https://neojos.com/blog/2024/08-11-discordgo/</link>
       <pubDate>Sun, 11 Aug 2024 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/blog/2024/discordgo/</guid>
+      <guid>https://neojos.com/blog/2024/08-11-discordgo/</guid>
       <description>代</description>
     </item>
     <item>
@@ -157,9 +157,9 @@
     </item>
     <item>
       <title>数据统计</title>
-      <link>https://neojos.com/blog/2024/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1/</link>
+      <link>https://neojos.com/blog/2024/07-19-%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1/</link>
       <pubDate>Fri, 19 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/blog/2024/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1/</guid>
+      <guid>https://neojos.com/blog/2024/07-19-%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1/</guid>
       <description>了</description>
     </item>
     <item>
