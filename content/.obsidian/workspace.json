@@ -41,7 +41,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "greatperson/2022.03.13.我的炒股观念/index.md",
+                "file": "blog/2024/09-04 设计模式/index.md",
                 "mode": "source",
                 "source": true
               },
@@ -82,7 +82,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "设计模式",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -204,11 +204,15 @@
   },
   "active": "47d10e262fe40118",
   "lastOpenFiles": [
+    "blog/2024/09-04 设计模式/images/chain.png",
+    "blog/2024/09-04 设计模式/index.md",
+    "blog/2024/09-04 设计模式/images",
+    "blog/2019/19-04-07-设计模式-适配器模式.md",
+    "greatperson/2022.03.13.我的炒股观念/index.md",
     "greatperson/谈35岁就业/index.md",
     "greatperson/2022.03.10 生活焦虑/index.md",
     "greatperson/2022.03.10 生活焦虑/images/model.png",
     "greatperson/2022.03.10 生活焦虑/images",
-    "greatperson/2022.03.13.我的炒股观念/index.md",
     "blog/2024/11-29 vscode 工具使用/index.md",
     "greatperson/2022.03.13.我的炒股观念",
     "Excalidraw/Drawing 2025-03-29 22.17.22.excalidraw.md",
@@ -223,7 +227,6 @@
     "blog/2024/08-11 discordgo/Pasted image 20240811221149.png",
     "blog/2024/07-19 数据统计/index.md",
     "blog/2024/07-19 数据统计/pyhthon.png",
-    "blog/2024/11-04 寸剑/index.md",
     "Excalidraw",
     "blog/2024/12-30 搭建RAG系统/index.md",
     "blog/2025/01-02 大模型基础入门/images/cal.png",
@@ -241,13 +244,10 @@
     "blog/2024/10-01 go语言goland编辑器debug失效/images/gotest.png",
     "blog/2024/10-01 go语言goland编辑器debug失效/images/release-version.png",
     "blog/2024/10-01 go语言goland编辑器debug失效/images/sonic-upgrade.png",
-    "blog/2024/10-01 go语言goland编辑器debug失效/images/goland-issues-answer.png",
     "blog/2024/10-01 go语言goland编辑器debug失效/images",
     "blog/2024/10-01 go语言goland编辑器debug失效",
     "blog/2022/0830 框架设计.md",
     "blog/2022/0825 ratelimit 漏桶限流.md",
-    "blog/2022/0829 sentinel 计数器限流.md",
-    "greatperson/产品迭代/images",
-    "greatperson/谈35岁就业"
+    "greatperson/产品迭代/images"
   ]
 }
