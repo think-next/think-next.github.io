@@ -41,7 +41,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/2024/09-04 设计模式/index.md",
+                "file": "greatperson/2022.03.10 生活焦虑/index.md",
                 "mode": "source",
                 "source": true
               },
@@ -204,21 +204,25 @@
   },
   "active": "47d10e262fe40118",
   "lastOpenFiles": [
-    "blog/2024/09-04 设计模式/images/chain.png",
+    "greatperson/2022.03.13.我的炒股观念/index.md",
+    "blog/2025/01-02 大模型基础入门/index.md",
+    "blog/2025/01-03 大模型微调/index.md",
+    "blog/2025/01-04 大模型Agent/index.md",
+    "greatperson/2022.03.10 生活焦虑/index.md",
+    "greatperson/_index.md",
+    "greatperson/秘密项目.md",
+    "greatperson/2022.03.12.结构话思维.md",
+    "greatperson/2022.03.11.坚持习惯.md",
     "blog/2024/09-04 设计模式/index.md",
+    "blog/2024/09-04 设计模式/images/chain.png",
     "blog/2024/09-04 设计模式/images",
     "blog/2019/19-04-07-设计模式-适配器模式.md",
-    "greatperson/2022.03.13.我的炒股观念/index.md",
     "greatperson/谈35岁就业/index.md",
-    "greatperson/2022.03.10 生活焦虑/index.md",
     "greatperson/2022.03.10 生活焦虑/images/model.png",
     "greatperson/2022.03.10 生活焦虑/images",
     "blog/2024/11-29 vscode 工具使用/index.md",
     "greatperson/2022.03.13.我的炒股观念",
     "Excalidraw/Drawing 2025-03-29 22.17.22.excalidraw.md",
-    "blog/2025/01-04 大模型Agent/index.md",
-    "blog/2025/01-02 大模型基础入门/index.md",
-    "blog/2025/01-03 大模型微调/index.md",
     "blog/2024/08-11 discordgo/index.md",
     "blog/2024/08-25 rust 模块/index.md",
     "blog/2024/11-11 rust 异步/index.md",
@@ -233,8 +237,6 @@
     "blog/2025/01-01 Go代码数据清洗/index.md",
     "greatperson/产品迭代/index.md",
     "readbook/_index.md",
-    "greatperson/_index.md",
-    "greatperson/2022.03.11.坚持习惯.md",
     "greatperson/2022.03.10 生活焦虑",
     "blog/2025/01-04 大模型Agent/images/town.png",
     "blog/2025/01-04 大模型Agent/images",
@@ -247,7 +249,6 @@
     "blog/2024/10-01 go语言goland编辑器debug失效/images",
     "blog/2024/10-01 go语言goland编辑器debug失效",
     "blog/2022/0830 框架设计.md",
-    "blog/2022/0825 ratelimit 漏桶限流.md",
     "greatperson/产品迭代/images"
   ]
 }
