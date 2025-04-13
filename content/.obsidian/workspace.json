@@ -41,7 +41,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "greatperson/2022.03.10 生活焦虑/index.md",
+                "file": "blog/2025/01-05 MCP协议解析/index.md",
                 "mode": "source",
                 "source": true
               },
@@ -204,11 +204,20 @@
   },
   "active": "47d10e262fe40118",
   "lastOpenFiles": [
+    "blog/2025/01-05 MCP协议解析/images/sse.png",
+    "blog/2025/01-05 MCP协议解析/index.md",
+    "blog/2025/01-05 MCP协议解析/images/exchange.png",
+    "blog/2025/01-05 MCP协议解析/images/tools.png",
+    "blog/2025/01-05 MCP协议解析/images/mcp-交互.png",
+    "blog/2025/01-05 MCP协议解析/images/mcp.png",
+    "blog/2025/01-05 MCP协议解析/images",
+    "blog/2025/01-04 大模型Agent/index.md",
+    "greatperson/谈35岁就业/index.md",
+    "blog/2025/01-05 MCP协议解析",
     "greatperson/2022.03.13.我的炒股观念/index.md",
+    "greatperson/2022.03.10 生活焦虑/index.md",
     "blog/2025/01-02 大模型基础入门/index.md",
     "blog/2025/01-03 大模型微调/index.md",
-    "blog/2025/01-04 大模型Agent/index.md",
-    "greatperson/2022.03.10 生活焦虑/index.md",
     "greatperson/_index.md",
     "greatperson/秘密项目.md",
     "greatperson/2022.03.12.结构话思维.md",
@@ -217,7 +226,6 @@
     "blog/2024/09-04 设计模式/images/chain.png",
     "blog/2024/09-04 设计模式/images",
     "blog/2019/19-04-07-设计模式-适配器模式.md",
-    "greatperson/谈35岁就业/index.md",
     "greatperson/2022.03.10 生活焦虑/images/model.png",
     "greatperson/2022.03.10 生活焦虑/images",
     "blog/2024/11-29 vscode 工具使用/index.md",
@@ -238,17 +246,8 @@
     "greatperson/产品迭代/index.md",
     "readbook/_index.md",
     "greatperson/2022.03.10 生活焦虑",
-    "blog/2025/01-04 大模型Agent/images/town.png",
     "blog/2025/01-04 大模型Agent/images",
     "blog/2025/01-04 大模型Agent",
-    "blog/2024/10-01 go语言goland编辑器debug失效/index.md",
-    "blog/2024/10-01 go语言goland编辑器debug失效/images/Pasted image 20250307180847.png",
-    "blog/2024/10-01 go语言goland编辑器debug失效/images/gotest.png",
-    "blog/2024/10-01 go语言goland编辑器debug失效/images/release-version.png",
-    "blog/2024/10-01 go语言goland编辑器debug失效/images/sonic-upgrade.png",
-    "blog/2024/10-01 go语言goland编辑器debug失效/images",
-    "blog/2024/10-01 go语言goland编辑器debug失效",
-    "blog/2022/0830 框架设计.md",
-    "greatperson/产品迭代/images"
+    "blog/2024/10-01 go语言goland编辑器debug失效/images"
   ]
 }
