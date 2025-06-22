@@ -208,7 +208,7 @@
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <h1 class="subheading">MCP协议解析</h1>
   <span  class="blog-single-desc">Posted by 付辉 on Sunday, January 5, 2025
-    共1109字
+    共1355字
   <div class="separator"></div>
 </span>
 
@@ -241,8 +241,34 @@
 </ol>
 <p>SSE Transport 是 MCP 中基于 HTTP 的传输方式，利用 SSE 技术实现服务器到客户端的流式消息推送，同时通过 HTTP POST 请求处理客户端到服务器的双向通信。（如果需要通过HTTP的方式提供服务，支持服务推送数据，需要使用 SSE 传输模式，还要注意，两个方向的数据交互是不相同的）</p>
 <h3 id="理解-sse-的工作原理">理解 SSE 的工作原理</h3>
-<p>SSE（Server-Sent Events）是一种基于 HTTP 协议的服务器推送技术，允许服务器向客户端发送实时更新。</p>
+<p>SSE（Server-Sent Events）是一种基于 HTTP 协议的服务器推送技术，允许服务器向客户端发送实时更新。说到底，还只是对HTTP协议的逻辑抽象。</p>
 <p><img src="./images/sse.png" alt="sse"></p>
+<p>很多项目都使用 gin 框架来提供 http 服务，所以，可以将 MCP 集成到 web 框架中，下面可以作为参考的示例代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// 创建一个新的 Gin 引擎
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">gin</span>.<span style="color:#a6e22e">Default</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 创建一个新的 MCPServer 实例（假设这是 SSEServer 所需的）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">mcpServer</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">NewMCPServer</span>(<span style="color:#e6db74">&#34;gin-mcp-server&#34;</span>, <span style="color:#e6db74">&#34;1.0.0&#34;</span>) <span style="color:#75715e">// 根据你的实际代码调整
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// mcpServer 新加Tool、Resource、Prompt
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// ... ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 创建一个新的 SSEServer 实例，并传入 MCPServer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">sseServer</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">NewSSEServer</span>(<span style="color:#a6e22e">mcpServer</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 将 SSEServer 的 SSE 端点和处理函数集成到 Gin 路由中
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#a6e22e">sseServer</span>.<span style="color:#a6e22e">CompleteSsePath</span>(), <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">gin</span>.<span style="color:#a6e22e">Context</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">sseServer</span>.<span style="color:#a6e22e">ServeHTTP</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Request</span>)
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 将 SSEServer 的消息端点和处理函数集成到 Gin 路由中
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">POST</span>(<span style="color:#a6e22e">sseServer</span>.<span style="color:#a6e22e">CompleteMessagePath</span>(), <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">gin</span>.<span style="color:#a6e22e">Context</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">sseServer</span>.<span style="color:#a6e22e">ServeHTTP</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Request</span>)
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 启动 Gin 服务器
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Run</span>(<span style="color:#e6db74">&#34;localhost:8081&#34;</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;Gin server startup failed: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>看到示例，代码的关键在于</p>
 <h2 id="构建-go-版本的-mcp-服务器">构建 Go 版本的 MCP 服务器</h2>
 <p>要构建 Go 版本的 MCP 服务器，参考使用三方包：<a href="https://github.com/mark3labs/mcp-go">mcp-go</a>，集成到服务项目中。</p>
 
