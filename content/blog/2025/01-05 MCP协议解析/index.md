@@ -47,11 +47,40 @@ SSE Transport 是 MCP 中基于 HTTP 的传输方式，利用 SSE 技术实现�
 
 ### 理解 SSE 的工作原理
 
-SSE（Server-Sent Events）是一种基于 HTTP 协议的服务器推送技术，允许服务器向客户端发送实时更新。
+SSE（Server-Sent Events）是一种基于 HTTP 协议的服务器推送技术，允许服务器向客户端发送实时更新。说到底，还只是对HTTP协议的逻辑抽象。
 
 ![sse](./images/sse.png)
 
+很多项目都使用 gin 框架来提供 http 服务，所以，可以将 MCP 集成到 web 框架中，下面可以作为参考的示例代码：
 
+```go
+// 创建一个新的 Gin 引擎
+r := gin.Default()
+
+// 创建一个新的 MCPServer 实例（假设这是 SSEServer 所需的）
+mcpServer := server.NewMCPServer("gin-mcp-server", "1.0.0") // 根据你的实际代码调整
+// mcpServer 新加Tool、Resource、Prompt
+// ... ...
+// 创建一个新的 SSEServer 实例，并传入 MCPServer
+sseServer := server.NewSSEServer(mcpServer)
+
+// 将 SSEServer 的 SSE 端点和处理函数集成到 Gin 路由中
+r.GET(sseServer.CompleteSsePath(), func(c *gin.Context) {
+    sseServer.ServeHTTP(c.Writer, c.Request)
+})
+
+// 将 SSEServer 的消息端点和处理函数集成到 Gin 路由中
+r.POST(sseServer.CompleteMessagePath(), func(c *gin.Context) {
+    sseServer.ServeHTTP(c.Writer, c.Request)
+})
+
+// 启动 Gin 服务器
+if err := r.Run("localhost:8081"); err != nil {
+    log.Fatalf("Gin server startup failed: %v", err)
+}
+```
+
+看到示例，代码的关键在于
 
 ## 构建 Go 版本的 MCP 服务器
 

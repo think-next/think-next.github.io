@@ -4,39 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "c2acda73e19fed06",
+        "id": "50d1beb628f3373d",
         "type": "tabs",
         "children": [
           {
-            "id": "a55dc14b93721b48",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "blog/2024/11-29 vscode 工具使用/index.md",
-                "mode": "source",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "index"
-            }
-          },
-          {
-            "id": "72c5ae0fc1a12539",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "hugo/产品迭代/index.md",
-                "mode": "source",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "index"
-            }
-          },
-          {
-            "id": "47d10e262fe40118",
+            "id": "1e249765837b2188",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -48,9 +20,23 @@
               "icon": "lucide-file",
               "title": "index"
             }
+          },
+          {
+            "id": "3b46ec3dba909b4f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "blog/2024/12-30 搭建RAG系统/index.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -202,12 +188,14 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "47d10e262fe40118",
+  "active": "3b46ec3dba909b4f",
   "lastOpenFiles": [
-    "blog/2025/01-05 MCP协议解析/images/sse.png",
-    "blog/2025/01-05 MCP协议解析/index.md",
-    "blog/2025/01-05 MCP协议解析/images/exchange.png",
+    "blog/2024/11-29 vscode 工具使用/index.md",
+    "blog/2024/12-30 搭建RAG系统/index.md",
     "blog/2025/01-05 MCP协议解析/images/tools.png",
+    "blog/2025/01-05 MCP协议解析/index.md",
+    "blog/2025/01-05 MCP协议解析/images/sse.png",
+    "blog/2025/01-05 MCP协议解析/images/exchange.png",
     "blog/2025/01-05 MCP协议解析/images/mcp-交互.png",
     "blog/2025/01-05 MCP协议解析/images/mcp.png",
     "blog/2025/01-05 MCP协议解析/images",
@@ -228,7 +216,6 @@
     "blog/2019/19-04-07-设计模式-适配器模式.md",
     "greatperson/2022.03.10 生活焦虑/images/model.png",
     "greatperson/2022.03.10 生活焦虑/images",
-    "blog/2024/11-29 vscode 工具使用/index.md",
     "greatperson/2022.03.13.我的炒股观念",
     "Excalidraw/Drawing 2025-03-29 22.17.22.excalidraw.md",
     "blog/2024/08-11 discordgo/index.md",
@@ -240,7 +227,6 @@
     "blog/2024/07-19 数据统计/index.md",
     "blog/2024/07-19 数据统计/pyhthon.png",
     "Excalidraw",
-    "blog/2024/12-30 搭建RAG系统/index.md",
     "blog/2025/01-02 大模型基础入门/images/cal.png",
     "blog/2025/01-01 Go代码数据清洗/index.md",
     "greatperson/产品迭代/index.md",
