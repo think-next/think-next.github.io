@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/2024/12-30 搭建RAG系统/index.md",
+                "file": "blog/2022/0611 Go使用 pprof 定位问题.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "0611 Go使用 pprof 定位问题"
             }
           }
         ],
@@ -180,6 +180,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:Create new base": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "templates:Insert template": false,
@@ -190,8 +191,9 @@
   },
   "active": "3b46ec3dba909b4f",
   "lastOpenFiles": [
-    "blog/2024/11-29 vscode 工具使用/index.md",
     "blog/2024/12-30 搭建RAG系统/index.md",
+    "blog/2022/0612 Go Pprof 定位内存泄漏.md",
+    "blog/2024/11-29 vscode 工具使用/index.md",
     "blog/2025/01-05 MCP协议解析/images/tools.png",
     "blog/2025/01-05 MCP协议解析/index.md",
     "blog/2025/01-05 MCP协议解析/images/sse.png",
