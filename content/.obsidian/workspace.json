@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/2022/0611 Go使用 pprof 定位问题.md",
+                "file": "blog/2022/0507 Go 切片的容量.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "0611 Go使用 pprof 定位问题"
+              "title": "0507 Go 切片的容量"
             }
           }
         ],
@@ -191,6 +191,9 @@
   },
   "active": "3b46ec3dba909b4f",
   "lastOpenFiles": [
+    "blog/2022/0611 Go使用 pprof 定位问题.md",
+    "blog/2022/0507 Go 切片的容量.md",
+    "blog/2022/0825 ratelimit 漏桶限流.md",
     "blog/2024/12-30 搭建RAG系统/index.md",
     "blog/2022/0612 Go Pprof 定位内存泄漏.md",
     "blog/2024/11-29 vscode 工具使用/index.md",
@@ -230,9 +233,6 @@
     "blog/2024/07-19 数据统计/pyhthon.png",
     "Excalidraw",
     "blog/2025/01-02 大模型基础入门/images/cal.png",
-    "blog/2025/01-01 Go代码数据清洗/index.md",
-    "greatperson/产品迭代/index.md",
-    "readbook/_index.md",
     "greatperson/2022.03.10 生活焦虑",
     "blog/2025/01-04 大模型Agent/images",
     "blog/2025/01-04 大模型Agent",
