@@ -219,13 +219,6 @@
       <description>限</description>
     </item>
     <item>
-      <title>Go Pprof 定位内存泄漏</title>
-      <link>https://neojos.com/blog/2022/0612-go-pprof-%E5%AE%9A%E4%BD%8D%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/</link>
-      <pubDate>Sun, 12 Jun 2022 00:00:00 +0000</pubDate>
-      <guid>https://neojos.com/blog/2022/0612-go-pprof-%E5%AE%9A%E4%BD%8D%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/</guid>
-      <description>之</description>
-    </item>
-    <item>
       <title>Go使用Pprof定位问题</title>
       <link>https://neojos.com/blog/2022/0611-go%E4%BD%BF%E7%94%A8-pprof-%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98/</link>
       <pubDate>Sat, 11 Jun 2022 00:00:00 +0000</pubDate>
